@@ -1,10 +1,10 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { getPageBySlug } from '../wordpress.js';
-import { getImageUrl, getProductImageUrl } from '../config.js';
+import Layout from "../layouts/Layout.astro";
+import { getPageBySlug } from "../wordpress.js";
+import { getImageUrl, getProductImageUrl } from "../config.js";
 
 // Obtener texto de WordPress (página con slug "inicio")
-const page = await getPageBySlug('inicio');
+const page = await getPageBySlug("inicio");
 
 // Imagen desde Azure Blob Storage - OPCIONES:
 // Opción 1: Imagen en raíz del contenedor
@@ -12,7 +12,7 @@ const page = await getPageBySlug('inicio');
 
 // Opción 2: Imagen dentro de carpeta de producto (tu estructura actual)
 // Ejemplo: https://raygoldstorage.blob.core.windows.net/imagenes/HILO-001619-/2.jpg
-const heroImage = getProductImageUrl('HILO-001619-', '2.jpg');
+const heroImage = getProductImageUrl(" HILO-001619-", "2.jpg");
 
 // Puedes cambiar a cualquier otra carpeta/imagen que tengas:
 // const heroImage = getProductImageUrl('AD-DELFIN-', '1.jpg');
@@ -25,21 +25,25 @@ const heroImage = getProductImageUrl('HILO-001619-', '2.jpg');
     <div class="hero">
       <img src={heroImage} alt="Imagen principal" />
       <div class="hero-overlay">
-        <h1>{page?.title || 'Bienvenido'}</h1>
+        <h1>{page?.title || "Bienvenido"}</h1>
       </div>
     </div>
 
     <!-- Contenido de WordPress -->
     <div class="content">
-      {page ? (
-        <div class="wp-content" set:html={page.content} />
-      ) : (
-        <p class="error">
-          ⚠️ No se pudo cargar el contenido de WordPress.
-          <br />
-          <small>Verifica que la página "inicio" existe y WPGraphQL está activo.</small>
-        </p>
-      )}
+      {
+        page ? (
+          <div class="wp-content" set:html={page.content} />
+        ) : (
+          <p class="error">
+            ⚠️ No se pudo cargar el contenido de WordPress.
+            <br />
+            <small>
+              Verifica que la página "inicio" existe y WPGraphQL está activo.
+            </small>
+          </p>
+        )
+      }
     </div>
 
     <!-- Footer con info -->
@@ -48,11 +52,14 @@ const heroImage = getProductImageUrl('HILO-001619-', '2.jpg');
         <span class="badge wp">📝 Texto: WordPress</span>
         <span class="badge storage">🖼️ Imagen: Azure Storage</span>
       </div>
-      {page?.modified && (
-        <p class="last-update">
-          Última actualización: {new Date(page.modified).toLocaleDateString('es-ES')}
-        </p>
-      )}
+      {
+        page?.modified && (
+          <p class="last-update">
+            Última actualización:{" "}
+            {new Date(page.modified).toLocaleDateString("es-ES")}
+          </p>
+        )
+      }
     </footer>
   </main>
 </Layout>
