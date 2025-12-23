@@ -1,30 +1,65 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { getPageBySlug } from "../wordpress.js";
+import { getPageBySlug, getMediaImages } from "../wordpress.js";
 import { getProductImageUrl, WORDPRESS_URL } from "../config.js";
 
 // Obtener contenido de WordPress
 const page = await getPageBySlug("inicio");
 
-// Imagen: usar la de WordPress si existe, sino la del Storage
+// Obtener imágenes para el carrusel (máximo 5)
+const mediaImages = await getMediaImages(5);
+
+// Imagen principal por defecto
 let heroImage = getProductImageUrl(" HILO-001619-", "2.jpg");
 
 if (page?.featuredImage?.node?.sourceUrl) {
   const imgUrl = page.featuredImage.node.sourceUrl;
-  heroImage = imgUrl.startsWith("http") ? imgUrl : WORDPRESS_URL + imgUrl;
+  heroImage = imgUrl.startsWith('http') ? imgUrl : WORDPRESS_URL + imgUrl;
 }
 
 const imageAlt = page?.featuredImage?.node?.altText || "Imagen principal";
+
+// Usar imágenes del carrusel si existen, sino solo la imagen destacada
+const carouselImages = mediaImages.length > 0 
+  ? mediaImages 
+  : [{ sourceUrl: heroImage, altText: imageAlt }];
 ---
 
 <Layout title={page?.title || "Raytecno"}>
   <main class="card">
-    <!-- Header con imagen -->
-    <div class="hero">
-      <img src={heroImage} alt={imageAlt} />
-      <div class="hero-overlay">
+    <!-- Carrusel de imágenes -->
+    <div class="carousel">
+      <div class="carousel-inner" id="carouselInner">
+        {carouselImages.map((img, index) => (
+          <div class={`carousel-slide ${index === 0 ? 'active' : ''}`}>
+            <img src={img.sourceUrl} alt={img.altText || img.title || 'Imagen'} />
+          </div>
+        ))}
+      </div>
+      
+      <!-- Overlay con título -->
+      <div class="carousel-overlay">
         <h1>{page?.title || "Bienvenido"}</h1>
       </div>
+
+      <!-- Controles del carrusel -->
+      {carouselImages.length > 1 && (
+        <>
+          <button class="carousel-btn prev" id="prevBtn" aria-label="Anterior">❮</button>
+          <button class="carousel-btn next" id="nextBtn" aria-label="Siguiente">❯</button>
+          
+          <!-- Indicadores -->
+          <div class="carousel-indicators">
+            {carouselImages.map((_, index) => (
+              <button 
+                class={`indicator ${index === 0 ? 'active' : ''}`} 
+                data-index={index}
+                aria-label={`Ir a imagen ${index + 1}`}
+              />
+            ))}
+          </div>
+        </>
+      )}
     </div>
 
     <!-- Contenido de WordPress -->
@@ -33,20 +68,18 @@ const imageAlt = page?.featuredImage?.node?.altText || "Imagen principal";
         page ? (
           <div class="wp-content" set:html={page.content} />
         ) : (
-          <p class="error">⚠️ No se pudo cargar el contenido de WordPress.</p>
+          <p class="error">
+            ⚠️ No se pudo cargar el contenido de WordPress.
+          </p>
         )
       }
     </div>
 
-    <!-- Footer con info -->
+    <!-- Footer -->
     <footer class="footer">
       <div class="source-info">
         <span class="badge wp">📝 Texto: WordPress</span>
-        <span class="badge storage"
-          >🖼️ Imagen: {
-            page?.featuredImage ? "WordPress" : "Azure Storage"
-          }</span
-        >
+        <span class="badge storage">🖼️ {carouselImages.length} imágenes</span>
       </div>
     </footer>
   </main>
@@ -60,34 +93,98 @@ const imageAlt = page?.featuredImage?.node?.altText || "Imagen principal";
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   }
 
-  .hero {
+  /* Carrusel */
+  .carousel {
     position: relative;
-    height: 300px;
+    height: 350px;
     overflow: hidden;
   }
 
-  .hero img {
+  .carousel-inner {
+    display: flex;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .carousel-slide {
+    min-width: 100%;
+    height: 100%;
+  }
+
+  .carousel-slide img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 
-  .hero-overlay {
+  .carousel-overlay {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 40px 30px 30px;
+    padding: 60px 30px 30px;
     background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+    pointer-events: none;
   }
 
-  .hero-overlay h1 {
+  .carousel-overlay h1 {
     color: white;
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: 700;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    margin: 0;
   }
 
+  /* Botones del carrusel */
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .carousel-btn:hover {
+    background: white;
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .carousel-btn.prev { left: 15px; }
+  .carousel-btn.next { right: 15px; }
+
+  /* Indicadores */
+  .carousel-indicators {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+  }
+
+  .indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid white;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .indicator.active,
+  .indicator:hover {
+    background: white;
+  }
+
+  /* Contenido */
   .content {
     padding: 30px;
   }
@@ -102,8 +199,8 @@ const imageAlt = page?.featuredImage?.node?.altText || "Imagen principal";
     margin-bottom: 1em;
   }
 
-  .wp-content :global(h2),
-  .wp-content :global(h3),
+  .wp-content :global(h2), 
+  .wp-content :global(h3), 
   .wp-content :global(strong) {
     font-size: 1.3rem;
     margin: 1.5em 0 0.5em;
@@ -119,6 +216,7 @@ const imageAlt = page?.featuredImage?.node?.altText || "Imagen principal";
     text-align: center;
   }
 
+  /* Footer */
   .footer {
     padding: 20px 30px;
     background: #f8fafc;
@@ -149,14 +247,47 @@ const imageAlt = page?.featuredImage?.node?.altText || "Imagen principal";
   }
 
   @media (max-width: 600px) {
-    .hero {
-      height: 200px;
-    }
-    .hero-overlay h1 {
-      font-size: 1.5rem;
-    }
-    .content {
-      padding: 20px;
-    }
+    .carousel { height: 250px; }
+    .carousel-overlay h1 { font-size: 1.5rem; }
+    .carousel-btn { width: 35px; height: 35px; font-size: 1rem; }
+    .content { padding: 20px; }
   }
 </style>
+
+<script>
+  // Carrusel JavaScript
+  const inner = document.getElementById('carouselInner');
+  const slides = document.querySelectorAll('.carousel-slide');
+  const indicators = document.querySelectorAll('.indicator');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  
+  let currentIndex = 0;
+  const totalSlides = slides.length;
+
+  function goToSlide(index) {
+    if (index < 0) index = totalSlides - 1;
+    if (index >= totalSlides) index = 0;
+    
+    currentIndex = index;
+    inner.style.transform = `translateX(-${currentIndex * 100}%)`;
+    
+    // Actualizar indicadores
+    indicators.forEach((ind, i) => {
+      ind.classList.toggle('active', i === currentIndex);
+    });
+  }
+
+  // Event listeners
+  prevBtn?.addEventListener('click', () => goToSlide(currentIndex - 1));
+  nextBtn?.addEventListener('click', () => goToSlide(currentIndex + 1));
+  
+  indicators.forEach((ind, index) => {
+    ind.addEventListener('click', () => goToSlide(index));
+  });
+
+  // Auto-play (cambiar cada 5 segundos)
+  setInterval(() => {
+    goToSlide(currentIndex + 1);
+  }, 5000);
+</script>
