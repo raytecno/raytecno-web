@@ -75,6 +75,15 @@ const carouselImages = mediaImages.length > 0
       }
     </div>
 
+
+     <!-- Botón Galería -->
+    <div class="galeria-link">
+      <a href="/galeria" class="btn-galeria">
+        🖼️ Ver Galería de Marcas
+      </a>
+    </div>
+
+
     <!-- Footer -->
     <footer class="footer">
       <div class="source-info">
@@ -244,14 +253,40 @@ const carouselImages = mediaImages.length > 0
   .badge.storage {
     background: #d1fae5;
     color: #065f46;
+    }
+
+    /* Botón Galería */
+  .galeria-link {
+    padding: 30px;
+    text-align: center;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
   }
 
+  .btn-galeria {
+    display: inline-block;
+    padding: 15px 40px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    transition: all 0.3s ease;
+  }
+
+  .btn-galeria:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+  }
   @media (max-width: 600px) {
     .carousel { height: 250px; }
     .carousel-overlay h1 { font-size: 1.5rem; }
     .carousel-btn { width: 35px; height: 35px; font-size: 1rem; }
     .content { padding: 20px; }
   }
+
+
 </style>
 
 <script>

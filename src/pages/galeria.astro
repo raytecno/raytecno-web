@@ -1,31 +1,27 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { imagenesMenu, STORAGE_MENU_URL } from "../data/imagenes-menu.js";
+import { getMenuImages } from "../azure-storage.js";
 
-// Filtrar imágenes que NO contengan "Fondo" (por si acaso)
-const imagenes = imagenesMenu.filter((img) => !img.includes("Fondo"));
+// Leer imágenes automáticamente de Azure (sin "Fondo")
+const imagenes = await getMenuImages();
 ---
 
 <Layout title="Galería - Raytecno">
   <main class="galeria-page">
     <header class="galeria-header">
+      <a href="/" class="btn-volver">← Volver</a>
       <h1>Nuestras Marcas</h1>
       <p>{imagenes.length} productos</p>
     </header>
 
     <div class="galeria-grid">
       {
-        imagenes.map((imagen) => {
-          const nombre = imagen.replace(".jpg", "").replace(/-/g, " ");
-          const url = STORAGE_MENU_URL + encodeURIComponent(imagen);
-
-          return (
-            <div class="galeria-item">
-              <img src={url} alt={nombre} loading="lazy" />
-              <span class="galeria-nombre">{nombre}</span>
-            </div>
-          );
-        })
+        imagenes.map((img) => (
+          <div class="galeria-item">
+            <img src={img.url} alt={img.name} loading="lazy" />
+            <span class="galeria-nombre">{img.name}</span>
+          </div>
+        ))
       }
     </div>
   </main>
@@ -41,6 +37,23 @@ const imagenes = imagenesMenu.filter((img) => !img.includes("Fondo"));
     text-align: center;
     padding: 40px 20px;
     color: white;
+    position: relative;
+  }
+
+  .btn-volver {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    transition: background 0.3s;
+  }
+
+  .btn-volver:hover {
+    background: rgba(255, 255, 255, 0.2);
   }
 
   .galeria-header h1 {
@@ -98,16 +111,22 @@ const imagenes = imagenesMenu.filter((img) => !img.includes("Fondo"));
   }
 
   @media (max-width: 600px) {
+    .galeria-header h1 {
+      font-size: 1.8rem;
+    }
+    .btn-volver {
+      position: static;
+      margin-bottom: 20px;
+      display: inline-block;
+    }
     .galeria-grid {
       grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
       gap: 12px;
       padding: 15px;
     }
-
     .galeria-item img {
       height: 80px;
     }
-
     .galeria-nombre {
       font-size: 0.65rem;
       padding: 8px;
