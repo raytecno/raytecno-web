@@ -1,15 +1,18 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { getPageBySlug } from "../wordpress.js";
-import { getProductImageUrl } from "../config.js";
+import { getProductImageUrl, WORDPRESS_URL } from "../config.js";
 
-// Obtener contenido de WordPress (incluye imagen destacada)
+// Obtener contenido de WordPress
 const page = await getPageBySlug("inicio");
 
-// Usar imagen de WordPress si existe, sino usar imagen por defecto del Storage
-const heroImage =
-  page?.featuredImage?.node?.sourceUrl ||
-  getProductImageUrl(" HILO-001619-", "2.jpg");
+// Imagen: usar la de WordPress si existe, sino la del Storage
+let heroImage = getProductImageUrl(" HILO-001619-", "2.jpg");
+
+if (page?.featuredImage?.node?.sourceUrl) {
+  const imgUrl = page.featuredImage.node.sourceUrl;
+  heroImage = imgUrl.startsWith("http") ? imgUrl : WORDPRESS_URL + imgUrl;
+}
 
 const imageAlt = page?.featuredImage?.node?.altText || "Imagen principal";
 ---
