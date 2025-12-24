@@ -28,7 +28,7 @@ const page = await getPageBySlug("inicio");
           </defs>
         </svg>
         <div class="logo-text">
-          <h1>RAYTECNO</h1>
+          <h1>RAYGOLD</h1>
           <span>Software para Joyería</span>
         </div>
       </div>
@@ -38,6 +38,7 @@ const page = await getPageBySlug("inicio");
         <a href="#modulos">Módulos</a>
         <a href="#nosotros">Nosotros</a>
         <a href="/galeria">Galería</a>
+        <a href="/tecnologia">Tecnología</a>
         <a href="#contacto">Contacto</a>
       </nav>
 
@@ -45,18 +46,16 @@ const page = await getPageBySlug("inicio");
     </div>
   </header>
 
-  <!-- HERO + MÓDULOS - Todo sobre la ola -->
+  <!-- HERO + MÓDULOS -->
   <section id="inicio" class="hero">
     <div class="hero-bg"></div>
 
     <div class="hero-wrapper">
-      <!-- Texto principal -->
       <div class="hero-content">
-        <h2>RAYGOLD UNA NUEVA EXPERIENCIA<br />EN GESTIÓN DE JOYERÍA</h2>
+        <h2>UNA NUEVA EXPERIENCIA<br />EN GESTIÓN DE JOYERÍA</h2>
         <p>Software integral para fabricantes y comerciantes de joyería</p>
       </div>
 
-      <!-- Módulos sobre la ola -->
       <div id="modulos" class="modulos-grid">
         <!-- Maestros -->
         <a href="/modulos/maestros" class="modulo-card">
@@ -125,54 +124,7 @@ const page = await getPageBySlug("inicio");
           <p>Ventas, pedidos y facturación</p>
         </a>
 
-        <!-- Inventarios -->
-        <a href="/modulos/inventarios" class="modulo-card">
-          <div class="modulo-icon">
-            <svg viewBox="0 0 64 64" fill="none">
-              <rect
-                x="8"
-                y="28"
-                width="20"
-                height="24"
-                rx="2"
-                fill="#4a5568"
-                stroke="#718096"
-                stroke-width="2"></rect>
-              <rect
-                x="22"
-                y="20"
-                width="20"
-                height="32"
-                rx="2"
-                fill="#5a6778"
-                stroke="#718096"
-                stroke-width="2"></rect>
-              <rect
-                x="36"
-                y="12"
-                width="20"
-                height="40"
-                rx="2"
-                fill="#6a7888"
-                stroke="#718096"
-                stroke-width="2"></rect>
-              <rect x="12" y="34" width="12" height="3" rx="1" fill="#14b8a6"
-              ></rect>
-              <rect x="26" y="26" width="12" height="3" rx="1" fill="#14b8a6"
-              ></rect>
-              <rect x="40" y="18" width="12" height="3" rx="1" fill="#14b8a6"
-              ></rect>
-              <rect x="40" y="26" width="12" height="3" rx="1" fill="#0d9488"
-              ></rect>
-              <rect x="40" y="34" width="12" height="3" rx="1" fill="#0f766e"
-              ></rect>
-            </svg>
-          </div>
-          <h4>Inventarios</h4>
-          <p>Stock, movimientos y trazabilidad</p>
-        </a>
-
-        <!-- Fabricación -->
+        <!-- Fabricación (antes Inventarios) -->
         <a href="/modulos/fabricacion" class="modulo-card">
           <div class="modulo-icon">
             <svg viewBox="0 0 64 64" fill="none">
@@ -206,7 +158,41 @@ const page = await getPageBySlug("inicio");
             </svg>
           </div>
           <h4>Fabricación</h4>
-          <p>Producción y control de calidad</p>
+          <p>Producción, inventarios y calidad</p>
+        </a>
+
+        <!-- Finanzas (antes Fabricación) -->
+        <a href="/modulos/finanzas" class="modulo-card">
+          <div class="modulo-icon">
+            <svg viewBox="0 0 64 64" fill="none">
+              <rect
+                x="8"
+                y="16"
+                width="48"
+                height="36"
+                rx="4"
+                fill="#4a5568"
+                stroke="#718096"
+                stroke-width="2"></rect>
+              <rect x="14" y="22" width="36" height="8" rx="2" fill="#10b981"
+              ></rect>
+              <rect x="14" y="34" width="20" height="4" rx="1" fill="#718096"
+              ></rect>
+              <rect x="14" y="42" width="28" height="4" rx="1" fill="#718096"
+              ></rect>
+              <circle cx="46" cy="40" r="8" fill="#059669"></circle>
+              <text
+                x="46"
+                y="44"
+                text-anchor="middle"
+                fill="white"
+                font-size="12"
+                font-weight="bold">€</text
+              >
+            </svg>
+          </div>
+          <h4>Finanzas</h4>
+          <p>Contabilidad, tesorería e IVA</p>
         </a>
 
         <!-- Históricos -->
@@ -273,11 +259,10 @@ const page = await getPageBySlug("inicio");
           <p>Informes y cuadros de mando</p>
         </a>
 
-        <!-- Vendedores / Movilidad -->
+        <!-- Vendedores -->
         <a href="/modulos/vendedores" class="modulo-card">
           <div class="modulo-icon">
             <svg viewBox="0 0 64 64" fill="none">
-              <!-- Persona/vendedor -->
               <circle
                 cx="24"
                 cy="16"
@@ -290,7 +275,6 @@ const page = await getPageBySlug("inicio");
                 fill="#4a5568"
                 stroke="#718096"
                 stroke-width="2"></path>
-              <!-- Maletín -->
               <rect
                 x="36"
                 y="32"
@@ -306,7 +290,6 @@ const page = await getPageBySlug("inicio");
               ></rect>
               <rect x="40" y="42" width="14" height="2" rx="1" fill="#60a5fa"
               ></rect>
-              <!-- Mapa/ruta -->
               <circle cx="52" cy="14" r="6" fill="#10b981"></circle>
               <path
                 d="M52 11v4M50 13h4"
@@ -316,7 +299,7 @@ const page = await getPageBySlug("inicio");
             </svg>
           </div>
           <h4>Vendedores</h4>
-          <p>Gestión de rutas y visitas a clientes</p>
+          <p>Gestión de rutas y visitas</p>
         </a>
 
         <!-- Ecommerce -->
@@ -362,13 +345,10 @@ const page = await getPageBySlug("inicio");
     </div>
   </section>
 
-  <!-- NOSOTROS -->
+  <!-- NOSOTROS - Minimalista -->
   <section id="nosotros" class="nosotros">
     <div class="nosotros-inner">
-      <div class="nosotros-header">
-        <span class="badge">SOBRE NOSOTROS</span>
-        <h3>Software diseñado por y para joyeros</h3>
-      </div>
+      <h3>Software diseñado por y para joyeros</h3>
 
       <div class="nosotros-content">
         {
@@ -392,9 +372,7 @@ const page = await getPageBySlug("inicio");
         }
       </div>
 
-      <div class="galeria-cta">
-        <a href="/galeria" class="btn-galeria">🖼️ Ver Galería de Marcas</a>
-      </div>
+      <a href="/galeria" class="btn-galeria">Ver Galería de Marcas →</a>
     </div>
   </section>
 
@@ -436,7 +414,7 @@ const page = await getPageBySlug("inicio");
         <p><a href="/modulos/maestros">Maestros</a></p>
         <p><a href="/modulos/comercial">Comercial</a></p>
         <p><a href="/modulos/fabricacion">Fabricación</a></p>
-        <p><a href="/modulos/vendedores">Vendedores</a></p>
+        <p><a href="/modulos/finanzas">Finanzas</a></p>
       </div>
 
       <div class="footer-col">
@@ -532,7 +510,7 @@ const page = await getPageBySlug("inicio");
     cursor: pointer;
   }
 
-  /* HERO - Con módulos integrados */
+  /* HERO */
   .hero {
     position: relative;
     min-height: 100vh;
@@ -588,7 +566,7 @@ const page = await getPageBySlug("inicio");
     color: rgba(255, 255, 255, 0.85);
   }
 
-  /* MÓDULOS - Sobre la ola con fondo azul fuerte */
+  /* MÓDULOS */
   .modulos-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -638,54 +616,38 @@ const page = await getPageBySlug("inicio");
     line-height: 1.4;
   }
 
-  /* NOSOTROS */
+  /* NOSOTROS - Minimalista */
   .nosotros {
     background: var(--light);
     padding: 80px 24px;
   }
 
   .nosotros-inner {
-    max-width: 900px;
+    max-width: 800px;
     margin: 0 auto;
-  }
-
-  .nosotros-header {
     text-align: center;
-    margin-bottom: 40px;
   }
 
-  .badge {
-    display: inline-block;
-    padding: 6px 16px;
-    background: var(--primary);
-    color: white;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 1px;
-    border-radius: 20px;
-    margin-bottom: 12px;
-  }
-
-  .nosotros-header h3 {
+  .nosotros-inner h3 {
     font-size: 2rem;
     color: var(--dark);
+    margin-bottom: 40px;
+    font-weight: 600;
   }
 
   .nosotros-content {
-    background: white;
-    border-radius: 20px;
-    padding: 40px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    text-align: left;
+    margin-bottom: 40px;
   }
 
   .wp-content {
     font-size: 1rem;
     color: #475569;
-    line-height: 1.8;
+    line-height: 1.9;
   }
 
   .wp-content :global(p) {
-    margin-bottom: 1.2em;
+    margin-bottom: 1.5em;
   }
 
   .wp-content :global(strong) {
@@ -695,29 +657,25 @@ const page = await getPageBySlug("inicio");
   .wp-content :global(h2),
   .wp-content :global(h3) {
     color: var(--dark);
-    margin: 1.5em 0 0.5em;
-    font-size: 1.2rem;
-  }
-
-  .galeria-cta {
-    text-align: center;
-    margin-top: 40px;
+    margin: 2em 0 0.8em;
+    font-size: 1.1rem;
+    font-weight: 600;
   }
 
   .btn-galeria {
     display: inline-block;
-    padding: 16px 40px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    padding: 14px 32px;
+    color: var(--primary);
     font-weight: 600;
-    border-radius: 10px;
+    font-size: 0.95rem;
+    border: 2px solid var(--primary);
+    border-radius: 8px;
     transition: all 0.3s;
-    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
   }
 
   .btn-galeria:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 30px rgba(102, 126, 234, 0.5);
+    background: var(--primary);
+    color: white;
   }
 
   /* FOOTER */
@@ -847,8 +805,12 @@ const page = await getPageBySlug("inicio");
       font-size: 0.7rem;
     }
 
-    .nosotros-content {
-      padding: 24px;
+    .nosotros {
+      padding: 60px 24px;
+    }
+
+    .nosotros-inner h3 {
+      font-size: 1.5rem;
     }
 
     .footer-grid {
