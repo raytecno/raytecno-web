@@ -1,329 +1,602 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { getPageBySlug, getMediaImages } from "../wordpress.js";
-import { getProductImageUrl, WORDPRESS_URL } from "../config.js";
+import { WORDPRESS_URL } from "../config.js";
 
 // Obtener contenido de WordPress
 const page = await getPageBySlug("inicio");
 
-// Obtener imágenes para el carrusel (máximo 5)
-const mediaImages = await getMediaImages(5);
-
-// Imagen principal por defecto
-let heroImage = getProductImageUrl(" HILO-001619-", "2.jpg");
-
-if (page?.featuredImage?.node?.sourceUrl) {
-  const imgUrl = page.featuredImage.node.sourceUrl;
-  heroImage = imgUrl.startsWith('http') ? imgUrl : WORDPRESS_URL + imgUrl;
-}
-
-const imageAlt = page?.featuredImage?.node?.altText || "Imagen principal";
-
-// Usar imágenes del carrusel si existen, sino solo la imagen destacada
-const carouselImages = mediaImages.length > 0 
-  ? mediaImages 
-  : [{ sourceUrl: heroImage, altText: imageAlt }];
+// Obtener una imagen de WordPress para la sección "Nosotros"
+const mediaImages = await getMediaImages(3);
+const aboutImage = mediaImages.length > 0 ? mediaImages[0].sourceUrl : null;
 ---
 
-<Layout title={page?.title || "Raytecno"}>
-  <main class="card">
-    <!-- Carrusel de imágenes -->
-    <div class="carousel">
-      <div class="carousel-inner" id="carouselInner">
-        {carouselImages.map((img, index) => (
-          <div class={`carousel-slide ${index === 0 ? 'active' : ''}`}>
-            <img src={img.sourceUrl} alt={img.altText || img.title || 'Imagen'} />
-          </div>
-        ))}
+<Layout title="RayGold - Soluciones para Joyería">
+  
+  <!-- HEADER / NAVEGACIÓN -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <h1 class="logo-text">RAYGOLD</h1>
+        <span class="logo-tagline">JOYERÍA</span>
       </div>
       
-      <!-- Overlay con título -->
-      <div class="carousel-overlay">
-        <h1>{page?.title || "Bienvenido"}</h1>
-      </div>
-
-      <!-- Controles del carrusel -->
-      {carouselImages.length > 1 && (
-        <>
-          <button class="carousel-btn prev" id="prevBtn" aria-label="Anterior">❮</button>
-          <button class="carousel-btn next" id="nextBtn" aria-label="Siguiente">❯</button>
-          
-          <!-- Indicadores -->
-          <div class="carousel-indicators">
-            {carouselImages.map((_, index) => (
-              <button 
-                class={`indicator ${index === 0 ? 'active' : ''}`} 
-                data-index={index}
-                aria-label={`Ir a imagen ${index + 1}`}
-              />
-            ))}
-          </div>
-        </>
-      )}
+      <nav class="nav">
+        <a href="#inicio" class="nav-link active">INICIO</a>
+        <a href="#nosotros" class="nav-link">NOSOTROS</a>
+        <a href="#productos" class="nav-link">PRODUCTOS</a>
+        <a href="/galeria" class="nav-link">GALERÍA</a>
+        <a href="#contacto" class="nav-link">CONTACTO</a>
+      </nav>
+      
+      <button class="menu-toggle" aria-label="Menú">☰</button>
     </div>
+  </header>
 
-    <!-- Contenido de WordPress -->
-    <div class="content">
-      {
-        page ? (
+  <!-- HERO SECTION -->
+  <section id="inicio" class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <h2 class="hero-title">UNA NUEVA EXPERIENCIA EN GESTIÓN DE JOYERÍA</h2>
+      <p class="hero-subtitle">Software integral para fabricantes y comerciantes de joyería</p>
+      <a href="#nosotros" class="hero-btn">Descubrir más</a>
+    </div>
+  </section>
+
+  <!-- SECCIÓN NOSOTROS -->
+  <section id="nosotros" class="nosotros">
+    <div class="section-header">
+      <h2 class="section-title">NOSOTROS</h2>
+      <span class="section-icon">💎</span>
+    </div>
+    
+    <div class="nosotros-content">
+      <div class="nosotros-image">
+        {aboutImage ? (
+          <img src={aboutImage} alt="RayGold Software" />
+        ) : (
+          <div class="image-placeholder">
+            <span>💎</span>
+          </div>
+        )}
+      </div>
+      
+      <div class="nosotros-text">
+        {page ? (
           <div class="wp-content" set:html={page.content} />
         ) : (
-          <p class="error">
-            ⚠️ No se pudo cargar el contenido de WordPress.
-          </p>
-        )
-      }
+          <>
+            <p><strong>RayGold Fabricación</strong> es ante todo una Aplicación Integradora cuyo propósito principal es proporcionar información para la toma de decisiones correctas, gestionar y dar soluciones a los pequeños detalles operativos.</p>
+            <p>RayGold se adapta a un mundo tecnológico y de desarrollo cada vez más exigente y a un mercado altamente competitivo, equilibrando la complejidad a la simplicidad.</p>
+            <p>Solución completa e integrada que incorpora todos los procesos necesarios para gestionar y controlar la funcionalidad de la empresa.</p>
+          </>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN PRODUCTOS -->
+  <section id="productos" class="productos">
+    <div class="section-header light">
+      <h2 class="section-title">NUESTROS PRODUCTOS</h2>
+      <span class="section-icon">⚙️</span>
+    </div>
+    
+    <div class="productos-grid">
+      <div class="producto-card">
+        <div class="producto-icon">🏭</div>
+        <h3>RayGold Fabricación</h3>
+        <p>Control total del proceso productivo: desde el diseño hasta el producto terminado.</p>
+      </div>
+      
+      <div class="producto-card">
+        <div class="producto-icon">🛒</div>
+        <h3>RayGold Comercial</h3>
+        <p>Gestión comercial completa: ventas, clientes, representantes y comisiones.</p>
+      </div>
+      
+      <div class="producto-card">
+        <div class="producto-icon">💳</div>
+        <h3>RayGold TPV</h3>
+        <p>Terminal punto de venta adaptado al sector joyero con control de stock.</p>
+      </div>
+      
+      <div class="producto-card">
+        <div class="producto-icon">📊</div>
+        <h3>RayGold Analytics</h3>
+        <p>Informes y análisis para la toma de decisiones estratégicas.</p>
+      </div>
     </div>
 
-
-     <!-- Botón Galería -->
-    <div class="galeria-link">
+    <!-- Botón Galería -->
+    <div class="galeria-cta">
       <a href="/galeria" class="btn-galeria">
         🖼️ Ver Galería de Marcas
       </a>
     </div>
+  </section>
 
-
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="source-info">
-        <span class="badge wp">📝 Texto: WordPress</span>
-        <span class="badge storage">🖼️ {carouselImages.length} imágenes</span>
+  <!-- FOOTER / CONTACTO -->
+  <footer id="contacto" class="footer">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>UBICACIÓN</h4>
+        <p>Polígono Industrial</p>
+        <p>Pamplona, Navarra</p>
       </div>
-    </footer>
-  </main>
+      
+      <div class="footer-col">
+        <h4>CONTACTO</h4>
+        <p>info@raytecno.es</p>
+        <p>+34 948 XXX XXX</p>
+      </div>
+      
+      <div class="footer-col">
+        <h4>HORARIO</h4>
+        <p>Lun-Vie: 09:00 - 18:00</p>
+        <p>Sábados: Cerrado</p>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>Todos los derechos reservados. RayGold © 2025</p>
+    </div>
+  </footer>
+
 </Layout>
 
 <style>
-  .card {
-    background: white;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  }
-
-  /* Carrusel */
-  .carousel {
-    position: relative;
-    height: 350px;
-    overflow: hidden;
-  }
-
-  .carousel-inner {
-    display: flex;
-    height: 100%;
-    transition: transform 0.5s ease-in-out;
-  }
-
-  .carousel-slide {
-    min-width: 100%;
-    height: 100%;
-  }
-
-  .carousel-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .carousel-overlay {
-    position: absolute;
-    bottom: 0;
+  /* ================================
+     HEADER
+     ================================ */
+  .header {
+    position: fixed;
+    top: 0;
     left: 0;
     right: 0;
-    padding: 60px 30px 30px;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
-    pointer-events: none;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
   }
 
-  .carousel-overlay h1 {
-    color: white;
-    font-size: 2.2rem;
+  .header-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
     font-weight: 700;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-    margin: 0;
+    color: #1e3a5f;
+    letter-spacing: 3px;
+    line-height: 1;
   }
 
-  /* Botones del carrusel */
-  .carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.9);
-    border: none;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  .logo-tagline {
+    font-size: 0.7rem;
+    letter-spacing: 4px;
+    color: #64748b;
+    margin-top: 2px;
   }
 
-  .carousel-btn:hover {
-    background: white;
-    transform: translateY(-50%) scale(1.1);
-  }
-
-  .carousel-btn.prev { left: 15px; }
-  .carousel-btn.next { right: 15px; }
-
-  /* Indicadores */
-  .carousel-indicators {
-    position: absolute;
-    bottom: 80px;
-    left: 50%;
-    transform: translateX(-50%);
+  .nav {
     display: flex;
     gap: 10px;
   }
 
-  .indicator {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    border: 2px solid white;
-    background: transparent;
-    cursor: pointer;
+  .nav-link {
+    padding: 10px 18px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: #334155;
+    border-radius: 4px;
     transition: all 0.3s ease;
   }
 
-  .indicator.active,
-  .indicator:hover {
-    background: white;
+  .nav-link:hover,
+  .nav-link.active {
+    color: #1e3a5f;
+    background: rgba(30, 58, 95, 0.08);
   }
 
-  /* Contenido */
-  .content {
-    padding: 30px;
+  .menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #1e3a5f;
   }
 
-  .wp-content {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #334155;
-  }
-
-  .wp-content :global(p) {
-    margin-bottom: 1em;
-  }
-
-  .wp-content :global(h2), 
-  .wp-content :global(h3), 
-  .wp-content :global(strong) {
-    font-size: 1.3rem;
-    margin: 1.5em 0 0.5em;
-    color: #1e293b;
-  }
-
-  .error {
-    padding: 20px;
-    background: #fef2f2;
-    border: 1px solid #fecaca;
-    border-radius: 10px;
-    color: #991b1b;
-    text-align: center;
-  }
-
-  /* Footer */
-  .footer {
-    padding: 20px 30px;
-    background: #f8fafc;
-    border-top: 1px solid #e2e8f0;
-  }
-
-  .source-info {
+  /* ================================
+     HERO
+     ================================ */
+  .hero {
+    position: relative;
+    min-height: 100vh;
     display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
   }
 
-  .badge {
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 500;
+  .hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('https://raytecno-wp-hmg0hgfzhsdzchfv.spaincentral-01.azurewebsites.net/wp-content/uploads/2025/12/ola.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
   }
 
-  .badge.wp {
-    background: #dbeafe;
-    color: #1e40af;
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(30, 58, 95, 0.7) 0%,
+      rgba(100, 116, 139, 0.5) 100%
+    );
   }
 
-  .badge.storage {
-    background: #d1fae5;
-    color: #065f46;
-    }
-
-    /* Botón Galería */
-  .galeria-link {
-    padding: 30px;
+  .hero-content {
+    position: relative;
+    z-index: 1;
     text-align: center;
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    padding: 40px;
+    max-width: 900px;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    line-height: 1.2;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .hero-subtitle {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 40px;
+    font-weight: 300;
+  }
+
+  .hero-btn {
+    display: inline-block;
+    padding: 15px 40px;
+    background: white;
+    color: #1e3a5f;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .hero-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  /* ================================
+     SECTION HEADER
+     ================================ */
+  .section-header {
+    text-align: center;
+    padding: 60px 20px 40px;
+    background: #f8fafc;
+  }
+
+  .section-header.light {
+    background: #1e3a5f;
+  }
+
+  .section-header.light .section-title {
+    color: white;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: #1e3a5f;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+  }
+
+  .section-icon {
+    font-size: 1.5rem;
+  }
+
+  /* ================================
+     NOSOTROS
+     ================================ */
+  .nosotros {
+    background: #f8fafc;
+  }
+
+  .nosotros-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .nosotros-image img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  }
+
+  .image-placeholder {
+    width: 100%;
+    height: 300px;
+    background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+  }
+
+  .nosotros-text {
+    font-size: 1rem;
+    color: #475569;
+    line-height: 1.9;
+  }
+
+  .nosotros-text :global(p) {
+    margin-bottom: 1.2em;
+  }
+
+  .nosotros-text :global(strong) {
+    color: #1e3a5f;
+    font-weight: 600;
+  }
+
+  .nosotros-text :global(h2),
+  .nosotros-text :global(h3) {
+    font-family: 'Playfair Display', serif;
+    color: #1e3a5f;
+    margin: 1.5em 0 0.5em;
+    font-size: 1.3rem;
+  }
+
+  /* ================================
+     PRODUCTOS
+     ================================ */
+  .productos {
+    background: #1e3a5f;
+    padding-bottom: 60px;
+  }
+
+  .productos-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+  }
+
+  .producto-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 30px 25px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .producto-card:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-5px);
+  }
+
+  .producto-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+  }
+
+  .producto-card h3 {
+    font-family: 'Playfair Display', serif;
+    color: white;
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+
+  .producto-card p {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  /* ================================
+     BOTÓN GALERÍA
+     ================================ */
+  .galeria-cta {
+    text-align: center;
+    padding: 50px 20px 20px;
   }
 
   .btn-galeria {
     display: inline-block;
-    padding: 15px 40px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    text-decoration: none;
-    border-radius: 30px;
-    font-size: 1.1rem;
+    padding: 18px 50px;
+    background: white;
+    color: #1e3a5f;
     font-weight: 600;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    border-radius: 4px;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   }
 
   .btn-galeria:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
-  }
-  
-  @media (max-width: 600px) {
-    .carousel { height: 250px; }
-    .carousel-overlay h1 { font-size: 1.5rem; }
-    .carousel-btn { width: 35px; height: 35px; font-size: 1rem; }
-    .content { padding: 20px; }
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    background: #f8fafc;
   }
 
+  /* ================================
+     FOOTER
+     ================================ */
+  .footer {
+    background: linear-gradient(135deg, #5d4e37 0%, #3d3227 100%);
+    color: white;
+  }
 
+  .footer-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 40px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    text-align: center;
+  }
+
+  .footer-col h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    color: #d4af37;
+  }
+
+  .footer-col p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+  }
+
+  .footer-bottom {
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  /* ================================
+     RESPONSIVE
+     ================================ */
+  @media (max-width: 1024px) {
+    .productos-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .header-inner {
+      padding: 15px 20px;
+    }
+
+    .nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: white;
+      flex-direction: column;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav.active {
+      display: flex;
+    }
+
+    .menu-toggle {
+      display: block;
+    }
+
+    .hero-title {
+      font-size: 2.2rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+    }
+
+    .nosotros-content {
+      grid-template-columns: 1fr;
+      padding: 0 20px 60px;
+    }
+
+    .nosotros-image {
+      order: -1;
+    }
+
+    .productos-grid {
+      grid-template-columns: 1fr;
+      padding: 0 20px;
+    }
+
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 30px;
+      padding: 40px 20px;
+    }
+  }
 </style>
 
 <script>
-  // Carrusel JavaScript
-  const inner = document.getElementById('carouselInner');
-  const slides = document.querySelectorAll('.carousel-slide');
-  const indicators = document.querySelectorAll('.indicator');
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
-  
-  let currentIndex = 0;
-  const totalSlides = slides.length;
-
-  function goToSlide(index) {
-    if (index < 0) index = totalSlides - 1;
-    if (index >= totalSlides) index = 0;
-    
-    currentIndex = index;
-    inner.style.transform = `translateX(-${currentIndex * 100}%)`;
-    
-    // Actualizar indicadores
-    indicators.forEach((ind, i) => {
-      ind.classList.toggle('active', i === currentIndex);
-    });
-  }
-
-  // Event listeners
-  prevBtn?.addEventListener('click', () => goToSlide(currentIndex - 1));
-  nextBtn?.addEventListener('click', () => goToSlide(currentIndex + 1));
-  
-  indicators.forEach((ind, index) => {
-    ind.addEventListener('click', () => goToSlide(index));
+  // Mobile menu toggle
+  document.querySelector('.menu-toggle')?.addEventListener('click', () => {
+    document.querySelector('.nav')?.classList.toggle('active');
   });
 
-  // Auto-play (cambiar cada 5 segundos)
-  setInterval(() => {
-    goToSlide(currentIndex + 1);
-  }, 5000);
+  // Smooth scroll para links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+      // Cerrar menú móvil
+      document.querySelector('.nav')?.classList.remove('active');
+    });
+  });
+
+  // Header scroll effect
+  window.addEventListener('scroll', () => {
+    const header = document.querySelector('.header');
+    if (window.scrollY > 100) {
+      header?.classList.add('scrolled');
+    } else {
+      header?.classList.remove('scrolled');
+    }
+  });
 </script>
