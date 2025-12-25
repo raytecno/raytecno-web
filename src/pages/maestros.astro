@@ -1,0 +1,918 @@
+---
+// src/pages/modulos/maestros.astro
+import Layout from "../../layouts/Layout.astro";
+
+// URL base de Azure Blob Storage
+const blobBaseUrl = "https://raygoldstorage.blob.core.windows.net/web";
+
+// Datos de las secciones (esto podría venir de WordPress en el futuro)
+const secciones = [
+  {
+    id: "articulos",
+    nombre: "Artículos",
+    descripcion: "Gestión completa del catálogo de artículos",
+    imagenes: [
+      {
+        src: `${blobBaseUrl}/A01.png`,
+        alt: "Listado de artículos",
+        titulo: "Listado de Artículos",
+        descripcion:
+          "Vista general del catálogo con filtros avanzados y búsqueda rápida",
+      },
+      {
+        src: `${blobBaseUrl}/A02.png`,
+        alt: "Ficha de artículo",
+        titulo: "Ficha de Artículo",
+        descripcion: "Detalle completo con especificaciones, precios y stock",
+      },
+      {
+        src: `${blobBaseUrl}/A03.png`,
+        alt: "Configuración de artículo",
+        titulo: "Configuración",
+        descripcion: "Personalización de campos y atributos por familia",
+      },
+    ],
+  },
+  {
+    id: "precios",
+    nombre: "Precios",
+    descripcion: "Tarifas, descuentos y políticas de precios",
+    imagenes: [
+      {
+        src: `${blobBaseUrl}/P01.png`,
+        alt: "Tarifas de precios",
+        titulo: "Tarifas",
+        descripcion: "Gestión de múltiples tarifas por cliente o grupo",
+      },
+      {
+        src: `${blobBaseUrl}/P02.png`,
+        alt: "Descuentos",
+        titulo: "Descuentos",
+        descripcion:
+          "Configuración de descuentos por volumen, cliente o temporada",
+      },
+      {
+        src: `${blobBaseUrl}/P03.png`,
+        alt: "Histórico de precios",
+        titulo: "Histórico",
+        descripcion: "Trazabilidad completa de cambios de precios",
+      },
+    ],
+  },
+  {
+    id: "estructuras",
+    nombre: "Estructuras",
+    descripcion: "Composición y materiales de cada pieza",
+    imagenes: [
+      {
+        src: `${blobBaseUrl}/E01.png`,
+        alt: "Estructura de artículo",
+        titulo: "Composición",
+        descripcion: "Definición de materiales, aleaciones y componentes",
+      },
+      {
+        src: `${blobBaseUrl}/E02.png`,
+        alt: "Árbol de materiales",
+        titulo: "Árbol de Materiales",
+        descripcion: "Vista jerárquica de la estructura del artículo",
+      },
+      {
+        src: `${blobBaseUrl}/E03.png`,
+        alt: "Costes de estructura",
+        titulo: "Costes",
+        descripcion: "Cálculo automático de costes según estructura",
+      },
+    ],
+  },
+  {
+    id: "imagenes",
+    nombre: "Imágenes",
+    descripcion: "Galería fotográfica y multimedia",
+    imagenes: [
+      {
+        src: `${blobBaseUrl}/I01.png`,
+        alt: "Galería de imágenes",
+        titulo: "Galería",
+        descripcion: "Gestión de imágenes múltiples por artículo",
+      },
+      {
+        src: `${blobBaseUrl}/I02.png`,
+        alt: "Visor de imágenes",
+        titulo: "Visor",
+        descripcion: "Visualización a pantalla completa con zoom",
+      },
+      {
+        src: `${blobBaseUrl}/I03.png`,
+        alt: "Importación de imágenes",
+        titulo: "Importación",
+        descripcion: "Carga masiva desde carpetas o dispositivos",
+      },
+    ],
+  },
+  {
+    id: "layout",
+    nombre: "Layout",
+    descripcion: "Personalización de vistas y formularios",
+    imagenes: [
+      {
+        src: `${blobBaseUrl}/L01.png`,
+        alt: "Configuración de layout",
+        titulo: "Configuración",
+        descripcion: "Diseño personalizado de formularios por usuario",
+      },
+      {
+        src: `${blobBaseUrl}/L02.png`,
+        alt: "Campos personalizados",
+        titulo: "Campos",
+        descripcion: "Creación de campos personalizados sin programación",
+      },
+      {
+        src: `${blobBaseUrl}/L03.png`,
+        alt: "Plantillas de vista",
+        titulo: "Plantillas",
+        descripcion: "Guardado y reutilización de configuraciones",
+      },
+    ],
+  },
+];
+---
+
+<Layout title="Maestros - RayGold ERP">
+  <main class="modulo-page">
+    <!-- Header del módulo -->
+    <header class="modulo-header">
+      <div class="header-content">
+        <div class="header-icon">
+          <svg viewBox="0 0 64 64" fill="none">
+            <rect
+              x="8"
+              y="12"
+              width="48"
+              height="40"
+              rx="4"
+              fill="#4a5568"
+              stroke="#718096"
+              stroke-width="2"></rect>
+            <rect x="14" y="18" width="36" height="6" rx="2" fill="#a0aec0"
+            ></rect>
+            <rect x="14" y="28" width="24" height="4" rx="1" fill="#718096"
+            ></rect>
+            <rect x="14" y="36" width="30" height="4" rx="1" fill="#718096"
+            ></rect>
+            <rect x="14" y="44" width="20" height="4" rx="1" fill="#718096"
+            ></rect>
+            <circle cx="46" cy="44" r="6" fill="#667eea"></circle>
+            <path
+              d="M44 44l2 2 4-4"
+              stroke="white"
+              stroke-width="2"
+              stroke-linecap="round"></path>
+          </svg>
+        </div>
+        <div class="header-text">
+          <h1>Maestros</h1>
+          <p>Artículos, proveedores, clientes y familias</p>
+        </div>
+      </div>
+      <a href="/" class="back-link">← Volver al inicio</a>
+    </header>
+
+    <!-- Navegación de secciones -->
+    <nav class="secciones-nav">
+      <div class="container">
+        <div class="secciones-tabs">
+          {
+            secciones.map((seccion, index) => (
+              <button
+                class={`seccion-tab ${index === 0 ? "active" : ""}`}
+                data-seccion={seccion.id}
+              >
+                <div class="tab-icon">
+                  {seccion.id === "articulos" && (
+                    <svg viewBox="0 0 48 48" fill="none">
+                      <rect
+                        x="6"
+                        y="8"
+                        width="36"
+                        height="32"
+                        rx="3"
+                        fill="#667eea"
+                        opacity="0.15"
+                      />
+                      <rect
+                        x="10"
+                        y="12"
+                        width="28"
+                        height="6"
+                        rx="2"
+                        fill="#667eea"
+                      />
+                      <rect
+                        x="10"
+                        y="22"
+                        width="20"
+                        height="3"
+                        rx="1"
+                        fill="#667eea"
+                        opacity="0.6"
+                      />
+                      <rect
+                        x="10"
+                        y="28"
+                        width="24"
+                        height="3"
+                        rx="1"
+                        fill="#667eea"
+                        opacity="0.6"
+                      />
+                      <rect
+                        x="10"
+                        y="34"
+                        width="16"
+                        height="3"
+                        rx="1"
+                        fill="#667eea"
+                        opacity="0.6"
+                      />
+                      <circle cx="34" cy="34" r="5" fill="#10b981" />
+                      <path
+                        d="M32 34l2 2 3-3"
+                        stroke="white"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                      />
+                    </svg>
+                  )}
+                  {seccion.id === "precios" && (
+                    <svg viewBox="0 0 48 48" fill="none">
+                      <rect
+                        x="8"
+                        y="10"
+                        width="32"
+                        height="28"
+                        rx="3"
+                        fill="#f59e0b"
+                        opacity="0.15"
+                      />
+                      <path
+                        d="M24 16v16M20 20h8c1.5 0 3 1 3 3s-1.5 3-3 3h-6c-1.5 0-3 1-3 3s1.5 3 3 3h8"
+                        stroke="#f59e0b"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                      />
+                      <circle cx="24" cy="16" r="2" fill="#f59e0b" />
+                      <circle cx="24" cy="32" r="2" fill="#f59e0b" />
+                    </svg>
+                  )}
+                  {seccion.id === "estructuras" && (
+                    <svg viewBox="0 0 48 48" fill="none">
+                      <rect
+                        x="8"
+                        y="6"
+                        width="14"
+                        height="10"
+                        rx="2"
+                        fill="#8b5cf6"
+                      />
+                      <rect
+                        x="26"
+                        y="6"
+                        width="14"
+                        height="10"
+                        rx="2"
+                        fill="#8b5cf6"
+                        opacity="0.6"
+                      />
+                      <rect
+                        x="8"
+                        y="20"
+                        width="14"
+                        height="10"
+                        rx="2"
+                        fill="#8b5cf6"
+                        opacity="0.6"
+                      />
+                      <rect
+                        x="26"
+                        y="20"
+                        width="14"
+                        height="10"
+                        rx="2"
+                        fill="#8b5cf6"
+                        opacity="0.4"
+                      />
+                      <rect
+                        x="17"
+                        y="34"
+                        width="14"
+                        height="10"
+                        rx="2"
+                        fill="#8b5cf6"
+                        opacity="0.8"
+                      />
+                      <path
+                        d="M15 16v4M33 16v4M15 30v4h9M33 30v-4h-9"
+                        stroke="#8b5cf6"
+                        stroke-width="2"
+                      />
+                    </svg>
+                  )}
+                  {seccion.id === "imagenes" && (
+                    <svg viewBox="0 0 48 48" fill="none">
+                      <rect
+                        x="6"
+                        y="10"
+                        width="36"
+                        height="28"
+                        rx="3"
+                        fill="#06b6d4"
+                        opacity="0.15"
+                      />
+                      <rect
+                        x="10"
+                        y="14"
+                        width="28"
+                        height="20"
+                        rx="2"
+                        fill="#06b6d4"
+                        opacity="0.3"
+                      />
+                      <circle cx="18" cy="22" r="4" fill="#06b6d4" />
+                      <path
+                        d="M10 30l8-6 6 4 8-8 6 6v4a2 2 0 01-2 2H12a2 2 0 01-2-2v-0z"
+                        fill="#06b6d4"
+                      />
+                    </svg>
+                  )}
+                  {seccion.id === "layout" && (
+                    <svg viewBox="0 0 48 48" fill="none">
+                      <rect
+                        x="6"
+                        y="8"
+                        width="36"
+                        height="32"
+                        rx="3"
+                        fill="#ec4899"
+                        opacity="0.15"
+                      />
+                      <rect
+                        x="10"
+                        y="12"
+                        width="12"
+                        height="24"
+                        rx="2"
+                        fill="#ec4899"
+                        opacity="0.4"
+                      />
+                      <rect
+                        x="26"
+                        y="12"
+                        width="12"
+                        height="10"
+                        rx="2"
+                        fill="#ec4899"
+                      />
+                      <rect
+                        x="26"
+                        y="26"
+                        width="12"
+                        height="10"
+                        rx="2"
+                        fill="#ec4899"
+                        opacity="0.6"
+                      />
+                    </svg>
+                  )}
+                </div>
+                <span class="tab-label">{seccion.nombre}</span>
+              </button>
+            ))
+          }
+        </div>
+      </div>
+    </nav>
+
+    <!-- Contenido de secciones -->
+    <div class="secciones-content">
+      <div class="container">
+        {
+          secciones.map((seccion, index) => (
+            <section
+              class={`seccion-panel ${index === 0 ? "active" : ""}`}
+              data-panel={seccion.id}
+            >
+              <div class="seccion-intro">
+                <h2>{seccion.nombre}</h2>
+                <p class="seccion-descripcion">{seccion.descripcion}</p>
+              </div>
+
+              <div class="galeria-grid">
+                {seccion.imagenes.map((img, imgIndex) => (
+                  <div
+                    class="galeria-item"
+                    style={`--delay: ${imgIndex * 0.1}s`}
+                  >
+                    <div class="imagen-wrapper">
+                      <img
+                        src={img.src}
+                        alt={img.alt}
+                        loading="lazy"
+                        onerror="this.src='https://placehold.co/600x400/1e293b/64748b?text=Imagen+no+disponible'"
+                      />
+                      <div class="imagen-overlay">
+                        <button class="btn-ampliar" data-img={img.src}>
+                          <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                          >
+                            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="imagen-info">
+                      <h4>{img.titulo}</h4>
+                      <p>{img.descripcion}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Modal para imagen ampliada -->
+    <div class="modal-imagen" id="modalImagen">
+      <button class="modal-close">&times;</button>
+      <img src="" alt="Imagen ampliada" id="modalImg" />
+    </div>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="container">
+        <p>¿Quieres ver una demostración del módulo Maestros?</p>
+        <a href="/#contacto" class="cta-button">Solicitar Demo →</a>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  /* Base */
+  .modulo-page {
+    font-family:
+      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #0f172a;
+    min-height: 100vh;
+    color: white;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* Header del módulo */
+  .modulo-header {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    padding: 2rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .header-content {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .header-icon {
+    width: 64px;
+    height: 64px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 8px;
+  }
+
+  .header-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .header-text h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0;
+    color: white;
+  }
+
+  .header-text p {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    margin: 0.25rem 0 0;
+  }
+
+  .back-link {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: white;
+  }
+
+  /* Navegación de secciones */
+  .secciones-nav {
+    background: #1e293b;
+    border-bottom: 1px solid #334155;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .secciones-tabs {
+    display: flex;
+    gap: 0.5rem;
+    padding: 1rem 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .secciones-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .seccion-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid transparent;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 100px;
+  }
+
+  .seccion-tab:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .seccion-tab.active {
+    background: rgba(102, 126, 234, 0.2);
+    border-color: #667eea;
+  }
+
+  .tab-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .tab-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .tab-label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #94a3b8;
+    transition: color 0.2s;
+  }
+
+  .seccion-tab.active .tab-label {
+    color: white;
+  }
+
+  /* Contenido de secciones */
+  .secciones-content {
+    padding: 2rem 0;
+  }
+
+  .seccion-panel {
+    display: none;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .seccion-panel.active {
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .seccion-intro {
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .seccion-intro h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: white;
+    margin: 0 0 0.5rem;
+  }
+
+  .seccion-descripcion {
+    color: #94a3b8;
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  /* Galería */
+  .galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .galeria-item {
+    background: #1e293b;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #334155;
+    transition: all 0.3s ease;
+    animation: slideUp 0.5s ease forwards;
+    animation-delay: var(--delay);
+    opacity: 0;
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .galeria-item:hover {
+    border-color: #667eea;
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  .imagen-wrapper {
+    position: relative;
+    aspect-ratio: 16/10;
+    overflow: hidden;
+    background: #0f172a;
+  }
+
+  .imagen-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .galeria-item:hover .imagen-wrapper img {
+    transform: scale(1.05);
+  }
+
+  .imagen-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .galeria-item:hover .imagen-overlay {
+    opacity: 1;
+  }
+
+  .btn-ampliar {
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(4px);
+  }
+
+  .btn-ampliar:hover {
+    background: #667eea;
+    transform: scale(1.1);
+  }
+
+  .btn-ampliar svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .imagen-info {
+    padding: 1.25rem;
+  }
+
+  .imagen-info h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    margin: 0 0 0.5rem;
+  }
+
+  .imagen-info p {
+    font-size: 0.875rem;
+    color: #94a3b8;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* Modal */
+  .modal-imagen {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 2rem;
+  }
+
+  .modal-imagen.active {
+    display: flex;
+  }
+
+  .modal-imagen img {
+    max-width: 100%;
+    max-height: 90vh;
+    border-radius: 8px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .modal-close:hover {
+    background: #ef4444;
+  }
+
+  /* CTA */
+  .cta-section {
+    padding: 3rem 1.5rem;
+    text-align: center;
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border-top: 1px solid #334155;
+  }
+
+  .cta-section p {
+    color: #94a3b8;
+    margin: 0 0 1rem;
+  }
+
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.75rem;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .modulo-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .header-icon {
+      width: 48px;
+      height: 48px;
+    }
+
+    .header-text h1 {
+      font-size: 1.5rem;
+    }
+
+    .secciones-tabs {
+      padding: 0.75rem 0;
+    }
+
+    .seccion-tab {
+      padding: 0.5rem 1rem;
+      min-width: 80px;
+    }
+
+    .tab-icon {
+      width: 32px;
+      height: 32px;
+    }
+
+    .tab-label {
+      font-size: 0.7rem;
+    }
+
+    .galeria-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  // Tabs de secciones
+  document.querySelectorAll(".seccion-tab").forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const seccionId = tab.dataset.seccion;
+
+      // Actualizar tabs
+      document
+        .querySelectorAll(".seccion-tab")
+        .forEach((t) => t.classList.remove("active"));
+      tab.classList.add("active");
+
+      // Actualizar paneles
+      document
+        .querySelectorAll(".seccion-panel")
+        .forEach((p) => p.classList.remove("active"));
+      document
+        .querySelector(`[data-panel="${seccionId}"]`)
+        ?.classList.add("active");
+    });
+  });
+
+  // Modal de imagen
+  const modal = document.getElementById("modalImagen");
+  const modalImg = document.getElementById("modalImg") as HTMLImageElement;
+
+  document.querySelectorAll(".btn-ampliar").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const imgSrc = (btn as HTMLElement).dataset.img;
+      if (modalImg && imgSrc) {
+        modalImg.src = imgSrc;
+        modal?.classList.add("active");
+      }
+    });
+  });
+
+  document.querySelector(".modal-close")?.addEventListener("click", () => {
+    modal?.classList.remove("active");
+  });
+
+  modal?.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.classList.remove("active");
+    }
+  });
+
+  // Cerrar con ESC
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      modal?.classList.remove("active");
+    }
+  });
+</script>
