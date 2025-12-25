@@ -1,8 +1,21 @@
 ---
 // src/pages/modulos/maestros.astro
-// LEE DATOS DESDE WORDPRESS
 import Layout from "../../layouts/Layout.astro";
 import { getModuloBySlug } from "../../wordpress.js";
+
+// Definir tipos
+interface Imagen {
+  url: string;
+  titulo: string;
+  descripcion: string;
+}
+
+interface Seccion {
+  id: string;
+  nombre: string;
+  descripcion: string;
+  imagenes: Imagen[];
+}
 
 // Obtener datos del módulo desde WordPress
 const modulo = await getModuloBySlug("maestros");
@@ -16,7 +29,7 @@ const colorPrincipal = modulo?.moduloColor || "#667eea";
 
 // Secciones desde WordPress o valores por defecto
 const blobBaseUrl = "https://raygoldstorage.blob.core.windows.net/web";
-let secciones = modulo?.secciones || [];
+let secciones: Seccion[] = modulo?.secciones || [];
 
 // Si no hay secciones de WordPress, usar datos por defecto
 if (secciones.length === 0) {
@@ -204,7 +217,7 @@ const iconoModuloDefault = `<svg viewBox="0 0 64 64" fill="none">
       <div class="container">
         <div class="secciones-tabs">
           {
-            secciones.map((seccion: any, index: number) => (
+            secciones.map((seccion, index) => (
               <button
                 class={`seccion-tab ${index === 0 ? "active" : ""}`}
                 data-seccion={seccion.id}
@@ -227,7 +240,7 @@ const iconoModuloDefault = `<svg viewBox="0 0 64 64" fill="none">
     <div class="secciones-content">
       <div class="container">
         {
-          secciones.map((seccion: any, index: number) => (
+          secciones.map((seccion, index) => (
             <section
               class={`seccion-panel ${index === 0 ? "active" : ""}`}
               data-panel={seccion.id}
@@ -238,7 +251,7 @@ const iconoModuloDefault = `<svg viewBox="0 0 64 64" fill="none">
               </div>
 
               <div class="galeria-grid">
-                {seccion.imagenes.map((img: any, imgIndex: number) => (
+                {seccion.imagenes.map((img, imgIndex) => (
                   <div
                     class="galeria-item"
                     style={`--delay: ${imgIndex * 0.1}s`}
@@ -393,6 +406,7 @@ const iconoModuloDefault = `<svg viewBox="0 0 64 64" fill="none">
     cursor: pointer;
     transition: all 0.3s ease;
     min-width: 100px;
+    color: white;
   }
 
   .seccion-tab:hover {
@@ -543,6 +557,7 @@ const iconoModuloDefault = `<svg viewBox="0 0 64 64" fill="none">
     align-items: center;
     justify-content: center;
     backdrop-filter: blur(4px);
+    transition: all 0.2s ease;
   }
 
   .btn-ampliar:hover {
@@ -605,6 +620,7 @@ const iconoModuloDefault = `<svg viewBox="0 0 64 64" fill="none">
     color: white;
     font-size: 1.5rem;
     cursor: pointer;
+    transition: background 0.2s ease;
   }
 
   .modal-close:hover {
@@ -631,6 +647,7 @@ const iconoModuloDefault = `<svg viewBox="0 0 64 64" fill="none">
     text-decoration: none;
     border-radius: 10px;
     font-weight: 500;
+    transition: all 0.2s ease;
   }
 
   .cta-button:hover {
