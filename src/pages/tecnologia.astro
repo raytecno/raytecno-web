@@ -1,590 +1,905 @@
-<!doctype html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tecnología - RayGold ERP - Preview</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+---
+// src/pages/tecnologia.astro
+import Layout from "../layouts/Layout.astro";
+---
 
-      body {
-        font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        /* Degradado de fondo púrpura/azul suave */
-        background: linear-gradient(
-          180deg,
-          #f1f5f9 0%,
-          #e0e7ff 20%,
-          #ddd6fe 40%,
-          #c7d2fe 60%,
-          #e0e7ff 80%,
-          #f1f5f9 100%
-        );
-        min-height: 100vh;
-      }
+<Layout title="Tecnología - RayGold ERP">
+  <main class="tech-page">
+    <a href="/" class="back-link">← Volver al inicio</a>
 
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 1.5rem;
-      }
-
-      /* Header compacto */
-      .page-header {
-        padding: 2rem 1.5rem 1.5rem;
-        text-align: center;
-      }
-
-      .header-content {
-        max-width: 600px;
-        margin: 0 auto;
-      }
-
-      .badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.4rem 0.875rem;
-        background: white;
-        border-radius: 100px;
-        font-size: 0.75rem;
-        color: #64748b;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-        margin-bottom: 1rem;
-      }
-
-      .badge-dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: #22c55e;
-        animation: pulse 2s infinite;
-      }
-
-      @keyframes pulse {
-        0%,
-        100% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0.5;
-        }
-      }
-
-      .page-header h1 {
-        font-size: 2.5rem;
-        font-weight: 700;
-        color: #0f172a;
-        margin: 0 0 0.5rem;
-      }
-
-      .page-header h1 span {
-        background: linear-gradient(135deg, #6366f1, #8b5cf6);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-      }
-
-      .page-header p {
-        font-size: 1rem;
-        color: #64748b;
-        margin: 0;
-      }
-
-      /* Diagrama */
-      .diagram-section {
-        padding: 0 1.5rem 1.5rem;
-      }
-
-      .diagram {
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        border-radius: 20px;
-        padding: 1.5rem 2rem;
-        box-shadow:
-          0 4px 24px rgba(99, 102, 241, 0.1),
-          0 1px 3px rgba(0, 0, 0, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.8);
-      }
-
-      .diagram-title {
-        text-align: center;
-        font-size: 0.7rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        color: #8b5cf6;
-        margin-bottom: 1.25rem;
-      }
-
-      /* Grid de arquitectura */
-      .arch-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1rem;
-      }
-
-      /* Nodos */
-      .node {
-        background: white;
-        border-radius: 12px;
-        padding: 1rem 1.25rem;
-        border: 1px solid #e2e8f0;
-        transition: all 0.3s ease;
-      }
-
-      .node:hover {
-        border-color: transparent;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-        transform: translateY(-2px);
-      }
-
-      .node-header {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        margin-bottom: 0.75rem;
-      }
-
-      .node-icon {
-        width: 40px;
-        height: 40px;
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.25rem;
-      }
-
-      .node-title {
-        font-size: 1rem;
-        font-weight: 600;
-        color: #1e293b;
-      }
-
-      .node-subtitle {
-        font-size: 0.75rem;
-        color: #94a3b8;
-      }
-
-      .node-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.375rem;
-      }
-
-      .tag {
-        padding: 0.25rem 0.625rem;
-        border-radius: 5px;
-        font-size: 0.7rem;
-        font-weight: 500;
-      }
-
-      /* Colores por tipo */
-      .node-frontend .node-icon {
-        background: linear-gradient(135deg, #10b981, #059669);
-        color: white;
-      }
-      .node-frontend .tag {
-        background: #ecfdf5;
-        color: #059669;
-      }
-      .node-frontend:hover {
-        border-color: #10b981;
-      }
-
-      .node-backend .node-icon {
-        background: linear-gradient(135deg, #6366f1, #4f46e5);
-        color: white;
-      }
-      .node-backend .tag {
-        background: #eef2ff;
-        color: #4f46e5;
-      }
-      .node-backend:hover {
-        border-color: #6366f1;
-      }
-
-      .node-web .node-icon {
-        background: linear-gradient(135deg, #f97316, #ea580c);
-        color: white;
-      }
-      .node-web .tag {
-        background: #fff7ed;
-        color: #ea580c;
-      }
-      .node-web:hover {
-        border-color: #f97316;
-      }
-
-      .node-cloud .node-icon {
-        background: linear-gradient(135deg, #0ea5e9, #0284c7);
-        color: white;
-      }
-      .node-cloud:hover {
-        border-color: #0ea5e9;
-      }
-
-      .node-data .node-icon {
-        background: linear-gradient(135deg, #8b5cf6, #7c3aed);
-        color: white;
-      }
-      .node-data .tag {
-        background: #f5f3ff;
-        color: #7c3aed;
-      }
-      .node-data:hover {
-        border-color: #8b5cf6;
-      }
-
-      .node-storage .node-icon {
-        background: linear-gradient(135deg, #14b8a6, #0d9488);
-        color: white;
-      }
-      .node-storage .tag {
-        background: #f0fdfa;
-        color: #0d9488;
-      }
-      .node-storage:hover {
-        border-color: #14b8a6;
-      }
-
-      /* Cloud node */
-      .node-cloud {
-        grid-column: 1 / 4;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-        border-color: #93c5fd;
-        padding: 1rem 1.5rem;
-      }
-
-      .node-cloud .node-header {
-        justify-content: center;
-        margin-bottom: 0.5rem;
-      }
-
-      .node-cloud .services {
-        display: flex;
-        gap: 1.5rem;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-
-      .service {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.25rem;
-      }
-
-      .service-icon {
-        width: 38px;
-        height: 38px;
-        border-radius: 8px;
-        background: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.1rem;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-      }
-
-      .service-name {
-        font-size: 0.65rem;
-        font-weight: 500;
-        color: #64748b;
-      }
-
-      /* Base de datos y Storage */
-      .node-data {
-        grid-column: 1 / 2;
-      }
-
-      .node-storage {
-        grid-column: 2 / 4;
-      }
-
-      /* Tech logos footer */
-      .tech-footer {
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
-        flex-wrap: wrap;
-        margin-top: 1.5rem;
-        padding-top: 1.25rem;
-        border-top: 1px solid #e2e8f0;
-      }
-
-      .tech-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.375rem;
-      }
-
-      .tech-logo {
-        width: 44px;
-        height: 44px;
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1rem;
-        font-weight: 700;
-        color: white;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        transition: transform 0.3s ease;
-      }
-
-      .tech-logo:hover {
-        transform: translateY(-3px);
-      }
-
-      .tech-logo.vue {
-        background: linear-gradient(135deg, #42b883, #35a06b);
-      }
-      .tech-logo.dotnet {
-        background: linear-gradient(135deg, #512bd4, #7c4dff);
-      }
-      .tech-logo.azure {
-        background: linear-gradient(135deg, #0078d4, #00bcf2);
-      }
-      .tech-logo.astro {
-        background: linear-gradient(135deg, #ff5d01, #ff8a4c);
-      }
-      .tech-logo.wordpress {
-        background: linear-gradient(135deg, #21759b, #464646);
-      }
-
-      .tech-name {
-        font-size: 0.7rem;
-        font-weight: 500;
-        color: #64748b;
-      }
-
-      /* CTA compacto */
-      .cta-section {
-        padding: 1rem 1.5rem 2rem;
-        text-align: center;
-      }
-
-      .cta-button {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.75rem 1.5rem;
-        background: linear-gradient(135deg, #6366f1, #8b5cf6);
-        color: white;
-        text-decoration: none;
-        border-radius: 10px;
-        font-weight: 500;
-        font-size: 0.9rem;
-        box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
-        transition: all 0.3s ease;
-      }
-
-      .cta-button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
-      }
-
-      /* Responsive */
-      @media (max-width: 900px) {
-        .arch-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .node-cloud,
-        .node-data,
-        .node-storage {
-          grid-column: 1;
-        }
-
-        .page-header h1 {
-          font-size: 2rem;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <main>
-      <!-- Header compacto -->
-      <header class="page-header">
-        <div class="header-content">
-          <div class="badge">
-            <span class="badge-dot"></span>
-            Arquitectura Tecnológica
-          </div>
-          <h1>Raygold <span>ERP</span></h1>
-          <p>Solución integral cloud-native para la industria joyera</p>
+    <!-- Header -->
+    <header class="page-header">
+      <div class="header-content">
+        <div class="badge">
+          <span class="badge-dot"></span>
+          Arquitectura Tecnológica
         </div>
-      </header>
+        <h1>Raygold <span>ERP</span></h1>
+        <p>
+          Solución integral cloud-native para la industria joyera, potenciada
+          con Inteligencia Artificial
+        </p>
+      </div>
+    </header>
 
-      <!-- Diagrama principal -->
-      <section class="diagram-section">
-        <div class="container">
-          <div class="diagram">
-            <div class="diagram-title">Stack Tecnológico</div>
+    <!-- Diagrama -->
+    <section class="diagram-section">
+      <div class="container">
+        <div class="diagram">
+          <div class="diagram-title">Stack Tecnológico</div>
 
-            <div class="arch-grid">
-              <!-- Frontend -->
-              <div class="node node-frontend">
-                <div class="node-header">
-                  <div class="node-icon">⚡</div>
-                  <div>
-                    <div class="node-title">Frontend</div>
-                    <div class="node-subtitle">Interfaz de Usuario</div>
-                  </div>
-                </div>
-                <div class="node-tags">
-                  <span class="tag">Vue.js</span>
-                  <span class="tag">Vuetify</span>
-                  <span class="tag">Quasar</span>
-                  <span class="tag">SPA</span>
+          <div class="arch-grid">
+            <!-- Frontend -->
+            <div class="node node-frontend">
+              <div class="node-header">
+                <div class="node-icon">⚡</div>
+                <div>
+                  <div class="node-title">Frontend</div>
+                  <div class="node-subtitle">Interfaz de Usuario</div>
                 </div>
               </div>
+              <div class="node-tags">
+                <span class="tag">Vue.js</span>
+                <span class="tag">Vuetify</span>
+                <span class="tag">Quasar</span>
+                <span class="tag">SPA</span>
+              </div>
+            </div>
 
-              <!-- Backend -->
-              <div class="node node-backend">
-                <div class="node-header">
-                  <div class="node-icon">🔷</div>
-                  <div>
-                    <div class="node-title">Backend</div>
-                    <div class="node-subtitle">API & Lógica</div>
-                  </div>
-                </div>
-                <div class="node-tags">
-                  <span class="tag">ASP.NET Core</span>
-                  <span class="tag">C#</span>
-                  <span class="tag">REST API</span>
+            <!-- Backend -->
+            <div class="node node-backend">
+              <div class="node-header">
+                <div class="node-icon">🔷</div>
+                <div>
+                  <div class="node-title">Backend</div>
+                  <div class="node-subtitle">API & Lógica</div>
                 </div>
               </div>
+              <div class="node-tags">
+                <span class="tag">ASP.NET Core</span>
+                <span class="tag">C#</span>
+                <span class="tag">REST API</span>
+              </div>
+            </div>
 
-              <!-- Web -->
-              <div class="node node-web">
-                <div class="node-header">
-                  <div class="node-icon">🚀</div>
-                  <div>
-                    <div class="node-title">Web</div>
-                    <div class="node-subtitle">Presencia Digital</div>
-                  </div>
-                </div>
-                <div class="node-tags">
-                  <span class="tag">Astro</span>
-                  <span class="tag">WordPress</span>
-                  <span class="tag">Ecommerce</span>
+            <!-- Web -->
+            <div class="node node-web">
+              <div class="node-header">
+                <div class="node-icon">🚀</div>
+                <div>
+                  <div class="node-title">Web</div>
+                  <div class="node-subtitle">Presencia Digital</div>
                 </div>
               </div>
+              <div class="node-tags">
+                <span class="tag">Astro</span>
+                <span class="tag">WordPress</span>
+                <span class="tag">Ecommerce</span>
+              </div>
+            </div>
 
-              <!-- Cloud -->
-              <div class="node node-cloud">
-                <div class="node-header">
-                  <div class="node-icon">☁️</div>
-                  <div>
-                    <div class="node-title">Microsoft Azure</div>
-                    <div class="node-subtitle">Infraestructura Cloud</div>
-                  </div>
-                </div>
-                <div class="services">
-                  <div class="service">
-                    <div class="service-icon">🖥️</div>
-                    <span class="service-name">App Service</span>
-                  </div>
-                  <div class="service">
-                    <div class="service-icon">📊</div>
-                    <span class="service-name">Static Web Apps</span>
-                  </div>
-                  <div class="service">
-                    <div class="service-icon">🗄️</div>
-                    <span class="service-name">SQL Database</span>
-                  </div>
-                  <div class="service">
-                    <div class="service-icon">📦</div>
-                    <span class="service-name">Blob Storage</span>
-                  </div>
-                  <div class="service">
-                    <div class="service-icon">🔐</div>
-                    <span class="service-name">Multi-Tenant</span>
-                  </div>
+            <!-- AI - Claude -->
+            <div class="node node-ai">
+              <div class="node-header">
+                <div class="node-icon">🧠</div>
+                <div>
+                  <div class="node-title">Inteligencia Artificial</div>
+                  <div class="node-subtitle">Claude by Anthropic</div>
                 </div>
               </div>
-
-              <!-- Base de Datos -->
-              <div class="node node-data">
-                <div class="node-header">
-                  <div class="node-icon">🗃️</div>
-                  <div>
-                    <div class="node-title">Base de Datos</div>
-                    <div class="node-subtitle">Persistencia</div>
-                  </div>
+              <div class="ai-features">
+                <div class="ai-feature">
+                  <span class="ai-feature-icon">💬</span>
+                  Asistente Inteligente
                 </div>
-                <div class="node-tags">
-                  <span class="tag">SQL Server</span>
-                  <span class="tag">Entity Framework</span>
-                  <span class="tag">Progress</span>
+                <div class="ai-feature">
+                  <span class="ai-feature-icon">📊</span>
+                  Análisis de Datos
                 </div>
-              </div>
-
-              <!-- Almacenamiento -->
-              <div class="node node-storage">
-                <div class="node-header">
-                  <div class="node-icon">💾</div>
-                  <div>
-                    <div class="node-title">Almacenamiento</div>
-                    <div class="node-subtitle">Assets & Media</div>
-                  </div>
+                <div class="ai-feature">
+                  <span class="ai-feature-icon">⚙️</span>
+                  Automatización
                 </div>
-                <div class="node-tags">
-                  <span class="tag">Blob Storage</span>
-                  <span class="tag">CDN</span>
-                  <span class="tag">Imágenes</span>
-                  <span class="tag">Documentos</span>
+                <div class="ai-feature">
+                  <span class="ai-feature-icon">📝</span>
+                  Generación de Contenido
                 </div>
               </div>
             </div>
 
-            <!-- Tech logos -->
-            <div class="tech-footer">
-              <div class="tech-item">
-                <div class="tech-logo vue">V</div>
-                <span class="tech-name">Vue.js</span>
+            <!-- Cloud -->
+            <div class="node node-cloud">
+              <div class="node-header">
+                <div class="node-icon">☁️</div>
+                <div>
+                  <div class="node-title">Microsoft Azure</div>
+                  <div class="node-subtitle">Infraestructura Cloud</div>
+                </div>
               </div>
-              <div class="tech-item">
-                <div class="tech-logo dotnet">C#</div>
-                <span class="tech-name">ASP.NET</span>
+              <div class="services">
+                <div class="service">
+                  <div class="service-icon">🖥️</div>
+                  <span class="service-name">App Service</span>
+                </div>
+                <div class="service">
+                  <div class="service-icon">📊</div>
+                  <span class="service-name">Static Web Apps</span>
+                </div>
+                <div class="service">
+                  <div class="service-icon">🗄️</div>
+                  <span class="service-name">SQL Database</span>
+                </div>
+                <div class="service">
+                  <div class="service-icon">📦</div>
+                  <span class="service-name">Blob Storage</span>
+                </div>
+                <div class="service">
+                  <div class="service-icon">🔐</div>
+                  <span class="service-name">Multi-Tenant</span>
+                </div>
               </div>
-              <div class="tech-item">
-                <div class="tech-logo azure">☁️</div>
-                <span class="tech-name">Azure</span>
+            </div>
+
+            <!-- Base de Datos -->
+            <div class="node node-data">
+              <div class="node-header">
+                <div class="node-icon">🗃️</div>
+                <div>
+                  <div class="node-title">Base de Datos</div>
+                  <div class="node-subtitle">Persistencia</div>
+                </div>
               </div>
-              <div class="tech-item">
-                <div class="tech-logo astro">🚀</div>
-                <span class="tech-name">Astro</span>
+              <div class="node-tags">
+                <span class="tag">SQL Server</span>
+                <span class="tag">Entity Framework</span>
+                <span class="tag">Progress</span>
               </div>
-              <div class="tech-item">
-                <div class="tech-logo wordpress">W</div>
-                <span class="tech-name">WordPress</span>
+            </div>
+
+            <!-- Almacenamiento -->
+            <div class="node node-storage">
+              <div class="node-header">
+                <div class="node-icon">💾</div>
+                <div>
+                  <div class="node-title">Almacenamiento</div>
+                  <div class="node-subtitle">Assets & Media</div>
+                </div>
+              </div>
+              <div class="node-tags">
+                <span class="tag">Blob Storage</span>
+                <span class="tag">CDN</span>
+                <span class="tag">Imágenes</span>
+                <span class="tag">Documentos</span>
+              </div>
+            </div>
+
+            <!-- Flecha -->
+            <div class="connection-arrow">
+              <div class="arrow-down">
+                <div class="arrow-line"></div>
+                <div class="arrow-head">▼</div>
+              </div>
+            </div>
+
+            <!-- RayGold Result -->
+            <div class="node node-result">
+              <div class="node-header">
+                <div class="node-icon">💎</div>
+                <div>
+                  <div class="node-title">RayGold ERP</div>
+                  <div class="node-subtitle">
+                    Software especializado para joyerías
+                  </div>
+                </div>
+              </div>
+              <div class="result-features">
+                <div class="result-feature">
+                  <span>📦</span> Gestión de Inventario
+                </div>
+                <div class="result-feature">
+                  <span>🏭</span> Fabricación
+                </div>
+                <div class="result-feature">
+                  <span>💰</span> Finanzas
+                </div>
+                <div class="result-feature">
+                  <span>📈</span> Estadísticas
+                </div>
+                <div class="result-feature">
+                  <span>🛒</span> Ecommerce
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
 
-      <!-- CTA -->
-      <section class="cta-section">
-        <div class="container">
-          <a href="/#contacto" class="cta-button">
-            ¿Quieres saber más? Contactar →
-          </a>
+          <!-- Tech logos -->
+          <div class="tech-footer">
+            <div class="tech-item">
+              <div class="tech-logo vue">V</div>
+              <span class="tech-name">Vue.js</span>
+            </div>
+            <div class="tech-item">
+              <div class="tech-logo dotnet">C#</div>
+              <span class="tech-name">ASP.NET</span>
+            </div>
+            <div class="tech-item">
+              <div class="tech-logo claude">🧠</div>
+              <span class="tech-name">Claude AI</span>
+            </div>
+            <div class="tech-item">
+              <div class="tech-logo azure">☁️</div>
+              <span class="tech-name">Azure</span>
+            </div>
+            <div class="tech-item">
+              <div class="tech-logo astro">🚀</div>
+              <span class="tech-name">Astro</span>
+            </div>
+            <div class="tech-item">
+              <div class="tech-logo wordpress">W</div>
+              <span class="tech-name">WordPress</span>
+            </div>
+          </div>
         </div>
-      </section>
-    </main>
-  </body>
-</html>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="container">
+        <a href="/#contacto" class="cta-button">
+          ¿Quieres saber más? Contactar →
+        </a>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .tech-page {
+    font-family:
+      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: linear-gradient(180deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+    min-height: 100vh;
+    color: white;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* Back link */
+  .back-link {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    z-index: 10;
+  }
+
+  .back-link:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  /* Header */
+  .page-header {
+    padding: 3rem 1.5rem 2rem;
+    text-align: center;
+  }
+
+  .header-content {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 100px;
+    font-size: 0.8rem;
+    color: #94a3b8;
+    backdrop-filter: blur(10px);
+    margin-bottom: 1.5rem;
+  }
+
+  .badge-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  .page-header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 0.75rem;
+  }
+
+  .page-header h1 span {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .page-header p {
+    font-size: 1.1rem;
+    color: #94a3b8;
+    margin: 0;
+  }
+
+  /* Diagrama */
+  .diagram-section {
+    padding: 0 1.5rem 2rem;
+  }
+
+  .diagram {
+    background: rgba(30, 41, 59, 0.8);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .diagram-title {
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #667eea;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Grid de arquitectura */
+  .arch-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  /* Nodos */
+  .node {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 1.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .node:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  .node-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .node-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+  }
+
+  .node-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+  }
+
+  .node-subtitle {
+    font-size: 0.75rem;
+    color: #94a3b8;
+  }
+
+  .node-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+  }
+
+  .tag {
+    padding: 0.25rem 0.625rem;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 500;
+  }
+
+  /* Colores por tipo */
+  .node-frontend .node-icon {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+  }
+  .node-frontend .tag {
+    background: rgba(16, 185, 129, 0.2);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+  }
+  .node-frontend:hover {
+    border-color: #10b981;
+    background: rgba(16, 185, 129, 0.1);
+  }
+
+  .node-backend .node-icon {
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    color: white;
+  }
+  .node-backend .tag {
+    background: rgba(99, 102, 241, 0.2);
+    color: #a5b4fc;
+    border: 1px solid rgba(99, 102, 241, 0.3);
+  }
+  .node-backend:hover {
+    border-color: #6366f1;
+    background: rgba(99, 102, 241, 0.1);
+  }
+
+  .node-web .node-icon {
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    color: white;
+  }
+  .node-web .tag {
+    background: rgba(249, 115, 22, 0.2);
+    color: #fdba74;
+    border: 1px solid rgba(249, 115, 22, 0.3);
+  }
+  .node-web:hover {
+    border-color: #f97316;
+    background: rgba(249, 115, 22, 0.1);
+  }
+
+  .node-data .node-icon {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+    color: white;
+  }
+  .node-data .tag {
+    background: rgba(139, 92, 246, 0.2);
+    color: #c4b5fd;
+    border: 1px solid rgba(139, 92, 246, 0.3);
+  }
+  .node-data:hover {
+    border-color: #8b5cf6;
+    background: rgba(139, 92, 246, 0.1);
+  }
+
+  .node-storage .node-icon {
+    background: linear-gradient(135deg, #14b8a6, #0d9488);
+    color: white;
+  }
+  .node-storage .tag {
+    background: rgba(20, 184, 166, 0.2);
+    color: #5eead4;
+    border: 1px solid rgba(20, 184, 166, 0.3);
+  }
+  .node-storage:hover {
+    border-color: #14b8a6;
+    background: rgba(20, 184, 166, 0.1);
+  }
+
+  /* AI Node - Claude */
+  .node-ai {
+    grid-column: 1 / 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(
+      135deg,
+      rgba(217, 119, 87, 0.15) 0%,
+      rgba(191, 90, 60, 0.15) 100%
+    );
+    border: 1px solid rgba(217, 119, 87, 0.3);
+    padding: 1.25rem 1.5rem;
+  }
+
+  .node-ai .node-icon {
+    background: linear-gradient(135deg, #d97757, #bf5a3c);
+    width: 52px;
+    height: 52px;
+  }
+
+  .node-ai:hover {
+    border-color: #d97757;
+    background: linear-gradient(
+      135deg,
+      rgba(217, 119, 87, 0.25) 0%,
+      rgba(191, 90, 60, 0.25) 100%
+    );
+  }
+
+  .node-ai .node-header {
+    justify-content: center;
+    margin-bottom: 0.75rem;
+  }
+
+  .ai-features {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
+
+  .ai-feature {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(217, 119, 87, 0.2);
+    border: 1px solid rgba(217, 119, 87, 0.3);
+    border-radius: 8px;
+    font-size: 0.8rem;
+    color: #f5d0c5;
+  }
+
+  .ai-feature-icon {
+    font-size: 1rem;
+  }
+
+  /* Cloud node */
+  .node-cloud {
+    grid-column: 1 / 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(
+      135deg,
+      rgba(14, 165, 233, 0.15) 0%,
+      rgba(2, 132, 199, 0.15) 100%
+    );
+    border: 1px solid rgba(14, 165, 233, 0.3);
+    padding: 1.25rem 1.5rem;
+  }
+
+  .node-cloud .node-icon {
+    background: linear-gradient(135deg, #0ea5e9, #0284c7);
+    width: 52px;
+    height: 52px;
+  }
+
+  .node-cloud:hover {
+    border-color: #0ea5e9;
+    background: linear-gradient(
+      135deg,
+      rgba(14, 165, 233, 0.25) 0%,
+      rgba(2, 132, 199, 0.25) 100%
+    );
+  }
+
+  .node-cloud .node-header {
+    justify-content: center;
+    margin-bottom: 0.75rem;
+  }
+
+  .services {
+    display: flex;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .service {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.375rem;
+  }
+
+  .service-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+  }
+
+  .service-name {
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: #94a3b8;
+  }
+
+  /* Base de datos y Storage */
+  .node-data {
+    grid-column: 1 / 2;
+  }
+
+  .node-storage {
+    grid-column: 2 / 4;
+  }
+
+  /* Flecha de conexión */
+  .connection-arrow {
+    grid-column: 1 / 4;
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem 0;
+  }
+
+  .arrow-down {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    color: #667eea;
+  }
+
+  .arrow-line {
+    width: 2px;
+    height: 20px;
+    background: linear-gradient(180deg, #667eea, #764ba2);
+    border-radius: 2px;
+  }
+
+  .arrow-head {
+    font-size: 1.25rem;
+  }
+
+  /* RayGold Result */
+  .node-result {
+    grid-column: 1 / 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(
+      135deg,
+      rgba(102, 126, 234, 0.2) 0%,
+      rgba(118, 75, 162, 0.2) 100%
+    );
+    border: 2px solid rgba(102, 126, 234, 0.5);
+    padding: 1.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .node-result::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(102, 126, 234, 0.1) 0%,
+      rgba(118, 75, 162, 0.1) 100%
+    );
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0%,
+    100% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  .node-result .node-icon {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    width: 64px;
+    height: 64px;
+    font-size: 1.75rem;
+    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+    position: relative;
+    z-index: 1;
+  }
+
+  .node-result .node-header {
+    justify-content: center;
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .node-result .node-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .node-result .node-subtitle {
+    font-size: 0.9rem;
+    color: #c4b5fd;
+  }
+
+  .result-features {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 0.75rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .result-feature {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(102, 126, 234, 0.2);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    border-radius: 8px;
+    font-size: 0.8rem;
+    color: #c4b5fd;
+  }
+
+  .node-result:hover {
+    border-color: #667eea;
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(102, 126, 234, 0.3);
+  }
+
+  /* Tech logos footer */
+  .tech-footer {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .tech-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .tech-logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: white;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+  }
+
+  .tech-logo:hover {
+    transform: translateY(-4px);
+  }
+
+  .tech-logo.vue {
+    background: linear-gradient(135deg, #42b883, #35a06b);
+  }
+  .tech-logo.dotnet {
+    background: linear-gradient(135deg, #512bd4, #7c4dff);
+  }
+  .tech-logo.azure {
+    background: linear-gradient(135deg, #0078d4, #00bcf2);
+  }
+  .tech-logo.astro {
+    background: linear-gradient(135deg, #ff5d01, #ff8a4c);
+  }
+  .tech-logo.wordpress {
+    background: linear-gradient(135deg, #21759b, #464646);
+  }
+  .tech-logo.claude {
+    background: linear-gradient(135deg, #d97757, #bf5a3c);
+  }
+
+  .tech-name {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: #94a3b8;
+  }
+
+  /* CTA */
+  .cta-section {
+    padding: 2rem 1.5rem 3rem;
+    text-align: center;
+  }
+
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.75rem;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+    transition: all 0.3s ease;
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(102, 126, 234, 0.5);
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .arch-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .node-cloud,
+    .node-ai,
+    .node-data,
+    .node-storage,
+    .node-result,
+    .connection-arrow {
+      grid-column: 1;
+    }
+
+    .page-header h1 {
+      font-size: 2.25rem;
+    }
+
+    .ai-features,
+    .result-features {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .services {
+      gap: 0.75rem;
+    }
+
+    .tech-footer {
+      gap: 1rem;
+    }
+
+    .back-link {
+      position: relative;
+      display: inline-block;
+      margin: 1rem 1.5rem;
+    }
+  }
+</style>
