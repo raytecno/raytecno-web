@@ -25,11 +25,8 @@ const blobBaseUrl = "https://raygoldstorage.blob.core.windows.net/web";
 
 // Datos del módulo
 const titulo = modulo?.title || "Maestros";
-const subtitulo =
-  modulo?.subtitulo || "Artículos, proveedores, clientes y familias";
-const iconoSvg =
-  modulo?.iconoSvg ||
-  `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h6"/></svg>`;
+const subtitulo = modulo?.subtitulo || "Artículos, proveedores, clientes y familias";
+const iconoSvg = modulo?.iconoSvg || `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h6"/></svg>`;
 const color = modulo?.color || "#667eea";
 
 // Secciones del módulo
@@ -43,111 +40,51 @@ if (secciones.length === 0) {
       nombre: "Artículos",
       descripcion: "Gestión completa del catálogo de artículos",
       imagenes: [
-        {
-          url: `${blobBaseUrl}/A01.png`,
-          titulo: "Listado de Artículos",
-          descripcion: "Vista general del catálogo con filtros avanzados",
-        },
-        {
-          url: `${blobBaseUrl}/A02.png`,
-          titulo: "Ficha de Artículo",
-          descripcion: "Detalle completo con especificaciones",
-        },
-        {
-          url: `${blobBaseUrl}/A03.png`,
-          titulo: "Configuración",
-          descripcion: "Personalización de campos y atributos",
-        },
-      ],
+        { url: `${blobBaseUrl}/A01.png`, titulo: "Listado de Artículos", descripcion: "Vista general del catálogo con filtros avanzados" },
+        { url: `${blobBaseUrl}/A02.png`, titulo: "Ficha de Artículo", descripcion: "Detalle completo con especificaciones" },
+        { url: `${blobBaseUrl}/A03.png`, titulo: "Configuración", descripcion: "Personalización de campos y atributos" }
+      ]
     },
     {
       id: "precios",
       nombre: "Precios",
       descripcion: "Tarifas, descuentos y listas de precios",
       imagenes: [
-        {
-          url: `${blobBaseUrl}/P01.png`,
-          titulo: "Tarifas",
-          descripcion: "Gestión de tarifas por cliente",
-        },
-        {
-          url: `${blobBaseUrl}/P02.png`,
-          titulo: "Descuentos",
-          descripcion: "Configuración de descuentos",
-        },
-        {
-          url: `${blobBaseUrl}/P03.png`,
-          titulo: "Histórico",
-          descripcion: "Evolución de precios",
-        },
-      ],
+        { url: `${blobBaseUrl}/P01.png`, titulo: "Tarifas", descripcion: "Gestión de tarifas por cliente" },
+        { url: `${blobBaseUrl}/P02.png`, titulo: "Descuentos", descripcion: "Configuración de descuentos" },
+        { url: `${blobBaseUrl}/P03.png`, titulo: "Histórico", descripcion: "Evolución de precios" }
+      ]
     },
     {
       id: "estructuras",
       nombre: "Estructuras",
       descripcion: "Composición y estructura de productos",
       imagenes: [
-        {
-          url: `${blobBaseUrl}/E01.png`,
-          titulo: "Componentes",
-          descripcion: "Gestión de componentes",
-        },
-        {
-          url: `${blobBaseUrl}/E02.png`,
-          titulo: "Aleaciones",
-          descripcion: "Composición de aleaciones",
-        },
-        {
-          url: `${blobBaseUrl}/E03.png`,
-          titulo: "Materiales",
-          descripcion: "Catálogo de materiales",
-        },
-      ],
+        { url: `${blobBaseUrl}/E01.png`, titulo: "Componentes", descripcion: "Gestión de componentes" },
+        { url: `${blobBaseUrl}/E02.png`, titulo: "Aleaciones", descripcion: "Composición de aleaciones" },
+        { url: `${blobBaseUrl}/E03.png`, titulo: "Materiales", descripcion: "Catálogo de materiales" }
+      ]
     },
     {
       id: "imagenes",
       nombre: "Imágenes",
       descripcion: "Galería de imágenes del producto",
       imagenes: [
-        {
-          url: `${blobBaseUrl}/I01.png`,
-          titulo: "Galería",
-          descripcion: "Galería de imágenes",
-        },
-        {
-          url: `${blobBaseUrl}/I02.png`,
-          titulo: "Visor",
-          descripcion: "Visor de alta resolución",
-        },
-        {
-          url: `${blobBaseUrl}/I03.png`,
-          titulo: "Gestión",
-          descripcion: "Administración de archivos",
-        },
-      ],
+        { url: `${blobBaseUrl}/I01.png`, titulo: "Galería", descripcion: "Galería de imágenes" },
+        { url: `${blobBaseUrl}/I02.png`, titulo: "Visor", descripcion: "Visor de alta resolución" },
+        { url: `${blobBaseUrl}/I03.png`, titulo: "Gestión", descripcion: "Administración de archivos" }
+      ]
     },
     {
       id: "layout",
       nombre: "Layout",
       descripcion: "Personalización de la interfaz",
       imagenes: [
-        {
-          url: `${blobBaseUrl}/L01.png`,
-          titulo: "Diseño",
-          descripcion: "Configuración de vistas",
-        },
-        {
-          url: `${blobBaseUrl}/L02.png`,
-          titulo: "Columnas",
-          descripcion: "Personalización de columnas",
-        },
-        {
-          url: `${blobBaseUrl}/L03.png`,
-          titulo: "Exportar",
-          descripcion: "Opciones de exportación",
-        },
-      ],
-    },
+        { url: `${blobBaseUrl}/L01.png`, titulo: "Diseño", descripcion: "Configuración de vistas" },
+        { url: `${blobBaseUrl}/L02.png`, titulo: "Columnas", descripcion: "Personalización de columnas" },
+        { url: `${blobBaseUrl}/L03.png`, titulo: "Exportar", descripcion: "Opciones de exportación" }
+      ]
+    }
   ];
 }
 
@@ -157,7 +94,7 @@ const iconosSecciones: Record<string, string> = {
   precios: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>`,
   estructuras: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>`,
   imagenes: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>`,
-  layout: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>`,
+  layout: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>`
 };
 
 // Tooltips para cada sección
@@ -166,7 +103,7 @@ const tooltipsSecciones: Record<string, string> = {
   precios: "Tarifas, descuentos y listas de precios",
   estructuras: "Composición y estructura de productos",
   imagenes: "Galería de imágenes del producto",
-  layout: "Personalización de la interfaz",
+  layout: "Personalización de la interfaz"
 };
 ---
 
@@ -184,59 +121,52 @@ const tooltipsSecciones: Record<string, string> = {
       <a href="/" class="back-link">← Volver al inicio</a>
     </header>
 
-    <!-- Navegación de tabs -->
+    <!-- Navegación de tabs - DISEÑO ORIGINAL -->
     <nav class="tabs-nav">
-      {
-        secciones.map((seccion, index) => (
-          <button
-            class={`tab-btn ${index === 0 ? "active" : ""}`}
-            data-section={seccion.id}
-            data-tooltip={tooltipsSecciones[seccion.id] || seccion.descripcion}
-          >
-            <div
-              class="tab-icon"
-              set:html={
-                iconosSecciones[seccion.id] || iconosSecciones.articulos
-              }
-            />
-            <span class="tab-name">{seccion.nombre}</span>
-          </button>
-        ))
-      }
+      {secciones.map((seccion, index) => (
+        <button 
+          class={`tab-btn ${index === 0 ? 'active' : ''}`}
+          data-section={seccion.id}
+          data-tooltip={tooltipsSecciones[seccion.id] || seccion.descripcion}
+        >
+          <div class={`tab-icon tab-icon-${seccion.id}`} set:html={iconosSecciones[seccion.id] || iconosSecciones.articulos} />
+          <span class="tab-name">{seccion.nombre}</span>
+          <!-- Tooltip element -->
+          <span class="tooltip">{tooltipsSecciones[seccion.id] || seccion.descripcion}</span>
+        </button>
+      ))}
     </nav>
 
     <!-- Contenido de las secciones -->
     <div class="sections-container">
-      {
-        secciones.map((seccion, index) => (
-          <section
-            class={`section-content ${index === 0 ? "active" : ""}`}
-            data-section={seccion.id}
-          >
-            <div class="section-header">
-              <h2>{seccion.nombre}</h2>
-              <p>{seccion.descripcion}</p>
-            </div>
+      {secciones.map((seccion, index) => (
+        <section 
+          class={`section-content ${index === 0 ? 'active' : ''}`}
+          data-section={seccion.id}
+        >
+          <div class="section-header">
+            <h2>{seccion.nombre}</h2>
+            <p>{seccion.descripcion}</p>
+          </div>
 
-            <div class="gallery-grid">
-              {seccion.imagenes.map((imagen) => (
-                <div class="gallery-item" data-url={imagen.url}>
-                  <div class="image-wrapper">
-                    <img src={imagen.url} alt={imagen.titulo} loading="lazy" />
-                    <div class="image-overlay">
-                      <span class="zoom-icon">🔍</span>
-                    </div>
-                  </div>
-                  <div class="image-info">
-                    <h3>{imagen.titulo}</h3>
-                    <p>{imagen.descripcion}</p>
+          <div class="gallery-grid">
+            {seccion.imagenes.map((imagen) => (
+              <div class="gallery-item" data-url={imagen.url}>
+                <div class="image-wrapper">
+                  <img src={imagen.url} alt={imagen.titulo} loading="lazy" />
+                  <div class="image-overlay">
+                    <span class="zoom-icon">🔍</span>
                   </div>
                 </div>
-              ))}
-            </div>
-          </section>
-        ))
-      }
+                <div class="image-info">
+                  <h3>{imagen.titulo}</h3>
+                  <p>{imagen.descripcion}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      ))}
     </div>
 
     <!-- Modal para imagen ampliada -->
@@ -329,7 +259,7 @@ const tooltipsSecciones: Record<string, string> = {
   }
 
   /* ============================================
-     TABS CON TOOLTIPS Y ANIMACIONES
+     TABS - DISEÑO ORIGINAL CON TOOLTIP
      ============================================ */
   .tabs-nav {
     display: flex;
@@ -349,14 +279,15 @@ const tooltipsSecciones: Record<string, string> = {
     padding: 1rem 1.5rem;
     background: rgba(255, 255, 255, 0.05);
     border: 2px solid transparent;
-    border-radius: 16px;
+    border-radius: 12px;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.25s ease;
     position: relative;
-    min-width: 100px;
+    min-width: 90px;
     color: white;
   }
 
+  /* Tab Icons - Colores originales por sección */
   .tab-icon {
     width: 48px;
     height: 48px;
@@ -364,7 +295,7 @@ const tooltipsSecciones: Record<string, string> = {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.25s ease;
     color: white;
   }
 
@@ -373,22 +304,24 @@ const tooltipsSecciones: Record<string, string> = {
     height: 24px;
   }
 
+  /* Colores por sección - Como antes */
+  .tab-icon-articulos { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+  .tab-icon-precios { background: linear-gradient(135deg, #f97316, #ea580c); }
+  .tab-icon-estructuras { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+  .tab-icon-imagenes { background: linear-gradient(135deg, #06b6d4, #0891b2); }
+  .tab-icon-layout { background: linear-gradient(135deg, #ec4899, #db2777); }
+
   .tab-name {
-    font-size: 0.875rem;
+    font-size: 0.8rem;
     font-weight: 500;
     color: #94a3b8;
-    transition: color 0.3s ease;
+    transition: color 0.25s ease;
   }
 
   /* Hover */
   .tab-btn:hover {
     background: rgba(255, 255, 255, 0.08);
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-  }
-
-  .tab-btn:hover .tab-icon {
-    transform: scale(1.1);
+    transform: translateY(-2px);
   }
 
   .tab-btn:hover .tab-name {
@@ -398,17 +331,7 @@ const tooltipsSecciones: Record<string, string> = {
   /* Activo */
   .tab-btn.active {
     background: rgba(102, 126, 234, 0.15);
-    border-color: #667eea;
-    box-shadow:
-      0 0 0 1px rgba(102, 126, 234, 0.3),
-      0 8px 32px rgba(102, 126, 234, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    animation: tabSelected 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .tab-btn.active .tab-icon {
-    transform: scale(1.05);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    border-color: rgba(102, 126, 234, 0.5);
   }
 
   .tab-btn.active .tab-name {
@@ -416,90 +339,57 @@ const tooltipsSecciones: Record<string, string> = {
     font-weight: 600;
   }
 
-  @keyframes tabSelected {
-    0% {
-      transform: scale(0.95);
-      opacity: 0.8;
-    }
-    50% {
-      transform: scale(1.02);
-    }
-    100% {
-      transform: scale(1);
-      opacity: 1;
-    }
+  /* Animación al seleccionar */
+  .tab-btn.selecting {
+    animation: tabPulse 0.3s ease;
   }
 
-  /* Colores por sección */
-  .tab-btn[data-section="articulos"] .tab-icon {
-    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-  }
-  .tab-btn[data-section="articulos"].active {
-    border-color: #3b82f6;
-    background: rgba(59, 130, 246, 0.15);
-  }
-
-  .tab-btn[data-section="precios"] .tab-icon {
-    background: linear-gradient(135deg, #f97316, #ea580c);
-  }
-  .tab-btn[data-section="precios"].active {
-    border-color: #f97316;
-    background: rgba(249, 115, 22, 0.15);
-  }
-
-  .tab-btn[data-section="estructuras"] .tab-icon {
-    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
-  }
-  .tab-btn[data-section="estructuras"].active {
-    border-color: #8b5cf6;
-    background: rgba(139, 92, 246, 0.15);
-  }
-
-  .tab-btn[data-section="imagenes"] .tab-icon {
-    background: linear-gradient(135deg, #06b6d4, #0891b2);
-  }
-  .tab-btn[data-section="imagenes"].active {
-    border-color: #06b6d4;
-    background: rgba(6, 182, 212, 0.15);
-  }
-
-  .tab-btn[data-section="layout"] .tab-icon {
-    background: linear-gradient(135deg, #ec4899, #db2777);
-  }
-  .tab-btn[data-section="layout"].active {
-    border-color: #ec4899;
-    background: rgba(236, 72, 153, 0.15);
+  @keyframes tabPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
   }
 
   /* ============================================
-     TOOLTIP
+     TOOLTIP - CORREGIDO
      ============================================ */
-  .tab-btn::after {
-    content: attr(data-tooltip);
+  .tooltip {
     position: absolute;
-    bottom: calc(100% + 12px);
+    bottom: calc(100% + 10px);
     left: 50%;
-    transform: translateX(-50%) translateY(8px);
-    padding: 0.625rem 1rem;
-    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    transform: translateX(-50%);
+    padding: 8px 12px;
+    background: #1e293b;
     color: white;
     font-size: 0.75rem;
     font-weight: 500;
     white-space: nowrap;
-    border-radius: 8px;
+    border-radius: 6px;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.2s ease;
     z-index: 100;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(255, 255, 255, 0.1);
     pointer-events: none;
   }
 
-  .tab-btn:hover::after {
+  /* Flecha del tooltip */
+  .tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: #1e293b;
+  }
+
+  /* Mostrar tooltip en hover */
+  .tab-btn:hover .tooltip {
     opacity: 1;
     visibility: visible;
-    transform: translateX(-50%) translateY(0);
+    bottom: calc(100% + 14px);
   }
 
   /* ============================================
@@ -513,22 +403,16 @@ const tooltipsSecciones: Record<string, string> = {
 
   .section-content {
     display: none;
-    animation: fadeInUp 0.4s ease-out;
+    animation: fadeIn 0.3s ease;
   }
 
   .section-content.active {
     display: block;
   }
 
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   .section-header {
@@ -660,14 +544,8 @@ const tooltipsSecciones: Record<string, string> = {
   }
 
   @keyframes modalIn {
-    from {
-      opacity: 0;
-      transform: scale(0.9);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
   }
 
   .modal-content img {
@@ -736,7 +614,8 @@ const tooltipsSecciones: Record<string, string> = {
       font-size: 0.7rem;
     }
 
-    .tab-btn::after {
+    /* Ocultar tooltip en móvil */
+    .tooltip {
       display: none;
     }
 
@@ -751,52 +630,48 @@ const tooltipsSecciones: Record<string, string> = {
 </style>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener('DOMContentLoaded', () => {
     // Tab navigation
-    const tabs = document.querySelectorAll(".tab-btn");
-    const sections = document.querySelectorAll(".section-content");
-
-    tabs.forEach((tab) => {
-      tab.addEventListener("click", () => {
+    const tabs = document.querySelectorAll('.tab-btn');
+    const sections = document.querySelectorAll('.section-content');
+    
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
         const sectionId = tab.dataset.section;
-
+        
         // Update tabs
-        tabs.forEach((t) => t.classList.remove("active"));
-        tab.classList.add("active");
-
-        // Re-trigger animation
-        tab.style.animation = "none";
-        tab.offsetHeight;
-        tab.style.animation = "tabSelected 0.4s cubic-bezier(0.4, 0, 0.2, 1)";
-
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        
+        // Animación de pulse
+        tab.classList.add('selecting');
+        setTimeout(() => tab.classList.remove('selecting'), 300);
+        
         // Update sections
-        sections.forEach((section) => {
+        sections.forEach(section => {
           if (section.dataset.section === sectionId) {
-            section.classList.add("active");
-            section.style.animation = "fadeInUp 0.4s ease-out";
+            section.classList.add('active');
           } else {
-            section.classList.remove("active");
+            section.classList.remove('active');
           }
         });
       });
     });
 
     // Image modal
-    const modal = document.getElementById("imageModal");
-    const modalImage = document.getElementById(
-      "modalImage"
-    ) as HTMLImageElement;
-    const modalCaption = document.getElementById("modalCaption");
-    const galleryItems = document.querySelectorAll(".gallery-item");
-    const modalClose = document.querySelector(".modal-close");
-    const modalBackdrop = document.querySelector(".modal-backdrop");
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage') as HTMLImageElement;
+    const modalCaption = document.getElementById('modalCaption');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const modalClose = document.querySelector('.modal-close');
+    const modalBackdrop = document.querySelector('.modal-backdrop');
 
-    galleryItems.forEach((item) => {
-      item.addEventListener("click", () => {
+    galleryItems.forEach(item => {
+      item.addEventListener('click', () => {
         const url = item.dataset.url;
-        const title = item.querySelector("h3")?.textContent || "";
-        const desc = item.querySelector(".image-info p")?.textContent || "";
-
+        const title = item.querySelector('h3')?.textContent || '';
+        const desc = item.querySelector('.image-info p')?.textContent || '';
+        
         if (modalImage && url) {
           modalImage.src = url;
           modalImage.alt = title;
@@ -804,21 +679,21 @@ const tooltipsSecciones: Record<string, string> = {
         if (modalCaption) {
           modalCaption.textContent = `${title} - ${desc}`;
         }
-        modal?.classList.add("active");
-        document.body.style.overflow = "hidden";
+        modal?.classList.add('active');
+        document.body.style.overflow = 'hidden';
       });
     });
 
     const closeModal = () => {
-      modal?.classList.remove("active");
-      document.body.style.overflow = "";
+      modal?.classList.remove('active');
+      document.body.style.overflow = '';
     };
 
-    modalClose?.addEventListener("click", closeModal);
-    modalBackdrop?.addEventListener("click", closeModal);
-
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeModal();
+    modalClose?.addEventListener('click', closeModal);
+    modalBackdrop?.addEventListener('click', closeModal);
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
     });
   });
 </script>
