@@ -1,0 +1,1627 @@
+---
+/**
+ * Sección de Contacto para RayGold
+ * Incluye: Formulario de contacto + Modal Login/Registro Demo
+ *
+ * INTEGRACIÓN CON TU API:
+ * - Registro: POST /identity/register
+ * - Login: POST /identity/login
+ *
+ * Añadir al index.astro o como página separada
+ */
+---
+
+<!-- ============================================
+     SECCIÓN CONTACTO
+     ============================================ -->
+<section id="contacto" class="contacto-section">
+  <div class="container">
+    <!-- Header -->
+    <div class="section-header">
+      <span class="section-badge">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+          ></path>
+        </svg>
+        Contacto
+      </span>
+      <h2 class="section-title">
+        ¿Listo para transformar <span class="gradient-text">tu joyería</span>?
+      </h2>
+      <p class="section-subtitle">
+        Cuéntanos sobre tu negocio y te ayudaremos a encontrar la solución
+        perfecta
+      </p>
+    </div>
+
+    <!-- Cards Container -->
+    <div class="contact-grid">
+      <!-- Card 1: Formulario de Contacto -->
+      <div class="contact-card contact-form-card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+              ></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+          </div>
+          <div>
+            <h3>Solicitar información</h3>
+            <p>Te contactaremos en menos de 24h</p>
+          </div>
+        </div>
+
+        <form id="contactForm" class="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="empresa">Tu empresa</label>
+              <input
+                type="text"
+                id="empresa"
+                name="empresa"
+                placeholder="Joyería Ejemplo S.L."
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="nombre">Tu nombre</label>
+              <input
+                type="text"
+                id="nombre"
+                name="nombre"
+                placeholder="Juan García"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="telefono">Teléfono</label>
+              <div class="input-prefix">
+                <span>+34</span>
+                <input
+                  type="tel"
+                  id="telefono"
+                  name="telefono"
+                  placeholder="612 345 678"
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="juan@joyeria.com"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="interes">Interés principal</label>
+            <select id="interes" name="interes">
+              <option value="informacion">Información general</option>
+              <option value="demo">Solicitar demostración</option>
+              <option value="presupuesto">Presupuesto personalizado</option>
+              <option value="migracion">Migración desde otro sistema</option>
+              <option value="soporte">Soporte técnico</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="tamano">Tamaño de la empresa</label>
+            <select id="tamano" name="tamano">
+              <option value="1-5">1-5 empleados</option>
+              <option value="6-15">6-15 empleados</option>
+              <option value="16-50">16-50 empleados</option>
+              <option value="50+">Más de 50 empleados</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="mensaje">Mensaje (opcional)</label>
+            <textarea
+              id="mensaje"
+              name="mensaje"
+              rows="3"
+              placeholder="Cuéntanos más sobre tu joyería..."></textarea>
+          </div>
+
+          <div class="form-privacy">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+            <span
+              >Trataremos tus datos según nuestra <a href="/privacidad"
+                >Política de Privacidad</a
+              ></span
+            >
+          </div>
+
+          <button type="submit" class="btn-submit">
+            <span>Enviar solicitud</span>
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </form>
+      </div>
+
+      <!-- Card 2: Prueba Gratis -->
+      <div class="contact-card demo-card">
+        <div class="demo-content">
+          <div class="demo-badge">✨ Sin compromiso</div>
+          <h3>Prueba RayGold <span>gratis</span></h3>
+          <p>
+            Accede a una demostración completa del sistema sin necesidad de
+            instalación
+          </p>
+
+          <ul class="demo-features">
+            <li>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              Acceso inmediato al sistema
+            </li>
+            <li>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              Datos de ejemplo precargados
+            </li>
+            <li>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              Todas las funcionalidades
+            </li>
+            <li>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              Soporte técnico incluido
+            </li>
+          </ul>
+
+          <button id="btnPruebaGratis" class="btn-demo">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            Pruébalo sin instalaciones
+          </button>
+
+          <p class="demo-note">
+            ¿Ya tienes cuenta? <a href="#" id="btnYaTengoCuenta"
+              >Iniciar sesión</a>
+          </p>
+        </div>
+
+        <!-- Info boxes -->
+        <div class="info-boxes">
+          <div class="info-box">
+            <h4>Comparar ediciones</h4>
+            <p>
+              Ediciones diseñadas para adaptarse a empresas de cualquier tamaño.
+            </p>
+            <a href="/precios">Ver planes →</a>
+          </div>
+          <div class="info-box">
+            <h4>Guía de implementación</h4>
+            <p>Te acompañamos en todo el proceso de puesta en marcha.</p>
+            <a href="#">Más información →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="contact-info">
+      <div class="info-item">
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+          ></path>
+        </svg>
+        <span>+34 948 123 456</span>
+      </div>
+      <div class="info-item">
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+          ></path>
+          <polyline points="22,6 12,13 2,6"></polyline>
+        </svg>
+        <span>info@raytecno.es</span>
+      </div>
+      <div class="info-item">
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+          <circle cx="12" cy="10" r="3"></circle>
+        </svg>
+        <span>Pamplona, Navarra, España</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     MODAL LOGIN / REGISTRO
+     ============================================ -->
+<div id="authModal" class="auth-modal">
+  <div class="auth-modal-backdrop"></div>
+  <div class="auth-modal-content">
+    <button class="modal-close" id="closeAuthModal">
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+
+    <!-- Tabs -->
+    <div class="auth-tabs">
+      <button class="auth-tab active" data-tab="login">Iniciar sesión</button>
+      <button class="auth-tab" data-tab="register">Crear cuenta</button>
+    </div>
+
+    <!-- Login Form -->
+    <form id="loginForm" class="auth-form active">
+      <div class="auth-header">
+        <div class="auth-logo">
+          <svg
+            viewBox="0 0 40 40"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M20 4L4 12L20 20L36 12L20 4Z"
+              fill="url(#grad1)"
+              opacity="0.9"></path>
+            <path d="M4 12V28L20 36V20L4 12Z" fill="url(#grad2)" opacity="0.8"
+            ></path>
+            <path d="M36 12V28L20 36V20L36 12Z" fill="url(#grad3)" opacity="0.7"
+            ></path>
+            <defs>
+              <linearGradient id="grad1" x1="4" y1="4" x2="36" y2="20">
+                <stop stop-color="#a78bfa"></stop><stop
+                  offset="1"
+                  stop-color="#6366f1"></stop>
+              </linearGradient>
+              <linearGradient id="grad2" x1="4" y1="12" x2="20" y2="36">
+                <stop stop-color="#8b5cf6"></stop><stop
+                  offset="1"
+                  stop-color="#6366f1"></stop>
+              </linearGradient>
+              <linearGradient id="grad3" x1="36" y1="12" x2="20" y2="36">
+                <stop stop-color="#a78bfa"></stop><stop
+                  offset="1"
+                  stop-color="#7c3aed"></stop>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <h3>Bienvenido de nuevo</h3>
+        <p>Accede a tu cuenta de demostración</p>
+      </div>
+
+      <div class="form-group">
+        <label for="loginUsuario">Usuario</label>
+        <input
+          type="text"
+          id="loginUsuario"
+          name="usuario"
+          placeholder="Tu usuario"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="loginPassword">Contraseña</label>
+        <div class="password-input">
+          <input
+            type="password"
+            id="loginPassword"
+            name="password"
+            placeholder="••••••••"
+            required
+          />
+          <button type="button" class="toggle-password">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div id="loginError" class="auth-error"></div>
+
+      <button type="submit" class="btn-auth">
+        <span>Iniciar sesión</span>
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+          <polyline points="10 17 15 12 10 7"></polyline>
+          <line x1="15" y1="12" x2="3" y2="12"></line>
+        </svg>
+      </button>
+
+      <p class="auth-footer">
+        ¿No tienes cuenta? <a href="#" class="switch-to-register"
+          >Regístrate gratis</a
+        >
+      </p>
+    </form>
+
+    <!-- Register Form -->
+    <form id="registerForm" class="auth-form">
+      <div class="auth-header">
+        <div class="auth-logo">
+          <svg
+            viewBox="0 0 40 40"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M20 4L4 12L20 20L36 12L20 4Z"
+              fill="url(#grad1r)"
+              opacity="0.9"></path>
+            <path d="M4 12V28L20 36V20L4 12Z" fill="url(#grad2r)" opacity="0.8"
+            ></path>
+            <path
+              d="M36 12V28L20 36V20L36 12Z"
+              fill="url(#grad3r)"
+              opacity="0.7"></path>
+            <defs>
+              <linearGradient id="grad1r" x1="4" y1="4" x2="36" y2="20">
+                <stop stop-color="#10b981"></stop><stop
+                  offset="1"
+                  stop-color="#059669"></stop>
+              </linearGradient>
+              <linearGradient id="grad2r" x1="4" y1="12" x2="20" y2="36">
+                <stop stop-color="#10b981"></stop><stop
+                  offset="1"
+                  stop-color="#047857"></stop>
+              </linearGradient>
+              <linearGradient id="grad3r" x1="36" y1="12" x2="20" y2="36">
+                <stop stop-color="#34d399"></stop><stop
+                  offset="1"
+                  stop-color="#10b981"></stop>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <h3>Crear cuenta de prueba</h3>
+        <p>Accede gratis a la demostración completa</p>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="regNombre">Nombre</label>
+          <input
+            type="text"
+            id="regNombre"
+            name="firstName"
+            placeholder="Juan"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="regApellido">Apellido</label>
+          <input
+            type="text"
+            id="regApellido"
+            name="lastName"
+            placeholder="García"
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="regEmpresa">Empresa</label>
+        <input
+          type="text"
+          id="regEmpresa"
+          name="empresa"
+          placeholder="Tu joyería"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="regEmail">Email</label>
+        <input
+          type="email"
+          id="regEmail"
+          name="email"
+          placeholder="juan@joyeria.com"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="regUsuario">Usuario</label>
+        <input
+          type="text"
+          id="regUsuario"
+          name="usuario"
+          placeholder="Elige un nombre de usuario"
+          required
+        />
+        <span class="input-hint">Mínimo 4 caracteres, sin espacios</span>
+      </div>
+
+      <div class="form-group">
+        <label for="regPassword">Contraseña</label>
+        <div class="password-input">
+          <input
+            type="password"
+            id="regPassword"
+            name="password"
+            placeholder="Mínimo 6 caracteres"
+            required
+            minlength="6"
+          />
+          <button type="button" class="toggle-password">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="form-checkbox">
+        <input type="checkbox" id="regTerms" required />
+        <label for="regTerms"
+          >Acepto los <a href="/terminos">Términos y Condiciones</a> y la <a
+            href="/privacidad">Política de Privacidad</a
+          ></label
+        >
+      </div>
+
+      <div id="registerError" class="auth-error"></div>
+      <div id="registerSuccess" class="auth-success"></div>
+
+      <button type="submit" class="btn-auth btn-auth-green">
+        <span>Crear cuenta gratis</span>
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="8.5" cy="7" r="4"></circle>
+          <line x1="20" y1="8" x2="20" y2="14"></line>
+          <line x1="23" y1="11" x2="17" y2="11"></line>
+        </svg>
+      </button>
+
+      <p class="auth-footer">
+        ¿Ya tienes cuenta? <a href="#" class="switch-to-login">Iniciar sesión</a
+        >
+      </p>
+    </form>
+  </div>
+</div>
+
+<!-- ============================================
+     ESTILOS
+     ============================================ -->
+<style>
+  /* Variables */
+  :root {
+    --bg-dark: #0a0a0f;
+    --bg-card: rgba(255, 255, 255, 0.03);
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --accent-purple: #8b5cf6;
+    --accent-green: #10b981;
+  }
+
+  /* ============================================
+     SECTION CONTACTO
+     ============================================ */
+  .contacto-section {
+    padding: 100px 0;
+    background: linear-gradient(180deg, #0f172a 0%, #0a0a0f 100%);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Header */
+  .section-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .section-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(139, 92, 246, 0.15);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    padding: 8px 16px;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    color: #a78bfa;
+    margin-bottom: 24px;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 16px 0;
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #10b981, #34d399);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .section-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  /* Grid */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 48px;
+  }
+
+  /* Cards */
+  .contact-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 20px;
+    padding: 32px;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .card-icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--accent-purple), #6366f1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+
+  .card-header h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  .card-header p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 4px 0 0 0;
+  }
+
+  /* Form */
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-group label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-purple);
+    background: rgba(139, 92, 246, 0.1);
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: var(--text-muted);
+  }
+
+  .form-group select {
+    cursor: pointer;
+  }
+
+  .form-group select option {
+    background: #1e293b;
+    color: var(--text-primary);
+  }
+
+  .input-prefix {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .input-prefix span {
+    padding: 12px 14px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    border-right: 1px solid var(--border-subtle);
+  }
+
+  .input-prefix input {
+    border: none;
+    background: transparent;
+    flex: 1;
+  }
+
+  .input-prefix input:focus {
+    background: transparent;
+  }
+
+  .form-privacy {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .form-privacy a {
+    color: var(--accent-purple);
+    text-decoration: none;
+  }
+
+  .btn-submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(135deg, var(--accent-purple), #6366f1);
+    color: white;
+    border: none;
+    padding: 14px 24px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.4);
+  }
+
+  /* Demo Card */
+  .demo-card {
+    background: linear-gradient(
+      135deg,
+      rgba(16, 185, 129, 0.1) 0%,
+      rgba(16, 185, 129, 0.05) 100%
+    );
+    border-color: rgba(16, 185, 129, 0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .demo-content {
+    text-align: center;
+    padding: 20px 0;
+  }
+
+  .demo-badge {
+    display: inline-block;
+    background: rgba(16, 185, 129, 0.2);
+    color: #34d399;
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+
+  .demo-content h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 12px 0;
+  }
+
+  .demo-content h3 span {
+    color: var(--accent-green);
+  }
+
+  .demo-content > p {
+    color: var(--text-secondary);
+    margin: 0 0 24px 0;
+    font-size: 0.95rem;
+  }
+
+  .demo-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: left;
+    max-width: 280px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .demo-features li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  .demo-features svg {
+    color: var(--accent-green);
+    flex-shrink: 0;
+  }
+
+  .btn-demo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(135deg, var(--accent-green), #059669);
+    color: white;
+    border: none;
+    padding: 16px 32px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .btn-demo:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
+  }
+
+  .demo-note {
+    margin-top: 16px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .demo-note a {
+    color: var(--accent-green);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  /* Info boxes */
+  .info-boxes {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: auto;
+  }
+
+  .info-box {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 16px;
+  }
+
+  .info-box h4 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 6px 0;
+  }
+
+  .info-box p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin: 0 0 8px 0;
+  }
+
+  .info-box a {
+    font-size: 0.8rem;
+    color: var(--accent-green);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  /* Contact Info */
+  .contact-info {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .info-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+
+  .info-item svg {
+    color: var(--accent-purple);
+  }
+
+  /* ============================================
+     MODAL AUTH
+     ============================================ */
+  .auth-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .auth-modal.active {
+    display: flex;
+  }
+
+  .auth-modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(4px);
+  }
+
+  .auth-modal-content {
+    position: relative;
+    background: #1e293b;
+    border: 1px solid var(--border-subtle);
+    border-radius: 20px;
+    padding: 32px;
+    width: 100%;
+    max-width: 420px;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: modalSlideIn 0.3s ease;
+  }
+
+  @keyframes modalSlideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 4px;
+    transition: color 0.2s ease;
+  }
+
+  .modal-close:hover {
+    color: var(--text-primary);
+  }
+
+  /* Tabs */
+  .auth-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 4px;
+    border-radius: 10px;
+  }
+
+  .auth-tab {
+    flex: 1;
+    padding: 10px 16px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+  }
+
+  .auth-tab.active {
+    background: var(--accent-purple);
+    color: white;
+  }
+
+  /* Auth Form */
+  .auth-form {
+    display: none;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .auth-form.active {
+    display: flex;
+  }
+
+  .auth-header {
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .auth-logo {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 12px;
+  }
+
+  .auth-logo svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .auth-header h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 4px 0;
+  }
+
+  .auth-header p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  .password-input {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .password-input input {
+    flex: 1;
+    padding-right: 44px;
+  }
+
+  .toggle-password {
+    position: absolute;
+    right: 12px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .input-hint {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .form-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .form-checkbox input {
+    margin-top: 3px;
+    accent-color: var(--accent-green);
+  }
+
+  .form-checkbox a {
+    color: var(--accent-purple);
+    text-decoration: none;
+  }
+
+  .auth-error {
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #f87171;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    display: none;
+  }
+
+  .auth-error.show {
+    display: block;
+  }
+
+  .auth-success {
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #34d399;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    display: none;
+  }
+
+  .auth-success.show {
+    display: block;
+  }
+
+  .btn-auth {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(135deg, var(--accent-purple), #6366f1);
+    color: white;
+    border: none;
+    padding: 14px 24px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 8px;
+  }
+
+  .btn-auth:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.4);
+  }
+
+  .btn-auth-green {
+    background: linear-gradient(135deg, var(--accent-green), #059669);
+  }
+
+  .btn-auth-green:hover {
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
+  }
+
+  .auth-footer {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 8px;
+  }
+
+  .auth-footer a {
+    color: var(--accent-purple);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  /* ============================================
+     RESPONSIVE
+     ============================================ */
+  @media (max-width: 900px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .contact-info {
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .contacto-section {
+      padding: 60px 0;
+    }
+
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-card {
+      padding: 24px;
+    }
+
+    .auth-modal-content {
+      margin: 16px;
+      padding: 24px;
+    }
+  }
+</style>
+
+<!-- ============================================
+     JAVASCRIPT
+     ============================================ -->
+<script>
+  // ==========================================
+  // CONFIGURACIÓN API
+  // ==========================================
+  // Detecta automáticamente el entorno (desarrollo/producción)
+  const API_BASE_URL =
+    window.location.hostname === "localhost"
+      ? "https://localhost:44357" // Desarrollo local
+      : "https://raygoldapp.azurewebsites.net"; // Producción en Azure
+
+  // ==========================================
+  // ELEMENTOS DOM
+  // ==========================================
+  const authModal = document.getElementById("authModal");
+  const closeAuthModal = document.getElementById("closeAuthModal");
+  const btnPruebaGratis = document.getElementById("btnPruebaGratis");
+  const btnYaTengoCuenta = document.getElementById("btnYaTengoCuenta");
+  const authTabs = document.querySelectorAll(".auth-tab");
+  const loginForm = document.getElementById("loginForm");
+  const registerForm = document.getElementById("registerForm");
+  const contactForm = document.getElementById("contactForm");
+
+  // ==========================================
+  // MODAL FUNCTIONS
+  // ==========================================
+  function openModal(tab = "register") {
+    authModal.classList.add("active");
+    document.body.style.overflow = "hidden";
+    switchTab(tab);
+  }
+
+  function closeModal() {
+    authModal.classList.remove("active");
+    document.body.style.overflow = "";
+    clearErrors();
+  }
+
+  function switchTab(tabName) {
+    authTabs.forEach((tab) => {
+      tab.classList.toggle("active", tab.dataset.tab === tabName);
+    });
+
+    loginForm.classList.toggle("active", tabName === "login");
+    registerForm.classList.toggle("active", tabName === "register");
+    clearErrors();
+  }
+
+  function clearErrors() {
+    document.querySelectorAll(".auth-error, .auth-success").forEach((el) => {
+      el.classList.remove("show");
+      el.textContent = "";
+    });
+  }
+
+  function showError(elementId, message) {
+    const el = document.getElementById(elementId);
+    if (el) {
+      el.textContent = message;
+      el.classList.add("show");
+    }
+  }
+
+  function showSuccess(elementId, message) {
+    const el = document.getElementById(elementId);
+    if (el) {
+      el.textContent = message;
+      el.classList.add("show");
+    }
+  }
+
+  // ==========================================
+  // EVENT LISTENERS
+  // ==========================================
+  btnPruebaGratis?.addEventListener("click", () => openModal("register"));
+  btnYaTengoCuenta?.addEventListener("click", (e) => {
+    e.preventDefault();
+    openModal("login");
+  });
+  closeAuthModal?.addEventListener("click", closeModal);
+
+  document
+    .querySelector(".auth-modal-backdrop")
+    ?.addEventListener("click", closeModal);
+
+  document.querySelectorAll(".switch-to-register").forEach((el) => {
+    el.addEventListener("click", (e) => {
+      e.preventDefault();
+      switchTab("register");
+    });
+  });
+
+  document.querySelectorAll(".switch-to-login").forEach((el) => {
+    el.addEventListener("click", (e) => {
+      e.preventDefault();
+      switchTab("login");
+    });
+  });
+
+  authTabs.forEach((tab) => {
+    tab.addEventListener("click", () => switchTab(tab.dataset.tab));
+  });
+
+  // Toggle password visibility
+  document.querySelectorAll(".toggle-password").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const input = btn.parentElement.querySelector("input");
+      const type = input.type === "password" ? "text" : "password";
+      input.type = type;
+    });
+  });
+
+  // Escape key closes modal
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && authModal.classList.contains("active")) {
+      closeModal();
+    }
+  });
+
+  // ==========================================
+  // LOGIN
+  // ==========================================
+  loginForm?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    clearErrors();
+
+    const usuario = document.getElementById("loginUsuario").value.trim();
+    const password = document.getElementById("loginPassword").value;
+
+    if (!usuario || !password) {
+      showError("loginError", "Por favor, completa todos los campos");
+      return;
+    }
+
+    const btn = loginForm.querySelector(".btn-auth");
+    const originalText = btn.innerHTML;
+    btn.innerHTML = "<span>Iniciando sesión...</span>";
+    btn.disabled = true;
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/identity/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          Usuario: usuario.toUpperCase(),
+          Password: password.toUpperCase(),
+          TipoLoginBiometrico: false,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.text();
+        throw new Error(errorData || "Credenciales inválidas");
+      }
+
+      const data = await response.json();
+
+      // Guardar token
+      localStorage.setItem("access_token", data.access_token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+
+      // Redirigir a la aplicación demo
+      window.location.href = "/demo"; // Cambiar por tu URL de demo
+    } catch (error) {
+      showError("loginError", error.message || "Error al iniciar sesión");
+    } finally {
+      btn.innerHTML = originalText;
+      btn.disabled = false;
+    }
+  });
+
+  // ==========================================
+  // REGISTRO
+  // ==========================================
+  registerForm?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    clearErrors();
+
+    const nombre = document.getElementById("regNombre").value.trim();
+    const apellido = document.getElementById("regApellido").value.trim();
+    const empresa = document.getElementById("regEmpresa").value.trim();
+    const email = document.getElementById("regEmail").value.trim();
+    const usuario = document.getElementById("regUsuario").value.trim();
+    const password = document.getElementById("regPassword").value;
+    const terms = document.getElementById("regTerms").checked;
+
+    // Validaciones
+    if (!nombre || !email || !usuario || !password) {
+      showError("registerError", "Por favor, completa los campos obligatorios");
+      return;
+    }
+
+    if (usuario.length < 4) {
+      showError("registerError", "El usuario debe tener al menos 4 caracteres");
+      return;
+    }
+
+    if (password.length < 6) {
+      showError(
+        "registerError",
+        "La contraseña debe tener al menos 6 caracteres"
+      );
+      return;
+    }
+
+    if (!terms) {
+      showError("registerError", "Debes aceptar los términos y condiciones");
+      return;
+    }
+
+    const btn = registerForm.querySelector(".btn-auth");
+    const originalText = btn.innerHTML;
+    btn.innerHTML = "<span>Creando cuenta...</span>";
+    btn.disabled = true;
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/identity/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          Usuario: usuario.toUpperCase(),
+          Password: password,
+          Email: email,
+          FirstName: nombre,
+          LastName: apellido || nombre,
+          Empresa: empresa || "DEMO",
+          Tipo: "WEB", // Tipo especial para usuarios web
+          RoleTipo: "Demo", // Rol de demostración
+          Permiso: "LECTURA", // Permisos limitados
+          Secutity: 9, // Nivel de seguridad más restrictivo
+          Modelo: 99, // Menú demo específico
+          Visible: true,
+          Grupo: "WEB",
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.text();
+        throw new Error(errorData || "Error al crear la cuenta");
+      }
+
+      showSuccess(
+        "registerSuccess",
+        "¡Cuenta creada exitosamente! Ahora puedes iniciar sesión."
+      );
+
+      // Cambiar a login después de 2 segundos
+      setTimeout(() => {
+        switchTab("login");
+        document.getElementById("loginUsuario").value = usuario;
+      }, 2000);
+    } catch (error) {
+      showError("registerError", error.message || "Error al crear la cuenta");
+    } finally {
+      btn.innerHTML = originalText;
+      btn.disabled = false;
+    }
+  });
+
+  // ==========================================
+  // FORMULARIO CONTACTO
+  // ==========================================
+  contactForm?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(contactForm);
+    const data = Object.fromEntries(formData.entries());
+
+    const btn = contactForm.querySelector(".btn-submit");
+    const originalText = btn.innerHTML;
+    btn.innerHTML = "<span>Enviando...</span>";
+    btn.disabled = true;
+
+    try {
+      // Opción 1: Enviar a tu API
+      // const response = await fetch(`${API_BASE_URL}/contacto`, {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify(data),
+      // });
+
+      // Opción 2: Enviar por email (usando servicio externo)
+      // Puedes usar Formspree, EmailJS, o tu propio backend
+
+      // Simulación de éxito
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+
+      // Mostrar mensaje de éxito
+      alert(
+        "¡Gracias por contactarnos! Te responderemos en menos de 24 horas."
+      );
+      contactForm.reset();
+    } catch (error) {
+      alert("Error al enviar el formulario. Por favor, inténtalo de nuevo.");
+    } finally {
+      btn.innerHTML = originalText;
+      btn.disabled = false;
+    }
+  });
+</script>
