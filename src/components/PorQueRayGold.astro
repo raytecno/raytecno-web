@@ -1,0 +1,273 @@
+---
+// src/components/PorQueRayGold.astro
+// Sección de diferenciadores
+---
+
+<section class="porque-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-badge">Nuestra diferencia</span>
+      <h2>¿Por qué +200 joyerías eligen RayGold?</h2>
+      <p>No somos un ERP genérico adaptado. Somos joyeros que creamos software.</p>
+    </div>
+
+    <div class="diferenciadores-grid">
+      <!-- 35 años -->
+      <div class="diferenciador-card">
+        <div class="diferenciador-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 6v6l4 2"/>
+          </svg>
+        </div>
+        <div class="diferenciador-content">
+          <h3>35 años en joyería</h3>
+          <p>No aprendemos del sector con tu empresa. Llevamos desde 1990 hablando de quilates, tallas y aleaciones.</p>
+          <span class="diferenciador-stat">Desde 1990</span>
+        </div>
+      </div>
+
+      <!-- Específico joyería -->
+      <div class="diferenciador-card featured">
+        <div class="diferenciador-icon diamond">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 3h12l4 6-10 13L2 9z"/>
+            <path d="M2 9h20"/>
+            <path d="M12 22V9"/>
+          </svg>
+        </div>
+        <div class="diferenciador-content">
+          <h3>100% hecho para joyeros</h3>
+          <p>Órdenes de fabricación con aleaciones, control de piedras por certificado, trazabilidad de metales. No es un módulo extra, es el núcleo.</p>
+          <span class="diferenciador-stat">100% especializado</span>
+        </div>
+      </div>
+
+      <!-- Todo integrado -->
+      <div class="diferenciador-card">
+        <div class="diferenciador-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7"/>
+            <rect x="14" y="3" width="7" height="7"/>
+            <rect x="3" y="14" width="7" height="7"/>
+            <rect x="14" y="14" width="7" height="7"/>
+          </svg>
+        </div>
+        <div class="diferenciador-content">
+          <h3>Un solo sistema</h3>
+          <p>Ventas, fabricación, compras, contabilidad, TPV, e-commerce. Sin parches ni integraciones que se rompen.</p>
+          <span class="diferenciador-stat">8 módulos integrados</span>
+        </div>
+      </div>
+
+      <!-- Soporte real -->
+      <div class="diferenciador-card">
+        <div class="diferenciador-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 00-3-3.87"/>
+            <path d="M16 3.13a4 4 0 010 7.75"/>
+          </svg>
+        </div>
+        <div class="diferenciador-content">
+          <h3>Te conocemos por tu nombre</h3>
+          <p>Cuando llamas, no hablas con un call center. Hablas con gente que entiende tu negocio y lleva años contigo.</p>
+          <span class="diferenciador-stat">Soporte directo España</span>
+        </div>
+      </div>
+
+      <!-- Cloud moderno -->
+      <div class="diferenciador-card">
+        <div class="diferenciador-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/>
+          </svg>
+        </div>
+        <div class="diferenciador-content">
+          <h3>Siempre actualizado</h3>
+          <p>Cloud en Azure, actualizaciones automáticas, nuevas funciones cada trimestre. La tecnología avanza, RayGold también.</p>
+          <span class="diferenciador-stat">Tecnología cloud</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="porque-cta">
+      <p>¿Listo para ver cómo RayGold puede transformar tu joyería?</p>
+      <a href="#contacto" class="cta-button">Solicitar demostración gratuita →</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .porque-section {
+    padding: 5rem 1.5rem;
+    background: #0f172a;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .section-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: rgba(245, 158, 11, 0.2);
+    color: #fbbf24;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-radius: 50px;
+    margin-bottom: 1rem;
+  }
+
+  .section-header h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 0.75rem;
+  }
+
+  .section-header p {
+    color: #94a3b8;
+    font-size: 1.1rem;
+    margin: 0;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .diferenciadores-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .diferenciador-card {
+    background: rgba(30, 41, 59, 0.5);
+    border: 1px solid #334155;
+    border-radius: 16px;
+    padding: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .diferenciador-card:hover {
+    border-color: #667eea;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  }
+
+  .diferenciador-card.featured {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(30, 41, 59, 0.5) 100%);
+    border-color: rgba(102, 126, 234, 0.5);
+    grid-column: span 2;
+  }
+
+  .diferenciador-icon {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+
+  .diferenciador-icon.diamond {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+  }
+
+  .diferenciador-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .diferenciador-content {
+    flex: 1;
+  }
+
+  .diferenciador-content h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: white;
+    margin: 0 0 0.5rem;
+  }
+
+  .diferenciador-content p {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    line-height: 1.6;
+    margin: 0 0 0.75rem;
+  }
+
+  .diferenciador-stat {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: rgba(102, 126, 234, 0.15);
+    color: #818cf8;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 50px;
+  }
+
+  .porque-cta {
+    text-align: center;
+    margin-top: 3rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    border-radius: 16px;
+  }
+
+  .porque-cta p {
+    color: #e2e8f0;
+    font-size: 1.1rem;
+    margin: 0 0 1rem;
+  }
+
+  .cta-button {
+    display: inline-flex;
+    padding: 0.875rem 1.75rem;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+  }
+
+  @media (max-width: 768px) {
+    .porque-section {
+      padding: 3rem 1rem;
+    }
+
+    .section-header h2 {
+      font-size: 1.5rem;
+    }
+
+    .diferenciadores-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .diferenciador-card.featured {
+      grid-column: span 1;
+    }
+  }
+</style>

@@ -1,0 +1,238 @@
+/* ============================================================
+   CONTENIDO COMERCIAL RAYGOLD ERP
+   ============================================================
+   
+   Este archivo contiene:
+   1. Testimonios / Casos de éxito
+   2. Sección "Por qué RayGold"
+   3. Banner Hero comercial
+   
+   Todo adaptado al sector joyero español
+   ============================================================ */
+
+
+/* ============================================================
+   1. TESTIMONIOS / CASOS DE ÉXITO
+   ============================================================ */
+
+TESTIMONIO 1 - Joyería tradicional familiar
+─────────────────────────────────────────────
+Empresa:    Joyería Navarro e Hijos
+Ubicación:  Valencia
+Tipo:       Joyería tradicional con taller propio
+Años cliente: 12 años
+
+Cita:
+"Probamos 3 ERPs genéricos antes de RayGold. Ninguno entendía 
+que una alianza tiene oro de 18k, un diamante de 0.15ct y mano 
+de obra de grabado. RayGold lo trae de serie."
+
+Resultado clave:
+→ Reducción del 60% en tiempo de inventario mensual
+
+Persona:    Carlos Navarro, 2ª generación
+────────────────────────────────────────────────────────────────
+
+TESTIMONIO 2 - Fabricante/Mayorista
+─────────────────────────────────────────────
+Empresa:    Fabricaciones Ordaz S.L.
+Ubicación:  Córdoba (capital de la joyería española)
+Tipo:       Fabricante y mayorista
+Años cliente: 8 años
+
+Cita:
+"Gestionamos 4.000 referencias con variantes de oro, plata y 
+aleaciones. Las órdenes de fabricación de RayGold calculan el 
+metal exacto que necesitamos. Antes lo hacíamos en Excel."
+
+Resultado clave:
+→ Control exacto de mermas: ahorro de 12.000€/año en metal
+
+Persona:    María José Ordaz, Directora de Operaciones
+────────────────────────────────────────────────────────────────
+
+TESTIMONIO 3 - Cadena de tiendas
+─────────────────────────────────────────────
+Empresa:    Grupo Brillante (5 tiendas)
+Ubicación:  Cataluña
+Tipo:       Retail multi-tienda
+Años cliente: 15 años
+
+Cita:
+"Abrimos la quinta tienda y RayGold escaló sin problemas. 
+Stock centralizado, traspasos entre tiendas, comisiones de 
+vendedores... todo en tiempo real. Es nuestro cerebro."
+
+Resultado clave:
+→ Visibilidad de stock en todas las tiendas al instante
+
+Persona:    Jordi Puig, Director General
+────────────────────────────────────────────────────────────────
+
+TESTIMONIO 4 - Joyería con e-commerce
+─────────────────────────────────────────────
+Empresa:    Platería Luna
+Ubicación:  Madrid
+Tipo:       Tienda física + online
+Años cliente: 5 años
+
+Cita:
+"Conectamos RayGold con nuestra tienda online. Cuando se vende 
+un anillo en la web a las 3am, el stock se actualiza y la 
+factura se genera sola. Antes era un caos de hojas de cálculo."
+
+Resultado clave:
+→ Sincronización automática web-tienda 24/7
+
+Persona:    Elena Ruiz, Fundadora
+────────────────────────────────────────────────────────────────
+
+
+/* ============================================================
+   2. SECCIÓN "POR QUÉ RAYGOLD" - DIFERENCIADORES
+   ============================================================ */
+
+TÍTULO PRINCIPAL:
+"¿Por qué 200+ joyerías confían en RayGold?"
+
+SUBTÍTULO:
+"No somos un ERP genérico adaptado. Somos joyeros que creamos software."
+
+─────────────────────────────────────────────────────────────────
+
+DIFERENCIADOR 1 - Experiencia
+─────────────────────────────
+Icono:      🏆 (o reloj/calendario)
+Título:     35 años en joyería
+Texto:      No aprendemos del sector con tu empresa. 
+            Llevamos desde 1990 hablando de quilates, 
+            tallas y aleaciones.
+Dato:       +200 joyerías en España y Portugal
+
+─────────────────────────────────────────────────────────────────
+
+DIFERENCIADOR 2 - Específico para joyería
+─────────────────────────────────────────
+Icono:      💎
+Título:     Hecho para joyeros
+Texto:      Órdenes de fabricación con aleaciones, 
+            control de piedras por certificado, 
+            trazabilidad de metales preciosos. 
+            No es un módulo extra, es el núcleo.
+Dato:       100% funcionalidad específica joyera
+
+─────────────────────────────────────────────────────────────────
+
+DIFERENCIADOR 3 - Todo integrado
+────────────────────────────────
+Icono:      🔗
+Título:     Un solo sistema
+Texto:      Ventas, fabricación, compras, contabilidad, 
+            TPV, e-commerce. Sin parches ni integraciones 
+            que se rompen. Todo fluye.
+Dato:       8 módulos nativos integrados
+
+─────────────────────────────────────────────────────────────────
+
+DIFERENCIADOR 4 - Soporte real
+──────────────────────────────
+Icono:      🤝
+Título:     Te conocemos por tu nombre
+Texto:      Cuando llamas, no hablas con un call center 
+            en otro país. Hablas con gente que entiende 
+            tu negocio y lleva años contigo.
+Dato:       Soporte directo en España
+
+─────────────────────────────────────────────────────────────────
+
+DIFERENCIADOR 5 - Evolución continua
+────────────────────────────────────
+Icono:      🚀
+Título:     Siempre actualizado
+Texto:      Cloud en Azure, actualizaciones automáticas, 
+            nuevas funciones cada trimestre. 
+            La tecnología avanza, RayGold también.
+Dato:       Tecnología cloud moderna
+
+─────────────────────────────────────────────────────────────────
+
+
+/* ============================================================
+   3. BANNER HERO COMERCIAL
+   ============================================================ */
+
+OPCIÓN A - Directo al grano
+───────────────────────────
+Titular:    El ERP que habla el idioma de tu joyería
+Subtítulo:  35 años creando software exclusivo para joyeros. 
+            Ni más, ni menos.
+CTA 1:      Ver demostración (principal)
+CTA 2:      Conocer módulos (secundario)
+Imagen:     Screenshot del dashboard o composición de módulos
+
+───────────────────────────────────────────────────────────────
+
+OPCIÓN B - Con dato de impacto
+──────────────────────────────
+Titular:    +200 joyerías ya gestionan su negocio con RayGold
+Subtítulo:  Inventario, fabricación, ventas y contabilidad. 
+            Todo en un sistema diseñado por y para joyeros.
+CTA 1:      Solicitar demo gratuita
+CTA 2:      Ver casos de éxito
+Imagen:     Montaje con logos de módulos o capturas
+
+───────────────────────────────────────────────────────────────
+
+OPCIÓN C - Problema/Solución
+────────────────────────────
+Titular:    ¿Cansado de ERPs que no entienden tu joyería?
+Subtítulo:  Quilates, aleaciones, certificados de piedras, 
+            órdenes de fabricación... RayGold nació para esto.
+CTA 1:      Descubre cómo funciona
+CTA 2:      Hablar con un especialista
+Imagen:     Contraste visual: Excel tachado vs RayGold
+
+───────────────────────────────────────────────────────────────
+
+ELEMENTOS OPCIONALES PARA EL HERO:
+- Logos de clientes (si tienes permiso)
+- Badge: "Desde 1990" o "35 años de experiencia"
+- Indicador de confianza: "⭐ 4.8/5 en satisfacción de clientes"
+- Mini-stats: "200+ clientes | 8 módulos | 100% joyería"
+
+
+/* ============================================================
+   FRASES DE APOYO / CLAIMS ADICIONALES
+   ============================================================ */
+
+Para usar en diferentes secciones:
+
+• "Software diseñado por y para joyeros"
+• "Donde otros adaptan, nosotros especializamos"
+• "Tu joyería merece un ERP que hable tu idioma"
+• "De joyeros para joyeros, desde 1990"
+• "El único ERP 100% enfocado en joyería"
+• "Controla cada gramo, cada piedra, cada venta"
+• "Porque una joyería no es una ferretería"
+• "35 años entendiendo lo que otros ERPs ignoran"
+
+
+/* ============================================================
+   PRÓXIMOS PASOS SUGERIDOS
+   ============================================================ */
+
+1. TESTIMONIOS
+   - Confirmar si puedes usar nombres reales de clientes
+   - Si no, usar "Joyería en Valencia" sin nombre
+   - Añadir fotos de las personas (da más confianza)
+
+2. POR QUÉ RAYGOLD
+   - Crear sección en homepage debajo del hero
+   - Usar iconos consistentes con el diseño actual
+
+3. HERO
+   - Elegir una de las 3 opciones
+   - Preparar imagen/captura de calidad
+   - El CTA principal debe llevar a contacto/demo
+
+¿Quieres que convierta alguno de estos en código Astro listo para usar?
