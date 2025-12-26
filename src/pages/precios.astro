@@ -1,0 +1,1498 @@
+---
+/**
+ * precios.astro - Página de precios de RayGold
+ * URL: /precios
+ */
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Precios - RayGold ERP para Joyería">
+  <!-- HEADER / NAV (igual que en tu index) -->
+  <header class="header">
+    <div class="header-container">
+      <a href="/" class="logo">
+        <div class="logo-icon">
+          <svg
+            viewBox="0 0 40 40"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M20 4L4 12L20 20L36 12L20 4Z"
+              fill="url(#grad1)"
+              opacity="0.9"></path>
+            <path d="M4 12V28L20 36V20L4 12Z" fill="url(#grad2)" opacity="0.8"
+            ></path>
+            <path d="M36 12V28L20 36V20L36 12Z" fill="url(#grad3)" opacity="0.7"
+            ></path>
+            <defs>
+              <linearGradient id="grad1" x1="4" y1="4" x2="36" y2="20">
+                <stop stop-color="#a78bfa"></stop>
+                <stop offset="1" stop-color="#6366f1"></stop>
+              </linearGradient>
+              <linearGradient id="grad2" x1="4" y1="12" x2="20" y2="36">
+                <stop stop-color="#8b5cf6"></stop>
+                <stop offset="1" stop-color="#6366f1"></stop>
+              </linearGradient>
+              <linearGradient id="grad3" x1="36" y1="12" x2="20" y2="36">
+                <stop stop-color="#a78bfa"></stop>
+                <stop offset="1" stop-color="#7c3aed"></stop>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="logo-title">RAYGOLD</span>
+          <span class="logo-subtitle">Software para Joyería</span>
+        </div>
+      </a>
+
+      <nav class="nav">
+        <a href="/">Inicio</a>
+        <a href="/#modulos">Módulos</a>
+        <a href="/#porque">Por qué RayGold</a>
+        <a href="/tecnologia">Tecnología</a>
+        <a href="/precios" class="active">Precios</a>
+        <a href="/#contacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="main-content">
+    <!-- Hero de precios -->
+    <section class="pricing-hero">
+      <div class="container">
+        <span class="hero-badge">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <line x1="12" y1="1" x2="12" y2="23"></line>
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+          </svg>
+          Precios transparentes
+        </span>
+        <h1 class="hero-title">
+          Elige el plan perfecto para
+          <span class="gradient-text">tu joyería</span>
+        </h1>
+        <p class="hero-subtitle">
+          Sin costes ocultos. Sin sorpresas. Soporte local en España incluido.
+        </p>
+      </div>
+    </section>
+
+    <!-- Toggle -->
+    <section class="toggle-section">
+      <div class="container">
+        <div class="pricing-toggle">
+          <button class="toggle-btn active" data-plan="saas">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"
+              ></path>
+            </svg>
+            Suscripción mensual
+          </button>
+          <button class="toggle-btn" data-plan="perpetual">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+            </svg>
+            Licencia perpetua
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLANES SAAS -->
+    <section class="pricing-section saas-plans active" id="saasPlans">
+      <div class="container">
+        <div class="plans-grid">
+          <!-- STARTER -->
+          <div class="plan-card">
+            <div class="plan-header">
+              <div class="plan-icon starter">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                  <path d="M2 17l10 5 10-5"></path>
+                  <path d="M2 12l10 5 10-5"></path>
+                </svg>
+              </div>
+              <h3 class="plan-name">Starter</h3>
+              <p class="plan-description">Para joyerías pequeñas</p>
+            </div>
+
+            <div class="plan-pricing">
+              <span class="price-amount">29€</span>
+              <span class="price-period">/usuario/mes</span>
+            </div>
+            <p class="price-note">Facturación anual · Mín. 2 usuarios</p>
+
+            <ul class="plan-features">
+              <li>
+                <svg viewBox="0 0 24 24" fill="currentColor"
+                  ><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
+                  ></path></svg
+                > Punto de Venta (TPV)
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="currentColor"
+                  ><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
+                  ></path></svg
+                > Gestión de Inventario
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="currentColor"
+                  ><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
+                  ></path></svg
+                > Clientes y CRM básico
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="currentColor"
+                  ><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
+                  ></path></svg
+                > Control de metales y quilates
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="currentColor"
+                  ><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
+                  ></path></svg
+                > Etiquetas especializadas
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="currentColor"
+                  ><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
+                  ></path></svg
+                > Soporte por email
+              </li>
+            </ul>
+
+            <a href="/#contacto" class="plan-cta">Empezar ahora</a>
+          </div>
+
+          <!-- PROFESIONAL -->
+          <div class="plan-card featured">
+            <div class="featured-badge">Más popular</div>
+            <div class="plan-header">
+              <div class="plan-icon professional">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <polygon
+                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                  ></polygon>
+                </svg>
+              </div>
+              <h3 class="plan-name">Profesional</h3>
+              <p class="plan-description">Para joyerías en crecimiento</p>
+            </div>
+
+            <div class="plan-pricing">
+              <span class="price-amount">49€</span>
+              <span class="price-period">/usuario/mes</span>
+            </div>
+            <p class="price-note">Facturación anual · Mín. 3 usuarios</p>
+
+            <ul class="plan-features">
+              <li>
+                <svg viewBox="0 0 24 24" fill="currentColor"
+                  ><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
+                  ></path></svg
+                >
+                <strong>Todo lo de Starter +</strong>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="currentColor"
+                  ><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
+                  ></path></svg
+                > Módulo de Fabricación
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="currentColor"
+                  ><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
+                  ></path></svg
+                > Taller y Reparaciones
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="currentColor"
+                  ><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
+                  ></path></svg
+                > Contabilidad integrada
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="currentColor"
+                  ><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
+                  ></path></svg
+                > Gestión de proveedores
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="currentColor"
+                  ><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
+                  ></path></svg
+                > Informes avanzados
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="currentColor"
+                  ><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
+                  ></path></svg
+                > Soporte telefónico
+              </li>
+            </ul>
+
+            <a href="/#contacto" class="plan-cta featured">Solicitar demo</a>
+          </div>
+
+          <!-- ENTERPRISE -->
+          <div class="plan-card">
+            <div class="plan-header">
+              <div class="plan-icon enterprise">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"
+                  ></path>
+                </svg>
+              </div>
+              <h3 class="plan-name">Enterprise</h3>
+              <p class="plan-description">Para cadenas y fabricantes</p>
+            </div>
+
+            <div class="plan-pricing">
+              <span class="price-amount">69€</span>
+              <span class="price-period">/usuario/mes</span>
+            </div>
+            <p class="price-note">Facturación anual · Mín. 5 usuarios</p>
+
+            <ul class="plan-features">
+              <li>
+                <svg viewBox="0 0 24 24" fill="currentColor"
+                  ><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
+                  ></path></svg
+                >
+                <strong>Todo lo de Profesional +</strong>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="currentColor"
+                  ><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
+                  ></path></svg
+                > Multi-tienda sincronizado
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="currentColor"
+                  ><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
+                  ></path></svg
+                > API para integraciones
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="currentColor"
+                  ><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
+                  ></path></svg
+                > Business Intelligence
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="currentColor"
+                  ><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
+                  ></path></svg
+                > Conexión e-commerce
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="currentColor"
+                  ><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
+                  ></path></svg
+                > Gestor de cuenta dedicado
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="currentColor"
+                  ><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
+                  ></path></svg
+                > SLA garantizado
+              </li>
+            </ul>
+
+            <a href="/#contacto" class="plan-cta">Contactar ventas</a>
+          </div>
+        </div>
+
+        <div class="pricing-note">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+          <p>
+            Todos los planes incluyen: hosting en Azure España, actualizaciones,
+            copias de seguridad diarias y formación inicial.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- LICENCIA PERPETUA -->
+    <section class="pricing-section perpetual-plans" id="perpetualPlans">
+      <div class="container">
+        <div class="perpetual-card">
+          <div class="perpetual-content">
+            <div class="perpetual-left">
+              <div class="perpetual-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                  <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                </svg>
+              </div>
+              <div class="perpetual-info">
+                <h3>Licencia Perpetua</h3>
+                <p>
+                  Compra el software y es tuyo para siempre. Ideal para empresas
+                  que prefieren inversión inicial en lugar de cuotas mensuales.
+                </p>
+              </div>
+            </div>
+
+            <div class="perpetual-right">
+              <div class="perpetual-price">
+                <span class="price-from">desde</span>
+                <span class="price-amount">12.000€</span>
+              </div>
+              <p class="price-detail">Pago único · Usuarios ilimitados</p>
+            </div>
+          </div>
+
+          <div class="perpetual-features">
+            <div class="feature-col">
+              <h4>Incluye:</h4>
+              <ul>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="currentColor"
+                    ><path
+                      d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
+                    ></path></svg
+                  > Todos los módulos de RayGold
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="currentColor"
+                    ><path
+                      d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
+                    ></path></svg
+                  > Usuarios ilimitados
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="currentColor"
+                    ><path
+                      d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
+                    ></path></svg
+                  > Instalación en su servidor
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="currentColor"
+                    ><path
+                      d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
+                    ></path></svg
+                  > Formación presencial (16h)
+                </li>
+              </ul>
+            </div>
+            <div class="feature-col">
+              <h4>Mantenimiento opcional:</h4>
+              <ul>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="currentColor"
+                    ><path
+                      d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
+                    ></path></svg
+                  > Actualizaciones de versión
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="currentColor"
+                    ><path
+                      d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
+                    ></path></svg
+                  > Soporte técnico prioritario
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="currentColor"
+                    ><path
+                      d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
+                    ></path></svg
+                  > 18% anual sobre licencia
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <a href="/#contacto" class="perpetual-cta">
+            Solicitar presupuesto personalizado
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Comparativa -->
+        <div class="comparison-box">
+          <h4>¿SaaS o Licencia Perpetua?</h4>
+          <div class="comparison-grid">
+            <div class="comparison-item">
+              <span class="comparison-label">SaaS (Suscripción)</span>
+              <p>
+                Sin inversión inicial grande. Ideal para empezar o crecer
+                progresivamente. Todo incluido: hosting, actualizaciones y
+                soporte.
+              </p>
+            </div>
+            <div class="comparison-item">
+              <span class="comparison-label">Licencia Perpetua</span>
+              <p>
+                Mayor control sobre tu infraestructura. Sin cuotas mensuales.
+                Rentable a largo plazo para equipos de +10 usuarios.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section">
+      <div class="container">
+        <h2 class="faq-title">Preguntas frecuentes</h2>
+        <div class="faq-grid">
+          <div class="faq-item">
+            <h4>¿Hay compromiso de permanencia?</h4>
+            <p>
+              No. Los planes SaaS son anuales pero puedes cancelar en cualquier
+              momento sin penalización al finalizar tu período.
+            </p>
+          </div>
+          <div class="faq-item">
+            <h4>¿Qué incluye la implementación?</h4>
+            <p>
+              Configuración inicial, migración de datos, formación del equipo y
+              acompañamiento durante el primer mes.
+            </p>
+          </div>
+          <div class="faq-item">
+            <h4>¿Puedo cambiar de plan?</h4>
+            <p>
+              Sí, puedes escalar tu plan en cualquier momento. También puedes
+              migrar de SaaS a licencia perpetua.
+            </p>
+          </div>
+          <div class="faq-item">
+            <h4>¿Ofrecéis prueba gratuita?</h4>
+            <p>
+              Ofrecemos una demo personalizada gratuita donde verás RayGold
+              funcionando con datos de ejemplo del sector joyero.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="cta-section">
+      <div class="container">
+        <h2>¿Listo para transformar tu joyería?</h2>
+        <p>
+          Solicita una demo gratuita y descubre por qué más de 200 joyerías
+          confían en RayGold
+        </p>
+        <a href="/#contacto" class="cta-button">
+          Solicitar demo gratuita
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <span class="footer-logo">RAYGOLD</span>
+        <p>Software ERP especializado para el sector joyero desde 1990</p>
+      </div>
+      <div class="footer-links">
+        <a href="/">Inicio</a>
+        <a href="/tecnologia">Tecnología</a>
+        <a href="/precios">Precios</a>
+        <a href="/#contacto">Contacto</a>
+      </div>
+      <div class="footer-copy">
+        <p>© 2025 Raytecno BCN SL. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+</Layout>
+
+<style>
+  /* ============================================
+     VARIABLES Y RESET
+     ============================================ */
+  :root {
+    --bg-dark: #0a0a0f;
+    --bg-card: rgba(255, 255, 255, 0.03);
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --accent-green: #10b981;
+    --accent-green-light: #34d399;
+    --accent-purple: #8b5cf6;
+    --accent-amber: #f59e0b;
+  }
+
+  /* ============================================
+     HEADER
+     ============================================ */
+  .header {
+    background: linear-gradient(
+      180deg,
+      rgba(10, 10, 15, 0.98) 0%,
+      rgba(10, 10, 15, 0.95) 100%
+    );
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-subtle);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+
+  .logo-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .logo-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .logo-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: 1px;
+  }
+
+  .logo-subtitle {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+  }
+
+  .nav {
+    display: flex;
+    gap: 32px;
+  }
+
+  .nav a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  .nav a:hover,
+  .nav a.active {
+    color: var(--text-primary);
+  }
+
+  /* ============================================
+     MAIN CONTENT
+     ============================================ */
+  .main-content {
+    background: var(--bg-dark);
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ============================================
+     HERO
+     ============================================ */
+  .pricing-hero {
+    padding: 80px 0 40px;
+    text-align: center;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: var(--accent-green-light);
+    padding: 8px 16px;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 24px;
+  }
+
+  .hero-badge svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .hero-title {
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 800;
+    color: var(--text-primary);
+    margin: 0 0 16px 0;
+    line-height: 1.1;
+  }
+
+  .gradient-text {
+    background: linear-gradient(
+      135deg,
+      var(--accent-green-light) 0%,
+      var(--accent-green) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin: 0;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  /* ============================================
+     TOGGLE
+     ============================================ */
+  .toggle-section {
+    padding: 20px 0 40px;
+  }
+
+  .pricing-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 6px;
+    border-radius: 12px;
+    width: fit-content;
+    margin: 0 auto;
+  }
+
+  .toggle-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .toggle-btn:hover {
+    color: var(--text-primary);
+  }
+
+  .toggle-btn.active {
+    background: linear-gradient(135deg, var(--accent-green) 0%, #059669 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+  }
+
+  .toggle-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* ============================================
+     PRICING SECTION
+     ============================================ */
+  .pricing-section {
+    padding: 20px 0 60px;
+    display: none;
+  }
+
+  .pricing-section.active {
+    display: block;
+  }
+
+  .plans-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+
+  /* ============================================
+     PLAN CARD
+     ============================================ */
+  .plan-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 20px;
+    padding: 32px;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .plan-card:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-4px);
+  }
+
+  .plan-card.featured {
+    background: linear-gradient(
+      135deg,
+      rgba(16, 185, 129, 0.1) 0%,
+      rgba(16, 185, 129, 0.05) 100%
+    );
+    border-color: rgba(16, 185, 129, 0.3);
+    transform: scale(1.02);
+  }
+
+  .plan-card.featured:hover {
+    transform: scale(1.02) translateY(-4px);
+  }
+
+  .featured-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--accent-green) 0%, #059669 100%);
+    color: white;
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .plan-header {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .plan-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+  }
+
+  .plan-icon svg {
+    width: 28px;
+    height: 28px;
+    color: white;
+  }
+
+  .plan-icon.starter {
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  }
+
+  .plan-icon.professional {
+    background: linear-gradient(135deg, var(--accent-green) 0%, #059669 100%);
+  }
+
+  .plan-icon.enterprise {
+    background: linear-gradient(135deg, var(--accent-amber) 0%, #d97706 100%);
+  }
+
+  .plan-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 4px 0;
+  }
+
+  .plan-description {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  .plan-pricing {
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .price-amount {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1;
+  }
+
+  .price-period {
+    font-size: 1rem;
+    color: var(--text-muted);
+  }
+
+  .price-note {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin: 0 0 24px 0;
+  }
+
+  .plan-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px 0;
+  }
+
+  .plan-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 0;
+    font-size: 0.9rem;
+    color: #cbd5e1;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .plan-features li:last-child {
+    border-bottom: none;
+  }
+
+  .plan-features li svg {
+    width: 18px;
+    height: 18px;
+    color: var(--accent-green);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .plan-features li strong {
+    color: var(--text-primary);
+  }
+
+  .plan-cta {
+    display: block;
+    text-align: center;
+    padding: 14px 24px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .plan-cta:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .plan-cta.featured {
+    background: linear-gradient(135deg, var(--accent-green) 0%, #059669 100%);
+    border: none;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+  }
+
+  .plan-cta.featured:hover {
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+    transform: translateY(-2px);
+  }
+
+  /* ============================================
+     PRICING NOTE
+     ============================================ */
+  .pricing-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px 24px;
+    background: var(--bg-card);
+    border-radius: 12px;
+  }
+
+  .pricing-note svg {
+    width: 20px;
+    height: 20px;
+    color: var(--text-muted);
+    flex-shrink: 0;
+  }
+
+  .pricing-note p {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+  }
+
+  /* ============================================
+     PERPETUAL
+     ============================================ */
+  .perpetual-card {
+    background: linear-gradient(
+      135deg,
+      rgba(245, 158, 11, 0.1) 0%,
+      rgba(245, 158, 11, 0.05) 100%
+    );
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 32px;
+  }
+
+  .perpetual-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .perpetual-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .perpetual-icon {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, var(--accent-amber) 0%, #d97706 100%);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .perpetual-icon svg {
+    width: 32px;
+    height: 32px;
+    color: white;
+  }
+
+  .perpetual-info h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 8px 0;
+  }
+
+  .perpetual-info p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin: 0;
+    max-width: 400px;
+  }
+
+  .perpetual-right {
+    text-align: right;
+  }
+
+  .perpetual-price {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    justify-content: flex-end;
+  }
+
+  .price-from {
+    font-size: 1rem;
+    color: var(--text-muted);
+  }
+
+  .perpetual-price .price-amount {
+    font-size: 3.5rem;
+    background: linear-gradient(135deg, var(--accent-amber) 0%, #fbbf24 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .price-detail {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin: 8px 0 0 0;
+  }
+
+  .perpetual-features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    padding: 24px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 24px;
+  }
+
+  .feature-col h4 {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent-amber);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0 16px 0;
+  }
+
+  .feature-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .feature-col li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    font-size: 0.9rem;
+    color: #cbd5e1;
+  }
+
+  .feature-col li svg {
+    width: 18px;
+    height: 18px;
+    color: var(--accent-amber);
+    flex-shrink: 0;
+  }
+
+  .perpetual-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 16px 32px;
+    background: linear-gradient(135deg, var(--accent-amber) 0%, #d97706 100%);
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+  }
+
+  .perpetual-cta:hover {
+    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+    transform: translateY(-2px);
+  }
+
+  .perpetual-cta svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Comparison */
+  .comparison-box {
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 24px;
+  }
+
+  .comparison-box h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 16px 0;
+    text-align: center;
+  }
+
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .comparison-item {
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 10px;
+  }
+
+  .comparison-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent-green);
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .comparison-item:last-child .comparison-label {
+    color: var(--accent-amber);
+  }
+
+  .comparison-item p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* ============================================
+     FAQ
+     ============================================ */
+  .faq-section {
+    padding: 60px 0;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .faq-title {
+    text-align: center;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 40px 0;
+  }
+
+  .faq-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .faq-item {
+    padding: 24px;
+    background: var(--bg-card);
+    border-radius: 12px;
+    border: 1px solid var(--border-subtle);
+  }
+
+  .faq-item h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 8px 0;
+  }
+
+  .faq-item p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* ============================================
+     CTA SECTION
+     ============================================ */
+  .cta-section {
+    padding: 80px 0;
+    text-align: center;
+    background: linear-gradient(
+      135deg,
+      rgba(16, 185, 129, 0.1) 0%,
+      rgba(16, 185, 129, 0.05) 100%
+    );
+    border-top: 1px solid rgba(16, 185, 129, 0.2);
+  }
+
+  .cta-section h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 12px 0;
+  }
+
+  .cta-section p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin: 0 0 32px 0;
+  }
+
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, var(--accent-green) 0%, #059669 100%);
+    color: white;
+    padding: 16px 32px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(16, 185, 129, 0.4);
+  }
+
+  .cta-button svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* ============================================
+     FOOTER
+     ============================================ */
+  .footer {
+    background: #05050a;
+    border-top: 1px solid var(--border-subtle);
+    padding: 40px 0;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .footer-logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .footer-brand p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 4px 0 0 0;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+  }
+
+  .footer-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+  }
+
+  .footer-links a:hover {
+    color: var(--text-primary);
+  }
+
+  .footer-copy p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  /* ============================================
+     RESPONSIVE
+     ============================================ */
+  @media (max-width: 968px) {
+    .plans-grid {
+      grid-template-columns: 1fr;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .plan-card.featured {
+      transform: none;
+      order: -1;
+    }
+
+    .perpetual-content {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .perpetual-left {
+      flex-direction: column;
+    }
+
+    .perpetual-right {
+      text-align: center;
+    }
+
+    .perpetual-price {
+      justify-content: center;
+    }
+
+    .perpetual-features {
+      grid-template-columns: 1fr;
+    }
+
+    .comparison-grid,
+    .faq-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .nav {
+      display: none;
+    }
+
+    .footer-container {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .pricing-hero {
+      padding: 60px 0 30px;
+    }
+
+    .pricing-toggle {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .toggle-btn {
+      justify-content: center;
+    }
+
+    .plan-card {
+      padding: 24px;
+    }
+
+    .perpetual-card {
+      padding: 24px;
+    }
+
+    .perpetual-price .price-amount {
+      font-size: 2.5rem;
+    }
+
+    .cta-section {
+      padding: 60px 0;
+    }
+
+    .cta-button {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const toggleBtns = document.querySelectorAll(".toggle-btn");
+    const saasPlans = document.getElementById("saasPlans");
+    const perpetualPlans = document.getElementById("perpetualPlans");
+
+    toggleBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        toggleBtns.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        const plan = btn.getAttribute("data-plan");
+        if (plan === "saas") {
+          saasPlans?.classList.add("active");
+          perpetualPlans?.classList.remove("active");
+        } else {
+          saasPlans?.classList.remove("active");
+          perpetualPlans?.classList.add("active");
+        }
+      });
+    });
+  });
+</script>

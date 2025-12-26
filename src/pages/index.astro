@@ -5,6 +5,7 @@ import { getPageBySlug } from "../wordpress.js";
 import Hero from "../components/Hero.astro";
 import PorQueRayGold from "../components/PorQueRayGold.astro";
 import Testimonios from "../components/Testimonios.astro";
+import VideoDemo from "../components/VideoDemo.astro";
 
 // Obtener contenido de WordPress
 const page = await getPageBySlug("inicio");
@@ -42,6 +43,7 @@ const page = await getPageBySlug("inicio");
         <a href="#modulos">Módulos</a>
         <a href="#porque">Por qué RayGold</a>
         <a href="/tecnologia">Tecnología</a>
+        <a href="/precios">Precios</a>
         <a href="#contacto">Contacto</a>
       </nav>
 
@@ -356,6 +358,9 @@ const page = await getPageBySlug("inicio");
   <div id="porque">
     <PorQueRayGold />
   </div>
+
+  <!-- VIDEO DEMOSTRACION ERP RAYGOLD -->
+  <VideoDemo />
 
   <!-- TESTIMONIOS -->
   <Testimonios />

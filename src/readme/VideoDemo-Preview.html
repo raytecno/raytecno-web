@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preview - VideoDemo RayGold</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0a0a0f;
+      color: white;
+    }
+
+    /* SECCIÓN PRINCIPAL */
+    .video-section {
+      padding: 100px 0;
+      background: linear-gradient(180deg, #0a0a0f 0%, #12121a 50%, #0a0a0f 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .video-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: radial-gradient(rgba(139, 92, 246, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* HEADER */
+    .section-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .section-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(139, 92, 246, 0.1);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      color: #a78bfa;
+      padding: 8px 16px;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+
+    .section-badge svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 5vw, 2.75rem);
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0 0 16px 0;
+      line-height: 1.2;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #a78bfa 0%, #6366f1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: #94a3b8;
+      margin: 0;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* VIDEO WRAPPER */
+    .video-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .video-frame {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #1a1a2e;
+      box-shadow: 
+        0 0 0 1px rgba(139, 92, 246, 0.2),
+        0 25px 50px -12px rgba(0, 0, 0, 0.5),
+        0 0 100px rgba(139, 92, 246, 0.1);
+    }
+
+    .glow-effect {
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* VIDEO PLAYER */
+    .video-player {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1a 100%);
+    }
+
+    .video-poster {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      cursor: pointer;
+    }
+
+    .poster-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        135deg,
+        rgba(10, 10, 15, 0.7) 0%,
+        rgba(10, 10, 15, 0.4) 100%
+      );
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      transition: background 0.3s ease;
+    }
+
+    .video-poster:hover .poster-overlay {
+      background: linear-gradient(
+        135deg,
+        rgba(10, 10, 15, 0.6) 0%,
+        rgba(10, 10, 15, 0.3) 100%
+      );
+    }
+
+    .play-button {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      transition: all 0.3s ease;
+      box-shadow: 
+        0 10px 40px rgba(139, 92, 246, 0.4),
+        0 0 0 0 rgba(139, 92, 246, 0.4);
+      animation: pulse-play 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-play {
+      0%, 100% {
+        box-shadow: 
+          0 10px 40px rgba(139, 92, 246, 0.4),
+          0 0 0 0 rgba(139, 92, 246, 0.4);
+      }
+      50% {
+        box-shadow: 
+          0 10px 40px rgba(139, 92, 246, 0.4),
+          0 0 0 20px rgba(139, 92, 246, 0);
+      }
+    }
+
+    .play-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 15px 50px rgba(139, 92, 246, 0.5);
+    }
+
+    .play-button svg {
+      width: 32px;
+      height: 32px;
+      margin-left: 4px;
+    }
+
+    .play-text {
+      color: white;
+      font-size: 1rem;
+      font-weight: 500;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Placeholder del ERP */
+    .erp-placeholder {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: 
+        linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, transparent 50%),
+        linear-gradient(45deg, #0f0f1a 0%, #1a1a2e 100%);
+      z-index: 1;
+    }
+
+    .erp-mockup {
+      width: 80%;
+      max-width: 700px;
+      background: #1e1e2e;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    .erp-header {
+      height: 32px;
+      background: linear-gradient(90deg, #2d2d3d 0%, #3d3d4d 100%);
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      gap: 6px;
+    }
+
+    .erp-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .erp-dot.red { background: #ff5f56; }
+    .erp-dot.yellow { background: #ffbd2e; }
+    .erp-dot.green { background: #27ca3f; }
+
+    .erp-content {
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 16px;
+      min-height: 200px;
+    }
+
+    .erp-sidebar {
+      background: #252535;
+      border-radius: 6px;
+      padding: 12px;
+    }
+
+    .erp-menu-item {
+      height: 24px;
+      background: rgba(139, 92, 246, 0.2);
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+    .erp-menu-item:nth-child(2) { background: rgba(139, 92, 246, 0.4); }
+
+    .erp-main {
+      background: #252535;
+      border-radius: 6px;
+      padding: 12px;
+    }
+
+    .erp-row {
+      height: 20px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 3px;
+      margin-bottom: 8px;
+    }
+    .erp-row:nth-child(odd) { width: 80%; }
+
+    /* FEATURES */
+    .video-features {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 32px;
+      padding: 24px;
+      background: rgba(255, 255, 255, 0.02);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .feature-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(139, 92, 246, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .feature-icon svg {
+      width: 20px;
+      height: 20px;
+      color: #a78bfa;
+    }
+
+    .feature-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .feature-value {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .feature-label {
+      font-size: 0.75rem;
+      color: #64748b;
+    }
+
+    .feature-divider {
+      width: 1px;
+      height: 32px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* CTA */
+    .video-cta {
+      text-align: center;
+      margin-top: 48px;
+    }
+
+    .cta-text {
+      color: #94a3b8;
+      margin: 0 0 20px 0;
+      font-size: 1rem;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+      color: white;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+      border: none;
+      cursor: pointer;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(139, 92, 246, 0.4);
+    }
+
+    .cta-button svg {
+      width: 18px;
+      height: 18px;
+      transition: transform 0.3s ease;
+    }
+
+    .cta-button:hover svg {
+      transform: translateX(4px);
+    }
+
+    /* INFO BOX */
+    .info-box {
+      max-width: 600px;
+      margin: 60px auto 0;
+      background: rgba(139, 92, 246, 0.1);
+      border: 1px solid rgba(139, 92, 246, 0.2);
+      border-radius: 12px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .info-icon {
+      width: 40px;
+      height: 40px;
+      min-width: 40px;
+      background: rgba(139, 92, 246, 0.2);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #a78bfa;
+    }
+
+    .info-content h4 {
+      color: #a78bfa;
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+
+    .info-content p {
+      color: #94a3b8;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .video-section {
+        padding: 60px 0;
+      }
+
+      .video-features {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .feature-divider {
+        width: 60px;
+        height: 1px;
+      }
+
+      .play-button {
+        width: 64px;
+        height: 64px;
+      }
+
+      .play-button svg {
+        width: 24px;
+        height: 24px;
+      }
+
+      .erp-content {
+        grid-template-columns: 1fr;
+      }
+
+      .info-box {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<section class="video-section" id="demo">
+  <div class="container">
+    <!-- Header -->
+    <div class="section-header">
+      <span class="section-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>
+        Ver en acción
+      </span>
+      <h2 class="section-title">
+        Descubre RayGold en 
+        <span class="gradient-text">90 segundos</span>
+      </h2>
+      <p class="section-subtitle">
+        Un recorrido por las funcionalidades que transformarán la gestión de tu joyería
+      </p>
+    </div>
+
+    <!-- Video Container -->
+    <div class="video-wrapper">
+      <div class="video-frame">
+        <div class="glow-effect"></div>
+        
+        <div class="video-player">
+          <!-- Mockup del ERP como placeholder -->
+          <div class="erp-placeholder">
+            <div class="erp-mockup">
+              <div class="erp-header">
+                <div class="erp-dot red"></div>
+                <div class="erp-dot yellow"></div>
+                <div class="erp-dot green"></div>
+              </div>
+              <div class="erp-content">
+                <div class="erp-sidebar">
+                  <div class="erp-menu-item"></div>
+                  <div class="erp-menu-item"></div>
+                  <div class="erp-menu-item"></div>
+                  <div class="erp-menu-item"></div>
+                </div>
+                <div class="erp-main">
+                  <div class="erp-row"></div>
+                  <div class="erp-row"></div>
+                  <div class="erp-row"></div>
+                  <div class="erp-row"></div>
+                  <div class="erp-row"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Poster con botón de play -->
+          <div class="video-poster">
+            <div class="poster-overlay">
+              <button class="play-button" aria-label="Reproducir video">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </button>
+              <span class="play-text">Ver demostración</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Features -->
+        <div class="video-features">
+          <div class="feature-item">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+            </div>
+            <div class="feature-text">
+              <span class="feature-value">90 seg</span>
+              <span class="feature-label">de demo</span>
+            </div>
+          </div>
+          
+          <div class="feature-divider"></div>
+          
+          <div class="feature-item">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+              </svg>
+            </div>
+            <div class="feature-text">
+              <span class="feature-value">8 módulos</span>
+              <span class="feature-label">en acción</span>
+            </div>
+          </div>
+          
+          <div class="feature-divider"></div>
+          
+          <div class="feature-item">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+            </div>
+            <div class="feature-text">
+              <span class="feature-value">100%</span>
+              <span class="feature-label">joyería</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="video-cta">
+      <p class="cta-text">¿Te gustaría ver una demo personalizada para tu negocio?</p>
+      <button class="cta-button">
+        Solicitar demo gratuita
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Info box -->
+    <div class="info-box">
+      <div class="info-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+      </div>
+      <div class="info-content">
+        <h4>📋 Nota para Agustín</h4>
+        <p>
+          Este es un preview del componente. El mockup del ERP es solo un placeholder visual.
+          Cuando tengas el video final, se reemplazará automáticamente.
+          El botón de play tiene animación pulsante para llamar la atención.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
