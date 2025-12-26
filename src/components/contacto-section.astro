@@ -1322,306 +1322,414 @@
 <!-- ============================================
      JAVASCRIPT
      ============================================ -->
-<script>
+<script is:inline>
   // ==========================================
   // CONFIGURACIÓN API
   // ==========================================
   // Detecta automáticamente el entorno (desarrollo/producción)
-  const API_BASE_URL =
+  var API_BASE_URL =
     window.location.hostname === "localhost"
       ? "https://localhost:44357" // Desarrollo local
       : "https://raygoldapp.azurewebsites.net"; // Producción en Azure
 
   // ==========================================
-  // ELEMENTOS DOM
+  // INICIALIZACIÓN
   // ==========================================
-  const authModal = document.getElementById("authModal");
-  const closeAuthModal = document.getElementById("closeAuthModal");
-  const btnPruebaGratis = document.getElementById("btnPruebaGratis");
-  const btnYaTengoCuenta = document.getElementById("btnYaTengoCuenta");
-  const authTabs = document.querySelectorAll(".auth-tab");
-  const loginForm = document.getElementById("loginForm");
-  const registerForm = document.getElementById("registerForm");
-  const contactForm = document.getElementById("contactForm");
+  document.addEventListener("DOMContentLoaded", function () {
+    // Elementos DOM
+    var authModal = document.getElementById("authModal");
+    var closeAuthModalBtn = document.getElementById("closeAuthModal");
+    var btnPruebaGratis = document.getElementById("btnPruebaGratis");
+    var btnYaTengoCuenta = document.getElementById("btnYaTengoCuenta");
+    var authTabs = document.querySelectorAll(".auth-tab");
+    var loginForm = document.getElementById("loginForm");
+    var registerForm = document.getElementById("registerForm");
+    var contactForm = document.getElementById("contactForm");
 
-  // ==========================================
-  // MODAL FUNCTIONS
-  // ==========================================
-  function openModal(tab = "register") {
-    authModal.classList.add("active");
-    document.body.style.overflow = "hidden";
-    switchTab(tab);
-  }
-
-  function closeModal() {
-    authModal.classList.remove("active");
-    document.body.style.overflow = "";
-    clearErrors();
-  }
-
-  function switchTab(tabName) {
-    authTabs.forEach((tab) => {
-      tab.classList.toggle("active", tab.dataset.tab === tabName);
-    });
-
-    loginForm.classList.toggle("active", tabName === "login");
-    registerForm.classList.toggle("active", tabName === "register");
-    clearErrors();
-  }
-
-  function clearErrors() {
-    document.querySelectorAll(".auth-error, .auth-success").forEach((el) => {
-      el.classList.remove("show");
-      el.textContent = "";
-    });
-  }
-
-  function showError(elementId, message) {
-    const el = document.getElementById(elementId);
-    if (el) {
-      el.textContent = message;
-      el.classList.add("show");
-    }
-  }
-
-  function showSuccess(elementId, message) {
-    const el = document.getElementById(elementId);
-    if (el) {
-      el.textContent = message;
-      el.classList.add("show");
-    }
-  }
-
-  // ==========================================
-  // EVENT LISTENERS
-  // ==========================================
-  btnPruebaGratis?.addEventListener("click", () => openModal("register"));
-  btnYaTengoCuenta?.addEventListener("click", (e) => {
-    e.preventDefault();
-    openModal("login");
-  });
-  closeAuthModal?.addEventListener("click", closeModal);
-
-  document
-    .querySelector(".auth-modal-backdrop")
-    ?.addEventListener("click", closeModal);
-
-  document.querySelectorAll(".switch-to-register").forEach((el) => {
-    el.addEventListener("click", (e) => {
-      e.preventDefault();
-      switchTab("register");
-    });
-  });
-
-  document.querySelectorAll(".switch-to-login").forEach((el) => {
-    el.addEventListener("click", (e) => {
-      e.preventDefault();
-      switchTab("login");
-    });
-  });
-
-  authTabs.forEach((tab) => {
-    tab.addEventListener("click", () => switchTab(tab.dataset.tab));
-  });
-
-  // Toggle password visibility
-  document.querySelectorAll(".toggle-password").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const input = btn.parentElement.querySelector("input");
-      const type = input.type === "password" ? "text" : "password";
-      input.type = type;
-    });
-  });
-
-  // Escape key closes modal
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && authModal.classList.contains("active")) {
-      closeModal();
-    }
-  });
-
-  // ==========================================
-  // LOGIN
-  // ==========================================
-  loginForm?.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    clearErrors();
-
-    const usuario = document.getElementById("loginUsuario").value.trim();
-    const password = document.getElementById("loginPassword").value;
-
-    if (!usuario || !password) {
-      showError("loginError", "Por favor, completa todos los campos");
-      return;
+    // ==========================================
+    // MODAL FUNCTIONS
+    // ==========================================
+    function openModal(tab) {
+      tab = tab || "register";
+      if (authModal) {
+        authModal.classList.add("active");
+        document.body.style.overflow = "hidden";
+        switchTab(tab);
+      }
     }
 
-    const btn = loginForm.querySelector(".btn-auth");
-    const originalText = btn.innerHTML;
-    btn.innerHTML = "<span>Iniciando sesión...</span>";
-    btn.disabled = true;
+    function closeModal() {
+      if (authModal) {
+        authModal.classList.remove("active");
+        document.body.style.overflow = "";
+        clearErrors();
+      }
+    }
 
-    try {
-      const response = await fetch(`${API_BASE_URL}/identity/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          Usuario: usuario.toUpperCase(),
-          Password: password.toUpperCase(),
-          TipoLoginBiometrico: false,
-        }),
+    function switchTab(tabName) {
+      authTabs.forEach(function (tab) {
+        if (tab.dataset && tab.dataset.tab) {
+          tab.classList.toggle("active", tab.dataset.tab === tabName);
+        }
       });
 
-      if (!response.ok) {
-        const errorData = await response.text();
-        throw new Error(errorData || "Credenciales inválidas");
+      if (loginForm) loginForm.classList.toggle("active", tabName === "login");
+      if (registerForm)
+        registerForm.classList.toggle("active", tabName === "register");
+      clearErrors();
+    }
+
+    function clearErrors() {
+      document
+        .querySelectorAll(".auth-error, .auth-success")
+        .forEach(function (el) {
+          el.classList.remove("show");
+          el.textContent = "";
+        });
+    }
+
+    function showError(elementId, message) {
+      var el = document.getElementById(elementId);
+      if (el) {
+        el.textContent = message;
+        el.classList.add("show");
       }
-
-      const data = await response.json();
-
-      // Guardar token
-      localStorage.setItem("access_token", data.access_token);
-      localStorage.setItem("user", JSON.stringify(data.user));
-
-      // Redirigir a la aplicación demo
-      window.location.href = "/demo"; // Cambiar por tu URL de demo
-    } catch (error) {
-      showError("loginError", error.message || "Error al iniciar sesión");
-    } finally {
-      btn.innerHTML = originalText;
-      btn.disabled = false;
-    }
-  });
-
-  // ==========================================
-  // REGISTRO
-  // ==========================================
-  registerForm?.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    clearErrors();
-
-    const nombre = document.getElementById("regNombre").value.trim();
-    const apellido = document.getElementById("regApellido").value.trim();
-    const empresa = document.getElementById("regEmpresa").value.trim();
-    const email = document.getElementById("regEmail").value.trim();
-    const usuario = document.getElementById("regUsuario").value.trim();
-    const password = document.getElementById("regPassword").value;
-    const terms = document.getElementById("regTerms").checked;
-
-    // Validaciones
-    if (!nombre || !email || !usuario || !password) {
-      showError("registerError", "Por favor, completa los campos obligatorios");
-      return;
     }
 
-    if (usuario.length < 4) {
-      showError("registerError", "El usuario debe tener al menos 4 caracteres");
-      return;
+    function showSuccess(elementId, message) {
+      var el = document.getElementById(elementId);
+      if (el) {
+        el.textContent = message;
+        el.classList.add("show");
+      }
     }
 
-    if (password.length < 6) {
-      showError(
-        "registerError",
-        "La contraseña debe tener al menos 6 caracteres"
-      );
-      return;
-    }
-
-    if (!terms) {
-      showError("registerError", "Debes aceptar los términos y condiciones");
-      return;
-    }
-
-    const btn = registerForm.querySelector(".btn-auth");
-    const originalText = btn.innerHTML;
-    btn.innerHTML = "<span>Creando cuenta...</span>";
-    btn.disabled = true;
-
-    try {
-      const response = await fetch(`${API_BASE_URL}/identity/register`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          Usuario: usuario.toUpperCase(),
-          Password: password,
-          Email: email,
-          FirstName: nombre,
-          LastName: apellido || nombre,
-          Empresa: empresa || "DEMO",
-          Tipo: "WEB", // Tipo especial para usuarios web
-          RoleTipo: "Demo", // Rol de demostración
-          Permiso: "LECTURA", // Permisos limitados
-          Secutity: 9, // Nivel de seguridad más restrictivo
-          Modelo: 99, // Menú demo específico
-          Visible: true,
-          Grupo: "WEB",
-        }),
+    // ==========================================
+    // EVENT LISTENERS
+    // ==========================================
+    if (btnPruebaGratis) {
+      btnPruebaGratis.addEventListener("click", function () {
+        openModal("register");
       });
+    }
 
-      if (!response.ok) {
-        const errorData = await response.text();
-        throw new Error(errorData || "Error al crear la cuenta");
-      }
+    if (btnYaTengoCuenta) {
+      btnYaTengoCuenta.addEventListener("click", function (e) {
+        e.preventDefault();
+        openModal("login");
+      });
+    }
 
-      showSuccess(
-        "registerSuccess",
-        "¡Cuenta creada exitosamente! Ahora puedes iniciar sesión."
-      );
+    if (closeAuthModalBtn) {
+      closeAuthModalBtn.addEventListener("click", closeModal);
+    }
 
-      // Cambiar a login después de 2 segundos
-      setTimeout(() => {
+    var backdrop = document.querySelector(".auth-modal-backdrop");
+    if (backdrop) {
+      backdrop.addEventListener("click", closeModal);
+    }
+
+    document.querySelectorAll(".switch-to-register").forEach(function (el) {
+      el.addEventListener("click", function (e) {
+        e.preventDefault();
+        switchTab("register");
+      });
+    });
+
+    document.querySelectorAll(".switch-to-login").forEach(function (el) {
+      el.addEventListener("click", function (e) {
+        e.preventDefault();
         switchTab("login");
-        document.getElementById("loginUsuario").value = usuario;
-      }, 2000);
-    } catch (error) {
-      showError("registerError", error.message || "Error al crear la cuenta");
-    } finally {
-      btn.innerHTML = originalText;
-      btn.disabled = false;
+      });
+    });
+
+    authTabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        if (tab.dataset && tab.dataset.tab) {
+          switchTab(tab.dataset.tab);
+        }
+      });
+    });
+
+    // Toggle password visibility
+    document.querySelectorAll(".toggle-password").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var parent = btn.parentElement;
+        if (parent) {
+          var input = parent.querySelector("input");
+          if (input) {
+            input.type = input.type === "password" ? "text" : "password";
+          }
+        }
+      });
+    });
+
+    // Escape key closes modal
+    document.addEventListener("keydown", function (e) {
+      if (
+        e.key === "Escape" &&
+        authModal &&
+        authModal.classList.contains("active")
+      ) {
+        closeModal();
+      }
+    });
+
+    // ==========================================
+    // LOGIN
+    // ==========================================
+    if (loginForm) {
+      loginForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        clearErrors();
+
+        var usuarioInput = document.getElementById("loginUsuario");
+        var passwordInput = document.getElementById("loginPassword");
+
+        if (!usuarioInput || !passwordInput) return;
+
+        var usuario = usuarioInput.value.trim();
+        var password = passwordInput.value;
+
+        if (!usuario || !password) {
+          showError("loginError", "Por favor, completa todos los campos");
+          return;
+        }
+
+        var btn = loginForm.querySelector(".btn-auth");
+        if (!btn) return;
+
+        var originalText = btn.innerHTML;
+        btn.innerHTML = "<span>Iniciando sesión...</span>";
+        btn.disabled = true;
+
+        try {
+          var response = await fetch(API_BASE_URL + "/identity/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              Usuario: usuario.toUpperCase(),
+              Password: password.toUpperCase(),
+              TipoLoginBiometrico: false,
+            }),
+          });
+
+          if (!response.ok) {
+            var errorData = await response.text();
+            throw new Error(errorData || "Credenciales inválidas");
+          }
+
+          var data = await response.json();
+
+          // Guardar token
+          localStorage.setItem("access_token", data.access_token);
+          localStorage.setItem("user", JSON.stringify(data.user));
+
+          // Redirigir a la aplicación demo
+          window.location.href = "/demo"; // Cambiar por tu URL de demo
+        } catch (error) {
+          showError("loginError", error.message || "Error al iniciar sesión");
+        } finally {
+          btn.innerHTML = originalText;
+          btn.disabled = false;
+        }
+      });
     }
-  });
 
-  // ==========================================
-  // FORMULARIO CONTACTO
-  // ==========================================
-  contactForm?.addEventListener("submit", async (e) => {
-    e.preventDefault();
+    // ==========================================
+    // REGISTRO
+    // ==========================================
+    if (registerForm) {
+      registerForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        clearErrors();
 
-    const formData = new FormData(contactForm);
-    const data = Object.fromEntries(formData.entries());
+        var nombreInput = document.getElementById("regNombre");
+        var apellidoInput = document.getElementById("regApellido");
+        var empresaInput = document.getElementById("regEmpresa");
+        var emailInput = document.getElementById("regEmail");
+        var usuarioInput = document.getElementById("regUsuario");
+        var passwordInput = document.getElementById("regPassword");
+        var termsInput = document.getElementById("regTerms");
 
-    const btn = contactForm.querySelector(".btn-submit");
-    const originalText = btn.innerHTML;
-    btn.innerHTML = "<span>Enviando...</span>";
-    btn.disabled = true;
+        if (!nombreInput || !emailInput || !usuarioInput || !passwordInput)
+          return;
 
-    try {
-      // Opción 1: Enviar a tu API
-      // const response = await fetch(`${API_BASE_URL}/contacto`, {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(data),
-      // });
+        var nombre = nombreInput.value.trim();
+        var apellido = apellidoInput ? apellidoInput.value.trim() : "";
+        var empresa = empresaInput ? empresaInput.value.trim() : "";
+        var email = emailInput.value.trim();
+        var usuario = usuarioInput.value.trim();
+        var password = passwordInput.value;
+        var terms = termsInput ? termsInput.checked : false;
 
-      // Opción 2: Enviar por email (usando servicio externo)
-      // Puedes usar Formspree, EmailJS, o tu propio backend
+        // Validaciones
+        if (!nombre || !email || !usuario || !password) {
+          showError(
+            "registerError",
+            "Por favor, completa los campos obligatorios"
+          );
+          return;
+        }
 
-      // Simulación de éxito
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+        if (usuario.length < 4) {
+          showError(
+            "registerError",
+            "El usuario debe tener al menos 4 caracteres"
+          );
+          return;
+        }
 
-      // Mostrar mensaje de éxito
-      alert(
-        "¡Gracias por contactarnos! Te responderemos en menos de 24 horas."
-      );
-      contactForm.reset();
-    } catch (error) {
-      alert("Error al enviar el formulario. Por favor, inténtalo de nuevo.");
-    } finally {
-      btn.innerHTML = originalText;
-      btn.disabled = false;
+        if (password.length < 6) {
+          showError(
+            "registerError",
+            "La contraseña debe tener al menos 6 caracteres"
+          );
+          return;
+        }
+
+        if (!terms) {
+          showError(
+            "registerError",
+            "Debes aceptar los términos y condiciones"
+          );
+          return;
+        }
+
+        var btn = registerForm.querySelector(".btn-auth");
+        if (!btn) return;
+
+        var originalText = btn.innerHTML;
+        btn.innerHTML = "<span>Creando cuenta...</span>";
+        btn.disabled = true;
+
+        try {
+          var response = await fetch(API_BASE_URL + "/identity/register", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              Usuario: usuario.toUpperCase(),
+              Password: password,
+              Email: email,
+              FirstName: nombre,
+              LastName: apellido || nombre,
+              Empresa: empresa || "DEMO",
+              Tipo: "WEB",
+              RoleTipo: "Demo",
+              Permiso: "LECTURA",
+              Secutity: 9,
+              Modelo: 99,
+              Visible: true,
+              Grupo: "WEB",
+            }),
+          });
+
+          if (!response.ok) {
+            var errorData = await response.text();
+            throw new Error(errorData || "Error al crear la cuenta");
+          }
+
+          showSuccess(
+            "registerSuccess",
+            "¡Cuenta creada exitosamente! Ahora puedes iniciar sesión."
+          );
+
+          // Cambiar a login después de 2 segundos
+          setTimeout(function () {
+            switchTab("login");
+            var loginUsuarioInput = document.getElementById("loginUsuario");
+            if (loginUsuarioInput) {
+              loginUsuarioInput.value = usuario;
+            }
+          }, 2000);
+        } catch (error) {
+          showError(
+            "registerError",
+            error.message || "Error al crear la cuenta"
+          );
+        } finally {
+          btn.innerHTML = originalText;
+          btn.disabled = false;
+        }
+      });
     }
-  });
+
+    // ==========================================
+    // FORMULARIO CONTACTO
+    // ==========================================
+    if (contactForm) {
+      contactForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        var formData = new FormData(contactForm);
+
+        // Construir objeto con los datos del formulario
+        var data = {
+          empresa: formData.get("empresa") || "",
+          nombre: formData.get("nombre") || "",
+          telefono: formData.get("telefono") || "",
+          email: formData.get("email") || "",
+          interes: formData.get("interes") || "informacion",
+          tamano: formData.get("tamano") || "1-5",
+          mensaje: formData.get("mensaje") || "",
+        };
+
+        // Validaciones
+        if (!data.nombre.trim()) {
+          alert("Por favor, introduce tu nombre");
+          return;
+        }
+
+        if (!data.email.trim()) {
+          alert("Por favor, introduce tu email");
+          return;
+        }
+
+        var btn = contactForm.querySelector(".btn-submit");
+        if (!btn) return;
+
+        var originalText = btn.innerHTML;
+        btn.innerHTML = "<span>Enviando...</span>";
+        btn.disabled = true;
+
+        try {
+          var response = await fetch(API_BASE_URL + "/api/contacto", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          });
+
+          var result = await response.json();
+
+          if (!response.ok) {
+            throw new Error(
+              result.message || result || "Error al enviar el formulario"
+            );
+          }
+
+          // Mostrar mensaje de éxito
+          alert(
+            result.message ||
+              "¡Gracias por contactarnos! Te responderemos en menos de 24 horas."
+          );
+          contactForm.reset();
+        } catch (error) {
+          console.error("Error contacto:", error);
+          alert(
+            error.message ||
+              "Error al enviar el formulario. Por favor, inténtalo de nuevo."
+          );
+        } finally {
+          btn.innerHTML = originalText;
+          btn.disabled = false;
+        }
+      });
+    }
+  }); // Fin DOMContentLoaded
 </script>
