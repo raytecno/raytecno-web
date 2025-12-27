@@ -1,0 +1,308 @@
+---
+/**
+ * LanguageSelector - Selector de idioma para el header
+ * 
+ * Uso:
+ * <LanguageSelector currentLang={lang} currentPath={Astro.url.pathname} />
+ */
+
+import { languages, type Language } from '../i18n/config';
+import { getI18nPath, removeI18nPrefix } from '../i18n/utils';
+
+interface Props {
+  currentLang: Language;
+  currentPath: string;
+  variant?: 'dropdown' | 'inline' | 'flags';
+}
+
+const { currentLang, currentPath, variant = 'dropdown' } = Astro.props;
+
+// Obtener la ruta base sin prefijo de idioma
+const basePath = removeI18nPrefix(currentPath);
+
+// Generar enlaces a cada idioma
+const languageLinks = Object.entries(languages).map(([code, info]) => ({
+  code: code as Language,
+  name: info.name,
+  flag: info.flag,
+  href: getI18nPath(basePath, code as Language),
+  active: code === currentLang,
+}));
+---
+
+{variant === 'dropdown' && (
+  <div class="language-selector dropdown">
+    <button class="lang-trigger" aria-label="Seleccionar idioma" aria-expanded="false">
+      <span class="current-flag">{languages[currentLang].flag}</span>
+      <span class="current-code">{currentLang.toUpperCase()}</span>
+      <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M6 9l6 6 6-6"/>
+      </svg>
+    </button>
+    <div class="lang-dropdown">
+      {languageLinks.map((lang) => (
+        <a 
+          href={lang.href} 
+          class:list={['lang-option', { active: lang.active }]}
+          hreflang={lang.code}
+        >
+          <span class="flag">{lang.flag}</span>
+          <span class="name">{lang.name}</span>
+          {lang.active && (
+            <svg class="check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 6L9 17l-5-5"/>
+            </svg>
+          )}
+        </a>
+      ))}
+    </div>
+  </div>
+)}
+
+{variant === 'inline' && (
+  <div class="language-selector inline">
+    {languageLinks.map((lang, index) => (
+      <>
+        <a 
+          href={lang.href}
+          class:list={['lang-link', { active: lang.active }]}
+          hreflang={lang.code}
+          title={lang.name}
+        >
+          {lang.code.toUpperCase()}
+        </a>
+        {index < languageLinks.length - 1 && <span class="separator">|</span>}
+      </>
+    ))}
+  </div>
+)}
+
+{variant === 'flags' && (
+  <div class="language-selector flags">
+    {languageLinks.map((lang) => (
+      <a 
+        href={lang.href}
+        class:list={['flag-link', { active: lang.active }]}
+        hreflang={lang.code}
+        title={lang.name}
+        aria-label={`Cambiar a ${lang.name}`}
+      >
+        <span class="flag">{lang.flag}</span>
+      </a>
+    ))}
+  </div>
+)}
+
+<style>
+  /* ================================
+     DROPDOWN VARIANT
+     ================================ */
+  .language-selector.dropdown {
+    position: relative;
+  }
+
+  .lang-trigger {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .lang-trigger:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .current-flag {
+    font-size: 1.1rem;
+  }
+
+  .current-code {
+    font-weight: 600;
+  }
+
+  .chevron {
+    transition: transform 0.2s ease;
+  }
+
+  .lang-trigger[aria-expanded="true"] .chevron {
+    transform: rotate(180deg);
+  }
+
+  .lang-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 180px;
+    background: #1e293b;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 8px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+    z-index: 100;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  .dropdown:hover .lang-dropdown,
+  .lang-trigger:focus + .lang-dropdown,
+  .lang-dropdown:hover {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .lang-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.15s ease;
+  }
+
+  .lang-option:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+  }
+
+  .lang-option.active {
+    background: rgba(59, 130, 246, 0.2);
+    color: #60a5fa;
+  }
+
+  .lang-option .flag {
+    font-size: 1.25rem;
+  }
+
+  .lang-option .name {
+    flex: 1;
+    font-size: 0.9rem;
+  }
+
+  .lang-option .check {
+    color: #60a5fa;
+  }
+
+  /* ================================
+     INLINE VARIANT
+     ================================ */
+  .language-selector.inline {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .lang-link {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 4px 6px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+  }
+
+  .lang-link:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .lang-link.active {
+    color: #60a5fa;
+    font-weight: 600;
+  }
+
+  .separator {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.75rem;
+  }
+
+  /* ================================
+     FLAGS VARIANT
+     ================================ */
+  .language-selector.flags {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .flag-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1.25rem;
+    transition: all 0.2s ease;
+    opacity: 0.7;
+  }
+
+  .flag-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    opacity: 1;
+    transform: scale(1.1);
+  }
+
+  .flag-link.active {
+    background: rgba(59, 130, 246, 0.2);
+    opacity: 1;
+  }
+
+  /* ================================
+     RESPONSIVE
+     ================================ */
+  @media (max-width: 768px) {
+    .lang-trigger {
+      padding: 6px 10px;
+    }
+
+    .current-code {
+      display: none;
+    }
+
+    .lang-dropdown {
+      right: auto;
+      left: 50%;
+      transform: translateX(-50%) translateY(-10px);
+    }
+
+    .dropdown:hover .lang-dropdown {
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+</style>
+
+<script>
+  // Toggle dropdown en móvil (touch)
+  document.querySelectorAll('.lang-trigger').forEach((trigger) => {
+    trigger.addEventListener('click', (e) => {
+      const expanded = trigger.getAttribute('aria-expanded') === 'true';
+      trigger.setAttribute('aria-expanded', (!expanded).toString());
+    });
+  });
+
+  // Cerrar dropdown al hacer clic fuera
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (!target.closest('.language-selector.dropdown')) {
+      document.querySelectorAll('.lang-trigger').forEach((trigger) => {
+        trigger.setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+</script>

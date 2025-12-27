@@ -1,14 +1,18 @@
 ---
 /**
- * precios.astro - Página de precios de RayGold
- * URL: /precios
+ * Pricing Page - RayGold (English)
+ * File: src/pages/en/pricing.astro
+ * URL: /en/pricing
  */
-import Layout from "../layouts/Layout.astro";
+import Layout from "../../layouts/Layout.astro";
+
+const lang = "en";
 ---
 
 <Layout
-  title="Precios - RayGold ERP para Joyería"
-  description="Planes de RayGold ERP desde 29€/usuario/mes"
+  title="Pricing - RayGold ERP for Jewelry"
+  description="RayGold ERP plans from €29/user/month"
+  lang={lang}
 >
   <!-- HEADER / NAV (igual que en tu index) -->
   <header class="header">
@@ -46,17 +50,17 @@ import Layout from "../layouts/Layout.astro";
         </div>
         <div class="logo-text">
           <span class="logo-title">RAYGOLD</span>
-          <span class="logo-subtitle">Software para Joyería</span>
+          <span class="logo-subtitle">Jewelry Software</span>
         </div>
       </a>
 
       <nav class="nav">
-        <a href="/">Inicio</a>
-        <a href="/#modulos">Módulos</a>
-        <a href="/#porque">Por qué RayGold</a>
-        <a href="/tecnologia">Tecnología</a>
-        <a href="/precios" class="active">Precios</a>
-        <a href="/contacto">Contacto</a>
+        <a href="/en/">Home</a>
+        <a href="/en/#modules">Modules</a>
+        <a href="/en/#why">Why RayGold</a>
+        <a href="/en/technology">Technology</a>
+        <a href="/en/pricing" class="active">Pricing</a>
+        <a href="/en/contact">Contact</a>
       </nav>
     </div>
   </header>
@@ -78,14 +82,14 @@ import Layout from "../layouts/Layout.astro";
             <line x1="12" y1="1" x2="12" y2="23"></line>
             <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
           </svg>
-          Precios transparentes
+          Transparent pricing
         </span>
         <h1 class="hero-title">
-          Elige el plan perfecto para
-          <span class="gradient-text">tu joyería</span>
+          Choose the perfect plan for
+          <span class="gradient-text">your jewelry</span>
         </h1>
         <p class="hero-subtitle">
-          Sin costes ocultos. Sin sorpresas. Soporte local en España incluido.
+          No hidden costs. No surprises. Local support in Spain included.
         </p>
       </div>
     </section>
@@ -106,7 +110,7 @@ import Layout from "../layouts/Layout.astro";
               <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"
               ></path>
             </svg>
-            Suscripción mensual
+            Monthly subscription
           </button>
           <button class="toggle-btn" data-plan="perpetual">
             <svg
@@ -120,7 +124,7 @@ import Layout from "../layouts/Layout.astro";
               <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
               <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
             </svg>
-            Licencia perpetua
+            Perpetual license
           </button>
         </div>
       </div>
@@ -146,14 +150,14 @@ import Layout from "../layouts/Layout.astro";
                 </svg>
               </div>
               <h3 class="plan-name">Starter</h3>
-              <p class="plan-description">Para joyerías pequeñas</p>
+              <p class="plan-description">For small jewelry stores</p>
             </div>
 
             <div class="plan-pricing">
-              <span class="price-amount">29€</span>
-              <span class="price-period">/usuario/mes</span>
+              <span class="price-amount">€29</span>
+              <span class="price-period">/user/month</span>
             </div>
-            <p class="price-note">Facturación anual · Mín. 2 usuarios</p>
+            <p class="price-note">Annual billing · Min. 2 users</p>
 
             <ul class="plan-features">
               <li>
@@ -161,51 +165,51 @@ import Layout from "../layouts/Layout.astro";
                   ><path
                     d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
                   ></path></svg
-                > Punto de Venta (TPV)
+                > Point of Sale (POS)
               </li>
               <li>
                 <svg viewBox="0 0 24 24" fill="currentColor"
                   ><path
                     d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
                   ></path></svg
-                > Gestión de Inventario
+                > Inventory Management
               </li>
               <li>
                 <svg viewBox="0 0 24 24" fill="currentColor"
                   ><path
                     d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
                   ></path></svg
-                > Clientes y CRM básico
+                > Customers and basic CRM
               </li>
               <li>
                 <svg viewBox="0 0 24 24" fill="currentColor"
                   ><path
                     d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
                   ></path></svg
-                > Control de metales y quilates
+                > Metal and carat control
               </li>
               <li>
                 <svg viewBox="0 0 24 24" fill="currentColor"
                   ><path
                     d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
                   ></path></svg
-                > Etiquetas especializadas
+                > Specialized labels
               </li>
               <li>
                 <svg viewBox="0 0 24 24" fill="currentColor"
                   ><path
                     d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
                   ></path></svg
-                > Soporte por email
+                > Email support
               </li>
             </ul>
 
-            <a href="/contacto" class="plan-cta">Empezar ahora</a>
+            <a href="/en/contact" class="plan-cta">Get started</a>
           </div>
 
           <!-- PROFESIONAL -->
           <div class="plan-card featured">
-            <div class="featured-badge">Más popular</div>
+            <div class="featured-badge">Most popular</div>
             <div class="plan-header">
               <div class="plan-icon professional">
                 <svg
@@ -219,15 +223,15 @@ import Layout from "../layouts/Layout.astro";
                   ></polygon>
                 </svg>
               </div>
-              <h3 class="plan-name">Profesional</h3>
-              <p class="plan-description">Para joyerías en crecimiento</p>
+              <h3 class="plan-name">Professional</h3>
+              <p class="plan-description">For growing jewelry stores</p>
             </div>
 
             <div class="plan-pricing">
-              <span class="price-amount">49€</span>
-              <span class="price-period">/usuario/mes</span>
+              <span class="price-amount">€49</span>
+              <span class="price-period">/user/month</span>
             </div>
-            <p class="price-note">Facturación anual · Mín. 3 usuarios</p>
+            <p class="price-note">Annual billing · Min. 3 users</p>
 
             <ul class="plan-features">
               <li>
@@ -236,53 +240,53 @@ import Layout from "../layouts/Layout.astro";
                     d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
                   ></path></svg
                 >
-                <strong>Todo lo de Starter +</strong>
+                <strong>Everything in Starter +</strong>
               </li>
               <li>
                 <svg viewBox="0 0 24 24" fill="currentColor"
                   ><path
                     d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
                   ></path></svg
-                > Módulo de Fabricación
+                > Manufacturing Module
               </li>
               <li>
                 <svg viewBox="0 0 24 24" fill="currentColor"
                   ><path
                     d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
                   ></path></svg
-                > Taller y Reparaciones
+                > Workshop and Repairs
               </li>
               <li>
                 <svg viewBox="0 0 24 24" fill="currentColor"
                   ><path
                     d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
                   ></path></svg
-                > Contabilidad integrada
+                > Integrated Accounting
               </li>
               <li>
                 <svg viewBox="0 0 24 24" fill="currentColor"
                   ><path
                     d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
                   ></path></svg
-                > Gestión de proveedores
+                > Supplier Management
               </li>
               <li>
                 <svg viewBox="0 0 24 24" fill="currentColor"
                   ><path
                     d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
                   ></path></svg
-                > Informes avanzados
+                > Advanced Reports
               </li>
               <li>
                 <svg viewBox="0 0 24 24" fill="currentColor"
                   ><path
                     d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
                   ></path></svg
-                > Soporte telefónico
+                > Phone Support
               </li>
             </ul>
 
-            <a href="/contacto" class="plan-cta featured">Solicitar demo</a>
+            <a href="/en/contact" class="plan-cta featured">Request demo</a>
           </div>
 
           <!-- ENTERPRISE -->
@@ -316,7 +320,7 @@ import Layout from "../layouts/Layout.astro";
                     d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
                   ></path></svg
                 >
-                <strong>Todo lo de Profesional +</strong>
+                <strong>Everything in Professional +</strong>
               </li>
               <li>
                 <svg viewBox="0 0 24 24" fill="currentColor"
@@ -351,18 +355,18 @@ import Layout from "../layouts/Layout.astro";
                   ><path
                     d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
                   ></path></svg
-                > Gestor de cuenta dedicado
+                > Dedicated account manager
               </li>
               <li>
                 <svg viewBox="0 0 24 24" fill="currentColor"
                   ><path
                     d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
                   ></path></svg
-                > SLA garantizado
+                > Guaranteed SLA
               </li>
             </ul>
 
-            <a href="/contacto" class="plan-cta">Contactar ventas</a>
+            <a href="/en/contact" class="plan-cta">Contactar ventas</a>
           </div>
         </div>
 
@@ -403,9 +407,9 @@ import Layout from "../layouts/Layout.astro";
                 </svg>
               </div>
               <div class="perpetual-info">
-                <h3>Licencia Perpetua</h3>
+                <h3>Perpetual License</h3>
                 <p>
-                  Compra el software y es tuyo para siempre. Ideal para empresas
+                  Buy the software and own it forever. Ideal para empresas
                   que prefieren inversión inicial en lugar de cuotas mensuales.
                 </p>
               </div>
@@ -413,77 +417,77 @@ import Layout from "../layouts/Layout.astro";
 
             <div class="perpetual-right">
               <div class="perpetual-price">
-                <span class="price-from">desde</span>
+                <span class="price-from">from</span>
                 <span class="price-amount">12.000€</span>
               </div>
-              <p class="price-detail">Pago único · Usuarios ilimitados</p>
+              <p class="price-detail">One-time payment · Unlimited users</p>
             </div>
           </div>
 
           <div class="perpetual-features">
             <div class="feature-col">
-              <h4>Incluye:</h4>
+              <h4>Includes:</h4>
               <ul>
                 <li>
                   <svg viewBox="0 0 24 24" fill="currentColor"
                     ><path
                       d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
                     ></path></svg
-                  > Todos los módulos de RayGold
+                  > All RayGold modules
                 </li>
                 <li>
                   <svg viewBox="0 0 24 24" fill="currentColor"
                     ><path
                       d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
                     ></path></svg
-                  > Usuarios ilimitados
+                  > Unlimited users
                 </li>
                 <li>
                   <svg viewBox="0 0 24 24" fill="currentColor"
                     ><path
                       d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
                     ></path></svg
-                  > Instalación en su servidor
+                  > Installation on your server
                 </li>
                 <li>
                   <svg viewBox="0 0 24 24" fill="currentColor"
                     ><path
                       d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
                     ></path></svg
-                  > Formación presencial (16h)
+                  > On-site training (16h)
                 </li>
               </ul>
             </div>
             <div class="feature-col">
-              <h4>Mantenimiento opcional:</h4>
+              <h4>Optional maintenance:</h4>
               <ul>
                 <li>
                   <svg viewBox="0 0 24 24" fill="currentColor"
                     ><path
                       d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
                     ></path></svg
-                  > Actualizaciones de versión
+                  > Version updates
                 </li>
                 <li>
                   <svg viewBox="0 0 24 24" fill="currentColor"
                     ><path
                       d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
                     ></path></svg
-                  > Soporte técnico prioritario
+                  > Priority technical support
                 </li>
                 <li>
                   <svg viewBox="0 0 24 24" fill="currentColor"
                     ><path
                       d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
                     ></path></svg
-                  > 18% anual sobre licencia
+                  > 18% annual on license
                 </li>
               </ul>
             </div>
           </div>
 
-          <a href="/contacto" class="perpetual-cta">
-            Solicitar presupuesto personalizado
+          <a href="/en/contact" class="perpetual-cta">
+            Request custom quote
             <svg
               viewBox="0 0 24 24"
               fill="none"
@@ -498,21 +502,21 @@ import Layout from "../layouts/Layout.astro";
 
         <!-- Comparativa -->
         <div class="comparison-box">
-          <h4>¿SaaS o Licencia Perpetua?</h4>
+          <h4>¿SaaS o Perpetual License?</h4>
           <div class="comparison-grid">
             <div class="comparison-item">
-              <span class="comparison-label">SaaS (Suscripción)</span>
+              <span class="comparison-label">SaaS (Subscription)</span>
               <p>
-                Sin inversión inicial grande. Ideal para empezar o crecer
+                No large upfront investment. Ideal para empezar o crecer
                 progresivamente. Todo incluido: hosting, actualizaciones y
                 soporte.
               </p>
             </div>
             <div class="comparison-item">
-              <span class="comparison-label">Licencia Perpetua</span>
+              <span class="comparison-label">Perpetual License</span>
               <p>
-                Mayor control sobre tu infraestructura. Sin cuotas mensuales.
-                Rentable a largo plazo para equipos de +10 usuarios.
+                Greater control over your infrastructure. No monthly fees.
+                Cost-effective long-term for teams of 10+ users.
               </p>
             </div>
           </div>
@@ -523,31 +527,31 @@ import Layout from "../layouts/Layout.astro";
     <!-- FAQ -->
     <section class="faq-section">
       <div class="container">
-        <h2 class="faq-title">Preguntas frecuentes</h2>
+        <h2 class="faq-title">Frequently Asked Questions</h2>
         <div class="faq-grid">
           <div class="faq-item">
-            <h4>¿Hay compromiso de permanencia?</h4>
+            <h4>Is there a commitment period?</h4>
             <p>
               No. Los planes SaaS son anuales pero puedes cancelar en cualquier
               momento sin penalización al finalizar tu período.
             </p>
           </div>
           <div class="faq-item">
-            <h4>¿Qué incluye la implementación?</h4>
+            <h4>What does implementation include?</h4>
             <p>
               Configuración inicial, migración de datos, formación del equipo y
               acompañamiento durante el primer mes.
             </p>
           </div>
           <div class="faq-item">
-            <h4>¿Puedo cambiar de plan?</h4>
+            <h4>Can I change plans?</h4>
             <p>
               Sí, puedes escalar tu plan en cualquier momento. También puedes
               migrar de SaaS a licencia perpetua.
             </p>
           </div>
           <div class="faq-item">
-            <h4>¿Ofrecéis prueba gratuita?</h4>
+            <h4>Do you offer a free trial?</h4>
             <p>
               Ofrecemos una demo personalizada gratuita donde verás RayGold
               funcionando con datos de ejemplo del sector joyero.
@@ -565,7 +569,7 @@ import Layout from "../layouts/Layout.astro";
           Solicita una demo gratuita y descubre por qué más de 200 joyerías
           confían en RayGold
         </p>
-        <a href="/contacto" class="cta-button">
+        <a href="/en/contact" class="cta-button">
           Solicitar demo gratuita
           <svg
             viewBox="0 0 24 24"
@@ -586,16 +590,16 @@ import Layout from "../layouts/Layout.astro";
     <div class="footer-container">
       <div class="footer-brand">
         <span class="footer-logo">RAYGOLD</span>
-        <p>Software ERP especializado para el sector joyero desde 1990</p>
+        <p>Software ERP especializado para el sector joyero from 1990</p>
       </div>
       <div class="footer-links">
-        <a href="/">Inicio</a>
-        <a href="/tecnologia">Tecnología</a>
-        <a href="/precios">Precios</a>
-        <a href="/contacto">Contacto</a>
+        <a href="/">Home</a>
+        <a href="/en/technology">Technology</a>
+        <a href="/en/pricing">Pricing</a>
+        <a href="/en/contact">Contact</a>
       </div>
       <div class="footer-copy">
-        <p>© 2025 Raytecno BCN SL. Todos los derechos reservados.</p>
+        <p>© 2025 Raytecno BCN SL. All rights reserved.</p>
       </div>
     </div>
   </footer>
@@ -606,9 +610,9 @@ import Layout from "../layouts/Layout.astro";
      VARIABLES Y RESET
      ============================================ */
   :root {
-    --bg-dark: #0f172a;
-    --bg-card: rgba(30, 41, 59, 0.5);
-    --border-subtle: rgba(255, 255, 255, 0.1);
+    --bg-dark: #0a0a0f;
+    --bg-card: rgba(255, 255, 255, 0.03);
+    --border-subtle: rgba(255, 255, 255, 0.08);
     --text-primary: #ffffff;
     --text-secondary: #94a3b8;
     --text-muted: #64748b;
@@ -622,13 +626,15 @@ import Layout from "../layouts/Layout.astro";
      HEADER
      ============================================ */
   .header {
-    background: rgba(15, 23, 42, 0.95);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    position: fixed;
+    background: linear-gradient(
+      180deg,
+      rgba(10, 10, 15, 0.98) 0%,
+      rgba(10, 10, 15, 0.95) 100%
+    );
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-subtle);
+    position: sticky;
     top: 0;
-    left: 0;
-    right: 0;
     z-index: 100;
   }
 
@@ -697,9 +703,8 @@ import Layout from "../layouts/Layout.astro";
      MAIN CONTENT
      ============================================ */
   .main-content {
-    background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+    background: var(--bg-dark);
     min-height: 100vh;
-    padding-top: 72px;
   }
 
   .container {
@@ -712,7 +717,7 @@ import Layout from "../layouts/Layout.astro";
      HERO
      ============================================ */
   .pricing-hero {
-    padding: 60px 0 40px;
+    padding: 80px 0 40px;
     text-align: center;
   }
 
@@ -720,9 +725,9 @@ import Layout from "../layouts/Layout.astro";
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: rgba(102, 126, 234, 0.1);
-    border: 1px solid rgba(102, 126, 234, 0.3);
-    color: #818cf8;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: var(--accent-green-light);
     padding: 8px 16px;
     border-radius: 100px;
     font-size: 0.85rem;
@@ -744,7 +749,11 @@ import Layout from "../layouts/Layout.astro";
   }
 
   .gradient-text {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(
+      135deg,
+      var(--accent-green-light) 0%,
+      var(--accent-green) 100%
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -835,7 +844,6 @@ import Layout from "../layouts/Layout.astro";
     padding: 32px;
     position: relative;
     transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
   }
 
   .plan-card:hover {
@@ -1333,8 +1341,8 @@ import Layout from "../layouts/Layout.astro";
      FOOTER
      ============================================ */
   .footer {
-    background: #020617;
-    border-top: 1px solid #334155;
+    background: #05050a;
+    border-top: 1px solid var(--border-subtle);
     padding: 40px 0;
   }
 

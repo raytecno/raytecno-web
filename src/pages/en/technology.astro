@@ -1,17 +1,19 @@
 ---
 /**
- * tecnologia.astro - Página de tecnología de RayGold
- * URL: /tecnologia
- * UNIFICADO con el mismo header/nav que precios.astro
+ * Technology Page - RayGold (English)
+ * File: src/pages/en/technology.astro
+ * URL: /en/technology
  */
-import Layout from "../layouts/Layout.astro";
+import Layout from "../../layouts/Layout.astro";
+
+const lang = "en";
 ---
 
-<Layout title="Tecnología - RayGold ERP para Joyería">
+<Layout title="Technology - RayGold ERP for Jewelry" lang={lang}>
   <!-- HEADER / NAV (igual que en precios) -->
   <header class="header">
     <div class="header-container">
-      <a href="/" class="logo">
+      <a href="/en/" class="logo">
         <div class="logo-icon">
           <svg
             viewBox="0 0 40 40"
@@ -44,17 +46,17 @@ import Layout from "../layouts/Layout.astro";
         </div>
         <div class="logo-text">
           <span class="logo-title">RAYGOLD</span>
-          <span class="logo-subtitle">Software para Joyería</span>
+          <span class="logo-subtitle">Jewelry Software</span>
         </div>
       </a>
 
       <nav class="nav">
-        <a href="/">Inicio</a>
-        <a href="/#modulos">Módulos</a>
-        <a href="/#porque">Por qué RayGold</a>
-        <a href="/tecnologia" class="active">Tecnología</a>
-        <a href="/precios">Precios</a>
-        <a href="/contacto">Contacto</a>
+        <a href="/en/">Home</a>
+        <a href="/en/#modules">Modules</a>
+        <a href="/en/#why">Why RayGold</a>
+        <a href="/en/technology" class="active">Technology</a>
+        <a href="/en/pricing">Pricing</a>
+        <a href="/en/contact">Contact</a>
       </nav>
     </div>
   </header>
@@ -67,12 +69,12 @@ import Layout from "../layouts/Layout.astro";
         <div class="header-content">
           <div class="badge">
             <span class="badge-dot"></span>
-            Arquitectura Tecnológica
+            Technology Architecture
           </div>
           <h1>Raygold <span>ERP</span></h1>
           <p>
             Solución integral cloud-native para la industria joyera, potenciada
-            con Inteligencia Artificial
+            con Artificial Intelligence
           </p>
         </div>
       </div>
@@ -138,7 +140,7 @@ import Layout from "../layouts/Layout.astro";
             <div class="node node-ai">
               <div class="node-header">
                 <div>
-                  <div class="node-title">Inteligencia Artificial</div>
+                  <div class="node-title">Artificial Intelligence</div>
                   <div class="node-subtitle">Claude by Anthropic</div>
                 </div>
               </div>
@@ -167,7 +169,7 @@ import Layout from "../layouts/Layout.astro";
               <div class="node-header">
                 <div>
                   <div class="node-title">Microsoft Azure</div>
-                  <div class="node-subtitle">Infraestructura Cloud</div>
+                  <div class="node-subtitle">Cloud Infrastructure</div>
                 </div>
               </div>
               <div class="services">
@@ -194,12 +196,12 @@ import Layout from "../layouts/Layout.astro";
               </div>
             </div>
 
-            <!-- Base de Datos -->
+            <!-- Database -->
             <div class="node node-data">
               <div class="node-header">
                 <div class="node-icon">🗃️</div>
                 <div>
-                  <div class="node-title">Base de Datos</div>
+                  <div class="node-title">Database</div>
                   <div class="node-subtitle">Persistencia</div>
                 </div>
               </div>
@@ -308,8 +310,8 @@ import Layout from "../layouts/Layout.astro";
       <div class="container">
         <h2>¿Quieres saber más sobre nuestra tecnología?</h2>
         <p>Te explicamos cómo RayGold puede transformar tu joyería</p>
-        <a href="/contacto" class="cta-button">
-          Contactar con nosotros
+        <a href="/en/contact" class="cta-button">
+          Contact us con nosotros
           <svg
             viewBox="0 0 24 24"
             fill="none"
@@ -329,16 +331,16 @@ import Layout from "../layouts/Layout.astro";
     <div class="footer-container">
       <div class="footer-brand">
         <span class="footer-logo">RAYGOLD</span>
-        <p>Software ERP especializado para el sector joyero desde 1990</p>
+        <p>Specialized ERP software for the jewelry sector since 1990</p>
       </div>
       <div class="footer-links">
-        <a href="/">Inicio</a>
-        <a href="/tecnologia">Tecnología</a>
-        <a href="/precios">Precios</a>
-        <a href="/contacto">Contacto</a>
+        <a href="/en/">Home</a>
+        <a href="/en/technology">Technology</a>
+        <a href="/en/pricing">Pricing</a>
+        <a href="/en/contact">Contact</a>
       </div>
       <div class="footer-copy">
-        <p>© 2025 Raytecno BCN SL. Todos los derechos reservados.</p>
+        <p>© 2025 Raytecno BCN SL. All rights reserved.</p>
       </div>
     </div>
   </footer>

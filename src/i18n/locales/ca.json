@@ -1,0 +1,189 @@
+{
+  "meta": {
+    "title": "RayGold ERP | Programari de Gestió per a Joieria",
+    "description": "Programari ERP especialitzat en el sector joier. Gestió integral de fabricació, comercial, finances i inventari per a joieries i tallers.",
+    "keywords": "ERP joieria, programari gestió joieria, programa joiers, RayGold"
+  },
+  "nav": {
+    "home": "Inici",
+    "modules": "Mòduls",
+    "technology": "Tecnologia",
+    "pricing": "Preus",
+    "contact": "Contacte",
+    "demo": "Sol·licitar Demo"
+  },
+  "hero": {
+    "badge": "Programari ERP especialitzat",
+    "title": "Transforma la gestió de la teva",
+    "titleHighlight": "joieria",
+    "description": "RayGold ERP és la solució integral dissenyada específicament per al sector joier. Controla fabricació, vendes, inventari i finances des d'una única plataforma.",
+    "cta_primary": "Sol·licitar Demo",
+    "cta_secondary": "Veure Mòduls",
+    "stats": {
+      "years": "anys d'experiència",
+      "clients": "clients actius",
+      "modules": "mòduls integrats"
+    }
+  },
+  "modules": {
+    "title": "Mòduls",
+    "subtitle": "Tot el que necessites per gestionar el teu negoci",
+    "viewAll": "Veure tots els mòduls",
+    "learnMore": "Saber més",
+    "list": {
+      "maestros": {
+        "title": "Mestres",
+        "description": "Gestió completa d'articles, preus, estructures i imatges del teu catàleg de joieria."
+      },
+      "comercial": {
+        "title": "Comercial",
+        "description": "Control total de vendes, compres, comandes i gestió de clients i proveïdors."
+      },
+      "fabricacion": {
+        "title": "Fabricació",
+        "description": "Planificació i seguiment de la producció, ordres de treball i control de materials."
+      },
+      "finanzas": {
+        "title": "Finances",
+        "description": "Comptabilitat integrada, gestió de cobraments, pagaments, bancs i informes financers."
+      },
+      "historicos": {
+        "title": "Històrics",
+        "description": "Accés complet a l'historial d'operacions, moviments i traçabilitat de peces."
+      },
+      "estadisticas": {
+        "title": "Estadístiques",
+        "description": "Anàlisi de dades, informes personalitzats i dashboards per a presa de decisions."
+      },
+      "vendedores": {
+        "title": "Venedors",
+        "description": "Gestió d'equips comercials, comissions, objectius i seguiment de vendes."
+      },
+      "ecommerce": {
+        "title": "E-commerce",
+        "description": "Integració amb botiga online, sincronització d'estoc i gestió de comandes web."
+      }
+    }
+  },
+  "features": {
+    "title": "Per què triar RayGold?",
+    "subtitle": "Dissenyat per experts en el sector joier",
+    "list": {
+      "specialized": {
+        "title": "Especialitzat en Joieria",
+        "description": "Desenvolupat específicament per a les necessitats úniques del sector joier."
+      },
+      "integrated": {
+        "title": "Totalment Integrat",
+        "description": "Tots els mòduls connectats en una única plataforma centralitzada."
+      },
+      "cloud": {
+        "title": "Al Núvol",
+        "description": "Accedeix des de qualsevol lloc amb total seguretat a Microsoft Azure."
+      },
+      "support": {
+        "title": "Suport Expert",
+        "description": "Equip de suport especialitzat amb més de 30 anys d'experiència."
+      }
+    }
+  },
+  "pricing": {
+    "title": "Preus",
+    "subtitle": "Plans adaptats al teu negoci",
+    "monthly": "Mensual",
+    "perpetual": "Llicència Perpètua",
+    "perUser": "per usuari/mes",
+    "oneTime": "pagament únic",
+    "popular": "Més popular",
+    "cta": "Sol·licitar informació",
+    "includes": "Inclou",
+    "plans": {
+      "starter": {
+        "name": "Starter",
+        "description": "Per a petites joieries"
+      },
+      "professional": {
+        "name": "Professional",
+        "description": "Per a joieries en creixement"
+      },
+      "enterprise": {
+        "name": "Enterprise",
+        "description": "Per a grans empreses"
+      }
+    },
+    "features": {
+      "modules": "mòduls inclosos",
+      "users": "usuaris",
+      "support": "Suport",
+      "updates": "Actualitzacions",
+      "training": "Formació",
+      "customization": "Personalització"
+    }
+  },
+  "technology": {
+    "title": "Tecnologia",
+    "subtitle": "Arquitectura moderna i escalable",
+    "description": "RayGold està construït sobre les tecnologies més avançades del mercat, garantint rendiment, seguretat i escalabilitat.",
+    "stack": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "cloud": "Infraestructura Cloud",
+      "database": "Base de Dades"
+    }
+  },
+  "cta": {
+    "title": "Preparat per transformar el teu negoci?",
+    "description": "Sol·licita una demostració personalitzada i descobreix com RayGold pot ajudar-te.",
+    "button": "Sol·licitar Demo Gratuïta"
+  },
+  "contact": {
+    "title": "Contacte",
+    "subtitle": "Som aquí per ajudar-te",
+    "form": {
+      "name": "Nom",
+      "email": "Email",
+      "phone": "Telèfon",
+      "company": "Empresa",
+      "message": "Missatge",
+      "submit": "Enviar missatge"
+    },
+    "info": {
+      "address": "Adreça",
+      "phone": "Telèfon",
+      "email": "Email",
+      "hours": "Horari"
+    }
+  },
+  "footer": {
+    "description": "Programari ERP especialitzat per al sector joier. Més de 30 anys d'experiència transformant la gestió de joieries.",
+    "links": {
+      "product": "Producte",
+      "company": "Empresa",
+      "legal": "Legal"
+    },
+    "legal": {
+      "privacy": "Privacitat",
+      "terms": "Termes",
+      "cookies": "Cookies"
+    },
+    "copyright": "Tots els drets reservats."
+  },
+  "whatsapp": {
+    "tooltip": "Necessites ajuda?",
+    "message": "Hola, m'interessa informació sobre RayGold ERP"
+  },
+  "common": {
+    "loading": "Carregant...",
+    "error": "S'ha produït un error",
+    "retry": "Tornar a provar",
+    "close": "Tancar",
+    "back": "Tornar",
+    "next": "Següent",
+    "previous": "Anterior",
+    "search": "Cercar",
+    "filter": "Filtrar",
+    "all": "Tots",
+    "yes": "Sí",
+    "no": "No"
+  }
+}

@@ -1,0 +1,1980 @@
+---
+/**
+ * Página de Contacto - RayGold
+ * /contacto (español)
+ *
+ * Incluye: Formulario de contacto + Modal Login/Registro Demo
+ */
+import Layout from "../layouts/Layout.astro";
+import { defaultLang, type Language } from "../i18n/config";
+import { useTranslations } from "../i18n/utils";
+
+interface Props {
+  lang?: Language;
+}
+
+const { lang = defaultLang } = Astro.props;
+const t = useTranslations(lang);
+
+// Determinar rutas según idioma
+const homePath = lang === defaultLang ? "/" : `/${lang}/`;
+const modulosPath = lang === defaultLang ? "/#modulos" : `/${lang}/#modules`;
+const porquePath = lang === defaultLang ? "/#porque" : `/${lang}/#why`;
+const tecnologiaPath =
+  lang === defaultLang ? "/tecnologia" : `/${lang}/technology`;
+const preciosPath = lang === defaultLang ? "/precios" : `/${lang}/pricing`;
+const contactoPath = lang === defaultLang ? "/contacto" : `/${lang}/contact`;
+---
+
+<Layout
+  title={`${t("contact.title")} | RayGold ERP`}
+  description={t("contact.subtitle")}
+  lang={lang}
+>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <a href={homePath} class="logo">
+        <svg class="logo-icon" viewBox="0 0 40 40" fill="none">
+          <path
+            d="M20 2L37 12V28L20 38L3 28V12L20 2Z"
+            fill="url(#grad1)"
+            stroke="#fff"
+            stroke-width="1"></path>
+          <path
+            d="M20 8L30 14V26L20 32L10 26V14L20 8Z"
+            fill="rgba(255,255,255,0.3)"></path>
+          <defs>
+            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#667eea"></stop>
+              <stop offset="100%" style="stop-color:#764ba2"></stop>
+            </linearGradient>
+          </defs>
+        </svg>
+        <div class="logo-text">
+          <h1>RAYGOLD</h1>
+          <span>{t("hero.badge")}</span>
+        </div>
+      </a>
+
+      <nav class="nav">
+        <a href={homePath}>{t("nav.home")}</a>
+        <a href={modulosPath}>{t("nav.modules")}</a>
+        <a href={porquePath}
+          >{
+            lang === "es"
+              ? "Por qué RayGold"
+              : lang === "en"
+                ? "Why RayGold"
+                : lang === "fr"
+                  ? "Pourquoi RayGold"
+                  : lang === "ca"
+                    ? "Per què RayGold"
+                    : "Por que RayGold"
+          }</a
+        >
+        <a href={tecnologiaPath}>{t("nav.technology")}</a>
+        <a href={preciosPath}>{t("nav.pricing")}</a>
+        <a href={contactoPath} class="active">{t("nav.contact")}</a>
+      </nav>
+
+      <button class="menu-toggle" aria-label="Menu">☰</button>
+    </div>
+  </header>
+
+  <!-- CONTACTO PAGE -->
+  <main class="contacto-page">
+    <section class="contacto-section">
+      <div class="container">
+        <!-- Header -->
+        <div class="section-header">
+          <span class="section-badge">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+              ></path>
+            </svg>
+            {t("nav.contact")}
+          </span>
+          <h2 class="section-title">
+            {t("cta.title").split("?")[0]}? <span class="gradient-text"
+              >{t("hero.titleHighlight")}</span
+            >
+          </h2>
+          <p class="section-subtitle">
+            {t("cta.description")}
+          </p>
+        </div>
+
+        <!-- Cards Container -->
+        <div class="contact-grid">
+          <!-- Card 1: Formulario de Contacto -->
+          <div class="contact-card contact-form-card">
+            <div class="card-header">
+              <div class="card-icon">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                  ></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+              </div>
+              <div>
+                <h3>{t("contact.form.submit")}</h3>
+                <p>
+                  {
+                    lang === "es"
+                      ? "Te contactaremos en menos de 24h"
+                      : lang === "en"
+                        ? "We will contact you within 24h"
+                        : lang === "fr"
+                          ? "Nous vous contacterons sous 24h"
+                          : lang === "ca"
+                            ? "Et contactarem en menys de 24h"
+                            : "Entraremos em contato em 24h"
+                  }
+                </p>
+              </div>
+            </div>
+
+            <form id="contactForm" class="contact-form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="empresa">{t("contact.form.company")}</label>
+                  <input
+                    type="text"
+                    id="empresa"
+                    name="empresa"
+                    placeholder={lang === "es"
+                      ? "Joyería Ejemplo S.L."
+                      : lang === "en"
+                        ? "Example Jewelry Ltd."
+                        : lang === "fr"
+                          ? "Bijouterie Exemple SARL"
+                          : lang === "ca"
+                            ? "Joieria Exemple S.L."
+                            : "Joalheria Exemplo Ltda."}
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="nombre">{t("contact.form.name")}</label>
+                  <input
+                    type="text"
+                    id="nombre"
+                    name="nombre"
+                    placeholder={lang === "es"
+                      ? "Juan García"
+                      : lang === "en"
+                        ? "John Smith"
+                        : lang === "fr"
+                          ? "Jean Dupont"
+                          : lang === "ca"
+                            ? "Joan Garcia"
+                            : "João Silva"}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="telefono">{t("contact.form.phone")}</label>
+                  <div class="input-prefix">
+                    <span>+34</span>
+                    <input
+                      type="tel"
+                      id="telefono"
+                      name="telefono"
+                      placeholder="612 345 678"
+                    />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="email">{t("contact.form.email")}</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="juan@joyeria.com"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="interes"
+                  >{
+                    lang === "es"
+                      ? "Interés principal"
+                      : lang === "en"
+                        ? "Main interest"
+                        : lang === "fr"
+                          ? "Intérêt principal"
+                          : lang === "ca"
+                            ? "Interès principal"
+                            : "Interesse principal"
+                  }</label
+                >
+                <select id="interes" name="interes">
+                  <option value="informacion"
+                    >{
+                      lang === "es"
+                        ? "Información general"
+                        : lang === "en"
+                          ? "General information"
+                          : lang === "fr"
+                            ? "Informations générales"
+                            : lang === "ca"
+                              ? "Informació general"
+                              : "Informação geral"
+                    }</option
+                  >
+                  <option value="demo"
+                    >{
+                      lang === "es"
+                        ? "Solicitar demostración"
+                        : lang === "en"
+                          ? "Request demo"
+                          : lang === "fr"
+                            ? "Demander une démo"
+                            : lang === "ca"
+                              ? "Sol·licitar demostració"
+                              : "Solicitar demonstração"
+                    }</option
+                  >
+                  <option value="presupuesto"
+                    >{
+                      lang === "es"
+                        ? "Presupuesto personalizado"
+                        : lang === "en"
+                          ? "Custom quote"
+                          : lang === "fr"
+                            ? "Devis personnalisé"
+                            : lang === "ca"
+                              ? "Pressupost personalitzat"
+                              : "Orçamento personalizado"
+                    }</option
+                  >
+                  <option value="migracion"
+                    >{
+                      lang === "es"
+                        ? "Migración desde otro sistema"
+                        : lang === "en"
+                          ? "Migration from another system"
+                          : lang === "fr"
+                            ? "Migration depuis un autre système"
+                            : lang === "ca"
+                              ? "Migració des d'un altre sistema"
+                              : "Migração de outro sistema"
+                    }</option
+                  >
+                  <option value="soporte"
+                    >{
+                      lang === "es"
+                        ? "Soporte técnico"
+                        : lang === "en"
+                          ? "Technical support"
+                          : lang === "fr"
+                            ? "Support technique"
+                            : lang === "ca"
+                              ? "Suport tècnic"
+                              : "Suporte técnico"
+                    }</option
+                  >
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="tamano"
+                  >{
+                    lang === "es"
+                      ? "Tamaño de la empresa"
+                      : lang === "en"
+                        ? "Company size"
+                        : lang === "fr"
+                          ? "Taille de l'entreprise"
+                          : lang === "ca"
+                            ? "Mida de l'empresa"
+                            : "Tamanho da empresa"
+                  }</label
+                >
+                <select id="tamano" name="tamano">
+                  <option value="1-5"
+                    >{
+                      lang === "es"
+                        ? "1-5 empleados"
+                        : lang === "en"
+                          ? "1-5 employees"
+                          : lang === "fr"
+                            ? "1-5 employés"
+                            : lang === "ca"
+                              ? "1-5 empleats"
+                              : "1-5 funcionários"
+                    }</option
+                  >
+                  <option value="6-15"
+                    >{
+                      lang === "es"
+                        ? "6-15 empleados"
+                        : lang === "en"
+                          ? "6-15 employees"
+                          : lang === "fr"
+                            ? "6-15 employés"
+                            : lang === "ca"
+                              ? "6-15 empleats"
+                              : "6-15 funcionários"
+                    }</option
+                  >
+                  <option value="16-50"
+                    >{
+                      lang === "es"
+                        ? "16-50 empleados"
+                        : lang === "en"
+                          ? "16-50 employees"
+                          : lang === "fr"
+                            ? "16-50 employés"
+                            : lang === "ca"
+                              ? "16-50 empleats"
+                              : "16-50 funcionários"
+                    }</option
+                  >
+                  <option value="50+"
+                    >{
+                      lang === "es"
+                        ? "Más de 50 empleados"
+                        : lang === "en"
+                          ? "More than 50 employees"
+                          : lang === "fr"
+                            ? "Plus de 50 employés"
+                            : lang === "ca"
+                              ? "Més de 50 empleats"
+                              : "Mais de 50 funcionários"
+                    }</option
+                  >
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="mensaje"
+                  >{t("contact.form.message")} ({
+                    lang === "es"
+                      ? "opcional"
+                      : lang === "en"
+                        ? "optional"
+                        : lang === "fr"
+                          ? "optionnel"
+                          : lang === "ca"
+                            ? "opcional"
+                            : "opcional"
+                  })</label
+                >
+                <textarea
+                  id="mensaje"
+                  name="mensaje"
+                  rows="3"
+                  placeholder={lang === "es"
+                    ? "Cuéntanos más sobre tu joyería..."
+                    : lang === "en"
+                      ? "Tell us more about your jewelry business..."
+                      : lang === "fr"
+                        ? "Parlez-nous de votre bijouterie..."
+                        : lang === "ca"
+                          ? "Explica'ns més sobre la teva joieria..."
+                          : "Conte-nos mais sobre sua joalheria..."}></textarea>
+              </div>
+
+              <div class="form-privacy">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <span>
+                  {
+                    lang === "es"
+                      ? "Trataremos tus datos según nuestra"
+                      : lang === "en"
+                        ? "We will process your data according to our"
+                        : lang === "fr"
+                          ? "Nous traiterons vos données selon notre"
+                          : lang === "ca"
+                            ? "Tractarem les teves dades segons la nostra"
+                            : "Trataremos seus dados de acordo com nossa"
+                  }
+                  <a href="/privacidad">{t("footer.legal.privacy")}</a>
+                </span>
+              </div>
+
+              <button type="submit" class="btn-submit">
+                <span>{t("contact.form.submit")}</span>
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+              </button>
+            </form>
+          </div>
+
+          <!-- Card 2: Prueba Gratis -->
+          <div class="contact-card demo-card">
+            <div class="demo-content">
+              <div class="demo-badge">
+                ✨ {
+                  lang === "es"
+                    ? "Sin compromiso"
+                    : lang === "en"
+                      ? "No commitment"
+                      : lang === "fr"
+                        ? "Sans engagement"
+                        : lang === "ca"
+                          ? "Sense compromís"
+                          : "Sem compromisso"
+                }
+              </div>
+              <h3>
+                {
+                  lang === "es"
+                    ? "Prueba RayGold"
+                    : lang === "en"
+                      ? "Try RayGold"
+                      : lang === "fr"
+                        ? "Essayez RayGold"
+                        : lang === "ca"
+                          ? "Prova RayGold"
+                          : "Experimente RayGold"
+                }
+                <span
+                  >{
+                    lang === "es"
+                      ? "gratis"
+                      : lang === "en"
+                        ? "free"
+                        : lang === "fr"
+                          ? "gratuitement"
+                          : lang === "ca"
+                            ? "gratis"
+                            : "grátis"
+                  }</span>
+              </h3>
+              <p>
+                {
+                  lang === "es"
+                    ? "Accede a una demostración completa del sistema sin necesidad de instalación"
+                    : lang === "en"
+                      ? "Access a complete system demo without installation"
+                      : lang === "fr"
+                        ? "Accédez à une démonstration complète du système sans installation"
+                        : lang === "ca"
+                          ? "Accedeix a una demostració completa del sistema sense instal·lació"
+                          : "Acesse uma demonstração completa do sistema sem instalação"
+                }
+              </p>
+
+              <ul class="demo-features">
+                <li>
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  {
+                    lang === "es"
+                      ? "Acceso inmediato al sistema"
+                      : lang === "en"
+                        ? "Immediate system access"
+                        : lang === "fr"
+                          ? "Accès immédiat au système"
+                          : lang === "ca"
+                            ? "Accés immediat al sistema"
+                            : "Acesso imediato ao sistema"
+                  }
+                </li>
+                <li>
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  {
+                    lang === "es"
+                      ? "Datos de ejemplo precargados"
+                      : lang === "en"
+                        ? "Preloaded sample data"
+                        : lang === "fr"
+                          ? "Données exemples préchargées"
+                          : lang === "ca"
+                            ? "Dades d'exemple precarregades"
+                            : "Dados de exemplo pré-carregados"
+                  }
+                </li>
+                <li>
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  {
+                    lang === "es"
+                      ? "Todas las funcionalidades"
+                      : lang === "en"
+                        ? "All features included"
+                        : lang === "fr"
+                          ? "Toutes les fonctionnalités"
+                          : lang === "ca"
+                            ? "Totes les funcionalitats"
+                            : "Todas as funcionalidades"
+                  }
+                </li>
+                <li>
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  {
+                    lang === "es"
+                      ? "Soporte técnico incluido"
+                      : lang === "en"
+                        ? "Technical support included"
+                        : lang === "fr"
+                          ? "Support technique inclus"
+                          : lang === "ca"
+                            ? "Suport tècnic inclòs"
+                            : "Suporte técnico incluído"
+                  }
+                </li>
+              </ul>
+
+              <button id="btnPruebaGratis" class="btn-demo">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+                <span
+                  >{
+                    lang === "es"
+                      ? "Probar ahora"
+                      : lang === "en"
+                        ? "Try now"
+                        : lang === "fr"
+                          ? "Essayer maintenant"
+                          : lang === "ca"
+                            ? "Provar ara"
+                            : "Experimentar agora"
+                  }</span
+                >
+              </button>
+            </div>
+
+            <!-- Decoración -->
+            <div class="demo-decoration">
+              <div class="deco-circle"></div>
+              <div class="deco-circle"></div>
+              <div class="deco-circle"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Info adicional -->
+        <div class="contact-info">
+          <div class="info-item">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <div>
+              <strong>{t("contact.info.address")}</strong>
+              <p>Montgat, Barcelona, España</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+              ></path>
+            </svg>
+            <div>
+              <strong>{t("contact.info.phone")}</strong>
+              <p>+34 933 741 047</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+              ></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            <div>
+              <strong>{t("contact.info.email")}</strong>
+              <p>info@raytecno.es</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-logo">
+          <svg class="footer-icon" viewBox="0 0 40 40" fill="none">
+            <path
+              d="M20 2L37 12V28L20 38L3 28V12L20 2Z"
+              fill="url(#grad2)"
+              stroke="#fff"
+              stroke-width="1"></path>
+            <defs>
+              <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#667eea"></stop>
+                <stop offset="100%" style="stop-color:#764ba2"></stop>
+              </linearGradient>
+            </defs>
+          </svg>
+          <h4>RAYGOLD</h4>
+        </div>
+        <p>{t("footer.description")}</p>
+      </div>
+
+      <div class="footer-col">
+        <h5>{t("footer.links.product")}</h5>
+        <p><a href={modulosPath}>{t("nav.modules")}</a></p>
+        <p><a href={preciosPath}>{t("nav.pricing")}</a></p>
+        <p><a href={tecnologiaPath}>{t("nav.technology")}</a></p>
+      </div>
+
+      <div class="footer-col">
+        <h5>{t("footer.links.company")}</h5>
+        <p><a href="#">{t("nav.contact")}</a></p>
+      </div>
+
+      <div class="footer-col">
+        <h5>{t("footer.links.legal")}</h5>
+        <p><a href="/privacidad">{t("footer.legal.privacy")}</a></p>
+        <p><a href="/terminos">{t("footer.legal.terms")}</a></p>
+        <p><a href="/cookies">{t("footer.legal.cookies")}</a></p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>
+        © {new Date().getFullYear()} Raytecno BCN SL. {t("footer.copyright")}
+      </p>
+    </div>
+  </footer>
+
+  <!-- MODAL LOGIN/REGISTRO -->
+  <div id="authModal" class="auth-modal">
+    <div class="auth-modal-content">
+      <button class="modal-close" id="closeModal">×</button>
+
+      <div class="auth-tabs">
+        <button class="auth-tab active" data-tab="login"
+          >{
+            lang === "es"
+              ? "Iniciar Sesión"
+              : lang === "en"
+                ? "Login"
+                : lang === "fr"
+                  ? "Connexion"
+                  : lang === "ca"
+                    ? "Iniciar Sessió"
+                    : "Entrar"
+          }</button
+        >
+        <button class="auth-tab" data-tab="register"
+          >{
+            lang === "es"
+              ? "Crear Cuenta"
+              : lang === "en"
+                ? "Create Account"
+                : lang === "fr"
+                  ? "Créer un Compte"
+                  : lang === "ca"
+                    ? "Crear Compte"
+                    : "Criar Conta"
+          }</button
+        >
+      </div>
+
+      <!-- LOGIN FORM -->
+      <form id="loginForm" class="auth-form active">
+        <div class="form-group">
+          <label for="loginUsuario"
+            >{
+              lang === "es"
+                ? "Usuario"
+                : lang === "en"
+                  ? "Username"
+                  : lang === "fr"
+                    ? "Utilisateur"
+                    : lang === "ca"
+                      ? "Usuari"
+                      : "Usuário"
+            }</label
+          >
+          <input type="text" id="loginUsuario" name="usuario" required />
+        </div>
+        <div class="form-group">
+          <label for="loginPassword"
+            >{
+              lang === "es"
+                ? "Contraseña"
+                : lang === "en"
+                  ? "Password"
+                  : lang === "fr"
+                    ? "Mot de passe"
+                    : lang === "ca"
+                      ? "Contrasenya"
+                      : "Senha"
+            }</label
+          >
+          <input type="password" id="loginPassword" name="password" required />
+        </div>
+        <div id="loginError" class="error-message"></div>
+        <button type="submit" class="btn-auth"
+          >{
+            lang === "es"
+              ? "Entrar"
+              : lang === "en"
+                ? "Enter"
+                : lang === "fr"
+                  ? "Entrer"
+                  : lang === "ca"
+                    ? "Entrar"
+                    : "Entrar"
+          }</button
+        >
+      </form>
+
+      <!-- REGISTER FORM -->
+      <form id="registerForm" class="auth-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="regNombre">{t("contact.form.name")} *</label>
+            <input type="text" id="regNombre" name="nombre" required />
+          </div>
+          <div class="form-group">
+            <label for="regApellido"
+              >{
+                lang === "es"
+                  ? "Apellido"
+                  : lang === "en"
+                    ? "Last name"
+                    : lang === "fr"
+                      ? "Nom"
+                      : lang === "ca"
+                        ? "Cognom"
+                        : "Sobrenome"
+              }</label
+            >
+            <input type="text" id="regApellido" name="apellido" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="regEmpresa">{t("contact.form.company")}</label>
+          <input type="text" id="regEmpresa" name="empresa" />
+        </div>
+        <div class="form-group">
+          <label for="regEmail">{t("contact.form.email")} *</label>
+          <input type="email" id="regEmail" name="email" required />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="regUsuario"
+              >{
+                lang === "es"
+                  ? "Usuario"
+                  : lang === "en"
+                    ? "Username"
+                    : lang === "fr"
+                      ? "Utilisateur"
+                      : lang === "ca"
+                        ? "Usuari"
+                        : "Usuário"
+              } *</label
+            >
+            <input
+              type="text"
+              id="regUsuario"
+              name="usuario"
+              minlength="4"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="regPassword"
+              >{
+                lang === "es"
+                  ? "Contraseña"
+                  : lang === "en"
+                    ? "Password"
+                    : lang === "fr"
+                      ? "Mot de passe"
+                      : lang === "ca"
+                        ? "Contrasenya"
+                        : "Senha"
+              } *</label
+            >
+            <input
+              type="password"
+              id="regPassword"
+              name="password"
+              minlength="6"
+              required
+            />
+          </div>
+        </div>
+        <div class="form-checkbox">
+          <input type="checkbox" id="regTerms" name="terms" required />
+          <label for="regTerms">
+            {
+              lang === "es"
+                ? "Acepto los"
+                : lang === "en"
+                  ? "I accept the"
+                  : lang === "fr"
+                    ? "J'accepte les"
+                    : lang === "ca"
+                      ? "Accepto els"
+                      : "Aceito os"
+            }
+            <a href="/terminos">{t("footer.legal.terms")}</a>
+          </label>
+        </div>
+        <div id="registerError" class="error-message"></div>
+        <div id="registerSuccess" class="success-message"></div>
+        <button type="submit" class="btn-auth"
+          >{
+            lang === "es"
+              ? "Crear Cuenta"
+              : lang === "en"
+                ? "Create Account"
+                : lang === "fr"
+                  ? "Créer un Compte"
+                  : lang === "ca"
+                    ? "Crear Compte"
+                    : "Criar Conta"
+          }</button
+        >
+      </form>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  /* ============================================
+     HEADER
+     ============================================ */
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+
+  .logo-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .logo-text h1 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 2px;
+    margin: 0;
+    font-family: "Inter", sans-serif;
+  }
+
+  .logo-text span {
+    font-size: 0.7rem;
+    color: #94a3b8;
+    display: block;
+  }
+
+  .nav {
+    display: flex;
+    gap: 32px;
+  }
+
+  .nav a {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav a:hover,
+  .nav a.active {
+    color: white;
+  }
+
+  .menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  /* ============================================
+     MAIN CONTENT
+     ============================================ */
+  .contacto-page {
+    padding-top: 72px;
+    min-height: 100vh;
+    background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+  }
+
+  .contacto-section {
+    padding: 80px 24px;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* Header Section */
+  .section-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .section-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: rgba(102, 126, 234, 0.1);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    border-radius: 24px;
+    color: #818cf8;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .section-subtitle {
+    font-size: 1.1rem;
+    color: #94a3b8;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* Contact Grid */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 32px;
+    margin-bottom: 48px;
+  }
+
+  /* Contact Cards */
+  .contact-card {
+    background: rgba(30, 41, 59, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 32px;
+    backdrop-filter: blur(10px);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .card-icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+
+  .card-header h3 {
+    font-size: 1.1rem;
+    color: white;
+    margin: 0;
+    font-family: "Inter", sans-serif;
+  }
+
+  .card-header p {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin: 4px 0 0 0;
+  }
+
+  /* Form Styles */
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-group label {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    font-weight: 500;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 12px 16px;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: white;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: #475569;
+  }
+
+  .form-group select {
+    cursor: pointer;
+  }
+
+  .input-prefix {
+    display: flex;
+    align-items: stretch;
+  }
+
+  .input-prefix span {
+    padding: 12px 14px;
+    background: rgba(102, 126, 234, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-right: none;
+    border-radius: 10px 0 0 10px;
+    color: #818cf8;
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+
+  .input-prefix input {
+    border-radius: 0 10px 10px 0;
+    flex: 1;
+  }
+
+  .form-privacy {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    color: #64748b;
+    margin-top: 8px;
+  }
+
+  .form-privacy a {
+    color: #818cf8;
+    text-decoration: underline;
+  }
+
+  .btn-submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 24px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 8px;
+  }
+
+  .btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+  }
+
+  /* Demo Card */
+  .demo-card {
+    background: linear-gradient(
+      135deg,
+      rgba(102, 126, 234, 0.15) 0%,
+      rgba(118, 75, 162, 0.15) 100%
+    );
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .demo-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .demo-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    font-size: 0.8rem;
+    color: #fbbf24;
+    margin-bottom: 16px;
+  }
+
+  .demo-content h3 {
+    font-size: 1.75rem;
+    color: white;
+    margin-bottom: 12px;
+    font-family: "Inter", sans-serif;
+  }
+
+  .demo-content h3 span {
+    color: #818cf8;
+  }
+
+  .demo-content > p {
+    color: #94a3b8;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .demo-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 28px 0;
+  }
+
+  .demo-features li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #cbd5e1;
+    font-size: 0.9rem;
+    padding: 8px 0;
+  }
+
+  .demo-features svg {
+    color: #10b981;
+    flex-shrink: 0;
+  }
+
+  .btn-demo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 16px 24px;
+    background: white;
+    border: none;
+    border-radius: 12px;
+    color: #0f172a;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .btn-demo:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(255, 255, 255, 0.2);
+  }
+
+  .demo-decoration {
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    pointer-events: none;
+  }
+
+  .deco-circle {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(102, 126, 234, 0.2);
+  }
+
+  .deco-circle:nth-child(1) {
+    width: 150px;
+    height: 150px;
+    top: 0;
+    right: 0;
+  }
+
+  .deco-circle:nth-child(2) {
+    width: 100px;
+    height: 100px;
+    top: 50px;
+    right: 100px;
+  }
+
+  .deco-circle:nth-child(3) {
+    width: 60px;
+    height: 60px;
+    top: 120px;
+    right: 30px;
+  }
+
+  /* Contact Info */
+  .contact-info {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    padding: 32px;
+    background: rgba(30, 41, 59, 0.3);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    color: white;
+  }
+
+  .info-item svg {
+    color: #667eea;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .info-item strong {
+    display: block;
+    font-size: 0.8rem;
+    color: #64748b;
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+
+  .info-item p {
+    margin: 0;
+    font-size: 0.95rem;
+  }
+
+  /* ============================================
+     FOOTER
+     ============================================ */
+  .footer {
+    background: #020617;
+    color: white;
+    border-top: 1px solid #334155;
+  }
+
+  .footer-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 24px;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 40px;
+  }
+
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .footer-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .footer-logo h4 {
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    font-family: "Inter", sans-serif;
+  }
+
+  .footer-col p {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+  }
+
+  .footer-col h5 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: white;
+    font-family: "Inter", sans-serif;
+  }
+
+  .footer-col a {
+    color: #94a3b8;
+    transition: color 0.2s;
+  }
+
+  .footer-col a:hover {
+    color: white;
+  }
+
+  .footer-bottom {
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid #1e293b;
+    font-size: 0.85rem;
+    color: #64748b;
+  }
+
+  /* ============================================
+     AUTH MODAL
+     ============================================ */
+  .auth-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .auth-modal.active {
+    display: flex;
+  }
+
+  .auth-modal-content {
+    background: #1e293b;
+    border-radius: 20px;
+    padding: 32px;
+    width: 100%;
+    max-width: 440px;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    color: #64748b;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .modal-close:hover {
+    color: white;
+  }
+
+  .auth-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .auth-tab {
+    flex: 1;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: #94a3b8;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .auth-tab.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-color: transparent;
+    color: white;
+  }
+
+  .auth-form {
+    display: none;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .auth-form.active {
+    display: flex;
+  }
+
+  .form-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: #94a3b8;
+  }
+
+  .form-checkbox input {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+  }
+
+  .form-checkbox a {
+    color: #818cf8;
+  }
+
+  .btn-auth {
+    padding: 14px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-auth:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+  }
+
+  .btn-auth:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .error-message {
+    padding: 10px;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 8px;
+    color: #f87171;
+    font-size: 0.85rem;
+    display: none;
+  }
+
+  .error-message.show {
+    display: block;
+  }
+
+  .success-message {
+    padding: 10px;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 8px;
+    color: #34d399;
+    font-size: 0.85rem;
+    display: none;
+  }
+
+  .success-message.show {
+    display: block;
+  }
+
+  /* ============================================
+     RESPONSIVE
+     ============================================ */
+  @media (max-width: 1024px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .footer-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: #0f172a;
+      flex-direction: column;
+      padding: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav.active {
+      display: flex;
+    }
+
+    .menu-toggle {
+      display: block;
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+    }
+
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-info {
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .footer-grid {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+
+    .footer-logo {
+      justify-content: center;
+    }
+
+    .auth-modal-content {
+      margin: 16px;
+      padding: 24px;
+    }
+  }
+</style>
+
+<script>
+  // API Base URL
+  const API_BASE_URL = "https://raygold-api.azurewebsites.net";
+
+  document.addEventListener("DOMContentLoaded", function () {
+    // Menu toggle
+    const menuToggle = document.querySelector(".menu-toggle");
+    const nav = document.querySelector(".nav");
+
+    if (menuToggle && nav) {
+      menuToggle.addEventListener("click", () => {
+        nav.classList.toggle("active");
+      });
+    }
+
+    // Modal elements
+    const authModal = document.getElementById("authModal");
+    const btnPruebaGratis = document.getElementById("btnPruebaGratis");
+    const closeModal = document.getElementById("closeModal");
+    const authTabs = document.querySelectorAll(".auth-tab");
+    const loginForm = document.getElementById("loginForm");
+    const registerForm = document.getElementById("registerForm");
+    const contactForm = document.getElementById("contactForm");
+
+    // Open modal
+    if (btnPruebaGratis && authModal) {
+      btnPruebaGratis.addEventListener("click", () => {
+        authModal.classList.add("active");
+        document.body.style.overflow = "hidden";
+      });
+    }
+
+    // Close modal
+    if (closeModal && authModal) {
+      closeModal.addEventListener("click", () => {
+        authModal.classList.remove("active");
+        document.body.style.overflow = "";
+      });
+
+      authModal.addEventListener("click", (e) => {
+        if (e.target === authModal) {
+          authModal.classList.remove("active");
+          document.body.style.overflow = "";
+        }
+      });
+    }
+
+    // Tab switching
+    function switchTab(tab) {
+      authTabs.forEach((t) => t.classList.remove("active"));
+      document
+        .querySelectorAll(".auth-form")
+        .forEach((f) => f.classList.remove("active"));
+
+      document.querySelector(`[data-tab="${tab}"]`)?.classList.add("active");
+      document.getElementById(`${tab}Form`)?.classList.add("active");
+      clearErrors();
+    }
+
+    authTabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        switchTab(tab.dataset.tab);
+      });
+    });
+
+    // Error/Success helpers
+    function showError(id, message) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.textContent = message;
+        el.classList.add("show");
+      }
+    }
+
+    function showSuccess(id, message) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.textContent = message;
+        el.classList.add("show");
+      }
+    }
+
+    function clearErrors() {
+      document
+        .querySelectorAll(".error-message, .success-message")
+        .forEach((el) => {
+          el.classList.remove("show");
+          el.textContent = "";
+        });
+    }
+
+    // LOGIN
+    if (loginForm) {
+      loginForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        clearErrors();
+
+        const usuario = document.getElementById("loginUsuario")?.value.trim();
+        const password = document.getElementById("loginPassword")?.value;
+
+        if (!usuario || !password) {
+          showError("loginError", "Por favor, completa todos los campos");
+          return;
+        }
+
+        const btn = loginForm.querySelector(".btn-auth");
+        if (!btn) return;
+
+        const originalText = btn.innerHTML;
+        btn.innerHTML = "<span>Iniciando sesión...</span>";
+        btn.disabled = true;
+
+        try {
+          const response = await fetch(API_BASE_URL + "/identity/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              Usuario: usuario.toUpperCase(),
+              Password: password.toUpperCase(),
+              TipoLoginBiometrico: false,
+            }),
+          });
+
+          if (!response.ok) {
+            const errorData = await response.text();
+            throw new Error(errorData || "Credenciales inválidas");
+          }
+
+          const data = await response.json();
+          localStorage.setItem("access_token", data.access_token);
+          localStorage.setItem("user", JSON.stringify(data.user));
+          window.location.href = "/demo";
+        } catch (error) {
+          showError("loginError", error.message || "Error al iniciar sesión");
+        } finally {
+          btn.innerHTML = originalText;
+          btn.disabled = false;
+        }
+      });
+    }
+
+    // REGISTRO
+    if (registerForm) {
+      registerForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        clearErrors();
+
+        const nombre = document.getElementById("regNombre")?.value.trim();
+        const apellido =
+          document.getElementById("regApellido")?.value.trim() || "";
+        const empresa =
+          document.getElementById("regEmpresa")?.value.trim() || "";
+        const email = document.getElementById("regEmail")?.value.trim();
+        const usuario = document.getElementById("regUsuario")?.value.trim();
+        const password = document.getElementById("regPassword")?.value;
+        const terms = document.getElementById("regTerms")?.checked;
+
+        if (!nombre || !email || !usuario || !password) {
+          showError(
+            "registerError",
+            "Por favor, completa los campos obligatorios"
+          );
+          return;
+        }
+
+        if (usuario.length < 4) {
+          showError(
+            "registerError",
+            "El usuario debe tener al menos 4 caracteres"
+          );
+          return;
+        }
+
+        if (password.length < 6) {
+          showError(
+            "registerError",
+            "La contraseña debe tener al menos 6 caracteres"
+          );
+          return;
+        }
+
+        if (!terms) {
+          showError(
+            "registerError",
+            "Debes aceptar los términos y condiciones"
+          );
+          return;
+        }
+
+        const btn = registerForm.querySelector(".btn-auth");
+        if (!btn) return;
+
+        const originalText = btn.innerHTML;
+        btn.innerHTML = "<span>Creando cuenta...</span>";
+        btn.disabled = true;
+
+        try {
+          const response = await fetch(API_BASE_URL + "/identity/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              Usuario: usuario.toUpperCase(),
+              Password: password,
+              Email: email,
+              FirstName: nombre,
+              LastName: apellido || nombre,
+              Empresa: empresa || "DEMO",
+              Tipo: "WEB",
+              RoleTipo: "Demo",
+              Permiso: "LECTURA",
+              Secutity: 9,
+              Modelo: 99,
+              Visible: true,
+              Grupo: "WEB",
+            }),
+          });
+
+          if (!response.ok) {
+            const errorData = await response.text();
+            throw new Error(errorData || "Error al crear la cuenta");
+          }
+
+          showSuccess(
+            "registerSuccess",
+            "¡Cuenta creada! Ahora puedes iniciar sesión."
+          );
+          setTimeout(() => {
+            switchTab("login");
+            const loginUsuario = document.getElementById("loginUsuario");
+            if (loginUsuario) loginUsuario.value = usuario;
+          }, 2000);
+        } catch (error) {
+          showError(
+            "registerError",
+            error.message || "Error al crear la cuenta"
+          );
+        } finally {
+          btn.innerHTML = originalText;
+          btn.disabled = false;
+        }
+      });
+    }
+
+    // CONTACTO
+    if (contactForm) {
+      contactForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(contactForm);
+        const data = {
+          empresa: formData.get("empresa") || "",
+          nombre: formData.get("nombre") || "",
+          telefono: formData.get("telefono") || "",
+          email: formData.get("email") || "",
+          interes: formData.get("interes") || "informacion",
+          tamano: formData.get("tamano") || "1-5",
+          mensaje: formData.get("mensaje") || "",
+        };
+
+        if (!data.nombre.trim()) {
+          alert("Por favor, introduce tu nombre");
+          return;
+        }
+
+        if (!data.email.trim()) {
+          alert("Por favor, introduce tu email");
+          return;
+        }
+
+        const btn = contactForm.querySelector(".btn-submit");
+        if (!btn) return;
+
+        const originalText = btn.innerHTML;
+        btn.innerHTML = "<span>Enviando...</span>";
+        btn.disabled = true;
+
+        try {
+          const response = await fetch(API_BASE_URL + "/api/contacto", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          });
+
+          const result = await response.json();
+
+          if (!response.ok) {
+            throw new Error(result.message || "Error al enviar");
+          }
+
+          alert(
+            result.message || "¡Gracias! Te responderemos en menos de 24 horas."
+          );
+          contactForm.reset();
+        } catch (error) {
+          console.error("Error contacto:", error);
+          alert(error.message || "Error al enviar. Inténtalo de nuevo.");
+        } finally {
+          btn.innerHTML = originalText;
+          btn.disabled = false;
+        }
+      });
+    }
+  });
+</script>

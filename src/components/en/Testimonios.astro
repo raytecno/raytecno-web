@@ -1,0 +1,270 @@
+---
+// src/components/en/Testimonios.astro
+// Testimonials / success cases section - English version
+---
+
+<section class="testimonios-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-badge">Success Stories</span>
+      <h2>What our clients say</h2>
+      <p>Real jewelry stores with real results</p>
+    </div>
+
+    <div class="testimonios-grid">
+      <!-- Testimonial 1 -->
+      <article class="testimonio-card">
+        <div class="testimonio-quote">
+          <svg class="quote-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"></path>
+          </svg>
+          <p>
+            "We tried 3 generic ERPs before RayGold. None of them understood that
+            a wedding band has 18k gold, a 0.15ct diamond and engraving labor costs.
+            <strong>RayGold includes it all by default.</strong>"
+          </p>
+        </div>
+        <div class="testimonio-result">
+          <span class="result-number">-60%</span>
+          <span class="result-text">inventory time</span>
+        </div>
+        <div class="testimonio-author">
+          <div class="author-avatar">CN</div>
+          <div class="author-info">
+            <strong>Brian Flores</strong>
+            <span>Flores & Sons Jewelry · Valencia</span>
+            <span class="author-years">Client since 2012</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Testimonial 2 -->
+      <article class="testimonio-card featured">
+        <div class="testimonio-quote">
+          <svg class="quote-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"></path>
+          </svg>
+          <p>
+            "We manage 4,000 references with gold, silver and alloy variants.
+            RayGold's manufacturing orders calculate the exact metal.
+            <strong>Before, we did it in Excel.</strong>"
+          </p>
+        </div>
+        <div class="testimonio-result">
+          <span class="result-number">€12,000</span>
+          <span class="result-text">annual savings in waste</span>
+        </div>
+        <div class="testimonio-author">
+          <div class="author-avatar">MO</div>
+          <div class="author-info">
+            <strong>Degan & Ferraz</strong>
+            <span>Ferraz Manufacturing · Córdoba</span>
+            <span class="author-years">Client since 2016</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Testimonial 3 -->
+      <article class="testimonio-card">
+        <div class="testimonio-quote">
+          <svg class="quote-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"></path>
+          </svg>
+          <p>
+            "We opened the fifth store and RayGold scaled without issues. Centralized
+            stock, transfers between stores, commissions... <strong
+              >It's our operational brain.</strong
+            >"
+          </p>
+        </div>
+        <div class="testimonio-result">
+          <span class="result-number">5</span>
+          <span class="result-text">synchronized stores</span>
+        </div>
+        <div class="testimonio-author">
+          <div class="author-avatar">JP</div>
+          <div class="author-info">
+            <strong>David Pablo</strong>
+            <span>Brillante Group · Catalonia</span>
+            <span class="author-years">Client since 2009</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonios-section {
+    padding: 5rem 1.5rem;
+    background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .section-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: rgba(102, 126, 234, 0.2);
+    color: #818cf8;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-radius: 50px;
+    margin-bottom: 1rem;
+  }
+
+  .section-header h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 0.5rem;
+  }
+
+  .section-header p {
+    color: #94a3b8;
+    font-size: 1.1rem;
+    margin: 0;
+  }
+
+  .testimonios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .testimonio-card {
+    background: rgba(30, 41, 59, 0.6);
+    border: 1px solid #334155;
+    border-radius: 16px;
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    transition: all 0.3s ease;
+  }
+
+  .testimonio-card:hover {
+    border-color: #667eea;
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  .testimonio-card.featured {
+    border-color: #667eea;
+    background: linear-gradient(
+      135deg,
+      rgba(102, 126, 234, 0.15) 0%,
+      rgba(30, 41, 59, 0.6) 100%
+    );
+  }
+
+  .testimonio-quote {
+    position: relative;
+  }
+
+  .quote-icon {
+    width: 32px;
+    height: 32px;
+    color: #667eea;
+    opacity: 0.5;
+    margin-bottom: 0.5rem;
+  }
+
+  .testimonio-quote p {
+    color: #e2e8f0;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .testimonio-quote strong {
+    color: white;
+  }
+
+  .testimonio-result {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    padding: 1rem;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 10px;
+  }
+
+  .result-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #10b981;
+  }
+
+  .result-text {
+    font-size: 0.85rem;
+    color: #94a3b8;
+  }
+
+  .testimonio-author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #334155;
+  }
+
+  .author-avatar {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+
+  .author-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .author-info strong {
+    color: white;
+    font-size: 0.95rem;
+  }
+
+  .author-info span {
+    color: #94a3b8;
+    font-size: 0.8rem;
+  }
+
+  .author-years {
+    color: #667eea !important;
+    font-size: 0.75rem !important;
+  }
+
+  @media (max-width: 768px) {
+    .testimonios-section {
+      padding: 3rem 1rem;
+    }
+
+    .section-header h2 {
+      font-size: 1.5rem;
+    }
+
+    .testimonios-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

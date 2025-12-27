@@ -1,0 +1,189 @@
+{
+  "meta": {
+    "title": "RayGold ERP | Software de Gestão para Joalheria",
+    "description": "Software ERP especializado no setor joalheiro. Gestão integral de fabricação, comercial, finanças e estoque para joalherias e oficinas.",
+    "keywords": "ERP joalheria, software gestão joalheria, programa joalheiros, RayGold"
+  },
+  "nav": {
+    "home": "Início",
+    "modules": "Módulos",
+    "technology": "Tecnologia",
+    "pricing": "Preços",
+    "contact": "Contato",
+    "demo": "Solicitar Demo"
+  },
+  "hero": {
+    "badge": "Software ERP especializado",
+    "title": "Transforme a gestão da sua",
+    "titleHighlight": "joalheria",
+    "description": "RayGold ERP é a solução integral projetada especificamente para o setor joalheiro. Controle fabricação, vendas, estoque e finanças a partir de uma única plataforma.",
+    "cta_primary": "Solicitar Demo",
+    "cta_secondary": "Ver Módulos",
+    "stats": {
+      "years": "anos de experiência",
+      "clients": "clientes ativos",
+      "modules": "módulos integrados"
+    }
+  },
+  "modules": {
+    "title": "Módulos",
+    "subtitle": "Tudo o que você precisa para gerenciar seu negócio",
+    "viewAll": "Ver todos os módulos",
+    "learnMore": "Saiba mais",
+    "list": {
+      "maestros": {
+        "title": "Cadastros",
+        "description": "Gestão completa de artigos, preços, estruturas e imagens do seu catálogo de joalheria."
+      },
+      "comercial": {
+        "title": "Comercial",
+        "description": "Controle total de vendas, compras, pedidos e gestão de clientes e fornecedores."
+      },
+      "fabricacion": {
+        "title": "Fabricação",
+        "description": "Planejamento e acompanhamento da produção, ordens de serviço e controle de materiais."
+      },
+      "finanzas": {
+        "title": "Finanças",
+        "description": "Contabilidade integrada, gestão de recebimentos, pagamentos, bancos e relatórios financeiros."
+      },
+      "historicos": {
+        "title": "Históricos",
+        "description": "Acesso completo ao histórico de operações, movimentos e rastreabilidade de peças."
+      },
+      "estadisticas": {
+        "title": "Estatísticas",
+        "description": "Análise de dados, relatórios personalizados e dashboards para tomada de decisões."
+      },
+      "vendedores": {
+        "title": "Vendedores",
+        "description": "Gestão de equipes comerciais, comissões, objetivos e acompanhamento de vendas."
+      },
+      "ecommerce": {
+        "title": "E-commerce",
+        "description": "Integração com loja online, sincronização de estoque e gestão de pedidos web."
+      }
+    }
+  },
+  "features": {
+    "title": "Por que escolher RayGold?",
+    "subtitle": "Projetado por especialistas do setor joalheiro",
+    "list": {
+      "specialized": {
+        "title": "Especializado em Joalheria",
+        "description": "Desenvolvido especificamente para as necessidades únicas do setor joalheiro."
+      },
+      "integrated": {
+        "title": "Totalmente Integrado",
+        "description": "Todos os módulos conectados em uma única plataforma centralizada."
+      },
+      "cloud": {
+        "title": "Na Nuvem",
+        "description": "Acesse de qualquer lugar com total segurança no Microsoft Azure."
+      },
+      "support": {
+        "title": "Suporte Especializado",
+        "description": "Equipe de suporte especializada com mais de 30 anos de experiência."
+      }
+    }
+  },
+  "pricing": {
+    "title": "Preços",
+    "subtitle": "Planos adaptados ao seu negócio",
+    "monthly": "Mensal",
+    "perpetual": "Licença Perpétua",
+    "perUser": "por usuário/mês",
+    "oneTime": "pagamento único",
+    "popular": "Mais popular",
+    "cta": "Solicitar informação",
+    "includes": "Inclui",
+    "plans": {
+      "starter": {
+        "name": "Starter",
+        "description": "Para pequenas joalherias"
+      },
+      "professional": {
+        "name": "Profissional",
+        "description": "Para joalherias em crescimento"
+      },
+      "enterprise": {
+        "name": "Enterprise",
+        "description": "Para grandes empresas"
+      }
+    },
+    "features": {
+      "modules": "módulos incluídos",
+      "users": "usuários",
+      "support": "Suporte",
+      "updates": "Atualizações",
+      "training": "Treinamento",
+      "customization": "Personalização"
+    }
+  },
+  "technology": {
+    "title": "Tecnologia",
+    "subtitle": "Arquitetura moderna e escalável",
+    "description": "RayGold é construído sobre as tecnologias mais avançadas do mercado, garantindo desempenho, segurança e escalabilidade.",
+    "stack": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "cloud": "Infraestrutura Cloud",
+      "database": "Banco de Dados"
+    }
+  },
+  "cta": {
+    "title": "Pronto para transformar seu negócio?",
+    "description": "Solicite uma demonstração personalizada e descubra como RayGold pode ajudá-lo.",
+    "button": "Solicitar Demo Gratuita"
+  },
+  "contact": {
+    "title": "Contato",
+    "subtitle": "Estamos aqui para ajudá-lo",
+    "form": {
+      "name": "Nome",
+      "email": "Email",
+      "phone": "Telefone",
+      "company": "Empresa",
+      "message": "Mensagem",
+      "submit": "Enviar mensagem"
+    },
+    "info": {
+      "address": "Endereço",
+      "phone": "Telefone",
+      "email": "Email",
+      "hours": "Horário"
+    }
+  },
+  "footer": {
+    "description": "Software ERP especializado para o setor joalheiro. Mais de 30 anos de experiência transformando a gestão de joalherias.",
+    "links": {
+      "product": "Produto",
+      "company": "Empresa",
+      "legal": "Legal"
+    },
+    "legal": {
+      "privacy": "Privacidade",
+      "terms": "Termos",
+      "cookies": "Cookies"
+    },
+    "copyright": "Todos os direitos reservados."
+  },
+  "whatsapp": {
+    "tooltip": "Precisa de ajuda?",
+    "message": "Olá, estou interessado em informações sobre RayGold ERP"
+  },
+  "common": {
+    "loading": "Carregando...",
+    "error": "Ocorreu um erro",
+    "retry": "Tentar novamente",
+    "close": "Fechar",
+    "back": "Voltar",
+    "next": "Próximo",
+    "previous": "Anterior",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "all": "Todos",
+    "yes": "Sim",
+    "no": "Não"
+  }
+}

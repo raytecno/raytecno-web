@@ -1,0 +1,189 @@
+{
+  "meta": {
+    "title": "RayGold ERP | Logiciel de Gestion pour Bijouterie",
+    "description": "Logiciel ERP spécialisé pour le secteur de la bijouterie. Gestion complète de la fabrication, du commercial, des finances et des stocks pour bijouteries et ateliers.",
+    "keywords": "ERP bijouterie, logiciel gestion bijouterie, programme bijoutiers, RayGold"
+  },
+  "nav": {
+    "home": "Accueil",
+    "modules": "Modules",
+    "technology": "Technologie",
+    "pricing": "Tarifs",
+    "contact": "Contact",
+    "demo": "Demander une Démo"
+  },
+  "hero": {
+    "badge": "Logiciel ERP spécialisé",
+    "title": "Transformez la gestion de votre",
+    "titleHighlight": "bijouterie",
+    "description": "RayGold ERP est la solution intégrale conçue spécifiquement pour le secteur de la bijouterie. Contrôlez la fabrication, les ventes, les stocks et les finances depuis une plateforme unique.",
+    "cta_primary": "Demander une Démo",
+    "cta_secondary": "Voir les Modules",
+    "stats": {
+      "years": "ans d'expérience",
+      "clients": "clients actifs",
+      "modules": "modules intégrés"
+    }
+  },
+  "modules": {
+    "title": "Modules",
+    "subtitle": "Tout ce dont vous avez besoin pour gérer votre entreprise",
+    "viewAll": "Voir tous les modules",
+    "learnMore": "En savoir plus",
+    "list": {
+      "maestros": {
+        "title": "Données de Base",
+        "description": "Gestion complète des articles, prix, structures et images de votre catalogue de bijouterie."
+      },
+      "comercial": {
+        "title": "Commercial",
+        "description": "Contrôle total des ventes, achats, commandes et gestion des clients et fournisseurs."
+      },
+      "fabricacion": {
+        "title": "Fabrication",
+        "description": "Planification et suivi de la production, ordres de travail et contrôle des matériaux."
+      },
+      "finanzas": {
+        "title": "Finances",
+        "description": "Comptabilité intégrée, gestion des encaissements, paiements, banques et rapports financiers."
+      },
+      "historicos": {
+        "title": "Historiques",
+        "description": "Accès complet à l'historique des opérations, mouvements et traçabilité des pièces."
+      },
+      "estadisticas": {
+        "title": "Statistiques",
+        "description": "Analyse de données, rapports personnalisés et tableaux de bord pour la prise de décision."
+      },
+      "vendedores": {
+        "title": "Équipe Commerciale",
+        "description": "Gestion des équipes commerciales, commissions, objectifs et suivi des ventes."
+      },
+      "ecommerce": {
+        "title": "E-commerce",
+        "description": "Intégration avec la boutique en ligne, synchronisation des stocks et gestion des commandes web."
+      }
+    }
+  },
+  "features": {
+    "title": "Pourquoi choisir RayGold ?",
+    "subtitle": "Conçu par des experts du secteur de la bijouterie",
+    "list": {
+      "specialized": {
+        "title": "Spécialisé Bijouterie",
+        "description": "Développé spécifiquement pour les besoins uniques du secteur de la bijouterie."
+      },
+      "integrated": {
+        "title": "Totalement Intégré",
+        "description": "Tous les modules connectés dans une plateforme centralisée unique."
+      },
+      "cloud": {
+        "title": "Dans le Cloud",
+        "description": "Accédez de n'importe où avec une sécurité totale sur Microsoft Azure."
+      },
+      "support": {
+        "title": "Support Expert",
+        "description": "Équipe de support spécialisée avec plus de 30 ans d'expérience."
+      }
+    }
+  },
+  "pricing": {
+    "title": "Tarifs",
+    "subtitle": "Plans adaptés à votre entreprise",
+    "monthly": "Mensuel",
+    "perpetual": "Licence Perpétuelle",
+    "perUser": "par utilisateur/mois",
+    "oneTime": "paiement unique",
+    "popular": "Le plus populaire",
+    "cta": "Demander des informations",
+    "includes": "Inclut",
+    "plans": {
+      "starter": {
+        "name": "Starter",
+        "description": "Pour les petites bijouteries"
+      },
+      "professional": {
+        "name": "Professionnel",
+        "description": "Pour les bijouteries en croissance"
+      },
+      "enterprise": {
+        "name": "Enterprise",
+        "description": "Pour les grandes entreprises"
+      }
+    },
+    "features": {
+      "modules": "modules inclus",
+      "users": "utilisateurs",
+      "support": "Support",
+      "updates": "Mises à jour",
+      "training": "Formation",
+      "customization": "Personnalisation"
+    }
+  },
+  "technology": {
+    "title": "Technologie",
+    "subtitle": "Architecture moderne et évolutive",
+    "description": "RayGold est construit sur les technologies les plus avancées du marché, garantissant performance, sécurité et évolutivité.",
+    "stack": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "cloud": "Infrastructure Cloud",
+      "database": "Base de Données"
+    }
+  },
+  "cta": {
+    "title": "Prêt à transformer votre entreprise ?",
+    "description": "Demandez une démonstration personnalisée et découvrez comment RayGold peut vous aider.",
+    "button": "Demander une Démo Gratuite"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Nous sommes là pour vous aider",
+    "form": {
+      "name": "Nom",
+      "email": "Email",
+      "phone": "Téléphone",
+      "company": "Entreprise",
+      "message": "Message",
+      "submit": "Envoyer le message"
+    },
+    "info": {
+      "address": "Adresse",
+      "phone": "Téléphone",
+      "email": "Email",
+      "hours": "Horaires"
+    }
+  },
+  "footer": {
+    "description": "Logiciel ERP spécialisé pour le secteur de la bijouterie. Plus de 30 ans d'expérience à transformer la gestion des bijouteries.",
+    "links": {
+      "product": "Produit",
+      "company": "Entreprise",
+      "legal": "Légal"
+    },
+    "legal": {
+      "privacy": "Confidentialité",
+      "terms": "Conditions",
+      "cookies": "Cookies"
+    },
+    "copyright": "Tous droits réservés."
+  },
+  "whatsapp": {
+    "tooltip": "Besoin d'aide ?",
+    "message": "Bonjour, je suis intéressé par des informations sur RayGold ERP"
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Une erreur s'est produite",
+    "retry": "Réessayer",
+    "close": "Fermer",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "all": "Tous",
+    "yes": "Oui",
+    "no": "Non"
+  }
+}

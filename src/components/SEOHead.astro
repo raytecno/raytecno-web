@@ -1,92 +1,204 @@
 ---
 /**
- * SEO Meta Component - Versión simplificada
- * Para insertar en el <head> de Layout.astro
+ * SEOHead - Componente SEO con soporte multiidioma
+ *
+ * Incluye:
+ * - Meta tags básicos
+ * - Open Graph
+ * - Twitter Cards
+ * - hreflang tags para SEO multiidioma
+ * - Schema.org JSON-LD
  */
+
+import { languages, defaultLang, type Language } from "../i18n/config";
+import { getAlternateUrls, useTranslations } from "../i18n/utils";
 
 interface Props {
   title?: string;
   description?: string;
   image?: string;
+  lang?: Language;
+  type?: "website" | "article";
+  noindex?: boolean;
 }
 
-const SITE = {
-  name: 'RayGold ERP',
-  domain: 'https://www.raytecno.es',
-  defaultDescription: 'Software de gestión integral para el sector joyero. ERP especializado con módulos de fabricación, comercial, finanzas y más. +30 años de experiencia.',
-  defaultImage: '/images/og-default.jpg'
-};
-
-const { 
+const {
   title,
-  description = SITE.defaultDescription,
-  image = SITE.defaultImage
+  description,
+  image = "/images/og-default.jpg",
+  lang = defaultLang,
+  type = "website",
+  noindex = false,
 } = Astro.props;
 
-const fullTitle = title ? `${title} | ${SITE.name}` : `${SITE.name} - Software ERP para Joyería`;
-const imageUrl = image.startsWith('http') ? image : `${SITE.domain}${image}`;
-const pageUrl = Astro.url.href;
+const t = useTranslations(lang);
+const siteUrl =
+  Astro.site?.toString().replace(/\/$/, "") || "https://www.raytecno.es";
+const currentUrl = new URL(Astro.url.pathname, siteUrl).toString();
 
-// Schema.org JSON-LD
-const schema = {
+// Usar traducciones como fallback
+const pageTitle = title || t("meta.title");
+const pageDescription = description || t("meta.description");
+const pageImage = image.startsWith("http") ? image : `${siteUrl}${image}`;
+
+// Generar URLs alternativas para hreflang
+const alternateUrls = getAlternateUrls(Astro.url.pathname, siteUrl);
+
+// Código de idioma completo para Open Graph
+const ogLocale = languages[lang].code.replace("-", "_");
+
+// Schema.org JSON-LD para Software
+const schemaOrg = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  "name": "RayGold ERP",
-  "applicationCategory": "BusinessApplication",
-  "operatingSystem": "Windows, Web",
-  "description": description,
-  "url": SITE.domain,
-  "author": {
-    "@type": "Organization",
-    "name": "Raytecno BCN SL",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Montgat, Barcelona",
-      "addressCountry": "ES"
-    },
-    "telephone": "+34648088550",
-    "email": "info@raytecno.es"
+  name: "RayGold ERP",
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Web, Windows",
+  description: pageDescription,
+  url: siteUrl,
+  offers: {
+    "@type": "Offer",
+    price: "29",
+    priceCurrency: "EUR",
+    priceValidUntil: new Date(new Date().getFullYear() + 1, 11, 31)
+      .toISOString()
+      .split("T")[0],
   },
-  "offers": {
-    "@type": "AggregateOffer",
-    "lowPrice": "29",
-    "highPrice": "12000",
-    "priceCurrency": "EUR"
-  }
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "4.8",
+    ratingCount: "150",
+    bestRating: "5",
+    worstRating: "1",
+  },
+  provider: {
+    "@type": "Organization",
+    name: "Raytecno BCN SL",
+    url: siteUrl,
+    logo: `${siteUrl}/images/logo.svg`,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Montgat",
+      addressRegion: "Barcelona",
+      addressCountry: "ES",
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: "+34-933-741-047",
+      contactType: "sales",
+      availableLanguage: [
+        "Spanish",
+        "English",
+        "French",
+        "Catalan",
+        "Portuguese",
+      ],
+    },
+  },
+};
+
+// Schema.org para la organización
+const schemaOrganization = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Raytecno BCN SL",
+  url: siteUrl,
+  logo: `${siteUrl}/images/logo.svg`,
+  description:
+    "Software ERP especializado para el sector joyero. Más de 30 años de experiencia.",
+  foundingDate: "1994",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Montgat",
+    addressRegion: "Barcelona",
+    postalCode: "08390",
+    addressCountry: "ES",
+  },
+  sameAs: ["https://www.linkedin.com/company/raytecno"],
 };
 ---
 
-<!-- Primary Meta Tags -->
-<title>{fullTitle}</title>
-<meta name="title" content={fullTitle} />
-<meta name="description" content={description} />
-<meta name="keywords" content="ERP joyería, software joyería, gestión joyería, RayGold, fabricación joyas, Raytecno, software fabricación, ERP Barcelona" />
-<meta name="author" content="Raytecno BCN SL" />
-<meta name="robots" content="index, follow" />
-<link rel="canonical" href={pageUrl} />
+<!-- Meta básicos -->
+<title>{pageTitle}</title>
+<meta name="description" content={pageDescription} />
+<meta name="keywords" content={t("meta.keywords")} />
+<link rel="canonical" href={currentUrl} />
 
-<!-- Theme -->
+<!-- Robots -->
+{
+  noindex ? (
+    <meta name="robots" content="noindex, nofollow" />
+  ) : (
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+  )
+}
+
+<!-- hreflang tags para SEO multiidioma -->
+{
+  alternateUrls.map((alt) => (
+    <link rel="alternate" hreflang={alt.hreflang} href={alt.url} />
+  ))
+}
+<!-- x-default para el idioma por defecto -->
+<link
+  rel="alternate"
+  hreflang="x-default"
+  href={`${siteUrl}${Astro.url.pathname.replace(/^\/(en|fr|ca|pt-br)/, "") || "/"}`}
+/>
+
+<!-- Open Graph -->
+<meta property="og:type" content={type} />
+<meta property="og:url" content={currentUrl} />
+<meta property="og:title" content={pageTitle} />
+<meta property="og:description" content={pageDescription} />
+<meta property="og:image" content={pageImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={pageTitle} />
+<meta property="og:locale" content={ogLocale} />
+<meta property="og:site_name" content="RayGold ERP" />
+
+<!-- Locales alternativos para Open Graph -->
+{
+  Object.entries(languages)
+    .filter(([code]) => code !== lang)
+    .map(([code, info]) => (
+      <meta
+        property="og:locale:alternate"
+        content={info.code.replace("-", "_")}
+      />
+    ))
+}
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={currentUrl} />
+<meta name="twitter:title" content={pageTitle} />
+<meta name="twitter:description" content={pageDescription} />
+<meta name="twitter:image" content={pageImage} />
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
 <meta name="theme-color" content="#667eea" />
 
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta property="og:url" content={pageUrl} />
-<meta property="og:title" content={fullTitle} />
-<meta property="og:description" content={description} />
-<meta property="og:image" content={imageUrl} />
-<meta property="og:locale" content="es_ES" />
-<meta property="og:site_name" content={SITE.name} />
+<!-- Preconnect para rendimiento -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://raygoldstorage.blob.core.windows.net" />
 
-<!-- Twitter -->
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:url" content={pageUrl} />
-<meta name="twitter:title" content={fullTitle} />
-<meta name="twitter:description" content={description} />
-<meta name="twitter:image" content={imageUrl} />
+<!-- DNS Prefetch -->
+<link rel="dns-prefetch" href="https://www.google-analytics.com" />
 
-<!-- Geo (SEO Local) -->
-<meta name="geo.region" content="ES-CT" />
-<meta name="geo.placename" content="Barcelona" />
-
-<!-- JSON-LD -->
-<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<!-- Schema.org JSON-LD -->
+<script type="application/ld+json" set:html={JSON.stringify(schemaOrg)} />
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify(schemaOrganization)}
+/>

@@ -1,17 +1,23 @@
 ---
+/**
+ * Layout principal con soporte multiidioma
+ * Fusión del original + i18n
+ */
 import WhatsAppButton from "../components/WhatsAppButton.astro";
 import SEOHead from "../components/SEOHead.astro";
+import { defaultLang, type Language } from "../i18n/config";
 
 export interface Props {
   title: string;
   description?: string;
+  lang?: Language;
 }
 
-const { title, description } = Astro.props;
+const { title, description, lang = defaultLang } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -22,13 +28,54 @@ const { title, description } = Astro.props;
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
-    <!-- SEO -->
-    <SEOHead title={title} description={description} />
+    <!-- SEO con soporte multiidioma -->
+    <SEOHead title={title} description={description} lang={lang} />
   </head>
   <body>
     <slot />
-    <!-- WhatsApp flotante -->
-    <WhatsAppButton />
+    <!-- WhatsApp flotante con mensaje en el idioma correspondiente -->
+    <WhatsAppButton lang={lang} />
+
+    <!-- Script global para manejar navegación con anchors entre páginas -->
+    <script is:inline>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Manejar clics en enlaces con hash que apuntan a otra página
+        document.addEventListener("click", function (e) {
+          const link = e.target.closest("a");
+          if (!link) return;
+
+          const href = link.getAttribute("href");
+          if (!href) return;
+
+          // Detectar enlaces tipo /en/#section o /#section
+          const hashMatch = href.match(/^(\/[^#]*)(#.+)$/);
+          if (!hashMatch) return;
+
+          const [, basePath, hash] = hashMatch;
+          const currentPath = window.location.pathname;
+
+          // Normalizar paths (quitar trailing slash)
+          const normalizedBase = basePath.replace(/\/$/, "") || "/";
+          const normalizedCurrent = currentPath.replace(/\/$/, "") || "/";
+
+          // Si estamos en la misma página base, dejar que el navegador haga scroll
+          if (normalizedBase === normalizedCurrent) {
+            const target = document.querySelector(hash);
+            if (target) {
+              e.preventDefault();
+              target.scrollIntoView({ behavior: "smooth" });
+              history.pushState(null, "", hash);
+            }
+            return;
+          }
+
+          // Si estamos en una subpágina diferente, forzar navegación completa
+          // Esto evita que el navegador intente hacer scroll en la página actual
+          e.preventDefault();
+          window.location.href = href;
+        });
+      });
+    </script>
   </body>
 </html>
 

@@ -1,17 +1,15 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import { getPageBySlug } from "../wordpress.js";
+import Layout from "../../layouts/Layout.astro";
 
-import Hero from "../components/Hero.astro";
-import PorQueRayGold from "../components/PorQueRayGold.astro";
-import Testimonios from "../components/Testimonios.astro";
-import VideoDemo from "../components/VideoDemo.astro";
+import Hero from "../../components/en/Hero.astro";
+import Why from "../../components/en/Why.astro";
+import Testimonios from "../../components/en/Testimonios.astro";
+import VideoDemo from "../../components/en/VideoDemo.astro";
 
-// Obtener contenido de WordPress
-const page = await getPageBySlug("inicio");
+const lang = "en";
 ---
 
-<Layout title="RayGold - Software ERP para Joyería">
+<Layout title="RayGold - ERP Software for Jewelry" lang={lang}>
   <!-- HEADER -->
   <header class="header">
     <div class="header-inner">
@@ -34,40 +32,40 @@ const page = await getPageBySlug("inicio");
         </svg>
         <div class="logo-text">
           <h1>RAYGOLD</h1>
-          <span>Software para Joyería</span>
+          <span>Jewelry Software</span>
         </div>
       </div>
 
       <nav class="nav">
-        <a href="/#inicio">Inicio</a>
-        <a href="/modulos">Módulos</a>
-        <a href="/#porque">Por qué RayGold</a>
-        <a href="/tecnologia">Tecnología</a>
-        <a href="/precios">Precios</a>
-        <a href="/contacto">Contacto</a>
+        <a href="/en/#home">Home</a>
+        <a href="/en/modules">Modules</a>
+        <a href="/en/#why">Why RayGold</a>
+        <a href="/en/technology">Technology</a>
+        <a href="/en/pricing">Pricing</a>
+        <a href="/en/contact">Contact</a>
       </nav>
 
       <button class="menu-toggle">☰</button>
     </div>
   </header>
 
-  <!-- HERO COMERCIAL -->
-  <div id="inicio">
+  <!-- HERO -->
+  <div id="home">
     <Hero />
   </div>
 
-  <!-- MÓDULOS -->
-  <section id="modulos" class="modulos-section">
+  <!-- MODULES -->
+  <section id="modules" class="modulos-section">
     <div class="modulos-container">
       <div class="modulos-header">
-        <span class="section-badge">Solución completa</span>
-        <h2>8 módulos integrados para tu joyería</h2>
-        <p>Todo lo que necesitas en un solo sistema</p>
+        <span class="section-badge">Complete Solution</span>
+        <h2>8 integrated modules for your jewelry</h2>
+        <p>Everything you need in a single system</p>
       </div>
 
       <div class="modulos-grid">
-        <!-- Maestros -->
-        <a href="/modulos/maestros" class="modulo-card" data-color="#667eea">
+        <!-- Masters -->
+        <a href="/en/modules/masters" class="modulo-card" data-color="#667eea">
           <div class="modulo-icon">
             <svg viewBox="0 0 64 64" fill="none">
               <rect
@@ -95,12 +93,12 @@ const page = await getPageBySlug("inicio");
                 stroke-linecap="round"></path>
             </svg>
           </div>
-          <h4>Maestros</h4>
-          <p>Artículos, proveedores, clientes y familias</p>
+          <h4>Masters</h4>
+          <p>Items, suppliers, customers and families</p>
         </a>
 
-        <!-- Comercial -->
-        <a href="/modulos/comercial" class="modulo-card" data-color="#06b6d4">
+        <!-- Sales -->
+        <a href="/en/modules/sales" class="modulo-card" data-color="#06b6d4">
           <div class="modulo-icon">
             <svg viewBox="0 0 64 64" fill="none">
               <rect
@@ -129,12 +127,16 @@ const page = await getPageBySlug("inicio");
                 stroke-linecap="round"></path>
             </svg>
           </div>
-          <h4>Comercial</h4>
-          <p>Ventas, pedidos y facturación</p>
+          <h4>Sales</h4>
+          <p>Sales, orders and invoicing</p>
         </a>
 
-        <!-- Fabricación -->
-        <a href="/modulos/fabricacion" class="modulo-card" data-color="#f59e0b">
+        <!-- Manufacturing -->
+        <a
+          href="/en/modules/manufacturing"
+          class="modulo-card"
+          data-color="#f59e0b"
+        >
           <div class="modulo-icon">
             <svg viewBox="0 0 64 64" fill="none">
               <rect
@@ -166,12 +168,12 @@ const page = await getPageBySlug("inicio");
               <path d="M6 52h52" stroke="#718096" stroke-width="3"></path>
             </svg>
           </div>
-          <h4>Fabricación</h4>
-          <p>Producción, inventarios y calidad</p>
+          <h4>Manufacturing</h4>
+          <p>Production, inventory and quality</p>
         </a>
 
-        <!-- Finanzas -->
-        <a href="/modulos/finanzas" class="modulo-card" data-color="#10b981">
+        <!-- Finance -->
+        <a href="/en/modules/finance" class="modulo-card" data-color="#10b981">
           <div class="modulo-icon">
             <svg viewBox="0 0 64 64" fill="none">
               <rect
@@ -200,12 +202,12 @@ const page = await getPageBySlug("inicio");
               >
             </svg>
           </div>
-          <h4>Finanzas</h4>
-          <p>Contabilidad, tesorería e IVA</p>
+          <h4>Finance</h4>
+          <p>Accounting, treasury and VAT</p>
         </a>
 
-        <!-- Históricos -->
-        <a href="/modulos/historicos" class="modulo-card" data-color="#8b5cf6">
+        <!-- History -->
+        <a href="/en/modules/history" class="modulo-card" data-color="#8b5cf6">
           <div class="modulo-icon">
             <svg viewBox="0 0 64 64" fill="none">
               <rect
@@ -235,13 +237,13 @@ const page = await getPageBySlug("inicio");
                 stroke-linecap="round"></path>
             </svg>
           </div>
-          <h4>Históricos</h4>
-          <p>Datos históricos y tendencias</p>
+          <h4>History</h4>
+          <p>Historical data and trends</p>
         </a>
 
-        <!-- Estadísticas -->
+        <!-- Analytics -->
         <a
-          href="/modulos/estadisticas"
+          href="/en/modules/analytics"
           class="modulo-card"
           data-color="#ec4899"
         >
@@ -268,12 +270,16 @@ const page = await getPageBySlug("inicio");
               <circle cx="52" cy="16" r="3" fill="#a855f7"></circle>
             </svg>
           </div>
-          <h4>Estadísticas</h4>
-          <p>Informes y cuadros de mando</p>
+          <h4>Analytics</h4>
+          <p>Reports and dashboards</p>
         </a>
 
-        <!-- Vendedores -->
-        <a href="/modulos/vendedores" class="modulo-card" data-color="#3b82f6">
+        <!-- Salespeople -->
+        <a
+          href="/en/modules/salespeople"
+          class="modulo-card"
+          data-color="#3b82f6"
+        >
           <div class="modulo-icon">
             <svg viewBox="0 0 64 64" fill="none">
               <circle
@@ -311,12 +317,16 @@ const page = await getPageBySlug("inicio");
                 stroke-linecap="round"></path>
             </svg>
           </div>
-          <h4>Vendedores</h4>
-          <p>Gestión de rutas y visitas</p>
+          <h4>Salespeople</h4>
+          <p>Route and visit management</p>
         </a>
 
         <!-- Ecommerce -->
-        <a href="/modulos/ecommerce" class="modulo-card" data-color="#6366f1">
+        <a
+          href="/en/modules/ecommerce"
+          class="modulo-card"
+          data-color="#6366f1"
+        >
           <div class="modulo-icon">
             <svg viewBox="0 0 64 64" fill="none">
               <circle
@@ -352,56 +362,49 @@ const page = await getPageBySlug("inicio");
             </svg>
           </div>
           <h4>Ecommerce</h4>
-          <p>Tiendas online y marketplaces</p>
+          <p>Online stores and marketplaces</p>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- POR QUÉ RAYGOLD -->
-  <div id="porque">
-    <PorQueRayGold />
+  <!-- WHY RAYGOLD -->
+  <div id="why">
+    <Why />
   </div>
 
-  <!-- VIDEO DEMOSTRACION ERP RAYGOLD -->
+  <!-- VIDEO DEMO -->
   <VideoDemo />
 
-  <!-- TESTIMONIOS -->
+  <!-- TESTIMONIALS -->
   <Testimonios />
 
-  <!-- NOSOTROS -->
-  <section id="nosotros" class="nosotros">
+  <!-- ABOUT US -->
+  <section id="about" class="nosotros">
     <div class="nosotros-inner">
-      <h3>Nuestra historia</h3>
+      <h3>Our Story</h3>
 
       <div class="nosotros-content">
-        {
-          page ? (
-            <div class="wp-content" set:html={page.content} />
-          ) : (
-            <div class="wp-content">
-              <p>
-                <strong>RayGold Fabricación</strong> es ante todo una Aplicación
-                Integradora cuyo propósito principal es proporcionar información
-                para la toma de decisiones correctas, gestionar y dar soluciones
-                a los pequeños detalles operativos.
-              </p>
-              <p>
-                RayGold se adapta a un mundo tecnológico y de desarrollo cada
-                vez más exigente y a un mercado altamente competitivo,
-                equilibrando la complejidad a la simplicidad.
-              </p>
-            </div>
-          )
-        }
+        <div class="wp-content">
+          <p>
+            <strong>RayGold Manufacturing</strong> is first and foremost an Integrating
+            Application whose main purpose is to provide information for making correct
+            decisions, manage and provide solutions to small operational details.
+          </p>
+          <p>
+            RayGold adapts to an increasingly demanding technological and
+            development world and to a highly competitive market, balancing
+            complexity with simplicity.
+          </p>
+        </div>
       </div>
 
-      <a href="/galeria" class="btn-galeria">Ver Galería de Marcas →</a>
+      <a href="/en/gallery" class="btn-galeria">View Brand Gallery →</a>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer id="contacto" class="footer">
+  <footer id="contact-footer" class="footer">
     <div class="footer-grid">
       <div class="footer-col">
         <div class="footer-logo">
@@ -421,72 +424,66 @@ const page = await getPageBySlug("inicio");
           <h4>RAYTECNO BCN SL</h4>
         </div>
         <p>
-          Soluciones tecnológicas integrales para la industria joyera desde
+          Comprehensive technology solutions for the jewelry industry since
           1990.
         </p>
       </div>
 
       <div class="footer-col">
-        <h5>Contacto</h5>
+        <h5>Contact</h5>
         <p>📍 Montgat, Barcelona</p>
         <p>📧 info@raytecno.es</p>
         <p>📞 648 088 550</p>
       </div>
 
       <div class="footer-col">
-        <h5>Módulos</h5>
-        <p><a href="/modulos/maestros">Maestros</a></p>
-        <p><a href="/modulos/comercial">Comercial</a></p>
-        <p><a href="/modulos/fabricacion">Fabricación</a></p>
-        <p><a href="/modulos/finanzas">Finanzas</a></p>
+        <h5>Modules</h5>
+        <p><a href="/en/modules/masters">Masters</a></p>
+        <p><a href="/en/modules/sales">Sales</a></p>
+        <p><a href="/en/modules/manufacturing">Manufacturing</a></p>
+        <p><a href="/en/modules/finance">Finance</a></p>
       </div>
 
       <div class="footer-col">
-        <h5>Horario</h5>
-        <p>Lun-Vie: 09:00 - 18:00</p>
-        <p>Sáb-Dom: Cerrado</p>
+        <h5>Hours</h5>
+        <p>Mon-Fri: 09:00 - 18:00</p>
+        <p>Sat-Sun: Closed</p>
       </div>
     </div>
 
     <div class="footer-bottom">
-      <p>© 2025 RayGold Jewelry. Todos los derechos reservados.</p>
+      <p>© 2024 Raytecno BCN SL. All rights reserved.</p>
     </div>
   </footer>
 </Layout>
 
 <style>
-  :root {
-    --primary: #667eea;
-    --dark: #1a202c;
-    --gray: #64748b;
-    --light: #f8fafc;
-  }
-
   /* HEADER */
   .header {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
+    z-index: 100;
     background: rgba(15, 23, 42, 0.95);
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .header-inner {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 12px 24px;
+    padding: 1rem 1.5rem;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
   }
 
   .logo {
     display: flex;
     align-items: center;
     gap: 12px;
+    text-decoration: none;
   }
 
   .logo-icon {
@@ -495,49 +492,47 @@ const page = await getPageBySlug("inicio");
   }
 
   .logo-text h1 {
-    font-size: 1.4rem;
+    font-size: 1.25rem;
     font-weight: 700;
     color: white;
     letter-spacing: 2px;
-    line-height: 1;
+    margin: 0;
   }
 
   .logo-text span {
     font-size: 0.7rem;
     color: #94a3b8;
+    display: block;
   }
 
   .nav {
     display: flex;
-    gap: 8px;
+    gap: 2rem;
   }
 
   .nav a {
-    padding: 8px 16px;
+    color: #94a3b8;
     font-size: 0.9rem;
     font-weight: 500;
-    color: #94a3b8;
-    border-radius: 8px;
-    transition: all 0.2s;
+    transition: color 0.2s;
   }
 
   .nav a:hover {
     color: white;
-    background: rgba(255, 255, 255, 0.1);
   }
 
   .menu-toggle {
     display: none;
     background: none;
     border: none;
+    color: white;
     font-size: 1.5rem;
     cursor: pointer;
-    color: white;
   }
 
-  /* MÓDULOS SECTION */
+  /* MODULES SECTION */
   .modulos-section {
-    background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+    background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
     padding: 5rem 1.5rem;
   }
 
@@ -554,55 +549,49 @@ const page = await getPageBySlug("inicio");
   .section-badge {
     display: inline-block;
     padding: 0.5rem 1rem;
-    background: rgba(16, 185, 129, 0.2);
-    color: #10b981;
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    background: rgba(102, 126, 234, 0.15);
+    border: 1px solid rgba(102, 126, 234, 0.3);
     border-radius: 50px;
+    color: #818cf8;
+    font-size: 0.8rem;
+    font-weight: 500;
     margin-bottom: 1rem;
   }
 
   .modulos-header h2 {
-    font-size: 2.5rem;
-    font-weight: 700;
+    font-size: 2.25rem;
     color: white;
-    margin: 0 0 0.75rem;
+    margin-bottom: 0.75rem;
+    font-weight: 700;
   }
 
   .modulos-header p {
     color: #94a3b8;
     font-size: 1.1rem;
-    margin: 0;
   }
 
-  /* GRID DE MÓDULOS - 4 columnas */
   .modulos-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
   }
 
-  /* CARD DE MÓDULO - Estilo centrado */
   .modulo-card {
-    background: rgba(30, 41, 59, 0.6);
-    border: 1px solid #334155;
+    background: rgba(30, 41, 59, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 16px;
-    padding: 32px 20px;
+    padding: 28px 20px;
     text-align: center;
     text-decoration: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
+    transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
   }
 
-  /* Borde superior animado */
   .modulo-card::before {
     content: "";
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
     right: 0;
     height: 3px;
@@ -622,7 +611,6 @@ const page = await getPageBySlug("inicio");
     border-color: var(--card-color, #667eea);
   }
 
-  /* Colores específicos por card */
   .modulo-card[data-color="#667eea"] {
     --card-color: #667eea;
   }
@@ -678,7 +666,7 @@ const page = await getPageBySlug("inicio");
     margin: 0;
   }
 
-  /* NOSOTROS */
+  /* ABOUT US */
   .nosotros {
     background: #0f172a;
     padding: 5rem 1.5rem;
@@ -882,13 +870,13 @@ const page = await getPageBySlug("inicio");
     document.querySelector(".nav")?.classList.toggle("active");
   });
 
-  // Solo hacer smooth scroll si estamos en la página principal
-  if (window.location.pathname === "/") {
-    document.querySelectorAll('a[href^="/#"]').forEach((anchor) => {
+  // Smooth scroll for anchor links on English pages
+  if (window.location.pathname.startsWith("/en")) {
+    document.querySelectorAll('a[href^="/en/#"]').forEach((anchor) => {
       anchor.addEventListener("click", function (e) {
         const href = this.getAttribute("href");
-        const targetId = href.replace("/#", "#");
-        const target = document.querySelector(targetId);
+        const targetId = href?.replace("/en/#", "#");
+        const target = document.querySelector(targetId || "");
         if (target) {
           e.preventDefault();
           target.scrollIntoView({ behavior: "smooth" });
