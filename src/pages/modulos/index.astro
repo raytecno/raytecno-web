@@ -130,13 +130,29 @@ const modulos = [
           <div class="logo-icon">
             <svg viewBox="0 0 40 40" fill="none">
               <defs>
-                <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" style="stop-color:#667eea" />
-                  <stop offset="100%" style="stop-color:#764ba2" />
+                <linearGradient
+                  id="logoGrad"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
+                  <stop offset="0%" style="stop-color:#667eea"></stop>
+                  <stop offset="100%" style="stop-color:#764ba2"></stop>
                 </linearGradient>
               </defs>
-              <rect x="4" y="4" width="32" height="32" rx="8" fill="url(#logoGrad)"/>
-              <path d="M12 20h16M20 12v16" stroke="white" stroke-width="3" stroke-linecap="round"/>
+              <rect
+                x="4"
+                y="4"
+                width="32"
+                height="32"
+                rx="8"
+                fill="url(#logoGrad)"></rect>
+              <path
+                d="M12 20h16M20 12v16"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"></path>
             </svg>
           </div>
           <div class="logo-text">
@@ -144,14 +160,14 @@ const modulos = [
             <span class="logo-tagline">Software para Joyería</span>
           </div>
         </a>
-        
+
         <nav class="nav-menu">
           <a href="/">Inicio</a>
           <a href="/modulos" class="active">Módulos</a>
-          <a href="/por-que-raygold">Por qué RayGold</a>
+          <a href="/#porque">Por qué RayGold</a>
           <a href="/tecnologia">Tecnología</a>
           <a href="/precios">Precios</a>
-          <a href="/contacto">Contacto</a>
+          <a href="/#contacto">Contacto</a>
         </nav>
       </nav>
     </header>
@@ -161,7 +177,10 @@ const modulos = [
       <div class="container">
         <span class="badge">SOLUCIÓN COMPLETA</span>
         <h1>8 módulos integrados para tu joyería</h1>
-        <p class="hero-subtitle">Todo lo que necesitas en un solo sistema. Cada módulo está diseñado específicamente para el sector joyero.</p>
+        <p class="hero-subtitle">
+          Todo lo que necesitas en un solo sistema. Cada módulo está diseñado
+          específicamente para el sector joyero.
+        </p>
       </div>
     </section>
 
@@ -169,20 +188,31 @@ const modulos = [
     <section class="modulos-section">
       <div class="container">
         <div class="modulos-grid">
-          {modulos.map((modulo) => (
-            <a href={`/modulos/${modulo.id}`} class="modulo-card" style={`--modulo-color: ${modulo.color}`}>
-              <div class="modulo-icon" set:html={modulo.icono} />
-              <div class="modulo-content">
-                <h3>{modulo.nombre}</h3>
-                <p>{modulo.descripcion}</p>
-              </div>
-              <div class="modulo-arrow">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-              </div>
-            </a>
-          ))}
+          {
+            modulos.map((modulo) => (
+              <a
+                href={`/modulos/${modulo.id}`}
+                class="modulo-card"
+                style={`--modulo-color: ${modulo.color}`}
+              >
+                <div class="modulo-icon" set:html={modulo.icono} />
+                <div class="modulo-content">
+                  <h3>{modulo.nombre}</h3>
+                  <p>{modulo.descripcion}</p>
+                </div>
+                <div class="modulo-arrow">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </a>
+            ))
+          }
         </div>
       </div>
     </section>
@@ -191,9 +221,12 @@ const modulos = [
     <section class="cta-section">
       <div class="container">
         <h2>¿Quieres ver todos los módulos en acción?</h2>
-        <p>Solicita una demostración personalizada y descubre cómo RayGold puede transformar tu negocio.</p>
+        <p>
+          Solicita una demostración personalizada y descubre cómo RayGold puede
+          transformar tu negocio.
+        </p>
         <div class="cta-buttons">
-          <a href="/contacto" class="btn-primary">Solicitar Demo</a>
+          <a href="/#contacto" class="btn-primary">Solicitar Demo</a>
           <a href="/precios" class="btn-secondary">Ver Precios</a>
         </div>
       </div>
@@ -355,7 +388,7 @@ const modulos = [
   }
 
   .modulo-card::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -433,7 +466,11 @@ const modulos = [
   .cta-section {
     padding: 4rem 0;
     text-align: center;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    background: linear-gradient(
+      135deg,
+      rgba(102, 126, 234, 0.1) 0%,
+      rgba(118, 75, 162, 0.1) 100%
+    );
     border-top: 1px solid rgba(255, 255, 255, 0.05);
   }
 

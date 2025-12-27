@@ -17,7 +17,7 @@
 
 TESTIMONIO 1 - Joyería tradicional familiar
 ─────────────────────────────────────────────
-Empresa:    Joyería Navarro e Hijos
+Empresa:    Joyería Flores e Hijos
 Ubicación:  Valencia
 Tipo:       Joyería tradicional con taller propio
 Años cliente: 12 años
@@ -30,12 +30,12 @@ de obra de grabado. RayGold lo trae de serie."
 Resultado clave:
 → Reducción del 60% en tiempo de inventario mensual
 
-Persona:    Carlos Navarro, 2ª generación
+Persona:    Brian Flores, 2ª generación
 ────────────────────────────────────────────────────────────────
 
 TESTIMONIO 2 - Fabricante/Mayorista
 ─────────────────────────────────────────────
-Empresa:    Fabricaciones Ordaz S.L.
+Empresa:    Fabricaciones Ferraz S.L.
 Ubicación:  Córdoba (capital de la joyería española)
 Tipo:       Fabricante y mayorista
 Años cliente: 8 años
@@ -48,7 +48,7 @@ metal exacto que necesitamos. Antes lo hacíamos en Excel."
 Resultado clave:
 → Control exacto de mermas: ahorro de 12.000€/año en metal
 
-Persona:    María José Ordaz, Directora de Operaciones
+Persona:    Degan & Ferraz, Directora de Operaciones
 ────────────────────────────────────────────────────────────────
 
 TESTIMONIO 3 - Cadena de tiendas
@@ -66,7 +66,7 @@ vendedores... todo en tiempo real. Es nuestro cerebro."
 Resultado clave:
 → Visibilidad de stock en todas las tiendas al instante
 
-Persona:    Jordi Puig, Director General
+Persona:    David Pablo, Director General
 ────────────────────────────────────────────────────────────────
 
 TESTIMONIO 4 - Joyería con e-commerce

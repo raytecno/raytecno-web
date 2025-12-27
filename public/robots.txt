@@ -1,0 +1,46 @@
+# robots.txt para RayGold / Raytecno
+# https://www.raytecno.es
+
+User-agent: *
+Allow: /
+
+# Bloquear rutas de administración y archivos privados
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_astro/
+Disallow: /wp-admin/
+Disallow: /wp-json/
+
+# Bloquear parámetros de búsqueda que generan duplicados
+Disallow: /*?*
+Allow: /*?page=
+
+# Archivos que no deben indexarse
+Disallow: /*.json$
+Disallow: /*.xml$
+
+# Sitemap
+Sitemap: https://www.raytecno.es/sitemap-index.xml
+
+# Crawl-delay (opcional, algunos bots lo respetan)
+Crawl-delay: 1
+
+# Bots específicos
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Bloquear bots de IA que scrapen contenido (opcional)
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /

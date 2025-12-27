@@ -14,9 +14,21 @@ const secciones = [
     nombre: "Rutas",
     descripcion: "Planificación y gestión de rutas comerciales",
     imagenes: [
-      { url: `${blobBaseUrl}/VEN01.png`, titulo: "Rutas Comerciales", descripcion: "Definición de zonas y rutas" },
-      { url: `${blobBaseUrl}/VEN02.png`, titulo: "Planificación", descripcion: "Calendario de visitas" },
-      { url: `${blobBaseUrl}/VEN03.png`, titulo: "Optimización", descripcion: "Rutas optimizadas" },
+      {
+        url: `${blobBaseUrl}/VEN01.png`,
+        titulo: "Rutas Comerciales",
+        descripcion: "Definición de zonas y rutas",
+      },
+      {
+        url: `${blobBaseUrl}/VEN02.png`,
+        titulo: "Planificación",
+        descripcion: "Calendario de visitas",
+      },
+      {
+        url: `${blobBaseUrl}/VEN03.png`,
+        titulo: "Optimización",
+        descripcion: "Rutas optimizadas",
+      },
     ],
   },
   {
@@ -24,9 +36,21 @@ const secciones = [
     nombre: "Visitas",
     descripcion: "Registro y seguimiento de visitas",
     imagenes: [
-      { url: `${blobBaseUrl}/VIS01.png`, titulo: "Registro de Visitas", descripcion: "Control de visitas realizadas" },
-      { url: `${blobBaseUrl}/VIS02.png`, titulo: "Check-in", descripcion: "Geolocalización de visitas" },
-      { url: `${blobBaseUrl}/VIS03.png`, titulo: "Informes", descripcion: "Reportes de actividad" },
+      {
+        url: `${blobBaseUrl}/VIS01.png`,
+        titulo: "Registro de Visitas",
+        descripcion: "Control de visitas realizadas",
+      },
+      {
+        url: `${blobBaseUrl}/VIS02.png`,
+        titulo: "Check-in",
+        descripcion: "Geolocalización de visitas",
+      },
+      {
+        url: `${blobBaseUrl}/VIS03.png`,
+        titulo: "Informes",
+        descripcion: "Reportes de actividad",
+      },
     ],
   },
   {
@@ -34,9 +58,21 @@ const secciones = [
     nombre: "Comisiones",
     descripcion: "Cálculo automático de comisiones",
     imagenes: [
-      { url: `${blobBaseUrl}/COM01.png`, titulo: "Comisiones", descripcion: "Sistema de comisiones flexible" },
-      { url: `${blobBaseUrl}/COM02.png`, titulo: "Escalas", descripcion: "Escalas por objetivos" },
-      { url: `${blobBaseUrl}/COM03.png`, titulo: "Liquidación", descripcion: "Liquidación automática" },
+      {
+        url: `${blobBaseUrl}/COM01.png`,
+        titulo: "Comisiones",
+        descripcion: "Sistema de comisiones flexible",
+      },
+      {
+        url: `${blobBaseUrl}/COM02.png`,
+        titulo: "Escalas",
+        descripcion: "Escalas por objetivos",
+      },
+      {
+        url: `${blobBaseUrl}/COM03.png`,
+        titulo: "Liquidación",
+        descripcion: "Liquidación automática",
+      },
     ],
   },
   {
@@ -44,9 +80,21 @@ const secciones = [
     nombre: "Objetivos",
     descripcion: "Definición y seguimiento de objetivos",
     imagenes: [
-      { url: `${blobBaseUrl}/OBJ01.png`, titulo: "Objetivos", descripcion: "Metas por vendedor" },
-      { url: `${blobBaseUrl}/OBJ02.png`, titulo: "Seguimiento", descripcion: "Progreso en tiempo real" },
-      { url: `${blobBaseUrl}/OBJ03.png`, titulo: "Rankings", descripcion: "Comparativa de rendimiento" },
+      {
+        url: `${blobBaseUrl}/OBJ01.png`,
+        titulo: "Objetivos",
+        descripcion: "Metas por vendedor",
+      },
+      {
+        url: `${blobBaseUrl}/OBJ02.png`,
+        titulo: "Seguimiento",
+        descripcion: "Progreso en tiempo real",
+      },
+      {
+        url: `${blobBaseUrl}/OBJ03.png`,
+        titulo: "Rankings",
+        descripcion: "Comparativa de rendimiento",
+      },
     ],
   },
   {
@@ -54,9 +102,21 @@ const secciones = [
     nombre: "App Móvil",
     descripcion: "Aplicación para vendedores en movilidad",
     imagenes: [
-      { url: `${blobBaseUrl}/APP01.png`, titulo: "App Vendedores", descripcion: "Pedidos desde móvil" },
-      { url: `${blobBaseUrl}/APP02.png`, titulo: "Catálogo", descripcion: "Catálogo en el móvil" },
-      { url: `${blobBaseUrl}/APP03.png`, titulo: "Sincronización", descripcion: "Trabajo offline" },
+      {
+        url: `${blobBaseUrl}/APP01.png`,
+        titulo: "App Vendedores",
+        descripcion: "Pedidos desde móvil",
+      },
+      {
+        url: `${blobBaseUrl}/APP02.png`,
+        titulo: "Catálogo",
+        descripcion: "Catálogo en el móvil",
+      },
+      {
+        url: `${blobBaseUrl}/APP03.png`,
+        titulo: "Sincronización",
+        descripcion: "Trabajo offline",
+      },
     ],
   },
 ];
@@ -93,44 +153,70 @@ const iconoModulo = `<svg viewBox="0 0 64 64" fill="none">
     <nav class="secciones-nav">
       <div class="container">
         <div class="secciones-tabs">
-          {secciones.map((seccion, index) => (
-            <button class={`seccion-tab ${index === 0 ? "active" : ""}`} data-seccion={seccion.id}>
-              <div class="tab-icon" set:html={iconosSecciones[seccion.id]} />
-              <span class="tab-label">{seccion.nombre}</span>
-            </button>
-          ))}
+          {
+            secciones.map((seccion, index) => (
+              <button
+                class={`seccion-tab ${index === 0 ? "active" : ""}`}
+                data-seccion={seccion.id}
+              >
+                <div class="tab-icon" set:html={iconosSecciones[seccion.id]} />
+                <span class="tab-label">{seccion.nombre}</span>
+              </button>
+            ))
+          }
         </div>
       </div>
     </nav>
 
     <div class="secciones-content">
       <div class="container">
-        {secciones.map((seccion, index) => (
-          <section class={`seccion-panel ${index === 0 ? "active" : ""}`} data-panel={seccion.id}>
-            <div class="seccion-intro">
-              <h2>{seccion.nombre}</h2>
-              <p class="seccion-descripcion">{seccion.descripcion}</p>
-            </div>
-            <div class="galeria-grid">
-              {seccion.imagenes.map((img, imgIndex) => (
-                <div class="galeria-item" style={`--delay: ${imgIndex * 0.1}s`}>
-                  <div class="imagen-wrapper">
-                    <img src={img.url} alt={img.titulo} loading="lazy" onerror="this.src='https://placehold.co/600x400/1e293b/64748b?text=Imagen+no+disponible'" />
-                    <div class="imagen-overlay">
-                      <button class="btn-ampliar" data-img={img.url}>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-                      </button>
+        {
+          secciones.map((seccion, index) => (
+            <section
+              class={`seccion-panel ${index === 0 ? "active" : ""}`}
+              data-panel={seccion.id}
+            >
+              <div class="seccion-intro">
+                <h2>{seccion.nombre}</h2>
+                <p class="seccion-descripcion">{seccion.descripcion}</p>
+              </div>
+              <div class="galeria-grid">
+                {seccion.imagenes.map((img, imgIndex) => (
+                  <div
+                    class="galeria-item"
+                    style={`--delay: ${imgIndex * 0.1}s`}
+                  >
+                    <div class="imagen-wrapper">
+                      <img
+                        src={img.url}
+                        alt={img.titulo}
+                        loading="lazy"
+                        onerror="this.src='https://placehold.co/600x400/1e293b/64748b?text=Imagen+no+disponible'"
+                      />
+                      <div class="imagen-overlay">
+                        <button class="btn-ampliar" data-img={img.url}>
+                          <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                          >
+                            <circle cx="11" cy="11" r="8" />
+                            <path d="M21 21l-4.35-4.35" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="imagen-info">
+                      <h4>{img.titulo}</h4>
+                      <p>{img.descripcion}</p>
                     </div>
                   </div>
-                  <div class="imagen-info">
-                    <h4>{img.titulo}</h4>
-                    <p>{img.descripcion}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-        ))}
+                ))}
+              </div>
+            </section>
+          ))
+        }
       </div>
     </div>
 
@@ -142,86 +228,363 @@ const iconoModulo = `<svg viewBox="0 0 64 64" fill="none">
     <section class="cta-section">
       <div class="container">
         <p>¿Quieres ver una demostración del módulo {titulo}?</p>
-        <a href="/contacto" class="cta-button">Solicitar Demo →</a>
+        <a href="/#contacto" class="cta-button">Solicitar Demo →</a>
       </div>
     </section>
   </main>
 </Layout>
 
 <style>
-  .modulo-page { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0f172a; min-height: 100vh; color: white; }
-  .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
-  .modulo-header { background: linear-gradient(135deg, #1e293b 0%, #334155 100%); padding: 2rem 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-  .header-content { display: flex; align-items: center; gap: 1.25rem; }
-  .header-icon { width: 64px; height: 64px; background: rgba(255,255,255,0.1); border-radius: 16px; padding: 8px; }
-  .header-icon :global(svg) { width: 100%; height: 100%; }
-  .header-text h1 { font-size: 1.75rem; font-weight: 700; margin: 0; }
-  .header-text p { font-size: 0.9rem; color: #94a3b8; margin: 0.25rem 0 0; }
-  .back-link { color: #94a3b8; text-decoration: none; font-size: 0.875rem; }
-  .back-link:hover { color: white; }
-  .secciones-nav { background: #1e293b; border-bottom: 1px solid #334155; position: sticky; top: 0; z-index: 100; }
-  .secciones-tabs { display: flex; gap: 0.5rem; padding: 1rem 0; overflow-x: auto; scrollbar-width: none; }
-  .secciones-tabs::-webkit-scrollbar { display: none; }
-  .seccion-tab { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; padding: 0.75rem 1.25rem; background: rgba(255,255,255,0.05); border: 1px solid transparent; border-radius: 12px; cursor: pointer; transition: all 0.25s; min-width: 100px; color: white; }
-  .seccion-tab:hover { background: rgba(255,255,255,0.1); transform: translateY(-4px) scale(1.05); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
-  .seccion-tab.active { background: rgba(59,130,246,0.2); border-color: #3b82f6; }
-  .tab-icon { width: 40px; height: 40px; transition: transform 0.25s; }
-  .tab-icon :global(svg) { width: 100%; height: 100%; }
-  .tab-label { font-size: 0.8rem; font-weight: 500; color: #94a3b8; }
-  .seccion-tab.active .tab-label { color: white; }
-  .secciones-content { padding: 2rem 0; }
-  .seccion-panel { display: none; animation: fadeIn 0.3s ease; }
-  .seccion-panel.active { display: block; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-  .seccion-intro { margin-bottom: 2rem; text-align: center; }
-  .seccion-intro h2 { font-size: 1.5rem; font-weight: 600; margin: 0 0 0.5rem; }
-  .seccion-descripcion { color: #94a3b8; font-size: 1rem; margin: 0; }
-  .galeria-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
-  .galeria-item { background: #1e293b; border-radius: 16px; overflow: hidden; border: 1px solid #334155; transition: all 0.3s; animation: slideUp 0.5s ease forwards; animation-delay: var(--delay); opacity: 0; }
-  @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-  .galeria-item:hover { border-color: #3b82f6; transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.3); }
-  .imagen-wrapper { position: relative; aspect-ratio: 16/10; overflow: hidden; background: #0f172a; }
-  .imagen-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
-  .galeria-item:hover .imagen-wrapper img { transform: scale(1.05); }
-  .imagen-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; }
-  .galeria-item:hover .imagen-overlay { opacity: 1; }
-  .btn-ampliar { width: 48px; height: 48px; background: rgba(255,255,255,0.2); border: none; border-radius: 50%; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(4px); transition: all 0.2s; }
-  .btn-ampliar:hover { background: #3b82f6; transform: scale(1.1); }
-  .btn-ampliar svg { width: 22px; height: 22px; }
-  .imagen-info { padding: 1.25rem; }
-  .imagen-info h4 { font-size: 1rem; font-weight: 600; margin: 0 0 0.5rem; }
-  .imagen-info p { font-size: 0.875rem; color: #94a3b8; margin: 0; line-height: 1.5; }
-  .modal-imagen { position: fixed; inset: 0; background: rgba(0,0,0,0.95); display: none; align-items: center; justify-content: center; z-index: 1000; padding: 2rem; }
-  .modal-imagen.active { display: flex; }
-  .modal-imagen img { max-width: 100%; max-height: 90vh; border-radius: 8px; }
-  .modal-close { position: absolute; top: 1rem; right: 1rem; width: 48px; height: 48px; background: rgba(255,255,255,0.1); border: none; border-radius: 50%; color: white; font-size: 1.5rem; cursor: pointer; }
-  .modal-close:hover { background: #ef4444; }
-  .cta-section { padding: 3rem 1.5rem; text-align: center; background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border-top: 1px solid #334155; }
-  .cta-section p { color: #94a3b8; margin: 0 0 1rem; }
-  .cta-button { display: inline-flex; padding: 0.875rem 1.75rem; background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; text-decoration: none; border-radius: 10px; font-weight: 500; transition: all 0.2s; }
-  .cta-button:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(59,130,246,0.4); }
-  @media (max-width: 768px) { .modulo-header { flex-direction: column; align-items: flex-start; } .header-icon { width: 48px; height: 48px; } .header-text h1 { font-size: 1.5rem; } .galeria-grid { grid-template-columns: 1fr; } }
+  .modulo-page {
+    font-family:
+      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #0f172a;
+    min-height: 100vh;
+    color: white;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  .modulo-header {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    padding: 2rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .header-content {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+  .header-icon {
+    width: 64px;
+    height: 64px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 8px;
+  }
+  .header-icon :global(svg) {
+    width: 100%;
+    height: 100%;
+  }
+  .header-text h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0;
+  }
+  .header-text p {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    margin: 0.25rem 0 0;
+  }
+  .back-link {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.875rem;
+  }
+  .back-link:hover {
+    color: white;
+  }
+  .secciones-nav {
+    background: #1e293b;
+    border-bottom: 1px solid #334155;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .secciones-tabs {
+    display: flex;
+    gap: 0.5rem;
+    padding: 1rem 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .secciones-tabs::-webkit-scrollbar {
+    display: none;
+  }
+  .seccion-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid transparent;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.25s;
+    min-width: 100px;
+    color: white;
+  }
+  .seccion-tab:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+  .seccion-tab.active {
+    background: rgba(59, 130, 246, 0.2);
+    border-color: #3b82f6;
+  }
+  .tab-icon {
+    width: 40px;
+    height: 40px;
+    transition: transform 0.25s;
+  }
+  .tab-icon :global(svg) {
+    width: 100%;
+    height: 100%;
+  }
+  .tab-label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #94a3b8;
+  }
+  .seccion-tab.active .tab-label {
+    color: white;
+  }
+  .secciones-content {
+    padding: 2rem 0;
+  }
+  .seccion-panel {
+    display: none;
+    animation: fadeIn 0.3s ease;
+  }
+  .seccion-panel.active {
+    display: block;
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .seccion-intro {
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  .seccion-intro h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+  }
+  .seccion-descripcion {
+    color: #94a3b8;
+    font-size: 1rem;
+    margin: 0;
+  }
+  .galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+  .galeria-item {
+    background: #1e293b;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #334155;
+    transition: all 0.3s;
+    animation: slideUp 0.5s ease forwards;
+    animation-delay: var(--delay);
+    opacity: 0;
+  }
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .galeria-item:hover {
+    border-color: #3b82f6;
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+  }
+  .imagen-wrapper {
+    position: relative;
+    aspect-ratio: 16/10;
+    overflow: hidden;
+    background: #0f172a;
+  }
+  .imagen-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+  }
+  .galeria-item:hover .imagen-wrapper img {
+    transform: scale(1.05);
+  }
+  .imagen-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .galeria-item:hover .imagen-overlay {
+    opacity: 1;
+  }
+  .btn-ampliar {
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+    transition: all 0.2s;
+  }
+  .btn-ampliar:hover {
+    background: #3b82f6;
+    transform: scale(1.1);
+  }
+  .btn-ampliar svg {
+    width: 22px;
+    height: 22px;
+  }
+  .imagen-info {
+    padding: 1.25rem;
+  }
+  .imagen-info h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+  }
+  .imagen-info p {
+    font-size: 0.875rem;
+    color: #94a3b8;
+    margin: 0;
+    line-height: 1.5;
+  }
+  .modal-imagen {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 2rem;
+  }
+  .modal-imagen.active {
+    display: flex;
+  }
+  .modal-imagen img {
+    max-width: 100%;
+    max-height: 90vh;
+    border-radius: 8px;
+  }
+  .modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  .modal-close:hover {
+    background: #ef4444;
+  }
+  .cta-section {
+    padding: 3rem 1.5rem;
+    text-align: center;
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border-top: 1px solid #334155;
+  }
+  .cta-section p {
+    color: #94a3b8;
+    margin: 0 0 1rem;
+  }
+  .cta-button {
+    display: inline-flex;
+    padding: 0.875rem 1.75rem;
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
+  }
+  @media (max-width: 768px) {
+    .modulo-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .header-icon {
+      width: 48px;
+      height: 48px;
+    }
+    .header-text h1 {
+      font-size: 1.5rem;
+    }
+    .galeria-grid {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>
 
 <script>
-  document.querySelectorAll(".seccion-tab").forEach(tab => {
+  document.querySelectorAll(".seccion-tab").forEach((tab) => {
     tab.addEventListener("click", () => {
       const seccionId = (tab as HTMLElement).dataset.seccion;
-      document.querySelectorAll(".seccion-tab").forEach(t => t.classList.remove("active"));
+      document
+        .querySelectorAll(".seccion-tab")
+        .forEach((t) => t.classList.remove("active"));
       tab.classList.add("active");
-      document.querySelectorAll(".seccion-panel").forEach(p => p.classList.remove("active"));
-      document.querySelector(`[data-panel="${seccionId}"]`)?.classList.add("active");
+      document
+        .querySelectorAll(".seccion-panel")
+        .forEach((p) => p.classList.remove("active"));
+      document
+        .querySelector(`[data-panel="${seccionId}"]`)
+        ?.classList.add("active");
     });
   });
   const modal = document.getElementById("modalImagen");
   const modalImg = document.getElementById("modalImg") as HTMLImageElement;
-  document.querySelectorAll(".btn-ampliar").forEach(btn => {
+  document.querySelectorAll(".btn-ampliar").forEach((btn) => {
     btn.addEventListener("click", () => {
       const imgSrc = (btn as HTMLElement).dataset.img;
-      if (modalImg && imgSrc) { modalImg.src = imgSrc; modal?.classList.add("active"); }
+      if (modalImg && imgSrc) {
+        modalImg.src = imgSrc;
+        modal?.classList.add("active");
+      }
     });
   });
-  document.querySelector(".modal-close")?.addEventListener("click", () => modal?.classList.remove("active"));
-  modal?.addEventListener("click", e => { if (e.target === modal) modal.classList.remove("active"); });
-  document.addEventListener("keydown", e => { if (e.key === "Escape") modal?.classList.remove("active"); });
+  document
+    .querySelector(".modal-close")
+    ?.addEventListener("click", () => modal?.classList.remove("active"));
+  modal?.addEventListener("click", (e) => {
+    if (e.target === modal) modal.classList.remove("active");
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") modal?.classList.remove("active");
+  });
 </script>

@@ -1,0 +1,92 @@
+---
+/**
+ * SEO Meta Component - Versión simplificada
+ * Para insertar en el <head> de Layout.astro
+ */
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const SITE = {
+  name: 'RayGold ERP',
+  domain: 'https://www.raytecno.es',
+  defaultDescription: 'Software de gestión integral para el sector joyero. ERP especializado con módulos de fabricación, comercial, finanzas y más. +30 años de experiencia.',
+  defaultImage: '/images/og-default.jpg'
+};
+
+const { 
+  title,
+  description = SITE.defaultDescription,
+  image = SITE.defaultImage
+} = Astro.props;
+
+const fullTitle = title ? `${title} | ${SITE.name}` : `${SITE.name} - Software ERP para Joyería`;
+const imageUrl = image.startsWith('http') ? image : `${SITE.domain}${image}`;
+const pageUrl = Astro.url.href;
+
+// Schema.org JSON-LD
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "RayGold ERP",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Windows, Web",
+  "description": description,
+  "url": SITE.domain,
+  "author": {
+    "@type": "Organization",
+    "name": "Raytecno BCN SL",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Montgat, Barcelona",
+      "addressCountry": "ES"
+    },
+    "telephone": "+34648088550",
+    "email": "info@raytecno.es"
+  },
+  "offers": {
+    "@type": "AggregateOffer",
+    "lowPrice": "29",
+    "highPrice": "12000",
+    "priceCurrency": "EUR"
+  }
+};
+---
+
+<!-- Primary Meta Tags -->
+<title>{fullTitle}</title>
+<meta name="title" content={fullTitle} />
+<meta name="description" content={description} />
+<meta name="keywords" content="ERP joyería, software joyería, gestión joyería, RayGold, fabricación joyas, Raytecno, software fabricación, ERP Barcelona" />
+<meta name="author" content="Raytecno BCN SL" />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href={pageUrl} />
+
+<!-- Theme -->
+<meta name="theme-color" content="#667eea" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={pageUrl} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={imageUrl} />
+<meta property="og:locale" content="es_ES" />
+<meta property="og:site_name" content={SITE.name} />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={pageUrl} />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageUrl} />
+
+<!-- Geo (SEO Local) -->
+<meta name="geo.region" content="ES-CT" />
+<meta name="geo.placename" content="Barcelona" />
+
+<!-- JSON-LD -->
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
