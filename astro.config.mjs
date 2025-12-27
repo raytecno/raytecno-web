@@ -26,13 +26,8 @@ export default defineConfig({
       // Otros idiomas con prefijo: raytecno.es/en/, raytecno.es/fr/, etc.
       prefixDefaultLocale: false,
     },
-    // Fallback: si no existe traducción, usa español
-    fallback: {
-      en: "es",
-      fr: "es",
-      ca: "es",
-      "pt-br": "es",
-    },
+    // NOTA: fallback eliminado - no compatible con output: "static"
+    // Si necesitas fallback, cambia a output: "hybrid" o "server"
   },
 
   // ================================
