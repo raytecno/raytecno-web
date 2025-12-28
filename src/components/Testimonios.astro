@@ -1,95 +1,261 @@
 ---
-// src/components/Testimonios.astro
-// Sección de testimonios / casos de éxito
+/**
+ * Testimonios.astro - Sección de testimonios / casos de éxito
+ * Con soporte multiidioma
+ */
+import { type Lang } from "@/config/pages";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'es' } = Astro.props;
+
+// Traducciones por idioma
+const translations: Record<Lang, {
+  badge: string;
+  title: string;
+  subtitle: string;
+  clientSince: string;
+  testimonials: Array<{
+    quote: string;
+    highlight: string;
+    resultNumber: string;
+    resultText: string;
+    author: string;
+    company: string;
+    initials: string;
+    since: string;
+  }>;
+}> = {
+  es: {
+    badge: "Casos de éxito",
+    title: "Lo que dicen nuestros clientes",
+    subtitle: "Joyerías reales con resultados reales",
+    clientSince: "Cliente desde",
+    testimonials: [
+      {
+        quote: "Probamos 3 ERPs genéricos antes de RayGold. Ninguno entendía que una alianza tiene oro de 18k, un diamante de 0.15ct y mano de obra de grabado.",
+        highlight: "RayGold lo trae de serie.",
+        resultNumber: "-60%",
+        resultText: "tiempo de inventario",
+        author: "Brian Flores",
+        company: "Joyería Flores e Hijos · Valencia",
+        initials: "BF",
+        since: "2012"
+      },
+      {
+        quote: "Gestionamos 4.000 referencias con variantes de oro, plata y aleaciones. Las órdenes de fabricación de RayGold calculan el metal exacto.",
+        highlight: "Antes lo hacíamos en Excel.",
+        resultNumber: "12.000€",
+        resultText: "ahorro anual en mermas",
+        author: "Degan & Ferraz",
+        company: "Fabricaciones Ferraz · Córdoba",
+        initials: "DF",
+        since: "2016"
+      },
+      {
+        quote: "Abrimos la quinta tienda y RayGold escaló sin problemas. Stock centralizado, traspasos entre tiendas, comisiones...",
+        highlight: "Es nuestro cerebro operativo.",
+        resultNumber: "5",
+        resultText: "tiendas sincronizadas",
+        author: "David Pablo",
+        company: "Grupo Brillante · Cataluña",
+        initials: "DP",
+        since: "2009"
+      }
+    ]
+  },
+  en: {
+    badge: "Success stories",
+    title: "What our clients say",
+    subtitle: "Real jewelry businesses with real results",
+    clientSince: "Client since",
+    testimonials: [
+      {
+        quote: "We tried 3 generic ERPs before RayGold. None understood that a ring has 18k gold, a 0.15ct diamond and engraving labor.",
+        highlight: "RayGold includes it by default.",
+        resultNumber: "-60%",
+        resultText: "inventory time",
+        author: "Brian Flores",
+        company: "Flores & Sons Jewelry · Valencia",
+        initials: "BF",
+        since: "2012"
+      },
+      {
+        quote: "We manage 4,000 references with gold, silver and alloy variants. RayGold's manufacturing orders calculate exact metal.",
+        highlight: "We used to do it in Excel.",
+        resultNumber: "€12,000",
+        resultText: "annual savings on waste",
+        author: "Degan & Ferraz",
+        company: "Ferraz Manufacturing · Córdoba",
+        initials: "DF",
+        since: "2016"
+      },
+      {
+        quote: "We opened our fifth store and RayGold scaled seamlessly. Centralized stock, inter-store transfers, commissions...",
+        highlight: "It's our operational brain.",
+        resultNumber: "5",
+        resultText: "synced stores",
+        author: "David Pablo",
+        company: "Brillante Group · Catalonia",
+        initials: "DP",
+        since: "2009"
+      }
+    ]
+  },
+  fr: {
+    badge: "Témoignages",
+    title: "Ce que disent nos clients",
+    subtitle: "De vraies bijouteries avec de vrais résultats",
+    clientSince: "Client depuis",
+    testimonials: [
+      {
+        quote: "Nous avons essayé 3 ERP génériques avant RayGold. Aucun ne comprenait qu'une alliance a de l'or 18k, un diamant de 0,15ct et une gravure.",
+        highlight: "RayGold l'inclut en standard.",
+        resultNumber: "-60%",
+        resultText: "temps d'inventaire",
+        author: "Brian Flores",
+        company: "Bijouterie Flores & Fils · Valence",
+        initials: "BF",
+        since: "2012"
+      },
+      {
+        quote: "Nous gérons 4.000 références avec des variantes or, argent et alliages. Les ordres de fabrication RayGold calculent le métal exact.",
+        highlight: "Avant, on le faisait sur Excel.",
+        resultNumber: "12.000€",
+        resultText: "économies annuelles sur les pertes",
+        author: "Degan & Ferraz",
+        company: "Fabrications Ferraz · Cordoue",
+        initials: "DF",
+        since: "2016"
+      },
+      {
+        quote: "Nous avons ouvert notre cinquième boutique et RayGold a évolué sans problème. Stock centralisé, transferts inter-magasins, commissions...",
+        highlight: "C'est notre cerveau opérationnel.",
+        resultNumber: "5",
+        resultText: "magasins synchronisés",
+        author: "David Pablo",
+        company: "Groupe Brillante · Catalogne",
+        initials: "DP",
+        since: "2009"
+      }
+    ]
+  },
+  ca: {
+    badge: "Casos d'èxit",
+    title: "El que diuen els nostres clients",
+    subtitle: "Joieries reals amb resultats reals",
+    clientSince: "Client des de",
+    testimonials: [
+      {
+        quote: "Vam provar 3 ERPs genèrics abans de RayGold. Cap entenia que una aliança té or de 18k, un diamant de 0,15ct i mà d'obra de gravat.",
+        highlight: "RayGold ho porta de sèrie.",
+        resultNumber: "-60%",
+        resultText: "temps d'inventari",
+        author: "Brian Flores",
+        company: "Joieria Flores i Fills · València",
+        initials: "BF",
+        since: "2012"
+      },
+      {
+        quote: "Gestionem 4.000 referències amb variants d'or, plata i aliatges. Les ordres de fabricació de RayGold calculen el metall exacte.",
+        highlight: "Abans ho fèiem a Excel.",
+        resultNumber: "12.000€",
+        resultText: "estalvi anual en pèrdues",
+        author: "Degan & Ferraz",
+        company: "Fabricacions Ferraz · Còrdova",
+        initials: "DF",
+        since: "2016"
+      },
+      {
+        quote: "Vam obrir la cinquena botiga i RayGold va escalar sense problemes. Stock centralitzat, traspassos entre botigues, comissions...",
+        highlight: "És el nostre cervell operatiu.",
+        resultNumber: "5",
+        resultText: "botigues sincronitzades",
+        author: "David Pablo",
+        company: "Grup Brillante · Catalunya",
+        initials: "DP",
+        since: "2009"
+      }
+    ]
+  },
+  "pt-br": {
+    badge: "Casos de sucesso",
+    title: "O que dizem nossos clientes",
+    subtitle: "Joalherias reais com resultados reais",
+    clientSince: "Cliente desde",
+    testimonials: [
+      {
+        quote: "Testamos 3 ERPs genéricos antes do RayGold. Nenhum entendia que uma aliança tem ouro 18k, um diamante de 0,15ct e mão de obra de gravação.",
+        highlight: "O RayGold já vem com isso.",
+        resultNumber: "-60%",
+        resultText: "tempo de inventário",
+        author: "Brian Flores",
+        company: "Joalheria Flores & Filhos · Valência",
+        initials: "BF",
+        since: "2012"
+      },
+      {
+        quote: "Gerenciamos 4.000 referências com variantes de ouro, prata e ligas. As ordens de fabricação do RayGold calculam o metal exato.",
+        highlight: "Antes fazíamos no Excel.",
+        resultNumber: "12.000€",
+        resultText: "economia anual em perdas",
+        author: "Degan & Ferraz",
+        company: "Fabricações Ferraz · Córdoba",
+        initials: "DF",
+        since: "2016"
+      },
+      {
+        quote: "Abrimos a quinta loja e o RayGold escalou sem problemas. Estoque centralizado, transferências entre lojas, comissões...",
+        highlight: "É nosso cérebro operacional.",
+        resultNumber: "5",
+        resultText: "lojas sincronizadas",
+        author: "David Pablo",
+        company: "Grupo Brillante · Catalunha",
+        initials: "DP",
+        since: "2009"
+      }
+    ]
+  }
+};
+
+const t = translations[lang] || translations.es;
 ---
 
 <section class="testimonios-section">
   <div class="container">
     <div class="section-header">
-      <span class="section-badge">Casos de éxito</span>
-      <h2>Lo que dicen nuestros clientes</h2>
-      <p>Joyerías reales con resultados reales</p>
+      <span class="section-badge">{t.badge}</span>
+      <h2>{t.title}</h2>
+      <p>{t.subtitle}</p>
     </div>
 
     <div class="testimonios-grid">
-      <!-- Testimonio 1 -->
-      <article class="testimonio-card">
-        <div class="testimonio-quote">
-          <svg class="quote-icon" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"></path>
-          </svg>
-          <p>
-            "Probamos 3 ERPs genéricos antes de RayGold. Ninguno entendía que
-            una alianza tiene oro de 18k, un diamante de 0.15ct y mano de obra
-            de grabado. <strong>RayGold lo trae de serie.</strong>"
-          </p>
-        </div>
-        <div class="testimonio-result">
-          <span class="result-number">-60%</span>
-          <span class="result-text">tiempo de inventario</span>
-        </div>
-        <div class="testimonio-author">
-          <div class="author-avatar">CN</div>
-          <div class="author-info">
-            <strong>Brian Flores</strong>
-            <span>Joyería Flores e Hijos · Valencia</span>
-            <span class="author-years">Cliente desde 2012</span>
+      {t.testimonials.map((testimonial, index) => (
+        <article class:list={["testimonio-card", { featured: index === 1 }]}>
+          <div class="testimonio-quote">
+            <svg class="quote-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"></path>
+            </svg>
+            <p>
+              "{testimonial.quote} <strong>{testimonial.highlight}</strong>"
+            </p>
           </div>
-        </div>
-      </article>
-
-      <!-- Testimonio 2 -->
-      <article class="testimonio-card featured">
-        <div class="testimonio-quote">
-          <svg class="quote-icon" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"></path>
-          </svg>
-          <p>
-            "Gestionamos 4.000 referencias con variantes de oro, plata y
-            aleaciones. Las órdenes de fabricación de RayGold calculan el metal
-            exacto. <strong>Antes lo hacíamos en Excel.</strong>"
-          </p>
-        </div>
-        <div class="testimonio-result">
-          <span class="result-number">12.000€</span>
-          <span class="result-text">ahorro anual en mermas</span>
-        </div>
-        <div class="testimonio-author">
-          <div class="author-avatar">MO</div>
-          <div class="author-info">
-            <strong>Degan & Ferraz</strong>
-            <span>Fabricaciones Ferraz · Córdoba</span>
-            <span class="author-years">Cliente desde 2016</span>
+          <div class="testimonio-result">
+            <span class="result-number">{testimonial.resultNumber}</span>
+            <span class="result-text">{testimonial.resultText}</span>
           </div>
-        </div>
-      </article>
-
-      <!-- Testimonio 3 -->
-      <article class="testimonio-card">
-        <div class="testimonio-quote">
-          <svg class="quote-icon" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"></path>
-          </svg>
-          <p>
-            "Abrimos la quinta tienda y RayGold escaló sin problemas. Stock
-            centralizado, traspasos entre tiendas, comisiones... <strong
-              >Es nuestro cerebro operativo.</strong
-            >"
-          </p>
-        </div>
-        <div class="testimonio-result">
-          <span class="result-number">5</span>
-          <span class="result-text">tiendas sincronizadas</span>
-        </div>
-        <div class="testimonio-author">
-          <div class="author-avatar">JP</div>
-          <div class="author-info">
-            <strong>David Pablo</strong>
-            <span>Grupo Brillante · Cataluña</span>
-            <span class="author-years">Cliente desde 2009</span>
+          <div class="testimonio-author">
+            <div class="author-avatar">{testimonial.initials}</div>
+            <div class="author-info">
+              <strong>{testimonial.author}</strong>
+              <span>{testimonial.company}</span>
+              <span class="author-years">{t.clientSince} {testimonial.since}</span>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
+      ))}
     </div>
   </div>
 </section>

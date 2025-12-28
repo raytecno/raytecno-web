@@ -1,0 +1,16 @@
+---
+/**
+ * Template: Módulo E-commerce
+ * Tiendas online y marketplaces
+ */
+import SubmoduloLayout from "@/components/SubmoduloLayout.astro";
+
+interface Props {
+  lang: string;
+  pageId: string;
+}
+
+const { lang } = Astro.props;
+---
+
+<SubmoduloLayout lang={lang} moduloId="ecommerce" />

@@ -1,0 +1,120 @@
+{
+  "home": {
+    "metaTitle": "RayGold - Programari ERP per a Joieria",
+    "metaDescription": "Sistema ERP especialitzat en joieria. Gestió d'inventari, fabricació, vendes i comptabilitat per a joieries i tallers.",
+    
+    "hero": {
+      "badge": "Des de 1990 · +200 joieries confien en nosaltres",
+      "title": "L'ERP que parla l'idioma de la teva joieria",
+      "subtitle": "Gestiona inventari, fabricació, vendes i comptabilitat amb un sistema",
+      "subtitleStrong": "dissenyat exclusivament per a joiers",
+      "subtitleEnd": "Sense adaptacions, sense pegats.",
+      "stats": {
+        "years": "anys d'experiència",
+        "jewelers": "joieries actives",
+        "modules": "mòduls integrats"
+      },
+      "ctaPrimary": "Veure demostració",
+      "ctaSecondary": "Explorar mòduls",
+      "visual": {
+        "label": "Gestió d'articles",
+        "badge1": "Stock sincronitzat",
+        "badge2": "Control de costos"
+      },
+      "scroll": "Descobreix més"
+    },
+
+    "porque": {
+      "badge": "La nostra diferència",
+      "title": "Per què +200 joieries trien RayGold?",
+      "subtitle": "No som un ERP genèric adaptat. Som joiers que creem programari.",
+      "items": {
+        "experience": {
+          "title": "35 anys en joieria",
+          "description": "No aprenem del sector amb la teva empresa. Des del 1990 parlem de quirats, talles i aliatges.",
+          "stat": "Des de 1990"
+        },
+        "specialized": {
+          "title": "100% fet per a joiers",
+          "description": "Ordres de fabricació amb aliatges, control de pedres per certificat, traçabilitat de metalls. No és un mòdul extra, és el nucli.",
+          "stat": "100% especialitzat"
+        },
+        "integrated": {
+          "title": "Un sol sistema",
+          "description": "Vendes, fabricació, compres, comptabilitat, TPV, e-commerce. Sense pegats ni integracions que es trenquen.",
+          "stat": "8 mòduls integrats"
+        },
+        "support": {
+          "title": "Et coneixem pel teu nom",
+          "description": "Quan truques, no parles amb un call center. Parles amb gent que entén el teu negoci i fa anys que està amb tu.",
+          "stat": "Suport directe"
+        },
+        "cloud": {
+          "title": "Sempre actualitzat",
+          "description": "Cloud a Azure, actualitzacions automàtiques, noves funcions cada trimestre. La tecnologia avança, RayGold també.",
+          "stat": "Tecnologia cloud"
+        }
+      },
+      "cta": {
+        "text": "Preparat per veure com RayGold pot transformar la teva joieria?",
+        "button": "Sol·licitar demostració gratuïta →"
+      }
+    },
+
+    "testimonios": {
+      "badge": "Casos d'èxit",
+      "title": "El que diuen els nostres clients",
+      "subtitle": "Joieries reals amb resultats reals",
+      "items": [
+        {
+          "quote": "Vam provar 3 ERPs genèrics abans de RayGold. Cap entenia que una aliança té or de 18k, un diamant de 0.15ct i mà d'obra de gravat.",
+          "quoteStrong": "RayGold ho porta de sèrie.",
+          "resultNumber": "-60%",
+          "resultText": "temps d'inventari",
+          "author": "Brian Flores",
+          "company": "Joieria Flores i Fills · València",
+          "since": "Client des de 2012",
+          "initials": "CN"
+        },
+        {
+          "quote": "Gestionem 4.000 referències amb variants d'or, plata i aliatges. Les ordres de fabricació de RayGold calculen el metall exacte.",
+          "quoteStrong": "Abans ho fèiem amb Excel.",
+          "resultNumber": "12.000€",
+          "resultText": "estalvi anual en pèrdues",
+          "author": "Degan & Ferraz",
+          "company": "Fabricacions Ferraz · Còrdova",
+          "since": "Client des de 2016",
+          "initials": "MO",
+          "featured": true
+        },
+        {
+          "quote": "Vam obrir la cinquena botiga i RayGold va escalar sense problemes. Stock centralitzat, traspassos entre botigues, comissions...",
+          "quoteStrong": "És el nostre cervell operatiu.",
+          "resultNumber": "5",
+          "resultText": "botigues sincronitzades",
+          "author": "David Pablo",
+          "company": "Grup Brillante · Catalunya",
+          "since": "Client des de 2009",
+          "initials": "JP"
+        }
+      ]
+    },
+
+    "video": {
+      "badge": "Veure en acció",
+      "title": "Descobreix RayGold en",
+      "titleHighlight": "90 segons",
+      "subtitle": "Un recorregut per les funcionalitats que transformaran la gestió de la teva joieria",
+      "playText": "Veure demostració",
+      "features": {
+        "duration": { "value": "90 seg", "label": "de demo" },
+        "modules": { "value": "8 mòduls", "label": "en acció" },
+        "specialized": { "value": "100%", "label": "joieria" }
+      },
+      "cta": {
+        "text": "T'agradaria veure una demo personalitzada per al teu negoci?",
+        "button": "Sol·licitar demo gratuïta"
+      }
+    }
+  }
+}

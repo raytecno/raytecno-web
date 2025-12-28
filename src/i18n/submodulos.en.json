@@ -1,0 +1,310 @@
+{
+  "submodulos": {
+    "common": {
+      "backToModules": "← Back to Modules",
+      "backToHome": "← Back to Home",
+      "requestDemo": "Request a demo",
+      "seeInAction": "Want to see this module in action?",
+      "imageNotAvailable": "Image not available",
+      "close": "Close"
+    },
+    "maestros": {
+      "title": "Master Data",
+      "subtitle": "Items, suppliers, customers and families",
+      "metaTitle": "Master Data | RayGold ERP - Catalog Management",
+      "metaDescription": "Complete management of items, prices, structures and images of your jewelry catalog with RayGold ERP.",
+      "sections": {
+        "articulos": {
+          "name": "Items",
+          "description": "Complete catalog item management",
+          "images": [
+            { "title": "Item List", "description": "General view of catalog with advanced filters" },
+            { "title": "Item Card", "description": "Complete detail with specifications" },
+            { "title": "Configuration", "description": "Field and attribute customization" }
+          ]
+        },
+        "precios": {
+          "name": "Prices",
+          "description": "Rates, discounts and pricing policies",
+          "images": [
+            { "title": "Price Lists", "description": "Multiple price list management" },
+            { "title": "Discounts", "description": "Discount configuration" },
+            { "title": "History", "description": "Change traceability" }
+          ]
+        },
+        "estructuras": {
+          "name": "Structures",
+          "description": "Composition and materials of each piece",
+          "images": [
+            { "title": "Composition", "description": "Material and component definition" },
+            { "title": "Material Tree", "description": "Hierarchical structure view" },
+            { "title": "Costs", "description": "Automatic cost calculation" }
+          ]
+        },
+        "imagenes": {
+          "name": "Images",
+          "description": "Photo gallery and multimedia",
+          "images": [
+            { "title": "Gallery", "description": "Multiple image management" },
+            { "title": "Viewer", "description": "Visualization with zoom" },
+            { "title": "Import", "description": "Bulk image upload" }
+          ]
+        },
+        "layout": {
+          "name": "Layout",
+          "description": "View and form customization",
+          "images": [
+            { "title": "Configuration", "description": "Custom form design" },
+            { "title": "Fields", "description": "Custom fields without code" },
+            { "title": "Templates", "description": "Save configurations" }
+          ]
+        }
+      }
+    },
+    "comercial": {
+      "title": "Sales",
+      "subtitle": "Complete sales, orders and invoicing for your jewelry business",
+      "metaTitle": "Sales | RayGold ERP - Sales Management",
+      "metaDescription": "Total control of sales, orders, delivery notes and invoicing for jewelry businesses with RayGold ERP.",
+      "sections": {
+        "pedidos": {
+          "name": "Orders",
+          "description": "Complete order cycle management",
+          "images": [
+            { "title": "Order List", "description": "General view with status and tracking" },
+            { "title": "New Order", "description": "Quick creation with item search" },
+            { "title": "Order Detail", "description": "Complete order information" }
+          ]
+        },
+        "albaranes": {
+          "name": "Delivery Notes",
+          "description": "Delivery and shipment control",
+          "images": [
+            { "title": "Delivery Notes", "description": "Delivery note management" },
+            { "title": "Generation", "description": "Creation from orders" },
+            { "title": "Printing", "description": "Customizable documents" }
+          ]
+        },
+        "facturas": {
+          "name": "Invoices",
+          "description": "Electronic and traditional invoicing",
+          "images": [
+            { "title": "Invoices", "description": "List of issued invoices" },
+            { "title": "New Invoice", "description": "Manual or from delivery notes" },
+            { "title": "E-Invoice", "description": "Integrated electronic invoicing" }
+          ]
+        },
+        "clientes": {
+          "name": "Customers",
+          "description": "Customer database",
+          "images": [
+            { "title": "List", "description": "Customer directory" },
+            { "title": "Card", "description": "Complete customer data" },
+            { "title": "History", "description": "Operation history" }
+          ]
+        }
+      }
+    },
+    "fabricacion": {
+      "title": "Manufacturing",
+      "subtitle": "Production, inventory and quality control",
+      "metaTitle": "Manufacturing | RayGold ERP - Production Control",
+      "metaDescription": "Production planning and tracking, work orders and material control for jewelry businesses.",
+      "sections": {
+        "ordenes": {
+          "name": "Work Orders",
+          "description": "Manufacturing order management",
+          "images": [
+            { "title": "WO List", "description": "General order view" },
+            { "title": "New WO", "description": "Work order creation" },
+            { "title": "Tracking", "description": "Production status" }
+          ]
+        },
+        "materiales": {
+          "name": "Materials",
+          "description": "Raw material control",
+          "images": [
+            { "title": "Inventory", "description": "Material stock" },
+            { "title": "Movements", "description": "Inputs and outputs" },
+            { "title": "Valuation", "description": "Material cost" }
+          ]
+        },
+        "mermas": {
+          "name": "Waste",
+          "description": "Manufacturing loss control",
+          "images": [
+            { "title": "Registry", "description": "Waste control" },
+            { "title": "Analysis", "description": "Loss statistics" },
+            { "title": "Reports", "description": "Detailed reports" }
+          ]
+        }
+      }
+    },
+    "finanzas": {
+      "title": "Finance",
+      "subtitle": "Integrated accounting, treasury and VAT",
+      "metaTitle": "Finance | RayGold ERP - Financial Management",
+      "metaDescription": "Integrated accounting, collections, payments, banking and financial reports for jewelry businesses.",
+      "sections": {
+        "contabilidad": {
+          "name": "Accounting",
+          "description": "Chart of accounts and entries",
+          "images": [
+            { "title": "Chart of Accounts", "description": "Accounting structure" },
+            { "title": "Entries", "description": "Movement registry" },
+            { "title": "Balances", "description": "Financial statements" }
+          ]
+        },
+        "cobros": {
+          "name": "Collections",
+          "description": "Accounts receivable management",
+          "images": [
+            { "title": "Pending", "description": "Invoices to collect" },
+            { "title": "Remittances", "description": "Remittance management" },
+            { "title": "Reconciliation", "description": "Account matching" }
+          ]
+        },
+        "pagos": {
+          "name": "Payments",
+          "description": "Accounts payable management",
+          "images": [
+            { "title": "Pending", "description": "Invoices to pay" },
+            { "title": "Scheduling", "description": "Payment calendar" },
+            { "title": "History", "description": "Payments made" }
+          ]
+        },
+        "iva": {
+          "name": "VAT",
+          "description": "Settlement and declarations",
+          "images": [
+            { "title": "Books", "description": "VAT registry" },
+            { "title": "Form 303", "description": "Quarterly declaration" },
+            { "title": "SII", "description": "Immediate supply" }
+          ]
+        }
+      }
+    },
+    "historicos": {
+      "title": "History",
+      "subtitle": "Historical data and complete traceability",
+      "metaTitle": "History | RayGold ERP - Traceability",
+      "metaDescription": "Complete access to operation history, movements and jewelry piece traceability.",
+      "sections": {
+        "operaciones": {
+          "name": "Operations",
+          "description": "History of all operations",
+          "images": [
+            { "title": "Search", "description": "Operation lookup" },
+            { "title": "Detail", "description": "Complete information" },
+            { "title": "Export", "description": "Data download" }
+          ]
+        },
+        "trazabilidad": {
+          "name": "Traceability",
+          "description": "Piece tracking",
+          "images": [
+            { "title": "By Piece", "description": "History of each item" },
+            { "title": "By Batch", "description": "Batch traceability" },
+            { "title": "Certificates", "description": "Associated documentation" }
+          ]
+        }
+      }
+    },
+    "estadisticas": {
+      "title": "Analytics",
+      "subtitle": "Reports and dashboards for decision making",
+      "metaTitle": "Analytics | RayGold ERP - Business Intelligence",
+      "metaDescription": "Data analysis, custom reports and dashboards for decision making in jewelry businesses.",
+      "sections": {
+        "dashboards": {
+          "name": "Dashboards",
+          "description": "Visual control panels",
+          "images": [
+            { "title": "Main", "description": "Key KPIs" },
+            { "title": "Sales", "description": "Commercial metrics" },
+            { "title": "Production", "description": "Factory indicators" }
+          ]
+        },
+        "informes": {
+          "name": "Reports",
+          "description": "Customizable reports",
+          "images": [
+            { "title": "Catalog", "description": "Predefined reports" },
+            { "title": "Designer", "description": "Report creator" },
+            { "title": "Scheduling", "description": "Automatic sending" }
+          ]
+        }
+      }
+    },
+    "vendedores": {
+      "title": "Sales Team",
+      "subtitle": "Route, visit and commission management",
+      "metaTitle": "Sales Team | RayGold ERP - Commercial Management",
+      "metaDescription": "Commercial team management, commissions, objectives and sales tracking for jewelry businesses.",
+      "sections": {
+        "equipo": {
+          "name": "Team",
+          "description": "Commercial team management",
+          "images": [
+            { "title": "Salespeople", "description": "Team list" },
+            { "title": "Zones", "description": "Territory assignment" },
+            { "title": "Objectives", "description": "Sales goals" }
+          ]
+        },
+        "comisiones": {
+          "name": "Commissions",
+          "description": "Calculation and settlement",
+          "images": [
+            { "title": "Rules", "description": "Commission configuration" },
+            { "title": "Calculation", "description": "Automatic settlement" },
+            { "title": "History", "description": "Payments made" }
+          ]
+        },
+        "rutas": {
+          "name": "Routes",
+          "description": "Visit planning",
+          "images": [
+            { "title": "Calendar", "description": "Visit agenda" },
+            { "title": "Map", "description": "Geographic view" },
+            { "title": "Reports", "description": "Visit results" }
+          ]
+        }
+      }
+    },
+    "ecommerce": {
+      "title": "E-commerce",
+      "subtitle": "Online stores and integrated marketplaces",
+      "metaTitle": "E-commerce | RayGold ERP - Online Sales",
+      "metaDescription": "Online store integration, stock synchronization and web order management for jewelry businesses.",
+      "sections": {
+        "catalogo": {
+          "name": "Online Catalog",
+          "description": "Product publishing",
+          "images": [
+            { "title": "Products", "description": "Web catalog management" },
+            { "title": "Categories", "description": "Product organization" },
+            { "title": "Synchronization", "description": "Automatic update" }
+          ]
+        },
+        "pedidos": {
+          "name": "Web Orders",
+          "description": "Online order management",
+          "images": [
+            { "title": "Reception", "description": "Incoming orders" },
+            { "title": "Processing", "description": "Workflow" },
+            { "title": "Shipping", "description": "Integrated logistics" }
+          ]
+        },
+        "integraciones": {
+          "name": "Integrations",
+          "description": "Platform connections",
+          "images": [
+            { "title": "Shopify", "description": "Shopify integration" },
+            { "title": "WooCommerce", "description": "WordPress integration" },
+            { "title": "Marketplaces", "description": "Amazon, eBay, etc." }
+          ]
+        }
+      }
+    }
+  }
+}

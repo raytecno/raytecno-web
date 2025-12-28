@@ -10,42 +10,77 @@
  * - Schema.org JSON-LD
  */
 
-import { languages, defaultLang, type Language } from "../i18n/config";
-import { getAlternateUrls, useTranslations } from "../i18n/utils";
+import { type Lang } from "@/config/pages";
 
 interface Props {
   title?: string;
   description?: string;
   image?: string;
-  lang?: Language;
+  lang?: Lang;
   type?: "website" | "article";
   noindex?: boolean;
+  alternateUrls?: { lang: Lang; url: string }[];
 }
 
 const {
   title,
   description,
   image = "/images/og-default.jpg",
-  lang = defaultLang,
+  lang = "es",
   type = "website",
   noindex = false,
+  alternateUrls = [],
 } = Astro.props;
 
-const t = useTranslations(lang);
-const siteUrl =
-  Astro.site?.toString().replace(/\/$/, "") || "https://www.raytecno.es";
+// Configuración de idiomas para hreflang (definido localmente)
+const langConfig: Record<Lang, { code: string; name: string }> = {
+  es: { code: "es", name: "Español" },
+  en: { code: "en", name: "English" },
+  fr: { code: "fr", name: "Français" },
+  ca: { code: "ca", name: "Català" },
+  "pt-br": { code: "pt-BR", name: "Português" },
+};
+
+// Traducciones para meta defaults
+const metaDefaults: Record<Lang, { title: string; description: string; keywords: string }> = {
+  es: {
+    title: "RayGold - Software ERP para Joyería",
+    description: "Software de gestión integral para el sector joyero. ERP especializado con módulos de fabricación, comercial, finanzas y más. +35 años de experiencia.",
+    keywords: "ERP joyería, software joyería, gestión joyería, RayGold, fabricación joyas, control mermas oro",
+  },
+  en: {
+    title: "RayGold - Jewelry ERP Software",
+    description: "Comprehensive management software for the jewelry sector. Specialized ERP with manufacturing, commercial, finance modules and more. +35 years of experience.",
+    keywords: "jewelry ERP, jewelry software, jewelry management, RayGold, jewelry manufacturing, gold waste control",
+  },
+  fr: {
+    title: "RayGold - Logiciel ERP pour Bijouterie",
+    description: "Logiciel de gestion intégrale pour le secteur de la bijouterie. ERP spécialisé avec modules de fabrication, commercial, finances et plus. +35 ans d'expérience.",
+    keywords: "ERP bijouterie, logiciel bijouterie, gestion bijouterie, RayGold, fabrication bijoux, contrôle pertes or",
+  },
+  ca: {
+    title: "RayGold - Programari ERP per a Joieria",
+    description: "Programari de gestió integral per al sector joier. ERP especialitzat amb mòduls de fabricació, comercial, finances i més. +35 anys d'experiència.",
+    keywords: "ERP joieria, programari joieria, gestió joieria, RayGold, fabricació joies, control pèrdues or",
+  },
+  "pt-br": {
+    title: "RayGold - Software ERP para Joalheria",
+    description: "Software de gestão integral para o setor joalheiro. ERP especializado com módulos de fabricação, comercial, finanças e mais. +35 anos de experiência.",
+    keywords: "ERP joalheria, software joalheria, gestão joalheria, RayGold, fabricação joias, controle perdas ouro",
+  },
+};
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, "") || "https://www.raygold.es";
 const currentUrl = new URL(Astro.url.pathname, siteUrl).toString();
 
 // Usar traducciones como fallback
-const pageTitle = title || t("meta.title");
-const pageDescription = description || t("meta.description");
+const defaults = metaDefaults[lang] || metaDefaults.es;
+const pageTitle = title || defaults.title;
+const pageDescription = description || defaults.description;
 const pageImage = image.startsWith("http") ? image : `${siteUrl}${image}`;
 
-// Generar URLs alternativas para hreflang
-const alternateUrls = getAlternateUrls(Astro.url.pathname, siteUrl);
-
 // Código de idioma completo para Open Graph
-const ogLocale = languages[lang].code.replace("-", "_");
+const ogLocale = langConfig[lang]?.code.replace("-", "_") || "es";
 
 // Schema.org JSON-LD para Software
 const schemaOrg = {
@@ -84,15 +119,9 @@ const schemaOrg = {
     },
     contactPoint: {
       "@type": "ContactPoint",
-      telephone: "+34-933-741-047",
+      telephone: "+34-648-088-550",
       contactType: "sales",
-      availableLanguage: [
-        "Spanish",
-        "English",
-        "French",
-        "Catalan",
-        "Portuguese",
-      ],
+      availableLanguage: ["Spanish", "English", "French", "Catalan", "Portuguese"],
     },
   },
 };
@@ -104,9 +133,8 @@ const schemaOrganization = {
   name: "Raytecno BCN SL",
   url: siteUrl,
   logo: `${siteUrl}/images/logo.svg`,
-  description:
-    "Software ERP especializado para el sector joyero. Más de 30 años de experiencia.",
-  foundingDate: "1994",
+  description: "Software ERP especializado para el sector joyero. Más de 35 años de experiencia.",
+  foundingDate: "1990",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Montgat",
@@ -121,33 +149,25 @@ const schemaOrganization = {
 <!-- Meta básicos -->
 <title>{pageTitle}</title>
 <meta name="description" content={pageDescription} />
-<meta name="keywords" content={t("meta.keywords")} />
+<meta name="keywords" content={defaults.keywords} />
 <link rel="canonical" href={currentUrl} />
 
 <!-- Robots -->
-{
-  noindex ? (
-    <meta name="robots" content="noindex, nofollow" />
-  ) : (
-    <meta
-      name="robots"
-      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
-    />
-  )
-}
+{noindex ? (
+  <meta name="robots" content="noindex, nofollow" />
+) : (
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+)}
 
 <!-- hreflang tags para SEO multiidioma -->
-{
-  alternateUrls.map((alt) => (
-    <link rel="alternate" hreflang={alt.hreflang} href={alt.url} />
-  ))
-}
-<!-- x-default para el idioma por defecto -->
-<link
-  rel="alternate"
-  hreflang="x-default"
-  href={`${siteUrl}${Astro.url.pathname.replace(/^\/(en|fr|ca|pt-br)/, "") || "/"}`}
-/>
+{alternateUrls.map((alt) => (
+  <link rel="alternate" hreflang={langConfig[alt.lang]?.code || alt.lang} href={alt.url} />
+))}
+
+<!-- x-default para el idioma por defecto (español) -->
+{alternateUrls.length > 0 && (
+  <link rel="alternate" hreflang="x-default" href={alternateUrls.find(a => a.lang === 'es')?.url || `${siteUrl}/es/`} />
+)}
 
 <!-- Open Graph -->
 <meta property="og:type" content={type} />
@@ -162,15 +182,11 @@ const schemaOrganization = {
 <meta property="og:site_name" content="RayGold ERP" />
 
 <!-- Locales alternativos para Open Graph -->
-{
-  Object.entries(languages)
-    .filter(([code]) => code !== lang)
-    .map(([code, info]) => (
-      <meta
-        property="og:locale:alternate"
-        content={info.code.replace("-", "_")}
-      />
-    ))
+{Object.entries(langConfig)
+  .filter(([code]) => code !== lang)
+  .map(([code, info]) => (
+    <meta property="og:locale:alternate" content={info.code.replace("-", "_")} />
+  ))
 }
 
 <!-- Twitter Card -->
@@ -198,7 +214,4 @@ const schemaOrganization = {
 
 <!-- Schema.org JSON-LD -->
 <script type="application/ld+json" set:html={JSON.stringify(schemaOrg)} />
-<script
-  type="application/ld+json"
-  set:html={JSON.stringify(schemaOrganization)}
-/>
+<script type="application/ld+json" set:html={JSON.stringify(schemaOrganization)} />

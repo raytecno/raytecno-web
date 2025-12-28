@@ -1,0 +1,16 @@
+---
+/**
+ * Template: Módulo Estadísticas
+ * Informes y cuadros de mando
+ */
+import SubmoduloLayout from "@/components/SubmoduloLayout.astro";
+
+interface Props {
+  lang: string;
+  pageId: string;
+}
+
+const { lang } = Astro.props;
+---
+
+<SubmoduloLayout lang={lang} moduloId="estadisticas" />

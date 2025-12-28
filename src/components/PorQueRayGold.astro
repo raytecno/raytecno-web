@@ -1,14 +1,161 @@
 ---
-// src/components/PorQueRayGold.astro
-// Sección de diferenciadores
+/**
+ * PorQueRayGold.astro - Sección de diferenciadores
+ * Con soporte multiidioma
+ */
+import { type Lang, getPageUrl } from "@/config/pages";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'es' } = Astro.props;
+
+// Traducciones
+const translations: Record<Lang, {
+  badge: string;
+  title: string;
+  subtitle: string;
+  card1Title: string;
+  card1Text: string;
+  card1Stat: string;
+  card2Title: string;
+  card2Text: string;
+  card2Stat: string;
+  card3Title: string;
+  card3Text: string;
+  card3Stat: string;
+  card4Title: string;
+  card4Text: string;
+  card4Stat: string;
+  card5Title: string;
+  card5Text: string;
+  card5Stat: string;
+  ctaText: string;
+  ctaButton: string;
+}> = {
+  es: {
+    badge: "Nuestra diferencia",
+    title: "¿Por qué +200 joyerías eligen RayGold?",
+    subtitle: "No somos un ERP genérico adaptado. Somos joyeros que creamos software.",
+    card1Title: "35 años en joyería",
+    card1Text: "No aprendemos del sector con tu empresa. Llevamos desde 1990 hablando de quilates, tallas y aleaciones.",
+    card1Stat: "Desde 1990",
+    card2Title: "100% hecho para joyeros",
+    card2Text: "Órdenes de fabricación con aleaciones, control de piedras por certificado, trazabilidad de metales. No es un módulo extra, es el núcleo.",
+    card2Stat: "100% especializado",
+    card3Title: "Un solo sistema",
+    card3Text: "Ventas, fabricación, compras, contabilidad, TPV, e-commerce. Sin parches ni integraciones que se rompen.",
+    card3Stat: "8 módulos integrados",
+    card4Title: "Te conocemos por tu nombre",
+    card4Text: "Cuando llamas, no hablas con un call center. Hablas con gente que entiende tu negocio y lleva años contigo.",
+    card4Stat: "Soporte directo España",
+    card5Title: "Siempre actualizado",
+    card5Text: "Cloud en Azure, actualizaciones automáticas, nuevas funciones cada trimestre. La tecnología avanza, RayGold también.",
+    card5Stat: "Tecnología cloud",
+    ctaText: "¿Listo para ver cómo RayGold puede transformar tu joyería?",
+    ctaButton: "Solicitar demostración gratuita →",
+  },
+  en: {
+    badge: "Our difference",
+    title: "Why do +200 jewelers choose RayGold?",
+    subtitle: "We're not an adapted generic ERP. We're jewelers who create software.",
+    card1Title: "35 years in jewelry",
+    card1Text: "We don't learn from your company. Since 1990 we've been speaking about carats, cuts and alloys.",
+    card1Stat: "Since 1990",
+    card2Title: "100% made for jewelers",
+    card2Text: "Manufacturing orders with alloys, stone control by certificate, metal traceability. It's not an extra module, it's the core.",
+    card2Stat: "100% specialized",
+    card3Title: "One single system",
+    card3Text: "Sales, manufacturing, purchases, accounting, POS, e-commerce. No patches or breaking integrations.",
+    card3Stat: "8 integrated modules",
+    card4Title: "We know you by name",
+    card4Text: "When you call, you don't talk to a call center. You talk to people who understand your business and have been with you for years.",
+    card4Stat: "Direct support Spain",
+    card5Title: "Always updated",
+    card5Text: "Azure cloud, automatic updates, new features every quarter. Technology advances, RayGold too.",
+    card5Stat: "Cloud technology",
+    ctaText: "Ready to see how RayGold can transform your jewelry business?",
+    ctaButton: "Request free demo →",
+  },
+  fr: {
+    badge: "Notre différence",
+    title: "Pourquoi +200 bijouteries choisissent RayGold?",
+    subtitle: "Nous ne sommes pas un ERP générique adapté. Nous sommes des bijoutiers qui créons des logiciels.",
+    card1Title: "35 ans dans la bijouterie",
+    card1Text: "Nous n'apprenons pas de votre entreprise. Depuis 1990, nous parlons de carats, de tailles et d'alliages.",
+    card1Stat: "Depuis 1990",
+    card2Title: "100% fait pour les bijoutiers",
+    card2Text: "Ordres de fabrication avec alliages, contrôle des pierres par certificat, traçabilité des métaux. Ce n'est pas un module extra, c'est le cœur.",
+    card2Stat: "100% spécialisé",
+    card3Title: "Un seul système",
+    card3Text: "Ventes, fabrication, achats, comptabilité, TPV, e-commerce. Sans correctifs ni intégrations qui se cassent.",
+    card3Stat: "8 modules intégrés",
+    card4Title: "Nous vous connaissons par votre nom",
+    card4Text: "Quand vous appelez, vous ne parlez pas à un centre d'appels. Vous parlez à des gens qui comprennent votre entreprise.",
+    card4Stat: "Support direct Espagne",
+    card5Title: "Toujours à jour",
+    card5Text: "Cloud Azure, mises à jour automatiques, nouvelles fonctionnalités chaque trimestre. La technologie avance, RayGold aussi.",
+    card5Stat: "Technologie cloud",
+    ctaText: "Prêt à voir comment RayGold peut transformer votre bijouterie?",
+    ctaButton: "Demander une démo gratuite →",
+  },
+  ca: {
+    badge: "La nostra diferència",
+    title: "Per què +200 joieries trien RayGold?",
+    subtitle: "No som un ERP genèric adaptat. Som joiers que creem programari.",
+    card1Title: "35 anys en joieria",
+    card1Text: "No aprenem del sector amb la teva empresa. Des de 1990 parlem de quirats, talles i aliatges.",
+    card1Stat: "Des de 1990",
+    card2Title: "100% fet per a joiers",
+    card2Text: "Ordres de fabricació amb aliatges, control de pedres per certificat, traçabilitat de metalls. No és un mòdul extra, és el nucli.",
+    card2Stat: "100% especialitzat",
+    card3Title: "Un sol sistema",
+    card3Text: "Vendes, fabricació, compres, comptabilitat, TPV, e-commerce. Sense pedaços ni integracions que es trenquen.",
+    card3Stat: "8 mòduls integrats",
+    card4Title: "Et coneixem pel teu nom",
+    card4Text: "Quan truques, no parles amb un call center. Parles amb gent que entén el teu negoci i porta anys amb tu.",
+    card4Stat: "Suport directe Espanya",
+    card5Title: "Sempre actualitzat",
+    card5Text: "Cloud a Azure, actualitzacions automàtiques, noves funcions cada trimestre. La tecnologia avança, RayGold també.",
+    card5Stat: "Tecnologia cloud",
+    ctaText: "Estàs preparat per veure com RayGold pot transformar la teva joieria?",
+    ctaButton: "Sol·licitar demostració gratuïta →",
+  },
+  "pt-br": {
+    badge: "Nossa diferença",
+    title: "Por que +200 joalherias escolhem RayGold?",
+    subtitle: "Não somos um ERP genérico adaptado. Somos joalheiros que criam software.",
+    card1Title: "35 anos em joalheria",
+    card1Text: "Não aprendemos do setor com sua empresa. Desde 1990 falamos de quilates, lapidações e ligas.",
+    card1Stat: "Desde 1990",
+    card2Title: "100% feito para joalheiros",
+    card2Text: "Ordens de fabricação com ligas, controle de pedras por certificado, rastreabilidade de metais. Não é um módulo extra, é o núcleo.",
+    card2Stat: "100% especializado",
+    card3Title: "Um único sistema",
+    card3Text: "Vendas, fabricação, compras, contabilidade, PDV, e-commerce. Sem remendos nem integrações que quebram.",
+    card3Stat: "8 módulos integrados",
+    card4Title: "Conhecemos você pelo nome",
+    card4Text: "Quando você liga, não fala com um call center. Fala com pessoas que entendem seu negócio e estão com você há anos.",
+    card4Stat: "Suporte direto Espanha",
+    card5Title: "Sempre atualizado",
+    card5Text: "Cloud no Azure, atualizações automáticas, novas funções a cada trimestre. A tecnologia avança, RayGold também.",
+    card5Stat: "Tecnologia cloud",
+    ctaText: "Pronto para ver como RayGold pode transformar sua joalheria?",
+    ctaButton: "Solicitar demonstração gratuita →",
+  },
+};
+
+const t = translations[lang] || translations.es;
+const contactUrl = getPageUrl('contacto', lang);
 ---
 
 <section class="porque-section">
   <div class="container">
     <div class="section-header">
-      <span class="section-badge">Nuestra diferencia</span>
-      <h2>¿Por qué +200 joyerías eligen RayGold?</h2>
-      <p>No somos un ERP genérico adaptado. Somos joyeros que creamos software.</p>
+      <span class="section-badge">{t.badge}</span>
+      <h2>{t.title}</h2>
+      <p>{t.subtitle}</p>
     </div>
 
     <div class="diferenciadores-grid">
@@ -21,9 +168,9 @@
           </svg>
         </div>
         <div class="diferenciador-content">
-          <h3>35 años en joyería</h3>
-          <p>No aprendemos del sector con tu empresa. Llevamos desde 1990 hablando de quilates, tallas y aleaciones.</p>
-          <span class="diferenciador-stat">Desde 1990</span>
+          <h3>{t.card1Title}</h3>
+          <p>{t.card1Text}</p>
+          <span class="diferenciador-stat">{t.card1Stat}</span>
         </div>
       </div>
 
@@ -37,9 +184,9 @@
           </svg>
         </div>
         <div class="diferenciador-content">
-          <h3>100% hecho para joyeros</h3>
-          <p>Órdenes de fabricación con aleaciones, control de piedras por certificado, trazabilidad de metales. No es un módulo extra, es el núcleo.</p>
-          <span class="diferenciador-stat">100% especializado</span>
+          <h3>{t.card2Title}</h3>
+          <p>{t.card2Text}</p>
+          <span class="diferenciador-stat">{t.card2Stat}</span>
         </div>
       </div>
 
@@ -54,9 +201,9 @@
           </svg>
         </div>
         <div class="diferenciador-content">
-          <h3>Un solo sistema</h3>
-          <p>Ventas, fabricación, compras, contabilidad, TPV, e-commerce. Sin parches ni integraciones que se rompen.</p>
-          <span class="diferenciador-stat">8 módulos integrados</span>
+          <h3>{t.card3Title}</h3>
+          <p>{t.card3Text}</p>
+          <span class="diferenciador-stat">{t.card3Stat}</span>
         </div>
       </div>
 
@@ -71,9 +218,9 @@
           </svg>
         </div>
         <div class="diferenciador-content">
-          <h3>Te conocemos por tu nombre</h3>
-          <p>Cuando llamas, no hablas con un call center. Hablas con gente que entiende tu negocio y lleva años contigo.</p>
-          <span class="diferenciador-stat">Soporte directo España</span>
+          <h3>{t.card4Title}</h3>
+          <p>{t.card4Text}</p>
+          <span class="diferenciador-stat">{t.card4Stat}</span>
         </div>
       </div>
 
@@ -85,17 +232,17 @@
           </svg>
         </div>
         <div class="diferenciador-content">
-          <h3>Siempre actualizado</h3>
-          <p>Cloud en Azure, actualizaciones automáticas, nuevas funciones cada trimestre. La tecnología avanza, RayGold también.</p>
-          <span class="diferenciador-stat">Tecnología cloud</span>
+          <h3>{t.card5Title}</h3>
+          <p>{t.card5Text}</p>
+          <span class="diferenciador-stat">{t.card5Stat}</span>
         </div>
       </div>
     </div>
 
     <!-- CTA -->
     <div class="porque-cta">
-      <p>¿Listo para ver cómo RayGold puede transformar tu joyería?</p>
-      <a href="#contacto" class="cta-button">Solicitar demostración gratuita →</a>
+      <p>{t.ctaText}</p>
+      <a href={contactUrl} class="cta-button">{t.ctaButton}</a>
     </div>
   </div>
 </section>

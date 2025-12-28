@@ -1,0 +1,214 @@
+{
+  "meta": {
+    "title": "RayGold ERP | Jewelry Management Software",
+    "description": "Specialized ERP software for the jewelry industry. Comprehensive management of manufacturing, sales, finance and inventory for jewelers and workshops.",
+    "keywords": "jewelry ERP, jewelry management software, jeweler software, RayGold"
+  },
+  "nav": {
+    "home": "Home",
+    "modules": "Modules",
+    "technology": "Technology",
+    "pricing": "Pricing",
+    "contact": "Contact",
+    "gallery": "Gallery",
+    "demo": "Request Demo"
+  },
+  "hero": {
+    "badge": "Specialized ERP Software",
+    "title": "Transform the management of your",
+    "titleHighlight": "jewelry business",
+    "description": "RayGold ERP is the comprehensive solution specifically designed for the jewelry industry. Control manufacturing, sales, inventory and finances from a single platform.",
+    "cta_primary": "Request Demo",
+    "cta_secondary": "View Modules",
+    "stats": {
+      "years": "years of experience",
+      "clients": "active clients",
+      "modules": "integrated modules"
+    }
+  },
+  "modules": {
+    "metaTitle": "Modules | RayGold ERP for Jewelry",
+    "metaDescription": "Discover the 8 modules of RayGold ERP: Master Data, Sales, Manufacturing, Finance, History, Analytics, Sales Team and Ecommerce.",
+    "title": "Modules",
+    "subtitle": "Everything you need to manage your business",
+    "viewAll": "View all modules",
+    "learnMore": "Learn more",
+    "list": {
+      "maestros": {
+        "title": "Master Data",
+        "description": "Complete management of items, prices, structures and images of your jewelry catalog."
+      },
+      "comercial": {
+        "title": "Sales",
+        "description": "Total control of sales, purchases, orders and customer and supplier management."
+      },
+      "fabricacion": {
+        "title": "Manufacturing",
+        "description": "Production planning and tracking, work orders and material control."
+      },
+      "finanzas": {
+        "title": "Finance",
+        "description": "Integrated accounting, collections, payments, banking and financial reports management."
+      },
+      "historicos": {
+        "title": "History",
+        "description": "Complete access to operation history, movements and piece traceability."
+      },
+      "estadisticas": {
+        "title": "Analytics",
+        "description": "Data analysis, custom reports and dashboards for decision making."
+      },
+      "vendedores": {
+        "title": "Sales Team",
+        "description": "Commercial team management, commissions, objectives and sales tracking."
+      },
+      "ecommerce": {
+        "title": "E-commerce",
+        "description": "Online store integration, stock synchronization and web order management."
+      }
+    }
+  },
+  "features": {
+    "title": "Why choose RayGold?",
+    "subtitle": "Designed by jewelry industry experts",
+    "list": {
+      "specialized": {
+        "title": "Jewelry Specialized",
+        "description": "Specifically developed for the unique needs of the jewelry industry."
+      },
+      "integrated": {
+        "title": "Fully Integrated",
+        "description": "All modules connected in a single centralized platform."
+      },
+      "cloud": {
+        "title": "Cloud-Based",
+        "description": "Access from anywhere with complete security on Microsoft Azure."
+      },
+      "support": {
+        "title": "Expert Support",
+        "description": "Specialized support team with over 30 years of experience."
+      }
+    }
+  },
+  "pricing": {
+    "metaTitle": "Pricing | RayGold ERP - SaaS & Perpetual License Plans",
+    "metaDescription": "Check RayGold ERP pricing. SaaS plans from €29/user/month or perpetual license from €12,000. Request a custom quote.",
+    "title": "Pricing",
+    "subtitle": "Plans tailored to your business",
+    "monthly": "Monthly",
+    "perpetual": "Perpetual License",
+    "perUser": "per user/month",
+    "oneTime": "one-time payment",
+    "popular": "Most popular",
+    "cta": "Request information",
+    "includes": "Includes",
+    "plans": {
+      "starter": {
+        "name": "Starter",
+        "description": "For small jewelry stores"
+      },
+      "professional": {
+        "name": "Professional",
+        "description": "For growing jewelry businesses"
+      },
+      "enterprise": {
+        "name": "Enterprise",
+        "description": "For large companies"
+      }
+    },
+    "features": {
+      "modules": "modules included",
+      "users": "users",
+      "support": "Support",
+      "updates": "Updates",
+      "training": "Training",
+      "customization": "Customization"
+    }
+  },
+  "technology": {
+    "metaTitle": "Technology | RayGold ERP Architecture",
+    "metaDescription": "RayGold ERP is built with Vue.js, ASP.NET Core, Azure and MySQL. Modern, secure and scalable architecture for jewelry businesses.",
+    "title": "Technology",
+    "subtitle": "Modern and scalable architecture",
+    "description": "RayGold is built on the most advanced technologies on the market, ensuring performance, security and scalability.",
+    "stack": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "cloud": "Cloud Infrastructure",
+      "database": "Database"
+    }
+  },
+  "gallery": {
+    "metaTitle": "Gallery | RayGold ERP Screenshots",
+    "metaDescription": "Explore the RayGold ERP image gallery. Screenshots of all modules and features.",
+    "title": "Gallery",
+    "subtitle": "Discover RayGold ERP in images",
+    "empty": "No images available",
+    "back": "Back"
+  },
+  "cta": {
+    "title": "Ready to transform your business?",
+    "description": "Request a personalized demo and discover how RayGold can help you.",
+    "button": "Request Free Demo"
+  },
+  "contact": {
+    "metaTitle": "Contact | RayGold ERP - Request Information",
+    "metaDescription": "Contact RayGold ERP. Request a free demo, quote or information about our jewelry management software.",
+    "title": "Contact",
+    "subtitle": "We're here to help",
+    "nombre": "Name",
+    "email": "Email",
+    "telefono": "Phone",
+    "empresa": "Company",
+    "mensaje": "Message",
+    "enviar": "Send message",
+    "llamanos": "Call us",
+    "whatsapp": "WhatsApp",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "company": "Company",
+      "message": "Message",
+      "submit": "Send message"
+    },
+    "info": {
+      "address": "Address",
+      "phone": "Phone",
+      "email": "Email",
+      "hours": "Hours"
+    }
+  },
+  "footer": {
+    "description": "Specialized ERP software for the jewelry industry. Over 30 years of experience transforming jewelry business management.",
+    "links": {
+      "product": "Product",
+      "company": "Company",
+      "legal": "Legal"
+    },
+    "legal": {
+      "privacy": "Privacy",
+      "terms": "Terms",
+      "cookies": "Cookies"
+    },
+    "copyright": "All rights reserved."
+  },
+  "whatsapp": {
+    "tooltip": "Need help?",
+    "message": "Hello, I'm interested in information about RayGold ERP"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "retry": "Retry",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "search": "Search",
+    "filter": "Filter",
+    "all": "All",
+    "yes": "Yes",
+    "no": "No"
+  }
+}

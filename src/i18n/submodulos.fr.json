@@ -1,0 +1,328 @@
+{
+  "submodulos": {
+    "common": {
+      "backToModules": "← Retour aux Modules",
+      "backToHome": "← Retour à l'accueil",
+      "requestDemo": "Demander une démo",
+      "seeInAction": "Voulez-vous voir ce module en action ?",
+      "imageNotAvailable": "Image non disponible",
+      "close": "Fermer"
+    },
+    "maestros": {
+      "title": "Données de Base",
+      "subtitle": "Articles, fournisseurs, clients et familles",
+      "metaTitle": "Données de Base | RayGold ERP - Gestion du Catalogue",
+      "metaDescription": "Gestion complète des articles, prix, structures et images de votre catalogue de bijouterie avec RayGold ERP.",
+      "sections": {
+        "articulos": {
+          "name": "Articles",
+          "description": "Gestion complète du catalogue d'articles",
+          "images": [
+            { "title": "Liste des Articles", "description": "Vue générale du catalogue avec filtres avancés" },
+            { "title": "Fiche Article", "description": "Détail complet avec spécifications" },
+            { "title": "Configuration", "description": "Personnalisation des champs et attributs" }
+          ]
+        },
+        "precios": {
+          "name": "Prix",
+          "description": "Tarifs, remises et politiques de prix",
+          "images": [
+            { "title": "Tarifs", "description": "Gestion de multiples tarifs" },
+            { "title": "Remises", "description": "Configuration des remises" },
+            { "title": "Historique", "description": "Traçabilité des changements" }
+          ]
+        },
+        "estructuras": {
+          "name": "Structures",
+          "description": "Composition et matériaux de chaque pièce",
+          "images": [
+            { "title": "Composition", "description": "Définition des matériaux et composants" },
+            { "title": "Arbre des Matériaux", "description": "Vue hiérarchique de la structure" },
+            { "title": "Coûts", "description": "Calcul automatique des coûts" }
+          ]
+        },
+        "imagenes": {
+          "name": "Images",
+          "description": "Galerie photos et multimédia",
+          "images": [
+            { "title": "Galerie", "description": "Gestion d'images multiples" },
+            { "title": "Visionneuse", "description": "Visualisation avec zoom" },
+            { "title": "Importation", "description": "Chargement massif d'images" }
+          ]
+        },
+        "layout": {
+          "name": "Mise en Page",
+          "description": "Personnalisation des vues et formulaires",
+          "images": [
+            { "title": "Configuration", "description": "Conception personnalisée des formulaires" },
+            { "title": "Champs", "description": "Champs personnalisés sans code" },
+            { "title": "Modèles", "description": "Sauvegarde des configurations" }
+          ]
+        }
+      }
+    },
+    "comercial": {
+      "title": "Commercial",
+      "subtitle": "Ventes, commandes et facturation complète pour votre bijouterie",
+      "metaTitle": "Commercial | RayGold ERP - Gestion des Ventes",
+      "metaDescription": "Contrôle total des ventes, commandes, bons de livraison et facturation pour bijouteries avec RayGold ERP.",
+      "sections": {
+        "pedidos": {
+          "name": "Commandes",
+          "description": "Gestion complète du cycle de commandes",
+          "images": [
+            { "title": "Liste des Commandes", "description": "Vue générale avec états et suivi" },
+            { "title": "Nouvelle Commande", "description": "Création rapide avec recherche d'articles" },
+            { "title": "Détail Commande", "description": "Information complète de la commande" }
+          ]
+        },
+        "albaranes": {
+          "name": "Bons de Livraison",
+          "description": "Contrôle des livraisons et expéditions",
+          "images": [
+            { "title": "Bons de Livraison", "description": "Gestion des bons de livraison" },
+            { "title": "Génération", "description": "Création depuis commandes" },
+            { "title": "Impression", "description": "Documents personnalisables" }
+          ]
+        },
+        "facturas": {
+          "name": "Factures",
+          "description": "Facturation électronique et traditionnelle",
+          "images": [
+            { "title": "Factures", "description": "Liste des factures émises" },
+            { "title": "Nouvelle Facture", "description": "Facturation manuelle ou depuis bons" },
+            { "title": "Facture-E", "description": "Facturation électronique intégrée" }
+          ]
+        },
+        "clientes": {
+          "name": "Clients",
+          "description": "Base de données clients",
+          "images": [
+            { "title": "Liste", "description": "Répertoire clients" },
+            { "title": "Fiche", "description": "Données complètes du client" },
+            { "title": "Historique", "description": "Historique des opérations" }
+          ]
+        }
+      }
+    },
+    "fabricacion": {
+      "title": "Fabrication",
+      "subtitle": "Production, inventaires et contrôle qualité",
+      "metaTitle": "Fabrication | RayGold ERP - Contrôle de Production",
+      "metaDescription": "Planification et suivi de la production, ordres de travail et contrôle des matériaux pour bijouteries.",
+      "sections": {
+        "ordenes": {
+          "name": "Ordres de Fabrication",
+          "description": "Gestion des ordres de fabrication",
+          "images": [
+            { "title": "Liste OF", "description": "Vue générale des ordres" },
+            { "title": "Nouvel OF", "description": "Création d'ordre de travail" },
+            { "title": "Suivi", "description": "État de la production" }
+          ]
+        },
+        "fases": {
+          "name": "Phases",
+          "description": "Contrôle des phases productives",
+          "images": [
+            { "title": "Phases de Production", "description": "Définition du processus productif" },
+            { "title": "Temps", "description": "Contrôle des temps par phase" },
+            { "title": "Opérateurs", "description": "Affectation des ressources" }
+          ]
+        },
+        "fundicion": {
+          "name": "Fonte",
+          "description": "Contrôle du processus de fonte",
+          "images": [
+            { "title": "Fontes", "description": "Registre des fontes" },
+            { "title": "Pertes", "description": "Contrôle des pertes" },
+            { "title": "Alliages", "description": "Composition des métaux" }
+          ]
+        },
+        "inventario": {
+          "name": "Inventaire",
+          "description": "Contrôle du stock et mouvements",
+          "images": [
+            { "title": "Stock", "description": "Inventaire en temps réel" },
+            { "title": "Mouvements", "description": "Traçabilité complète" },
+            { "title": "Valorisation", "description": "Valorisation des existences" }
+          ]
+        }
+      }
+    },
+    "finanzas": {
+      "title": "Finances",
+      "subtitle": "Comptabilité, trésorerie et TVA intégrés",
+      "metaTitle": "Finances | RayGold ERP - Gestion Financière",
+      "metaDescription": "Comptabilité intégrée, gestion des encaissements, paiements, banques et rapports financiers pour bijouteries.",
+      "sections": {
+        "contabilidad": {
+          "name": "Comptabilité",
+          "description": "Plan comptable et écritures",
+          "images": [
+            { "title": "Plan de Comptes", "description": "Structure comptable" },
+            { "title": "Écritures", "description": "Registre des mouvements" },
+            { "title": "Balance", "description": "États financiers" }
+          ]
+        },
+        "tesoreria": {
+          "name": "Trésorerie",
+          "description": "Contrôle des encaissements et paiements",
+          "images": [
+            { "title": "Trésorerie", "description": "Panneau de trésorerie" },
+            { "title": "Encaissements", "description": "Gestion des encaissements en attente" },
+            { "title": "Paiements", "description": "Contrôle des paiements fournisseurs" }
+          ]
+        },
+        "iva": {
+          "name": "TVA",
+          "description": "Liquidation et déclarations",
+          "images": [
+            { "title": "Liquidation TVA", "description": "Calcul automatique de TVA" },
+            { "title": "Modèles", "description": "Génération des modèles fiscaux" },
+            { "title": "Configuration", "description": "Types de TVA et retenues" }
+          ]
+        },
+        "bancos": {
+          "name": "Banques",
+          "description": "Rapprochement bancaire automatique",
+          "images": [
+            { "title": "Banques", "description": "Gestion des comptes bancaires" },
+            { "title": "Rapprochement", "description": "Rapprochement automatique" },
+            { "title": "Relevés", "description": "Importation des relevés" }
+          ]
+        },
+        "informes": {
+          "name": "Rapports",
+          "description": "Bilan, compte de résultat et ratios",
+          "images": [
+            { "title": "Bilan", "description": "Bilan de situation" },
+            { "title": "Compte de Résultat", "description": "Compte de pertes et profits" },
+            { "title": "Ratios", "description": "Analyse des ratios financiers" }
+          ]
+        }
+      }
+    },
+    "historicos": {
+      "title": "Historiques",
+      "subtitle": "Données historiques et traçabilité complète",
+      "metaTitle": "Historiques | RayGold ERP - Traçabilité",
+      "metaDescription": "Accès complet à l'historique des opérations, mouvements et traçabilité des pièces de bijouterie.",
+      "sections": {
+        "operaciones": {
+          "name": "Opérations",
+          "description": "Historique de toutes les opérations",
+          "images": [
+            { "title": "Recherche", "description": "Localisation des opérations" },
+            { "title": "Détail", "description": "Information complète" },
+            { "title": "Exportation", "description": "Téléchargement des données" }
+          ]
+        },
+        "trazabilidad": {
+          "name": "Traçabilité",
+          "description": "Suivi des pièces",
+          "images": [
+            { "title": "Par Pièce", "description": "Histoire de chaque article" },
+            { "title": "Par Lot", "description": "Traçabilité par lots" },
+            { "title": "Certificats", "description": "Documentation associée" }
+          ]
+        }
+      }
+    },
+    "estadisticas": {
+      "title": "Statistiques",
+      "subtitle": "Rapports et tableaux de bord pour décisions",
+      "metaTitle": "Statistiques | RayGold ERP - Business Intelligence",
+      "metaDescription": "Analyse de données, rapports personnalisés et tableaux de bord pour la prise de décision en bijouterie.",
+      "sections": {
+        "dashboards": {
+          "name": "Tableaux de Bord",
+          "description": "Panneaux de contrôle visuels",
+          "images": [
+            { "title": "Principal", "description": "KPIs principaux" },
+            { "title": "Ventes", "description": "Métriques commerciales" },
+            { "title": "Production", "description": "Indicateurs d'usine" }
+          ]
+        },
+        "informes": {
+          "name": "Rapports",
+          "description": "Rapports personnalisables",
+          "images": [
+            { "title": "Catalogue", "description": "Rapports prédéfinis" },
+            { "title": "Concepteur", "description": "Créateur de rapports" },
+            { "title": "Programmation", "description": "Envoi automatique" }
+          ]
+        }
+      }
+    },
+    "vendedores": {
+      "title": "Commerciaux",
+      "subtitle": "Gestion des tournées, visites et commissions",
+      "metaTitle": "Commerciaux | RayGold ERP - Gestion Commerciale",
+      "metaDescription": "Gestion des équipes commerciales, commissions, objectifs et suivi des ventes pour bijouteries.",
+      "sections": {
+        "equipo": {
+          "name": "Équipe",
+          "description": "Gestion de l'équipe commerciale",
+          "images": [
+            { "title": "Commerciaux", "description": "Liste de l'équipe" },
+            { "title": "Zones", "description": "Attribution des territoires" },
+            { "title": "Objectifs", "description": "Objectifs de vente" }
+          ]
+        },
+        "comisiones": {
+          "name": "Commissions",
+          "description": "Calcul et règlement",
+          "images": [
+            { "title": "Règles", "description": "Configuration des commissions" },
+            { "title": "Calcul", "description": "Règlement automatique" },
+            { "title": "Historique", "description": "Paiements effectués" }
+          ]
+        },
+        "rutas": {
+          "name": "Tournées",
+          "description": "Planification des visites",
+          "images": [
+            { "title": "Calendrier", "description": "Agenda des visites" },
+            { "title": "Carte", "description": "Vue géographique" },
+            { "title": "Rapports", "description": "Résultats des visites" }
+          ]
+        }
+      }
+    },
+    "ecommerce": {
+      "title": "E-commerce",
+      "subtitle": "Boutiques en ligne et marketplaces intégrés",
+      "metaTitle": "E-commerce | RayGold ERP - Vente en Ligne",
+      "metaDescription": "Intégration boutique en ligne, synchronisation des stocks et gestion des commandes web pour bijouteries.",
+      "sections": {
+        "catalogo": {
+          "name": "Catalogue en Ligne",
+          "description": "Publication des produits",
+          "images": [
+            { "title": "Produits", "description": "Gestion du catalogue web" },
+            { "title": "Catégories", "description": "Organisation des produits" },
+            { "title": "Synchronisation", "description": "Mise à jour automatique" }
+          ]
+        },
+        "pedidos": {
+          "name": "Commandes Web",
+          "description": "Gestion des commandes en ligne",
+          "images": [
+            { "title": "Réception", "description": "Commandes entrantes" },
+            { "title": "Traitement", "description": "Flux de travail" },
+            { "title": "Expéditions", "description": "Logistique intégrée" }
+          ]
+        },
+        "integraciones": {
+          "name": "Intégrations",
+          "description": "Connexion avec plateformes",
+          "images": [
+            { "title": "Shopify", "description": "Intégration Shopify" },
+            { "title": "WooCommerce", "description": "Intégration WordPress" },
+            { "title": "Marketplaces", "description": "Amazon, eBay, etc." }
+          ]
+        }
+      }
+    }
+  }
+}

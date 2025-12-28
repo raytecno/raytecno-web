@@ -1,0 +1,120 @@
+{
+  "home": {
+    "metaTitle": "RayGold - Software ERP para Joalheria",
+    "metaDescription": "Sistema ERP especializado em joalheria. Gestão de estoque, fabricação, vendas e contabilidade para joalherias e oficinas.",
+    
+    "hero": {
+      "badge": "Desde 1990 · +200 joalherias confiam em nós",
+      "title": "O ERP que fala a língua da sua joalheria",
+      "subtitle": "Gerencie estoque, fabricação, vendas e contabilidade com um sistema",
+      "subtitleStrong": "projetado exclusivamente para joalheiros",
+      "subtitleEnd": "Sem adaptações, sem remendos.",
+      "stats": {
+        "years": "anos de experiência",
+        "jewelers": "joalherias ativas",
+        "modules": "módulos integrados"
+      },
+      "ctaPrimary": "Ver demonstração",
+      "ctaSecondary": "Explorar módulos",
+      "visual": {
+        "label": "Gestão de artigos",
+        "badge1": "Estoque sincronizado",
+        "badge2": "Controle de custos"
+      },
+      "scroll": "Descubra mais"
+    },
+
+    "porque": {
+      "badge": "Nossa diferença",
+      "title": "Por que +200 joalherias escolhem RayGold?",
+      "subtitle": "Não somos um ERP genérico adaptado. Somos joalheiros que criam software.",
+      "items": {
+        "experience": {
+          "title": "35 anos em joalheria",
+          "description": "Não aprendemos o setor com sua empresa. Desde 1990 falamos de quilates, lapidações e ligas.",
+          "stat": "Desde 1990"
+        },
+        "specialized": {
+          "title": "100% feito para joalheiros",
+          "description": "Ordens de fabricação com ligas, controle de pedras por certificado, rastreabilidade de metais. Não é um módulo extra, é o núcleo.",
+          "stat": "100% especializado"
+        },
+        "integrated": {
+          "title": "Um único sistema",
+          "description": "Vendas, fabricação, compras, contabilidade, PDV, e-commerce. Sem remendos nem integrações que quebram.",
+          "stat": "8 módulos integrados"
+        },
+        "support": {
+          "title": "Conhecemos você pelo nome",
+          "description": "Quando você liga, não fala com um call center. Fala com pessoas que entendem seu negócio e estão com você há anos.",
+          "stat": "Suporte direto"
+        },
+        "cloud": {
+          "title": "Sempre atualizado",
+          "description": "Cloud no Azure, atualizações automáticas, novas funcionalidades a cada trimestre. A tecnologia avança, o RayGold também.",
+          "stat": "Tecnologia cloud"
+        }
+      },
+      "cta": {
+        "text": "Pronto para ver como o RayGold pode transformar sua joalheria?",
+        "button": "Solicitar demonstração gratuita →"
+      }
+    },
+
+    "testimonios": {
+      "badge": "Casos de sucesso",
+      "title": "O que nossos clientes dizem",
+      "subtitle": "Joalherias reais com resultados reais",
+      "items": [
+        {
+          "quote": "Testamos 3 ERPs genéricos antes do RayGold. Nenhum entendia que uma aliança tem ouro 18k, um diamante de 0.15ct e mão de obra de gravação.",
+          "quoteStrong": "O RayGold já vem com isso.",
+          "resultNumber": "-60%",
+          "resultText": "tempo de inventário",
+          "author": "Brian Flores",
+          "company": "Joalheria Flores e Filhos · Valência",
+          "since": "Cliente desde 2012",
+          "initials": "CN"
+        },
+        {
+          "quote": "Gerenciamos 4.000 referências com variantes de ouro, prata e ligas. As ordens de fabricação do RayGold calculam o metal exato.",
+          "quoteStrong": "Antes fazíamos no Excel.",
+          "resultNumber": "12.000€",
+          "resultText": "economia anual em perdas",
+          "author": "Degan & Ferraz",
+          "company": "Fabricações Ferraz · Córdoba",
+          "since": "Cliente desde 2016",
+          "initials": "MO",
+          "featured": true
+        },
+        {
+          "quote": "Abrimos a quinta loja e o RayGold escalou sem problemas. Estoque centralizado, transferências entre lojas, comissões...",
+          "quoteStrong": "É nosso cérebro operacional.",
+          "resultNumber": "5",
+          "resultText": "lojas sincronizadas",
+          "author": "David Pablo",
+          "company": "Grupo Brillante · Catalunha",
+          "since": "Cliente desde 2009",
+          "initials": "JP"
+        }
+      ]
+    },
+
+    "video": {
+      "badge": "Veja em ação",
+      "title": "Descubra o RayGold em",
+      "titleHighlight": "90 segundos",
+      "subtitle": "Um tour pelas funcionalidades que transformarão a gestão da sua joalheria",
+      "playText": "Ver demonstração",
+      "features": {
+        "duration": { "value": "90 seg", "label": "de demo" },
+        "modules": { "value": "8 módulos", "label": "em ação" },
+        "specialized": { "value": "100%", "label": "joalheria" }
+      },
+      "cta": {
+        "text": "Gostaria de ver uma demo personalizada para seu negócio?",
+        "button": "Solicitar demo gratuita"
+      }
+    }
+  }
+}

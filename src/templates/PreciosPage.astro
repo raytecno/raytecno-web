@@ -1,0 +1,1816 @@
+---
+/**
+ * Template: Precios
+ * Planes de precios de RayGold ERP
+ */
+import Layout from "@/layouts/Layout.astro";
+import { getTranslations } from "@/i18n";
+import { getAlternateUrls, getPageUrl, type Lang } from "@/config/pages";
+
+interface Props {
+  lang: string;
+  pageId: string;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang as Lang);
+const alternateUrls = getAlternateUrls("precios");
+const contactUrl = getPageUrl("contacto", lang as Lang);
+
+// Traducciones de precios
+const pT = {
+  es: {
+    badge: "Precios transparentes",
+    title: "Elige el plan perfecto para",
+    titleHighlight: "tu joyería",
+    subtitle:
+      "Sin costes ocultos. Sin sorpresas. Soporte local en España incluido.",
+    toggleSaas: "Suscripción mensual",
+    togglePerpetual: "Licencia perpetua",
+    // Planes
+    starter: {
+      name: "Starter",
+      desc: "Para joyerías pequeñas",
+      price: "29€",
+      period: "/usuario/mes",
+      note: "Facturación anual · Mín. 2 usuarios",
+      cta: "Empezar ahora",
+    },
+    professional: {
+      name: "Profesional",
+      desc: "Para joyerías en crecimiento",
+      price: "49€",
+      period: "/usuario/mes",
+      note: "Facturación anual · Mín. 3 usuarios",
+      cta: "Solicitar demo",
+      badge: "Más popular",
+    },
+    enterprise: {
+      name: "Enterprise",
+      desc: "Para cadenas y fabricantes",
+      price: "69€",
+      period: "/usuario/mes",
+      note: "Facturación anual · Mín. 5 usuarios",
+      cta: "Contactar ventas",
+    },
+    // Features
+    starterFeatures: [
+      "Punto de Venta (TPV)",
+      "Gestión de Inventario",
+      "Clientes y CRM básico",
+      "Control de metales y quilates",
+      "Etiquetas especializadas",
+      "Soporte por email",
+    ],
+    professionalFeatures: [
+      "Todo lo de Starter +",
+      "Módulo de Fabricación",
+      "Taller y Reparaciones",
+      "Contabilidad integrada",
+      "Gestión de proveedores",
+      "Informes avanzados",
+      "Soporte telefónico",
+    ],
+    enterpriseFeatures: [
+      "Todo lo de Profesional +",
+      "Multi-tienda sincronizado",
+      "API para integraciones",
+      "Business Intelligence",
+      "Conexión e-commerce",
+      "Gestor de cuenta dedicado",
+      "SLA garantizado",
+    ],
+    // Note
+    plansNote:
+      "Todos los planes incluyen: hosting en Azure España, actualizaciones, copias de seguridad diarias y formación inicial.",
+    // Perpetual
+    perpetual: {
+      title: "Licencia Perpetua",
+      desc: "Compra el software y es tuyo para siempre. Ideal para empresas que prefieren inversión inicial en lugar de cuotas mensuales.",
+      from: "desde",
+      price: "12.000€",
+      detail: "Pago único · Usuarios ilimitados",
+      cta: "Solicitar presupuesto personalizado",
+    },
+    perpetualIncludes: "Incluye:",
+    perpetualIncludesList: [
+      "Todos los módulos de RayGold",
+      "Usuarios ilimitados",
+      "Instalación en su servidor",
+      "Formación presencial (16h)",
+    ],
+    perpetualMaintenance: "Mantenimiento opcional:",
+    perpetualMaintenanceList: [
+      "Actualizaciones de versión",
+      "Soporte técnico prioritario",
+      "18% anual sobre licencia",
+    ],
+    // Comparison
+    comparisonTitle: "¿SaaS o Licencia Perpetua?",
+    saasLabel: "SaaS (Suscripción)",
+    saasDesc:
+      "Sin inversión inicial grande. Ideal para empezar o crecer progresivamente. Todo incluido: hosting, actualizaciones y soporte.",
+    perpetualLabel: "Licencia Perpetua",
+    perpetualDesc:
+      "Mayor control sobre tu infraestructura. Sin cuotas mensuales. Rentable a largo plazo para equipos de +10 usuarios.",
+    // FAQ
+    faqTitle: "Preguntas frecuentes",
+    faq: [
+      {
+        q: "¿Hay compromiso de permanencia?",
+        a: "No. Los planes SaaS son anuales pero puedes cancelar en cualquier momento sin penalización al finalizar tu período.",
+      },
+      {
+        q: "¿Qué incluye la implementación?",
+        a: "Configuración inicial, migración de datos, formación del equipo y acompañamiento durante el primer mes.",
+      },
+      {
+        q: "¿Puedo cambiar de plan?",
+        a: "Sí, puedes escalar tu plan en cualquier momento. También puedes migrar de SaaS a licencia perpetua.",
+      },
+      {
+        q: "¿Ofrecéis prueba gratuita?",
+        a: "Ofrecemos una demo personalizada gratuita donde verás RayGold funcionando con datos de ejemplo del sector joyero.",
+      },
+    ],
+    // CTA
+    ctaTitle: "¿Listo para transformar tu joyería?",
+    ctaSubtitle:
+      "Solicita una demo gratuita y descubre por qué más de 200 joyerías confían en RayGold",
+    ctaButton: "Solicitar demo gratuita",
+  },
+  en: {
+    badge: "Transparent pricing",
+    title: "Choose the perfect plan for",
+    titleHighlight: "your jewelry business",
+    subtitle: "No hidden costs. No surprises. Local support included.",
+    toggleSaas: "Monthly subscription",
+    togglePerpetual: "Perpetual license",
+    starter: {
+      name: "Starter",
+      desc: "For small jewelers",
+      price: "29€",
+      period: "/user/month",
+      note: "Annual billing · Min. 2 users",
+      cta: "Get started",
+    },
+    professional: {
+      name: "Professional",
+      desc: "For growing jewelers",
+      price: "49€",
+      period: "/user/month",
+      note: "Annual billing · Min. 3 users",
+      cta: "Request demo",
+      badge: "Most popular",
+    },
+    enterprise: {
+      name: "Enterprise",
+      desc: "For chains and manufacturers",
+      price: "69€",
+      period: "/user/month",
+      note: "Annual billing · Min. 5 users",
+      cta: "Contact sales",
+    },
+    starterFeatures: [
+      "Point of Sale (POS)",
+      "Inventory Management",
+      "Customers and basic CRM",
+      "Metal and karat control",
+      "Specialized labels",
+      "Email support",
+    ],
+    professionalFeatures: [
+      "Everything in Starter +",
+      "Manufacturing Module",
+      "Workshop & Repairs",
+      "Integrated accounting",
+      "Supplier management",
+      "Advanced reports",
+      "Phone support",
+    ],
+    enterpriseFeatures: [
+      "Everything in Professional +",
+      "Multi-store sync",
+      "API for integrations",
+      "Business Intelligence",
+      "E-commerce connection",
+      "Dedicated account manager",
+      "Guaranteed SLA",
+    ],
+    plansNote:
+      "All plans include: Azure hosting, updates, daily backups and initial training.",
+    perpetual: {
+      title: "Perpetual License",
+      desc: "Buy the software and own it forever. Ideal for companies that prefer an initial investment over monthly fees.",
+      from: "from",
+      price: "12,000€",
+      detail: "One-time payment · Unlimited users",
+      cta: "Request custom quote",
+    },
+    perpetualIncludes: "Includes:",
+    perpetualIncludesList: [
+      "All RayGold modules",
+      "Unlimited users",
+      "Installation on your server",
+      "On-site training (16h)",
+    ],
+    perpetualMaintenance: "Optional maintenance:",
+    perpetualMaintenanceList: [
+      "Version updates",
+      "Priority technical support",
+      "18% annual on license",
+    ],
+    comparisonTitle: "SaaS or Perpetual License?",
+    saasLabel: "SaaS (Subscription)",
+    saasDesc:
+      "No large upfront investment. Ideal for starting or growing progressively. All-inclusive: hosting, updates and support.",
+    perpetualLabel: "Perpetual License",
+    perpetualDesc:
+      "More control over your infrastructure. No monthly fees. Cost-effective long-term for teams of 10+ users.",
+    faqTitle: "Frequently asked questions",
+    faq: [
+      {
+        q: "Is there a commitment period?",
+        a: "No. SaaS plans are annual but you can cancel anytime without penalty at the end of your period.",
+      },
+      {
+        q: "What does implementation include?",
+        a: "Initial setup, data migration, team training and support during the first month.",
+      },
+      {
+        q: "Can I change plans?",
+        a: "Yes, you can upgrade your plan at any time. You can also migrate from SaaS to perpetual license.",
+      },
+      {
+        q: "Do you offer a free trial?",
+        a: "We offer a free personalized demo where you'll see RayGold working with sample jewelry industry data.",
+      },
+    ],
+    ctaTitle: "Ready to transform your jewelry business?",
+    ctaSubtitle:
+      "Request a free demo and discover why over 200 jewelers trust RayGold",
+    ctaButton: "Request free demo",
+  },
+  fr: {
+    badge: "Prix transparents",
+    title: "Choisissez le plan parfait pour",
+    titleHighlight: "votre bijouterie",
+    subtitle: "Sans frais cachés. Sans surprises. Support local inclus.",
+    toggleSaas: "Abonnement mensuel",
+    togglePerpetual: "Licence perpétuelle",
+    starter: {
+      name: "Starter",
+      desc: "Pour petites bijouteries",
+      price: "29€",
+      period: "/utilisateur/mois",
+      note: "Facturation annuelle · Min. 2 utilisateurs",
+      cta: "Commencer",
+    },
+    professional: {
+      name: "Professionnel",
+      desc: "Pour bijouteries en croissance",
+      price: "49€",
+      period: "/utilisateur/mois",
+      note: "Facturation annuelle · Min. 3 utilisateurs",
+      cta: "Demander démo",
+      badge: "Plus populaire",
+    },
+    enterprise: {
+      name: "Enterprise",
+      desc: "Pour chaînes et fabricants",
+      price: "69€",
+      period: "/utilisateur/mois",
+      note: "Facturation annuelle · Min. 5 utilisateurs",
+      cta: "Contacter ventes",
+    },
+    starterFeatures: [
+      "Point de Vente (PDV)",
+      "Gestion des stocks",
+      "Clients et CRM basique",
+      "Contrôle métaux et carats",
+      "Étiquettes spécialisées",
+      "Support par email",
+    ],
+    professionalFeatures: [
+      "Tout de Starter +",
+      "Module Fabrication",
+      "Atelier et Réparations",
+      "Comptabilité intégrée",
+      "Gestion fournisseurs",
+      "Rapports avancés",
+      "Support téléphonique",
+    ],
+    enterpriseFeatures: [
+      "Tout de Professionnel +",
+      "Multi-magasin synchronisé",
+      "API pour intégrations",
+      "Business Intelligence",
+      "Connexion e-commerce",
+      "Gestionnaire de compte dédié",
+      "SLA garanti",
+    ],
+    plansNote:
+      "Tous les plans incluent: hébergement Azure, mises à jour, sauvegardes quotidiennes et formation initiale.",
+    perpetual: {
+      title: "Licence Perpétuelle",
+      desc: "Achetez le logiciel et il est à vous pour toujours. Idéal pour les entreprises qui préfèrent un investissement initial aux frais mensuels.",
+      from: "à partir de",
+      price: "12.000€",
+      detail: "Paiement unique · Utilisateurs illimités",
+      cta: "Demander devis personnalisé",
+    },
+    perpetualIncludes: "Inclus:",
+    perpetualIncludesList: [
+      "Tous les modules RayGold",
+      "Utilisateurs illimités",
+      "Installation sur votre serveur",
+      "Formation sur site (16h)",
+    ],
+    perpetualMaintenance: "Maintenance optionnelle:",
+    perpetualMaintenanceList: [
+      "Mises à jour de version",
+      "Support technique prioritaire",
+      "18% annuel sur licence",
+    ],
+    comparisonTitle: "SaaS ou Licence Perpétuelle?",
+    saasLabel: "SaaS (Abonnement)",
+    saasDesc:
+      "Pas de gros investissement initial. Idéal pour démarrer ou grandir progressivement. Tout inclus: hébergement, mises à jour et support.",
+    perpetualLabel: "Licence Perpétuelle",
+    perpetualDesc:
+      "Plus de contrôle sur votre infrastructure. Pas de frais mensuels. Rentable à long terme pour équipes de +10 utilisateurs.",
+    faqTitle: "Questions fréquentes",
+    faq: [
+      {
+        q: "Y a-t-il un engagement?",
+        a: "Non. Les plans SaaS sont annuels mais vous pouvez annuler à tout moment sans pénalité à la fin de votre période.",
+      },
+      {
+        q: "Que comprend l'implémentation?",
+        a: "Configuration initiale, migration des données, formation de l'équipe et accompagnement le premier mois.",
+      },
+      {
+        q: "Puis-je changer de plan?",
+        a: "Oui, vous pouvez passer à un plan supérieur à tout moment. Vous pouvez aussi migrer du SaaS vers licence perpétuelle.",
+      },
+      {
+        q: "Offrez-vous un essai gratuit?",
+        a: "Nous offrons une démo personnalisée gratuite où vous verrez RayGold fonctionner avec des données du secteur bijoutier.",
+      },
+    ],
+    ctaTitle: "Prêt à transformer votre bijouterie?",
+    ctaSubtitle:
+      "Demandez une démo gratuite et découvrez pourquoi plus de 200 bijouteries font confiance à RayGold",
+    ctaButton: "Demander démo gratuite",
+  },
+  ca: {
+    badge: "Preus transparents",
+    title: "Tria el pla perfecte per a",
+    titleHighlight: "la teva joieria",
+    subtitle: "Sense costos ocults. Sense sorpreses. Suport local inclòs.",
+    toggleSaas: "Subscripció mensual",
+    togglePerpetual: "Llicència perpètua",
+    starter: {
+      name: "Starter",
+      desc: "Per a joieries petites",
+      price: "29€",
+      period: "/usuari/mes",
+      note: "Facturació anual · Mín. 2 usuaris",
+      cta: "Començar ara",
+    },
+    professional: {
+      name: "Professional",
+      desc: "Per a joieries en creixement",
+      price: "49€",
+      period: "/usuari/mes",
+      note: "Facturació anual · Mín. 3 usuaris",
+      cta: "Sol·licitar demo",
+      badge: "Més popular",
+    },
+    enterprise: {
+      name: "Enterprise",
+      desc: "Per a cadenes i fabricants",
+      price: "69€",
+      period: "/usuari/mes",
+      note: "Facturació anual · Mín. 5 usuaris",
+      cta: "Contactar vendes",
+    },
+    starterFeatures: [
+      "Punt de Venda (TPV)",
+      "Gestió d'Inventari",
+      "Clients i CRM bàsic",
+      "Control de metalls i quirats",
+      "Etiquetes especialitzades",
+      "Suport per email",
+    ],
+    professionalFeatures: [
+      "Tot de Starter +",
+      "Mòdul de Fabricació",
+      "Taller i Reparacions",
+      "Comptabilitat integrada",
+      "Gestió de proveïdors",
+      "Informes avançats",
+      "Suport telefònic",
+    ],
+    enterpriseFeatures: [
+      "Tot de Professional +",
+      "Multi-botiga sincronitzat",
+      "API per integracions",
+      "Business Intelligence",
+      "Connexió e-commerce",
+      "Gestor de compte dedicat",
+      "SLA garantit",
+    ],
+    plansNote:
+      "Tots els plans inclouen: hosting a Azure, actualitzacions, còpies de seguretat diàries i formació inicial.",
+    perpetual: {
+      title: "Llicència Perpètua",
+      desc: "Compra el software i és teu per sempre. Ideal per a empreses que prefereixen inversió inicial en lloc de quotes mensuals.",
+      from: "des de",
+      price: "12.000€",
+      detail: "Pagament únic · Usuaris il·limitats",
+      cta: "Sol·licitar pressupost personalitzat",
+    },
+    perpetualIncludes: "Inclou:",
+    perpetualIncludesList: [
+      "Tots els mòduls de RayGold",
+      "Usuaris il·limitats",
+      "Instal·lació al teu servidor",
+      "Formació presencial (16h)",
+    ],
+    perpetualMaintenance: "Manteniment opcional:",
+    perpetualMaintenanceList: [
+      "Actualitzacions de versió",
+      "Suport tècnic prioritari",
+      "18% anual sobre llicència",
+    ],
+    comparisonTitle: "SaaS o Llicència Perpètua?",
+    saasLabel: "SaaS (Subscripció)",
+    saasDesc:
+      "Sense inversió inicial gran. Ideal per començar o créixer progressivament. Tot inclòs: hosting, actualitzacions i suport.",
+    perpetualLabel: "Llicència Perpètua",
+    perpetualDesc:
+      "Més control sobre la teva infraestructura. Sense quotes mensuals. Rendible a llarg termini per equips de +10 usuaris.",
+    faqTitle: "Preguntes freqüents",
+    faq: [
+      {
+        q: "Hi ha compromís de permanència?",
+        a: "No. Els plans SaaS són anuals però pots cancel·lar en qualsevol moment sense penalització en finalitzar el teu període.",
+      },
+      {
+        q: "Què inclou la implementació?",
+        a: "Configuració inicial, migració de dades, formació de l'equip i acompanyament durant el primer mes.",
+      },
+      {
+        q: "Puc canviar de pla?",
+        a: "Sí, pots escalar el teu pla en qualsevol moment. També pots migrar de SaaS a llicència perpètua.",
+      },
+      {
+        q: "Oferiu prova gratuïta?",
+        a: "Oferim una demo personalitzada gratuïta on veuràs RayGold funcionant amb dades d'exemple del sector joier.",
+      },
+    ],
+    ctaTitle: "Preparat per transformar la teva joieria?",
+    ctaSubtitle:
+      "Sol·licita una demo gratuïta i descobreix per què més de 200 joieries confien en RayGold",
+    ctaButton: "Sol·licitar demo gratuïta",
+  },
+  "pt-br": {
+    badge: "Preços transparentes",
+    title: "Escolha o plano perfeito para",
+    titleHighlight: "sua joalheria",
+    subtitle: "Sem custos ocultos. Sem surpresas. Suporte local incluído.",
+    toggleSaas: "Assinatura mensal",
+    togglePerpetual: "Licença perpétua",
+    starter: {
+      name: "Starter",
+      desc: "Para joalherias pequenas",
+      price: "29€",
+      period: "/usuário/mês",
+      note: "Faturamento anual · Mín. 2 usuários",
+      cta: "Começar agora",
+    },
+    professional: {
+      name: "Profissional",
+      desc: "Para joalherias em crescimento",
+      price: "49€",
+      period: "/usuário/mês",
+      note: "Faturamento anual · Mín. 3 usuários",
+      cta: "Solicitar demo",
+      badge: "Mais popular",
+    },
+    enterprise: {
+      name: "Enterprise",
+      desc: "Para redes e fabricantes",
+      price: "69€",
+      period: "/usuário/mês",
+      note: "Faturamento anual · Mín. 5 usuários",
+      cta: "Contatar vendas",
+    },
+    starterFeatures: [
+      "Ponto de Venda (PDV)",
+      "Gestão de Estoque",
+      "Clientes e CRM básico",
+      "Controle de metais e quilates",
+      "Etiquetas especializadas",
+      "Suporte por email",
+    ],
+    professionalFeatures: [
+      "Tudo do Starter +",
+      "Módulo de Fabricação",
+      "Oficina e Reparos",
+      "Contabilidade integrada",
+      "Gestão de fornecedores",
+      "Relatórios avançados",
+      "Suporte telefônico",
+    ],
+    enterpriseFeatures: [
+      "Tudo do Profissional +",
+      "Multi-loja sincronizado",
+      "API para integrações",
+      "Business Intelligence",
+      "Conexão e-commerce",
+      "Gerente de conta dedicado",
+      "SLA garantido",
+    ],
+    plansNote:
+      "Todos os planos incluem: hospedagem Azure, atualizações, backups diários e treinamento inicial.",
+    perpetual: {
+      title: "Licença Perpétua",
+      desc: "Compre o software e seja seu para sempre. Ideal para empresas que preferem investimento inicial ao invés de mensalidades.",
+      from: "a partir de",
+      price: "12.000€",
+      detail: "Pagamento único · Usuários ilimitados",
+      cta: "Solicitar orçamento personalizado",
+    },
+    perpetualIncludes: "Inclui:",
+    perpetualIncludesList: [
+      "Todos os módulos RayGold",
+      "Usuários ilimitados",
+      "Instalação no seu servidor",
+      "Treinamento presencial (16h)",
+    ],
+    perpetualMaintenance: "Manutenção opcional:",
+    perpetualMaintenanceList: [
+      "Atualizações de versão",
+      "Suporte técnico prioritário",
+      "18% anual sobre licença",
+    ],
+    comparisonTitle: "SaaS ou Licença Perpétua?",
+    saasLabel: "SaaS (Assinatura)",
+    saasDesc:
+      "Sem grande investimento inicial. Ideal para começar ou crescer progressivamente. Tudo incluído: hospedagem, atualizações e suporte.",
+    perpetualLabel: "Licença Perpétua",
+    perpetualDesc:
+      "Mais controle sobre sua infraestrutura. Sem mensalidades. Rentável a longo prazo para equipes de +10 usuários.",
+    faqTitle: "Perguntas frequentes",
+    faq: [
+      {
+        q: "Há compromisso de permanência?",
+        a: "Não. Os planos SaaS são anuais mas você pode cancelar a qualquer momento sem penalidade ao final do seu período.",
+      },
+      {
+        q: "O que inclui a implementação?",
+        a: "Configuração inicial, migração de dados, treinamento da equipe e acompanhamento durante o primeiro mês.",
+      },
+      {
+        q: "Posso mudar de plano?",
+        a: "Sim, você pode escalar seu plano a qualquer momento. Também pode migrar de SaaS para licença perpétua.",
+      },
+      {
+        q: "Oferecem teste gratuito?",
+        a: "Oferecemos uma demo personalizada gratuita onde você verá RayGold funcionando com dados de exemplo do setor joalheiro.",
+      },
+    ],
+    ctaTitle: "Pronto para transformar sua joalheria?",
+    ctaSubtitle:
+      "Solicite uma demo gratuita e descubra por que mais de 200 joalherias confiam no RayGold",
+    ctaButton: "Solicitar demo gratuita",
+  },
+};
+
+const p = pT[lang as keyof typeof pT] || pT.es;
+
+// SVG del check (reutilizable)
+const checkSvg = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"></path></svg>`;
+---
+
+<Layout
+  title={`${p.badge} | RayGold ERP`}
+  description={p.subtitle}
+  lang={lang as Lang}
+  alternateUrls={alternateUrls}
+>
+  <main class="main-content">
+    <!-- Hero de precios -->
+    <section class="pricing-hero">
+      <div class="container">
+        <span class="hero-badge">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <line x1="12" y1="1" x2="12" y2="23"></line>
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+          </svg>
+          {p.badge}
+        </span>
+        <h1 class="hero-title">
+          {p.title}
+          <span class="gradient-text">{p.titleHighlight}</span>
+        </h1>
+        <p class="hero-subtitle">{p.subtitle}</p>
+      </div>
+    </section>
+
+    <!-- Toggle -->
+    <section class="toggle-section">
+      <div class="container">
+        <div class="pricing-toggle">
+          <button class="toggle-btn active" data-plan="saas">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"
+              ></path>
+            </svg>
+            {p.toggleSaas}
+          </button>
+          <button class="toggle-btn" data-plan="perpetual">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+            </svg>
+            {p.togglePerpetual}
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLANES SAAS -->
+    <section class="pricing-section saas-plans active" id="saasPlans">
+      <div class="container">
+        <div class="plans-grid">
+          <!-- STARTER -->
+          <div class="plan-card">
+            <div class="plan-header">
+              <div class="plan-icon starter">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                  <path d="M2 17l10 5 10-5"></path>
+                  <path d="M2 12l10 5 10-5"></path>
+                </svg>
+              </div>
+              <h3 class="plan-name">{p.starter.name}</h3>
+              <p class="plan-description">{p.starter.desc}</p>
+            </div>
+            <div class="plan-pricing">
+              <span class="price-amount">{p.starter.price}</span>
+              <span class="price-period">{p.starter.period}</span>
+            </div>
+            <p class="price-note">{p.starter.note}</p>
+            <ul class="plan-features">
+              {
+                p.starterFeatures.map((f) => (
+                  <li>
+                    <Fragment set:html={checkSvg} /> {f}
+                  </li>
+                ))
+              }
+            </ul>
+            <a href={contactUrl} class="plan-cta">{p.starter.cta}</a>
+          </div>
+
+          <!-- PROFESIONAL -->
+          <div class="plan-card featured">
+            <div class="featured-badge">{p.professional.badge}</div>
+            <div class="plan-header">
+              <div class="plan-icon professional">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <polygon
+                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                  ></polygon>
+                </svg>
+              </div>
+              <h3 class="plan-name">{p.professional.name}</h3>
+              <p class="plan-description">{p.professional.desc}</p>
+            </div>
+            <div class="plan-pricing">
+              <span class="price-amount">{p.professional.price}</span>
+              <span class="price-period">{p.professional.period}</span>
+            </div>
+            <p class="price-note">{p.professional.note}</p>
+            <ul class="plan-features">
+              {
+                p.professionalFeatures.map((f, i) => (
+                  <li>
+                    <Fragment set:html={checkSvg} />{" "}
+                    {i === 0 ? <strong>{f}</strong> : f}
+                  </li>
+                ))
+              }
+            </ul>
+            <a href={contactUrl} class="plan-cta featured"
+              >{p.professional.cta}</a
+            >
+          </div>
+
+          <!-- ENTERPRISE -->
+          <div class="plan-card">
+            <div class="plan-header">
+              <div class="plan-icon enterprise">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"
+                  ></path>
+                </svg>
+              </div>
+              <h3 class="plan-name">{p.enterprise.name}</h3>
+              <p class="plan-description">{p.enterprise.desc}</p>
+            </div>
+            <div class="plan-pricing">
+              <span class="price-amount">{p.enterprise.price}</span>
+              <span class="price-period">{p.enterprise.period}</span>
+            </div>
+            <p class="price-note">{p.enterprise.note}</p>
+            <ul class="plan-features">
+              {
+                p.enterpriseFeatures.map((f, i) => (
+                  <li>
+                    <Fragment set:html={checkSvg} />{" "}
+                    {i === 0 ? <strong>{f}</strong> : f}
+                  </li>
+                ))
+              }
+            </ul>
+            <a href={contactUrl} class="plan-cta">{p.enterprise.cta}</a>
+          </div>
+        </div>
+
+        <div class="pricing-note">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+          <p>{p.plansNote}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- LICENCIA PERPETUA -->
+    <section class="pricing-section perpetual-plans" id="perpetualPlans">
+      <div class="container">
+        <div class="perpetual-card">
+          <div class="perpetual-content">
+            <div class="perpetual-left">
+              <div class="perpetual-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                  <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                </svg>
+              </div>
+              <div class="perpetual-info">
+                <h3>{p.perpetual.title}</h3>
+                <p>{p.perpetual.desc}</p>
+              </div>
+            </div>
+            <div class="perpetual-right">
+              <div class="perpetual-price">
+                <span class="price-from">{p.perpetual.from}</span>
+                <span class="price-amount">{p.perpetual.price}</span>
+              </div>
+              <p class="price-detail">{p.perpetual.detail}</p>
+            </div>
+          </div>
+
+          <div class="perpetual-features">
+            <div class="feature-col">
+              <h4>{p.perpetualIncludes}</h4>
+              <ul>
+                {
+                  p.perpetualIncludesList.map((f) => (
+                    <li>
+                      <Fragment set:html={checkSvg} /> {f}
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+            <div class="feature-col">
+              <h4>{p.perpetualMaintenance}</h4>
+              <ul>
+                {
+                  p.perpetualMaintenanceList.map((f) => (
+                    <li>
+                      <Fragment set:html={checkSvg} /> {f}
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+          </div>
+
+          <a href={contactUrl} class="perpetual-cta">
+            {p.perpetual.cta}
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Comparativa -->
+        <div class="comparison-box">
+          <h4>{p.comparisonTitle}</h4>
+          <div class="comparison-grid">
+            <div class="comparison-item">
+              <span class="comparison-label">{p.saasLabel}</span>
+              <p>{p.saasDesc}</p>
+            </div>
+            <div class="comparison-item">
+              <span class="comparison-label">{p.perpetualLabel}</span>
+              <p>{p.perpetualDesc}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section">
+      <div class="container">
+        <h2 class="faq-title">{p.faqTitle}</h2>
+        <div class="faq-grid">
+          {
+            p.faq.map((item) => (
+              <div class="faq-item">
+                <h4>{item.q}</h4>
+                <p>{item.a}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="cta-section">
+      <div class="container">
+        <h2>{p.ctaTitle}</h2>
+        <p>{p.ctaSubtitle}</p>
+        <a href={contactUrl} class="cta-button">
+          {p.ctaButton}
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </section>
+  </main>
+</Layout>
+<style>
+  /* ============================================
+     VARIABLES Y RESET
+     ============================================ */
+  :root {
+    --bg-dark: #0f172a;
+    --bg-card: rgba(30, 41, 59, 0.5);
+    --border-subtle: rgba(255, 255, 255, 0.1);
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --accent-green: #10b981;
+    --accent-green-light: #34d399;
+    --accent-purple: #8b5cf6;
+    --accent-amber: #f59e0b;
+  }
+
+  /* ============================================
+     HEADER
+     ============================================ */
+  .header {
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+  }
+
+  .header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+
+  .logo-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .logo-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .logo-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: 1px;
+  }
+
+  .logo-subtitle {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+  }
+
+  .nav {
+    display: flex;
+    gap: 32px;
+  }
+
+  .nav a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  .nav a:hover,
+  .nav a.active {
+    color: var(--text-primary);
+  }
+
+  /* ============================================
+     MAIN CONTENT
+     ============================================ */
+  .main-content {
+    background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+    min-height: 100vh;
+    padding-top: 72px;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ============================================
+     HERO
+     ============================================ */
+  .pricing-hero {
+    padding: 60px 0 40px;
+    text-align: center;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(102, 126, 234, 0.1);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    color: #818cf8;
+    padding: 8px 16px;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 24px;
+  }
+
+  .hero-badge svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .hero-title {
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 800;
+    color: var(--text-primary);
+    margin: 0 0 16px 0;
+    line-height: 1.1;
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin: 0;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  /* ============================================
+     TOGGLE
+     ============================================ */
+  .toggle-section {
+    padding: 20px 0 40px;
+  }
+
+  .pricing-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 6px;
+    border-radius: 12px;
+    width: fit-content;
+    margin: 0 auto;
+  }
+
+  .toggle-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .toggle-btn:hover {
+    color: var(--text-primary);
+  }
+
+  .toggle-btn.active {
+    background: linear-gradient(135deg, var(--accent-green) 0%, #059669 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+  }
+
+  .toggle-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* ============================================
+     PRICING SECTION
+     ============================================ */
+  .pricing-section {
+    padding: 20px 0 60px;
+    display: none;
+  }
+
+  .pricing-section.active {
+    display: block;
+  }
+
+  .plans-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+
+  /* ============================================
+     PLAN CARD
+     ============================================ */
+  .plan-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 20px;
+    padding: 32px;
+    position: relative;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+  }
+
+  .plan-card:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-4px);
+  }
+
+  .plan-card.featured {
+    background: linear-gradient(
+      135deg,
+      rgba(16, 185, 129, 0.1) 0%,
+      rgba(16, 185, 129, 0.05) 100%
+    );
+    border-color: rgba(16, 185, 129, 0.3);
+    transform: scale(1.02);
+  }
+
+  .plan-card.featured:hover {
+    transform: scale(1.02) translateY(-4px);
+  }
+
+  .featured-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--accent-green) 0%, #059669 100%);
+    color: white;
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .plan-header {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .plan-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+  }
+
+  .plan-icon svg {
+    width: 28px;
+    height: 28px;
+    color: white;
+  }
+
+  .plan-icon.starter {
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  }
+
+  .plan-icon.professional {
+    background: linear-gradient(135deg, var(--accent-green) 0%, #059669 100%);
+  }
+
+  .plan-icon.enterprise {
+    background: linear-gradient(135deg, var(--accent-amber) 0%, #d97706 100%);
+  }
+
+  .plan-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 4px 0;
+  }
+
+  .plan-description {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  .plan-pricing {
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .price-amount {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1;
+  }
+
+  .price-period {
+    font-size: 1rem;
+    color: var(--text-muted);
+  }
+
+  .price-note {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin: 0 0 24px 0;
+  }
+
+  .plan-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px 0;
+  }
+
+  .plan-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 0;
+    font-size: 0.9rem;
+    color: #cbd5e1;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .plan-features li:last-child {
+    border-bottom: none;
+  }
+
+  .plan-features li svg {
+    width: 18px;
+    height: 18px;
+    color: var(--accent-green);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .plan-features li strong {
+    color: var(--text-primary);
+  }
+
+  .plan-cta {
+    display: block;
+    text-align: center;
+    padding: 14px 24px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .plan-cta:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .plan-cta.featured {
+    background: linear-gradient(135deg, var(--accent-green) 0%, #059669 100%);
+    border: none;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+  }
+
+  .plan-cta.featured:hover {
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+    transform: translateY(-2px);
+  }
+
+  /* ============================================
+     PRICING NOTE
+     ============================================ */
+  .pricing-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px 24px;
+    background: var(--bg-card);
+    border-radius: 12px;
+  }
+
+  .pricing-note svg {
+    width: 20px;
+    height: 20px;
+    color: var(--text-muted);
+    flex-shrink: 0;
+  }
+
+  .pricing-note p {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+  }
+
+  /* ============================================
+     PERPETUAL
+     ============================================ */
+  .perpetual-card {
+    background: linear-gradient(
+      135deg,
+      rgba(245, 158, 11, 0.1) 0%,
+      rgba(245, 158, 11, 0.05) 100%
+    );
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 32px;
+  }
+
+  .perpetual-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .perpetual-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .perpetual-icon {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, var(--accent-amber) 0%, #d97706 100%);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .perpetual-icon svg {
+    width: 32px;
+    height: 32px;
+    color: white;
+  }
+
+  .perpetual-info h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 8px 0;
+  }
+
+  .perpetual-info p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin: 0;
+    max-width: 400px;
+  }
+
+  .perpetual-right {
+    text-align: right;
+  }
+
+  .perpetual-price {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    justify-content: flex-end;
+  }
+
+  .price-from {
+    font-size: 1rem;
+    color: var(--text-muted);
+  }
+
+  .perpetual-price .price-amount {
+    font-size: 3.5rem;
+    background: linear-gradient(135deg, var(--accent-amber) 0%, #fbbf24 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .price-detail {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin: 8px 0 0 0;
+  }
+
+  .perpetual-features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    padding: 24px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 24px;
+  }
+
+  .feature-col h4 {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent-amber);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0 16px 0;
+  }
+
+  .feature-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .feature-col li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    font-size: 0.9rem;
+    color: #cbd5e1;
+  }
+
+  .feature-col li svg {
+    width: 18px;
+    height: 18px;
+    color: var(--accent-amber);
+    flex-shrink: 0;
+  }
+
+  .perpetual-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 16px 32px;
+    background: linear-gradient(135deg, var(--accent-amber) 0%, #d97706 100%);
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+  }
+
+  .perpetual-cta:hover {
+    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+    transform: translateY(-2px);
+  }
+
+  .perpetual-cta svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Comparison */
+  .comparison-box {
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 24px;
+  }
+
+  .comparison-box h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 16px 0;
+    text-align: center;
+  }
+
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .comparison-item {
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 10px;
+  }
+
+  .comparison-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent-green);
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .comparison-item:last-child .comparison-label {
+    color: var(--accent-amber);
+  }
+
+  .comparison-item p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* ============================================
+     FAQ
+     ============================================ */
+  .faq-section {
+    padding: 60px 0;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .faq-title {
+    text-align: center;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 40px 0;
+  }
+
+  .faq-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .faq-item {
+    padding: 24px;
+    background: var(--bg-card);
+    border-radius: 12px;
+    border: 1px solid var(--border-subtle);
+  }
+
+  .faq-item h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 8px 0;
+  }
+
+  .faq-item p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* ============================================
+     CTA SECTION
+     ============================================ */
+  .cta-section {
+    padding: 80px 0;
+    text-align: center;
+    background: linear-gradient(
+      135deg,
+      rgba(16, 185, 129, 0.1) 0%,
+      rgba(16, 185, 129, 0.05) 100%
+    );
+    border-top: 1px solid rgba(16, 185, 129, 0.2);
+  }
+
+  .cta-section h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 12px 0;
+  }
+
+  .cta-section p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin: 0 0 32px 0;
+  }
+
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, var(--accent-green) 0%, #059669 100%);
+    color: white;
+    padding: 16px 32px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(16, 185, 129, 0.4);
+  }
+
+  .cta-button svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* ============================================
+     FOOTER
+     ============================================ */
+  .footer {
+    background: #020617;
+    border-top: 1px solid #334155;
+    padding: 40px 0;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .footer-logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .footer-brand p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 4px 0 0 0;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+  }
+
+  .footer-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+  }
+
+  .footer-links a:hover {
+    color: var(--text-primary);
+  }
+
+  .footer-copy p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  /* ============================================
+     RESPONSIVE
+     ============================================ */
+  @media (max-width: 968px) {
+    .plans-grid {
+      grid-template-columns: 1fr;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .plan-card.featured {
+      transform: none;
+      order: -1;
+    }
+
+    .perpetual-content {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .perpetual-left {
+      flex-direction: column;
+    }
+
+    .perpetual-right {
+      text-align: center;
+    }
+
+    .perpetual-price {
+      justify-content: center;
+    }
+
+    .perpetual-features {
+      grid-template-columns: 1fr;
+    }
+
+    .comparison-grid,
+    .faq-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .nav {
+      display: none;
+    }
+
+    .footer-container {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .pricing-hero {
+      padding: 60px 0 30px;
+    }
+
+    .pricing-toggle {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .toggle-btn {
+      justify-content: center;
+    }
+
+    .plan-card {
+      padding: 24px;
+    }
+
+    .perpetual-card {
+      padding: 24px;
+    }
+
+    .perpetual-price .price-amount {
+      font-size: 2.5rem;
+    }
+
+    .cta-section {
+      padding: 60px 0;
+    }
+
+    .cta-button {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const toggleBtns = document.querySelectorAll(".toggle-btn");
+    const saasPlans = document.getElementById("saasPlans");
+    const perpetualPlans = document.getElementById("perpetualPlans");
+
+    toggleBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        toggleBtns.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        const plan = btn.getAttribute("data-plan");
+        if (plan === "saas") {
+          saasPlans?.classList.add("active");
+          perpetualPlans?.classList.remove("active");
+        } else {
+          saasPlans?.classList.remove("active");
+          perpetualPlans?.classList.add("active");
+        }
+      });
+    });
+  });
+</script>

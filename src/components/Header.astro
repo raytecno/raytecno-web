@@ -1,0 +1,296 @@
+---
+/**
+ * Header.astro - Navegación principal con selector de idiomas
+ * @component
+ */
+import { getPageUrl, type Lang } from "@/config/pages";
+import { getTranslations } from "@/i18n";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'es' } = Astro.props;
+const t = getTranslations(lang);
+
+// Idiomas soportados (definido localmente)
+const languages: { code: Lang; name: string; flag: string }[] = [
+  { code: 'es', name: 'Español', flag: '🇪🇸' },
+  { code: 'en', name: 'English', flag: '🇬🇧' },
+  { code: 'fr', name: 'Français', flag: '🇫🇷' },
+  { code: 'ca', name: 'Català', flag: '🏴󠁥󠁳󠁣󠁴󠁿' },
+  { code: 'pt-br', name: 'Português', flag: '🇧🇷' },
+];
+
+// Obtener idioma actual
+const currentLang = languages.find(l => l.code === lang) || languages[0];
+---
+
+<header class="header">
+  <div class="header-container">
+    <!-- Logo -->
+    <a href={`/${lang}/`} class="logo">
+      <img src="/images/logo.svg" alt="RayGold" class="logo-img" />
+      <span class="logo-text">RayGold</span>
+    </a>
+
+    <!-- Navegación principal -->
+    <nav class="nav-main">
+      <a href={`/${lang}/`} class="nav-link">{t.nav?.home || 'Inicio'}</a>
+      <a href={getPageUrl('modulos', lang)} class="nav-link">{t.nav?.modules || 'Módulos'}</a>
+      <a href={getPageUrl('precios', lang)} class="nav-link">{t.nav?.pricing || 'Precios'}</a>
+      <a href={getPageUrl('tecnologia', lang)} class="nav-link">{t.nav?.technology || 'Tecnología'}</a>
+      <a href={getPageUrl('contacto', lang)} class="nav-link nav-cta">{t.nav?.contact || 'Contacto'}</a>
+    </nav>
+
+    <!-- Selector de idioma -->
+    <div class="lang-selector">
+      <button class="lang-trigger" aria-label="Seleccionar idioma" aria-expanded="false">
+        <span class="lang-flag">{currentLang.flag}</span>
+        <span class="lang-code">{lang.toUpperCase()}</span>
+        <svg class="lang-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 9l6 6 6-6"/>
+        </svg>
+      </button>
+      <div class="lang-dropdown">
+        {languages.map((l) => (
+          <a 
+            href={`/${l.code}/`} 
+            class:list={['lang-option', { active: l.code === lang }]}
+            hreflang={l.code}
+          >
+            <span class="lang-option-flag">{l.flag}</span>
+            <span class="lang-option-name">{l.name}</span>
+            {l.code === lang && (
+              <svg class="lang-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 6L9 17l-5-5"/>
+              </svg>
+            )}
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- Menú móvil -->
+    <button class="mobile-toggle" aria-label="Menú">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 12h18M3 6h18M3 18h18"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .header-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* Logo */
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .logo-img {
+    height: 36px;
+    width: auto;
+  }
+
+  .logo-text {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: -0.5px;
+  }
+
+  /* Navegación */
+  .nav-main {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .nav-link {
+    padding: 8px 16px;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+  }
+
+  .nav-link:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .nav-cta {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white !important;
+    margin-left: 8px;
+  }
+
+  .nav-cta:hover {
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    transform: translateY(-1px);
+  }
+
+  /* Selector de idioma */
+  .lang-selector {
+    position: relative;
+    margin-left: 16px;
+  }
+
+  .lang-trigger {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: white;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .lang-trigger:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .lang-flag {
+    font-size: 1.1rem;
+  }
+
+  .lang-code {
+    font-weight: 600;
+  }
+
+  .lang-chevron {
+    transition: transform 0.2s ease;
+  }
+
+  .lang-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 180px;
+    background: #1e293b;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 8px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+    z-index: 100;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  .lang-selector:hover .lang-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .lang-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.15s ease;
+  }
+
+  .lang-option:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+  }
+
+  .lang-option.active {
+    background: rgba(102, 126, 234, 0.2);
+    color: #a5b4fc;
+  }
+
+  .lang-option-flag {
+    font-size: 1.25rem;
+  }
+
+  .lang-option-name {
+    flex: 1;
+    font-size: 0.9rem;
+  }
+
+  .lang-check {
+    color: #a5b4fc;
+  }
+
+  /* Menú móvil */
+  .mobile-toggle {
+    display: none;
+    padding: 8px;
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
+
+  @media (max-width: 900px) {
+    .nav-main {
+      display: none;
+    }
+
+    .mobile-toggle {
+      display: block;
+    }
+
+    .lang-code {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  // Toggle del dropdown en móvil
+  document.querySelectorAll('.lang-trigger').forEach((trigger) => {
+    trigger.addEventListener('click', () => {
+      const expanded = trigger.getAttribute('aria-expanded') === 'true';
+      trigger.setAttribute('aria-expanded', (!expanded).toString());
+    });
+  });
+
+  // Cerrar dropdown al hacer clic fuera
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (!target.closest('.lang-selector')) {
+      document.querySelectorAll('.lang-trigger').forEach((trigger) => {
+        trigger.setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+</script>

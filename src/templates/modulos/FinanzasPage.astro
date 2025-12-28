@@ -1,0 +1,16 @@
+---
+/**
+ * Template: Módulo Finanzas
+ * Contabilidad, tesorería e IVA
+ */
+import SubmoduloLayout from "@/components/SubmoduloLayout.astro";
+
+interface Props {
+  lang: string;
+  pageId: string;
+}
+
+const { lang } = Astro.props;
+---
+
+<SubmoduloLayout lang={lang} moduloId="finanzas" />

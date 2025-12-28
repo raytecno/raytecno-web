@@ -1,0 +1,16 @@
+---
+/**
+ * Template: Módulo Fabricación
+ * Producción, inventarios y control de calidad
+ */
+import SubmoduloLayout from "@/components/SubmoduloLayout.astro";
+
+interface Props {
+  lang: string;
+  pageId: string;
+}
+
+const { lang } = Astro.props;
+---
+
+<SubmoduloLayout lang={lang} moduloId="fabricacion" />

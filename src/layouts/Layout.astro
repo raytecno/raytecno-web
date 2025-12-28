@@ -1,23 +1,34 @@
 ---
 /**
  * Layout principal con soporte multiidioma
- * Fusión del original + i18n
+ * Incluye hreflang tags para SEO internacional
  */
-import WhatsAppButton from "../components/WhatsAppButton.astro";
-import SEOHead from "../components/SEOHead.astro";
-import { defaultLang, type Language } from "../i18n/config";
+import WhatsAppButton from "@/components/WhatsAppButton.astro";
+import SEOHead from "@/components/SEOHead.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import { type Lang } from "@/config/pages";
 
 export interface Props {
   title: string;
   description?: string;
-  lang?: Language;
+  lang?: Lang;
+  alternateUrls?: { lang: Lang; url: string }[];
 }
 
-const { title, description, lang = defaultLang } = Astro.props;
+const { 
+  title, 
+  description, 
+  lang = 'es',
+  alternateUrls = []
+} = Astro.props;
+
+// URL base del sitio
+const siteUrl = 'https://raytecno.es';
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang={lang === 'pt-br' ? 'pt-BR' : lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -28,18 +39,44 @@ const { title, description, lang = defaultLang } = Astro.props;
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
+    
     <!-- SEO con soporte multiidioma -->
     <SEOHead title={title} description={description} lang={lang} />
+    
+    <!-- Hreflang tags para SEO internacional -->
+    {alternateUrls.length > 0 && alternateUrls.map(({ lang: hrefLang, url }) => (
+      <link 
+        rel="alternate" 
+        hreflang={hrefLang === 'pt-br' ? 'pt-BR' : hrefLang} 
+        href={`${siteUrl}${url}`} 
+      />
+    ))}
+    
+    <!-- x-default para Google (idioma por defecto) -->
+    {alternateUrls.length > 0 && (
+      <link 
+        rel="alternate" 
+        hreflang="x-default" 
+        href={`${siteUrl}${alternateUrls.find(u => u.lang === 'es')?.url || '/'}`} 
+      />
+    )}
   </head>
   <body>
+    <!-- Header con navegación -->
+    <Header lang={lang} />
+    
+    <!-- Contenido principal -->
     <slot />
-    <!-- WhatsApp flotante con mensaje en el idioma correspondiente -->
+    
+    <!-- Footer -->
+    <Footer lang={lang} />
+    
+    <!-- WhatsApp flotante -->
     <WhatsAppButton lang={lang} />
 
-    <!-- Script global para manejar navegación con anchors entre páginas -->
+    <!-- Script global para navegación con anchors -->
     <script is:inline>
       document.addEventListener("DOMContentLoaded", function () {
-        // Manejar clics en enlaces con hash que apuntan a otra página
         document.addEventListener("click", function (e) {
           const link = e.target.closest("a");
           if (!link) return;
@@ -47,18 +84,15 @@ const { title, description, lang = defaultLang } = Astro.props;
           const href = link.getAttribute("href");
           if (!href) return;
 
-          // Detectar enlaces tipo /en/#section o /#section
           const hashMatch = href.match(/^(\/[^#]*)(#.+)$/);
           if (!hashMatch) return;
 
           const [, basePath, hash] = hashMatch;
           const currentPath = window.location.pathname;
 
-          // Normalizar paths (quitar trailing slash)
           const normalizedBase = basePath.replace(/\/$/, "") || "/";
           const normalizedCurrent = currentPath.replace(/\/$/, "") || "/";
 
-          // Si estamos en la misma página base, dejar que el navegador haga scroll
           if (normalizedBase === normalizedCurrent) {
             const target = document.querySelector(hash);
             if (target) {
@@ -69,8 +103,6 @@ const { title, description, lang = defaultLang } = Astro.props;
             return;
           }
 
-          // Si estamos en una subpágina diferente, forzar navegación completa
-          // Esto evita que el navegador intente hacer scroll en la página actual
           e.preventDefault();
           window.location.href = href;
         });

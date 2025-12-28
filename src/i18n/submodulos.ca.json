@@ -1,0 +1,328 @@
+{
+  "submodulos": {
+    "common": {
+      "backToModules": "← Tornar a Mòduls",
+      "backToHome": "← Tornar a l'inici",
+      "requestDemo": "Sol·licitar una demo",
+      "seeInAction": "Vols veure aquest mòdul en acció?",
+      "imageNotAvailable": "Imatge no disponible",
+      "close": "Tancar"
+    },
+    "maestros": {
+      "title": "Mestres",
+      "subtitle": "Articles, proveïdors, clients i famílies",
+      "metaTitle": "Mestres | RayGold ERP - Gestió de Catàleg",
+      "metaDescription": "Gestió completa d'articles, preus, estructures i imatges del teu catàleg de joieria amb RayGold ERP.",
+      "sections": {
+        "articulos": {
+          "name": "Articles",
+          "description": "Gestió completa del catàleg d'articles",
+          "images": [
+            { "title": "Llistat d'Articles", "description": "Vista general del catàleg amb filtres avançats" },
+            { "title": "Fitxa d'Article", "description": "Detall complet amb especificacions" },
+            { "title": "Configuració", "description": "Personalització de camps i atributs" }
+          ]
+        },
+        "precios": {
+          "name": "Preus",
+          "description": "Tarifes, descomptes i polítiques de preus",
+          "images": [
+            { "title": "Tarifes", "description": "Gestió de múltiples tarifes" },
+            { "title": "Descomptes", "description": "Configuració de descomptes" },
+            { "title": "Històric", "description": "Traçabilitat de canvis" }
+          ]
+        },
+        "estructuras": {
+          "name": "Estructures",
+          "description": "Composició i materials de cada peça",
+          "images": [
+            { "title": "Composició", "description": "Definició de materials i components" },
+            { "title": "Arbre de Materials", "description": "Vista jeràrquica de l'estructura" },
+            { "title": "Costos", "description": "Càlcul automàtic de costos" }
+          ]
+        },
+        "imagenes": {
+          "name": "Imatges",
+          "description": "Galeria fotogràfica i multimèdia",
+          "images": [
+            { "title": "Galeria", "description": "Gestió d'imatges múltiples" },
+            { "title": "Visor", "description": "Visualització amb zoom" },
+            { "title": "Importació", "description": "Càrrega massiva d'imatges" }
+          ]
+        },
+        "layout": {
+          "name": "Disseny",
+          "description": "Personalització de vistes i formularis",
+          "images": [
+            { "title": "Configuració", "description": "Disseny personalitzat de formularis" },
+            { "title": "Camps", "description": "Camps personalitzats sense codi" },
+            { "title": "Plantilles", "description": "Desament de configuracions" }
+          ]
+        }
+      }
+    },
+    "comercial": {
+      "title": "Comercial",
+      "subtitle": "Vendes, comandes i facturació completa per a la teva joieria",
+      "metaTitle": "Comercial | RayGold ERP - Gestió de Vendes",
+      "metaDescription": "Control total de vendes, comandes, albarans i facturació per a joieries amb RayGold ERP.",
+      "sections": {
+        "pedidos": {
+          "name": "Comandes",
+          "description": "Gestió completa del cicle de comandes",
+          "images": [
+            { "title": "Llistat de Comandes", "description": "Vista general amb estats i seguiment" },
+            { "title": "Nova Comanda", "description": "Creació ràpida amb cerca d'articles" },
+            { "title": "Detall de Comanda", "description": "Informació completa de la comanda" }
+          ]
+        },
+        "albaranes": {
+          "name": "Albarans",
+          "description": "Control de lliuraments i expedicions",
+          "images": [
+            { "title": "Albarans", "description": "Gestió d'albarans de lliurament" },
+            { "title": "Generació", "description": "Creació des de comandes" },
+            { "title": "Impressió", "description": "Documents personalitzables" }
+          ]
+        },
+        "facturas": {
+          "name": "Factures",
+          "description": "Facturació electrònica i tradicional",
+          "images": [
+            { "title": "Factures", "description": "Llistat de factures emeses" },
+            { "title": "Nova Factura", "description": "Facturació manual o des d'albarans" },
+            { "title": "Factura-E", "description": "Facturació electrònica integrada" }
+          ]
+        },
+        "clientes": {
+          "name": "Clients",
+          "description": "Base de dades de clients",
+          "images": [
+            { "title": "Llistat", "description": "Directori de clients" },
+            { "title": "Fitxa", "description": "Dades completes del client" },
+            { "title": "Històric", "description": "Historial d'operacions" }
+          ]
+        }
+      }
+    },
+    "fabricacion": {
+      "title": "Fabricació",
+      "subtitle": "Producció, inventaris i control de qualitat",
+      "metaTitle": "Fabricació | RayGold ERP - Control de Producció",
+      "metaDescription": "Planificació i seguiment de la producció, ordres de treball i control de materials per a joieries.",
+      "sections": {
+        "ordenes": {
+          "name": "Ordres de Fabricació",
+          "description": "Gestió d'ordres de fabricació",
+          "images": [
+            { "title": "Llistat OF", "description": "Vista general d'ordres" },
+            { "title": "Nova OF", "description": "Creació d'ordre de treball" },
+            { "title": "Seguiment", "description": "Estat de la producció" }
+          ]
+        },
+        "fases": {
+          "name": "Fases",
+          "description": "Control de fases productives",
+          "images": [
+            { "title": "Fases de Producció", "description": "Definició del procés productiu" },
+            { "title": "Temps", "description": "Control de temps per fase" },
+            { "title": "Operaris", "description": "Assignació de recursos" }
+          ]
+        },
+        "fundicion": {
+          "name": "Fosa",
+          "description": "Control del procés de fosa",
+          "images": [
+            { "title": "Foses", "description": "Registre de foses" },
+            { "title": "Pèrdues", "description": "Control de pèrdues" },
+            { "title": "Aliatges", "description": "Composició de metalls" }
+          ]
+        },
+        "inventario": {
+          "name": "Inventari",
+          "description": "Control d'estoc i moviments",
+          "images": [
+            { "title": "Estoc", "description": "Inventari en temps real" },
+            { "title": "Moviments", "description": "Traçabilitat completa" },
+            { "title": "Valoració", "description": "Valoració d'existències" }
+          ]
+        }
+      }
+    },
+    "finanzas": {
+      "title": "Finances",
+      "subtitle": "Comptabilitat, tresoreria i IVA integrats",
+      "metaTitle": "Finances | RayGold ERP - Gestió Financera",
+      "metaDescription": "Comptabilitat integrada, gestió de cobraments, pagaments, bancs i informes financers per a joieries.",
+      "sections": {
+        "contabilidad": {
+          "name": "Comptabilitat",
+          "description": "Pla comptable i assentaments",
+          "images": [
+            { "title": "Pla de Comptes", "description": "Estructura comptable" },
+            { "title": "Assentaments", "description": "Registre de moviments" },
+            { "title": "Balanç", "description": "Estats financers" }
+          ]
+        },
+        "tesoreria": {
+          "name": "Tresoreria",
+          "description": "Control de cobraments i pagaments",
+          "images": [
+            { "title": "Tresoreria", "description": "Panell de tresoreria" },
+            { "title": "Cobraments", "description": "Gestió de cobraments pendents" },
+            { "title": "Pagaments", "description": "Control de pagaments a proveïdors" }
+          ]
+        },
+        "iva": {
+          "name": "IVA",
+          "description": "Liquidació i declaracions",
+          "images": [
+            { "title": "Liquidació IVA", "description": "Càlcul automàtic d'IVA" },
+            { "title": "Models", "description": "Generació de models fiscals" },
+            { "title": "Configuració", "description": "Tipus d'IVA i retencions" }
+          ]
+        },
+        "bancos": {
+          "name": "Bancs",
+          "description": "Conciliació bancària automàtica",
+          "images": [
+            { "title": "Bancs", "description": "Gestió de comptes bancaris" },
+            { "title": "Conciliació", "description": "Conciliació automàtica" },
+            { "title": "Extractes", "description": "Importació d'extractes" }
+          ]
+        },
+        "informes": {
+          "name": "Informes",
+          "description": "Balanç, PyG i ràtios financers",
+          "images": [
+            { "title": "Balanç", "description": "Balanç de situació" },
+            { "title": "PyG", "description": "Compte de pèrdues i guanys" },
+            { "title": "Ràtios", "description": "Anàlisi de ràtios financers" }
+          ]
+        }
+      }
+    },
+    "historicos": {
+      "title": "Històrics",
+      "subtitle": "Dades històriques i traçabilitat completa",
+      "metaTitle": "Històrics | RayGold ERP - Traçabilitat",
+      "metaDescription": "Accés complet a l'historial d'operacions, moviments i traçabilitat de peces de joieria.",
+      "sections": {
+        "operaciones": {
+          "name": "Operacions",
+          "description": "Historial de totes les operacions",
+          "images": [
+            { "title": "Cerca", "description": "Localització d'operacions" },
+            { "title": "Detall", "description": "Informació completa" },
+            { "title": "Exportació", "description": "Descàrrega de dades" }
+          ]
+        },
+        "trazabilidad": {
+          "name": "Traçabilitat",
+          "description": "Seguiment de peces",
+          "images": [
+            { "title": "Per Peça", "description": "Història de cada article" },
+            { "title": "Per Lot", "description": "Traçabilitat per lots" },
+            { "title": "Certificats", "description": "Documentació associada" }
+          ]
+        }
+      }
+    },
+    "estadisticas": {
+      "title": "Estadístiques",
+      "subtitle": "Informes i quadres de comandament per a decisions",
+      "metaTitle": "Estadístiques | RayGold ERP - Business Intelligence",
+      "metaDescription": "Anàlisi de dades, informes personalitzats i dashboards per a presa de decisions en joieries.",
+      "sections": {
+        "dashboards": {
+          "name": "Quadres de Comandament",
+          "description": "Panells de control visuals",
+          "images": [
+            { "title": "Principal", "description": "KPIs principals" },
+            { "title": "Vendes", "description": "Mètriques comercials" },
+            { "title": "Producció", "description": "Indicadors de fàbrica" }
+          ]
+        },
+        "informes": {
+          "name": "Informes",
+          "description": "Informes personalitzables",
+          "images": [
+            { "title": "Catàleg", "description": "Informes predefinits" },
+            { "title": "Dissenyador", "description": "Creador d'informes" },
+            { "title": "Programació", "description": "Enviament automàtic" }
+          ]
+        }
+      }
+    },
+    "vendedores": {
+      "title": "Venedors",
+      "subtitle": "Gestió de rutes, visites i comissions",
+      "metaTitle": "Venedors | RayGold ERP - Gestió Comercial",
+      "metaDescription": "Gestió d'equips comercials, comissions, objectius i seguiment de vendes per a joieries.",
+      "sections": {
+        "equipo": {
+          "name": "Equip",
+          "description": "Gestió de l'equip comercial",
+          "images": [
+            { "title": "Venedors", "description": "Llistat de l'equip" },
+            { "title": "Zones", "description": "Assignació de territoris" },
+            { "title": "Objectius", "description": "Metes de venda" }
+          ]
+        },
+        "comisiones": {
+          "name": "Comissions",
+          "description": "Càlcul i liquidació",
+          "images": [
+            { "title": "Regles", "description": "Configuració de comissions" },
+            { "title": "Càlcul", "description": "Liquidació automàtica" },
+            { "title": "Històric", "description": "Pagaments realitzats" }
+          ]
+        },
+        "rutas": {
+          "name": "Rutes",
+          "description": "Planificació de visites",
+          "images": [
+            { "title": "Calendari", "description": "Agenda de visites" },
+            { "title": "Mapa", "description": "Vista geogràfica" },
+            { "title": "Informes", "description": "Resultats de visites" }
+          ]
+        }
+      }
+    },
+    "ecommerce": {
+      "title": "E-commerce",
+      "subtitle": "Botigues en línia i marketplaces integrats",
+      "metaTitle": "E-commerce | RayGold ERP - Venda en Línia",
+      "metaDescription": "Integració amb botiga en línia, sincronització d'estoc i gestió de comandes web per a joieries.",
+      "sections": {
+        "catalogo": {
+          "name": "Catàleg en Línia",
+          "description": "Publicació de productes",
+          "images": [
+            { "title": "Productes", "description": "Gestió del catàleg web" },
+            { "title": "Categories", "description": "Organització de productes" },
+            { "title": "Sincronització", "description": "Actualització automàtica" }
+          ]
+        },
+        "pedidos": {
+          "name": "Comandes Web",
+          "description": "Gestió de comandes en línia",
+          "images": [
+            { "title": "Recepció", "description": "Comandes entrants" },
+            { "title": "Processament", "description": "Flux de treball" },
+            { "title": "Enviaments", "description": "Logística integrada" }
+          ]
+        },
+        "integraciones": {
+          "name": "Integracions",
+          "description": "Connexió amb plataformes",
+          "images": [
+            { "title": "Shopify", "description": "Integració Shopify" },
+            { "title": "WooCommerce", "description": "Integració WordPress" },
+            { "title": "Marketplaces", "description": "Amazon, eBay, etc." }
+          ]
+        }
+      }
+    }
+  }
+}

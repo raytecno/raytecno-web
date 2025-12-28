@@ -1,0 +1,1087 @@
+---
+/**
+ * Template: Tecnología
+ * Página de arquitectura tecnológica de RayGold
+ */
+import Layout from "@/layouts/Layout.astro";
+import { getTranslations } from "@/i18n";
+import { getAlternateUrls, getPageUrl, type Lang } from "@/config/pages";
+
+interface Props {
+  lang: string;
+  pageId: string;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang as Lang);
+const alternateUrls = getAlternateUrls("tecnologia");
+
+// Traducciones específicas de tecnología (inline para esta página)
+const techT = {
+  es: {
+    badge: "Arquitectura Tecnológica",
+    title: "Raygold",
+    titleHighlight: "ERP",
+    subtitle:
+      "Solución integral cloud-native para la industria joyera, potenciada con Inteligencia Artificial",
+    stackTitle: "Stack Tecnológico",
+    frontend: { title: "Frontend", subtitle: "Interfaz de Usuario" },
+    backend: { title: "Backend", subtitle: "API & Lógica" },
+    web: { title: "Web", subtitle: "Presencia Digital" },
+    ai: { title: "Inteligencia Artificial", subtitle: "Claude by Anthropic" },
+    aiFeatures: [
+      "Asistente Inteligente",
+      "Análisis de Datos",
+      "Automatización",
+      "Generación de Contenido",
+    ],
+    cloud: { title: "Microsoft Azure", subtitle: "Infraestructura Cloud" },
+    cloudServices: [
+      "App Service",
+      "Static Web Apps",
+      "SQL Database",
+      "Blob Storage",
+      "Multi-Tenant",
+    ],
+    database: { title: "Base de Datos", subtitle: "Persistencia" },
+    storage: { title: "Almacenamiento", subtitle: "Assets & Media" },
+    result: {
+      title: "RayGold ERP",
+      subtitle: "Software especializado para joyerías",
+    },
+    modules: [
+      "Maestros",
+      "Comercial",
+      "Fabricación",
+      "Finanzas",
+      "Estadísticas",
+      "Vendedores",
+      "Ecommerce",
+    ],
+    ctaTitle: "¿Listo para modernizar tu joyería?",
+    ctaSubtitle: "Descubre cómo RayGold puede transformar tu negocio",
+    ctaButton: "Solicitar demo",
+  },
+  en: {
+    badge: "Technology Architecture",
+    title: "Raygold",
+    titleHighlight: "ERP",
+    subtitle:
+      "Comprehensive cloud-native solution for the jewelry industry, powered by Artificial Intelligence",
+    stackTitle: "Technology Stack",
+    frontend: { title: "Frontend", subtitle: "User Interface" },
+    backend: { title: "Backend", subtitle: "API & Logic" },
+    web: { title: "Web", subtitle: "Digital Presence" },
+    ai: { title: "Artificial Intelligence", subtitle: "Claude by Anthropic" },
+    aiFeatures: [
+      "Smart Assistant",
+      "Data Analysis",
+      "Automation",
+      "Content Generation",
+    ],
+    cloud: { title: "Microsoft Azure", subtitle: "Cloud Infrastructure" },
+    cloudServices: [
+      "App Service",
+      "Static Web Apps",
+      "SQL Database",
+      "Blob Storage",
+      "Multi-Tenant",
+    ],
+    database: { title: "Database", subtitle: "Persistence" },
+    storage: { title: "Storage", subtitle: "Assets & Media" },
+    result: {
+      title: "RayGold ERP",
+      subtitle: "Specialized software for jewelry businesses",
+    },
+    modules: [
+      "Masters",
+      "Commercial",
+      "Manufacturing",
+      "Finance",
+      "Statistics",
+      "Sales Reps",
+      "Ecommerce",
+    ],
+    ctaTitle: "Ready to modernize your jewelry business?",
+    ctaSubtitle: "Discover how RayGold can transform your business",
+    ctaButton: "Request demo",
+  },
+  fr: {
+    badge: "Architecture Technologique",
+    title: "Raygold",
+    titleHighlight: "ERP",
+    subtitle:
+      "Solution cloud-native complète pour l'industrie de la bijouterie, alimentée par l'Intelligence Artificielle",
+    stackTitle: "Stack Technologique",
+    frontend: { title: "Frontend", subtitle: "Interface Utilisateur" },
+    backend: { title: "Backend", subtitle: "API & Logique" },
+    web: { title: "Web", subtitle: "Présence Numérique" },
+    ai: { title: "Intelligence Artificielle", subtitle: "Claude by Anthropic" },
+    aiFeatures: [
+      "Assistant Intelligent",
+      "Analyse de Données",
+      "Automatisation",
+      "Génération de Contenu",
+    ],
+    cloud: { title: "Microsoft Azure", subtitle: "Infrastructure Cloud" },
+    cloudServices: [
+      "App Service",
+      "Static Web Apps",
+      "SQL Database",
+      "Blob Storage",
+      "Multi-Tenant",
+    ],
+    database: { title: "Base de Données", subtitle: "Persistance" },
+    storage: { title: "Stockage", subtitle: "Assets & Médias" },
+    result: {
+      title: "RayGold ERP",
+      subtitle: "Logiciel spécialisé pour bijouteries",
+    },
+    modules: [
+      "Maîtres",
+      "Commercial",
+      "Fabrication",
+      "Finances",
+      "Statistiques",
+      "Vendeurs",
+      "Ecommerce",
+    ],
+    ctaTitle: "Prêt à moderniser votre bijouterie?",
+    ctaSubtitle: "Découvrez comment RayGold peut transformer votre entreprise",
+    ctaButton: "Demander une démo",
+  },
+  ca: {
+    badge: "Arquitectura Tecnològica",
+    title: "Raygold",
+    titleHighlight: "ERP",
+    subtitle:
+      "Solució integral cloud-native per a la indústria joiera, potenciada amb Intel·ligència Artificial",
+    stackTitle: "Stack Tecnològic",
+    frontend: { title: "Frontend", subtitle: "Interfície d'Usuari" },
+    backend: { title: "Backend", subtitle: "API & Lògica" },
+    web: { title: "Web", subtitle: "Presència Digital" },
+    ai: { title: "Intel·ligència Artificial", subtitle: "Claude by Anthropic" },
+    aiFeatures: [
+      "Assistent Intel·ligent",
+      "Anàlisi de Dades",
+      "Automatització",
+      "Generació de Contingut",
+    ],
+    cloud: { title: "Microsoft Azure", subtitle: "Infraestructura Cloud" },
+    cloudServices: [
+      "App Service",
+      "Static Web Apps",
+      "SQL Database",
+      "Blob Storage",
+      "Multi-Tenant",
+    ],
+    database: { title: "Base de Dades", subtitle: "Persistència" },
+    storage: { title: "Emmagatzematge", subtitle: "Assets & Media" },
+    result: {
+      title: "RayGold ERP",
+      subtitle: "Programari especialitzat per a joieries",
+    },
+    modules: [
+      "Mestres",
+      "Comercial",
+      "Fabricació",
+      "Finances",
+      "Estadístiques",
+      "Venedors",
+      "Ecommerce",
+    ],
+    ctaTitle: "Preparat per modernitzar la teva joieria?",
+    ctaSubtitle: "Descobreix com RayGold pot transformar el teu negoci",
+    ctaButton: "Sol·licitar demo",
+  },
+  "pt-br": {
+    badge: "Arquitetura Tecnológica",
+    title: "Raygold",
+    titleHighlight: "ERP",
+    subtitle:
+      "Solução integral cloud-native para a indústria joalheira, potencializada com Inteligência Artificial",
+    stackTitle: "Stack Tecnológico",
+    frontend: { title: "Frontend", subtitle: "Interface de Usuário" },
+    backend: { title: "Backend", subtitle: "API & Lógica" },
+    web: { title: "Web", subtitle: "Presença Digital" },
+    ai: { title: "Inteligência Artificial", subtitle: "Claude by Anthropic" },
+    aiFeatures: [
+      "Assistente Inteligente",
+      "Análise de Dados",
+      "Automação",
+      "Geração de Conteúdo",
+    ],
+    cloud: { title: "Microsoft Azure", subtitle: "Infraestrutura Cloud" },
+    cloudServices: [
+      "App Service",
+      "Static Web Apps",
+      "SQL Database",
+      "Blob Storage",
+      "Multi-Tenant",
+    ],
+    database: { title: "Banco de Dados", subtitle: "Persistência" },
+    storage: { title: "Armazenamento", subtitle: "Assets & Mídia" },
+    result: {
+      title: "RayGold ERP",
+      subtitle: "Software especializado para joalherias",
+    },
+    modules: [
+      "Mestres",
+      "Comercial",
+      "Fabricação",
+      "Finanças",
+      "Estatísticas",
+      "Vendedores",
+      "Ecommerce",
+    ],
+    ctaTitle: "Pronto para modernizar sua joalheria?",
+    ctaSubtitle: "Descubra como RayGold pode transformar seu negócio",
+    ctaButton: "Solicitar demo",
+  },
+};
+
+const tt = techT[lang as keyof typeof techT] || techT.es;
+---
+
+<Layout
+  title={`${tt.badge} | RayGold ERP`}
+  description={tt.subtitle}
+  lang={lang}
+  alternateUrls={alternateUrls}
+>
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="tech-page">
+    <!-- Header de página -->
+    <section class="page-header">
+      <div class="container">
+        <div class="header-content">
+          <div class="badge">
+            <span class="badge-dot"></span>
+            {tt.badge}
+          </div>
+          <h1>{tt.title} <span>{tt.titleHighlight}</span></h1>
+          <p>{tt.subtitle}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diagrama -->
+    <section class="diagram-section">
+      <div class="container">
+        <div class="diagram">
+          <div class="diagram-title">{tt.stackTitle}</div>
+
+          <div class="arch-grid">
+            <!-- Frontend -->
+            <div class="node node-frontend">
+              <div class="node-header">
+                <div class="node-icon">⚡</div>
+                <div>
+                  <div class="node-title">{tt.frontend.title}</div>
+                  <div class="node-subtitle">{tt.frontend.subtitle}</div>
+                </div>
+              </div>
+              <div class="node-tags">
+                <span class="tag">Vue.js</span>
+                <span class="tag">Vuetify</span>
+                <span class="tag">Quasar</span>
+                <span class="tag">SPA</span>
+              </div>
+            </div>
+
+            <!-- Backend -->
+            <div class="node node-backend">
+              <div class="node-header">
+                <div class="node-icon">🔷</div>
+                <div>
+                  <div class="node-title">{tt.backend.title}</div>
+                  <div class="node-subtitle">{tt.backend.subtitle}</div>
+                </div>
+              </div>
+              <div class="node-tags">
+                <span class="tag">ASP.NET Core</span>
+                <span class="tag">C#</span>
+                <span class="tag">REST API</span>
+              </div>
+            </div>
+
+            <!-- Web -->
+            <div class="node node-web">
+              <div class="node-header">
+                <div class="node-icon">🚀</div>
+                <div>
+                  <div class="node-title">{tt.web.title}</div>
+                  <div class="node-subtitle">{tt.web.subtitle}</div>
+                </div>
+              </div>
+              <div class="node-tags">
+                <span class="tag">Astro</span>
+                <span class="tag">WordPress</span>
+                <span class="tag">Ecommerce</span>
+              </div>
+            </div>
+
+            <!-- AI - Claude -->
+            <div class="node node-ai">
+              <div class="node-header">
+                <div>
+                  <div class="node-title">{tt.ai.title}</div>
+                  <div class="node-subtitle">{tt.ai.subtitle}</div>
+                </div>
+              </div>
+              <div class="ai-features">
+                <div class="ai-feature">
+                  <span class="ai-feature-icon">💬</span>
+                  {tt.aiFeatures[0]}
+                </div>
+                <div class="ai-feature">
+                  <span class="ai-feature-icon">📊</span>
+                  {tt.aiFeatures[1]}
+                </div>
+                <div class="ai-feature">
+                  <span class="ai-feature-icon">⚙️</span>
+                  {tt.aiFeatures[2]}
+                </div>
+                <div class="ai-feature">
+                  <span class="ai-feature-icon">📝</span>
+                  {tt.aiFeatures[3]}
+                </div>
+              </div>
+            </div>
+
+            <!-- Cloud -->
+            <div class="node node-cloud">
+              <div class="node-header">
+                <div>
+                  <div class="node-title">{tt.cloud.title}</div>
+                  <div class="node-subtitle">{tt.cloud.subtitle}</div>
+                </div>
+              </div>
+              <div class="services">
+                <div class="service">
+                  <div class="service-icon">🖥️</div>
+                  <span class="service-name">{tt.cloudServices[0]}</span>
+                </div>
+                <div class="service">
+                  <div class="service-icon">📊</div>
+                  <span class="service-name">{tt.cloudServices[1]}</span>
+                </div>
+                <div class="service">
+                  <div class="service-icon">🗄️</div>
+                  <span class="service-name">{tt.cloudServices[2]}</span>
+                </div>
+                <div class="service">
+                  <div class="service-icon">📦</div>
+                  <span class="service-name">{tt.cloudServices[3]}</span>
+                </div>
+                <div class="service">
+                  <div class="service-icon">🔐</div>
+                  <span class="service-name">{tt.cloudServices[4]}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Base de Datos -->
+            <div class="node node-data">
+              <div class="node-header">
+                <div class="node-icon">🗃️</div>
+                <div>
+                  <div class="node-title">{tt.database.title}</div>
+                  <div class="node-subtitle">{tt.database.subtitle}</div>
+                </div>
+              </div>
+              <div class="node-tags">
+                <span class="tag">SQL Server</span>
+                <span class="tag">Entity Framework</span>
+                <span class="tag">Progress</span>
+              </div>
+            </div>
+
+            <!-- Almacenamiento -->
+            <div class="node node-storage">
+              <div class="node-header">
+                <div class="node-icon">💾</div>
+                <div>
+                  <div class="node-title">{tt.storage.title}</div>
+                  <div class="node-subtitle">{tt.storage.subtitle}</div>
+                </div>
+              </div>
+              <div class="node-tags">
+                <span class="tag">Blob Storage</span>
+                <span class="tag">CDN</span>
+                <span class="tag">Imágenes</span>
+                <span class="tag">Documentos</span>
+              </div>
+            </div>
+
+            <!-- Flecha -->
+            <div class="connection-arrow">
+              <div class="arrow-down">
+                <div class="arrow-line"></div>
+                <div class="arrow-head">▼</div>
+              </div>
+            </div>
+
+            <!-- RayGold Result -->
+            <div class="node node-result">
+              <div class="node-header">
+                <div class="node-icon">💎</div>
+                <div>
+                  <div class="node-title">{tt.result.title}</div>
+                  <div class="node-subtitle">{tt.result.subtitle}</div>
+                </div>
+              </div>
+              <div class="result-features">
+                {
+                  tt.modules.map((mod, i) => (
+                    <div class="result-feature">
+                      <span>
+                        {["📦", "📦", "🏭", "💰", "📈", "🛒", "🛒"][i]}
+                      </span>{" "}
+                      {mod}
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+
+          <!-- Tech logos -->
+          <div class="tech-footer">
+            <div class="tech-item">
+              <div class="tech-logo vue">V</div>
+              <span class="tech-name">Vue.js</span>
+            </div>
+            <div class="tech-item">
+              <div class="tech-logo dotnet">.NET</div>
+              <span class="tech-name">ASP.NET</span>
+            </div>
+            <div class="tech-item">
+              <div class="tech-logo azure">☁️</div>
+              <span class="tech-name">Azure</span>
+            </div>
+            <div class="tech-item">
+              <div class="tech-logo astro">🚀</div>
+              <span class="tech-name">Astro</span>
+            </div>
+            <div class="tech-item">
+              <div class="tech-logo wordpress">W</div>
+              <span class="tech-name">WordPress</span>
+            </div>
+            <div class="tech-item">
+              <div class="tech-logo claude">C</div>
+              <span class="tech-name">Claude AI</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="container">
+        <h2>{tt.ctaTitle}</h2>
+        <p>{tt.ctaSubtitle}</p>
+        <a href={getPageUrl("contacto", lang as Lang)} class="cta-button">
+          {tt.ctaButton}
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  /* Variables */
+  :root {
+    --bg-dark: #0a0a0f;
+    --bg-card: rgba(15, 23, 42, 0.8);
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --border-subtle: rgba(148, 163, 184, 0.15);
+    --accent-purple: #a78bfa;
+    --accent-blue: #60a5fa;
+    --accent-green: #4ade80;
+    --accent-orange: #fb923c;
+    --accent-cyan: #22d3ee;
+  }
+
+  .tech-page {
+    background: var(--bg-dark);
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Page Header */
+  .page-header {
+    padding: 100px 0 40px;
+    text-align: center;
+    background: linear-gradient(
+      180deg,
+      rgba(102, 126, 234, 0.08) 0%,
+      transparent 100%
+    );
+  }
+
+  .header-content {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: rgba(102, 126, 234, 0.15);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--accent-purple);
+    margin-bottom: 24px;
+  }
+
+  .badge-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--accent-purple);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.5;
+      transform: scale(1.2);
+    }
+  }
+
+  .page-header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 16px 0;
+  }
+
+  .page-header h1 span {
+    background: linear-gradient(135deg, #667eea, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .page-header p {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Diagram Section */
+  .diagram-section {
+    padding: 20px 0 60px;
+  }
+
+  .diagram {
+    background: linear-gradient(
+      180deg,
+      rgba(15, 23, 42, 0.9) 0%,
+      rgba(15, 23, 42, 0.95) 100%
+    );
+    border: 1px solid var(--border-subtle);
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  }
+
+  .diagram-title {
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .arch-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  /* Nodes */
+  .node {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+    padding: 1.25rem;
+    transition: all 0.3s ease;
+  }
+
+  .node:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  .node-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .node-icon {
+    font-size: 1.5rem;
+  }
+
+  .node-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .node-subtitle {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .node-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tag {
+    padding: 4px 10px;
+    background: rgba(148, 163, 184, 0.1);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+  }
+
+  /* Node variants */
+  .node-frontend {
+    border-color: rgba(74, 222, 128, 0.3);
+  }
+  .node-frontend:hover {
+    border-color: var(--accent-green);
+  }
+  .node-frontend .node-icon {
+    color: var(--accent-green);
+  }
+
+  .node-backend {
+    border-color: rgba(96, 165, 250, 0.3);
+  }
+  .node-backend:hover {
+    border-color: var(--accent-blue);
+  }
+  .node-backend .node-icon {
+    color: var(--accent-blue);
+  }
+
+  .node-web {
+    border-color: rgba(251, 146, 60, 0.3);
+  }
+  .node-web:hover {
+    border-color: var(--accent-orange);
+  }
+  .node-web .node-icon {
+    color: var(--accent-orange);
+  }
+
+  .node-data {
+    border-color: rgba(167, 139, 250, 0.3);
+  }
+  .node-data:hover {
+    border-color: var(--accent-purple);
+  }
+  .node-data .node-icon {
+    color: var(--accent-purple);
+  }
+
+  .node-storage {
+    border-color: rgba(34, 211, 238, 0.3);
+  }
+  .node-storage:hover {
+    border-color: var(--accent-cyan);
+  }
+  .node-storage .node-icon {
+    color: var(--accent-cyan);
+  }
+
+  /* AI Node */
+  .node-ai {
+    grid-column: span 2;
+    background: linear-gradient(
+      135deg,
+      rgba(217, 119, 87, 0.15) 0%,
+      rgba(217, 119, 87, 0.05) 100%
+    );
+    border-color: rgba(217, 119, 87, 0.4);
+  }
+
+  .node-ai:hover {
+    border-color: #d97757;
+  }
+
+  .node-ai .node-title {
+    background: linear-gradient(135deg, #d97757, #bf5a3c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 1.1rem;
+  }
+
+  .ai-features {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .ai-feature {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    background: rgba(217, 119, 87, 0.15);
+    border: 1px solid rgba(217, 119, 87, 0.3);
+    border-radius: 8px;
+    font-size: 0.8rem;
+    color: #e8a892;
+  }
+
+  .ai-feature-icon {
+    font-size: 1rem;
+  }
+
+  /* Cloud Node */
+  .node-cloud {
+    grid-column: span 3;
+    background: linear-gradient(
+      135deg,
+      rgba(0, 120, 212, 0.1) 0%,
+      rgba(0, 188, 242, 0.05) 100%
+    );
+    border-color: rgba(0, 120, 212, 0.4);
+  }
+
+  .node-cloud:hover {
+    border-color: #0078d4;
+  }
+
+  .node-cloud .node-title {
+    color: #00bcf2;
+    font-size: 1.1rem;
+  }
+
+  .services {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .service {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: rgba(0, 120, 212, 0.15);
+    border: 1px solid rgba(0, 120, 212, 0.3);
+    border-radius: 10px;
+  }
+
+  .service-icon {
+    font-size: 1.25rem;
+  }
+
+  .service-name {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #7dd3fc;
+  }
+
+  /* Connection Arrow */
+  .connection-arrow {
+    grid-column: span 3;
+    display: flex;
+    justify-content: center;
+    padding: 1rem 0;
+  }
+
+  .arrow-down {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .arrow-line {
+    width: 2px;
+    height: 40px;
+    background: linear-gradient(
+      180deg,
+      rgba(102, 126, 234, 0.6) 0%,
+      rgba(102, 126, 234, 0.2) 100%
+    );
+  }
+
+  .arrow-head {
+    color: var(--accent-purple);
+    font-size: 1.25rem;
+    animation: bounce 2s ease-in-out infinite;
+  }
+
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(6px);
+    }
+  }
+
+  /* Result Node */
+  .node-result {
+    grid-column: span 3;
+    background: linear-gradient(
+      135deg,
+      rgba(102, 126, 234, 0.15) 0%,
+      rgba(167, 139, 250, 0.1) 100%
+    );
+    border: 2px solid rgba(102, 126, 234, 0.4);
+    text-align: center;
+    padding: 1.5rem;
+  }
+
+  .node-result:hover {
+    border-color: #667eea;
+    box-shadow: 0 16px 48px rgba(102, 126, 234, 0.3);
+  }
+
+  .node-result .node-header {
+    justify-content: center;
+  }
+
+  .node-result .node-title {
+    font-size: 1.5rem;
+    background: linear-gradient(135deg, #667eea, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .node-result .node-subtitle {
+    font-size: 0.9rem;
+    color: #c4b5fd;
+  }
+
+  .result-features {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 0.75rem;
+  }
+
+  .result-feature {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(102, 126, 234, 0.2);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    border-radius: 8px;
+    font-size: 0.8rem;
+    color: #c4b5fd;
+  }
+
+  /* Tech Footer */
+  .tech-footer {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .tech-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .tech-logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: white;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+  }
+
+  .tech-logo:hover {
+    transform: translateY(-4px);
+  }
+
+  .tech-logo.vue {
+    background: linear-gradient(135deg, #42b883, #35a06b);
+  }
+  .tech-logo.dotnet {
+    background: linear-gradient(135deg, #512bd4, #7c4dff);
+  }
+  .tech-logo.azure {
+    background: linear-gradient(135deg, #0078d4, #00bcf2);
+  }
+  .tech-logo.astro {
+    background: linear-gradient(135deg, #ff5d01, #ff8a4c);
+  }
+  .tech-logo.wordpress {
+    background: linear-gradient(135deg, #21759b, #464646);
+  }
+  .tech-logo.claude {
+    background: linear-gradient(135deg, #d97757, #bf5a3c);
+  }
+
+  .tech-name {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: #94a3b8;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    padding: 60px 1.5rem;
+    text-align: center;
+    background: linear-gradient(
+      135deg,
+      rgba(102, 126, 234, 0.1) 0%,
+      rgba(118, 75, 162, 0.1) 100%
+    );
+    border-top: 1px solid rgba(102, 126, 234, 0.2);
+  }
+
+  .cta-section h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 12px 0;
+  }
+
+  .cta-section p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin: 0 0 32px 0;
+  }
+
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+    transition: all 0.3s ease;
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(102, 126, 234, 0.5);
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .arch-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .node-cloud,
+    .node-ai,
+    .node-data,
+    .node-storage,
+    .node-result,
+    .connection-arrow {
+      grid-column: 1;
+    }
+
+    .page-header h1 {
+      font-size: 2.25rem;
+    }
+
+    .ai-features,
+    .result-features {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .services {
+      gap: 0.75rem;
+    }
+
+    .tech-footer {
+      gap: 1rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .page-header {
+      padding: 80px 0 30px;
+    }
+
+    .page-header h1 {
+      font-size: 2rem;
+    }
+
+    .diagram {
+      padding: 1.5rem 1rem;
+    }
+
+    .cta-section {
+      padding: 40px 1.5rem;
+    }
+
+    .cta-button {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>

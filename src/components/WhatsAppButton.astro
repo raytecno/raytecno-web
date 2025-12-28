@@ -1,20 +1,28 @@
 ---
 /**
  * WhatsApp Button - Minimal Premium Dark
- * Diseño minimalista que combina con la estética oscura de la web
+ * Diseño minimalista con soporte multiidioma
  */
-import { defaultLang, type Language } from "../i18n/config";
-import { useTranslations } from "../i18n/utils";
+import { type Lang } from "@/config/pages";
 
 interface Props {
-  lang?: Language;
+  lang?: Lang;
 }
 
-const { lang = defaultLang } = Astro.props;
-const t = useTranslations(lang);
+const { lang = 'es' } = Astro.props;
 
 const phoneNumber = "34648088550";
-const message = t("whatsapp.message");
+
+// Mensajes por idioma
+const messages: Record<Lang, string> = {
+  es: "Hola, me interesa RayGold ERP para mi joyería. ¿Pueden darme más información?",
+  en: "Hello, I'm interested in RayGold ERP for my jewelry business. Can you give me more information?",
+  fr: "Bonjour, je suis intéressé par RayGold ERP pour ma bijouterie. Pouvez-vous me donner plus d'informations?",
+  ca: "Hola, m'interessa RayGold ERP per a la meva joieria. Em podeu donar més informació?",
+  "pt-br": "Olá, estou interessado no RayGold ERP para minha joalheria. Podem me dar mais informações?"
+};
+
+const message = messages[lang] || messages.es;
 ---
 
 <a

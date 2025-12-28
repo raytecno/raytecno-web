@@ -1,6 +1,130 @@
 ---
-// src/components/Hero.astro
-// Banner hero comercial principal
+/**
+ * Hero.astro - Banner hero comercial principal
+ * Con soporte multiidioma
+ */
+import { type Lang, getPageUrl } from "@/config/pages";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'es' } = Astro.props;
+
+// Traducciones
+const translations: Record<Lang, {
+  badge: string;
+  title: string;
+  subtitle: string;
+  subtitleHighlight: string;
+  stat1Number: string;
+  stat1Label: string;
+  stat2Number: string;
+  stat2Label: string;
+  stat3Number: string;
+  stat3Label: string;
+  ctaPrimary: string;
+  ctaSecondary: string;
+  visualLabel: string;
+  badge1: string;
+  badge2: string;
+  scrollText: string;
+}> = {
+  es: {
+    badge: "Desde 1990 · +200 joyerías confían en nosotros",
+    title: "El ERP que habla el idioma de tu joyería",
+    subtitle: "Gestiona inventario, fabricación, ventas y contabilidad con un sistema",
+    subtitleHighlight: "diseñado exclusivamente para joyeros",
+    stat1Number: "35",
+    stat1Label: "años de experiencia",
+    stat2Number: "200+",
+    stat2Label: "joyerías activas",
+    stat3Number: "8",
+    stat3Label: "módulos integrados",
+    ctaPrimary: "Ver demostración",
+    ctaSecondary: "Explorar módulos",
+    visualLabel: "Gestión de artículos",
+    badge1: "Stock sincronizado",
+    badge2: "Control de costes",
+    scrollText: "Descubre más",
+  },
+  en: {
+    badge: "Since 1990 · +200 jewelers trust us",
+    title: "The ERP that speaks your jewelry's language",
+    subtitle: "Manage inventory, manufacturing, sales and accounting with a system",
+    subtitleHighlight: "designed exclusively for jewelers",
+    stat1Number: "35",
+    stat1Label: "years of experience",
+    stat2Number: "200+",
+    stat2Label: "active jewelers",
+    stat3Number: "8",
+    stat3Label: "integrated modules",
+    ctaPrimary: "Watch demo",
+    ctaSecondary: "Explore modules",
+    visualLabel: "Item management",
+    badge1: "Synced stock",
+    badge2: "Cost control",
+    scrollText: "Discover more",
+  },
+  fr: {
+    badge: "Depuis 1990 · +200 bijouteries nous font confiance",
+    title: "L'ERP qui parle le langage de votre bijouterie",
+    subtitle: "Gérez inventaire, fabrication, ventes et comptabilité avec un système",
+    subtitleHighlight: "conçu exclusivement pour les bijoutiers",
+    stat1Number: "35",
+    stat1Label: "ans d'expérience",
+    stat2Number: "200+",
+    stat2Label: "bijouteries actives",
+    stat3Number: "8",
+    stat3Label: "modules intégrés",
+    ctaPrimary: "Voir la démo",
+    ctaSecondary: "Explorer les modules",
+    visualLabel: "Gestion des articles",
+    badge1: "Stock synchronisé",
+    badge2: "Contrôle des coûts",
+    scrollText: "Découvrir plus",
+  },
+  ca: {
+    badge: "Des de 1990 · +200 joieries confien en nosaltres",
+    title: "L'ERP que parla l'idioma de la teva joieria",
+    subtitle: "Gestiona inventari, fabricació, vendes i comptabilitat amb un sistema",
+    subtitleHighlight: "dissenyat exclusivament per a joiers",
+    stat1Number: "35",
+    stat1Label: "anys d'experiència",
+    stat2Number: "200+",
+    stat2Label: "joieries actives",
+    stat3Number: "8",
+    stat3Label: "mòduls integrats",
+    ctaPrimary: "Veure demostració",
+    ctaSecondary: "Explorar mòduls",
+    visualLabel: "Gestió d'articles",
+    badge1: "Stock sincronitzat",
+    badge2: "Control de costos",
+    scrollText: "Descobreix més",
+  },
+  "pt-br": {
+    badge: "Desde 1990 · +200 joalherias confiam em nós",
+    title: "O ERP que fala a língua da sua joalheria",
+    subtitle: "Gerencie inventário, fabricação, vendas e contabilidade com um sistema",
+    subtitleHighlight: "projetado exclusivamente para joalheiros",
+    stat1Number: "35",
+    stat1Label: "anos de experiência",
+    stat2Number: "200+",
+    stat2Label: "joalherias ativas",
+    stat3Number: "8",
+    stat3Label: "módulos integrados",
+    ctaPrimary: "Ver demonstração",
+    ctaSecondary: "Explorar módulos",
+    visualLabel: "Gestão de artigos",
+    badge1: "Estoque sincronizado",
+    badge2: "Controle de custos",
+    scrollText: "Descubra mais",
+  },
+};
+
+const t = translations[lang] || translations.es;
+const contactUrl = getPageUrl('contacto', lang);
+const modulosUrl = getPageUrl('modulos', lang);
 ---
 
 <section class="hero-section">
@@ -15,46 +139,45 @@
         <!-- Badge de confianza -->
         <div class="hero-badge">
           <span class="badge-icon">💎</span>
-          <span>Desde 1990 · +200 joyerías confían en nosotros</span>
+          <span>{t.badge}</span>
         </div>
 
         <!-- Titular principal -->
-        <h1>El ERP que habla el idioma de tu joyería</h1>
+        <h1>{t.title}</h1>
         
         <!-- Subtítulo -->
         <p class="hero-subtitle">
-          Gestiona inventario, fabricación, ventas y contabilidad con un sistema 
-          <strong>diseñado exclusivamente para joyeros</strong>. Sin adaptaciones, sin parches.
+          {t.subtitle} <strong>{t.subtitleHighlight}</strong>. Sin adaptaciones, sin parches.
         </p>
 
         <!-- Stats rápidos -->
         <div class="hero-stats">
           <div class="stat">
-            <span class="stat-number">35</span>
-            <span class="stat-label">años de experiencia</span>
+            <span class="stat-number">{t.stat1Number}</span>
+            <span class="stat-label">{t.stat1Label}</span>
           </div>
           <div class="stat-divider"></div>
           <div class="stat">
-            <span class="stat-number">200+</span>
-            <span class="stat-label">joyerías activas</span>
+            <span class="stat-number">{t.stat2Number}</span>
+            <span class="stat-label">{t.stat2Label}</span>
           </div>
           <div class="stat-divider"></div>
           <div class="stat">
-            <span class="stat-number">8</span>
-            <span class="stat-label">módulos integrados</span>
+            <span class="stat-number">{t.stat3Number}</span>
+            <span class="stat-label">{t.stat3Label}</span>
           </div>
         </div>
 
         <!-- CTAs -->
         <div class="hero-ctas">
-          <a href="#contacto" class="cta-primary">
-            <span>Ver demostración</span>
+          <a href={contactUrl} class="cta-primary">
+            <span>{t.ctaPrimary}</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
           </a>
-          <a href="#modulos" class="cta-secondary">
-            Explorar módulos
+          <a href={modulosUrl} class="cta-secondary">
+            {t.ctaSecondary}
           </a>
         </div>
       </div>
@@ -65,7 +188,7 @@
           <img src="https://raygoldstorage.blob.core.windows.net/web/A01.png" alt="Dashboard RayGold" />
           <div class="visual-label">
             <span class="label-dot"></span>
-            Gestión de artículos
+            {t.visualLabel}
           </div>
         </div>
         <div class="visual-card floating-1">
@@ -81,13 +204,13 @@
             <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
             <path d="M22 4L12 14.01l-3-3"/>
           </svg>
-          <span>Stock sincronizado</span>
+          <span>{t.badge1}</span>
         </div>
         <div class="visual-badge badge-2">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
           </svg>
-          <span>Control de costes</span>
+          <span>{t.badge2}</span>
         </div>
       </div>
     </div>
@@ -95,7 +218,7 @@
 
   <!-- Indicador scroll -->
   <div class="scroll-indicator">
-    <span>Descubre más</span>
+    <span>{t.scrollText}</span>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <path d="M12 5v14M5 12l7 7 7-7"/>
     </svg>

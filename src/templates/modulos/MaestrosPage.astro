@@ -1,0 +1,16 @@
+---
+/**
+ * Template: Módulo Maestros
+ * Artículos, proveedores, clientes y familias
+ */
+import SubmoduloLayout from "@/components/SubmoduloLayout.astro";
+
+interface Props {
+  lang: string;
+  pageId: string;
+}
+
+const { lang } = Astro.props;
+---
+
+<SubmoduloLayout lang={lang} moduloId="maestros" />

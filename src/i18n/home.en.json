@@ -1,0 +1,120 @@
+{
+  "home": {
+    "metaTitle": "RayGold - ERP Software for Jewelry",
+    "metaDescription": "Specialized ERP system for jewelry. Inventory management, manufacturing, sales and accounting for jewelry stores and workshops.",
+    
+    "hero": {
+      "badge": "Since 1990 · +200 jewelers trust us",
+      "title": "The ERP that speaks your jewelry's language",
+      "subtitle": "Manage inventory, manufacturing, sales and accounting with a system",
+      "subtitleStrong": "designed exclusively for jewelers",
+      "subtitleEnd": "No adaptations, no patches.",
+      "stats": {
+        "years": "years of experience",
+        "jewelers": "active jewelers",
+        "modules": "integrated modules"
+      },
+      "ctaPrimary": "Watch demo",
+      "ctaSecondary": "Explore modules",
+      "visual": {
+        "label": "Item management",
+        "badge1": "Synced inventory",
+        "badge2": "Cost control"
+      },
+      "scroll": "Discover more"
+    },
+
+    "porque": {
+      "badge": "Our difference",
+      "title": "Why do +200 jewelers choose RayGold?",
+      "subtitle": "We're not a generic ERP adapted. We are jewelers who create software.",
+      "items": {
+        "experience": {
+          "title": "35 years in jewelry",
+          "description": "We don't learn the industry with your company. We've been talking about carats, cuts and alloys since 1990.",
+          "stat": "Since 1990"
+        },
+        "specialized": {
+          "title": "100% made for jewelers",
+          "description": "Manufacturing orders with alloys, stone control by certificate, metal traceability. It's not an extra module, it's the core.",
+          "stat": "100% specialized"
+        },
+        "integrated": {
+          "title": "One single system",
+          "description": "Sales, manufacturing, purchasing, accounting, POS, e-commerce. No patches or integrations that break.",
+          "stat": "8 integrated modules"
+        },
+        "support": {
+          "title": "We know you by name",
+          "description": "When you call, you don't talk to a call center. You talk to people who understand your business and have been with you for years.",
+          "stat": "Direct support"
+        },
+        "cloud": {
+          "title": "Always updated",
+          "description": "Cloud on Azure, automatic updates, new features every quarter. Technology advances, so does RayGold.",
+          "stat": "Cloud technology"
+        }
+      },
+      "cta": {
+        "text": "Ready to see how RayGold can transform your jewelry business?",
+        "button": "Request free demo →"
+      }
+    },
+
+    "testimonios": {
+      "badge": "Success stories",
+      "title": "What our customers say",
+      "subtitle": "Real jewelers with real results",
+      "items": [
+        {
+          "quote": "We tried 3 generic ERPs before RayGold. None understood that a wedding band has 18k gold, a 0.15ct diamond and engraving labor.",
+          "quoteStrong": "RayGold has it built-in.",
+          "resultNumber": "-60%",
+          "resultText": "inventory time",
+          "author": "Brian Flores",
+          "company": "Flores & Sons Jewelry · Valencia",
+          "since": "Customer since 2012",
+          "initials": "CN"
+        },
+        {
+          "quote": "We manage 4,000 references with gold, silver and alloy variants. RayGold's manufacturing orders calculate the exact metal.",
+          "quoteStrong": "We used to do it in Excel.",
+          "resultNumber": "€12,000",
+          "resultText": "annual savings in waste",
+          "author": "Degan & Ferraz",
+          "company": "Ferraz Manufacturing · Córdoba",
+          "since": "Customer since 2016",
+          "initials": "MO",
+          "featured": true
+        },
+        {
+          "quote": "We opened our fifth store and RayGold scaled seamlessly. Centralized stock, transfers between stores, commissions...",
+          "quoteStrong": "It's our operational brain.",
+          "resultNumber": "5",
+          "resultText": "synced stores",
+          "author": "David Pablo",
+          "company": "Brillante Group · Catalonia",
+          "since": "Customer since 2009",
+          "initials": "JP"
+        }
+      ]
+    },
+
+    "video": {
+      "badge": "See it in action",
+      "title": "Discover RayGold in",
+      "titleHighlight": "90 seconds",
+      "subtitle": "A tour through the features that will transform your jewelry management",
+      "playText": "Watch demo",
+      "features": {
+        "duration": { "value": "90 sec", "label": "demo" },
+        "modules": { "value": "8 modules", "label": "in action" },
+        "specialized": { "value": "100%", "label": "jewelry" }
+      },
+      "cta": {
+        "text": "Would you like to see a personalized demo for your business?",
+        "button": "Request free demo"
+      }
+    }
+  }
+}

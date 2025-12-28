@@ -1,21 +1,27 @@
 ---
 /**
  * SEO Component - Meta tags, Open Graph, Twitter Cards & JSON-LD
+ * Con soporte multiidioma
  * 
  * Uso básico:
- * <SEO title="Mi Página" description="Descripción de la página" />
+ * <SEO lang="es" title="Mi Página" description="Descripción de la página" />
  * 
  * Uso completo:
  * <SEO 
- *   title="Módulo Maestros"
- *   description="Gestión de artículos, proveedores y clientes"
+ *   lang="en"
+ *   title="Master Module"
+ *   description="Items, suppliers and customers management"
  *   image="/images/maestros-og.jpg"
  *   type="product"
  *   noindex={false}
+ *   alternateUrls={[{ lang: 'es', url: '...' }, ...]}
  * />
  */
 
+import { type Lang } from "@/config/pages";
+
 interface Props {
+  lang?: Lang;
   title?: string;
   description?: string;
   image?: string;
@@ -26,20 +32,62 @@ interface Props {
   modifiedTime?: string;
   author?: string;
   keywords?: string[];
+  alternateUrls?: { lang: Lang; url: string }[];
 }
 
-// Configuración base del sitio
-const SITE_CONFIG = {
+// Configuración base del sitio por idioma
+const SITE_CONFIG: Record<Lang, {
+  defaultTitle: string;
+  defaultDescription: string;
+  defaultKeywords: string[];
+  locale: string;
+  languageName: string;
+}> = {
+  es: {
+    defaultTitle: 'RayGold - Software ERP para Joyería',
+    defaultDescription: 'Software de gestión integral para el sector joyero. ERP especializado con módulos de fabricación, comercial, finanzas y más. +35 años de experiencia.',
+    defaultKeywords: ['ERP joyería', 'software joyería', 'gestión joyería', 'RayGold', 'fabricación joyas', 'control mermas oro', 'Raytecno'],
+    locale: 'es_ES',
+    languageName: 'Spanish',
+  },
+  en: {
+    defaultTitle: 'RayGold - Jewelry ERP Software',
+    defaultDescription: 'Comprehensive management software for the jewelry sector. Specialized ERP with manufacturing, commercial, finance modules and more. +35 years of experience.',
+    defaultKeywords: ['jewelry ERP', 'jewelry software', 'jewelry management', 'RayGold', 'jewelry manufacturing', 'gold waste control', 'Raytecno'],
+    locale: 'en_US',
+    languageName: 'English',
+  },
+  fr: {
+    defaultTitle: 'RayGold - Logiciel ERP pour Bijouterie',
+    defaultDescription: 'Logiciel de gestion intégrale pour le secteur bijoutier. ERP spécialisé avec modules de fabrication, commercial, finances et plus. +35 ans d\'expérience.',
+    defaultKeywords: ['ERP bijouterie', 'logiciel bijouterie', 'gestion bijouterie', 'RayGold', 'fabrication bijoux', 'contrôle pertes or', 'Raytecno'],
+    locale: 'fr_FR',
+    languageName: 'French',
+  },
+  ca: {
+    defaultTitle: 'RayGold - Programari ERP per a Joieria',
+    defaultDescription: 'Programari de gestió integral per al sector joier. ERP especialitzat amb mòduls de fabricació, comercial, finances i més. +35 anys d\'experiència.',
+    defaultKeywords: ['ERP joieria', 'programari joieria', 'gestió joieria', 'RayGold', 'fabricació joies', 'control pèrdues or', 'Raytecno'],
+    locale: 'ca_ES',
+    languageName: 'Catalan',
+  },
+  "pt-br": {
+    defaultTitle: 'RayGold - Software ERP para Joalheria',
+    defaultDescription: 'Software de gestão integral para o setor joalheiro. ERP especializado com módulos de fabricação, comercial, finanças e mais. +35 anos de experiência.',
+    defaultKeywords: ['ERP joalheria', 'software joalheria', 'gestão joalheria', 'RayGold', 'fabricação joias', 'controle perdas ouro', 'Raytecno'],
+    locale: 'pt_BR',
+    languageName: 'Portuguese',
+  },
+};
+
+// Datos comunes de la empresa
+const COMPANY = {
   name: 'RayGold ERP',
   company: 'Raytecno BCN SL',
-  domain: 'https://www.raytecno.es',
-  defaultTitle: 'RayGold - Software ERP para Joyería',
-  defaultDescription: 'Software de gestión integral para el sector joyero. ERP especializado con módulos de fabricación, comercial, finanzas y más. +30 años de experiencia.',
+  domain: 'https://www.raygold.es',
   defaultImage: '/images/og-default.jpg',
-  locale: 'es_ES',
   twitterHandle: '@raytecno',
   themeColor: '#667eea',
-  // Datos de la empresa para Schema.org
   address: {
     streetAddress: 'Montgat',
     addressLocality: 'Barcelona',
@@ -54,53 +102,64 @@ const SITE_CONFIG = {
 };
 
 const {
+  lang = 'es',
   title,
-  description = SITE_CONFIG.defaultDescription,
-  image = SITE_CONFIG.defaultImage,
+  description,
+  image = COMPANY.defaultImage,
   url = Astro.url.href,
   type = 'website',
   noindex = false,
   publishedTime,
   modifiedTime,
-  author = SITE_CONFIG.company,
-  keywords = ['ERP joyería', 'software joyería', 'gestión joyería', 'RayGold', 'fabricación joyas', 'Raytecno']
+  author = COMPANY.company,
+  keywords,
+  alternateUrls = [],
 } = Astro.props;
+
+const config = SITE_CONFIG[lang] || SITE_CONFIG.es;
+const finalKeywords = keywords || config.defaultKeywords;
+const finalDescription = description || config.defaultDescription;
 
 // Construir título completo
 const fullTitle = title 
-  ? `${title} | ${SITE_CONFIG.name}`
-  : SITE_CONFIG.defaultTitle;
+  ? `${title} | ${COMPANY.name}`
+  : config.defaultTitle;
 
 // URL absoluta de la imagen
 const absoluteImageUrl = image.startsWith('http') 
   ? image 
-  : `${SITE_CONFIG.domain}${image}`;
+  : `${COMPANY.domain}${image}`;
+
+// hreflang mapping
+const hreflangMap: Record<Lang, string> = {
+  es: 'es',
+  en: 'en',
+  fr: 'fr',
+  ca: 'ca',
+  'pt-br': 'pt-BR',
+};
 
 // Schema.org - Organization
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": SITE_CONFIG.company,
-  "url": SITE_CONFIG.domain,
-  "logo": `${SITE_CONFIG.domain}/images/logo.png`,
+  "name": COMPANY.company,
+  "url": COMPANY.domain,
+  "logo": `${COMPANY.domain}/images/logo.png`,
   "description": "Empresa especializada en software de gestión para el sector joyero desde 1990.",
   "foundingDate": "1990",
   "address": {
     "@type": "PostalAddress",
-    ...SITE_CONFIG.address
+    ...COMPANY.address
   },
   "contactPoint": {
     "@type": "ContactPoint",
-    "telephone": SITE_CONFIG.contact.phone,
-    "email": SITE_CONFIG.contact.email,
+    "telephone": COMPANY.contact.phone,
+    "email": COMPANY.contact.email,
     "contactType": "sales",
-    "availableLanguage": ["Spanish", "Catalan"]
+    "availableLanguage": ["Spanish", "English", "French", "Catalan", "Portuguese"]
   },
-  "sameAs": [
-    // Añadir redes sociales cuando estén disponibles
-    // "https://www.linkedin.com/company/raytecno",
-    // "https://twitter.com/raytecno"
-  ]
+  "sameAs": []
 };
 
 // Schema.org - Software Application (para páginas de producto)
@@ -110,23 +169,23 @@ const softwareSchema = {
   "name": "RayGold ERP",
   "applicationCategory": "BusinessApplication",
   "operatingSystem": "Windows, Web",
-  "description": description,
-  "url": SITE_CONFIG.domain,
+  "description": finalDescription,
+  "url": COMPANY.domain,
   "author": {
     "@type": "Organization",
-    "name": SITE_CONFIG.company
+    "name": COMPANY.company
   },
   "offers": {
     "@type": "Offer",
     "price": "29",
     "priceCurrency": "EUR",
-    "priceValidUntil": "2025-12-31",
+    "priceValidUntil": new Date(new Date().getFullYear() + 1, 11, 31).toISOString().split('T')[0],
     "availability": "https://schema.org/InStock"
   },
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "4.8",
-    "reviewCount": "45"
+    "reviewCount": "150"
   }
 };
 
@@ -138,20 +197,20 @@ const breadcrumbSchema = {
     {
       "@type": "ListItem",
       "position": 1,
-      "name": "Inicio",
-      "item": SITE_CONFIG.domain
+      "name": lang === 'es' ? 'Inicio' : lang === 'en' ? 'Home' : lang === 'fr' ? 'Accueil' : lang === 'ca' ? 'Inici' : 'Início',
+      "item": `${COMPANY.domain}/${lang}/`
     }
   ]
 };
 
 // Añadir breadcrumb según la URL actual
-const pathSegments = Astro.url.pathname.split('/').filter(Boolean);
+const pathSegments = Astro.url.pathname.split('/').filter(Boolean).filter(s => !['es', 'en', 'fr', 'ca', 'pt-br'].includes(s));
 pathSegments.forEach((segment, index) => {
-  breadcrumbSchema.itemListElement.push({
+  (breadcrumbSchema.itemListElement as any[]).push({
     "@type": "ListItem",
     "position": index + 2,
     "name": segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' '),
-    "item": `${SITE_CONFIG.domain}/${pathSegments.slice(0, index + 1).join('/')}`
+    "item": `${COMPANY.domain}/${lang}/${pathSegments.slice(0, index + 1).join('/')}`
   });
 });
 
@@ -160,14 +219,14 @@ const webPageSchema = {
   "@context": "https://schema.org",
   "@type": type === 'article' ? 'Article' : 'WebPage',
   "name": fullTitle,
-  "description": description,
+  "description": finalDescription,
   "url": url,
   "image": absoluteImageUrl,
-  "inLanguage": "es",
+  "inLanguage": hreflangMap[lang] || 'es',
   "isPartOf": {
     "@type": "WebSite",
-    "name": SITE_CONFIG.name,
-    "url": SITE_CONFIG.domain
+    "name": COMPANY.name,
+    "url": COMPANY.domain
   },
   ...(publishedTime && { "datePublished": publishedTime }),
   ...(modifiedTime && { "dateModified": modifiedTime }),
@@ -183,30 +242,46 @@ const webPageSchema = {
 <!-- Primary Meta Tags -->
 <title>{fullTitle}</title>
 <meta name="title" content={fullTitle} />
-<meta name="description" content={description} />
-<meta name="keywords" content={keywords.join(', ')} />
+<meta name="description" content={finalDescription} />
+<meta name="keywords" content={finalKeywords.join(', ')} />
 <meta name="author" content={author} />
 <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
-<meta name="language" content="Spanish" />
+<meta name="language" content={config.languageName} />
 <meta name="revisit-after" content="7 days" />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={url} />
 
+<!-- hreflang tags -->
+{alternateUrls.map((alt) => (
+  <link rel="alternate" hreflang={hreflangMap[alt.lang] || alt.lang} href={alt.url} />
+))}
+{alternateUrls.length > 0 && (
+  <link rel="alternate" hreflang="x-default" href={alternateUrls.find(a => a.lang === 'es')?.url || `${COMPANY.domain}/es/`} />
+)}
+
 <!-- Theme Color -->
-<meta name="theme-color" content={SITE_CONFIG.themeColor} />
-<meta name="msapplication-TileColor" content={SITE_CONFIG.themeColor} />
+<meta name="theme-color" content={COMPANY.themeColor} />
+<meta name="msapplication-TileColor" content={COMPANY.themeColor} />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content={type} />
 <meta property="og:url" content={url} />
 <meta property="og:title" content={fullTitle} />
-<meta property="og:description" content={description} />
+<meta property="og:description" content={finalDescription} />
 <meta property="og:image" content={absoluteImageUrl} />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:locale" content={SITE_CONFIG.locale} />
-<meta property="og:site_name" content={SITE_CONFIG.name} />
+<meta property="og:locale" content={config.locale} />
+<meta property="og:site_name" content={COMPANY.name} />
+
+<!-- Alternate locales for OG -->
+{Object.entries(SITE_CONFIG)
+  .filter(([code]) => code !== lang)
+  .map(([code, conf]) => (
+    <meta property="og:locale:alternate" content={conf.locale} />
+  ))
+}
 
 {type === 'article' && publishedTime && (
   <meta property="article:published_time" content={publishedTime} />
@@ -222,10 +297,10 @@ const webPageSchema = {
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:url" content={url} />
 <meta name="twitter:title" content={fullTitle} />
-<meta name="twitter:description" content={description} />
+<meta name="twitter:description" content={finalDescription} />
 <meta name="twitter:image" content={absoluteImageUrl} />
-<meta name="twitter:site" content={SITE_CONFIG.twitterHandle} />
-<meta name="twitter:creator" content={SITE_CONFIG.twitterHandle} />
+<meta name="twitter:site" content={COMPANY.twitterHandle} />
+<meta name="twitter:creator" content={COMPANY.twitterHandle} />
 
 <!-- Geo Tags (para SEO local) -->
 <meta name="geo.region" content="ES-CT" />
