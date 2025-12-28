@@ -8,12 +8,12 @@ import { getTranslations } from "@/i18n";
 import { getAlternateUrls, getPageUrl, type Lang } from "@/config/pages";
 
 interface Props {
-  lang: string;
+  lang: Lang;
   pageId: string;
 }
 
 const { lang } = Astro.props;
-const t = getTranslations(lang as Lang);
+const t = getTranslations(lang);
 const alternateUrls = getAlternateUrls("modulos");
 
 // Definición de módulos con iconos y colores
@@ -67,19 +67,125 @@ const modulos = [
     color: "#f97316",
   },
 ];
+
+// Traducciones de módulos por idioma
+const modulesT: Record<string, Record<string, { title: string; description: string }>> = {
+  es: {
+    maestros: { title: "Maestros", description: "Artículos, proveedores, clientes y familias" },
+    comercial: { title: "Comercial", description: "Ventas, pedidos y facturación" },
+    fabricacion: { title: "Fabricación", description: "Producción, órdenes de trabajo y control de mermas" },
+    finanzas: { title: "Finanzas", description: "Contabilidad, tesorería e IVA" },
+    historicos: { title: "Históricos", description: "Consulta de datos históricos y tendencias" },
+    estadisticas: { title: "Estadísticas", description: "Informes y cuadros de mando" },
+    vendedores: { title: "Vendedores", description: "Gestión de comisiones y objetivos" },
+    ecommerce: { title: "Ecommerce", description: "Tienda online sincronizada" },
+  },
+  en: {
+    maestros: { title: "Masters", description: "Items, suppliers, customers and categories" },
+    comercial: { title: "Commercial", description: "Sales, orders and invoicing" },
+    fabricacion: { title: "Manufacturing", description: "Production, work orders and loss control" },
+    finanzas: { title: "Finance", description: "Accounting, treasury and VAT" },
+    historicos: { title: "Historical", description: "Historical data query and trends" },
+    estadisticas: { title: "Statistics", description: "Reports and dashboards" },
+    vendedores: { title: "Sales Reps", description: "Commission and target management" },
+    ecommerce: { title: "Ecommerce", description: "Synchronized online store" },
+  },
+  fr: {
+    maestros: { title: "Maîtres", description: "Articles, fournisseurs, clients et familles" },
+    comercial: { title: "Commercial", description: "Ventes, commandes et facturation" },
+    fabricacion: { title: "Fabrication", description: "Production, ordres de travail et contrôle des pertes" },
+    finanzas: { title: "Finances", description: "Comptabilité, trésorerie et TVA" },
+    historicos: { title: "Historiques", description: "Consultation des données historiques" },
+    estadisticas: { title: "Statistiques", description: "Rapports et tableaux de bord" },
+    vendedores: { title: "Vendeurs", description: "Gestion des commissions et objectifs" },
+    ecommerce: { title: "Ecommerce", description: "Boutique en ligne synchronisée" },
+  },
+  ca: {
+    maestros: { title: "Mestres", description: "Articles, proveïdors, clients i famílies" },
+    comercial: { title: "Comercial", description: "Vendes, comandes i facturació" },
+    fabricacion: { title: "Fabricació", description: "Producció, ordres de treball i control de mermes" },
+    finanzas: { title: "Finances", description: "Comptabilitat, tresoreria i IVA" },
+    historicos: { title: "Històrics", description: "Consulta de dades històriques" },
+    estadisticas: { title: "Estadístiques", description: "Informes i quadres de comandament" },
+    vendedores: { title: "Venedors", description: "Gestió de comissions i objectius" },
+    ecommerce: { title: "Ecommerce", description: "Botiga online sincronitzada" },
+  },
+  "pt-br": {
+    maestros: { title: "Mestres", description: "Artigos, fornecedores, clientes e famílias" },
+    comercial: { title: "Comercial", description: "Vendas, pedidos e faturamento" },
+    fabricacion: { title: "Fabricação", description: "Produção, ordens de trabalho e controle de perdas" },
+    finanzas: { title: "Finanças", description: "Contabilidade, tesouraria e IVA" },
+    historicos: { title: "Históricos", description: "Consulta de dados históricos" },
+    estadisticas: { title: "Estatísticas", description: "Relatórios e painéis" },
+    vendedores: { title: "Vendedores", description: "Gestão de comissões e metas" },
+    ecommerce: { title: "Ecommerce", description: "Loja online sincronizada" },
+  },
+};
+
+// Textos generales de la página
+const pageT: Record<string, { title: string; subtitle: string; metaTitle: string; metaDesc: string; ctaTitle: string; ctaDesc: string; ctaBtn: string }> = {
+  es: { 
+    title: "Módulos", 
+    subtitle: "8 módulos integrados para tu joyería",
+    metaTitle: "Módulos | RayGold ERP",
+    metaDesc: "8 módulos integrados para gestionar tu joyería",
+    ctaTitle: "¿Listo para empezar?", 
+    ctaDesc: "Solicita una demo personalizada y descubre todo el potencial de RayGold", 
+    ctaBtn: "Solicitar demo" 
+  },
+  en: { 
+    title: "Modules", 
+    subtitle: "8 integrated modules for your jewelry business",
+    metaTitle: "Modules | RayGold ERP",
+    metaDesc: "8 integrated modules to manage your jewelry business",
+    ctaTitle: "Ready to get started?", 
+    ctaDesc: "Request a personalized demo and discover RayGold's full potential", 
+    ctaBtn: "Request demo" 
+  },
+  fr: { 
+    title: "Modules", 
+    subtitle: "8 modules intégrés pour votre bijouterie",
+    metaTitle: "Modules | RayGold ERP",
+    metaDesc: "8 modules intégrés pour gérer votre bijouterie",
+    ctaTitle: "Prêt à commencer?", 
+    ctaDesc: "Demandez une démo personnalisée et découvrez tout le potentiel de RayGold", 
+    ctaBtn: "Demander une démo" 
+  },
+  ca: { 
+    title: "Mòduls", 
+    subtitle: "8 mòduls integrats per a la teva joieria",
+    metaTitle: "Mòduls | RayGold ERP",
+    metaDesc: "8 mòduls integrats per gestionar la teva joieria",
+    ctaTitle: "Preparat per començar?", 
+    ctaDesc: "Sol·licita una demo personalitzada i descobreix tot el potencial de RayGold", 
+    ctaBtn: "Sol·licitar demo" 
+  },
+  "pt-br": { 
+    title: "Módulos", 
+    subtitle: "8 módulos integrados para sua joalheria",
+    metaTitle: "Módulos | RayGold ERP",
+    metaDesc: "8 módulos integrados para gerenciar sua joalheria",
+    ctaTitle: "Pronto para começar?", 
+    ctaDesc: "Solicite uma demo personalizada e descubra todo o potencial do RayGold", 
+    ctaBtn: "Solicitar demo" 
+  },
+};
+
+const pt = pageT[lang] || pageT.es;
+const mt = modulesT[lang] || modulesT.es;
 ---
 
 <Layout
-  title={t.modules.metaTitle}
-  description={t.modules.metaDescription}
-  lang={lang as Lang}
+  title={pt.metaTitle}
+  description={pt.metaDesc}
+  lang={lang}
   alternateUrls={alternateUrls}
 >
   <!-- Hero Section -->
   <section class="modules-hero">
     <div class="container">
-      <h1>{t.modules.title}</h1>
-      <p>{t.modules.subtitle}</p>
+      <h1>{pt.title}</h1>
+      <p>{pt.subtitle}</p>
     </div>
   </section>
 
@@ -87,36 +193,28 @@ const modulos = [
   <section class="modules-section">
     <div class="container">
       <div class="modules-grid">
-        {
-          modulos.map((modulo) => {
-            const moduleData =
-              t.modules.list[modulo.key as keyof typeof t.modules.list];
-            return (
-              <a
-                href={getPageUrl(modulo.id as any, lang as Lang)}
-                class="module-card"
-                style={`--module-color: ${modulo.color}`}
-              >
-                <div class="module-icon" set:html={modulo.icon} />
-                <div class="module-content">
-                  <h3>{moduleData.title}</h3>
-                  <p>{moduleData.description}</p>
-                </div>
-                <div class="module-arrow">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  >
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                    <polyline points="12 5 19 12 12 19" />
-                  </svg>
-                </div>
-              </a>
-            );
-          })
-        }
+        {modulos.map((modulo) => {
+          const moduleData = mt[modulo.key];
+          return (
+            <a
+              href={`/${lang}/${modulo.id}`}
+              class="module-card"
+              style={`--module-color: ${modulo.color}`}
+            >
+              <div class="module-icon" set:html={modulo.icon} />
+              <div class="module-content">
+                <h3>{moduleData.title}</h3>
+                <p>{moduleData.description}</p>
+              </div>
+              <div class="module-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </div>
+            </a>
+          );
+        })}
       </div>
     </div>
   </section>
@@ -124,18 +222,11 @@ const modulos = [
   <!-- CTA Section -->
   <section class="cta-section">
     <div class="container">
-      <h2>{t.cta.title}</h2>
-      <p>{t.cta.description}</p>
-      <a href={getPageUrl("contacto", lang as Lang)} class="cta-button">
-        {t.cta.button}
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          width="20"
-          height="20"
-        >
+      <h2>{pt.ctaTitle}</h2>
+      <p>{pt.ctaDesc}</p>
+      <a href={getPageUrl("contacto", lang)} class="cta-button">
+        {pt.ctaBtn}
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
           <line x1="5" y1="12" x2="19" y2="12"></line>
           <polyline points="12 5 19 12 12 19"></polyline>
         </svg>
@@ -147,7 +238,7 @@ const modulos = [
 <style>
   .modules-hero {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 80px 0 60px;
+    padding: 40px 0 60px;
     text-align: center;
     color: white;
   }
@@ -257,11 +348,7 @@ const modulos = [
   .cta-section {
     padding: 60px 0;
     text-align: center;
-    background: linear-gradient(
-      135deg,
-      rgba(102, 126, 234, 0.1) 0%,
-      rgba(118, 75, 162, 0.1) 100%
-    );
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
   }
 
   .cta-section h2 {

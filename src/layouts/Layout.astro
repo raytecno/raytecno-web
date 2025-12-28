@@ -1,15 +1,13 @@
 ---
 /**
- * Layout principal con soporte multiidioma
- * Incluye hreflang tags para SEO internacional
+ * Layout principal con Header y Footer multiidioma
  */
-import WhatsAppButton from "@/components/WhatsAppButton.astro";
-import SEOHead from "@/components/SEOHead.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
+import WhatsAppButton from "@/components/WhatsAppButton.astro";
 import { type Lang } from "@/config/pages";
 
-export interface Props {
+interface Props {
   title: string;
   description?: string;
   lang?: Lang;
@@ -18,104 +16,61 @@ export interface Props {
 
 const { 
   title, 
-  description, 
+  description = "RayGold - Software ERP especializado para la industria joyera", 
   lang = 'es',
   alternateUrls = []
 } = Astro.props;
-
-// URL base del sitio
-const siteUrl = 'https://raytecno.es';
 ---
 
-<!doctype html>
-<html lang={lang === 'pt-br' ? 'pt-BR' : lang}>
+<!DOCTYPE html>
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap"
-      rel="stylesheet"
-    />
     
-    <!-- SEO con soporte multiidioma -->
-    <SEOHead title={title} description={description} lang={lang} />
-    
-    <!-- Hreflang tags para SEO internacional -->
-    {alternateUrls.length > 0 && alternateUrls.map(({ lang: hrefLang, url }) => (
-      <link 
-        rel="alternate" 
-        hreflang={hrefLang === 'pt-br' ? 'pt-BR' : hrefLang} 
-        href={`${siteUrl}${url}`} 
-      />
+    <!-- Hreflang tags -->
+    {alternateUrls.map((alt) => (
+      <link rel="alternate" hreflang={alt.lang === 'pt-br' ? 'pt-BR' : alt.lang} href={alt.url} />
     ))}
-    
-    <!-- x-default para Google (idioma por defecto) -->
     {alternateUrls.length > 0 && (
-      <link 
-        rel="alternate" 
-        hreflang="x-default" 
-        href={`${siteUrl}${alternateUrls.find(u => u.lang === 'es')?.url || '/'}`} 
-      />
+      <link rel="alternate" hreflang="x-default" href={alternateUrls.find(a => a.lang === 'es')?.url || alternateUrls[0]?.url} />
     )}
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={lang === 'pt-br' ? 'pt_BR' : lang} />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
   </head>
+  
   <body>
-    <!-- Header con navegación -->
     <Header lang={lang} />
     
-    <!-- Contenido principal -->
-    <slot />
+    <main class="main-content">
+      <slot />
+    </main>
     
-    <!-- Footer -->
     <Footer lang={lang} />
-    
-    <!-- WhatsApp flotante -->
     <WhatsAppButton lang={lang} />
-
-    <!-- Script global para navegación con anchors -->
-    <script is:inline>
-      document.addEventListener("DOMContentLoaded", function () {
-        document.addEventListener("click", function (e) {
-          const link = e.target.closest("a");
-          if (!link) return;
-
-          const href = link.getAttribute("href");
-          if (!href) return;
-
-          const hashMatch = href.match(/^(\/[^#]*)(#.+)$/);
-          if (!hashMatch) return;
-
-          const [, basePath, hash] = hashMatch;
-          const currentPath = window.location.pathname;
-
-          const normalizedBase = basePath.replace(/\/$/, "") || "/";
-          const normalizedCurrent = currentPath.replace(/\/$/, "") || "/";
-
-          if (normalizedBase === normalizedCurrent) {
-            const target = document.querySelector(hash);
-            if (target) {
-              e.preventDefault();
-              target.scrollIntoView({ behavior: "smooth" });
-              history.pushState(null, "", hash);
-            }
-            return;
-          }
-
-          e.preventDefault();
-          window.location.href = href;
-        });
-      });
-    </script>
   </body>
 </html>
 
 <style is:global>
-  * {
+  /* Reset básico */
+  *, *::before, *::after {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
   }
 
   html {
@@ -123,26 +78,26 @@ const siteUrl = 'https://raytecno.es';
   }
 
   body {
-    font-family: "Inter", system-ui, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     line-height: 1.6;
     color: #1e293b;
-    background: #f8fafc;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4 {
-    font-family: "Playfair Display", serif;
-  }
-
-  a {
-    text-decoration: none;
-    color: inherit;
+    background: #0f172a;
+    min-height: 100vh;
   }
 
   img {
     max-width: 100%;
     height: auto;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* Contenido principal con padding para header fijo */
+  .main-content {
+    padding-top: 72px;
+    min-height: calc(100vh - 72px);
   }
 </style>
