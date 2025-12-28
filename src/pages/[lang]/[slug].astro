@@ -8,41 +8,40 @@ import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import { type Lang } from "@/config/pages";
 
-// Definición de páginas y sus slugs por idioma
-const pageDefinitions = {
-  modulos: {
-    slugs: { es: 'modulos', en: 'modules', fr: 'modules', ca: 'moduls', 'pt-br': 'modulos' },
-    title: { es: 'Módulos', en: 'Modules', fr: 'Modules', ca: 'Mòduls', 'pt-br': 'Módulos' },
-  },
-  precios: {
-    slugs: { es: 'precios', en: 'pricing', fr: 'tarifs', ca: 'preus', 'pt-br': 'precos' },
-    title: { es: 'Precios', en: 'Pricing', fr: 'Tarifs', ca: 'Preus', 'pt-br': 'Preços' },
-  },
-  tecnologia: {
-    slugs: { es: 'tecnologia', en: 'technology', fr: 'technologie', ca: 'tecnologia', 'pt-br': 'tecnologia' },
-    title: { es: 'Tecnología', en: 'Technology', fr: 'Technologie', ca: 'Tecnologia', 'pt-br': 'Tecnologia' },
-  },
-  contacto: {
-    slugs: { es: 'contacto', en: 'contact', fr: 'contact', ca: 'contacte', 'pt-br': 'contato' },
-    title: { es: 'Contacto', en: 'Contact', fr: 'Contact', ca: 'Contacte', 'pt-br': 'Contato' },
-  },
-  nosotros: {
-    slugs: { es: 'nosotros', en: 'about', fr: 'a-propos', ca: 'nosaltres', 'pt-br': 'sobre' },
-    title: { es: 'Nosotros', en: 'About Us', fr: 'À propos', ca: 'Nosaltres', 'pt-br': 'Sobre nós' },
-  },
-};
-
-type PageKey = keyof typeof pageDefinitions;
-type LangKey = 'es' | 'en' | 'fr' | 'ca' | 'pt-br';
-
 export function getStaticPaths() {
-  const supportedLangs: LangKey[] = ['es', 'en', 'fr', 'ca', 'pt-br'];
+  // ✅ TODO debe estar DENTRO de getStaticPaths
+  const supportedLangs = ['es', 'en', 'fr', 'ca', 'pt-br'] as const;
+  type LangType = typeof supportedLangs[number];
+
+  const pageDefinitions = {
+    modulos: {
+      slugs: { es: 'modulos', en: 'modules', fr: 'modules', ca: 'moduls', 'pt-br': 'modulos' },
+      title: { es: 'Módulos', en: 'Modules', fr: 'Modules', ca: 'Mòduls', 'pt-br': 'Módulos' },
+    },
+    precios: {
+      slugs: { es: 'precios', en: 'pricing', fr: 'tarifs', ca: 'preus', 'pt-br': 'precos' },
+      title: { es: 'Precios', en: 'Pricing', fr: 'Tarifs', ca: 'Preus', 'pt-br': 'Preços' },
+    },
+    tecnologia: {
+      slugs: { es: 'tecnologia', en: 'technology', fr: 'technologie', ca: 'tecnologia', 'pt-br': 'tecnologia' },
+      title: { es: 'Tecnología', en: 'Technology', fr: 'Technologie', ca: 'Tecnologia', 'pt-br': 'Tecnologia' },
+    },
+    contacto: {
+      slugs: { es: 'contacto', en: 'contact', fr: 'contact', ca: 'contacte', 'pt-br': 'contato' },
+      title: { es: 'Contacto', en: 'Contact', fr: 'Contact', ca: 'Contacte', 'pt-br': 'Contato' },
+    },
+    nosotros: {
+      slugs: { es: 'nosotros', en: 'about', fr: 'a-propos', ca: 'nosaltres', 'pt-br': 'sobre' },
+      title: { es: 'Nosotros', en: 'About Us', fr: 'À propos', ca: 'Nosaltres', 'pt-br': 'Sobre nós' },
+    },
+  };
+
   const paths: { params: { lang: string; slug: string }; props: { pageKey: string; title: string } }[] = [];
 
   for (const lang of supportedLangs) {
     for (const [pageKey, pageDef] of Object.entries(pageDefinitions)) {
-      const slug = pageDef.slugs[lang];
-      const title = pageDef.title[lang];
+      const slug = pageDef.slugs[lang as LangType];
+      const title = pageDef.title[lang as LangType];
       paths.push({
         params: { lang, slug },
         props: { pageKey, title },
@@ -61,6 +60,47 @@ interface Props {
 const { lang, slug } = Astro.params;
 const { pageKey, title } = Astro.props;
 const currentLang = (lang || 'es') as Lang;
+
+// Subtítulos por página
+const subtitles: Record<string, Record<string, string>> = {
+  modulos: {
+    es: '8 módulos integrados para tu joyería',
+    en: '8 integrated modules for your jewelry business',
+    fr: '8 modules intégrés pour votre bijouterie',
+    ca: '8 mòduls integrats per a la teva joieria',
+    'pt-br': '8 módulos integrados para sua joalheria',
+  },
+  precios: {
+    es: 'Planes flexibles para cada negocio',
+    en: 'Flexible plans for every business',
+    fr: 'Plans flexibles pour chaque entreprise',
+    ca: 'Plans flexibles per a cada negoci',
+    'pt-br': 'Planos flexíveis para cada negócio',
+  },
+  tecnologia: {
+    es: 'Arquitectura moderna y segura',
+    en: 'Modern and secure architecture',
+    fr: 'Architecture moderne et sécurisée',
+    ca: 'Arquitectura moderna i segura',
+    'pt-br': 'Arquitetura moderna e segura',
+  },
+  contacto: {
+    es: 'Estamos aquí para ayudarte',
+    en: 'We are here to help you',
+    fr: 'Nous sommes là pour vous aider',
+    ca: 'Som aquí per ajudar-te',
+    'pt-br': 'Estamos aqui para ajudar você',
+  },
+  nosotros: {
+    es: 'Más de 35 años en el sector joyero',
+    en: 'Over 35 years in the jewelry industry',
+    fr: 'Plus de 35 ans dans le secteur de la bijouterie',
+    ca: 'Més de 35 anys en el sector joier',
+    'pt-br': 'Mais de 35 anos no setor joalheiro',
+  },
+};
+
+const subtitle = subtitles[pageKey]?.[currentLang] || subtitles[pageKey]?.es || '';
 ---
 
 <Layout title={`${title} | RayGold`}>
@@ -70,13 +110,7 @@ const currentLang = (lang || 'es') as Lang;
     <div class="page-header">
       <div class="container">
         <h1>{title}</h1>
-        <p class="page-subtitle">
-          {pageKey === 'modulos' && (currentLang === 'es' ? '8 módulos integrados para tu joyería' : '8 integrated modules for your jewelry business')}
-          {pageKey === 'precios' && (currentLang === 'es' ? 'Planes flexibles para cada negocio' : 'Flexible plans for every business')}
-          {pageKey === 'tecnologia' && (currentLang === 'es' ? 'Arquitectura moderna y segura' : 'Modern and secure architecture')}
-          {pageKey === 'contacto' && (currentLang === 'es' ? 'Estamos aquí para ayudarte' : 'We are here to help you')}
-          {pageKey === 'nosotros' && (currentLang === 'es' ? 'Más de 35 años en el sector' : 'Over 35 years in the industry')}
-        </p>
+        <p class="page-subtitle">{subtitle}</p>
       </div>
     </div>
 
@@ -99,7 +133,7 @@ const currentLang = (lang || 'es') as Lang;
 
 <style>
   .page-content {
-    padding-top: 72px; /* Altura del header */
+    padding-top: 72px;
   }
 
   .page-header {
