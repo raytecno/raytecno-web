@@ -1,7 +1,7 @@
 ---
 /**
  * Header.astro - Navegación principal con selector de idiomas
- * @component
+ * Con logo SVG inline (no imagen externa)
  */
 import { getPageUrl, type Lang } from "@/config/pages";
 import { getTranslations } from "@/i18n";
@@ -13,7 +13,7 @@ interface Props {
 const { lang = 'es' } = Astro.props;
 const t = getTranslations(lang);
 
-// Idiomas soportados (definido localmente)
+// Idiomas soportados
 const languages: { code: Lang; name: string; flag: string }[] = [
   { code: 'es', name: 'Español', flag: '🇪🇸' },
   { code: 'en', name: 'English', flag: '🇬🇧' },
@@ -22,16 +22,35 @@ const languages: { code: Lang; name: string; flag: string }[] = [
   { code: 'pt-br', name: 'Português', flag: '🇧🇷' },
 ];
 
-// Obtener idioma actual
 const currentLang = languages.find(l => l.code === lang) || languages[0];
 ---
 
 <header class="header">
   <div class="header-container">
-    <!-- Logo -->
+    <!-- Logo con SVG inline -->
     <a href={`/${lang}/`} class="logo">
-      <img src="/images/logo.svg" alt="RayGold" class="logo-img" />
-      <span class="logo-text">RayGold</span>
+      <svg class="logo-icon" viewBox="0 0 40 40" fill="none">
+        <path
+          d="M20 2L37 12V28L20 38L3 28V12L20 2Z"
+          fill="url(#grad1)"
+          stroke="#fff"
+          stroke-width="1"
+        />
+        <path
+          d="M20 8L30 14V26L20 32L10 26V14L20 8Z"
+          fill="rgba(255,255,255,0.3)"
+        />
+        <defs>
+          <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#667eea" />
+            <stop offset="100%" style="stop-color:#764ba2" />
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="logo-text">
+        <span class="logo-name">RAYGOLD</span>
+        <span class="logo-tagline">Software para Joyería</span>
+      </div>
     </a>
 
     <!-- Navegación principal -->
@@ -106,20 +125,31 @@ const currentLang = languages.find(l => l.code === lang) || languages[0];
   .logo {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     text-decoration: none;
   }
 
-  .logo-img {
-    height: 36px;
-    width: auto;
+  .logo-icon {
+    width: 40px;
+    height: 40px;
   }
 
   .logo-text {
-    font-size: 1.25rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .logo-name {
+    font-size: 1.1rem;
     font-weight: 700;
     color: white;
-    letter-spacing: -0.5px;
+    letter-spacing: 2px;
+  }
+
+  .logo-tagline {
+    font-size: 0.65rem;
+    color: #94a3b8;
+    letter-spacing: 0.5px;
   }
 
   /* Navegación */
@@ -272,11 +302,14 @@ const currentLang = languages.find(l => l.code === lang) || languages[0];
     .lang-code {
       display: none;
     }
+
+    .logo-tagline {
+      display: none;
+    }
   }
 </style>
 
 <script>
-  // Toggle del dropdown en móvil
   document.querySelectorAll('.lang-trigger').forEach((trigger) => {
     trigger.addEventListener('click', () => {
       const expanded = trigger.getAttribute('aria-expanded') === 'true';
@@ -284,7 +317,6 @@ const currentLang = languages.find(l => l.code === lang) || languages[0];
     });
   });
 
-  // Cerrar dropdown al hacer clic fuera
   document.addEventListener('click', (e) => {
     const target = e.target as HTMLElement;
     if (!target.closest('.lang-selector')) {

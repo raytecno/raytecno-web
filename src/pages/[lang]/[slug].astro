@@ -1,0 +1,161 @@
+---
+/**
+ * Router dinámico para páginas internas
+ * Genera: /es/modulos, /en/modules, /es/precios, /en/pricing, etc.
+ */
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import { type Lang } from "@/config/pages";
+
+// Definición de páginas y sus slugs por idioma
+const pageDefinitions = {
+  modulos: {
+    slugs: { es: 'modulos', en: 'modules', fr: 'modules', ca: 'moduls', 'pt-br': 'modulos' },
+    title: { es: 'Módulos', en: 'Modules', fr: 'Modules', ca: 'Mòduls', 'pt-br': 'Módulos' },
+  },
+  precios: {
+    slugs: { es: 'precios', en: 'pricing', fr: 'tarifs', ca: 'preus', 'pt-br': 'precos' },
+    title: { es: 'Precios', en: 'Pricing', fr: 'Tarifs', ca: 'Preus', 'pt-br': 'Preços' },
+  },
+  tecnologia: {
+    slugs: { es: 'tecnologia', en: 'technology', fr: 'technologie', ca: 'tecnologia', 'pt-br': 'tecnologia' },
+    title: { es: 'Tecnología', en: 'Technology', fr: 'Technologie', ca: 'Tecnologia', 'pt-br': 'Tecnologia' },
+  },
+  contacto: {
+    slugs: { es: 'contacto', en: 'contact', fr: 'contact', ca: 'contacte', 'pt-br': 'contato' },
+    title: { es: 'Contacto', en: 'Contact', fr: 'Contact', ca: 'Contacte', 'pt-br': 'Contato' },
+  },
+  nosotros: {
+    slugs: { es: 'nosotros', en: 'about', fr: 'a-propos', ca: 'nosaltres', 'pt-br': 'sobre' },
+    title: { es: 'Nosotros', en: 'About Us', fr: 'À propos', ca: 'Nosaltres', 'pt-br': 'Sobre nós' },
+  },
+};
+
+type PageKey = keyof typeof pageDefinitions;
+type LangKey = 'es' | 'en' | 'fr' | 'ca' | 'pt-br';
+
+export function getStaticPaths() {
+  const supportedLangs: LangKey[] = ['es', 'en', 'fr', 'ca', 'pt-br'];
+  const paths: { params: { lang: string; slug: string }; props: { pageKey: string; title: string } }[] = [];
+
+  for (const lang of supportedLangs) {
+    for (const [pageKey, pageDef] of Object.entries(pageDefinitions)) {
+      const slug = pageDef.slugs[lang];
+      const title = pageDef.title[lang];
+      paths.push({
+        params: { lang, slug },
+        props: { pageKey, title },
+      });
+    }
+  }
+
+  return paths;
+}
+
+interface Props {
+  pageKey: string;
+  title: string;
+}
+
+const { lang, slug } = Astro.params;
+const { pageKey, title } = Astro.props;
+const currentLang = (lang || 'es') as Lang;
+---
+
+<Layout title={`${title} | RayGold`}>
+  <Header lang={currentLang} />
+  
+  <main class="page-content">
+    <div class="page-header">
+      <div class="container">
+        <h1>{title}</h1>
+        <p class="page-subtitle">
+          {pageKey === 'modulos' && (currentLang === 'es' ? '8 módulos integrados para tu joyería' : '8 integrated modules for your jewelry business')}
+          {pageKey === 'precios' && (currentLang === 'es' ? 'Planes flexibles para cada negocio' : 'Flexible plans for every business')}
+          {pageKey === 'tecnologia' && (currentLang === 'es' ? 'Arquitectura moderna y segura' : 'Modern and secure architecture')}
+          {pageKey === 'contacto' && (currentLang === 'es' ? 'Estamos aquí para ayudarte' : 'We are here to help you')}
+          {pageKey === 'nosotros' && (currentLang === 'es' ? 'Más de 35 años en el sector' : 'Over 35 years in the industry')}
+        </p>
+      </div>
+    </div>
+
+    <section class="page-body">
+      <div class="container">
+        <div class="content-placeholder">
+          <p>
+            {currentLang === 'es' 
+              ? `Contenido de la página ${title} en desarrollo...`
+              : `${title} page content under development...`
+            }
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer lang={currentLang} />
+</Layout>
+
+<style>
+  .page-content {
+    padding-top: 72px; /* Altura del header */
+  }
+
+  .page-header {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    padding: 4rem 1.5rem;
+    text-align: center;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 1rem;
+  }
+
+  .page-subtitle {
+    font-size: 1.1rem;
+    color: #94a3b8;
+    margin: 0;
+  }
+
+  .page-body {
+    padding: 4rem 1.5rem;
+    background: #0f172a;
+    min-height: 50vh;
+  }
+
+  .content-placeholder {
+    background: rgba(30, 41, 59, 0.5);
+    border: 1px solid #334155;
+    border-radius: 16px;
+    padding: 3rem;
+    text-align: center;
+  }
+
+  .content-placeholder p {
+    color: #64748b;
+    font-size: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 1.75rem;
+    }
+
+    .page-header {
+      padding: 3rem 1rem;
+    }
+
+    .page-body {
+      padding: 2rem 1rem;
+    }
+  }
+</style>

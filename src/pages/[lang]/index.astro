@@ -9,7 +9,7 @@ import { type Lang } from "@/config/pages";
 export function getStaticPaths() {
   // Idiomas soportados - DEBE estar dentro de getStaticPaths
   const supportedLangs: Lang[] = ["es", "en", "fr", "ca", "pt-br"];
-
+  
   return supportedLangs.map((lang) => ({
     params: { lang },
   }));
