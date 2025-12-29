@@ -18,17 +18,32 @@
           "name": "Articles",
           "description": "Gestió completa del catàleg d'articles",
           "images": [
-            { "title": "Llistat d'Articles", "description": "Vista general del catàleg amb filtres avançats" },
-            { "title": "Fitxa d'Article", "description": "Detall complet amb especificacions" },
-            { "title": "Configuració", "description": "Personalització de camps i atributs" }
+            {
+              "title": "Llistat d'Articles",
+              "description": "Vista general del catàleg amb filtres avançats"
+            },
+            {
+              "title": "Fitxa d'Article",
+              "description": "Detall complet amb especificacions"
+            },
+            {
+              "title": "Configuració",
+              "description": "Personalització de camps i atributs"
+            }
           ]
         },
         "precios": {
           "name": "Preus",
           "description": "Tarifes, descomptes i polítiques de preus",
           "images": [
-            { "title": "Tarifes", "description": "Gestió de múltiples tarifes" },
-            { "title": "Descomptes", "description": "Configuració de descomptes" },
+            {
+              "title": "Tarifes",
+              "description": "Gestió de múltiples tarifes"
+            },
+            {
+              "title": "Descomptes",
+              "description": "Configuració de descomptes"
+            },
             { "title": "Històric", "description": "Traçabilitat de canvis" }
           ]
         },
@@ -36,8 +51,14 @@
           "name": "Estructures",
           "description": "Composició i materials de cada peça",
           "images": [
-            { "title": "Composició", "description": "Definició de materials i components" },
-            { "title": "Arbre de Materials", "description": "Vista jeràrquica de l'estructura" },
+            {
+              "title": "Composició",
+              "description": "Definició de materials i components"
+            },
+            {
+              "title": "Arbre de Materials",
+              "description": "Vista jeràrquica de l'estructura"
+            },
             { "title": "Costos", "description": "Càlcul automàtic de costos" }
           ]
         },
@@ -47,16 +68,28 @@
           "images": [
             { "title": "Galeria", "description": "Gestió d'imatges múltiples" },
             { "title": "Visor", "description": "Visualització amb zoom" },
-            { "title": "Importació", "description": "Càrrega massiva d'imatges" }
+            {
+              "title": "Importació",
+              "description": "Càrrega massiva d'imatges"
+            }
           ]
         },
         "layout": {
           "name": "Disseny",
           "description": "Personalització de vistes i formularis",
           "images": [
-            { "title": "Configuració", "description": "Disseny personalitzat de formularis" },
-            { "title": "Camps", "description": "Camps personalitzats sense codi" },
-            { "title": "Plantilles", "description": "Desament de configuracions" }
+            {
+              "title": "Configuració",
+              "description": "Disseny personalitzat de formularis"
+            },
+            {
+              "title": "Camps",
+              "description": "Camps personalitzats sense codi"
+            },
+            {
+              "title": "Plantilles",
+              "description": "Desament de configuracions"
+            }
           ]
         }
       }
@@ -71,27 +104,51 @@
           "name": "Comandes",
           "description": "Gestió completa del cicle de comandes",
           "images": [
-            { "title": "Llistat de Comandes", "description": "Vista general amb estats i seguiment" },
-            { "title": "Nova Comanda", "description": "Creació ràpida amb cerca d'articles" },
-            { "title": "Detall de Comanda", "description": "Informació completa de la comanda" }
+            {
+              "title": "Llistat de Comandes",
+              "description": "Vista general amb estats i seguiment"
+            },
+            {
+              "title": "Nova Comanda",
+              "description": "Creació ràpida amb cerca d'articles"
+            },
+            {
+              "title": "Detall de Comanda",
+              "description": "Informació completa de la comanda"
+            }
           ]
         },
         "albaranes": {
           "name": "Albarans",
           "description": "Control de lliuraments i expedicions",
           "images": [
-            { "title": "Albarans", "description": "Gestió d'albarans de lliurament" },
+            {
+              "title": "Albarans",
+              "description": "Gestió d'albarans de lliurament"
+            },
             { "title": "Generació", "description": "Creació des de comandes" },
-            { "title": "Impressió", "description": "Documents personalitzables" }
+            {
+              "title": "Impressió",
+              "description": "Documents personalitzables"
+            }
           ]
         },
         "facturas": {
           "name": "Factures",
           "description": "Facturació electrònica i tradicional",
           "images": [
-            { "title": "Factures", "description": "Llistat de factures emeses" },
-            { "title": "Nova Factura", "description": "Facturació manual o des d'albarans" },
-            { "title": "Factura-E", "description": "Facturació electrònica integrada" }
+            {
+              "title": "Factures",
+              "description": "Llistat de factures emeses"
+            },
+            {
+              "title": "Nova Factura",
+              "description": "Facturació manual o des d'albarans"
+            },
+            {
+              "title": "Factura-E",
+              "description": "Facturació electrònica integrada"
+            }
           ]
         },
         "clientes": {
@@ -124,7 +181,10 @@
           "name": "Fases",
           "description": "Control de fases productives",
           "images": [
-            { "title": "Fases de Producció", "description": "Definició del procés productiu" },
+            {
+              "title": "Fases de Producció",
+              "description": "Definició del procés productiu"
+            },
             { "title": "Temps", "description": "Control de temps per fase" },
             { "title": "Operaris", "description": "Assignació de recursos" }
           ]
@@ -159,7 +219,10 @@
           "name": "Comptabilitat",
           "description": "Pla comptable i assentaments",
           "images": [
-            { "title": "Pla de Comptes", "description": "Estructura comptable" },
+            {
+              "title": "Pla de Comptes",
+              "description": "Estructura comptable"
+            },
             { "title": "Assentaments", "description": "Registre de moviments" },
             { "title": "Balanç", "description": "Estats financers" }
           ]
@@ -169,17 +232,29 @@
           "description": "Control de cobraments i pagaments",
           "images": [
             { "title": "Tresoreria", "description": "Panell de tresoreria" },
-            { "title": "Cobraments", "description": "Gestió de cobraments pendents" },
-            { "title": "Pagaments", "description": "Control de pagaments a proveïdors" }
+            {
+              "title": "Cobraments",
+              "description": "Gestió de cobraments pendents"
+            },
+            {
+              "title": "Pagaments",
+              "description": "Control de pagaments a proveïdors"
+            }
           ]
         },
         "iva": {
           "name": "IVA",
           "description": "Liquidació i declaracions",
           "images": [
-            { "title": "Liquidació IVA", "description": "Càlcul automàtic d'IVA" },
+            {
+              "title": "Liquidació IVA",
+              "description": "Càlcul automàtic d'IVA"
+            },
             { "title": "Models", "description": "Generació de models fiscals" },
-            { "title": "Configuració", "description": "Tipus d'IVA i retencions" }
+            {
+              "title": "Configuració",
+              "description": "Tipus d'IVA i retencions"
+            }
           ]
         },
         "bancos": {
@@ -300,8 +375,14 @@
           "description": "Publicació de productes",
           "images": [
             { "title": "Productes", "description": "Gestió del catàleg web" },
-            { "title": "Categories", "description": "Organització de productes" },
-            { "title": "Sincronització", "description": "Actualització automàtica" }
+            {
+              "title": "Categories",
+              "description": "Organització de productes"
+            },
+            {
+              "title": "Sincronització",
+              "description": "Actualització automàtica"
+            }
           ]
         },
         "pedidos": {
@@ -320,6 +401,86 @@
             { "title": "Shopify", "description": "Integració Shopify" },
             { "title": "WooCommerce", "description": "Integració WordPress" },
             { "title": "Marketplaces", "description": "Amazon, eBay, etc." }
+          ]
+        }
+      }
+    },
+    "impresoras3d": {
+      "title": "Impressores 3D",
+      "subtitle": "Control i gestió de producció amb impressores 3D",
+      "metaTitle": "Impressores 3D | RayGold ERP - Producció 3D",
+      "metaDescription": "Control i gestió de producció amb impressores 3D per a joieria. Gestió de treballs, materials i configuració.",
+      "sections": {
+        "impresoras": {
+          "name": "Impressores",
+          "description": "Gestió del parc d'impressores 3D",
+          "images": [
+            {
+              "title": "Llistat d'Impressores",
+              "description": "Vista general del parc d'impressores"
+            },
+            {
+              "title": "Estat en Temps Real",
+              "description": "Monitorització de l'estat de cada impressora"
+            },
+            {
+              "title": "Manteniment",
+              "description": "Registre de manteniments i calibracions"
+            }
+          ]
+        },
+        "trabajos": {
+          "name": "Treballs",
+          "description": "Cua de treballs i producció",
+          "images": [
+            {
+              "title": "Cua d'Impressió",
+              "description": "Treballs pendents i en curs"
+            },
+            {
+              "title": "Nou Treball",
+              "description": "Configuració de nou treball d'impressió"
+            },
+            {
+              "title": "Històric",
+              "description": "Registre de treballs completats"
+            }
+          ]
+        },
+        "materiales": {
+          "name": "Materials",
+          "description": "Gestió de resines i materials",
+          "images": [
+            {
+              "title": "Estoc de Materials",
+              "description": "Inventari de resines i consumibles"
+            },
+            {
+              "title": "Consums",
+              "description": "Control de consum per treball"
+            },
+            {
+              "title": "Proveïdors",
+              "description": "Gestió de proveïdors de materials"
+            }
+          ]
+        },
+        "configuracion": {
+          "name": "Configuració",
+          "description": "Ajustos i perfils d'impressió",
+          "images": [
+            {
+              "title": "Perfils",
+              "description": "Perfils d'impressió per tipus de peça"
+            },
+            {
+              "title": "Paràmetres",
+              "description": "Configuració de paràmetres tècnics"
+            },
+            {
+              "title": "Integració",
+              "description": "Connexió amb programari de disseny"
+            }
           ]
         }
       }

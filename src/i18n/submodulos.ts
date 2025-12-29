@@ -11,7 +11,7 @@ import submodulosCa from './submodulos.ca.json';
 import submodulosPtBr from './submodulos.pt-br.json';
 
 // Tipos
-export type ModuloId = 'maestros' | 'comercial' | 'fabricacion' | 'finanzas' | 'historicos' | 'estadisticas' | 'vendedores' | 'ecommerce';
+export type ModuloId = 'maestros' | 'comercial' | 'fabricacion' | 'finanzas' | 'historicos' | 'estadisticas' | 'vendedores' | 'ecommerce' | 'impresoras3d';
 
 export interface ImageTranslation {
   title: string;
@@ -161,6 +161,16 @@ export const modulosConfig: Record<ModuloId, ModuloConfig> = {
       { id: 'catalogo', prefix: 'CAT' },
       { id: 'pedidos', prefix: 'PED' },
       { id: 'integraciones', prefix: 'INT' },
+    ],
+  },
+  impresoras3d: {
+    color: '#14b8a6',
+    icon: `<svg viewBox="0 0 64 64" fill="none"><rect x="8" y="8" width="48" height="48" rx="4" fill="currentColor" opacity="0.2"/><rect x="12" y="12" width="40" height="8" rx="2" fill="currentColor"/><rect x="16" y="24" width="32" height="24" rx="2" fill="currentColor" opacity="0.3"/><path d="M32 28v16" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M24 36h16" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="32" cy="36" r="6" fill="currentColor" opacity="0.5"/><rect x="14" y="52" width="10" height="4" rx="1" fill="currentColor"/><rect x="40" y="52" width="10" height="4" rx="1" fill="currentColor"/></svg>`,
+    secciones: [
+      { id: 'impresoras', prefix: '3DP' },
+      { id: 'trabajos', prefix: '3DJ' },
+      { id: 'materiales', prefix: '3DM' },
+      { id: 'configuracion', prefix: '3DC' },
     ],
   },
 };

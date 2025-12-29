@@ -15,100 +15,43 @@ import Impresoras3DPage from "@/templates/modulos/Impresoras3DPage.astro";
 import { type Lang } from "@/config/pages";
 
 export function getStaticPaths() {
-  const supportedLangs = ["es", "en", "fr", "ca", "pt-br"] as const;
-  type LangType = (typeof supportedLangs)[number];
+  const supportedLangs = ['es', 'en', 'fr', 'ca', 'pt-br'] as const;
+  type LangType = typeof supportedLangs[number];
 
   // Definición de submódulos con sus slugs por idioma
-  const submoduloDefinitions: Record<
-    string,
-    { slugs: Record<LangType, string> }
-  > = {
+  const submoduloDefinitions: Record<string, { slugs: Record<LangType, string> }> = {
     maestros: {
-      slugs: {
-        es: "maestros",
-        en: "masters",
-        fr: "maitres",
-        ca: "mestres",
-        "pt-br": "cadastros",
-      },
+      slugs: { es: 'maestros', en: 'masters', fr: 'maitres', ca: 'mestres', 'pt-br': 'cadastros' },
     },
     comercial: {
-      slugs: {
-        es: "comercial",
-        en: "commercial",
-        fr: "commercial",
-        ca: "comercial",
-        "pt-br": "comercial",
-      },
+      slugs: { es: 'comercial', en: 'commercial', fr: 'commercial', ca: 'comercial', 'pt-br': 'comercial' },
     },
     fabricacion: {
-      slugs: {
-        es: "fabricacion",
-        en: "manufacturing",
-        fr: "fabrication",
-        ca: "fabricacio",
-        "pt-br": "fabricacao",
-      },
+      slugs: { es: 'fabricacion', en: 'manufacturing', fr: 'fabrication', ca: 'fabricacio', 'pt-br': 'fabricacao' },
     },
     finanzas: {
-      slugs: {
-        es: "finanzas",
-        en: "finance",
-        fr: "finances",
-        ca: "finances",
-        "pt-br": "financas",
-      },
+      slugs: { es: 'finanzas', en: 'finance', fr: 'finances', ca: 'finances', 'pt-br': 'financas' },
     },
     historicos: {
-      slugs: {
-        es: "historicos",
-        en: "history",
-        fr: "historique",
-        ca: "historics",
-        "pt-br": "historicos",
-      },
+      slugs: { es: 'historicos', en: 'history', fr: 'historique', ca: 'historics', 'pt-br': 'historicos' },
     },
     estadisticas: {
-      slugs: {
-        es: "estadisticas",
-        en: "statistics",
-        fr: "statistiques",
-        ca: "estadistiques",
-        "pt-br": "estatisticas",
-      },
+      slugs: { es: 'estadisticas', en: 'statistics', fr: 'statistiques', ca: 'estadistiques', 'pt-br': 'estatisticas' },
     },
     vendedores: {
-      slugs: {
-        es: "vendedores",
-        en: "sales-reps",
-        fr: "vendeurs",
-        ca: "venedors",
-        "pt-br": "vendedores",
-      },
+      slugs: { es: 'vendedores', en: 'sales-reps', fr: 'vendeurs', ca: 'venedors', 'pt-br': 'vendedores' },
     },
     ecommerce: {
-      slugs: {
-        es: "ecommerce",
-        en: "ecommerce",
-        fr: "ecommerce",
-        ca: "ecommerce",
-        "pt-br": "ecommerce",
-      },
+      slugs: { es: 'ecommerce', en: 'ecommerce', fr: 'ecommerce', ca: 'ecommerce', 'pt-br': 'ecommerce' },
     },
     impresoras3d: {
-      slugs: {
-        es: "impresoras-3d",
-        en: "3d-printers",
-        fr: "imprimantes-3d",
-        ca: "impressores-3d",
-        "pt-br": "impressoras-3d",
-      },
+      slugs: { es: 'impresoras-3d', en: '3d-printers', fr: 'imprimantes-3d', ca: 'impressores-3d', 'pt-br': 'impressoras-3d' },
     },
   };
 
-  const paths: {
-    params: { lang: string; modulo: string };
-    props: { moduleKey: string };
+  const paths: { 
+    params: { lang: string; modulo: string }; 
+    props: { moduleKey: string } 
   }[] = [];
 
   for (const lang of supportedLangs) {
@@ -130,51 +73,15 @@ interface Props {
 
 const { lang } = Astro.params;
 const { moduleKey } = Astro.props;
-const currentLang = (lang || "es") as Lang;
+const currentLang = (lang || 'es') as Lang;
 ---
 
-{
-  moduleKey === "maestros" && (
-    <MaestrosPage lang={currentLang} pageId="maestros" />
-  )
-}
-{
-  moduleKey === "comercial" && (
-    <ComercialPage lang={currentLang} pageId="comercial" />
-  )
-}
-{
-  moduleKey === "fabricacion" && (
-    <FabricacionPage lang={currentLang} pageId="fabricacion" />
-  )
-}
-{
-  moduleKey === "finanzas" && (
-    <FinanzasPage lang={currentLang} pageId="finanzas" />
-  )
-}
-{
-  moduleKey === "historicos" && (
-    <HistoricosPage lang={currentLang} pageId="historicos" />
-  )
-}
-{
-  moduleKey === "estadisticas" && (
-    <EstadisticasPage lang={currentLang} pageId="estadisticas" />
-  )
-}
-{
-  moduleKey === "vendedores" && (
-    <VendedoresPage lang={currentLang} pageId="vendedores" />
-  )
-}
-{
-  moduleKey === "ecommerce" && (
-    <EcommercePage lang={currentLang} pageId="ecommerce" />
-  )
-}
-{
-  moduleKey === "impresoras3d" && (
-    <Impresoras3DPage lang={currentLang} pageId="impresoras3d" />
-  )
-}
+{moduleKey === 'maestros' && <MaestrosPage lang={currentLang} pageId="maestros" />}
+{moduleKey === 'comercial' && <ComercialPage lang={currentLang} pageId="comercial" />}
+{moduleKey === 'fabricacion' && <FabricacionPage lang={currentLang} pageId="fabricacion" />}
+{moduleKey === 'finanzas' && <FinanzasPage lang={currentLang} pageId="finanzas" />}
+{moduleKey === 'historicos' && <HistoricosPage lang={currentLang} pageId="historicos" />}
+{moduleKey === 'estadisticas' && <EstadisticasPage lang={currentLang} pageId="estadisticas" />}
+{moduleKey === 'vendedores' && <VendedoresPage lang={currentLang} pageId="vendedores" />}
+{moduleKey === 'ecommerce' && <EcommercePage lang={currentLang} pageId="ecommerce" />}
+{moduleKey === 'impresoras3d' && <Impresoras3DPage lang={currentLang} pageId="impresoras3d" />}

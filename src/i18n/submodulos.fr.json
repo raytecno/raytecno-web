@@ -18,9 +18,18 @@
           "name": "Articles",
           "description": "Gestion complète du catalogue d'articles",
           "images": [
-            { "title": "Liste des Articles", "description": "Vue générale du catalogue avec filtres avancés" },
-            { "title": "Fiche Article", "description": "Détail complet avec spécifications" },
-            { "title": "Configuration", "description": "Personnalisation des champs et attributs" }
+            {
+              "title": "Liste des Articles",
+              "description": "Vue générale du catalogue avec filtres avancés"
+            },
+            {
+              "title": "Fiche Article",
+              "description": "Détail complet avec spécifications"
+            },
+            {
+              "title": "Configuration",
+              "description": "Personnalisation des champs et attributs"
+            }
           ]
         },
         "precios": {
@@ -29,15 +38,24 @@
           "images": [
             { "title": "Tarifs", "description": "Gestion de multiples tarifs" },
             { "title": "Remises", "description": "Configuration des remises" },
-            { "title": "Historique", "description": "Traçabilité des changements" }
+            {
+              "title": "Historique",
+              "description": "Traçabilité des changements"
+            }
           ]
         },
         "estructuras": {
           "name": "Structures",
           "description": "Composition et matériaux de chaque pièce",
           "images": [
-            { "title": "Composition", "description": "Définition des matériaux et composants" },
-            { "title": "Arbre des Matériaux", "description": "Vue hiérarchique de la structure" },
+            {
+              "title": "Composition",
+              "description": "Définition des matériaux et composants"
+            },
+            {
+              "title": "Arbre des Matériaux",
+              "description": "Vue hiérarchique de la structure"
+            },
             { "title": "Coûts", "description": "Calcul automatique des coûts" }
           ]
         },
@@ -46,17 +64,32 @@
           "description": "Galerie photos et multimédia",
           "images": [
             { "title": "Galerie", "description": "Gestion d'images multiples" },
-            { "title": "Visionneuse", "description": "Visualisation avec zoom" },
-            { "title": "Importation", "description": "Chargement massif d'images" }
+            {
+              "title": "Visionneuse",
+              "description": "Visualisation avec zoom"
+            },
+            {
+              "title": "Importation",
+              "description": "Chargement massif d'images"
+            }
           ]
         },
         "layout": {
           "name": "Mise en Page",
           "description": "Personnalisation des vues et formulaires",
           "images": [
-            { "title": "Configuration", "description": "Conception personnalisée des formulaires" },
-            { "title": "Champs", "description": "Champs personnalisés sans code" },
-            { "title": "Modèles", "description": "Sauvegarde des configurations" }
+            {
+              "title": "Configuration",
+              "description": "Conception personnalisée des formulaires"
+            },
+            {
+              "title": "Champs",
+              "description": "Champs personnalisés sans code"
+            },
+            {
+              "title": "Modèles",
+              "description": "Sauvegarde des configurations"
+            }
           ]
         }
       }
@@ -71,18 +104,36 @@
           "name": "Commandes",
           "description": "Gestion complète du cycle de commandes",
           "images": [
-            { "title": "Liste des Commandes", "description": "Vue générale avec états et suivi" },
-            { "title": "Nouvelle Commande", "description": "Création rapide avec recherche d'articles" },
-            { "title": "Détail Commande", "description": "Information complète de la commande" }
+            {
+              "title": "Liste des Commandes",
+              "description": "Vue générale avec états et suivi"
+            },
+            {
+              "title": "Nouvelle Commande",
+              "description": "Création rapide avec recherche d'articles"
+            },
+            {
+              "title": "Détail Commande",
+              "description": "Information complète de la commande"
+            }
           ]
         },
         "albaranes": {
           "name": "Bons de Livraison",
           "description": "Contrôle des livraisons et expéditions",
           "images": [
-            { "title": "Bons de Livraison", "description": "Gestion des bons de livraison" },
-            { "title": "Génération", "description": "Création depuis commandes" },
-            { "title": "Impression", "description": "Documents personnalisables" }
+            {
+              "title": "Bons de Livraison",
+              "description": "Gestion des bons de livraison"
+            },
+            {
+              "title": "Génération",
+              "description": "Création depuis commandes"
+            },
+            {
+              "title": "Impression",
+              "description": "Documents personnalisables"
+            }
           ]
         },
         "facturas": {
@@ -90,8 +141,14 @@
           "description": "Facturation électronique et traditionnelle",
           "images": [
             { "title": "Factures", "description": "Liste des factures émises" },
-            { "title": "Nouvelle Facture", "description": "Facturation manuelle ou depuis bons" },
-            { "title": "Facture-E", "description": "Facturation électronique intégrée" }
+            {
+              "title": "Nouvelle Facture",
+              "description": "Facturation manuelle ou depuis bons"
+            },
+            {
+              "title": "Facture-E",
+              "description": "Facturation électronique intégrée"
+            }
           ]
         },
         "clientes": {
@@ -100,7 +157,10 @@
           "images": [
             { "title": "Liste", "description": "Répertoire clients" },
             { "title": "Fiche", "description": "Données complètes du client" },
-            { "title": "Historique", "description": "Historique des opérations" }
+            {
+              "title": "Historique",
+              "description": "Historique des opérations"
+            }
           ]
         }
       }
@@ -116,7 +176,10 @@
           "description": "Gestion des ordres de fabrication",
           "images": [
             { "title": "Liste OF", "description": "Vue générale des ordres" },
-            { "title": "Nouvel OF", "description": "Création d'ordre de travail" },
+            {
+              "title": "Nouvel OF",
+              "description": "Création d'ordre de travail"
+            },
             { "title": "Suivi", "description": "État de la production" }
           ]
         },
@@ -124,9 +187,15 @@
           "name": "Phases",
           "description": "Contrôle des phases productives",
           "images": [
-            { "title": "Phases de Production", "description": "Définition du processus productif" },
+            {
+              "title": "Phases de Production",
+              "description": "Définition du processus productif"
+            },
             { "title": "Temps", "description": "Contrôle des temps par phase" },
-            { "title": "Opérateurs", "description": "Affectation des ressources" }
+            {
+              "title": "Opérateurs",
+              "description": "Affectation des ressources"
+            }
           ]
         },
         "fundicion": {
@@ -144,7 +213,10 @@
           "images": [
             { "title": "Stock", "description": "Inventaire en temps réel" },
             { "title": "Mouvements", "description": "Traçabilité complète" },
-            { "title": "Valorisation", "description": "Valorisation des existences" }
+            {
+              "title": "Valorisation",
+              "description": "Valorisation des existences"
+            }
           ]
         }
       }
@@ -159,7 +231,10 @@
           "name": "Comptabilité",
           "description": "Plan comptable et écritures",
           "images": [
-            { "title": "Plan de Comptes", "description": "Structure comptable" },
+            {
+              "title": "Plan de Comptes",
+              "description": "Structure comptable"
+            },
             { "title": "Écritures", "description": "Registre des mouvements" },
             { "title": "Balance", "description": "États financiers" }
           ]
@@ -169,25 +244,46 @@
           "description": "Contrôle des encaissements et paiements",
           "images": [
             { "title": "Trésorerie", "description": "Panneau de trésorerie" },
-            { "title": "Encaissements", "description": "Gestion des encaissements en attente" },
-            { "title": "Paiements", "description": "Contrôle des paiements fournisseurs" }
+            {
+              "title": "Encaissements",
+              "description": "Gestion des encaissements en attente"
+            },
+            {
+              "title": "Paiements",
+              "description": "Contrôle des paiements fournisseurs"
+            }
           ]
         },
         "iva": {
           "name": "TVA",
           "description": "Liquidation et déclarations",
           "images": [
-            { "title": "Liquidation TVA", "description": "Calcul automatique de TVA" },
-            { "title": "Modèles", "description": "Génération des modèles fiscaux" },
-            { "title": "Configuration", "description": "Types de TVA et retenues" }
+            {
+              "title": "Liquidation TVA",
+              "description": "Calcul automatique de TVA"
+            },
+            {
+              "title": "Modèles",
+              "description": "Génération des modèles fiscaux"
+            },
+            {
+              "title": "Configuration",
+              "description": "Types de TVA et retenues"
+            }
           ]
         },
         "bancos": {
           "name": "Banques",
           "description": "Rapprochement bancaire automatique",
           "images": [
-            { "title": "Banques", "description": "Gestion des comptes bancaires" },
-            { "title": "Rapprochement", "description": "Rapprochement automatique" },
+            {
+              "title": "Banques",
+              "description": "Gestion des comptes bancaires"
+            },
+            {
+              "title": "Rapprochement",
+              "description": "Rapprochement automatique"
+            },
             { "title": "Relevés", "description": "Importation des relevés" }
           ]
         },
@@ -196,8 +292,14 @@
           "description": "Bilan, compte de résultat et ratios",
           "images": [
             { "title": "Bilan", "description": "Bilan de situation" },
-            { "title": "Compte de Résultat", "description": "Compte de pertes et profits" },
-            { "title": "Ratios", "description": "Analyse des ratios financiers" }
+            {
+              "title": "Compte de Résultat",
+              "description": "Compte de pertes et profits"
+            },
+            {
+              "title": "Ratios",
+              "description": "Analyse des ratios financiers"
+            }
           ]
         }
       }
@@ -212,16 +314,25 @@
           "name": "Opérations",
           "description": "Historique de toutes les opérations",
           "images": [
-            { "title": "Recherche", "description": "Localisation des opérations" },
+            {
+              "title": "Recherche",
+              "description": "Localisation des opérations"
+            },
             { "title": "Détail", "description": "Information complète" },
-            { "title": "Exportation", "description": "Téléchargement des données" }
+            {
+              "title": "Exportation",
+              "description": "Téléchargement des données"
+            }
           ]
         },
         "trazabilidad": {
           "name": "Traçabilité",
           "description": "Suivi des pièces",
           "images": [
-            { "title": "Par Pièce", "description": "Histoire de chaque article" },
+            {
+              "title": "Par Pièce",
+              "description": "Histoire de chaque article"
+            },
             { "title": "Par Lot", "description": "Traçabilité par lots" },
             { "title": "Certificats", "description": "Documentation associée" }
           ]
@@ -273,7 +384,10 @@
           "name": "Commissions",
           "description": "Calcul et règlement",
           "images": [
-            { "title": "Règles", "description": "Configuration des commissions" },
+            {
+              "title": "Règles",
+              "description": "Configuration des commissions"
+            },
             { "title": "Calcul", "description": "Règlement automatique" },
             { "title": "Historique", "description": "Paiements effectués" }
           ]
@@ -300,8 +414,14 @@
           "description": "Publication des produits",
           "images": [
             { "title": "Produits", "description": "Gestion du catalogue web" },
-            { "title": "Catégories", "description": "Organisation des produits" },
-            { "title": "Synchronisation", "description": "Mise à jour automatique" }
+            {
+              "title": "Catégories",
+              "description": "Organisation des produits"
+            },
+            {
+              "title": "Synchronisation",
+              "description": "Mise à jour automatique"
+            }
           ]
         },
         "pedidos": {
@@ -320,6 +440,86 @@
             { "title": "Shopify", "description": "Intégration Shopify" },
             { "title": "WooCommerce", "description": "Intégration WordPress" },
             { "title": "Marketplaces", "description": "Amazon, eBay, etc." }
+          ]
+        }
+      }
+    },
+    "impresoras3d": {
+      "title": "Imprimantes 3D",
+      "subtitle": "Contrôle et gestion de production avec imprimantes 3D",
+      "metaTitle": "Imprimantes 3D | RayGold ERP - Production 3D",
+      "metaDescription": "Contrôle et gestion de production avec imprimantes 3D pour bijouterie. Gestion des travaux, matériaux et configuration.",
+      "sections": {
+        "impresoras": {
+          "name": "Imprimantes",
+          "description": "Gestion du parc d'imprimantes 3D",
+          "images": [
+            {
+              "title": "Liste des Imprimantes",
+              "description": "Vue générale du parc d'imprimantes"
+            },
+            {
+              "title": "État en Temps Réel",
+              "description": "Surveillance de l'état de chaque imprimante"
+            },
+            {
+              "title": "Maintenance",
+              "description": "Registre des maintenances et calibrations"
+            }
+          ]
+        },
+        "trabajos": {
+          "name": "Travaux",
+          "description": "File d'attente et production",
+          "images": [
+            {
+              "title": "File d'Impression",
+              "description": "Travaux en attente et en cours"
+            },
+            {
+              "title": "Nouveau Travail",
+              "description": "Configuration d'un nouveau travail d'impression"
+            },
+            {
+              "title": "Historique",
+              "description": "Registre des travaux terminés"
+            }
+          ]
+        },
+        "materiales": {
+          "name": "Matériaux",
+          "description": "Gestion des résines et matériaux",
+          "images": [
+            {
+              "title": "Stock de Matériaux",
+              "description": "Inventaire des résines et consommables"
+            },
+            {
+              "title": "Consommations",
+              "description": "Contrôle de consommation par travail"
+            },
+            {
+              "title": "Fournisseurs",
+              "description": "Gestion des fournisseurs de matériaux"
+            }
+          ]
+        },
+        "configuracion": {
+          "name": "Configuration",
+          "description": "Réglages et profils d'impression",
+          "images": [
+            {
+              "title": "Profils",
+              "description": "Profils d'impression par type de pièce"
+            },
+            {
+              "title": "Paramètres",
+              "description": "Configuration des paramètres techniques"
+            },
+            {
+              "title": "Intégration",
+              "description": "Connexion avec logiciel de conception"
+            }
           ]
         }
       }

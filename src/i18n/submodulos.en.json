@@ -18,16 +18,28 @@
           "name": "Items",
           "description": "Complete catalog item management",
           "images": [
-            { "title": "Item List", "description": "General view of catalog with advanced filters" },
-            { "title": "Item Card", "description": "Complete detail with specifications" },
-            { "title": "Configuration", "description": "Field and attribute customization" }
+            {
+              "title": "Item List",
+              "description": "General view of catalog with advanced filters"
+            },
+            {
+              "title": "Item Card",
+              "description": "Complete detail with specifications"
+            },
+            {
+              "title": "Configuration",
+              "description": "Field and attribute customization"
+            }
           ]
         },
         "precios": {
           "name": "Prices",
           "description": "Rates, discounts and pricing policies",
           "images": [
-            { "title": "Price Lists", "description": "Multiple price list management" },
+            {
+              "title": "Price Lists",
+              "description": "Multiple price list management"
+            },
             { "title": "Discounts", "description": "Discount configuration" },
             { "title": "History", "description": "Change traceability" }
           ]
@@ -36,8 +48,14 @@
           "name": "Structures",
           "description": "Composition and materials of each piece",
           "images": [
-            { "title": "Composition", "description": "Material and component definition" },
-            { "title": "Material Tree", "description": "Hierarchical structure view" },
+            {
+              "title": "Composition",
+              "description": "Material and component definition"
+            },
+            {
+              "title": "Material Tree",
+              "description": "Hierarchical structure view"
+            },
             { "title": "Costs", "description": "Automatic cost calculation" }
           ]
         },
@@ -71,16 +89,28 @@
           "name": "Orders",
           "description": "Complete order cycle management",
           "images": [
-            { "title": "Order List", "description": "General view with status and tracking" },
-            { "title": "New Order", "description": "Quick creation with item search" },
-            { "title": "Order Detail", "description": "Complete order information" }
+            {
+              "title": "Order List",
+              "description": "General view with status and tracking"
+            },
+            {
+              "title": "New Order",
+              "description": "Quick creation with item search"
+            },
+            {
+              "title": "Order Detail",
+              "description": "Complete order information"
+            }
           ]
         },
         "albaranes": {
           "name": "Delivery Notes",
           "description": "Delivery and shipment control",
           "images": [
-            { "title": "Delivery Notes", "description": "Delivery note management" },
+            {
+              "title": "Delivery Notes",
+              "description": "Delivery note management"
+            },
             { "title": "Generation", "description": "Creation from orders" },
             { "title": "Printing", "description": "Customizable documents" }
           ]
@@ -90,8 +120,14 @@
           "description": "Electronic and traditional invoicing",
           "images": [
             { "title": "Invoices", "description": "List of issued invoices" },
-            { "title": "New Invoice", "description": "Manual or from delivery notes" },
-            { "title": "E-Invoice", "description": "Integrated electronic invoicing" }
+            {
+              "title": "New Invoice",
+              "description": "Manual or from delivery notes"
+            },
+            {
+              "title": "E-Invoice",
+              "description": "Integrated electronic invoicing"
+            }
           ]
         },
         "clientes": {
@@ -150,7 +186,10 @@
           "name": "Accounting",
           "description": "Chart of accounts and entries",
           "images": [
-            { "title": "Chart of Accounts", "description": "Accounting structure" },
+            {
+              "title": "Chart of Accounts",
+              "description": "Accounting structure"
+            },
             { "title": "Entries", "description": "Movement registry" },
             { "title": "Balances", "description": "Financial statements" }
           ]
@@ -205,7 +244,10 @@
           "images": [
             { "title": "By Piece", "description": "History of each item" },
             { "title": "By Batch", "description": "Batch traceability" },
-            { "title": "Certificates", "description": "Associated documentation" }
+            {
+              "title": "Certificates",
+              "description": "Associated documentation"
+            }
           ]
         }
       }
@@ -302,6 +344,83 @@
             { "title": "Shopify", "description": "Shopify integration" },
             { "title": "WooCommerce", "description": "WordPress integration" },
             { "title": "Marketplaces", "description": "Amazon, eBay, etc." }
+          ]
+        }
+      }
+    },
+    "impresoras3d": {
+      "title": "3D Printers",
+      "subtitle": "Production control and management with 3D printers",
+      "metaTitle": "3D Printers | RayGold ERP - 3D Production",
+      "metaDescription": "Production control and management with 3D printers for jewelry. Job management, materials and configuration.",
+      "sections": {
+        "impresoras": {
+          "name": "Printers",
+          "description": "3D printer fleet management",
+          "images": [
+            {
+              "title": "Printer List",
+              "description": "General view of printer fleet"
+            },
+            {
+              "title": "Real-Time Status",
+              "description": "Monitoring each printer status"
+            },
+            {
+              "title": "Maintenance",
+              "description": "Maintenance and calibration records"
+            }
+          ]
+        },
+        "trabajos": {
+          "name": "Jobs",
+          "description": "Job queue and production",
+          "images": [
+            {
+              "title": "Print Queue",
+              "description": "Pending and ongoing jobs"
+            },
+            {
+              "title": "New Job",
+              "description": "New print job configuration"
+            },
+            { "title": "History", "description": "Completed jobs record" }
+          ]
+        },
+        "materiales": {
+          "name": "Materials",
+          "description": "Resin and materials management",
+          "images": [
+            {
+              "title": "Material Stock",
+              "description": "Resin and consumables inventory"
+            },
+            {
+              "title": "Consumption",
+              "description": "Consumption control per job"
+            },
+            {
+              "title": "Suppliers",
+              "description": "Material supplier management"
+            }
+          ]
+        },
+        "configuracion": {
+          "name": "Configuration",
+          "description": "Settings and print profiles",
+          "images": [
+            {
+              "title": "Profiles",
+              "description": "Print profiles by piece type"
+            },
+            {
+              "title": "Parameters",
+              "description": "Technical parameter settings"
+            },
+            {
+              "title": "Integration",
+              "description": "Design software connection"
+            }
           ]
         }
       }

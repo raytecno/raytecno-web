@@ -18,17 +18,32 @@
           "name": "Artículos",
           "description": "Gestión completa del catálogo de artículos",
           "images": [
-            { "title": "Listado de Artículos", "description": "Vista general del catálogo con filtros avanzados" },
-            { "title": "Ficha de Artículo", "description": "Detalle completo con especificaciones" },
-            { "title": "Configuración", "description": "Personalización de campos y atributos" }
+            {
+              "title": "Listado de Artículos",
+              "description": "Vista general del catálogo con filtros avanzados"
+            },
+            {
+              "title": "Ficha de Artículo",
+              "description": "Detalle completo con especificaciones"
+            },
+            {
+              "title": "Configuración",
+              "description": "Personalización de campos y atributos"
+            }
           ]
         },
         "precios": {
           "name": "Precios",
           "description": "Tarifas, descuentos y políticas de precios",
           "images": [
-            { "title": "Tarifas", "description": "Gestión de múltiples tarifas" },
-            { "title": "Descuentos", "description": "Configuración de descuentos" },
+            {
+              "title": "Tarifas",
+              "description": "Gestión de múltiples tarifas"
+            },
+            {
+              "title": "Descuentos",
+              "description": "Configuración de descuentos"
+            },
             { "title": "Histórico", "description": "Trazabilidad de cambios" }
           ]
         },
@@ -36,8 +51,14 @@
           "name": "Estructuras",
           "description": "Composición y materiales de cada pieza",
           "images": [
-            { "title": "Composición", "description": "Definición de materiales y componentes" },
-            { "title": "Árbol de Materiales", "description": "Vista jerárquica de la estructura" },
+            {
+              "title": "Composición",
+              "description": "Definición de materiales y componentes"
+            },
+            {
+              "title": "Árbol de Materiales",
+              "description": "Vista jerárquica de la estructura"
+            },
             { "title": "Costes", "description": "Cálculo automático de costes" }
           ]
         },
@@ -45,18 +66,33 @@
           "name": "Imágenes",
           "description": "Galería fotográfica y multimedia",
           "images": [
-            { "title": "Galería", "description": "Gestión de imágenes múltiples" },
+            {
+              "title": "Galería",
+              "description": "Gestión de imágenes múltiples"
+            },
             { "title": "Visor", "description": "Visualización con zoom" },
-            { "title": "Importación", "description": "Carga masiva de imágenes" }
+            {
+              "title": "Importación",
+              "description": "Carga masiva de imágenes"
+            }
           ]
         },
         "layout": {
           "name": "Layout",
           "description": "Personalización de vistas y formularios",
           "images": [
-            { "title": "Configuración", "description": "Diseño personalizado de formularios" },
-            { "title": "Campos", "description": "Campos personalizados sin código" },
-            { "title": "Plantillas", "description": "Guardado de configuraciones" }
+            {
+              "title": "Configuración",
+              "description": "Diseño personalizado de formularios"
+            },
+            {
+              "title": "Campos",
+              "description": "Campos personalizados sin código"
+            },
+            {
+              "title": "Plantillas",
+              "description": "Guardado de configuraciones"
+            }
           ]
         }
       }
@@ -71,27 +107,51 @@
           "name": "Pedidos",
           "description": "Gestión completa del ciclo de pedidos",
           "images": [
-            { "title": "Listado de Pedidos", "description": "Vista general con estados y seguimiento" },
-            { "title": "Nuevo Pedido", "description": "Creación rápida con búsqueda de artículos" },
-            { "title": "Detalle de Pedido", "description": "Información completa del pedido" }
+            {
+              "title": "Listado de Pedidos",
+              "description": "Vista general con estados y seguimiento"
+            },
+            {
+              "title": "Nuevo Pedido",
+              "description": "Creación rápida con búsqueda de artículos"
+            },
+            {
+              "title": "Detalle de Pedido",
+              "description": "Información completa del pedido"
+            }
           ]
         },
         "albaranes": {
           "name": "Albaranes",
           "description": "Control de entregas y expediciones",
           "images": [
-            { "title": "Albaranes", "description": "Gestión de albaranes de entrega" },
+            {
+              "title": "Albaranes",
+              "description": "Gestión de albaranes de entrega"
+            },
             { "title": "Generación", "description": "Creación desde pedidos" },
-            { "title": "Impresión", "description": "Documentos personalizables" }
+            {
+              "title": "Impresión",
+              "description": "Documentos personalizables"
+            }
           ]
         },
         "facturas": {
           "name": "Facturas",
           "description": "Facturación electrónica y tradicional",
           "images": [
-            { "title": "Facturas", "description": "Listado de facturas emitidas" },
-            { "title": "Nueva Factura", "description": "Facturación manual o desde albaranes" },
-            { "title": "Factura-E", "description": "Facturación electrónica integrada" }
+            {
+              "title": "Facturas",
+              "description": "Listado de facturas emitidas"
+            },
+            {
+              "title": "Nueva Factura",
+              "description": "Facturación manual o desde albaranes"
+            },
+            {
+              "title": "Factura-E",
+              "description": "Facturación electrónica integrada"
+            }
           ]
         },
         "clientes": {
@@ -115,8 +175,14 @@
           "name": "Órdenes de Trabajo",
           "description": "Gestión de órdenes de fabricación",
           "images": [
-            { "title": "Listado OT", "description": "Vista general de órdenes" },
-            { "title": "Nueva OT", "description": "Creación de orden de trabajo" },
+            {
+              "title": "Listado OT",
+              "description": "Vista general de órdenes"
+            },
+            {
+              "title": "Nueva OT",
+              "description": "Creación de orden de trabajo"
+            },
             { "title": "Seguimiento", "description": "Estado de la producción" }
           ]
         },
@@ -150,7 +216,10 @@
           "name": "Contabilidad",
           "description": "Plan contable y asientos",
           "images": [
-            { "title": "Plan de Cuentas", "description": "Estructura contable" },
+            {
+              "title": "Plan de Cuentas",
+              "description": "Estructura contable"
+            },
             { "title": "Asientos", "description": "Registro de movimientos" },
             { "title": "Balances", "description": "Estados financieros" }
           ]
@@ -194,7 +263,10 @@
           "name": "Operaciones",
           "description": "Historial de todas las operaciones",
           "images": [
-            { "title": "Búsqueda", "description": "Localización de operaciones" },
+            {
+              "title": "Búsqueda",
+              "description": "Localización de operaciones"
+            },
             { "title": "Detalle", "description": "Información completa" },
             { "title": "Exportación", "description": "Descarga de datos" }
           ]
@@ -203,7 +275,10 @@
           "name": "Trazabilidad",
           "description": "Seguimiento de piezas",
           "images": [
-            { "title": "Por Pieza", "description": "Historia de cada artículo" },
+            {
+              "title": "Por Pieza",
+              "description": "Historia de cada artículo"
+            },
             { "title": "Por Lote", "description": "Trazabilidad por lotes" },
             { "title": "Certificados", "description": "Documentación asociada" }
           ]
@@ -282,8 +357,14 @@
           "description": "Publicación de productos",
           "images": [
             { "title": "Productos", "description": "Gestión del catálogo web" },
-            { "title": "Categorías", "description": "Organización de productos" },
-            { "title": "Sincronización", "description": "Actualización automática" }
+            {
+              "title": "Categorías",
+              "description": "Organización de productos"
+            },
+            {
+              "title": "Sincronización",
+              "description": "Actualización automática"
+            }
           ]
         },
         "pedidos": {
@@ -302,6 +383,86 @@
             { "title": "Shopify", "description": "Integración Shopify" },
             { "title": "WooCommerce", "description": "Integración WordPress" },
             { "title": "Marketplaces", "description": "Amazon, eBay, etc." }
+          ]
+        }
+      }
+    },
+    "impresoras3d": {
+      "title": "Impresoras 3D",
+      "subtitle": "Control y gestión de producción con impresoras 3D",
+      "metaTitle": "Impresoras 3D | RayGold ERP - Producción 3D",
+      "metaDescription": "Control y gestión de producción con impresoras 3D para joyería. Gestión de trabajos, materiales y configuración.",
+      "sections": {
+        "impresoras": {
+          "name": "Impresoras",
+          "description": "Gestión del parque de impresoras 3D",
+          "images": [
+            {
+              "title": "Listado de Impresoras",
+              "description": "Vista general del parque de impresoras"
+            },
+            {
+              "title": "Estado en Tiempo Real",
+              "description": "Monitorización del estado de cada impresora"
+            },
+            {
+              "title": "Mantenimiento",
+              "description": "Registro de mantenimientos y calibraciones"
+            }
+          ]
+        },
+        "trabajos": {
+          "name": "Trabajos",
+          "description": "Cola de trabajos y producción",
+          "images": [
+            {
+              "title": "Cola de Impresión",
+              "description": "Trabajos pendientes y en curso"
+            },
+            {
+              "title": "Nuevo Trabajo",
+              "description": "Configuración de nuevo trabajo de impresión"
+            },
+            {
+              "title": "Histórico",
+              "description": "Registro de trabajos completados"
+            }
+          ]
+        },
+        "materiales": {
+          "name": "Materiales",
+          "description": "Gestión de resinas y materiales",
+          "images": [
+            {
+              "title": "Stock de Materiales",
+              "description": "Inventario de resinas y consumibles"
+            },
+            {
+              "title": "Consumos",
+              "description": "Control de consumo por trabajo"
+            },
+            {
+              "title": "Proveedores",
+              "description": "Gestión de proveedores de materiales"
+            }
+          ]
+        },
+        "configuracion": {
+          "name": "Configuración",
+          "description": "Ajustes y perfiles de impresión",
+          "images": [
+            {
+              "title": "Perfiles",
+              "description": "Perfiles de impresión por tipo de pieza"
+            },
+            {
+              "title": "Parámetros",
+              "description": "Configuración de parámetros técnicos"
+            },
+            {
+              "title": "Integración",
+              "description": "Conexión con software de diseño"
+            }
           ]
         }
       }
