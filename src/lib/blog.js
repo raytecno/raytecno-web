@@ -1,6 +1,6 @@
 // src/lib/blog.js
 // Queries GraphQL para el Blog
-import { WORDPRESS_GRAPHQL } from "../config.js";
+import { WORDPRESS_GRAPHQL, WORDPRESS_URL } from "../config.js";
 
 // ============================================
 // HELPER: Verificar idioma (maneja array o string)
@@ -15,6 +15,37 @@ function matchesLanguage(post, lang) {
   }
   // Si es string
   return postLang === lang;
+}
+
+// ============================================
+// HELPER: Convertir URL relativa a absoluta
+// ============================================
+function makeAbsoluteUrl(url) {
+  if (!url) return null;
+
+  // Si ya es absoluta, devolverla tal cual
+  if (url.startsWith("http://") || url.startsWith("https://")) {
+    return url;
+  }
+
+  // Si es relativa, añadir el dominio de WordPress
+  return WORDPRESS_URL + url;
+}
+
+// ============================================
+// HELPER: Procesar post para corregir URLs de imágenes
+// ============================================
+function processPostImages(post) {
+  if (!post) return post;
+
+  // Corregir imagen destacada
+  if (post.featuredImage?.node?.sourceUrl) {
+    post.featuredImage.node.sourceUrl = makeAbsoluteUrl(
+      post.featuredImage.node.sourceUrl
+    );
+  }
+
+  return post;
 }
 
 // ============================================
@@ -78,8 +109,10 @@ export async function getBlogPosts(lang = "es", first = 100) {
     const { data } = await response.json();
     const posts = data?.blogPosts?.nodes || [];
 
-    // Filtrar por idioma (maneja array o string)
-    return posts.filter((post) => matchesLanguage(post, lang));
+    // Filtrar por idioma y procesar imágenes
+    return posts
+      .filter((post) => matchesLanguage(post, lang))
+      .map((post) => processPostImages(post));
   } catch (error) {
     console.error("Error fetching blog posts:", error);
     return [];
@@ -149,11 +182,22 @@ export async function getBlogPostBySlug(slug, lang = "es") {
     });
 
     const { data } = await response.json();
-    const post = data?.blogPost;
+    let post = data?.blogPost;
 
     // Verificar idioma (maneja array o string)
     if (post && !matchesLanguage(post, lang)) {
       return null;
+    }
+
+    // Procesar URLs de imágenes
+    post = processPostImages(post);
+
+    // También procesar imágenes dentro del contenido
+    if (post && post.content) {
+      post.content = post.content.replace(
+        /src="(\/wp-content\/[^"]+)"/g,
+        (match, url) => `src="${makeAbsoluteUrl(url)}"`
+      );
     }
 
     return post;
@@ -287,8 +331,9 @@ export function calculateReadingTime(content, wordsPerMinute = 200) {
 }
 
 // ============================================
-// HELPER: Obtener imagen destacada
+// HELPER: Obtener imagen destacada (ya con URL absoluta)
 // ============================================
 export function getFeaturedImageUrl(post) {
-  return post?.featuredImage?.node?.sourceUrl || null;
+  const url = post?.featuredImage?.node?.sourceUrl;
+  return makeAbsoluteUrl(url);
 }
