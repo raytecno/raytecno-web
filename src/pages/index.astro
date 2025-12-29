@@ -1,8 +1,7 @@
 ---
 /**
- * Página raíz - Redirige al idioma por defecto
- * URL: / → /es/
+ * Redirección automática al idioma español
+ * Este archivo redirige / a /es/
  */
-const defaultLang = "es";
-return Astro.redirect(`/${defaultLang}/`);
+return Astro.redirect("/es/");
 ---

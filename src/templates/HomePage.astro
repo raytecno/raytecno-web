@@ -2,376 +2,73 @@
 /**
  * Template: HomePage
  * Página de inicio de RayGold
+ * 
+ * USA LOS COMPONENTES ORIGINALES con soporte multiidioma
  */
 import Layout from "@/layouts/Layout.astro";
-import { getTranslations } from "@/i18n";
-import { getAlternateUrls, getPageUrl, type Lang } from "@/config/pages";
+import Hero from "@/components/Hero.astro";
+import Modulos from "@/components/Modulos.astro";
+import PorQueRayGold from "@/components/PorQueRayGold.astro";
+import VideoDemo from "@/components/VideoDemo.astro";
+import Testimonios from "@/components/Testimonios.astro";
+import WhatsAppButton from "@/components/WhatsAppButton.astro";
+import { getAlternateUrls, type Lang } from "@/config/pages";
 
 interface Props {
   lang: Lang;
 }
 
 const { lang } = Astro.props;
-const t = getTranslations(lang);
 const alternateUrls = getAlternateUrls("home");
 
-// Traducciones específicas del home
-const homeT: Record<Lang, { 
-  title: string; 
-  subtitle: string; 
-  cta: string;
-  features: { title: string; desc: string }[];
-}> = {
+// Meta información por idioma
+const metaInfo: Record<Lang, { title: string; description: string }> = {
   es: {
-    title: "Software ERP para Joyería",
-    subtitle: "Gestiona tu joyería con el ERP más completo del sector. Control de inventario, fabricación, ventas y más.",
-    cta: "Solicitar demo",
-    features: [
-      { title: "Control Total", desc: "Gestión integral de tu joyería desde un solo lugar" },
-      { title: "Trazabilidad", desc: "Seguimiento completo de metales preciosos y piedras" },
-      { title: "Multi-tienda", desc: "Sincronización en tiempo real entre todas tus tiendas" },
-    ],
+    title: "RayGold - Software ERP para Joyería",
+    description: "El ERP más completo para joyerías. Gestión de inventario, fabricación, ventas y contabilidad. +200 joyerías confían en nosotros desde 1990.",
   },
   en: {
-    title: "ERP Software for Jewelry",
-    subtitle: "Manage your jewelry business with the most complete ERP in the sector. Inventory control, manufacturing, sales and more.",
-    cta: "Request demo",
-    features: [
-      { title: "Total Control", desc: "Comprehensive management of your jewelry from one place" },
-      { title: "Traceability", desc: "Complete tracking of precious metals and stones" },
-      { title: "Multi-store", desc: "Real-time synchronization between all your stores" },
-    ],
+    title: "RayGold - ERP Software for Jewelry",
+    description: "The most complete ERP for jewelry businesses. Inventory management, manufacturing, sales and accounting. +200 jewelers trust us since 1990.",
   },
   fr: {
-    title: "Logiciel ERP pour Bijouterie",
-    subtitle: "Gérez votre bijouterie avec l'ERP le plus complet du secteur. Contrôle des stocks, fabrication, ventes et plus.",
-    cta: "Demander une démo",
-    features: [
-      { title: "Contrôle Total", desc: "Gestion complète de votre bijouterie depuis un seul endroit" },
-      { title: "Traçabilité", desc: "Suivi complet des métaux précieux et des pierres" },
-      { title: "Multi-magasin", desc: "Synchronisation en temps réel entre tous vos magasins" },
-    ],
+    title: "RayGold - Logiciel ERP pour Bijouterie",
+    description: "L'ERP le plus complet pour les bijouteries. Gestion des stocks, fabrication, ventes et comptabilité. +200 bijouteries nous font confiance depuis 1990.",
   },
   ca: {
-    title: "Software ERP per a Joieria",
-    subtitle: "Gestiona la teva joieria amb l'ERP més complet del sector. Control d'inventari, fabricació, vendes i més.",
-    cta: "Sol·licitar demo",
-    features: [
-      { title: "Control Total", desc: "Gestió integral de la teva joieria des d'un sol lloc" },
-      { title: "Traçabilitat", desc: "Seguiment complet de metalls preciosos i pedres" },
-      { title: "Multi-botiga", desc: "Sincronització en temps real entre totes les teves botigues" },
-    ],
+    title: "RayGold - Software ERP per a Joieria",
+    description: "L'ERP més complet per a joieries. Gestió d'inventari, fabricació, vendes i comptabilitat. +200 joieries confien en nosaltres des de 1990.",
   },
   "pt-br": {
-    title: "Software ERP para Joalheria",
-    subtitle: "Gerencie sua joalheria com o ERP mais completo do setor. Controle de estoque, fabricação, vendas e mais.",
-    cta: "Solicitar demo",
-    features: [
-      { title: "Controle Total", desc: "Gestão integral da sua joalheria em um só lugar" },
-      { title: "Rastreabilidade", desc: "Acompanhamento completo de metais preciosos e pedras" },
-      { title: "Multi-loja", desc: "Sincronização em tempo real entre todas as suas lojas" },
-    ],
+    title: "RayGold - Software ERP para Joalheria",
+    description: "O ERP mais completo para joalherias. Gestão de estoque, fabricação, vendas e contabilidade. +200 joalherias confiam em nós desde 1990.",
   },
 };
 
-const ht = homeT[lang] || homeT.es;
+const meta = metaInfo[lang] || metaInfo.es;
 ---
 
 <Layout
-  title={`RayGold - ${ht.title}`}
-  description={ht.subtitle}
+  title={meta.title}
+  description={meta.description}
   lang={lang}
   alternateUrls={alternateUrls}
 >
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="container">
-      <div class="hero-content">
-        <h1>{ht.title}</h1>
-        <p class="subtitle">{ht.subtitle}</p>
-        <div class="hero-cta">
-          <a href={getPageUrl("contacto", lang)} class="btn-primary">
-            {ht.cta}
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-          </a>
-          <a href={getPageUrl("modulos", lang)} class="btn-secondary">
-            {t.nav.modules}
-          </a>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Decoración -->
-    <div class="hero-bg">
-      <div class="hero-gradient"></div>
-    </div>
-  </section>
+  <!-- Hero Section - Banner principal con stats y CTAs -->
+  <Hero lang={lang} />
 
-  <!-- Features Section -->
-  <section class="features">
-    <div class="container">
-      <div class="features-grid">
-        {ht.features.map((feature, i) => (
-          <div class="feature-card">
-            <div class="feature-icon">
-              {i === 0 && (
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                </svg>
-              )}
-              {i === 1 && (
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <polyline points="12 6 12 12 16 14"></polyline>
-                </svg>
-              )}
-              {i === 2 && (
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                  <line x1="8" y1="21" x2="16" y2="21"></line>
-                  <line x1="12" y1="17" x2="12" y2="21"></line>
-                </svg>
-              )}
-            </div>
-            <h3>{feature.title}</h3>
-            <p>{feature.desc}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
+  <!-- Módulos - 8 módulos del ERP -->
+  <Modulos lang={lang} />
 
-  <!-- CTA Section -->
-  <section class="cta-section">
-    <div class="container">
-      <h2>{t.cta.title}</h2>
-      <p>{t.cta.description}</p>
-      <a href={getPageUrl("contacto", lang)} class="btn-primary">
-        {t.cta.button}
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
-          <line x1="5" y1="12" x2="19" y2="12"></line>
-          <polyline points="12 5 19 12 12 19"></polyline>
-        </svg>
-      </a>
-    </div>
-  </section>
+  <!-- Por Qué RayGold - Diferenciadores -->
+  <PorQueRayGold lang={lang} />
+
+  <!-- Video Demo - Demostración del ERP -->
+  <VideoDemo lang={lang} />
+
+  <!-- Testimonios - Casos de éxito -->
+  <Testimonios lang={lang} />
+
+  <!-- WhatsApp Button - Botón flotante -->
+  <WhatsAppButton lang={lang} />
 </Layout>
-
-<style>
-  .hero {
-    position: relative;
-    padding: 80px 0;
-    overflow: hidden;
-    color: white;
-    text-align: center;
-  }
-
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-  }
-
-  .hero-gradient {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  }
-
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-
-  .hero-content {
-    max-width: 700px;
-    margin: 0 auto;
-  }
-
-  .hero h1 {
-    font-size: 3rem;
-    font-weight: 800;
-    margin: 0 0 24px;
-    line-height: 1.1;
-  }
-
-  .subtitle {
-    font-size: 1.25rem;
-    opacity: 0.9;
-    margin: 0 0 40px;
-    line-height: 1.6;
-  }
-
-  .hero-cta {
-    display: flex;
-    gap: 16px;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 28px;
-    background: white;
-    color: #667eea;
-    border-radius: 12px;
-    font-weight: 600;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-  }
-
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-  }
-
-  .btn-secondary {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 28px;
-    background: transparent;
-    color: white;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 12px;
-    font-weight: 600;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-  }
-
-  .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.5);
-  }
-
-  /* Features */
-  .features {
-    padding: 80px 0;
-    background: #f8fafc;
-  }
-
-  .features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 32px;
-  }
-
-  .feature-card {
-    background: white;
-    padding: 32px;
-    border-radius: 16px;
-    text-align: center;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-    transition: all 0.3s ease;
-  }
-
-  .feature-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  }
-
-  .feature-icon {
-    width: 64px;
-    height: 64px;
-    margin: 0 auto 20px;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .feature-icon svg {
-    width: 32px;
-    height: 32px;
-    stroke: #667eea;
-  }
-
-  .feature-card h3 {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #1e293b;
-    margin: 0 0 12px;
-  }
-
-  .feature-card p {
-    font-size: 1rem;
-    color: #64748b;
-    margin: 0;
-    line-height: 1.6;
-  }
-
-  /* CTA Section */
-  .cta-section {
-    padding: 80px 0;
-    text-align: center;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-  }
-
-  .cta-section h2 {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #1e293b;
-    margin: 0 0 16px;
-  }
-
-  .cta-section p {
-    font-size: 1.1rem;
-    color: #64748b;
-    margin: 0 0 32px;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .cta-section .btn-primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    box-shadow: 0 4px 16px rgba(102, 126, 234, 0.4);
-  }
-
-  .cta-section .btn-primary:hover {
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
-  }
-
-  @media (max-width: 768px) {
-    .hero {
-      padding: 60px 0;
-    }
-
-    .hero h1 {
-      font-size: 2rem;
-    }
-
-    .subtitle {
-      font-size: 1.1rem;
-    }
-
-    .hero-cta {
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .btn-primary,
-    .btn-secondary {
-      width: 100%;
-      max-width: 280px;
-      justify-content: center;
-    }
-
-    .features {
-      padding: 60px 0;
-    }
-
-    .cta-section {
-      padding: 60px 0;
-    }
-  }
-</style>

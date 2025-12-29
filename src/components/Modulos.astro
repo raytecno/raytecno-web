@@ -1,0 +1,400 @@
+---
+/**
+ * Modulos.astro - Sección de módulos del ERP
+ * Con soporte multiidioma
+ */
+import { type Lang, getPageUrl } from "@/config/pages";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'es' } = Astro.props;
+
+// Traducciones
+const translations: Record<Lang, {
+  badge: string;
+  title: string;
+  subtitle: string;
+  modulos: Array<{
+    key: string;
+    title: string;
+    description: string;
+  }>;
+}> = {
+  es: {
+    badge: "Solución completa",
+    title: "8 módulos integrados para tu joyería",
+    subtitle: "Todo lo que necesitas en un solo sistema",
+    modulos: [
+      { key: "maestros", title: "Maestros", description: "Artículos, proveedores, clientes y familias" },
+      { key: "comercial", title: "Comercial", description: "Ventas, pedidos y facturación" },
+      { key: "fabricacion", title: "Fabricación", description: "Producción, inventarios y calidad" },
+      { key: "finanzas", title: "Finanzas", description: "Contabilidad, tesorería e IVA" },
+      { key: "historicos", title: "Históricos", description: "Datos históricos y tendencias" },
+      { key: "estadisticas", title: "Estadísticas", description: "Informes y cuadros de mando" },
+      { key: "vendedores", title: "Vendedores", description: "Gestión de rutas y visitas" },
+      { key: "ecommerce", title: "Ecommerce", description: "Tiendas online y marketplaces" },
+    ],
+  },
+  en: {
+    badge: "Complete solution",
+    title: "8 integrated modules for your jewelry",
+    subtitle: "Everything you need in one system",
+    modulos: [
+      { key: "maestros", title: "Masters", description: "Items, suppliers, customers and families" },
+      { key: "comercial", title: "Commercial", description: "Sales, orders and invoicing" },
+      { key: "fabricacion", title: "Manufacturing", description: "Production, inventory and quality" },
+      { key: "finanzas", title: "Finance", description: "Accounting, treasury and VAT" },
+      { key: "historicos", title: "History", description: "Historical data and trends" },
+      { key: "estadisticas", title: "Statistics", description: "Reports and dashboards" },
+      { key: "vendedores", title: "Sales Reps", description: "Route and visit management" },
+      { key: "ecommerce", title: "Ecommerce", description: "Online stores and marketplaces" },
+    ],
+  },
+  fr: {
+    badge: "Solution complète",
+    title: "8 modules intégrés pour votre bijouterie",
+    subtitle: "Tout ce dont vous avez besoin en un seul système",
+    modulos: [
+      { key: "maestros", title: "Maîtres", description: "Articles, fournisseurs, clients et familles" },
+      { key: "comercial", title: "Commercial", description: "Ventes, commandes et facturation" },
+      { key: "fabricacion", title: "Fabrication", description: "Production, inventaires et qualité" },
+      { key: "finanzas", title: "Finances", description: "Comptabilité, trésorerie et TVA" },
+      { key: "historicos", title: "Historique", description: "Données historiques et tendances" },
+      { key: "estadisticas", title: "Statistiques", description: "Rapports et tableaux de bord" },
+      { key: "vendedores", title: "Vendeurs", description: "Gestion des routes et visites" },
+      { key: "ecommerce", title: "Ecommerce", description: "Boutiques en ligne et marketplaces" },
+    ],
+  },
+  ca: {
+    badge: "Solució completa",
+    title: "8 mòduls integrats per a la teva joieria",
+    subtitle: "Tot el que necessites en un sol sistema",
+    modulos: [
+      { key: "maestros", title: "Mestres", description: "Articles, proveïdors, clients i famílies" },
+      { key: "comercial", title: "Comercial", description: "Vendes, comandes i facturació" },
+      { key: "fabricacion", title: "Fabricació", description: "Producció, inventaris i qualitat" },
+      { key: "finanzas", title: "Finances", description: "Comptabilitat, tresoreria i IVA" },
+      { key: "historicos", title: "Històrics", description: "Dades històriques i tendències" },
+      { key: "estadisticas", title: "Estadístiques", description: "Informes i quadres de comandament" },
+      { key: "vendedores", title: "Venedors", description: "Gestió de rutes i visites" },
+      { key: "ecommerce", title: "Ecommerce", description: "Botigues online i marketplaces" },
+    ],
+  },
+  "pt-br": {
+    badge: "Solução completa",
+    title: "8 módulos integrados para sua joalheria",
+    subtitle: "Tudo o que você precisa em um único sistema",
+    modulos: [
+      { key: "maestros", title: "Cadastros", description: "Artigos, fornecedores, clientes e famílias" },
+      { key: "comercial", title: "Comercial", description: "Vendas, pedidos e faturamento" },
+      { key: "fabricacion", title: "Fabricação", description: "Produção, estoques e qualidade" },
+      { key: "finanzas", title: "Finanças", description: "Contabilidade, tesouraria e impostos" },
+      { key: "historicos", title: "Históricos", description: "Dados históricos e tendências" },
+      { key: "estadisticas", title: "Estatísticas", description: "Relatórios e painéis" },
+      { key: "vendedores", title: "Vendedores", description: "Gestão de rotas e visitas" },
+      { key: "ecommerce", title: "Ecommerce", description: "Lojas online e marketplaces" },
+    ],
+  },
+};
+
+const t = translations[lang] || translations.es;
+
+// Colores e iconos por módulo
+const moduloConfig: Record<string, { color: string }> = {
+  maestros: { color: "#667eea" },
+  comercial: { color: "#06b6d4" },
+  fabricacion: { color: "#f59e0b" },
+  finanzas: { color: "#10b981" },
+  historicos: { color: "#8b5cf6" },
+  estadisticas: { color: "#ec4899" },
+  vendedores: { color: "#3b82f6" },
+  ecommerce: { color: "#6366f1" },
+};
+
+// Slugs de submódulos por idioma
+const submoduloSlugs: Record<string, Record<Lang, string>> = {
+  maestros: { es: 'maestros', en: 'masters', fr: 'maitres', ca: 'mestres', 'pt-br': 'cadastros' },
+  comercial: { es: 'comercial', en: 'commercial', fr: 'commercial', ca: 'comercial', 'pt-br': 'comercial' },
+  fabricacion: { es: 'fabricacion', en: 'manufacturing', fr: 'fabrication', ca: 'fabricacio', 'pt-br': 'fabricacao' },
+  finanzas: { es: 'finanzas', en: 'finance', fr: 'finances', ca: 'finances', 'pt-br': 'financas' },
+  historicos: { es: 'historicos', en: 'history', fr: 'historique', ca: 'historics', 'pt-br': 'historicos' },
+  estadisticas: { es: 'estadisticas', en: 'statistics', fr: 'statistiques', ca: 'estadistiques', 'pt-br': 'estatisticas' },
+  vendedores: { es: 'vendedores', en: 'sales-reps', fr: 'vendeurs', ca: 'venedors', 'pt-br': 'vendedores' },
+  ecommerce: { es: 'ecommerce', en: 'ecommerce', fr: 'ecommerce', ca: 'ecommerce', 'pt-br': 'ecommerce' },
+};
+
+function getModuloUrl(key: string): string {
+  const slugs = submoduloSlugs[key];
+  const modulosSlug = lang === 'en' ? 'modules' : lang === 'fr' ? 'modules' : lang === 'ca' ? 'moduls' : 'modulos';
+  return `/${lang}/${modulosSlug}/${slugs?.[lang] || key}`;
+}
+---
+
+<section id="modulos" class="modulos-section">
+  <div class="modulos-container">
+    <div class="modulos-header">
+      <span class="section-badge">{t.badge}</span>
+      <h2>{t.title}</h2>
+      <p>{t.subtitle}</p>
+    </div>
+
+    <div class="modulos-grid">
+      {t.modulos.map((modulo) => {
+        const config = moduloConfig[modulo.key];
+        return (
+          <a href={getModuloUrl(modulo.key)} class="modulo-card" style={`--card-color: ${config.color}`}>
+            <div class="modulo-icon">
+              {modulo.key === "maestros" && (
+                <svg viewBox="0 0 64 64" fill="none">
+                  <rect x="8" y="12" width="48" height="40" rx="4" fill="#4a5568" stroke="#718096" stroke-width="2"/>
+                  <rect x="14" y="18" width="36" height="6" rx="2" fill="#a0aec0"/>
+                  <rect x="14" y="28" width="24" height="4" rx="1" fill="#718096"/>
+                  <rect x="14" y="36" width="30" height="4" rx="1" fill="#718096"/>
+                  <rect x="14" y="44" width="20" height="4" rx="1" fill="#718096"/>
+                  <circle cx="46" cy="44" r="6" fill={config.color}/>
+                  <path d="M44 44l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              )}
+              {modulo.key === "comercial" && (
+                <svg viewBox="0 0 64 64" fill="none">
+                  <rect x="10" y="20" width="44" height="32" rx="4" fill="#4a5568" stroke="#718096" stroke-width="2"/>
+                  <path d="M24 20V14a8 8 0 0116 0v6" stroke="#718096" stroke-width="2" fill="none"/>
+                  <rect x="18" y="28" width="28" height="4" rx="1" fill="#a0aec0"/>
+                  <rect x="18" y="36" width="20" height="4" rx="1" fill="#718096"/>
+                  <circle cx="42" cy="42" r="8" fill={config.color}/>
+                  <path d="M39 42h6M42 39v6" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              )}
+              {modulo.key === "fabricacion" && (
+                <svg viewBox="0 0 64 64" fill="none">
+                  <rect x="6" y="32" width="24" height="20" rx="2" fill="#4a5568" stroke="#718096" stroke-width="2"/>
+                  <rect x="34" y="24" width="24" height="28" rx="2" fill="#5a6778" stroke="#718096" stroke-width="2"/>
+                  <rect x="10" y="12" width="12" height="20" rx="1" fill={config.color}/>
+                  <rect x="38" y="8" width="8" height="16" rx="1" fill="#fbbf24"/>
+                  <rect x="50" y="14" width="6" height="10" rx="1" fill="#fcd34d"/>
+                  <circle cx="18" cy="42" r="4" fill="#a0aec0"/>
+                  <circle cx="46" cy="38" r="5" fill="#a0aec0"/>
+                  <path d="M6 52h52" stroke="#718096" stroke-width="3"/>
+                </svg>
+              )}
+              {modulo.key === "finanzas" && (
+                <svg viewBox="0 0 64 64" fill="none">
+                  <rect x="8" y="16" width="48" height="36" rx="4" fill="#4a5568" stroke="#718096" stroke-width="2"/>
+                  <rect x="14" y="22" width="36" height="8" rx="2" fill={config.color}/>
+                  <rect x="14" y="34" width="20" height="4" rx="1" fill="#718096"/>
+                  <rect x="14" y="42" width="28" height="4" rx="1" fill="#718096"/>
+                  <circle cx="46" cy="40" r="8" fill="#059669"/>
+                  <text x="46" y="44" text-anchor="middle" fill="white" font-size="12" font-weight="bold">€</text>
+                </svg>
+              )}
+              {modulo.key === "historicos" && (
+                <svg viewBox="0 0 64 64" fill="none">
+                  <rect x="12" y="8" width="40" height="48" rx="4" fill="#4a5568" stroke="#718096" stroke-width="2"/>
+                  <rect x="18" y="14" width="28" height="6" rx="2" fill={config.color}/>
+                  <rect x="18" y="24" width="20" height="3" rx="1" fill="#718096"/>
+                  <rect x="18" y="30" width="24" height="3" rx="1" fill="#718096"/>
+                  <rect x="18" y="36" width="18" height="3" rx="1" fill="#718096"/>
+                  <rect x="18" y="42" width="22" height="3" rx="1" fill="#718096"/>
+                  <circle cx="44" cy="44" r="8" fill="#7c3aed"/>
+                  <path d="M44 40v5h4" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              )}
+              {modulo.key === "estadisticas" && (
+                <svg viewBox="0 0 64 64" fill="none">
+                  <rect x="8" y="44" width="10" height="12" rx="2" fill="#f9a8d4"/>
+                  <rect x="22" y="32" width="10" height="24" rx="2" fill="#f472b6"/>
+                  <rect x="36" y="20" width="10" height="36" rx="2" fill={config.color}/>
+                  <rect x="50" y="8" width="10" height="48" rx="2" fill="#db2777"/>
+                  <path d="M8 56h52" stroke="#718096" stroke-width="2"/>
+                  <path d="M12 40l12-10 14 6 14-20" stroke="#a855f7" stroke-width="3" stroke-linecap="round" fill="none"/>
+                  <circle cx="12" cy="40" r="3" fill="#a855f7"/>
+                  <circle cx="24" cy="30" r="3" fill="#a855f7"/>
+                  <circle cx="38" cy="36" r="3" fill="#a855f7"/>
+                  <circle cx="52" cy="16" r="3" fill="#a855f7"/>
+                </svg>
+              )}
+              {modulo.key === "vendedores" && (
+                <svg viewBox="0 0 64 64" fill="none">
+                  <circle cx="24" cy="16" r="8" fill="#4a5568" stroke="#718096" stroke-width="2"/>
+                  <path d="M12 52V40a12 12 0 0124 0v12" fill="#4a5568" stroke="#718096" stroke-width="2"/>
+                  <rect x="36" y="32" width="22" height="18" rx="3" fill={config.color} stroke="#2563eb" stroke-width="2"/>
+                  <rect x="42" y="28" width="10" height="6" rx="2" fill="#60a5fa"/>
+                  <rect x="40" y="38" width="14" height="2" rx="1" fill="#93c5fd"/>
+                  <rect x="40" y="42" width="14" height="2" rx="1" fill="#93c5fd"/>
+                  <circle cx="52" cy="14" r="6" fill="#10b981"/>
+                  <path d="M52 11v4M50 13h4" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              )}
+              {modulo.key === "ecommerce" && (
+                <svg viewBox="0 0 64 64" fill="none">
+                  <circle cx="32" cy="32" r="24" fill="#4a5568" stroke="#718096" stroke-width="2"/>
+                  <ellipse cx="32" cy="32" rx="24" ry="10" fill="none" stroke="#718096" stroke-width="2"/>
+                  <ellipse cx="32" cy="32" rx="10" ry="24" fill="none" stroke="#718096" stroke-width="2"/>
+                  <path d="M8 32h48" stroke="#718096" stroke-width="2"/>
+                  <circle cx="32" cy="32" r="8" fill={config.color}/>
+                  <path d="M29 32l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              )}
+            </div>
+            <h4>{modulo.title}</h4>
+            <p>{modulo.description}</p>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+<style>
+  .modulos-section {
+    padding: 5rem 1.5rem;
+    background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+  }
+
+  .modulos-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .modulos-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .section-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: rgba(102, 126, 234, 0.2);
+    color: #818cf8;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-radius: 50px;
+    margin-bottom: 1rem;
+  }
+
+  .modulos-header h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 0.5rem;
+  }
+
+  .modulos-header p {
+    color: #94a3b8;
+    font-size: 1.1rem;
+    margin: 0;
+  }
+
+  .modulos-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+  }
+
+  .modulo-card {
+    background: rgba(30, 41, 59, 0.6);
+    border: 1px solid #334155;
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .modulo-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--card-color);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  .modulo-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .modulo-card:hover {
+    background: rgba(51, 65, 85, 0.8);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+    border-color: var(--card-color);
+  }
+
+  .modulo-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 16px;
+    transition: transform 0.3s ease;
+  }
+
+  .modulo-card:hover .modulo-icon {
+    transform: scale(1.1);
+  }
+
+  .modulo-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .modulo-card h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: white;
+    margin: 0 0 8px;
+  }
+
+  .modulo-card p {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  @media (max-width: 1024px) {
+    .modulos-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .modulos-section {
+      padding: 3rem 1rem;
+    }
+
+    .modulos-header h2 {
+      font-size: 1.5rem;
+    }
+
+    .modulos-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .modulo-card {
+      padding: 1.25rem 1rem;
+    }
+
+    .modulo-icon {
+      width: 48px;
+      height: 48px;
+    }
+
+    .modulo-card h4 {
+      font-size: 0.95rem;
+    }
+
+    .modulo-card p {
+      font-size: 0.75rem;
+    }
+  }
+</style>

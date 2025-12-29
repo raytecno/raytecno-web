@@ -1,21 +1,25 @@
 ---
 /**
- * Página de inicio para cada idioma
+ * Home dinámico por idioma
  * URL: /es/, /en/, /fr/, /ca/, /pt-br/
  */
 import HomePage from "@/templates/HomePage.astro";
-import { type Lang } from "@/config/pages";
+import { supportedLangs, type Lang } from "@/config/pages";
 
+// Generar rutas estáticas para cada idioma
 export function getStaticPaths() {
-  // Idiomas soportados - DEBE estar dentro de getStaticPaths
-  const supportedLangs: Lang[] = ["es", "en", "fr", "ca", "pt-br"];
-  
-  return supportedLangs.map((lang) => ({
+  return supportedLangs.map((lang: Lang) => ({
     params: { lang },
   }));
 }
 
-const { lang } = Astro.params;
+// Obtener idioma de la URL
+const { lang } = Astro.params as { lang: Lang };
+
+// Validar idioma
+if (!supportedLangs.includes(lang)) {
+  return Astro.redirect("/es/");
+}
 ---
 
-<HomePage lang={lang as Lang} />
+<HomePage lang={lang} />

@@ -2,20 +2,18 @@
 /**
  * Template: Precios
  * Planes de precios de RayGold ERP
+ * Con soporte multiidioma
  */
 import Layout from "@/layouts/Layout.astro";
-import { getTranslations } from "@/i18n";
 import { getAlternateUrls, getPageUrl, type Lang } from "@/config/pages";
 
 interface Props {
-  lang: string;
-  pageId: string;
+  lang: Lang;
 }
 
 const { lang } = Astro.props;
-const t = getTranslations(lang as Lang);
 const alternateUrls = getAlternateUrls("precios");
-const contactUrl = getPageUrl("contacto", lang as Lang);
+const contactUrl = getPageUrl("contacto", lang);
 
 // Traducciones de precios
 const pT = {
@@ -598,7 +596,7 @@ const checkSvg = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17
 <Layout
   title={`${p.badge} | RayGold ERP`}
   description={p.subtitle}
-  lang={lang as Lang}
+  lang={lang}
   alternateUrls={alternateUrls}
 >
   <main class="main-content">

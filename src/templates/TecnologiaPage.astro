@@ -2,28 +2,54 @@
 /**
  * Template: Tecnología
  * Página de arquitectura tecnológica de RayGold
+ * Con soporte multiidioma
  */
 import Layout from "@/layouts/Layout.astro";
-import { getTranslations } from "@/i18n";
 import { getAlternateUrls, getPageUrl, type Lang } from "@/config/pages";
 
 interface Props {
-  lang: string;
-  pageId: string;
+  lang: Lang;
 }
 
 const { lang } = Astro.props;
-const t = getTranslations(lang as Lang);
 const alternateUrls = getAlternateUrls("tecnologia");
 
-// Traducciones específicas de tecnología (inline para esta página)
-const techT = {
+// Traducciones específicas de tecnología
+const techT: Record<
+  Lang,
+  {
+    badge: string;
+    title: string;
+    titleHighlight: string;
+    subtitle: string;
+    metaTitle: string;
+    metaDesc: string;
+    stackTitle: string;
+    frontend: { title: string; subtitle: string };
+    backend: { title: string; subtitle: string };
+    web: { title: string; subtitle: string };
+    ai: { title: string; subtitle: string };
+    aiFeatures: string[];
+    cloud: { title: string; subtitle: string };
+    cloudServices: string[];
+    database: { title: string; subtitle: string };
+    storage: { title: string; subtitle: string };
+    result: { title: string; subtitle: string };
+    modules: string[];
+    ctaTitle: string;
+    ctaSubtitle: string;
+    ctaButton: string;
+  }
+> = {
   es: {
     badge: "Arquitectura Tecnológica",
     title: "Raygold",
     titleHighlight: "ERP",
     subtitle:
       "Solución integral cloud-native para la industria joyera, potenciada con Inteligencia Artificial",
+    metaTitle: "Tecnología | RayGold ERP para Joyería",
+    metaDesc:
+      "Arquitectura tecnológica de RayGold: Vue.js, ASP.NET Core, Azure, IA con Claude. Software moderno para joyerías.",
     stackTitle: "Stack Tecnológico",
     frontend: { title: "Frontend", subtitle: "Interfaz de Usuario" },
     backend: { title: "Backend", subtitle: "API & Lógica" },
@@ -68,6 +94,9 @@ const techT = {
     titleHighlight: "ERP",
     subtitle:
       "Comprehensive cloud-native solution for the jewelry industry, powered by Artificial Intelligence",
+    metaTitle: "Technology | RayGold ERP for Jewelry",
+    metaDesc:
+      "RayGold technology architecture: Vue.js, ASP.NET Core, Azure, AI with Claude. Modern software for jewelers.",
     stackTitle: "Technology Stack",
     frontend: { title: "Frontend", subtitle: "User Interface" },
     backend: { title: "Backend", subtitle: "API & Logic" },
@@ -112,6 +141,9 @@ const techT = {
     titleHighlight: "ERP",
     subtitle:
       "Solution cloud-native complète pour l'industrie de la bijouterie, alimentée par l'Intelligence Artificielle",
+    metaTitle: "Technologie | RayGold ERP pour Bijouterie",
+    metaDesc:
+      "Architecture technologique de RayGold: Vue.js, ASP.NET Core, Azure, IA avec Claude. Logiciel moderne pour bijouteries.",
     stackTitle: "Stack Technologique",
     frontend: { title: "Frontend", subtitle: "Interface Utilisateur" },
     backend: { title: "Backend", subtitle: "API & Logique" },
@@ -156,6 +188,9 @@ const techT = {
     titleHighlight: "ERP",
     subtitle:
       "Solució integral cloud-native per a la indústria joiera, potenciada amb Intel·ligència Artificial",
+    metaTitle: "Tecnologia | RayGold ERP per a Joieria",
+    metaDesc:
+      "Arquitectura tecnològica de RayGold: Vue.js, ASP.NET Core, Azure, IA amb Claude. Programari modern per a joieries.",
     stackTitle: "Stack Tecnològic",
     frontend: { title: "Frontend", subtitle: "Interfície d'Usuari" },
     backend: { title: "Backend", subtitle: "API & Lògica" },
@@ -200,6 +235,9 @@ const techT = {
     titleHighlight: "ERP",
     subtitle:
       "Solução integral cloud-native para a indústria joalheira, potencializada com Inteligência Artificial",
+    metaTitle: "Tecnologia | RayGold ERP para Joalheria",
+    metaDesc:
+      "Arquitetura tecnológica do RayGold: Vue.js, ASP.NET Core, Azure, IA com Claude. Software moderno para joalherias.",
     stackTitle: "Stack Tecnológico",
     frontend: { title: "Frontend", subtitle: "Interface de Usuário" },
     backend: { title: "Backend", subtitle: "API & Lógica" },
@@ -240,16 +278,20 @@ const techT = {
   },
 };
 
-const tt = techT[lang as keyof typeof techT] || techT.es;
+const tt = techT[lang] || techT.es;
+
+// Iconos de servicios cloud
+const cloudIcons = ["🖥️", "📊", "🗄️", "📦", "🔐"];
+const aiIcons = ["💬", "📊", "⚙️", "📝"];
+const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
 ---
 
 <Layout
-  title={`${tt.badge} | RayGold ERP`}
-  description={tt.subtitle}
+  title={tt.metaTitle}
+  description={tt.metaDesc}
   lang={lang}
   alternateUrls={alternateUrls}
 >
-  <!-- CONTENIDO PRINCIPAL -->
   <main class="tech-page">
     <!-- Header de página -->
     <section class="page-header">
@@ -321,7 +363,7 @@ const tt = techT[lang as keyof typeof techT] || techT.es;
               </div>
             </div>
 
-            <!-- AI - Claude -->
+            <!-- AI -->
             <div class="node node-ai">
               <div class="node-header">
                 <div>
@@ -330,22 +372,14 @@ const tt = techT[lang as keyof typeof techT] || techT.es;
                 </div>
               </div>
               <div class="ai-features">
-                <div class="ai-feature">
-                  <span class="ai-feature-icon">💬</span>
-                  {tt.aiFeatures[0]}
-                </div>
-                <div class="ai-feature">
-                  <span class="ai-feature-icon">📊</span>
-                  {tt.aiFeatures[1]}
-                </div>
-                <div class="ai-feature">
-                  <span class="ai-feature-icon">⚙️</span>
-                  {tt.aiFeatures[2]}
-                </div>
-                <div class="ai-feature">
-                  <span class="ai-feature-icon">📝</span>
-                  {tt.aiFeatures[3]}
-                </div>
+                {
+                  tt.aiFeatures.map((feature, i) => (
+                    <div class="ai-feature">
+                      <span class="ai-feature-icon">{aiIcons[i]}</span>
+                      {feature}
+                    </div>
+                  ))
+                }
               </div>
             </div>
 
@@ -358,26 +392,14 @@ const tt = techT[lang as keyof typeof techT] || techT.es;
                 </div>
               </div>
               <div class="services">
-                <div class="service">
-                  <div class="service-icon">🖥️</div>
-                  <span class="service-name">{tt.cloudServices[0]}</span>
-                </div>
-                <div class="service">
-                  <div class="service-icon">📊</div>
-                  <span class="service-name">{tt.cloudServices[1]}</span>
-                </div>
-                <div class="service">
-                  <div class="service-icon">🗄️</div>
-                  <span class="service-name">{tt.cloudServices[2]}</span>
-                </div>
-                <div class="service">
-                  <div class="service-icon">📦</div>
-                  <span class="service-name">{tt.cloudServices[3]}</span>
-                </div>
-                <div class="service">
-                  <div class="service-icon">🔐</div>
-                  <span class="service-name">{tt.cloudServices[4]}</span>
-                </div>
+                {
+                  tt.cloudServices.map((service, i) => (
+                    <div class="service">
+                      <div class="service-icon">{cloudIcons[i]}</div>
+                      <span class="service-name">{service}</span>
+                    </div>
+                  ))
+                }
               </div>
             </div>
 
@@ -435,10 +457,7 @@ const tt = techT[lang as keyof typeof techT] || techT.es;
                 {
                   tt.modules.map((mod, i) => (
                     <div class="result-feature">
-                      <span>
-                        {["📦", "📦", "🏭", "💰", "📈", "🛒", "🛒"][i]}
-                      </span>{" "}
-                      {mod}
+                      <span>{moduleIcons[i]}</span> {mod}
                     </div>
                   ))
                 }
@@ -453,8 +472,8 @@ const tt = techT[lang as keyof typeof techT] || techT.es;
               <span class="tech-name">Vue.js</span>
             </div>
             <div class="tech-item">
-              <div class="tech-logo dotnet">.NET</div>
-              <span class="tech-name">ASP.NET</span>
+              <div class="tech-logo dotnet">.N</div>
+              <span class="tech-name">.NET</span>
             </div>
             <div class="tech-item">
               <div class="tech-logo azure">☁️</div>
@@ -469,7 +488,7 @@ const tt = techT[lang as keyof typeof techT] || techT.es;
               <span class="tech-name">WordPress</span>
             </div>
             <div class="tech-item">
-              <div class="tech-logo claude">C</div>
+              <div class="tech-logo claude">🤖</div>
               <span class="tech-name">Claude AI</span>
             </div>
           </div>
@@ -482,15 +501,15 @@ const tt = techT[lang as keyof typeof techT] || techT.es;
       <div class="container">
         <h2>{tt.ctaTitle}</h2>
         <p>{tt.ctaSubtitle}</p>
-        <a href={getPageUrl("contacto", lang as Lang)} class="cta-button">
+        <a href={getPageUrl("contacto", lang)} class="cta-button">
           {tt.ctaButton}
           <svg
-            width="18"
-            height="18"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
             stroke-width="2"
+            width="18"
+            height="18"
           >
             <line x1="5" y1="12" x2="19" y2="12"></line>
             <polyline points="12 5 19 12 12 19"></polyline>
@@ -505,36 +524,35 @@ const tt = techT[lang as keyof typeof techT] || techT.es;
   /* Variables */
   :root {
     --bg-dark: #0a0a0f;
-    --bg-card: rgba(15, 23, 42, 0.8);
-    --text-primary: #f1f5f9;
+    --bg-card: rgba(20, 20, 30, 0.6);
+    --text-primary: #ffffff;
     --text-secondary: #94a3b8;
     --text-muted: #64748b;
-    --border-subtle: rgba(148, 163, 184, 0.15);
-    --accent-purple: #a78bfa;
-    --accent-blue: #60a5fa;
-    --accent-green: #4ade80;
-    --accent-orange: #fb923c;
-    --accent-cyan: #22d3ee;
+    --border-subtle: rgba(255, 255, 255, 0.1);
+    --accent-purple: #667eea;
+    --accent-green: #10b981;
+    --accent-amber: #f59e0b;
+    --accent-cyan: #06b6d4;
   }
 
   .tech-page {
     background: var(--bg-dark);
-    min-height: 100vh;
+    color: var(--text-primary);
   }
 
   .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 0 1.5rem;
   }
 
   /* Page Header */
   .page-header {
-    padding: 100px 0 40px;
+    padding: 60px 0 40px;
     text-align: center;
     background: linear-gradient(
       180deg,
-      rgba(102, 126, 234, 0.08) 0%,
+      rgba(102, 126, 234, 0.1) 0%,
       transparent 100%
     );
   }
@@ -552,16 +570,16 @@ const tt = techT[lang as keyof typeof techT] || techT.es;
     background: rgba(102, 126, 234, 0.15);
     border: 1px solid rgba(102, 126, 234, 0.3);
     border-radius: 50px;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 500;
-    color: var(--accent-purple);
-    margin-bottom: 24px;
+    color: #a5b4fc;
+    margin-bottom: 1.5rem;
   }
 
   .badge-dot {
     width: 8px;
     height: 8px;
-    background: var(--accent-purple);
+    background: var(--accent-green);
     border-radius: 50%;
     animation: pulse 2s ease-in-out infinite;
   }
@@ -570,30 +588,28 @@ const tt = techT[lang as keyof typeof techT] || techT.es;
     0%,
     100% {
       opacity: 1;
-      transform: scale(1);
     }
     50% {
       opacity: 0.5;
-      transform: scale(1.2);
     }
   }
 
   .page-header h1 {
     font-size: 3rem;
     font-weight: 700;
-    color: var(--text-primary);
-    margin: 0 0 16px 0;
+    margin: 0 0 1rem;
+    letter-spacing: -1px;
   }
 
   .page-header h1 span {
-    background: linear-gradient(135deg, #667eea, #a78bfa);
+    background: linear-gradient(135deg, var(--accent-purple) 0%, #a78bfa 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .page-header p {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     color: var(--text-secondary);
     line-height: 1.6;
     margin: 0;
@@ -601,40 +617,33 @@ const tt = techT[lang as keyof typeof techT] || techT.es;
 
   /* Diagram Section */
   .diagram-section {
-    padding: 20px 0 60px;
+    padding: 40px 0 60px;
   }
 
   .diagram {
-    background: linear-gradient(
-      180deg,
-      rgba(15, 23, 42, 0.9) 0%,
-      rgba(15, 23, 42, 0.95) 100%
-    );
+    background: var(--bg-card);
     border: 1px solid var(--border-subtle);
     border-radius: 24px;
     padding: 2rem;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
   }
 
   .diagram-title {
     text-align: center;
     font-size: 1.25rem;
     font-weight: 600;
-    color: var(--text-secondary);
     margin-bottom: 2rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    color: var(--text-secondary);
   }
 
   .arch-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+    gap: 1.25rem;
   }
 
   /* Nodes */
   .node {
-    background: var(--bg-card);
+    background: rgba(30, 30, 45, 0.8);
     border: 1px solid var(--border-subtle);
     border-radius: 16px;
     padding: 1.25rem;
@@ -643,14 +652,14 @@ const tt = techT[lang as keyof typeof techT] || techT.es;
 
   .node:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
   }
 
   .node-header {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 12px;
+    margin-bottom: 1rem;
   }
 
   .node-icon {
@@ -664,75 +673,53 @@ const tt = techT[lang as keyof typeof techT] || techT.es;
   }
 
   .node-subtitle {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     color: var(--text-muted);
   }
 
   .node-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 8px;
   }
 
   .tag {
     padding: 4px 10px;
-    background: rgba(148, 163, 184, 0.1);
-    border: 1px solid rgba(148, 163, 184, 0.2);
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 6px;
-    font-size: 0.7rem;
-    font-weight: 500;
+    font-size: 0.75rem;
     color: var(--text-secondary);
   }
 
   /* Node variants */
   .node-frontend {
-    border-color: rgba(74, 222, 128, 0.3);
+    border-color: rgba(66, 184, 131, 0.4);
   }
   .node-frontend:hover {
-    border-color: var(--accent-green);
+    border-color: #42b883;
   }
-  .node-frontend .node-icon {
-    color: var(--accent-green);
+  .node-frontend .node-title {
+    color: #42b883;
   }
 
   .node-backend {
-    border-color: rgba(96, 165, 250, 0.3);
+    border-color: rgba(81, 43, 212, 0.4);
   }
   .node-backend:hover {
-    border-color: var(--accent-blue);
+    border-color: #512bd4;
   }
-  .node-backend .node-icon {
-    color: var(--accent-blue);
+  .node-backend .node-title {
+    color: #a78bfa;
   }
 
   .node-web {
-    border-color: rgba(251, 146, 60, 0.3);
+    border-color: rgba(255, 93, 1, 0.4);
   }
   .node-web:hover {
-    border-color: var(--accent-orange);
+    border-color: #ff5d01;
   }
-  .node-web .node-icon {
-    color: var(--accent-orange);
-  }
-
-  .node-data {
-    border-color: rgba(167, 139, 250, 0.3);
-  }
-  .node-data:hover {
-    border-color: var(--accent-purple);
-  }
-  .node-data .node-icon {
-    color: var(--accent-purple);
-  }
-
-  .node-storage {
-    border-color: rgba(34, 211, 238, 0.3);
-  }
-  .node-storage:hover {
-    border-color: var(--accent-cyan);
-  }
-  .node-storage .node-icon {
-    color: var(--accent-cyan);
+  .node-web .node-title {
+    color: #ff8a4c;
   }
 
   /* AI Node */
@@ -740,44 +727,40 @@ const tt = techT[lang as keyof typeof techT] || techT.es;
     grid-column: span 2;
     background: linear-gradient(
       135deg,
-      rgba(217, 119, 87, 0.15) 0%,
-      rgba(217, 119, 87, 0.05) 100%
+      rgba(217, 119, 87, 0.1) 0%,
+      rgba(191, 90, 60, 0.05) 100%
     );
     border-color: rgba(217, 119, 87, 0.4);
   }
-
   .node-ai:hover {
     border-color: #d97757;
   }
-
   .node-ai .node-title {
-    background: linear-gradient(135deg, #d97757, #bf5a3c);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #d97757;
     font-size: 1.1rem;
   }
 
   .ai-features {
     display: flex;
-    gap: 12px;
+    gap: 1rem;
     flex-wrap: wrap;
+    justify-content: center;
   }
 
   .ai-feature {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 8px 14px;
+    padding: 10px 16px;
     background: rgba(217, 119, 87, 0.15);
     border: 1px solid rgba(217, 119, 87, 0.3);
-    border-radius: 8px;
-    font-size: 0.8rem;
-    color: #e8a892;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    color: #f0b89a;
   }
 
   .ai-feature-icon {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 
   /* Cloud Node */
@@ -790,11 +773,9 @@ const tt = techT[lang as keyof typeof techT] || techT.es;
     );
     border-color: rgba(0, 120, 212, 0.4);
   }
-
   .node-cloud:hover {
     border-color: #0078d4;
   }
-
   .node-cloud .node-title {
     color: #00bcf2;
     font-size: 1.1rem;
@@ -820,11 +801,16 @@ const tt = techT[lang as keyof typeof techT] || techT.es;
   .service-icon {
     font-size: 1.25rem;
   }
-
   .service-name {
     font-size: 0.8rem;
     font-weight: 500;
     color: #7dd3fc;
+  }
+
+  /* Data & Storage */
+  .node-data,
+  .node-storage {
+    border-color: rgba(148, 163, 184, 0.3);
   }
 
   /* Connection Arrow */
@@ -1056,7 +1042,6 @@ const tt = techT[lang as keyof typeof techT] || techT.es;
     .services {
       gap: 0.75rem;
     }
-
     .tech-footer {
       gap: 1rem;
     }
@@ -1064,21 +1049,17 @@ const tt = techT[lang as keyof typeof techT] || techT.es;
 
   @media (max-width: 600px) {
     .page-header {
-      padding: 80px 0 30px;
+      padding: 40px 0 30px;
     }
-
     .page-header h1 {
       font-size: 2rem;
     }
-
     .diagram {
       padding: 1.5rem 1rem;
     }
-
     .cta-section {
       padding: 40px 1.5rem;
     }
-
     .cta-button {
       width: 100%;
       justify-content: center;

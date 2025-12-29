@@ -1,178 +1,460 @@
 ---
 /**
  * Template: Módulos (índice)
- * Muestra los 8 módulos de RayGold con enlaces a cada submódulo
+ * Estilo original oscuro con iconos coloridos grandes
+ * Con soporte multiidioma
  */
 import Layout from "@/layouts/Layout.astro";
-import { getTranslations } from "@/i18n";
 import { getAlternateUrls, getPageUrl, type Lang } from "@/config/pages";
 
 interface Props {
   lang: Lang;
-  pageId: string;
 }
 
 const { lang } = Astro.props;
-const t = getTranslations(lang);
 const alternateUrls = getAlternateUrls("modulos");
 
-// Definición de módulos con iconos y colores
+// Definición de los 8 módulos con iconos originales
 const modulos = [
   {
-    id: "modulos/maestros",
-    key: "maestros",
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>`,
-    color: "#3b82f6",
+    id: "maestros",
+    color: "#667eea",
+    icono: `<svg viewBox="0 0 64 64" fill="none">
+      <rect x="8" y="12" width="48" height="40" rx="4" fill="currentColor" opacity="0.15"/>
+      <rect x="14" y="18" width="36" height="6" rx="2" fill="currentColor"/>
+      <rect x="14" y="28" width="24" height="4" rx="1" fill="currentColor" opacity="0.6"/>
+      <rect x="14" y="36" width="30" height="4" rx="1" fill="currentColor" opacity="0.6"/>
+      <rect x="14" y="44" width="20" height="4" rx="1" fill="currentColor" opacity="0.6"/>
+      <circle cx="46" cy="44" r="6" fill="#10b981"/>
+      <path d="M44 44l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round"/>
+    </svg>`,
   },
   {
-    id: "modulos/comercial",
-    key: "comercial",
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>`,
-    color: "#10b981",
+    id: "comercial",
+    color: "#06b6d4",
+    icono: `<svg viewBox="0 0 64 64" fill="none">
+      <rect x="8" y="16" width="48" height="36" rx="4" fill="currentColor" opacity="0.15"/>
+      <rect x="8" y="16" width="48" height="12" rx="4" fill="currentColor"/>
+      <circle cx="20" cy="22" r="3" fill="white"/>
+      <rect x="28" y="20" width="20" height="4" rx="2" fill="white" opacity="0.6"/>
+      <rect x="14" y="34" width="16" height="12" rx="2" fill="currentColor" opacity="0.4"/>
+      <rect x="34" y="34" width="16" height="12" rx="2" fill="currentColor" opacity="0.4"/>
+    </svg>`,
   },
   {
-    id: "modulos/fabricacion",
-    key: "fabricacion",
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/></svg>`,
+    id: "fabricacion",
     color: "#f59e0b",
+    icono: `<svg viewBox="0 0 64 64" fill="none">
+      <rect x="6" y="32" width="16" height="20" rx="2" fill="currentColor"/>
+      <rect x="24" y="24" width="16" height="28" rx="2" fill="currentColor" opacity="0.7"/>
+      <rect x="42" y="16" width="16" height="36" rx="2" fill="currentColor" opacity="0.4"/>
+      <circle cx="14" cy="18" r="8" fill="currentColor" opacity="0.3"/>
+      <circle cx="14" cy="18" r="4" fill="currentColor"/>
+      <path d="M14 10v-4M14 26v4M6 18H2M22 18h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>`,
   },
   {
-    id: "modulos/finanzas",
-    key: "finanzas",
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`,
+    id: "finanzas",
+    color: "#10b981",
+    icono: `<svg viewBox="0 0 64 64" fill="none">
+      <rect x="8" y="12" width="48" height="40" rx="4" fill="currentColor" opacity="0.15"/>
+      <rect x="14" y="18" width="36" height="8" rx="2" fill="currentColor"/>
+      <path d="M20 36h24M20 44h16" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="46" cy="40" r="8" fill="currentColor" opacity="0.3"/>
+      <text x="46" y="44" text-anchor="middle" fill="currentColor" font-size="12" font-weight="bold">€</text>
+    </svg>`,
+  },
+  {
+    id: "historicos",
     color: "#8b5cf6",
+    icono: `<svg viewBox="0 0 64 64" fill="none">
+      <rect x="8" y="12" width="48" height="40" rx="4" fill="currentColor" opacity="0.15"/>
+      <rect x="14" y="18" width="36" height="6" rx="2" fill="currentColor"/>
+      <circle cx="32" cy="38" r="12" fill="currentColor" opacity="0.3"/>
+      <path d="M32 30v8l6 4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+      <circle cx="32" cy="38" r="2" fill="currentColor"/>
+    </svg>`,
   },
   {
-    id: "modulos/historicos",
-    key: "historicos",
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
-    color: "#6366f1",
-  },
-  {
-    id: "modulos/estadisticas",
-    key: "estadisticas",
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>`,
+    id: "estadisticas",
     color: "#ec4899",
+    icono: `<svg viewBox="0 0 64 64" fill="none">
+      <rect x="8" y="12" width="48" height="40" rx="4" fill="currentColor" opacity="0.15"/>
+      <rect x="14" y="36" width="8" height="12" rx="1" fill="currentColor"/>
+      <rect x="26" y="28" width="8" height="20" rx="1" fill="currentColor" opacity="0.7"/>
+      <rect x="38" y="20" width="8" height="28" rx="1" fill="currentColor" opacity="0.5"/>
+      <path d="M14 24l12-6 12 4 12-8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="14" cy="24" r="2" fill="currentColor"/>
+      <circle cx="26" cy="18" r="2" fill="currentColor"/>
+      <circle cx="38" cy="22" r="2" fill="currentColor"/>
+      <circle cx="50" cy="14" r="2" fill="currentColor"/>
+    </svg>`,
   },
   {
-    id: "modulos/vendedores",
-    key: "vendedores",
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
-    color: "#14b8a6",
+    id: "vendedores",
+    color: "#3b82f6",
+    icono: `<svg viewBox="0 0 64 64" fill="none">
+      <circle cx="32" cy="20" r="10" fill="currentColor"/>
+      <path d="M16 52c0-10 7-16 16-16s16 6 16 16" fill="currentColor" opacity="0.4"/>
+      <circle cx="50" cy="28" r="6" fill="currentColor" opacity="0.6"/>
+      <circle cx="14" cy="28" r="6" fill="currentColor" opacity="0.6"/>
+      <path d="M44 48c0-6 4-10 10-10" stroke="currentColor" stroke-width="2" opacity="0.4"/>
+      <path d="M20 48c0-6-4-10-10-10" stroke="currentColor" stroke-width="2" opacity="0.4"/>
+    </svg>`,
   },
   {
-    id: "modulos/ecommerce",
-    key: "ecommerce",
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>`,
-    color: "#f97316",
+    id: "ecommerce",
+    color: "#6366f1",
+    icono: `<svg viewBox="0 0 64 64" fill="none">
+      <circle cx="32" cy="32" r="24" fill="currentColor" opacity="0.15"/>
+      <ellipse cx="32" cy="32" rx="24" ry="10" stroke="currentColor" stroke-width="2"/>
+      <ellipse cx="32" cy="32" rx="10" ry="24" stroke="currentColor" stroke-width="2"/>
+      <line x1="8" y1="32" x2="56" y2="32" stroke="currentColor" stroke-width="2"/>
+      <line x1="32" y1="8" x2="32" y2="56" stroke="currentColor" stroke-width="2"/>
+      <circle cx="32" cy="32" r="4" fill="currentColor"/>
+    </svg>`,
   },
 ];
 
-// Traducciones de módulos por idioma
-const modulesT: Record<string, Record<string, { title: string; description: string }>> = {
+// Traducciones de módulos
+const modulosT: Record<
+  Lang,
+  Record<string, { nombre: string; descripcion: string }>
+> = {
   es: {
-    maestros: { title: "Maestros", description: "Artículos, proveedores, clientes y familias" },
-    comercial: { title: "Comercial", description: "Ventas, pedidos y facturación" },
-    fabricacion: { title: "Fabricación", description: "Producción, órdenes de trabajo y control de mermas" },
-    finanzas: { title: "Finanzas", description: "Contabilidad, tesorería e IVA" },
-    historicos: { title: "Históricos", description: "Consulta de datos históricos y tendencias" },
-    estadisticas: { title: "Estadísticas", description: "Informes y cuadros de mando" },
-    vendedores: { title: "Vendedores", description: "Gestión de comisiones y objetivos" },
-    ecommerce: { title: "Ecommerce", description: "Tienda online sincronizada" },
+    maestros: {
+      nombre: "Maestros",
+      descripcion: "Artículos, proveedores, clientes y familias",
+    },
+    comercial: {
+      nombre: "Comercial",
+      descripcion: "Ventas, pedidos y facturación",
+    },
+    fabricacion: {
+      nombre: "Fabricación",
+      descripcion: "Producción, inventarios y calidad",
+    },
+    finanzas: {
+      nombre: "Finanzas",
+      descripcion: "Contabilidad, tesorería e IVA",
+    },
+    historicos: {
+      nombre: "Históricos",
+      descripcion: "Datos históricos y tendencias",
+    },
+    estadisticas: {
+      nombre: "Estadísticas",
+      descripcion: "Informes y cuadros de mando",
+    },
+    vendedores: {
+      nombre: "Vendedores",
+      descripcion: "Gestión de rutas y visitas",
+    },
+    ecommerce: {
+      nombre: "Ecommerce",
+      descripcion: "Tiendas online y marketplaces",
+    },
   },
   en: {
-    maestros: { title: "Masters", description: "Items, suppliers, customers and categories" },
-    comercial: { title: "Commercial", description: "Sales, orders and invoicing" },
-    fabricacion: { title: "Manufacturing", description: "Production, work orders and loss control" },
-    finanzas: { title: "Finance", description: "Accounting, treasury and VAT" },
-    historicos: { title: "Historical", description: "Historical data query and trends" },
-    estadisticas: { title: "Statistics", description: "Reports and dashboards" },
-    vendedores: { title: "Sales Reps", description: "Commission and target management" },
-    ecommerce: { title: "Ecommerce", description: "Synchronized online store" },
+    maestros: {
+      nombre: "Masters",
+      descripcion: "Items, suppliers, customers and families",
+    },
+    comercial: {
+      nombre: "Commercial",
+      descripcion: "Sales, orders and invoicing",
+    },
+    fabricacion: {
+      nombre: "Manufacturing",
+      descripcion: "Production, inventory and quality",
+    },
+    finanzas: {
+      nombre: "Finance",
+      descripcion: "Accounting, treasury and VAT",
+    },
+    historicos: {
+      nombre: "History",
+      descripcion: "Historical data and trends",
+    },
+    estadisticas: {
+      nombre: "Statistics",
+      descripcion: "Reports and dashboards",
+    },
+    vendedores: {
+      nombre: "Sales Reps",
+      descripcion: "Route and visit management",
+    },
+    ecommerce: {
+      nombre: "Ecommerce",
+      descripcion: "Online stores and marketplaces",
+    },
   },
   fr: {
-    maestros: { title: "Maîtres", description: "Articles, fournisseurs, clients et familles" },
-    comercial: { title: "Commercial", description: "Ventes, commandes et facturation" },
-    fabricacion: { title: "Fabrication", description: "Production, ordres de travail et contrôle des pertes" },
-    finanzas: { title: "Finances", description: "Comptabilité, trésorerie et TVA" },
-    historicos: { title: "Historiques", description: "Consultation des données historiques" },
-    estadisticas: { title: "Statistiques", description: "Rapports et tableaux de bord" },
-    vendedores: { title: "Vendeurs", description: "Gestion des commissions et objectifs" },
-    ecommerce: { title: "Ecommerce", description: "Boutique en ligne synchronisée" },
+    maestros: {
+      nombre: "Maîtres",
+      descripcion: "Articles, fournisseurs, clients et familles",
+    },
+    comercial: {
+      nombre: "Commercial",
+      descripcion: "Ventes, commandes et facturation",
+    },
+    fabricacion: {
+      nombre: "Fabrication",
+      descripcion: "Production, inventaires et qualité",
+    },
+    finanzas: {
+      nombre: "Finances",
+      descripcion: "Comptabilité, trésorerie et TVA",
+    },
+    historicos: {
+      nombre: "Historique",
+      descripcion: "Données historiques et tendances",
+    },
+    estadisticas: {
+      nombre: "Statistiques",
+      descripcion: "Rapports et tableaux de bord",
+    },
+    vendedores: {
+      nombre: "Vendeurs",
+      descripcion: "Gestion des routes et visites",
+    },
+    ecommerce: {
+      nombre: "Ecommerce",
+      descripcion: "Boutiques en ligne et marketplaces",
+    },
   },
   ca: {
-    maestros: { title: "Mestres", description: "Articles, proveïdors, clients i famílies" },
-    comercial: { title: "Comercial", description: "Vendes, comandes i facturació" },
-    fabricacion: { title: "Fabricació", description: "Producció, ordres de treball i control de mermes" },
-    finanzas: { title: "Finances", description: "Comptabilitat, tresoreria i IVA" },
-    historicos: { title: "Històrics", description: "Consulta de dades històriques" },
-    estadisticas: { title: "Estadístiques", description: "Informes i quadres de comandament" },
-    vendedores: { title: "Venedors", description: "Gestió de comissions i objectius" },
-    ecommerce: { title: "Ecommerce", description: "Botiga online sincronitzada" },
+    maestros: {
+      nombre: "Mestres",
+      descripcion: "Articles, proveïdors, clients i famílies",
+    },
+    comercial: {
+      nombre: "Comercial",
+      descripcion: "Vendes, comandes i facturació",
+    },
+    fabricacion: {
+      nombre: "Fabricació",
+      descripcion: "Producció, inventaris i qualitat",
+    },
+    finanzas: {
+      nombre: "Finances",
+      descripcion: "Comptabilitat, tresoreria i IVA",
+    },
+    historicos: {
+      nombre: "Històrics",
+      descripcion: "Dades històriques i tendències",
+    },
+    estadisticas: {
+      nombre: "Estadístiques",
+      descripcion: "Informes i quadres de comandament",
+    },
+    vendedores: {
+      nombre: "Venedors",
+      descripcion: "Gestió de rutes i visites",
+    },
+    ecommerce: {
+      nombre: "Ecommerce",
+      descripcion: "Botigues online i marketplaces",
+    },
   },
   "pt-br": {
-    maestros: { title: "Mestres", description: "Artigos, fornecedores, clientes e famílias" },
-    comercial: { title: "Comercial", description: "Vendas, pedidos e faturamento" },
-    fabricacion: { title: "Fabricação", description: "Produção, ordens de trabalho e controle de perdas" },
-    finanzas: { title: "Finanças", description: "Contabilidade, tesouraria e IVA" },
-    historicos: { title: "Históricos", description: "Consulta de dados históricos" },
-    estadisticas: { title: "Estatísticas", description: "Relatórios e painéis" },
-    vendedores: { title: "Vendedores", description: "Gestão de comissões e metas" },
-    ecommerce: { title: "Ecommerce", description: "Loja online sincronizada" },
+    maestros: {
+      nombre: "Cadastros",
+      descripcion: "Artigos, fornecedores, clientes e famílias",
+    },
+    comercial: {
+      nombre: "Comercial",
+      descripcion: "Vendas, pedidos e faturamento",
+    },
+    fabricacion: {
+      nombre: "Fabricação",
+      descripcion: "Produção, estoques e qualidade",
+    },
+    finanzas: {
+      nombre: "Finanças",
+      descripcion: "Contabilidade, tesouraria e impostos",
+    },
+    historicos: {
+      nombre: "Históricos",
+      descripcion: "Dados históricos e tendências",
+    },
+    estadisticas: {
+      nombre: "Estatísticas",
+      descripcion: "Relatórios e painéis",
+    },
+    vendedores: {
+      nombre: "Vendedores",
+      descripcion: "Gestão de rotas e visitas",
+    },
+    ecommerce: {
+      nombre: "Ecommerce",
+      descripcion: "Lojas online e marketplaces",
+    },
   },
 };
 
-// Textos generales de la página
-const pageT: Record<string, { title: string; subtitle: string; metaTitle: string; metaDesc: string; ctaTitle: string; ctaDesc: string; ctaBtn: string }> = {
-  es: { 
-    title: "Módulos", 
-    subtitle: "8 módulos integrados para tu joyería",
-    metaTitle: "Módulos | RayGold ERP",
-    metaDesc: "8 módulos integrados para gestionar tu joyería",
-    ctaTitle: "¿Listo para empezar?", 
-    ctaDesc: "Solicita una demo personalizada y descubre todo el potencial de RayGold", 
-    ctaBtn: "Solicitar demo" 
+// Textos de la página
+const pageT: Record<
+  Lang,
+  {
+    badge: string;
+    title: string;
+    subtitle: string;
+    metaTitle: string;
+    metaDesc: string;
+    ctaTitle: string;
+    ctaDesc: string;
+    ctaDemo: string;
+    ctaPrecios: string;
+  }
+> = {
+  es: {
+    badge: "SOLUCIÓN COMPLETA",
+    title: "8 módulos integrados para tu joyería",
+    subtitle:
+      "Todo lo que necesitas en un solo sistema. Cada módulo está diseñado específicamente para el sector joyero.",
+    metaTitle: "Módulos | RayGold ERP para Joyería",
+    metaDesc:
+      "8 módulos integrados para gestionar tu joyería: Maestros, Comercial, Fabricación, Finanzas, Históricos, Estadísticas, Vendedores y Ecommerce.",
+    ctaTitle: "¿Quieres ver todos los módulos en acción?",
+    ctaDesc:
+      "Solicita una demostración personalizada y descubre cómo RayGold puede transformar tu negocio.",
+    ctaDemo: "Solicitar Demo",
+    ctaPrecios: "Ver Precios",
   },
-  en: { 
-    title: "Modules", 
-    subtitle: "8 integrated modules for your jewelry business",
-    metaTitle: "Modules | RayGold ERP",
-    metaDesc: "8 integrated modules to manage your jewelry business",
-    ctaTitle: "Ready to get started?", 
-    ctaDesc: "Request a personalized demo and discover RayGold's full potential", 
-    ctaBtn: "Request demo" 
+  en: {
+    badge: "COMPLETE SOLUTION",
+    title: "8 integrated modules for your jewelry",
+    subtitle:
+      "Everything you need in one system. Each module is specifically designed for the jewelry sector.",
+    metaTitle: "Modules | RayGold ERP for Jewelry",
+    metaDesc:
+      "8 integrated modules to manage your jewelry business: Masters, Commercial, Manufacturing, Finance, History, Statistics, Sales Reps and Ecommerce.",
+    ctaTitle: "Want to see all modules in action?",
+    ctaDesc:
+      "Request a personalized demo and discover how RayGold can transform your business.",
+    ctaDemo: "Request Demo",
+    ctaPrecios: "View Pricing",
   },
-  fr: { 
-    title: "Modules", 
-    subtitle: "8 modules intégrés pour votre bijouterie",
-    metaTitle: "Modules | RayGold ERP",
-    metaDesc: "8 modules intégrés pour gérer votre bijouterie",
-    ctaTitle: "Prêt à commencer?", 
-    ctaDesc: "Demandez une démo personnalisée et découvrez tout le potentiel de RayGold", 
-    ctaBtn: "Demander une démo" 
+  fr: {
+    badge: "SOLUTION COMPLÈTE",
+    title: "8 modules intégrés pour votre bijouterie",
+    subtitle:
+      "Tout ce dont vous avez besoin en un seul système. Chaque module est spécifiquement conçu pour le secteur de la bijouterie.",
+    metaTitle: "Modules | RayGold ERP pour Bijouterie",
+    metaDesc:
+      "8 modules intégrés pour gérer votre bijouterie: Maîtres, Commercial, Fabrication, Finances, Historique, Statistiques, Vendeurs et Ecommerce.",
+    ctaTitle: "Vous voulez voir tous les modules en action?",
+    ctaDesc:
+      "Demandez une démonstration personnalisée et découvrez comment RayGold peut transformer votre entreprise.",
+    ctaDemo: "Demander une Démo",
+    ctaPrecios: "Voir les Tarifs",
   },
-  ca: { 
-    title: "Mòduls", 
-    subtitle: "8 mòduls integrats per a la teva joieria",
-    metaTitle: "Mòduls | RayGold ERP",
-    metaDesc: "8 mòduls integrats per gestionar la teva joieria",
-    ctaTitle: "Preparat per començar?", 
-    ctaDesc: "Sol·licita una demo personalitzada i descobreix tot el potencial de RayGold", 
-    ctaBtn: "Sol·licitar demo" 
+  ca: {
+    badge: "SOLUCIÓ COMPLETA",
+    title: "8 mòduls integrats per a la teva joieria",
+    subtitle:
+      "Tot el que necessites en un sol sistema. Cada mòdul està dissenyat específicament per al sector joier.",
+    metaTitle: "Mòduls | RayGold ERP per a Joieria",
+    metaDesc:
+      "8 mòduls integrats per gestionar la teva joieria: Mestres, Comercial, Fabricació, Finances, Històrics, Estadístiques, Venedors i Ecommerce.",
+    ctaTitle: "Vols veure tots els mòduls en acció?",
+    ctaDesc:
+      "Sol·licita una demostració personalitzada i descobreix com RayGold pot transformar el teu negoci.",
+    ctaDemo: "Sol·licitar Demo",
+    ctaPrecios: "Veure Preus",
   },
-  "pt-br": { 
-    title: "Módulos", 
-    subtitle: "8 módulos integrados para sua joalheria",
-    metaTitle: "Módulos | RayGold ERP",
-    metaDesc: "8 módulos integrados para gerenciar sua joalheria",
-    ctaTitle: "Pronto para começar?", 
-    ctaDesc: "Solicite uma demo personalizada e descubra todo o potencial do RayGold", 
-    ctaBtn: "Solicitar demo" 
+  "pt-br": {
+    badge: "SOLUÇÃO COMPLETA",
+    title: "8 módulos integrados para sua joalheria",
+    subtitle:
+      "Tudo o que você precisa em um único sistema. Cada módulo é projetado especificamente para o setor joalheiro.",
+    metaTitle: "Módulos | RayGold ERP para Joalheria",
+    metaDesc:
+      "8 módulos integrados para gerenciar sua joalheria: Cadastros, Comercial, Fabricação, Finanças, Históricos, Estatísticas, Vendedores e Ecommerce.",
+    ctaTitle: "Quer ver todos os módulos em ação?",
+    ctaDesc:
+      "Solicite uma demonstração personalizada e descubra como o RayGold pode transformar seu negócio.",
+    ctaDemo: "Solicitar Demo",
+    ctaPrecios: "Ver Preços",
   },
 };
 
 const pt = pageT[lang] || pageT.es;
-const mt = modulesT[lang] || modulesT.es;
+const mt = modulosT[lang] || modulosT.es;
+
+// Slugs de submódulos por idioma
+const submoduloSlugs: Record<string, Record<Lang, string>> = {
+  maestros: {
+    es: "maestros",
+    en: "masters",
+    fr: "maitres",
+    ca: "mestres",
+    "pt-br": "cadastros",
+  },
+  comercial: {
+    es: "comercial",
+    en: "commercial",
+    fr: "commercial",
+    ca: "comercial",
+    "pt-br": "comercial",
+  },
+  fabricacion: {
+    es: "fabricacion",
+    en: "manufacturing",
+    fr: "fabrication",
+    ca: "fabricacio",
+    "pt-br": "fabricacao",
+  },
+  finanzas: {
+    es: "finanzas",
+    en: "finance",
+    fr: "finances",
+    ca: "finances",
+    "pt-br": "financas",
+  },
+  historicos: {
+    es: "historicos",
+    en: "history",
+    fr: "historique",
+    ca: "historics",
+    "pt-br": "historicos",
+  },
+  estadisticas: {
+    es: "estadisticas",
+    en: "statistics",
+    fr: "statistiques",
+    ca: "estadistiques",
+    "pt-br": "estatisticas",
+  },
+  vendedores: {
+    es: "vendedores",
+    en: "sales-reps",
+    fr: "vendeurs",
+    ca: "venedors",
+    "pt-br": "vendedores",
+  },
+  ecommerce: {
+    es: "ecommerce",
+    en: "ecommerce",
+    fr: "ecommerce",
+    ca: "ecommerce",
+    "pt-br": "ecommerce",
+  },
+};
+
+function getModuloUrl(key: string): string {
+  const slug = submoduloSlugs[key]?.[lang] || key;
+  const modulosSlug =
+    lang === "en"
+      ? "modules"
+      : lang === "fr"
+        ? "modules"
+        : lang === "ca"
+          ? "moduls"
+          : "modulos";
+  return `/${lang}/${modulosSlug}/${slug}`;
+}
 ---
 
 <Layout
@@ -181,220 +463,324 @@ const mt = modulesT[lang] || modulesT.es;
   lang={lang}
   alternateUrls={alternateUrls}
 >
-  <!-- Hero Section -->
-  <section class="modules-hero">
-    <div class="container">
-      <h1>{pt.title}</h1>
-      <p>{pt.subtitle}</p>
-    </div>
-  </section>
-
-  <!-- Modules Grid -->
-  <section class="modules-section">
-    <div class="container">
-      <div class="modules-grid">
-        {modulos.map((modulo) => {
-          const moduleData = mt[modulo.key];
-          return (
-            <a
-              href={`/${lang}/${modulo.id}`}
-              class="module-card"
-              style={`--module-color: ${modulo.color}`}
-            >
-              <div class="module-icon" set:html={modulo.icon} />
-              <div class="module-content">
-                <h3>{moduleData.title}</h3>
-                <p>{moduleData.description}</p>
-              </div>
-              <div class="module-arrow">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <line x1="5" y1="12" x2="19" y2="12" />
-                  <polyline points="12 5 19 12 12 19" />
-                </svg>
-              </div>
-            </a>
-          );
-        })}
+  <main class="modulos-page">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container">
+        <span class="badge">{pt.badge}</span>
+        <h1>{pt.title}</h1>
+        <p class="hero-subtitle">{pt.subtitle}</p>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- CTA Section -->
-  <section class="cta-section">
-    <div class="container">
-      <h2>{pt.ctaTitle}</h2>
-      <p>{pt.ctaDesc}</p>
-      <a href={getPageUrl("contacto", lang)} class="cta-button">
-        {pt.ctaBtn}
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
-          <line x1="5" y1="12" x2="19" y2="12"></line>
-          <polyline points="12 5 19 12 12 19"></polyline>
-        </svg>
-      </a>
-    </div>
-  </section>
+    <!-- Grid de Módulos -->
+    <section class="modulos-section">
+      <div class="container">
+        <div class="modulos-grid">
+          {
+            modulos.map((modulo) => {
+              const data = mt[modulo.id];
+              return (
+                <a
+                  href={getModuloUrl(modulo.id)}
+                  class="modulo-card"
+                  style={`--modulo-color: ${modulo.color}`}
+                >
+                  <div class="modulo-icon" set:html={modulo.icono} />
+                  <div class="modulo-content">
+                    <h3>{data.nombre}</h3>
+                    <p>{data.descripcion}</p>
+                  </div>
+                  <div class="modulo-arrow">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </a>
+              );
+            })
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="container">
+        <h2>{pt.ctaTitle}</h2>
+        <p>{pt.ctaDesc}</p>
+        <div class="cta-buttons">
+          <a href={getPageUrl("contacto", lang)} class="btn-primary"
+            >{pt.ctaDemo}</a
+          >
+          <a href={getPageUrl("precios", lang)} class="btn-secondary"
+            >{pt.ctaPrecios}</a
+          >
+        </div>
+      </div>
+    </section>
+  </main>
 </Layout>
 
 <style>
-  .modules-hero {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 40px 0 60px;
-    text-align: center;
+  .modulos-page {
+    background: #0f172a;
     color: white;
-  }
-
-  .modules-hero h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin: 0 0 16px;
-  }
-
-  .modules-hero p {
-    font-size: 1.2rem;
-    opacity: 0.9;
-    max-width: 600px;
-    margin: 0 auto;
   }
 
   .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 0 1.5rem;
   }
 
-  .modules-section {
-    padding: 60px 0;
-    background: #f8fafc;
+  /* Hero */
+  .hero-section {
+    padding: 4rem 0 3rem;
+    text-align: center;
   }
 
-  .modules-grid {
+  .badge {
+    display: inline-block;
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-section h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 1rem;
+    background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+    color: #94a3b8;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* Grid de Módulos */
+  .modulos-section {
+    padding: 2rem 0 4rem;
+  }
+
+  .modulos-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
   }
 
-  .module-card {
+  .modulo-card {
+    background: rgba(30, 41, 59, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-decoration: none;
     display: flex;
     align-items: center;
-    gap: 20px;
-    padding: 24px;
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-    text-decoration: none;
-    color: inherit;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
+    gap: 1rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
   }
 
-  .module-card:hover {
+  .modulo-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--modulo-color);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  .modulo-card:hover {
+    background: rgba(30, 41, 59, 0.8);
+    border-color: var(--modulo-color);
     transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-    border-color: var(--module-color);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
   }
 
-  .module-icon {
+  .modulo-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .modulo-icon {
     width: 56px;
     height: 56px;
-    background: color-mix(in srgb, var(--module-color) 15%, transparent);
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
+    min-width: 56px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 10px;
+    color: var(--modulo-color);
+    transition: all 0.3s ease;
   }
 
-  .module-icon :global(svg) {
-    width: 28px;
-    height: 28px;
-    stroke: var(--module-color);
+  .modulo-card:hover .modulo-icon {
+    background: var(--modulo-color);
+    color: white;
+    transform: scale(1.05);
   }
 
-  .module-content {
+  .modulo-icon :global(svg) {
+    width: 100%;
+    height: 100%;
+  }
+
+  .modulo-content {
     flex: 1;
   }
 
-  .module-content h3 {
+  .modulo-content h3 {
     font-size: 1.1rem;
     font-weight: 600;
-    color: #1e293b;
-    margin: 0 0 6px;
+    color: white;
+    margin: 0 0 0.25rem;
   }
 
-  .module-content p {
-    font-size: 0.875rem;
-    color: #64748b;
+  .modulo-content p {
+    font-size: 0.85rem;
+    color: #94a3b8;
     margin: 0;
-    line-height: 1.5;
+    line-height: 1.4;
   }
 
-  .module-arrow {
-    opacity: 0;
-    transform: translateX(-10px);
+  .modulo-arrow {
+    width: 24px;
+    height: 24px;
+    color: #64748b;
     transition: all 0.3s ease;
   }
 
-  .module-arrow svg {
-    width: 24px;
-    height: 24px;
-    stroke: var(--module-color);
+  .modulo-card:hover .modulo-arrow {
+    color: var(--modulo-color);
+    transform: translateX(4px);
   }
 
-  .module-card:hover .module-arrow {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
+  /* CTA */
   .cta-section {
-    padding: 60px 0;
+    padding: 4rem 0;
     text-align: center;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    background: linear-gradient(
+      135deg,
+      rgba(102, 126, 234, 0.1) 0%,
+      rgba(118, 75, 162, 0.1) 100%
+    );
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
   }
 
   .cta-section h2 {
     font-size: 1.75rem;
-    font-weight: 700;
-    color: #1e293b;
-    margin: 0 0 12px;
+    font-weight: 600;
+    margin: 0 0 0.75rem;
   }
 
   .cta-section p {
-    font-size: 1.1rem;
-    color: #64748b;
-    margin: 0 0 32px;
+    color: #94a3b8;
+    margin: 0 0 2rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  .cta-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 28px;
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
+    padding: 0.875rem 2rem;
+    border-radius: 10px;
     text-decoration: none;
-    border-radius: 12px;
-    font-weight: 600;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 16px rgba(102, 126, 234, 0.4);
+    font-weight: 500;
+    transition: all 0.2s ease;
   }
 
-  .cta-button:hover {
+  .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
   }
 
+  .btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 0.875rem 2rem;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 500;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.2s ease;
+  }
+
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  /* Responsive */
   @media (max-width: 768px) {
-    .modules-hero h1 {
-      font-size: 2rem;
+    .hero-section {
+      padding: 3rem 0 2rem;
     }
 
-    .modules-grid {
+    .hero-section h1 {
+      font-size: 1.75rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+    }
+
+    .modulos-grid {
       grid-template-columns: 1fr;
     }
 
-    .module-card {
-      padding: 20px;
+    .modulo-card {
+      padding: 1.25rem;
+    }
+
+    .modulo-icon {
+      width: 48px;
+      height: 48px;
+      min-width: 48px;
+    }
+
+    .cta-section {
+      padding: 3rem 0;
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      width: 100%;
+      max-width: 280px;
+      text-align: center;
     }
   }
 </style>

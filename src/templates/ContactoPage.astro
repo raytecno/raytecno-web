@@ -1,201 +1,961 @@
 ---
 /**
  * Template: Contacto
- *
- * Este componente recibe el idioma y renderiza la página de contacto
- * con todas las traducciones correspondientes.
+ * Página de contacto con formulario y login demo
+ * Con soporte multiidioma
  */
 import Layout from "@/layouts/Layout.astro";
-import { getTranslations } from "@/i18n";
-import { getAlternateUrls, type Lang } from "@/config/pages";
+import { getAlternateUrls, getPageUrl, type Lang } from "@/config/pages";
 
 interface Props {
-  lang: string;
-  pageId: string;
+  lang: Lang;
 }
 
 const { lang } = Astro.props;
-const t = getTranslations(lang as Lang);
-
-// URLs alternativas para hreflang
 const alternateUrls = getAlternateUrls("contacto");
+
+// Traducciones de contacto
+const contactT: Record<
+  Lang,
+  {
+    metaTitle: string;
+    metaDesc: string;
+    badge: string;
+    title: string;
+    titleHighlight: string;
+    subtitle: string;
+    formCard: { title: string; subtitle: string };
+    form: {
+      company: string;
+      companyPlaceholder: string;
+      name: string;
+      namePlaceholder: string;
+      phone: string;
+      email: string;
+      interest: string;
+      interestOptions: { value: string; label: string }[];
+      size: string;
+      sizeOptions: { value: string; label: string }[];
+      message: string;
+      messagePlaceholder: string;
+      submit: string;
+      sending: string;
+    };
+    demoCard: { title: string; subtitle: string; features: string[] };
+    loginTab: string;
+    registerTab: string;
+    login: {
+      user: string;
+      password: string;
+      submit: string;
+      forgot: string;
+    };
+    register: {
+      name: string;
+      surname: string;
+      company: string;
+      email: string;
+      user: string;
+      password: string;
+      terms: string;
+      termsLink: string;
+      submit: string;
+    };
+    directContact: {
+      title: string;
+      phone: string;
+      whatsapp: string;
+      email: string;
+    };
+    cta: { title: string; subtitle: string; button: string };
+  }
+> = {
+  es: {
+    metaTitle: "Contacto | RayGold ERP para Joyería",
+    metaDesc:
+      "Contacta con RayGold para solicitar una demo gratuita o información sobre nuestro software ERP para joyerías.",
+    badge: "Contacto",
+    title: "¿Listo para transformar",
+    titleHighlight: "tu joyería?",
+    subtitle:
+      "Solicita una demo gratuita y descubre por qué más de 200 joyerías confían en RayGold",
+    formCard: {
+      title: "Envíanos un mensaje",
+      subtitle: "Te contactaremos en menos de 24h",
+    },
+    form: {
+      company: "Empresa",
+      companyPlaceholder: "Joyería Ejemplo S.L.",
+      name: "Nombre",
+      namePlaceholder: "Juan García",
+      phone: "Teléfono",
+      email: "Email",
+      interest: "Interés principal",
+      interestOptions: [
+        { value: "informacion", label: "Información general" },
+        { value: "demo", label: "Solicitar demo" },
+        { value: "presupuesto", label: "Presupuesto personalizado" },
+        { value: "soporte", label: "Soporte técnico" },
+      ],
+      size: "Tamaño empresa",
+      sizeOptions: [
+        { value: "1-5", label: "1-5 empleados" },
+        { value: "6-15", label: "6-15 empleados" },
+        { value: "16-50", label: "16-50 empleados" },
+        { value: "50+", label: "Más de 50" },
+      ],
+      message: "Mensaje",
+      messagePlaceholder: "Cuéntanos sobre tu joyería y qué necesitas...",
+      submit: "Enviar mensaje",
+      sending: "Enviando...",
+    },
+    demoCard: {
+      title: "Acceso Demo",
+      subtitle: "Prueba RayGold gratis",
+      features: ["Sin compromiso", "Datos de ejemplo", "Todas las funciones"],
+    },
+    loginTab: "Iniciar sesión",
+    registerTab: "Crear cuenta",
+    login: {
+      user: "Usuario",
+      password: "Contraseña",
+      submit: "Entrar",
+      forgot: "¿Olvidaste tu contraseña?",
+    },
+    register: {
+      name: "Nombre",
+      surname: "Apellido",
+      company: "Empresa",
+      email: "Email",
+      user: "Usuario",
+      password: "Contraseña",
+      terms: "Acepto los",
+      termsLink: "términos y condiciones",
+      submit: "Crear cuenta",
+    },
+    directContact: {
+      title: "Contacto directo",
+      phone: "Llámanos",
+      whatsapp: "WhatsApp",
+      email: "Email",
+    },
+    cta: {
+      title: "¿Prefieres que te llamemos?",
+      subtitle: "Déjanos tu teléfono y te contactamos",
+      button: "Solicitar llamada",
+    },
+  },
+  en: {
+    metaTitle: "Contact | RayGold ERP for Jewelry",
+    metaDesc:
+      "Contact RayGold to request a free demo or information about our ERP software for jewelers.",
+    badge: "Contact",
+    title: "Ready to transform",
+    titleHighlight: "your jewelry business?",
+    subtitle:
+      "Request a free demo and discover why over 200 jewelers trust RayGold",
+    formCard: {
+      title: "Send us a message",
+      subtitle: "We will contact you within 24h",
+    },
+    form: {
+      company: "Company",
+      companyPlaceholder: "Example Jewelry Ltd.",
+      name: "Name",
+      namePlaceholder: "John Smith",
+      phone: "Phone",
+      email: "Email",
+      interest: "Main interest",
+      interestOptions: [
+        { value: "informacion", label: "General information" },
+        { value: "demo", label: "Request demo" },
+        { value: "presupuesto", label: "Custom quote" },
+        { value: "soporte", label: "Technical support" },
+      ],
+      size: "Company size",
+      sizeOptions: [
+        { value: "1-5", label: "1-5 employees" },
+        { value: "6-15", label: "6-15 employees" },
+        { value: "16-50", label: "16-50 employees" },
+        { value: "50+", label: "More than 50" },
+      ],
+      message: "Message",
+      messagePlaceholder:
+        "Tell us about your jewelry business and what you need...",
+      submit: "Send message",
+      sending: "Sending...",
+    },
+    demoCard: {
+      title: "Demo Access",
+      subtitle: "Try RayGold for free",
+      features: ["No commitment", "Sample data", "All features"],
+    },
+    loginTab: "Sign in",
+    registerTab: "Create account",
+    login: {
+      user: "Username",
+      password: "Password",
+      submit: "Sign in",
+      forgot: "Forgot your password?",
+    },
+    register: {
+      name: "Name",
+      surname: "Surname",
+      company: "Company",
+      email: "Email",
+      user: "Username",
+      password: "Password",
+      terms: "I accept the",
+      termsLink: "terms and conditions",
+      submit: "Create account",
+    },
+    directContact: {
+      title: "Direct contact",
+      phone: "Call us",
+      whatsapp: "WhatsApp",
+      email: "Email",
+    },
+    cta: {
+      title: "Prefer us to call you?",
+      subtitle: "Leave your phone and we'll contact you",
+      button: "Request call",
+    },
+  },
+  fr: {
+    metaTitle: "Contact | RayGold ERP pour Bijouterie",
+    metaDesc:
+      "Contactez RayGold pour demander une démo gratuite ou des informations sur notre logiciel ERP pour bijouteries.",
+    badge: "Contact",
+    title: "Prêt à transformer",
+    titleHighlight: "votre bijouterie?",
+    subtitle:
+      "Demandez une démo gratuite et découvrez pourquoi plus de 200 bijouteries font confiance à RayGold",
+    formCard: {
+      title: "Envoyez-nous un message",
+      subtitle: "Nous vous contacterons sous 24h",
+    },
+    form: {
+      company: "Entreprise",
+      companyPlaceholder: "Bijouterie Exemple SARL",
+      name: "Nom",
+      namePlaceholder: "Jean Dupont",
+      phone: "Téléphone",
+      email: "Email",
+      interest: "Intérêt principal",
+      interestOptions: [
+        { value: "informacion", label: "Information générale" },
+        { value: "demo", label: "Demander démo" },
+        { value: "presupuesto", label: "Devis personnalisé" },
+        { value: "soporte", label: "Support technique" },
+      ],
+      size: "Taille entreprise",
+      sizeOptions: [
+        { value: "1-5", label: "1-5 employés" },
+        { value: "6-15", label: "6-15 employés" },
+        { value: "16-50", label: "16-50 employés" },
+        { value: "50+", label: "Plus de 50" },
+      ],
+      message: "Message",
+      messagePlaceholder:
+        "Parlez-nous de votre bijouterie et de vos besoins...",
+      submit: "Envoyer message",
+      sending: "Envoi...",
+    },
+    demoCard: {
+      title: "Accès Démo",
+      subtitle: "Essayez RayGold gratuitement",
+      features: ["Sans engagement", "Données exemple", "Toutes fonctions"],
+    },
+    loginTab: "Connexion",
+    registerTab: "Créer compte",
+    login: {
+      user: "Utilisateur",
+      password: "Mot de passe",
+      submit: "Connexion",
+      forgot: "Mot de passe oublié?",
+    },
+    register: {
+      name: "Prénom",
+      surname: "Nom",
+      company: "Entreprise",
+      email: "Email",
+      user: "Utilisateur",
+      password: "Mot de passe",
+      terms: "J'accepte les",
+      termsLink: "conditions générales",
+      submit: "Créer compte",
+    },
+    directContact: {
+      title: "Contact direct",
+      phone: "Appelez-nous",
+      whatsapp: "WhatsApp",
+      email: "Email",
+    },
+    cta: {
+      title: "Préférez-vous qu'on vous appelle?",
+      subtitle: "Laissez votre téléphone et nous vous contacterons",
+      button: "Demander appel",
+    },
+  },
+  ca: {
+    metaTitle: "Contacte | RayGold ERP per a Joieria",
+    metaDesc:
+      "Contacta amb RayGold per sol·licitar una demo gratuïta o informació sobre el nostre software ERP per a joieries.",
+    badge: "Contacte",
+    title: "Preparat per transformar",
+    titleHighlight: "la teva joieria?",
+    subtitle:
+      "Sol·licita una demo gratuïta i descobreix per què més de 200 joieries confien en RayGold",
+    formCard: {
+      title: "Envia'ns un missatge",
+      subtitle: "Et contactarem en menys de 24h",
+    },
+    form: {
+      company: "Empresa",
+      companyPlaceholder: "Joieria Exemple S.L.",
+      name: "Nom",
+      namePlaceholder: "Joan Garcia",
+      phone: "Telèfon",
+      email: "Email",
+      interest: "Interès principal",
+      interestOptions: [
+        { value: "informacion", label: "Informació general" },
+        { value: "demo", label: "Sol·licitar demo" },
+        { value: "presupuesto", label: "Pressupost personalitzat" },
+        { value: "soporte", label: "Suport tècnic" },
+      ],
+      size: "Mida empresa",
+      sizeOptions: [
+        { value: "1-5", label: "1-5 empleats" },
+        { value: "6-15", label: "6-15 empleats" },
+        { value: "16-50", label: "16-50 empleats" },
+        { value: "50+", label: "Més de 50" },
+      ],
+      message: "Missatge",
+      messagePlaceholder:
+        "Explica'ns sobre la teva joieria i què necessites...",
+      submit: "Enviar missatge",
+      sending: "Enviant...",
+    },
+    demoCard: {
+      title: "Accés Demo",
+      subtitle: "Prova RayGold gratis",
+      features: ["Sense compromís", "Dades d'exemple", "Totes les funcions"],
+    },
+    loginTab: "Iniciar sessió",
+    registerTab: "Crear compte",
+    login: {
+      user: "Usuari",
+      password: "Contrasenya",
+      submit: "Entrar",
+      forgot: "Has oblidat la contrasenya?",
+    },
+    register: {
+      name: "Nom",
+      surname: "Cognom",
+      company: "Empresa",
+      email: "Email",
+      user: "Usuari",
+      password: "Contrasenya",
+      terms: "Accepto els",
+      termsLink: "termes i condicions",
+      submit: "Crear compte",
+    },
+    directContact: {
+      title: "Contacte directe",
+      phone: "Truca'ns",
+      whatsapp: "WhatsApp",
+      email: "Email",
+    },
+    cta: {
+      title: "Prefereixis que et truquem?",
+      subtitle: "Deixa'ns el teu telèfon i et contactem",
+      button: "Sol·licitar trucada",
+    },
+  },
+  "pt-br": {
+    metaTitle: "Contato | RayGold ERP para Joalheria",
+    metaDesc:
+      "Entre em contato com RayGold para solicitar uma demo gratuita ou informações sobre nosso software ERP para joalherias.",
+    badge: "Contato",
+    title: "Pronto para transformar",
+    titleHighlight: "sua joalheria?",
+    subtitle:
+      "Solicite uma demo gratuita e descubra por que mais de 200 joalherias confiam no RayGold",
+    formCard: {
+      title: "Envie-nos uma mensagem",
+      subtitle: "Entraremos em contato em 24h",
+    },
+    form: {
+      company: "Empresa",
+      companyPlaceholder: "Joalheria Exemplo Ltda.",
+      name: "Nome",
+      namePlaceholder: "João Silva",
+      phone: "Telefone",
+      email: "Email",
+      interest: "Interesse principal",
+      interestOptions: [
+        { value: "informacion", label: "Informação geral" },
+        { value: "demo", label: "Solicitar demo" },
+        { value: "presupuesto", label: "Orçamento personalizado" },
+        { value: "soporte", label: "Suporte técnico" },
+      ],
+      size: "Tamanho empresa",
+      sizeOptions: [
+        { value: "1-5", label: "1-5 funcionários" },
+        { value: "6-15", label: "6-15 funcionários" },
+        { value: "16-50", label: "16-50 funcionários" },
+        { value: "50+", label: "Mais de 50" },
+      ],
+      message: "Mensagem",
+      messagePlaceholder:
+        "Conte-nos sobre sua joalheria e o que você precisa...",
+      submit: "Enviar mensagem",
+      sending: "Enviando...",
+    },
+    demoCard: {
+      title: "Acesso Demo",
+      subtitle: "Experimente RayGold grátis",
+      features: ["Sem compromisso", "Dados exemplo", "Todas funções"],
+    },
+    loginTab: "Entrar",
+    registerTab: "Criar conta",
+    login: {
+      user: "Usuário",
+      password: "Senha",
+      submit: "Entrar",
+      forgot: "Esqueceu sua senha?",
+    },
+    register: {
+      name: "Nome",
+      surname: "Sobrenome",
+      company: "Empresa",
+      email: "Email",
+      user: "Usuário",
+      password: "Senha",
+      terms: "Aceito os",
+      termsLink: "termos e condições",
+      submit: "Criar conta",
+    },
+    directContact: {
+      title: "Contato direto",
+      phone: "Ligue-nos",
+      whatsapp: "WhatsApp",
+      email: "Email",
+    },
+    cta: {
+      title: "Prefere que ligamos?",
+      subtitle: "Deixe seu telefone e entramos em contato",
+      button: "Solicitar ligação",
+    },
+  },
+};
+
+const t = contactT[lang] || contactT.es;
+
+// API URL
+const API_BASE_URL = "https://raygoldapi.azurewebsites.net";
 ---
 
 <Layout
-  title={t.contact.metaTitle}
-  description={t.contact.metaDescription}
-  lang={lang as Lang}
+  title={t.metaTitle}
+  description={t.metaDesc}
+  lang={lang}
   alternateUrls={alternateUrls}
 >
-  <!-- Hero Section -->
-  <section class="contact-hero">
-    <div class="container">
-      <h1>{t.contact.title}</h1>
-      <p>{t.contact.subtitle}</p>
-    </div>
-  </section>
-
-  <!-- Contact Content -->
-  <section class="contact-content">
-    <div class="container">
-      <div class="contact-grid">
-        <!-- Formulario -->
-        <div class="contact-form-wrapper">
-          <form class="contact-form" id="contactForm">
-            <div class="form-group">
-              <label for="nombre">{t.contact.nombre}</label>
-              <input type="text" id="nombre" name="nombre" required />
-            </div>
-
-            <div class="form-group">
-              <label for="email">{t.contact.email}</label>
-              <input type="email" id="email" name="email" required />
-            </div>
-
-            <div class="form-group">
-              <label for="telefono">{t.contact.telefono}</label>
-              <input type="tel" id="telefono" name="telefono" />
-            </div>
-
-            <div class="form-group">
-              <label for="empresa">{t.contact.empresa}</label>
-              <input type="text" id="empresa" name="empresa" />
-            </div>
-
-            <div class="form-group full-width">
-              <label for="mensaje">{t.contact.mensaje}</label>
-              <textarea id="mensaje" name="mensaje" rows="5" required
-              ></textarea>
-            </div>
-
-            <button type="submit" class="btn-submit">
-              {t.contact.enviar}
-            </button>
-          </form>
-        </div>
-
-        <!-- Info de contacto -->
-        <div class="contact-info">
-          <div class="info-card">
-            <h3>{t.contact.llamanos}</h3>
-            <a href="tel:+34666666666" class="info-link">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
-                ></path>
-              </svg>
-              +34 666 666 666
-            </a>
-          </div>
-
-          <div class="info-card whatsapp">
-            <h3>{t.contact.whatsapp}</h3>
-            <a
-              href="https://wa.me/34666666666"
-              target="_blank"
-              rel="noopener"
-              class="info-link"
+  <main class="contacto-page">
+    <!-- Hero Section -->
+    <section class="contacto-hero">
+      <div class="container">
+        <div class="hero-content">
+          <span class="hero-badge">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path
-                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"
-                ></path>
-              </svg>
-              {t.contact.whatsapp}
-            </a>
+              <path
+                d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+              ></path>
+            </svg>
+            {t.badge}
+          </span>
+          <h1>
+            {t.title}
+            <span class="gradient-text">{t.titleHighlight}</span>
+          </h1>
+          <p>{t.subtitle}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cards Container -->
+    <section class="contacto-section">
+      <div class="container">
+        <div class="contact-grid">
+          <!-- Card 1: Formulario de Contacto -->
+          <div class="contact-card contact-form-card">
+            <div class="card-header">
+              <div class="card-icon">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                  ></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+              </div>
+              <div>
+                <h3>{t.formCard.title}</h3>
+                <p>{t.formCard.subtitle}</p>
+              </div>
+            </div>
+
+            <form id="contactForm" class="contact-form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="empresa">{t.form.company}</label>
+                  <input
+                    type="text"
+                    id="empresa"
+                    name="empresa"
+                    placeholder={t.form.companyPlaceholder}
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="nombre">{t.form.name}</label>
+                  <input
+                    type="text"
+                    id="nombre"
+                    name="nombre"
+                    placeholder={t.form.namePlaceholder}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="telefono">{t.form.phone}</label>
+                  <div class="input-prefix">
+                    <span>+34</span>
+                    <input
+                      type="tel"
+                      id="telefono"
+                      name="telefono"
+                      placeholder="612 345 678"
+                    />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="email">{t.form.email}</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="juan@joyeria.com"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="interes">{t.form.interest}</label>
+                  <select id="interes" name="interes">
+                    {
+                      t.form.interestOptions.map((opt) => (
+                        <option value={opt.value}>{opt.label}</option>
+                      ))
+                    }
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="tamano">{t.form.size}</label>
+                  <select id="tamano" name="tamano">
+                    {
+                      t.form.sizeOptions.map((opt) => (
+                        <option value={opt.value}>{opt.label}</option>
+                      ))
+                    }
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group full-width">
+                <label for="mensaje">{t.form.message}</label>
+                <textarea
+                  id="mensaje"
+                  name="mensaje"
+                  rows="4"
+                  placeholder={t.form.messagePlaceholder}></textarea>
+              </div>
+
+              <button type="submit" class="btn-submit">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+                {t.form.submit}
+              </button>
+            </form>
           </div>
 
-          <div class="info-card email">
-            <h3>Email</h3>
-            <a href="mailto:info@raytecno.es" class="info-link">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
+          <!-- Card 2: Demo Access -->
+          <div class="contact-card demo-card">
+            <div class="card-header">
+              <div class="card-icon demo">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                  <line x1="8" y1="21" x2="16" y2="21"></line>
+                  <line x1="12" y1="17" x2="12" y2="21"></line>
+                </svg>
+              </div>
+              <div>
+                <h3>{t.demoCard.title}</h3>
+                <p>{t.demoCard.subtitle}</p>
+              </div>
+            </div>
+
+            <div class="demo-features">
+              {
+                t.demoCard.features.map((feature) => (
+                  <div class="demo-feature">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
+                    </svg>
+                    {feature}
+                  </div>
+                ))
+              }
+            </div>
+
+            <!-- Tabs Login/Register -->
+            <div class="auth-tabs">
+              <button class="auth-tab active" data-tab="login"
+                >{t.loginTab}</button
               >
-                <path
-                  d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
-                ></path>
-                <polyline points="22,6 12,13 2,6"></polyline>
-              </svg>
-              info@raytecno.es
-            </a>
+              <button class="auth-tab" data-tab="register"
+                >{t.registerTab}</button
+              >
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" class="auth-form active">
+              <div class="form-group">
+                <label for="loginUsuario">{t.login.user}</label>
+                <input type="text" id="loginUsuario" name="usuario" required />
+              </div>
+              <div class="form-group">
+                <label for="loginPassword">{t.login.password}</label>
+                <input
+                  type="password"
+                  id="loginPassword"
+                  name="password"
+                  required
+                />
+              </div>
+              <div id="loginError" class="error-message"></div>
+              <button type="submit" class="btn-auth">
+                {t.login.submit}
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </form>
+
+            <!-- Register Form -->
+            <form id="registerForm" class="auth-form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="regNombre">{t.register.name} *</label>
+                  <input type="text" id="regNombre" name="nombre" required />
+                </div>
+                <div class="form-group">
+                  <label for="regApellido">{t.register.surname}</label>
+                  <input type="text" id="regApellido" name="apellido" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="regEmpresa">{t.register.company}</label>
+                <input type="text" id="regEmpresa" name="empresa" />
+              </div>
+              <div class="form-group">
+                <label for="regEmail">{t.register.email} *</label>
+                <input type="email" id="regEmail" name="email" required />
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="regUsuario">{t.register.user} *</label>
+                  <input type="text" id="regUsuario" name="usuario" required />
+                </div>
+                <div class="form-group">
+                  <label for="regPassword">{t.register.password} *</label>
+                  <input
+                    type="password"
+                    id="regPassword"
+                    name="password"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="form-group checkbox-group">
+                <input type="checkbox" id="regTerms" name="terms" required />
+                <label for="regTerms"
+                  >{t.register.terms}
+                  <a href="/legal">{t.register.termsLink}</a></label
+                >
+              </div>
+              <div id="registerError" class="error-message"></div>
+              <div id="registerSuccess" class="success-message"></div>
+              <button type="submit" class="btn-auth">
+                {t.register.submit}
+              </button>
+            </form>
+
+            <!-- Direct Contact -->
+            <div class="direct-contact">
+              <h4>{t.directContact.title}</h4>
+              <div class="contact-links">
+                <a href="tel:+34666666666" class="contact-link phone">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"
+                    ></path>
+                  </svg>
+                  +34 666 666 666
+                </a>
+                <a
+                  href="https://wa.me/34666666666"
+                  target="_blank"
+                  rel="noopener"
+                  class="contact-link whatsapp"
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"
+                    ></path>
+                  </svg>
+                  WhatsApp
+                </a>
+                <a href="mailto:info@raytecno.es" class="contact-link email">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                    ></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                  </svg>
+                  info@raytecno.es
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 </Layout>
 
 <style>
-  .contact-hero {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 80px 0 60px;
-    text-align: center;
-    color: white;
+  /* Variables */
+  :root {
+    --bg-dark: #0f172a;
+    --bg-card: rgba(30, 41, 59, 0.5);
+    --border-subtle: rgba(255, 255, 255, 0.1);
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --accent-purple: #667eea;
+    --accent-green: #10b981;
   }
 
-  .contact-hero h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin: 0 0 16px;
-  }
-
-  .contact-hero p {
-    font-size: 1.2rem;
-    opacity: 0.9;
-  }
-
-  .contact-content {
-    padding: 60px 0;
+  .contacto-page {
+    background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+    min-height: 100vh;
   }
 
   .container {
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 24px;
   }
 
+  /* Hero */
+  .contacto-hero {
+    padding: 60px 0 40px;
+    text-align: center;
+  }
+
+  .hero-content {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(102, 126, 234, 0.1);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    color: #818cf8;
+    padding: 8px 16px;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 24px;
+  }
+
+  .contacto-hero h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    color: var(--text-primary);
+    margin: 0 0 16px 0;
+    line-height: 1.1;
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .contacto-hero p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  /* Contact Section */
+  .contacto-section {
+    padding: 0 0 60px;
+  }
+
   .contact-grid {
     display: grid;
-    grid-template-columns: 1fr 360px;
-    gap: 48px;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
   }
 
-  .contact-form-wrapper {
-    background: white;
+  /* Contact Card */
+  .contact-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 20px;
     padding: 32px;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(10px);
   }
 
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .card-icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--accent-purple) 0%, #764ba2 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+
+  .card-icon.demo {
+    background: linear-gradient(135deg, var(--accent-green) 0%, #059669 100%);
+  }
+
+  .card-header h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 4px 0;
+  }
+
+  .card-header p {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  /* Form Styles */
   .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    gap: 16px;
   }
 
   .form-group {
     display: flex;
     flex-direction: column;
+    gap: 6px;
   }
 
   .form-group.full-width {
@@ -203,103 +963,546 @@ const alternateUrls = getAlternateUrls("contacto");
   }
 
   .form-group label {
-    font-size: 0.875rem;
+    font-size: 0.8rem;
     font-weight: 500;
-    color: #475569;
-    margin-bottom: 6px;
+    color: var(--text-secondary);
   }
 
   .form-group input,
+  .form-group select,
   .form-group textarea {
-    padding: 12px 16px;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    font-size: 1rem;
-    transition:
-      border-color 0.2s,
-      box-shadow 0.2s;
+    padding: 12px 14px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
   }
 
   .form-group input:focus,
+  .form-group select:focus,
   .form-group textarea:focus {
     outline: none;
-    border-color: #667eea;
+    border-color: var(--accent-purple);
     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
   }
 
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: var(--text-muted);
+  }
+
+  .input-prefix {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .input-prefix span {
+    padding: 12px 14px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    border-right: 1px solid var(--border-subtle);
+  }
+
+  .input-prefix input {
+    border: none;
+    background: transparent;
+    flex: 1;
+  }
+
   .btn-submit {
-    grid-column: span 2;
-    padding: 14px 32px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 24px;
+    background: linear-gradient(135deg, var(--accent-purple) 0%, #764ba2 100%);
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition:
-      transform 0.2s,
-      box-shadow 0.2s;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
   }
 
   .btn-submit:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
   }
 
-  .contact-info {
+  /* Demo Card */
+  .demo-features {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
   }
 
-  .info-card {
-    background: white;
-    padding: 24px;
-    border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-  }
-
-  .info-card h3 {
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: #64748b;
-    margin: 0 0 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .info-link {
+  .demo-feature {
     display: flex;
     align-items: center;
-    gap: 12px;
-    color: #1e293b;
-    text-decoration: none;
-    font-size: 1.1rem;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: var(--accent-green);
+  }
+
+  /* Auth Tabs */
+  .auth-tabs {
+    display: flex;
+    gap: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 4px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+
+  .auth-tab {
+    flex: 1;
+    padding: 10px 16px;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
     font-weight: 500;
-    transition: color 0.2s;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
   }
 
-  .info-link:hover {
-    color: #667eea;
+  .auth-tab.active {
+    background: var(--accent-green);
+    color: white;
   }
 
-  .info-card.whatsapp .info-link {
+  .auth-form {
+    display: none;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .auth-form.active {
+    display: flex;
+  }
+
+  .btn-auth {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, var(--accent-green) 0%, #059669 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+  }
+
+  .btn-auth:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+  }
+
+  .checkbox-group {
+    flex-direction: row !important;
+    align-items: center;
+    gap: 8px !important;
+  }
+
+  .checkbox-group input {
+    width: auto;
+  }
+
+  .checkbox-group label {
+    color: var(--text-secondary);
+  }
+
+  .checkbox-group a {
+    color: var(--accent-green);
+    text-decoration: none;
+  }
+
+  .error-message,
+  .success-message {
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    display: none;
+  }
+
+  .error-message.show {
+    display: block;
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #fca5a5;
+  }
+
+  .success-message.show {
+    display: block;
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #6ee7b7;
+  }
+
+  /* Direct Contact */
+  .direct-contact {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .direct-contact h4 {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0 16px 0;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+  }
+
+  .contact-link:hover {
+    border-color: var(--accent-purple);
+    color: var(--text-primary);
+  }
+
+  .contact-link.whatsapp {
     color: #25d366;
   }
 
-  @media (max-width: 768px) {
+  .contact-link.whatsapp:hover {
+    border-color: #25d366;
+    background: rgba(37, 211, 102, 0.1);
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
     .contact-grid {
       grid-template-columns: 1fr;
     }
+  }
 
-    .contact-form {
+  @media (max-width: 600px) {
+    .contacto-hero {
+      padding: 40px 0 30px;
+    }
+
+    .contact-card {
+      padding: 24px;
+    }
+
+    .form-row {
       grid-template-columns: 1fr;
     }
 
-    .form-group.full-width,
-    .btn-submit {
+    .form-group.full-width {
       grid-column: span 1;
+    }
+
+    .demo-features {
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .contact-links {
+      flex-direction: column;
     }
   }
 </style>
+
+<script define:vars={{ API_BASE_URL }}>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Tab switching
+    const authTabs = document.querySelectorAll(".auth-tab");
+    const loginForm = document.getElementById("loginForm");
+    const registerForm = document.getElementById("registerForm");
+    const contactForm = document.getElementById("contactForm");
+
+    function switchTab(tab) {
+      authTabs.forEach((t) => t.classList.remove("active"));
+      document.querySelector(`[data-tab="${tab}"]`)?.classList.add("active");
+
+      if (tab === "login") {
+        loginForm?.classList.add("active");
+        registerForm?.classList.remove("active");
+      } else {
+        loginForm?.classList.remove("active");
+        registerForm?.classList.add("active");
+      }
+    }
+
+    authTabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        switchTab(tab.getAttribute("data-tab") || "login");
+      });
+    });
+
+    // Helper functions
+    function showError(id, message) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.textContent = message;
+        el.classList.add("show");
+      }
+    }
+
+    function showSuccess(id, message) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.textContent = message;
+        el.classList.add("show");
+      }
+    }
+
+    function clearErrors() {
+      document
+        .querySelectorAll(".error-message, .success-message")
+        .forEach((el) => {
+          el.classList.remove("show");
+          el.textContent = "";
+        });
+    }
+
+    // Login
+    if (loginForm) {
+      loginForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        clearErrors();
+
+        const usuario = document.getElementById("loginUsuario")?.value.trim();
+        const password = document.getElementById("loginPassword")?.value;
+
+        if (!usuario || !password) {
+          showError("loginError", "Por favor, completa todos los campos");
+          return;
+        }
+
+        const btn = loginForm.querySelector(".btn-auth");
+        if (!btn) return;
+
+        const originalText = btn.innerHTML;
+        btn.innerHTML = "<span>Iniciando sesión...</span>";
+        btn.disabled = true;
+
+        try {
+          const response = await fetch(API_BASE_URL + "/identity/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              Usuario: usuario.toUpperCase(),
+              Password: password.toUpperCase(),
+              TipoLoginBiometrico: false,
+            }),
+          });
+
+          if (!response.ok) {
+            const errorData = await response.text();
+            throw new Error(errorData || "Credenciales inválidas");
+          }
+
+          const data = await response.json();
+          localStorage.setItem("access_token", data.access_token);
+          localStorage.setItem("user", JSON.stringify(data.user));
+          window.location.href = "/demo";
+        } catch (error) {
+          showError("loginError", error.message || "Error al iniciar sesión");
+        } finally {
+          btn.innerHTML = originalText;
+          btn.disabled = false;
+        }
+      });
+    }
+
+    // Register
+    if (registerForm) {
+      registerForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        clearErrors();
+
+        const nombre = document.getElementById("regNombre")?.value.trim();
+        const apellido =
+          document.getElementById("regApellido")?.value.trim() || "";
+        const empresa =
+          document.getElementById("regEmpresa")?.value.trim() || "";
+        const email = document.getElementById("regEmail")?.value.trim();
+        const usuario = document.getElementById("regUsuario")?.value.trim();
+        const password = document.getElementById("regPassword")?.value;
+        const terms = document.getElementById("regTerms")?.checked;
+
+        if (!nombre || !email || !usuario || !password) {
+          showError(
+            "registerError",
+            "Por favor, completa los campos obligatorios"
+          );
+          return;
+        }
+
+        if (usuario.length < 4) {
+          showError(
+            "registerError",
+            "El usuario debe tener al menos 4 caracteres"
+          );
+          return;
+        }
+
+        if (password.length < 6) {
+          showError(
+            "registerError",
+            "La contraseña debe tener al menos 6 caracteres"
+          );
+          return;
+        }
+
+        if (!terms) {
+          showError(
+            "registerError",
+            "Debes aceptar los términos y condiciones"
+          );
+          return;
+        }
+
+        const btn = registerForm.querySelector(".btn-auth");
+        if (!btn) return;
+
+        const originalText = btn.innerHTML;
+        btn.innerHTML = "<span>Creando cuenta...</span>";
+        btn.disabled = true;
+
+        try {
+          const response = await fetch(API_BASE_URL + "/identity/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              Usuario: usuario.toUpperCase(),
+              Password: password,
+              Email: email,
+              FirstName: nombre,
+              LastName: apellido || nombre,
+              Empresa: empresa || "DEMO",
+              Tipo: "WEB",
+              RoleTipo: "Demo",
+              Permiso: "LECTURA",
+              Secutity: 9,
+              Modelo: 99,
+              Visible: true,
+              Grupo: "WEB",
+            }),
+          });
+
+          if (!response.ok) {
+            const errorData = await response.text();
+            throw new Error(errorData || "Error al crear la cuenta");
+          }
+
+          showSuccess(
+            "registerSuccess",
+            "¡Cuenta creada! Ahora puedes iniciar sesión."
+          );
+          setTimeout(() => {
+            switchTab("login");
+            const loginUsuario = document.getElementById("loginUsuario");
+            if (loginUsuario) loginUsuario.value = usuario;
+          }, 2000);
+        } catch (error) {
+          showError(
+            "registerError",
+            error.message || "Error al crear la cuenta"
+          );
+        } finally {
+          btn.innerHTML = originalText;
+          btn.disabled = false;
+        }
+      });
+    }
+
+    // Contact Form
+    if (contactForm) {
+      contactForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(contactForm);
+        const data = {
+          empresa: formData.get("empresa") || "",
+          nombre: formData.get("nombre") || "",
+          telefono: formData.get("telefono") || "",
+          email: formData.get("email") || "",
+          interes: formData.get("interes") || "informacion",
+          tamano: formData.get("tamano") || "1-5",
+          mensaje: formData.get("mensaje") || "",
+        };
+
+        if (!data.nombre.trim()) {
+          alert("Por favor, introduce tu nombre");
+          return;
+        }
+
+        if (!data.email.trim()) {
+          alert("Por favor, introduce tu email");
+          return;
+        }
+
+        const btn = contactForm.querySelector(".btn-submit");
+        if (!btn) return;
+
+        const originalText = btn.innerHTML;
+        btn.innerHTML = "<span>Enviando...</span>";
+        btn.disabled = true;
+
+        try {
+          const response = await fetch(API_BASE_URL + "/api/contacto", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          });
+
+          const result = await response.json();
+
+          if (!response.ok) {
+            throw new Error(result.message || "Error al enviar");
+          }
+
+          alert(
+            result.message || "¡Gracias! Te responderemos en menos de 24 horas."
+          );
+          contactForm.reset();
+        } catch (error) {
+          console.error("Error contacto:", error);
+          alert(error.message || "Error al enviar. Inténtalo de nuevo.");
+        } finally {
+          btn.innerHTML = originalText;
+          btn.disabled = false;
+        }
+      });
+    }
+  });
+</script>

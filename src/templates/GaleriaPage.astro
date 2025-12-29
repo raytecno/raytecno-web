@@ -2,20 +2,107 @@
 /**
  * Template: Galería
  * Muestra capturas de pantalla del ERP desde Azure Storage
+ * Con soporte multiidioma y tema oscuro
  */
 import Layout from "@/layouts/Layout.astro";
-import { getTranslations } from "@/i18n";
 import { getAlternateUrls, type Lang } from "@/config/pages";
 import { getMenuImages } from "../azure-storage.js";
 
 interface Props {
-  lang: string;
-  pageId: string;
+  lang: Lang;
 }
 
 const { lang } = Astro.props;
-const t = getTranslations(lang as Lang);
 const alternateUrls = getAlternateUrls("galeria");
+
+// Traducciones de galería
+const galleryT: Record<
+  Lang,
+  {
+    metaTitle: string;
+    metaDesc: string;
+    badge: string;
+    title: string;
+    titleHighlight: string;
+    subtitle: string;
+    images: string;
+    empty: string;
+    back: string;
+    viewMore: string;
+  }
+> = {
+  es: {
+    metaTitle: "Galería | RayGold ERP para Joyería",
+    metaDesc:
+      "Explora las capturas de pantalla de RayGold ERP. Descubre la interfaz moderna y profesional de nuestro software para joyerías.",
+    badge: "Galería",
+    title: "Descubre",
+    titleHighlight: "RayGold ERP",
+    subtitle:
+      "Explora las capturas de pantalla de nuestra interfaz moderna y profesional",
+    images: "imágenes",
+    empty: "No hay imágenes disponibles en este momento",
+    back: "Volver al inicio",
+    viewMore: "Ver en detalle",
+  },
+  en: {
+    metaTitle: "Gallery | RayGold ERP for Jewelry",
+    metaDesc:
+      "Explore RayGold ERP screenshots. Discover the modern and professional interface of our jewelry software.",
+    badge: "Gallery",
+    title: "Discover",
+    titleHighlight: "RayGold ERP",
+    subtitle: "Explore screenshots of our modern and professional interface",
+    images: "images",
+    empty: "No images available at this time",
+    back: "Back to home",
+    viewMore: "View details",
+  },
+  fr: {
+    metaTitle: "Galerie | RayGold ERP pour Bijouterie",
+    metaDesc:
+      "Explorez les captures d'écran de RayGold ERP. Découvrez l'interface moderne et professionnelle de notre logiciel pour bijouteries.",
+    badge: "Galerie",
+    title: "Découvrez",
+    titleHighlight: "RayGold ERP",
+    subtitle:
+      "Explorez les captures d'écran de notre interface moderne et professionnelle",
+    images: "images",
+    empty: "Aucune image disponible pour le moment",
+    back: "Retour à l'accueil",
+    viewMore: "Voir en détail",
+  },
+  ca: {
+    metaTitle: "Galeria | RayGold ERP per a Joieria",
+    metaDesc:
+      "Explora les captures de pantalla de RayGold ERP. Descobreix la interfície moderna i professional del nostre software per a joieries.",
+    badge: "Galeria",
+    title: "Descobreix",
+    titleHighlight: "RayGold ERP",
+    subtitle:
+      "Explora les captures de pantalla de la nostra interfície moderna i professional",
+    images: "imatges",
+    empty: "No hi ha imatges disponibles en aquest moment",
+    back: "Tornar a l'inici",
+    viewMore: "Veure en detall",
+  },
+  "pt-br": {
+    metaTitle: "Galeria | RayGold ERP para Joalheria",
+    metaDesc:
+      "Explore as capturas de tela do RayGold ERP. Descubra a interface moderna e profissional do nosso software para joalherias.",
+    badge: "Galeria",
+    title: "Descubra",
+    titleHighlight: "RayGold ERP",
+    subtitle:
+      "Explore as capturas de tela da nossa interface moderna e profissional",
+    images: "imagens",
+    empty: "Nenhuma imagem disponível no momento",
+    back: "Voltar ao início",
+    viewMore: "Ver em detalhe",
+  },
+};
+
+const t = galleryT[lang] || galleryT.es;
 
 // Obtener imágenes desde Azure Storage
 let images: { url: string; name: string }[] = [];
@@ -27,231 +114,423 @@ try {
 ---
 
 <Layout
-  title={t.gallery.metaTitle}
-  description={t.gallery.metaDescription}
-  lang={lang as Lang}
+  title={t.metaTitle}
+  description={t.metaDesc}
+  lang={lang}
   alternateUrls={alternateUrls}
 >
-  <!-- Hero Section -->
-  <section class="gallery-hero">
-    <div class="container">
-      <h1>{t.gallery.title}</h1>
-      <p>{t.gallery.subtitle}</p>
-      <div class="badge">
-        <span class="badge-count">{images.length}</span>
-        <span class="badge-text">{t.common.all}</span>
-      </div>
-    </div>
-  </section>
+  <main class="gallery-page">
+    <!-- Hero Section -->
+    <section class="gallery-hero">
+      <div class="container">
+        <a href={`/${lang}`} class="back-link">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          {t.back}
+        </a>
 
-  <!-- Gallery Grid -->
-  <section class="gallery-section">
-    <div class="container">
-      {
-        images.length > 0 ? (
-          <div class="gallery-grid">
-            {images.map((img, index) => (
-              <div class="gallery-item" data-index={index}>
-                <img src={img.url} alt={img.name} loading="lazy" />
-                <div class="item-overlay">
-                  <span class="item-name">{img.name}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div class="empty-state">
+        <div class="hero-content">
+          <span class="hero-badge">
             <svg
+              width="16"
+              height="16"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="1.5"
-              width="64"
-              height="64"
+              stroke-width="2"
             >
-              <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-              <circle cx="8.5" cy="8.5" r="1.5" />
-              <polyline points="21 15 16 10 5 21" />
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <circle cx="8.5" cy="8.5" r="1.5"></circle>
+              <polyline points="21 15 16 10 5 21"></polyline>
             </svg>
-            <p>{t.gallery.empty}</p>
-          </div>
-        )
-      }
-    </div>
-  </section>
+            {t.badge}
+          </span>
+          <h1>
+            {t.title}
+            <span class="gradient-text">{t.titleHighlight}</span>
+          </h1>
+          <p>{t.subtitle}</p>
 
-  <!-- Back Button -->
-  <section class="back-section">
-    <div class="container">
-      <a href={`/${lang}`} class="back-button">
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          width="20"
-          height="20"
-        >
-          <line x1="19" y1="12" x2="5" y2="12"></line>
-          <polyline points="12 19 5 12 12 5"></polyline>
-        </svg>
-        {t.gallery.back}
-      </a>
-    </div>
-  </section>
+          {
+            images.length > 0 && (
+              <div class="image-count">
+                <span class="count-number">{images.length}</span>
+                <span class="count-text">{t.images}</span>
+              </div>
+            )
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Grid -->
+    <section class="gallery-section">
+      <div class="container">
+        {
+          images.length > 0 ? (
+            <div class="gallery-grid">
+              {images.map((img, index) => (
+                <div class="gallery-item" data-index={index}>
+                  <div class="item-image">
+                    <img src={img.url} alt={img.name} loading="lazy" />
+                  </div>
+                  <div class="item-info">
+                    <span class="item-name">{img.name}</span>
+                  </div>
+                  <div class="item-overlay">
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <circle cx="11" cy="11" r="8" />
+                      <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                      <line x1="11" y1="8" x2="11" y2="14" />
+                      <line x1="8" y1="11" x2="14" y2="11" />
+                    </svg>
+                    <span>{t.viewMore}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div class="empty-state">
+              <div class="empty-icon">
+                <svg
+                  width="64"
+                  height="64"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                  <circle cx="8.5" cy="8.5" r="1.5" />
+                  <polyline points="21 15 16 10 5 21" />
+                </svg>
+              </div>
+              <p>{t.empty}</p>
+            </div>
+          )
+        }
+      </div>
+    </section>
+  </main>
 </Layout>
 
 <style>
-  .gallery-hero {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 80px 0 60px;
-    text-align: center;
-    color: white;
+  /* Variables */
+  :root {
+    --bg-dark: #0f172a;
+    --bg-darker: #1e293b;
+    --bg-card: rgba(30, 41, 59, 0.5);
+    --border-subtle: rgba(255, 255, 255, 0.1);
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --accent-purple: #667eea;
+    --accent-green: #10b981;
   }
 
-  .gallery-hero h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin: 0 0 16px;
-  }
-
-  .gallery-hero p {
-    font-size: 1.2rem;
-    opacity: 0.9;
-    margin: 0 0 24px;
-  }
-
-  .badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 20px;
-    backdrop-filter: blur(4px);
-  }
-
-  .badge-count {
-    font-weight: 700;
-    font-size: 1.1rem;
-  }
-
-  .badge-text {
-    font-size: 0.875rem;
-    opacity: 0.9;
+  /* Main Page */
+  .gallery-page {
+    min-height: 100vh;
+    background: linear-gradient(
+      180deg,
+      var(--bg-dark) 0%,
+      var(--bg-darker) 100%
+    );
   }
 
   .container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 0 24px;
   }
 
+  /* Hero Section */
+  .gallery-hero {
+    padding: 40px 0 60px;
+    position: relative;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-subtle);
+    border-radius: 100px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    margin-bottom: 32px;
+  }
+
+  .back-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .hero-content {
+    text-align: center;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(102, 126, 234, 0.1);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    color: #818cf8;
+    padding: 8px 16px;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 24px;
+  }
+
+  .gallery-hero h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    color: var(--text-primary);
+    margin: 0 0 16px 0;
+    line-height: 1.1;
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gallery-hero p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin: 0 0 24px 0;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .image-count {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 100px;
+  }
+
+  .count-number {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--accent-green);
+  }
+
+  .count-text {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  /* Gallery Section */
   .gallery-section {
-    padding: 60px 0;
-    background: #f8fafc;
+    padding: 0 0 60px;
   }
 
   .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 20px;
   }
 
+  /* Gallery Item */
   .gallery-item {
     position: relative;
-    border-radius: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
     overflow: hidden;
-    background: white;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
     cursor: pointer;
     transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
   }
 
   .gallery-item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transform: translateY(-6px);
+    border-color: rgba(102, 126, 234, 0.3);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
   }
 
-  .gallery-item img {
+  .item-image {
+    background: #f8fafc;
+    padding: 12px;
+  }
+
+  .item-image img {
     width: 100%;
-    height: 200px;
-    object-fit: cover;
+    height: 120px;
+    object-fit: contain;
     display: block;
+  }
+
+  .item-info {
+    padding: 12px 14px;
+    background: rgba(15, 23, 42, 0.5);
+  }
+
+  .item-name {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .item-overlay {
     position: absolute;
-    bottom: 0;
+    top: 0;
     left: 0;
     right: 0;
-    padding: 12px 16px;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    bottom: 0;
+    background: rgba(102, 126, 234, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
     opacity: 0;
     transition: opacity 0.3s ease;
+    color: white;
+  }
+
+  .item-overlay span {
+    font-size: 0.85rem;
+    font-weight: 600;
   }
 
   .gallery-item:hover .item-overlay {
     opacity: 1;
   }
 
-  .item-name {
-    color: white;
-    font-size: 0.875rem;
-    font-weight: 500;
-  }
-
+  /* Empty State */
   .empty-state {
     text-align: center;
     padding: 80px 24px;
-    color: #94a3b8;
   }
 
-  .empty-state svg {
-    opacity: 0.4;
-    margin-bottom: 16px;
+  .empty-icon {
+    width: 100px;
+    height: 100px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+  }
+
+  .empty-icon svg {
+    color: var(--text-muted);
+    opacity: 0.5;
   }
 
   .empty-state p {
     font-size: 1.1rem;
+    color: var(--text-muted);
+    margin: 0;
   }
 
-  .back-section {
-    padding: 40px 0;
-    background: white;
-    border-top: 1px solid #e2e8f0;
-  }
-
-  .back-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 24px;
-    background: #f1f5f9;
-    color: #475569;
-    text-decoration: none;
-    border-radius: 10px;
-    font-weight: 500;
-    transition: all 0.2s ease;
-  }
-
-  .back-button:hover {
-    background: #e2e8f0;
-    color: #1e293b;
-  }
-
+  /* Responsive */
   @media (max-width: 768px) {
-    .gallery-hero h1 {
-      font-size: 2rem;
+    .gallery-hero {
+      padding: 30px 0 40px;
+    }
+
+    .back-link {
+      margin-bottom: 24px;
     }
 
     .gallery-grid {
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px;
     }
 
-    .gallery-item img {
-      height: 160px;
+    .item-image img {
+      height: 90px;
+    }
+
+    .item-info {
+      padding: 10px 12px;
+    }
+
+    .item-name {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .gallery-grid {
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 10px;
+    }
+
+    .gallery-item {
+      border-radius: 12px;
+    }
+
+    .item-image {
+      padding: 8px;
+    }
+
+    .item-image img {
+      height: 70px;
+    }
+
+    .item-info {
+      padding: 8px 10px;
+    }
+
+    .item-name {
+      font-size: 0.65rem;
     }
   }
 </style>
+
+<script>
+  // Lightbox functionality (optional - can be expanded)
+  document.addEventListener("DOMContentLoaded", () => {
+    const items = document.querySelectorAll(".gallery-item");
+
+    items.forEach((item) => {
+      item.addEventListener("click", () => {
+        const img = item.querySelector("img");
+        if (img) {
+          // Open image in new tab or implement lightbox
+          window.open(img.src, "_blank");
+        }
+      });
+    });
+  });
+</script>
