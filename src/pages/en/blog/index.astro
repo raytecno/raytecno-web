@@ -1,0 +1,622 @@
+---
+/**
+ * Blog - Listado de artículos (Español)
+ * @file src/pages/es/blog/index.astro
+ */
+import Layout from "@/layouts/Layout.astro";
+import { getBlogPosts, getFeaturedPosts, getBlogCategories, getFeaturedImageUrl, calculateReadingTime } from "@/lib/blog.js";
+
+const lang = 'es';
+
+// Traducciones
+const t = {
+  title: 'Blog',
+  metaTitle: 'Blog | RayGold ERP para Joyería',
+  metaDescription: 'Artículos sobre gestión de joyería, control de inventario, trazabilidad de metales preciosos y mejores prácticas del sector.',
+  featured: 'Destacados',
+  allPosts: 'Todos los artículos',
+  categories: 'Categorías',
+  readMore: 'Leer más',
+  minRead: 'min de lectura',
+  noPosts: 'No hay artículos disponibles',
+  searchPlaceholder: 'Buscar artículos...',
+  ctaTitle: '¿Quieres ver RayGold en acción?',
+  ctaText: 'Solicita una demo personalizada para tu negocio.',
+  ctaButton: 'Solicitar Demo'
+};
+
+// Obtener datos
+const [posts, featuredPosts, categories] = await Promise.all([
+  getBlogPosts(lang),
+  getFeaturedPosts(lang, 3),
+  getBlogCategories()
+]);
+
+// URLs alternativas para SEO
+const alternateUrls = [
+  { lang: 'es', url: '/es/blog' },
+  { lang: 'en', url: '/en/blog' },
+  { lang: 'fr', url: '/fr/blog' },
+  { lang: 'ca', url: '/ca/blog' },
+  { lang: 'pt-br', url: '/pt-br/blog' },
+];
+
+// Formatear fecha
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('es-ES', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+}
+
+// Obtener tiempo de lectura
+function getReadingTime(post) {
+  return post.blogSeo?.readingTime || calculateReadingTime(post.content || post.excerpt);
+}
+---
+
+<Layout 
+  title={t.metaTitle}
+  description={t.metaDescription}
+  lang={lang}
+  alternateUrls={alternateUrls}
+>
+  <div class="blog-page">
+    <!-- Hero -->
+    <section class="blog-hero">
+      <div class="container">
+        <h1>{t.title}</h1>
+        <p>{t.metaDescription}</p>
+        
+        <!-- Buscador -->
+        <div class="search-box">
+          <input 
+            type="search" 
+            id="blogSearch" 
+            placeholder={t.searchPlaceholder}
+            aria-label={t.searchPlaceholder}
+          />
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- Posts Destacados -->
+    {featuredPosts.length > 0 && (
+      <section class="featured-section">
+        <div class="container">
+          <h2>{t.featured}</h2>
+          <div class="featured-grid">
+            {featuredPosts.map((post, index) => (
+              <article class={`featured-card ${index === 0 ? 'featured-main' : ''}`}>
+                {getFeaturedImageUrl(post) && (
+                  <div class="featured-image">
+                    <img 
+                      src={getFeaturedImageUrl(post)} 
+                      alt={post.title}
+                      loading={index === 0 ? 'eager' : 'lazy'}
+                    />
+                  </div>
+                )}
+                <div class="featured-content">
+                  {post.blogCategories?.nodes?.[0] && (
+                    <span class="category-badge">
+                      {post.blogCategories.nodes[0].name}
+                    </span>
+                  )}
+                  <h3>
+                    <a href={`/${lang}/blog/${post.slug}`}>{post.title}</a>
+                  </h3>
+                  <p set:html={post.excerpt} />
+                  <div class="post-meta">
+                    <time datetime={post.date}>{formatDate(post.date)}</time>
+                    <span class="separator">•</span>
+                    <span>{getReadingTime(post)} {t.minRead}</span>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- Listado Principal -->
+    <section class="posts-section">
+      <div class="container">
+        <div class="posts-layout">
+          <!-- Grid de Posts -->
+          <div class="posts-grid">
+            <h2>{t.allPosts}</h2>
+            
+            {posts.length > 0 ? (
+              <div class="grid" id="postsGrid">
+                {posts.map(post => (
+                  <article class="post-card" data-title={post.title.toLowerCase()} data-categories={post.blogCategories?.nodes?.map(c => c.slug).join(' ')}>
+                    {getFeaturedImageUrl(post) && (
+                      <a href={`/${lang}/blog/${post.slug}`} class="post-image">
+                        <img 
+                          src={getFeaturedImageUrl(post)} 
+                          alt={post.title}
+                          loading="lazy"
+                        />
+                      </a>
+                    )}
+                    <div class="post-content">
+                      {post.blogCategories?.nodes?.[0] && (
+                        <a 
+                          href={`/${lang}/blog/categoria/${post.blogCategories.nodes[0].slug}`}
+                          class="category-link"
+                        >
+                          {post.blogCategories.nodes[0].name}
+                        </a>
+                      )}
+                      <h3>
+                        <a href={`/${lang}/blog/${post.slug}`}>{post.title}</a>
+                      </h3>
+                      <p set:html={post.excerpt} />
+                      <div class="post-footer">
+                        <time datetime={post.date}>{formatDate(post.date)}</time>
+                        <span>{getReadingTime(post)} {t.minRead}</span>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            ) : (
+              <p class="no-posts">{t.noPosts}</p>
+            )}
+          </div>
+
+          <!-- Sidebar -->
+          <aside class="sidebar">
+            <!-- Categorías -->
+            {categories.length > 0 && (
+              <div class="sidebar-widget">
+                <h3>{t.categories}</h3>
+                <ul class="categories-list">
+                  {categories.map(cat => (
+                    <li>
+                      <a href={`/${lang}/blog/categoria/${cat.slug}`}>
+                        {cat.name}
+                        <span class="count">({cat.count || 0})</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            <!-- CTA -->
+            <div class="sidebar-cta">
+              <h3>{t.ctaTitle}</h3>
+              <p>{t.ctaText}</p>
+              <a href={`/${lang}/contacto`} class="btn-cta">{t.ctaButton}</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .blog-page {
+    --primary: #c9a227;
+    --primary-dark: #b8931f;
+    --text: #1a1a1a;
+    --text-light: #666;
+    --bg-light: #f8f9fa;
+    --border: #e5e5e5;
+    background: white;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* Hero */
+  .blog-hero {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    color: white;
+    padding: 4rem 0;
+    text-align: center;
+  }
+
+  .blog-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+
+  .blog-hero p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+  }
+
+  .search-box {
+    position: relative;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .search-box input {
+    width: 100%;
+    padding: 1rem 1rem 1rem 3rem;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    background: rgba(255,255,255,0.1);
+    color: white;
+    backdrop-filter: blur(10px);
+  }
+
+  .search-box input::placeholder {
+    color: rgba(255,255,255,0.6);
+  }
+
+  .search-box svg {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.6;
+  }
+
+  /* Featured Section */
+  .featured-section {
+    padding: 4rem 0;
+    background: var(--bg-light);
+  }
+
+  .featured-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: var(--text);
+  }
+
+  .featured-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 1.5rem;
+  }
+
+  .featured-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .featured-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  }
+
+  .featured-main {
+    grid-row: span 2;
+  }
+
+  .featured-main .featured-image {
+    height: 300px;
+  }
+
+  .featured-image {
+    height: 150px;
+    overflow: hidden;
+  }
+
+  .featured-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .featured-content {
+    padding: 1.5rem;
+  }
+
+  .category-badge {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  .featured-content h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+  }
+
+  .featured-content h3 a {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .featured-content h3 a:hover {
+    color: var(--primary);
+  }
+
+  .featured-content p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .post-meta {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  /* Posts Section */
+  .posts-section {
+    padding: 4rem 0;
+  }
+
+  .posts-layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 3rem;
+  }
+
+  .posts-grid h2 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: var(--text);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .post-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .post-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  }
+
+  .post-card.hidden {
+    display: none;
+  }
+
+  .post-image {
+    display: block;
+    height: 180px;
+    overflow: hidden;
+  }
+
+  .post-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+  }
+
+  .post-card:hover .post-image img {
+    transform: scale(1.05);
+  }
+
+  .post-content {
+    padding: 1.25rem;
+  }
+
+  .category-link {
+    display: inline-block;
+    color: var(--primary);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+  }
+
+  .category-link:hover {
+    color: var(--primary-dark);
+  }
+
+  .post-content h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+  }
+
+  .post-content h3 a {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .post-content h3 a:hover {
+    color: var(--primary);
+  }
+
+  .post-content p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+
+  .post-footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--text-light);
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .no-posts {
+    text-align: center;
+    color: var(--text-light);
+    padding: 3rem;
+  }
+
+  /* Sidebar */
+  .sidebar-widget {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border);
+  }
+
+  .sidebar-widget h3 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: var(--text);
+  }
+
+  .categories-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .categories-list li {
+    margin-bottom: 0.5rem;
+  }
+
+  .categories-list a {
+    display: flex;
+    justify-content: space-between;
+    color: var(--text);
+    text-decoration: none;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border);
+    transition: color 0.2s;
+  }
+
+  .categories-list a:hover {
+    color: var(--primary);
+  }
+
+  .categories-list .count {
+    color: var(--text-light);
+    font-size: 0.85rem;
+  }
+
+  .sidebar-cta {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    color: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .sidebar-cta h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .sidebar-cta p {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin-bottom: 1rem;
+  }
+
+  .btn-cta {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s;
+  }
+
+  .btn-cta:hover {
+    background: var(--primary-dark);
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .posts-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .blog-hero h1 {
+      font-size: 2rem;
+    }
+
+    .featured-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .featured-main {
+      grid-row: span 1;
+    }
+
+    .grid {
+      grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  // Filtro de búsqueda
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('blogSearch');
+    const postsGrid = document.getElementById('postsGrid');
+    
+    if (searchInput && postsGrid) {
+      searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        const posts = postsGrid.querySelectorAll('.post-card');
+        
+        posts.forEach((post) => {
+          const title = post.getAttribute('data-title') || '';
+          const categories = post.getAttribute('data-categories') || '';
+          
+          if (title.includes(query) || categories.includes(query) || query === '') {
+            post.classList.remove('hidden');
+          } else {
+            post.classList.add('hidden');
+          }
+        });
+      });
+    }
+  });
+</script>

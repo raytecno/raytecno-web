@@ -399,44 +399,37 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
               </div>
             </div>
 
-            <!-- Base de Datos -->
-            <div class="node node-data">
-              <div class="node-header">
-                <div class="node-icon">🗃️</div>
-                <div>
-                  <div class="node-title">{tt.database.title}</div>
-                  <div class="node-subtitle">{tt.database.subtitle}</div>
+            <!-- Base de Datos y Almacenamiento - Fila simétrica -->
+            <div class="row-two">
+              <div class="node node-data">
+                <div class="node-header">
+                  <div class="node-icon">🗃️</div>
+                  <div>
+                    <div class="node-title">{tt.database.title}</div>
+                    <div class="node-subtitle">{tt.database.subtitle}</div>
+                  </div>
+                </div>
+                <div class="node-tags">
+                  <span class="tag">SQL Server</span>
+                  <span class="tag">Entity Framework</span>
+                  <span class="tag">Progress</span>
                 </div>
               </div>
-              <div class="node-tags">
-                <span class="tag">SQL Server</span>
-                <span class="tag">Entity Framework</span>
-                <span class="tag">Progress</span>
-              </div>
-            </div>
 
-            <!-- Almacenamiento -->
-            <div class="node node-storage">
-              <div class="node-header">
-                <div class="node-icon">💾</div>
-                <div>
-                  <div class="node-title">{tt.storage.title}</div>
-                  <div class="node-subtitle">{tt.storage.subtitle}</div>
+              <div class="node node-storage">
+                <div class="node-header">
+                  <div class="node-icon">💾</div>
+                  <div>
+                    <div class="node-title">{tt.storage.title}</div>
+                    <div class="node-subtitle">{tt.storage.subtitle}</div>
+                  </div>
                 </div>
-              </div>
-              <div class="node-tags">
-                <span class="tag">Blob Storage</span>
-                <span class="tag">CDN</span>
-                <span class="tag">Imágenes</span>
-                <span class="tag">Documentos</span>
-              </div>
-            </div>
-
-            <!-- Flecha -->
-            <div class="connection-arrow">
-              <div class="arrow-down">
-                <div class="arrow-line"></div>
-                <div class="arrow-head">▼</div>
+                <div class="node-tags">
+                  <span class="tag">Blob Storage</span>
+                  <span class="tag">CDN</span>
+                  <span class="tag">Imágenes</span>
+                  <span class="tag">Documentos</span>
+                </div>
               </div>
             </div>
 
@@ -644,6 +637,9 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
     border-radius: 16px;
     padding: 1.25rem;
     transition: all 0.3s ease;
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
   }
 
   .node:hover {
@@ -677,6 +673,7 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
+    margin-top: auto;
   }
 
   .tag {
@@ -684,7 +681,8 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
     background: rgba(255, 255, 255, 0.1);
     border-radius: 6px;
     font-size: 0.75rem;
-    color: var(--text-secondary);
+    color: #ffffff;
+    font-weight: 500;
   }
 
   /* Node variants */
@@ -720,7 +718,7 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
 
   /* AI Node */
   .node-ai {
-    grid-column: span 2;
+    grid-column: span 3;
     background: linear-gradient(
       135deg,
       rgba(217, 119, 87, 0.1) 0%,
@@ -752,7 +750,8 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
     border: 1px solid rgba(217, 119, 87, 0.3);
     border-radius: 10px;
     font-size: 0.85rem;
-    color: #f0b89a;
+    color: #ffffff;
+    font-weight: 500;
   }
 
   .ai-feature-icon {
@@ -800,13 +799,21 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
   .service-name {
     font-size: 0.8rem;
     font-weight: 500;
-    color: #7dd3fc;
+    color: #ffffff;
   }
 
   /* Data & Storage */
   .node-data,
   .node-storage {
     border-color: rgba(148, 163, 184, 0.3);
+  }
+
+  /* Fila simétrica de 2 columnas */
+  .row-two {
+    grid-column: span 3;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
   }
 
   /* Connection Arrow */
@@ -901,7 +908,8 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
     border: 1px solid rgba(102, 126, 234, 0.3);
     border-radius: 8px;
     font-size: 0.8rem;
-    color: #c4b5fd;
+    color: #ffffff;
+    font-weight: 500;
   }
 
   /* Tech Footer */
@@ -962,7 +970,7 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
   .tech-name {
     font-size: 0.7rem;
     font-weight: 500;
-    color: #94a3b8;
+    color: #ffffff;
   }
 
   /* CTA Section */
@@ -1021,8 +1029,13 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
     .node-data,
     .node-storage,
     .node-result,
-    .connection-arrow {
+    .connection-arrow,
+    .row-two {
       grid-column: 1;
+    }
+
+    .row-two {
+      grid-template-columns: 1fr;
     }
 
     .page-header h1 {

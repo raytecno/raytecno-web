@@ -10,19 +10,58 @@ interface Props {
   lang?: Lang;
 }
 
-const { lang = 'es' } = Astro.props;
+const { lang = "es" } = Astro.props;
 const t = getTranslations(lang);
+
+// Detectar página actual
+const currentPath = Astro.url.pathname;
+
+// Función para verificar si un link está activo
+const isActive = (path: string) => {
+  // Normalizar paths (quitar trailing slash)
+  const normalizedCurrent = currentPath.replace(/\/$/, "");
+  const normalizedPath = path.replace(/\/$/, "");
+
+  // Para home, debe ser exacto
+  if (normalizedPath === `/${lang}` || normalizedPath === `/${lang}/`) {
+    return (
+      normalizedCurrent === `/${lang}` ||
+      normalizedCurrent === `/${lang}/` ||
+      currentPath === `/${lang}/`
+    );
+  }
+
+  // Para otras páginas, verificar si empieza con el path
+  return normalizedCurrent.startsWith(normalizedPath);
+};
 
 // Idiomas soportados
 const languages: { code: Lang; name: string; flag: string }[] = [
-  { code: 'es', name: 'Español', flag: '🇪🇸' },
-  { code: 'en', name: 'English', flag: '🇬🇧' },
-  { code: 'fr', name: 'Français', flag: '🇫🇷' },
-  { code: 'ca', name: 'Català', flag: '🏴󠁥󠁳󠁣󠁴󠁿' },
-  { code: 'pt-br', name: 'Português', flag: '🇧🇷' },
+  { code: "es", name: "Español", flag: "🇪🇸" },
+  { code: "en", name: "English", flag: "🇬🇧" },
+  { code: "fr", name: "Français", flag: "🇫🇷" },
+  { code: "ca", name: "Català", flag: "🏴󠁥󠁳󠁣󠁴󠁿" },
+  { code: "pt-br", name: "Português", flag: "🇧🇷" },
 ];
 
-const currentLang = languages.find(l => l.code === lang) || languages[0];
+const currentLang = languages.find((l) => l.code === lang) || languages[0];
+
+// URLs de navegación
+const homeUrl = `/${lang}/`;
+const modulosUrl = getPageUrl("modulos", lang);
+const preciosUrl = getPageUrl("precios", lang);
+const tecnologiaUrl = getPageUrl("tecnologia", lang);
+const blogUrl = `/${lang}/blog`; // ← NUEVO: URL del Blog
+const contactoUrl = getPageUrl("contacto", lang);
+
+// Traducciones del Blog por idioma
+const blogLabel: Record<Lang, string> = {
+  es: "Blog",
+  en: "Blog",
+  fr: "Blog",
+  ca: "Blog",
+  "pt-br": "Blog",
+};
 ---
 
 <header class="header">
@@ -34,16 +73,14 @@ const currentLang = languages.find(l => l.code === lang) || languages[0];
           d="M20 2L37 12V28L20 38L3 28V12L20 2Z"
           fill="url(#grad1)"
           stroke="#fff"
-          stroke-width="1"
-        />
+          stroke-width="1"></path>
         <path
           d="M20 8L30 14V26L20 32L10 26V14L20 8Z"
-          fill="rgba(255,255,255,0.3)"
-        />
+          fill="rgba(255,255,255,0.3)"></path>
         <defs>
           <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style="stop-color:#667eea" />
-            <stop offset="100%" style="stop-color:#764ba2" />
+            <stop offset="0%" style="stop-color:#667eea"></stop>
+            <stop offset="100%" style="stop-color:#764ba2"></stop>
           </linearGradient>
         </defs>
       </svg>
@@ -55,45 +92,96 @@ const currentLang = languages.find(l => l.code === lang) || languages[0];
 
     <!-- Navegación principal -->
     <nav class="nav-main">
-      <a href={`/${lang}/`} class="nav-link">{t.nav?.home || 'Inicio'}</a>
-      <a href={getPageUrl('modulos', lang)} class="nav-link">{t.nav?.modules || 'Módulos'}</a>
-      <a href={getPageUrl('precios', lang)} class="nav-link">{t.nav?.pricing || 'Precios'}</a>
-      <a href={getPageUrl('tecnologia', lang)} class="nav-link">{t.nav?.technology || 'Tecnología'}</a>
-      <a href={getPageUrl('contacto', lang)} class="nav-link nav-cta">{t.nav?.contact || 'Contacto'}</a>
+      <a href={homeUrl} class:list={["nav-link", { active: isActive(homeUrl) }]}
+        >{t.nav?.home || "Inicio"}</a
+      >
+      <a
+        href={modulosUrl}
+        class:list={["nav-link", { active: isActive(modulosUrl) }]}
+        >{t.nav?.modules || "Módulos"}</a
+      >
+      <a
+        href={preciosUrl}
+        class:list={["nav-link", { active: isActive(preciosUrl) }]}
+        >{t.nav?.pricing || "Precios"}</a
+      >
+      <a
+        href={tecnologiaUrl}
+        class:list={["nav-link", { active: isActive(tecnologiaUrl) }]}
+        >{t.nav?.technology || "Tecnología"}</a
+      >
+      <!-- NUEVO: Enlace al Blog -->
+      <a href={blogUrl} class:list={["nav-link", { active: isActive(blogUrl) }]}
+        >{blogLabel[lang]}</a
+      >
+      <a
+        href={contactoUrl}
+        class:list={["nav-link", { active: isActive(contactoUrl) }]}
+        >{t.nav?.contact || "Contacto"}</a
+      >
     </nav>
 
     <!-- Selector de idioma -->
     <div class="lang-selector">
-      <button class="lang-trigger" aria-label="Seleccionar idioma" aria-expanded="false">
+      <button
+        class="lang-trigger"
+        aria-label="Seleccionar idioma"
+        aria-expanded="false"
+      >
         <span class="lang-flag">{currentLang.flag}</span>
-        <span class="lang-code">{lang.toUpperCase()}</span>
-        <svg class="lang-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M6 9l6 6 6-6"/>
+        <span class="lang-name">{currentLang.name}</span>
+        <svg
+          class="lang-chevron"
+          width="12"
+          height="12"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M6 9l6 6 6-6"></path>
         </svg>
       </button>
       <div class="lang-dropdown">
-        {languages.map((l) => (
-          <a 
-            href={`/${l.code}/`} 
-            class:list={['lang-option', { active: l.code === lang }]}
-            hreflang={l.code}
-          >
-            <span class="lang-option-flag">{l.flag}</span>
-            <span class="lang-option-name">{l.name}</span>
-            {l.code === lang && (
-              <svg class="lang-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M20 6L9 17l-5-5"/>
-              </svg>
-            )}
-          </a>
-        ))}
+        {
+          languages.map((l) => (
+            <a
+              href={`/${l.code}/`}
+              class:list={["lang-option", { active: l.code === lang }]}
+              hreflang={l.code}
+            >
+              <span class="lang-option-flag">{l.flag}</span>
+              <span class="lang-option-name">{l.name}</span>
+              {l.code === lang && (
+                <svg
+                  class="lang-check"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M20 6L9 17l-5-5" />
+                </svg>
+              )}
+            </a>
+          ))
+        }
       </div>
     </div>
 
     <!-- Menú móvil -->
     <button class="mobile-toggle" aria-label="Menú">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M3 12h18M3 6h18M3 18h18"/>
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path d="M3 12h18M3 6h18M3 18h18"></path>
       </svg>
     </button>
   </div>
@@ -157,6 +245,7 @@ const currentLang = languages.find(l => l.code === lang) || languages[0];
     display: flex;
     align-items: center;
     gap: 8px;
+    margin-left: auto;
   }
 
   .nav-link {
@@ -174,28 +263,23 @@ const currentLang = languages.find(l => l.code === lang) || languages[0];
     background: rgba(255, 255, 255, 0.1);
   }
 
-  .nav-cta {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white !important;
-    margin-left: 8px;
-  }
-
-  .nav-cta:hover {
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
-    transform: translateY(-1px);
+  .nav-link.active {
+    color: white;
+    background: rgba(102, 126, 234, 0.25);
+    border: 1px solid rgba(102, 126, 234, 0.4);
   }
 
   /* Selector de idioma */
   .lang-selector {
     position: relative;
-    margin-left: 16px;
+    margin-left: 32px;
   }
 
   .lang-trigger {
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 8px 12px;
+    gap: 8px;
+    padding: 8px 16px;
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 8px;
@@ -204,6 +288,7 @@ const currentLang = languages.find(l => l.code === lang) || languages[0];
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s ease;
+    min-width: 130px;
   }
 
   .lang-trigger:hover {
@@ -215,8 +300,9 @@ const currentLang = languages.find(l => l.code === lang) || languages[0];
     font-size: 1.1rem;
   }
 
-  .lang-code {
-    font-weight: 600;
+  .lang-name {
+    font-weight: 500;
+    flex: 1;
   }
 
   .lang-chevron {
@@ -299,8 +385,13 @@ const currentLang = languages.find(l => l.code === lang) || languages[0];
       display: block;
     }
 
-    .lang-code {
+    .lang-name {
       display: none;
+    }
+
+    .lang-trigger {
+      min-width: auto;
+      padding: 8px 12px;
     }
 
     .logo-tagline {
@@ -310,18 +401,18 @@ const currentLang = languages.find(l => l.code === lang) || languages[0];
 </style>
 
 <script>
-  document.querySelectorAll('.lang-trigger').forEach((trigger) => {
-    trigger.addEventListener('click', () => {
-      const expanded = trigger.getAttribute('aria-expanded') === 'true';
-      trigger.setAttribute('aria-expanded', (!expanded).toString());
+  document.querySelectorAll(".lang-trigger").forEach((trigger) => {
+    trigger.addEventListener("click", () => {
+      const expanded = trigger.getAttribute("aria-expanded") === "true";
+      trigger.setAttribute("aria-expanded", (!expanded).toString());
     });
   });
 
-  document.addEventListener('click', (e) => {
+  document.addEventListener("click", (e) => {
     const target = e.target as HTMLElement;
-    if (!target.closest('.lang-selector')) {
-      document.querySelectorAll('.lang-trigger').forEach((trigger) => {
-        trigger.setAttribute('aria-expanded', 'false');
+    if (!target.closest(".lang-selector")) {
+      document.querySelectorAll(".lang-trigger").forEach((trigger) => {
+        trigger.setAttribute("aria-expanded", "false");
       });
     }
   });
