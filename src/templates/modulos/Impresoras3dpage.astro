@@ -1,0 +1,16 @@
+---
+/**
+ * Template: Módulo Impresoras 3D
+ * Control y gestión de producción con impresoras 3D
+ */
+import SubmoduloLayout from "@/components/SubmoduloLayout.astro";
+
+interface Props {
+  lang: string;
+  pageId: string;
+}
+
+const { lang } = Astro.props;
+---
+
+<SubmoduloLayout lang={lang} moduloId="impresoras3d" />

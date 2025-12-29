@@ -9,12 +9,13 @@ import { getAlternateUrls, getPageUrl, type Lang } from "@/config/pages";
 
 interface Props {
   lang: Lang;
+  pageId: string;
 }
 
 const { lang } = Astro.props;
 const alternateUrls = getAlternateUrls("modulos");
 
-// Definición de los 8 módulos con iconos originales
+// Definición de los 9 módulos con iconos originales
 const modulos = [
   {
     id: "maestros",
@@ -114,6 +115,20 @@ const modulos = [
       <circle cx="32" cy="32" r="4" fill="currentColor"/>
     </svg>`,
   },
+  {
+    id: "impresoras3d",
+    color: "#14b8a6",
+    icono: `<svg viewBox="0 0 64 64" fill="none">
+      <rect x="8" y="8" width="48" height="48" rx="4" fill="currentColor" opacity="0.15"/>
+      <rect x="12" y="12" width="40" height="8" rx="2" fill="currentColor"/>
+      <rect x="16" y="24" width="32" height="24" rx="2" fill="currentColor" opacity="0.3"/>
+      <path d="M32 28v16" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <path d="M24 36h16" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="32" cy="36" r="6" fill="currentColor" opacity="0.5"/>
+      <rect x="14" y="52" width="10" height="4" rx="1" fill="currentColor"/>
+      <rect x="40" y="52" width="10" height="4" rx="1" fill="currentColor"/>
+    </svg>`,
+  },
 ];
 
 // Traducciones de módulos
@@ -154,6 +169,10 @@ const modulosT: Record<
       nombre: "Ecommerce",
       descripcion: "Tiendas online y marketplaces",
     },
+    impresoras3d: {
+      nombre: "Impresoras 3D",
+      descripcion: "Control y gestión de producción con impresoras 3D",
+    },
   },
   en: {
     maestros: {
@@ -187,6 +206,10 @@ const modulosT: Record<
     ecommerce: {
       nombre: "Ecommerce",
       descripcion: "Online stores and marketplaces",
+    },
+    impresoras3d: {
+      nombre: "3D Printers",
+      descripcion: "Production control and management with 3D printers",
     },
   },
   fr: {
@@ -222,6 +245,10 @@ const modulosT: Record<
       nombre: "Ecommerce",
       descripcion: "Boutiques en ligne et marketplaces",
     },
+    impresoras3d: {
+      nombre: "Imprimantes 3D",
+      descripcion: "Contrôle et gestion de production avec imprimantes 3D",
+    },
   },
   ca: {
     maestros: {
@@ -255,6 +282,10 @@ const modulosT: Record<
     ecommerce: {
       nombre: "Ecommerce",
       descripcion: "Botigues online i marketplaces",
+    },
+    impresoras3d: {
+      nombre: "Impressores 3D",
+      descripcion: "Control i gestió de producció amb impressores 3D",
     },
   },
   "pt-br": {
@@ -290,6 +321,10 @@ const modulosT: Record<
       nombre: "Ecommerce",
       descripcion: "Lojas online e marketplaces",
     },
+    impresoras3d: {
+      nombre: "Impressoras 3D",
+      descripcion: "Controle e gestão de produção com impressoras 3D",
+    },
   },
 };
 
@@ -310,12 +345,12 @@ const pageT: Record<
 > = {
   es: {
     badge: "SOLUCIÓN COMPLETA",
-    title: "8 módulos integrados para tu joyería",
+    title: "9 módulos integrados para tu joyería",
     subtitle:
       "Todo lo que necesitas en un solo sistema. Cada módulo está diseñado específicamente para el sector joyero.",
     metaTitle: "Módulos | RayGold ERP para Joyería",
     metaDesc:
-      "8 módulos integrados para gestionar tu joyería: Maestros, Comercial, Fabricación, Finanzas, Históricos, Estadísticas, Vendedores y Ecommerce.",
+      "9 módulos integrados para gestionar tu joyería: Maestros, Comercial, Fabricación, Finanzas, Históricos, Estadísticas, Vendedores, Ecommerce e Impresoras 3D.",
     ctaTitle: "¿Quieres ver todos los módulos en acción?",
     ctaDesc:
       "Solicita una demostración personalizada y descubre cómo RayGold puede transformar tu negocio.",
@@ -324,12 +359,12 @@ const pageT: Record<
   },
   en: {
     badge: "COMPLETE SOLUTION",
-    title: "8 integrated modules for your jewelry",
+    title: "9 integrated modules for your jewelry",
     subtitle:
       "Everything you need in one system. Each module is specifically designed for the jewelry sector.",
     metaTitle: "Modules | RayGold ERP for Jewelry",
     metaDesc:
-      "8 integrated modules to manage your jewelry business: Masters, Commercial, Manufacturing, Finance, History, Statistics, Sales Reps and Ecommerce.",
+      "9 integrated modules to manage your jewelry business: Masters, Commercial, Manufacturing, Finance, History, Statistics, Sales Reps, Ecommerce and 3D Printers.",
     ctaTitle: "Want to see all modules in action?",
     ctaDesc:
       "Request a personalized demo and discover how RayGold can transform your business.",
@@ -338,12 +373,12 @@ const pageT: Record<
   },
   fr: {
     badge: "SOLUTION COMPLÈTE",
-    title: "8 modules intégrés pour votre bijouterie",
+    title: "9 modules intégrés pour votre bijouterie",
     subtitle:
       "Tout ce dont vous avez besoin en un seul système. Chaque module est spécifiquement conçu pour le secteur de la bijouterie.",
     metaTitle: "Modules | RayGold ERP pour Bijouterie",
     metaDesc:
-      "8 modules intégrés pour gérer votre bijouterie: Maîtres, Commercial, Fabrication, Finances, Historique, Statistiques, Vendeurs et Ecommerce.",
+      "9 modules intégrés pour gérer votre bijouterie: Maîtres, Commercial, Fabrication, Finances, Historique, Statistiques, Vendeurs, Ecommerce et Imprimantes 3D.",
     ctaTitle: "Vous voulez voir tous les modules en action?",
     ctaDesc:
       "Demandez une démonstration personnalisée et découvrez comment RayGold peut transformer votre entreprise.",
@@ -352,12 +387,12 @@ const pageT: Record<
   },
   ca: {
     badge: "SOLUCIÓ COMPLETA",
-    title: "8 mòduls integrats per a la teva joieria",
+    title: "9 mòduls integrats per a la teva joieria",
     subtitle:
       "Tot el que necessites en un sol sistema. Cada mòdul està dissenyat específicament per al sector joier.",
     metaTitle: "Mòduls | RayGold ERP per a Joieria",
     metaDesc:
-      "8 mòduls integrats per gestionar la teva joieria: Mestres, Comercial, Fabricació, Finances, Històrics, Estadístiques, Venedors i Ecommerce.",
+      "9 mòduls integrats per gestionar la teva joieria: Mestres, Comercial, Fabricació, Finances, Històrics, Estadístiques, Venedors, Ecommerce i Impressores 3D.",
     ctaTitle: "Vols veure tots els mòduls en acció?",
     ctaDesc:
       "Sol·licita una demostració personalitzada i descobreix com RayGold pot transformar el teu negoci.",
@@ -366,12 +401,12 @@ const pageT: Record<
   },
   "pt-br": {
     badge: "SOLUÇÃO COMPLETA",
-    title: "8 módulos integrados para sua joalheria",
+    title: "9 módulos integrados para sua joalheria",
     subtitle:
       "Tudo o que você precisa em um único sistema. Cada módulo é projetado especificamente para o setor joalheiro.",
     metaTitle: "Módulos | RayGold ERP para Joalheria",
     metaDesc:
-      "8 módulos integrados para gerenciar sua joalheria: Cadastros, Comercial, Fabricação, Finanças, Históricos, Estatísticas, Vendedores e Ecommerce.",
+      "9 módulos integrados para gerenciar sua joalheria: Cadastros, Comercial, Fabricação, Finanças, Históricos, Estatísticas, Vendedores, Ecommerce e Impressoras 3D.",
     ctaTitle: "Quer ver todos os módulos em ação?",
     ctaDesc:
       "Solicite uma demonstração personalizada e descubra como o RayGold pode transformar seu negócio.",
@@ -440,6 +475,13 @@ const submoduloSlugs: Record<string, Record<Lang, string>> = {
     fr: "ecommerce",
     ca: "ecommerce",
     "pt-br": "ecommerce",
+  },
+  impresoras3d: {
+    es: "impresoras-3d",
+    en: "3d-printers",
+    fr: "imprimantes-3d",
+    ca: "impressores-3d",
+    "pt-br": "impressoras-3d",
   },
 };
 
@@ -542,18 +584,6 @@ function getModuloUrl(key: string): string {
   .hero-section {
     padding: 4rem 0 3rem;
     text-align: center;
-  }
-
-  .badge {
-    display: inline-block;
-    background: rgba(16, 185, 129, 0.2);
-    color: #10b981;
-    padding: 0.5rem 1rem;
-    border-radius: 50px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 1px;
-    margin-bottom: 1.5rem;
   }
 
   .hero-section h1 {
