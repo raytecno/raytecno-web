@@ -19,7 +19,7 @@ const t = {
   minRead: 'min',
   noPosts: 'No hay artículos disponibles',
   searchPlaceholder: 'Buscar...',
-  viewAll: 'Ver todos',
+  viewAll: 'Todos',
   ctaTitle: '¿Quieres ver RayGold en acción?',
   ctaButton: 'Solicitar Demo'
 };
@@ -51,7 +51,6 @@ function getReadingTime(post) {
   return post.blogSeo?.readingTime || calculateReadingTime(post.content || post.excerpt);
 }
 
-// Obtener posts no destacados
 const regularPosts = posts.filter(p => !featuredPosts.find(f => f.slug === p.slug));
 ---
 
@@ -61,119 +60,111 @@ const regularPosts = posts.filter(p => !featuredPosts.find(f => f.slug === p.slu
   lang={lang}
   alternateUrls={alternateUrls}
 >
-  <main class="blog">
-    <!-- Hero Minimalista -->
-    <header class="blog-header">
+  <main class="blog-page">
+    <!-- Hero con fondo azul oscuro -->
+    <section class="hero">
       <div class="container">
         <h1>{t.title}</h1>
         <p>{t.metaDescription}</p>
-      </div>
-    </header>
-
-    <!-- Filtros y Búsqueda -->
-    <nav class="blog-nav">
-      <div class="container">
-        <div class="categories-inline">
-          <a href={`/${lang}/blog`} class="active">{t.viewAll}</a>
+        
+        <!-- Categorías en el hero -->
+        <div class="hero-categories">
+          <a href={`/${lang}/blog`} class="cat-pill active">{t.viewAll}</a>
           {categories.map(cat => (
-            <a href={`/${lang}/blog/categoria/${cat.slug}`}>{cat.name}</a>
+            <a href={`/${lang}/blog/categoria/${cat.slug}`} class="cat-pill">{cat.name}</a>
           ))}
         </div>
-        <div class="search-inline">
-          <input 
-            type="search" 
-            id="blogSearch" 
-            placeholder={t.searchPlaceholder}
-          />
-        </div>
-      </div>
-    </nav>
-
-    <!-- Post Destacado -->
-    {featuredPosts.length > 0 && (
-      <section class="featured">
-        <div class="container">
-          <article class="featured-post">
-            {getFeaturedImageUrl(featuredPosts[0]) && (
-              <a href={`/${lang}/blog/${featuredPosts[0].slug}`} class="featured-image">
-                <img 
-                  src={getFeaturedImageUrl(featuredPosts[0])} 
-                  alt={featuredPosts[0].title}
-                />
-                <span class="badge">{t.featured}</span>
-              </a>
-            )}
-            <div class="featured-content">
-              {featuredPosts[0].blogCategories?.nodes?.[0] && (
-                <span class="category">
-                  {featuredPosts[0].blogCategories.nodes[0].name}
-                </span>
-              )}
-              <h2>
-                <a href={`/${lang}/blog/${featuredPosts[0].slug}`}>
-                  {featuredPosts[0].title}
-                </a>
-              </h2>
-              <p set:html={featuredPosts[0].excerpt} />
-              <div class="meta">
-                <time>{formatDate(featuredPosts[0].date)}</time>
-                <span class="dot">·</span>
-                <span>{getReadingTime(featuredPosts[0])} {t.minRead}</span>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-    )}
-
-    <!-- Grid de Posts -->
-    <section class="posts">
-      <div class="container">
-        <h2 class="section-title">{t.latestPosts}</h2>
-        
-        {regularPosts.length > 0 ? (
-          <div class="posts-grid" id="postsGrid">
-            {regularPosts.map(post => (
-              <article class="post-card" data-title={post.title.toLowerCase()} data-categories={post.blogCategories?.nodes?.map(c => c.slug).join(' ')}>
-                <a href={`/${lang}/blog/${post.slug}`} class="post-link">
-                  {getFeaturedImageUrl(post) ? (
-                    <div class="post-image">
-                      <img src={getFeaturedImageUrl(post)} alt={post.title} loading="lazy" />
-                    </div>
-                  ) : (
-                    <div class="post-image placeholder">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                        <polyline points="21 15 16 10 5 21"></polyline>
-                      </svg>
-                    </div>
-                  )}
-                  <div class="post-body">
-                    {post.blogCategories?.nodes?.[0] && (
-                      <span class="category">{post.blogCategories.nodes[0].name}</span>
-                    )}
-                    <h3>{post.title}</h3>
-                    <div class="meta">
-                      <time>{formatDate(post.date)}</time>
-                      <span class="dot">·</span>
-                      <span>{getReadingTime(post)} {t.minRead}</span>
-                    </div>
-                  </div>
-                </a>
-              </article>
-            ))}
-          </div>
-        ) : (
-          <p class="no-posts">{t.noPosts}</p>
-        )}
       </div>
     </section>
 
-    <!-- CTA Minimalista -->
-    <section class="cta">
+    <!-- Contenido con fondo blanco -->
+    <section class="content-area">
+      <!-- Post Destacado -->
+      {featuredPosts.length > 0 && (
+        <div class="container">
+          <div class="featured-section">
+            <article class="featured-card">
+              <a href={`/${lang}/blog/${featuredPosts[0].slug}`} class="featured-link">
+                {getFeaturedImageUrl(featuredPosts[0]) && (
+                  <div class="featured-image">
+                    <img src={getFeaturedImageUrl(featuredPosts[0])} alt={featuredPosts[0].title} />
+                    <span class="badge">{t.featured}</span>
+                  </div>
+                )}
+                <div class="featured-body">
+                  {featuredPosts[0].blogCategories?.nodes?.[0] && (
+                    <span class="category">{featuredPosts[0].blogCategories.nodes[0].name}</span>
+                  )}
+                  <h2>{featuredPosts[0].title}</h2>
+                  <p set:html={featuredPosts[0].excerpt} />
+                  <div class="meta">
+                    <time>{formatDate(featuredPosts[0].date)}</time>
+                    <span>·</span>
+                    <span>{getReadingTime(featuredPosts[0])} {t.minRead}</span>
+                  </div>
+                </div>
+              </a>
+            </article>
+          </div>
+        </div>
+      )}
+
+      <!-- Grid de Posts -->
       <div class="container">
-        <div class="cta-box">
+        <div class="posts-section">
+          <div class="section-header">
+            <h2>{t.latestPosts}</h2>
+            <div class="search-box">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.35-4.35"></path>
+              </svg>
+              <input type="search" id="blogSearch" placeholder={t.searchPlaceholder} />
+            </div>
+          </div>
+          
+          {regularPosts.length > 0 ? (
+            <div class="posts-grid" id="postsGrid">
+              {regularPosts.map(post => (
+                <article class="post-card" data-title={post.title.toLowerCase()} data-categories={post.blogCategories?.nodes?.map(c => c.slug).join(' ')}>
+                  <a href={`/${lang}/blog/${post.slug}`} class="post-link">
+                    {getFeaturedImageUrl(post) ? (
+                      <div class="post-image">
+                        <img src={getFeaturedImageUrl(post)} alt={post.title} loading="lazy" />
+                      </div>
+                    ) : (
+                      <div class="post-image placeholder">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                          <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                          <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                          <polyline points="21 15 16 10 5 21"></polyline>
+                        </svg>
+                      </div>
+                    )}
+                    <div class="post-body">
+                      {post.blogCategories?.nodes?.[0] && (
+                        <span class="category">{post.blogCategories.nodes[0].name}</span>
+                      )}
+                      <h3>{post.title}</h3>
+                      <div class="meta">
+                        <time>{formatDate(post.date)}</time>
+                        <span>·</span>
+                        <span>{getReadingTime(post)} {t.minRead}</span>
+                      </div>
+                    </div>
+                  </a>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <p class="no-posts">{t.noPosts}</p>
+          )}
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="container">
+        <div class="cta-section">
           <h3>{t.ctaTitle}</h3>
           <a href={`/${lang}/contacto`} class="cta-btn">{t.ctaButton}</a>
         </div>
@@ -183,123 +174,107 @@ const regularPosts = posts.filter(p => !featuredPosts.find(f => f.slug === p.slu
 </Layout>
 
 <style>
-  .blog {
+  /* Variables */
+  .blog-page {
+    --blue-dark: #0f172a;
+    --blue-medium: #1e293b;
     --gold: #c9a227;
     --gold-dark: #a8861e;
-    --text: #111;
-    --text-muted: #666;
-    --text-light: #999;
-    --bg: #fff;
-    --bg-alt: #fafafa;
-    --border: #eee;
+    --white: #ffffff;
+    --gray-50: #f8fafc;
+    --gray-100: #f1f5f9;
+    --gray-200: #e2e8f0;
+    --gray-400: #94a3b8;
+    --gray-500: #64748b;
+    --gray-600: #475569;
+    --gray-900: #0f172a;
   }
 
   .container {
-    max-width: 1100px;
+    max-width: 1140px;
     margin: 0 auto;
     padding: 0 1.5rem;
   }
 
-  /* Header */
-  .blog-header {
-    padding: 5rem 0 3rem;
+  /* ========== HERO - AZUL OSCURO ========== */
+  .hero {
+    background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue-medium) 100%);
+    color: var(--white);
+    padding: 5rem 0 4rem;
     text-align: center;
-    background: var(--bg);
   }
 
-  .blog-header h1 {
+  .hero h1 {
     font-size: 3.5rem;
     font-weight: 300;
-    letter-spacing: -0.03em;
-    margin-bottom: 0.75rem;
-    color: var(--text);
+    letter-spacing: -0.04em;
+    margin-bottom: 1rem;
   }
 
-  .blog-header p {
+  .hero p {
     font-size: 1.1rem;
-    color: var(--text-muted);
+    color: var(--gray-400);
     max-width: 500px;
-    margin: 0 auto;
-    font-weight: 400;
+    margin: 0 auto 2.5rem;
+    line-height: 1.6;
   }
 
-  /* Navigation */
-  .blog-nav {
-    border-bottom: 1px solid var(--border);
-    padding: 1rem 0;
-    position: sticky;
-    top: 80px;
-    background: var(--bg);
-    z-index: 10;
-  }
-
-  .blog-nav .container {
+  .hero-categories {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 2rem;
-  }
-
-  .categories-inline {
-    display: flex;
-    gap: 0.25rem;
+    justify-content: center;
+    gap: 0.5rem;
     flex-wrap: wrap;
   }
 
-  .categories-inline a {
-    padding: 0.5rem 1rem;
+  .cat-pill {
+    padding: 0.5rem 1.25rem;
     font-size: 0.85rem;
-    color: var(--text-muted);
+    color: var(--gray-400);
     text-decoration: none;
     border-radius: 100px;
+    border: 1px solid transparent;
     transition: all 0.2s;
   }
 
-  .categories-inline a:hover {
-    color: var(--text);
-    background: var(--bg-alt);
+  .cat-pill:hover {
+    color: var(--white);
+    border-color: var(--gray-500);
   }
 
-  .categories-inline a.active {
-    color: var(--text);
-    background: var(--text);
-    color: white;
+  .cat-pill.active {
+    background: var(--gold);
+    color: var(--white);
   }
 
-  .search-inline input {
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    width: 200px;
-    transition: all 0.2s;
-  }
-
-  .search-inline input:focus {
-    outline: none;
-    border-color: var(--gold);
-    width: 250px;
+  /* ========== CONTENIDO - FONDO BLANCO ========== */
+  .content-area {
+    background: var(--white);
+    padding: 4rem 0 5rem;
   }
 
   /* Featured Post */
-  .featured {
-    padding: 4rem 0;
-    background: var(--bg-alt);
+  .featured-section {
+    margin-bottom: 4rem;
   }
 
-  .featured-post {
+  .featured-card {
+    background: var(--white);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+  }
+
+  .featured-link {
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 3rem;
-    align-items: center;
+    grid-template-columns: 1fr 1fr;
+    text-decoration: none;
+    color: inherit;
   }
 
   .featured-image {
     position: relative;
-    border-radius: 16px;
+    aspect-ratio: 4/3;
     overflow: hidden;
-    aspect-ratio: 16/10;
-    display: block;
   }
 
   .featured-image img {
@@ -309,55 +284,58 @@ const regularPosts = posts.filter(p => !featuredPosts.find(f => f.slug === p.slu
     transition: transform 0.5s ease;
   }
 
-  .featured-image:hover img {
-    transform: scale(1.03);
+  .featured-link:hover .featured-image img {
+    transform: scale(1.05);
   }
 
   .badge {
     position: absolute;
-    top: 1rem;
-    left: 1rem;
+    top: 1.25rem;
+    left: 1.25rem;
     background: var(--gold);
-    color: white;
-    padding: 0.35rem 0.85rem;
+    color: var(--white);
+    padding: 0.4rem 1rem;
     font-size: 0.7rem;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
     border-radius: 100px;
   }
 
-  .featured-content .category {
-    display: inline-block;
+  .featured-body {
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .featured-body .category {
     color: var(--gold);
     font-size: 0.8rem;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
     margin-bottom: 1rem;
   }
 
-  .featured-content h2 {
-    font-size: 2rem;
+  .featured-body h2 {
+    font-size: 1.75rem;
     font-weight: 600;
+    color: var(--gray-900);
     line-height: 1.3;
     margin-bottom: 1rem;
     letter-spacing: -0.02em;
   }
 
-  .featured-content h2 a {
-    color: var(--text);
-    text-decoration: none;
-  }
-
-  .featured-content h2 a:hover {
+  .featured-link:hover .featured-body h2 {
     color: var(--gold);
   }
 
-  .featured-content p {
-    color: var(--text-muted);
+  .featured-body p {
+    color: var(--gray-500);
     line-height: 1.7;
     margin-bottom: 1.5rem;
+    font-size: 0.95rem;
   }
 
   .meta {
@@ -365,26 +343,62 @@ const regularPosts = posts.filter(p => !featuredPosts.find(f => f.slug === p.slu
     align-items: center;
     gap: 0.5rem;
     font-size: 0.85rem;
-    color: var(--text-light);
+    color: var(--gray-400);
   }
 
-  .dot {
-    opacity: 0.5;
+  /* Posts Section */
+  .posts-section {
+    margin-bottom: 4rem;
   }
 
-  /* Posts Grid */
-  .posts {
-    padding: 4rem 0 5rem;
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--gray-200);
   }
 
-  .section-title {
+  .section-header h2 {
     font-size: 1.25rem;
     font-weight: 600;
-    margin-bottom: 2rem;
-    color: var(--text);
+    color: var(--gray-900);
     letter-spacing: -0.02em;
   }
 
+  .search-box {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--gray-50);
+    padding: 0.5rem 1rem;
+    border-radius: 100px;
+    border: 1px solid var(--gray-200);
+  }
+
+  .search-box svg {
+    color: var(--gray-400);
+  }
+
+  .search-box input {
+    border: none;
+    background: transparent;
+    font-size: 0.9rem;
+    width: 150px;
+    color: var(--gray-900);
+  }
+
+  .search-box input::placeholder {
+    color: var(--gray-400);
+  }
+
+  .search-box input:focus {
+    outline: none;
+    width: 200px;
+  }
+
+  /* Posts Grid */
   .posts-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -392,7 +406,7 @@ const regularPosts = posts.filter(p => !featuredPosts.find(f => f.slug === p.slu
   }
 
   .post-card {
-    background: var(--bg);
+    background: var(--white);
   }
 
   .post-card.hidden {
@@ -406,10 +420,10 @@ const regularPosts = posts.filter(p => !featuredPosts.find(f => f.slug === p.slu
 
   .post-image {
     aspect-ratio: 4/3;
-    border-radius: 12px;
+    border-radius: 16px;
     overflow: hidden;
-    margin-bottom: 1rem;
-    background: var(--bg-alt);
+    margin-bottom: 1.25rem;
+    background: var(--gray-100);
   }
 
   .post-image img {
@@ -432,7 +446,7 @@ const regularPosts = posts.filter(p => !featuredPosts.find(f => f.slug === p.slu
   .post-image.placeholder svg {
     width: 40px;
     height: 40px;
-    color: var(--border);
+    color: var(--gray-200);
   }
 
   .post-body .category {
@@ -441,7 +455,7 @@ const regularPosts = posts.filter(p => !featuredPosts.find(f => f.slug === p.slu
     font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
     margin-bottom: 0.5rem;
   }
 
@@ -450,7 +464,7 @@ const regularPosts = posts.filter(p => !featuredPosts.find(f => f.slug === p.slu
     font-weight: 600;
     line-height: 1.4;
     margin-bottom: 0.75rem;
-    color: var(--text);
+    color: var(--gray-900);
     letter-spacing: -0.01em;
     transition: color 0.2s;
   }
@@ -465,34 +479,30 @@ const regularPosts = posts.filter(p => !featuredPosts.find(f => f.slug === p.slu
 
   .no-posts {
     text-align: center;
-    color: var(--text-light);
+    color: var(--gray-400);
     padding: 4rem;
   }
 
   /* CTA */
-  .cta {
-    padding: 0 0 5rem;
-  }
-
-  .cta-box {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-    color: white;
+  .cta-section {
+    background: var(--blue-dark);
+    color: var(--white);
     padding: 3rem;
-    border-radius: 16px;
+    border-radius: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
-  .cta-box h3 {
+  .cta-section h3 {
     font-size: 1.5rem;
     font-weight: 500;
   }
 
   .cta-btn {
     background: var(--gold);
-    color: white;
-    padding: 0.9rem 2rem;
+    color: var(--white);
+    padding: 1rem 2rem;
     border-radius: 100px;
     text-decoration: none;
     font-weight: 600;
@@ -507,8 +517,12 @@ const regularPosts = posts.filter(p => !featuredPosts.find(f => f.slug === p.slu
 
   /* Responsive */
   @media (max-width: 900px) {
-    .featured-post {
+    .featured-link {
       grid-template-columns: 1fr;
+    }
+
+    .featured-body {
+      padding: 2rem;
     }
 
     .posts-grid {
@@ -517,16 +531,21 @@ const regularPosts = posts.filter(p => !featuredPosts.find(f => f.slug === p.slu
   }
 
   @media (max-width: 640px) {
-    .blog-header h1 {
+    .hero h1 {
       font-size: 2.5rem;
     }
 
-    .blog-nav .container {
+    .section-header {
       flex-direction: column;
       gap: 1rem;
+      align-items: flex-start;
     }
 
-    .search-inline input {
+    .search-box {
+      width: 100%;
+    }
+
+    .search-box input {
       width: 100%;
     }
 
@@ -534,7 +553,7 @@ const regularPosts = posts.filter(p => !featuredPosts.find(f => f.slug === p.slu
       grid-template-columns: 1fr;
     }
 
-    .cta-box {
+    .cta-section {
       flex-direction: column;
       text-align: center;
       gap: 1.5rem;

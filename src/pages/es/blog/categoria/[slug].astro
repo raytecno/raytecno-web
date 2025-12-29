@@ -1,6 +1,6 @@
 ---
 /**
- * Blog - Categoría Minimalista
+ * Blog - Categoría
  * @file src/pages/es/blog/categoria/[slug].astro
  */
 import Layout from "@/layouts/Layout.astro";
@@ -12,7 +12,7 @@ const t = {
   blog: 'Blog',
   minRead: 'min',
   noPosts: 'No hay artículos en esta categoría',
-  viewAll: 'Ver todos',
+  viewAll: 'Todos',
   backToBlog: '← Volver al blog'
 };
 
@@ -56,9 +56,9 @@ const alternateUrls = [
   lang={lang}
   alternateUrls={alternateUrls}
 >
-  <main class="blog">
-    <!-- Header -->
-    <header class="blog-header">
+  <main class="category-page">
+    <!-- Hero -->
+    <section class="hero">
       <div class="container">
         <nav class="breadcrumb">
           <a href={`/${lang}/blog`}>{t.blog}</a>
@@ -67,28 +67,24 @@ const alternateUrls = [
         </nav>
         <h1>{category.name}</h1>
         <p>{posts.length} {posts.length === 1 ? 'artículo' : 'artículos'}</p>
-      </div>
-    </header>
-
-    <!-- Filtros -->
-    <nav class="blog-nav">
-      <div class="container">
-        <div class="categories-inline">
-          <a href={`/${lang}/blog`}>{t.viewAll}</a>
+        
+        <!-- Categorías -->
+        <div class="hero-categories">
+          <a href={`/${lang}/blog`} class="cat-pill">{t.viewAll}</a>
           {categories.map(cat => (
             <a 
-              href={`/${lang}/blog/categoria/${cat.slug}`}
-              class={cat.slug === slug ? 'active' : ''}
+              href={`/${lang}/blog/categoria/${cat.slug}`} 
+              class={`cat-pill ${cat.slug === slug ? 'active' : ''}`}
             >
               {cat.name}
             </a>
           ))}
         </div>
       </div>
-    </nav>
+    </section>
 
-    <!-- Grid de Posts -->
-    <section class="posts">
+    <!-- Contenido -->
+    <section class="content-area">
       <div class="container">
         {posts.length > 0 ? (
           <div class="posts-grid">
@@ -102,7 +98,7 @@ const alternateUrls = [
                   ) : (
                     <div class="post-image placeholder">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
                         <circle cx="8.5" cy="8.5" r="1.5"></circle>
                         <polyline points="21 15 16 10 5 21"></polyline>
                       </svg>
@@ -112,7 +108,7 @@ const alternateUrls = [
                     <h3>{post.title}</h3>
                     <div class="meta">
                       <time>{formatDate(post.date)}</time>
-                      <span class="dot">·</span>
+                      <span>·</span>
                       <span>{getReadingTime(post)} {t.minRead}</span>
                     </div>
                   </div>
@@ -127,125 +123,126 @@ const alternateUrls = [
           </div>
         )}
       </div>
-    </section>
 
-    <!-- Back Nav -->
-    <nav class="back-nav">
-      <div class="container">
-        <a href={`/${lang}/blog`}>{t.backToBlog}</a>
-      </div>
-    </nav>
+      <!-- Volver -->
+      <nav class="back-link">
+        <div class="container">
+          <a href={`/${lang}/blog`}>{t.backToBlog}</a>
+        </div>
+      </nav>
+    </section>
   </main>
 </Layout>
 
 <style>
-  .blog {
+  /* Variables */
+  .category-page {
+    --blue-dark: #0f172a;
+    --blue-medium: #1e293b;
     --gold: #c9a227;
     --gold-dark: #a8861e;
-    --text: #111;
-    --text-muted: #666;
-    --text-light: #999;
-    --bg: #fff;
-    --bg-alt: #fafafa;
-    --border: #eee;
+    --white: #ffffff;
+    --gray-50: #f8fafc;
+    --gray-100: #f1f5f9;
+    --gray-200: #e2e8f0;
+    --gray-300: #cbd5e1;
+    --gray-400: #94a3b8;
+    --gray-500: #64748b;
+    --gray-600: #475569;
+    --gray-900: #0f172a;
   }
 
   .container {
-    max-width: 1100px;
+    max-width: 1140px;
     margin: 0 auto;
     padding: 0 1.5rem;
   }
 
-  /* Header */
-  .blog-header {
-    padding: 4rem 0 3rem;
+  /* ========== HERO ========== */
+  .hero {
+    background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue-medium) 100%);
+    color: var(--white);
+    padding: 4rem 0 3.5rem;
     text-align: center;
-    background: var(--bg);
   }
 
   .breadcrumb {
     display: flex;
     justify-content: center;
     gap: 0.5rem;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     margin-bottom: 1.5rem;
   }
 
   .breadcrumb a {
-    color: var(--text-light);
+    color: var(--gray-400);
     text-decoration: none;
+    transition: color 0.2s;
   }
 
   .breadcrumb a:hover {
-    color: var(--gold);
+    color: var(--white);
   }
 
   .breadcrumb span {
-    color: var(--border);
+    color: var(--gray-500);
   }
 
-  .blog-header h1 {
+  .hero h1 {
     font-size: 3rem;
     font-weight: 300;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.04em;
     margin-bottom: 0.5rem;
-    color: var(--text);
   }
 
-  .blog-header p {
+  .hero > .container > p {
     font-size: 1rem;
-    color: var(--text-light);
+    color: var(--gray-400);
+    margin-bottom: 2rem;
   }
 
-  /* Navigation */
-  .blog-nav {
-    border-bottom: 1px solid var(--border);
-    padding: 1rem 0;
-    position: sticky;
-    top: 80px;
-    background: var(--bg);
-    z-index: 10;
-  }
-
-  .categories-inline {
+  .hero-categories {
     display: flex;
     justify-content: center;
-    gap: 0.25rem;
+    gap: 0.5rem;
     flex-wrap: wrap;
   }
 
-  .categories-inline a {
-    padding: 0.5rem 1rem;
+  .cat-pill {
+    padding: 0.5rem 1.25rem;
     font-size: 0.85rem;
-    color: var(--text-muted);
+    color: var(--gray-400);
     text-decoration: none;
     border-radius: 100px;
+    border: 1px solid transparent;
     transition: all 0.2s;
   }
 
-  .categories-inline a:hover {
-    color: var(--text);
-    background: var(--bg-alt);
+  .cat-pill:hover {
+    color: var(--white);
+    border-color: var(--gray-500);
   }
 
-  .categories-inline a.active {
-    background: var(--text);
-    color: white;
+  .cat-pill.active {
+    background: var(--gold);
+    color: var(--white);
   }
 
-  /* Posts Grid */
-  .posts {
-    padding: 4rem 0 5rem;
+  /* ========== CONTENIDO ========== */
+  .content-area {
+    background: var(--white);
+    padding: 4rem 0 3rem;
   }
 
   .posts-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
+    margin-bottom: 3rem;
   }
 
   .post-card {
-    background: var(--bg);
+    background: var(--white);
   }
 
   .post-link {
@@ -255,10 +252,10 @@ const alternateUrls = [
 
   .post-image {
     aspect-ratio: 4/3;
-    border-radius: 12px;
+    border-radius: 16px;
     overflow: hidden;
-    margin-bottom: 1rem;
-    background: var(--bg-alt);
+    margin-bottom: 1.25rem;
+    background: var(--gray-100);
   }
 
   .post-image img {
@@ -281,7 +278,7 @@ const alternateUrls = [
   .post-image.placeholder svg {
     width: 40px;
     height: 40px;
-    color: var(--border);
+    color: var(--gray-200);
   }
 
   .post-body h3 {
@@ -289,7 +286,7 @@ const alternateUrls = [
     font-weight: 600;
     line-height: 1.4;
     margin-bottom: 0.75rem;
-    color: var(--text);
+    color: var(--gray-900);
     letter-spacing: -0.01em;
     transition: color 0.2s;
   }
@@ -303,11 +300,7 @@ const alternateUrls = [
     align-items: center;
     gap: 0.5rem;
     font-size: 0.8rem;
-    color: var(--text-light);
-  }
-
-  .dot {
-    opacity: 0.5;
+    color: var(--gray-400);
   }
 
   .no-posts {
@@ -316,15 +309,16 @@ const alternateUrls = [
   }
 
   .no-posts p {
-    color: var(--text-light);
+    color: var(--gray-500);
     margin-bottom: 1.5rem;
+    font-size: 1.1rem;
   }
 
   .back-btn {
     display: inline-block;
     background: var(--gold);
-    color: white;
-    padding: 0.75rem 1.5rem;
+    color: var(--white);
+    padding: 0.9rem 2rem;
     border-radius: 100px;
     text-decoration: none;
     font-weight: 600;
@@ -336,24 +330,26 @@ const alternateUrls = [
     background: var(--gold-dark);
   }
 
-  /* Back Nav */
-  .back-nav {
-    padding: 0 0 4rem;
+  /* Back Link */
+  .back-link {
     text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid var(--gray-200);
   }
 
-  .back-nav a {
-    color: var(--text-muted);
+  .back-link a {
+    color: var(--gray-500);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    font-weight: 500;
     transition: color 0.2s;
   }
 
-  .back-nav a:hover {
+  .back-link a:hover {
     color: var(--gold);
   }
 
-  /* Responsive */
+  /* ========== RESPONSIVE ========== */
   @media (max-width: 900px) {
     .posts-grid {
       grid-template-columns: repeat(2, 1fr);
@@ -361,7 +357,7 @@ const alternateUrls = [
   }
 
   @media (max-width: 640px) {
-    .blog-header h1 {
+    .hero h1 {
       font-size: 2.25rem;
     }
 
