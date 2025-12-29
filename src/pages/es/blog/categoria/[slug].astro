@@ -1,395 +1,318 @@
 ---
 /**
- * Blog - Artículos por Categoría (Español)
+ * Blog - Categoría Minimalista
  * @file src/pages/es/blog/categoria/[slug].astro
  */
 import Layout from "@/layouts/Layout.astro";
-import {
-  getBlogPostsByCategory,
-  getBlogCategories,
-  getFeaturedImageUrl,
-  calculateReadingTime,
-} from "@/lib/blog.js";
+import { getBlogPostsByCategory, getBlogCategories, getFeaturedImageUrl, calculateReadingTime } from "@/lib/blog.js";
 
-const lang = "es";
+const lang = 'es';
 
-// Generar rutas estáticas
+const t = {
+  blog: 'Blog',
+  minRead: 'min',
+  noPosts: 'No hay artículos en esta categoría',
+  viewAll: 'Ver todos',
+  backToBlog: '← Volver al blog'
+};
+
 export async function getStaticPaths() {
   const categories = await getBlogCategories();
-  return categories.map((cat) => ({
+  return categories.map(cat => ({
     params: { slug: cat.slug },
-    props: { category: cat },
+    props: { category: cat }
   }));
 }
 
 const { slug } = Astro.params;
 const { category } = Astro.props;
 
-// Traducciones
-const t = {
-  title: "Blog",
-  metaTitle: `${category?.name || "Categoría"} | Blog RayGold`,
-  metaDescription: `Artículos sobre ${category?.name?.toLowerCase() || "joyería"} en el blog de RayGold ERP.`,
-  allPosts: `Artículos en "${category?.name || "Categoría"}"`,
-  categories: "Categorías",
-  minRead: "min de lectura",
-  noPosts: "No hay artículos en esta categoría",
-  backToBlog: "Ver todos los artículos",
-  ctaTitle: "¿Quieres ver RayGold en acción?",
-  ctaText: "Solicita una demo personalizada para tu negocio.",
-  ctaButton: "Solicitar Demo",
-};
-
-// Obtener datos
 const [posts, categories] = await Promise.all([
   getBlogPostsByCategory(slug, lang),
-  getBlogCategories(),
+  getBlogCategories()
 ]);
 
-// URLs alternativas
-const alternateUrls = [
-  { lang: "es", url: `/es/blog/categoria/${slug}` },
-  { lang: "en", url: `/en/blog/category/${slug}` },
-  { lang: "fr", url: `/fr/blog/categorie/${slug}` },
-  { lang: "ca", url: `/ca/blog/categoria/${slug}` },
-  { lang: "pt-br", url: `/pt-br/blog/categoria/${slug}` },
-];
-
-// Formatear fecha
 function formatDate(dateString) {
   const date = new Date(dateString);
-  return date.toLocaleDateString("es-ES", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
+  return date.toLocaleDateString('es-ES', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric'
   });
 }
 
-// Obtener tiempo de lectura
 function getReadingTime(post) {
-  return (
-    post.blogSeo?.readingTime ||
-    calculateReadingTime(post.content || post.excerpt)
-  );
+  return post.blogSeo?.readingTime || calculateReadingTime(post.content || post.excerpt);
 }
+
+const alternateUrls = [
+  { lang: 'es', url: `/es/blog/categoria/${slug}` },
+];
 ---
 
-<Layout
-  title={t.metaTitle}
-  description={t.metaDescription}
+<Layout 
+  title={`${category.name} | Blog | RayGold`}
+  description={`Artículos sobre ${category.name.toLowerCase()} en el blog de RayGold.`}
   lang={lang}
   alternateUrls={alternateUrls}
 >
-  <div class="blog-page">
-    <!-- Hero -->
-    <section class="blog-hero">
+  <main class="blog">
+    <!-- Header -->
+    <header class="blog-header">
       <div class="container">
-        <nav class="breadcrumb-hero">
-          <a href={`/${lang}/blog`}>Blog</a>
+        <nav class="breadcrumb">
+          <a href={`/${lang}/blog`}>{t.blog}</a>
           <span>/</span>
-          <span>{category?.name || "Categoría"}</span>
+          <span>{category.name}</span>
         </nav>
-        <h1>{category?.name || "Categoría"}</h1>
-        <p>
-          {posts.length} artículo{posts.length !== 1 ? "s" : ""} en esta categoría
-        </p>
+        <h1>{category.name}</h1>
+        <p>{posts.length} {posts.length === 1 ? 'artículo' : 'artículos'}</p>
       </div>
-    </section>
+    </header>
 
-    <!-- Listado -->
-    <section class="posts-section">
+    <!-- Filtros -->
+    <nav class="blog-nav">
       <div class="container">
-        <div class="posts-layout">
-          <!-- Grid de Posts -->
-          <div class="posts-grid">
-            <div class="section-header">
-              <h2>{t.allPosts}</h2>
-              <a href={`/${lang}/blog`} class="back-link">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path d="m15 18-6-6 6-6"></path>
-                </svg>
-                {t.backToBlog}
-              </a>
-            </div>
-
-            {
-              posts.length > 0 ? (
-                <div class="grid">
-                  {posts.map((post) => (
-                    <article class="post-card">
-                      {getFeaturedImageUrl(post) && (
-                        <a
-                          href={`/${lang}/blog/${post.slug}`}
-                          class="post-image"
-                        >
-                          <img
-                            src={getFeaturedImageUrl(post)}
-                            alt={post.title}
-                            loading="lazy"
-                          />
-                        </a>
-                      )}
-                      <div class="post-content">
-                        <span class="category-badge">{category?.name}</span>
-                        <h3>
-                          <a href={`/${lang}/blog/${post.slug}`}>
-                            {post.title}
-                          </a>
-                        </h3>
-                        <p set:html={post.excerpt} />
-                        <div class="post-footer">
-                          <time datetime={post.date}>
-                            {formatDate(post.date)}
-                          </time>
-                          <span>
-                            {getReadingTime(post)} {t.minRead}
-                          </span>
-                        </div>
-                      </div>
-                    </article>
-                  ))}
-                </div>
-              ) : (
-                <div class="no-posts">
-                  <p>{t.noPosts}</p>
-                  <a href={`/${lang}/blog`} class="btn-back">
-                    {t.backToBlog}
-                  </a>
-                </div>
-              )
-            }
-          </div>
-
-          <!-- Sidebar -->
-          <aside class="sidebar">
-            <!-- Categorías -->
-            {
-              categories.length > 0 && (
-                <div class="sidebar-widget">
-                  <h3>{t.categories}</h3>
-                  <ul class="categories-list">
-                    {categories.map((cat) => (
-                      <li>
-                        <a
-                          href={`/${lang}/blog/categoria/${cat.slug}`}
-                          class:list={[{ active: cat.slug === slug }]}
-                        >
-                          {cat.name}
-                          <span class="count">({cat.count || 0})</span>
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )
-            }
-
-            <!-- CTA -->
-            <div class="sidebar-cta">
-              <h3>{t.ctaTitle}</h3>
-              <p>{t.ctaText}</p>
-              <a href={`/${lang}/contacto`} class="btn-cta">{t.ctaButton}</a>
-            </div>
-          </aside>
+        <div class="categories-inline">
+          <a href={`/${lang}/blog`}>{t.viewAll}</a>
+          {categories.map(cat => (
+            <a 
+              href={`/${lang}/blog/categoria/${cat.slug}`}
+              class={cat.slug === slug ? 'active' : ''}
+            >
+              {cat.name}
+            </a>
+          ))}
         </div>
       </div>
+    </nav>
+
+    <!-- Grid de Posts -->
+    <section class="posts">
+      <div class="container">
+        {posts.length > 0 ? (
+          <div class="posts-grid">
+            {posts.map(post => (
+              <article class="post-card">
+                <a href={`/${lang}/blog/${post.slug}`} class="post-link">
+                  {getFeaturedImageUrl(post) ? (
+                    <div class="post-image">
+                      <img src={getFeaturedImageUrl(post)} alt={post.title} loading="lazy" />
+                    </div>
+                  ) : (
+                    <div class="post-image placeholder">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                        <polyline points="21 15 16 10 5 21"></polyline>
+                      </svg>
+                    </div>
+                  )}
+                  <div class="post-body">
+                    <h3>{post.title}</h3>
+                    <div class="meta">
+                      <time>{formatDate(post.date)}</time>
+                      <span class="dot">·</span>
+                      <span>{getReadingTime(post)} {t.minRead}</span>
+                    </div>
+                  </div>
+                </a>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <div class="no-posts">
+            <p>{t.noPosts}</p>
+            <a href={`/${lang}/blog`} class="back-btn">{t.backToBlog}</a>
+          </div>
+        )}
+      </div>
     </section>
-  </div>
+
+    <!-- Back Nav -->
+    <nav class="back-nav">
+      <div class="container">
+        <a href={`/${lang}/blog`}>{t.backToBlog}</a>
+      </div>
+    </nav>
+  </main>
 </Layout>
 
 <style>
-  .blog-page {
-    --primary: #c9a227;
-    --primary-dark: #b8931f;
-    --text: #1a1a1a;
-    --text-light: #666;
-    --bg-light: #f8f9fa;
-    --border: #e5e5e5;
-    background: white;
+  .blog {
+    --gold: #c9a227;
+    --gold-dark: #a8861e;
+    --text: #111;
+    --text-muted: #666;
+    --text-light: #999;
+    --bg: #fff;
+    --bg-alt: #fafafa;
+    --border: #eee;
   }
 
   .container {
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto;
     padding: 0 1.5rem;
   }
 
-  /* Hero */
-  .blog-hero {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-    color: white;
-    padding: 3rem 0;
+  /* Header */
+  .blog-header {
+    padding: 4rem 0 3rem;
     text-align: center;
+    background: var(--bg);
   }
 
-  .breadcrumb-hero {
+  .breadcrumb {
     display: flex;
     justify-content: center;
-    align-items: center;
     gap: 0.5rem;
-    margin-bottom: 1rem;
-    font-size: 0.9rem;
-    opacity: 0.8;
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
   }
 
-  .breadcrumb-hero a {
-    color: white;
-    text-decoration: none;
-  }
-
-  .breadcrumb-hero a:hover {
-    text-decoration: underline;
-  }
-
-  .blog-hero h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-    font-weight: 700;
-  }
-
-  .blog-hero p {
-    font-size: 1rem;
-    opacity: 0.8;
-  }
-
-  /* Posts Section */
-  .posts-section {
-    padding: 4rem 0;
-  }
-
-  .posts-layout {
-    display: grid;
-    grid-template-columns: 1fr 300px;
-    gap: 3rem;
-  }
-
-  .section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-
-  .section-header h2 {
-    font-size: 1.5rem;
-    color: var(--text);
-    margin: 0;
-  }
-
-  .back-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
+  .breadcrumb a {
     color: var(--text-light);
     text-decoration: none;
-    font-size: 0.9rem;
-    transition: color 0.2s;
   }
 
-  .back-link:hover {
-    color: var(--primary);
+  .breadcrumb a:hover {
+    color: var(--gold);
   }
 
-  .grid {
+  .breadcrumb span {
+    color: var(--border);
+  }
+
+  .blog-header h1 {
+    font-size: 3rem;
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+  }
+
+  .blog-header p {
+    font-size: 1rem;
+    color: var(--text-light);
+  }
+
+  /* Navigation */
+  .blog-nav {
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 0;
+    position: sticky;
+    top: 80px;
+    background: var(--bg);
+    z-index: 10;
+  }
+
+  .categories-inline {
+    display: flex;
+    justify-content: center;
+    gap: 0.25rem;
+    flex-wrap: wrap;
+  }
+
+  .categories-inline a {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-radius: 100px;
+    transition: all 0.2s;
+  }
+
+  .categories-inline a:hover {
+    color: var(--text);
+    background: var(--bg-alt);
+  }
+
+  .categories-inline a.active {
+    background: var(--text);
+    color: white;
+  }
+
+  /* Posts Grid */
+  .posts {
+    padding: 4rem 0 5rem;
+  }
+
+  .posts-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
   }
 
   .post-card {
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-    transition:
-      transform 0.3s,
-      box-shadow 0.3s;
+    background: var(--bg);
   }
 
-  .post-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  .post-link {
+    display: block;
+    text-decoration: none;
   }
 
   .post-image {
-    display: block;
-    height: 180px;
+    aspect-ratio: 4/3;
+    border-radius: 12px;
     overflow: hidden;
+    margin-bottom: 1rem;
+    background: var(--bg-alt);
   }
 
   .post-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s;
+    transition: transform 0.4s ease;
   }
 
-  .post-card:hover .post-image img {
+  .post-link:hover .post-image img {
     transform: scale(1.05);
   }
 
-  .post-content {
-    padding: 1.25rem;
-  }
-
-  .category-badge {
-    display: inline-block;
-    background: var(--primary);
-    color: white;
-    padding: 0.2rem 0.6rem;
-    border-radius: 20px;
-    font-size: 0.7rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-  }
-
-  .post-content h3 {
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-    line-height: 1.4;
-  }
-
-  .post-content h3 a {
-    color: var(--text);
-    text-decoration: none;
-  }
-
-  .post-content h3 a:hover {
-    color: var(--primary);
-  }
-
-  .post-content p {
-    color: var(--text-light);
-    font-size: 0.9rem;
-    line-height: 1.5;
-    margin-bottom: 1rem;
-  }
-
-  .post-footer {
+  .post-image.placeholder {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .post-image.placeholder svg {
+    width: 40px;
+    height: 40px;
+    color: var(--border);
+  }
+
+  .post-body h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 0.75rem;
+    color: var(--text);
+    letter-spacing: -0.01em;
+    transition: color 0.2s;
+  }
+
+  .post-link:hover .post-body h3 {
+    color: var(--gold);
+  }
+
+  .meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     font-size: 0.8rem;
     color: var(--text-light);
-    padding-top: 1rem;
-    border-top: 1px solid var(--border);
+  }
+
+  .dot {
+    opacity: 0.5;
   }
 
   .no-posts {
     text-align: center;
-    padding: 3rem;
-    background: var(--bg-light);
-    border-radius: 12px;
+    padding: 4rem 0;
   }
 
   .no-posts p {
@@ -397,132 +320,53 @@ function getReadingTime(post) {
     margin-bottom: 1.5rem;
   }
 
-  .btn-back {
+  .back-btn {
     display: inline-block;
-    background: var(--primary);
+    background: var(--gold);
     color: white;
     padding: 0.75rem 1.5rem;
-    border-radius: 8px;
+    border-radius: 100px;
     text-decoration: none;
     font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s;
   }
 
-  .btn-back:hover {
-    background: var(--primary-dark);
+  .back-btn:hover {
+    background: var(--gold-dark);
   }
 
-  /* Sidebar */
-  .sidebar-widget {
-    background: white;
-    border-radius: 12px;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    border: 1px solid var(--border);
-  }
-
-  .sidebar-widget h3 {
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
-    color: var(--text);
-  }
-
-  .categories-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .categories-list li {
-    margin-bottom: 0.5rem;
-  }
-
-  .categories-list a {
-    display: flex;
-    justify-content: space-between;
-    color: var(--text);
-    text-decoration: none;
-    padding: 0.5rem 0;
-    border-bottom: 1px solid var(--border);
-    transition: color 0.2s;
-  }
-
-  .categories-list a:hover {
-    color: var(--primary);
-  }
-
-  .categories-list a.active {
-    color: var(--primary);
-    font-weight: 600;
-  }
-
-  .categories-list .count {
-    color: var(--text-light);
-    font-size: 0.85rem;
-  }
-
-  .sidebar-cta {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-    color: white;
-    border-radius: 12px;
-    padding: 1.5rem;
+  /* Back Nav */
+  .back-nav {
+    padding: 0 0 4rem;
     text-align: center;
   }
 
-  .sidebar-cta h3 {
-    font-size: 1.1rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .sidebar-cta p {
-    font-size: 0.9rem;
-    opacity: 0.9;
-    margin-bottom: 1rem;
-  }
-
-  .btn-cta {
-    display: inline-block;
-    background: var(--primary);
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border-radius: 8px;
+  .back-nav a {
+    color: var(--text-muted);
     text-decoration: none;
-    font-weight: 600;
-    transition: background 0.3s;
+    font-size: 0.9rem;
+    transition: color 0.2s;
   }
 
-  .btn-cta:hover {
-    background: var(--primary-dark);
+  .back-nav a:hover {
+    color: var(--gold);
   }
 
   /* Responsive */
-  @media (max-width: 1024px) {
-    .posts-layout {
-      grid-template-columns: 1fr;
-    }
-
-    .sidebar {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
+  @media (max-width: 900px) {
+    .posts-grid {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 
-  @media (max-width: 768px) {
-    .blog-hero h1 {
-      font-size: 2rem;
+  @media (max-width: 640px) {
+    .blog-header h1 {
+      font-size: 2.25rem;
     }
 
-    .grid {
+    .posts-grid {
       grid-template-columns: 1fr;
-    }
-
-    .sidebar {
-      grid-template-columns: 1fr;
-    }
-
-    .section-header {
-      flex-direction: column;
-      align-items: flex-start;
     }
   }
 </style>

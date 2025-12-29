@@ -1,14 +1,26 @@
 ---
 /**
- * Blog - Artículo Individual (Español)
+ * Blog - Artículo Individual Minimalista
  * @file src/pages/es/blog/[slug].astro
  */
 import Layout from "@/layouts/Layout.astro";
-import { getAllBlogSlugs, getBlogPostBySlug, getRelatedPosts, getFeaturedImageUrl, calculateReadingTime } from "@/lib/blog.js";
+import { getBlogPostBySlug, getAllBlogSlugs, getRelatedPosts, getFeaturedImageUrl, calculateReadingTime } from "@/lib/blog.js";
 
 const lang = 'es';
 
-// Generar rutas estáticas
+const t = {
+  home: 'Inicio',
+  blog: 'Blog',
+  share: 'Compartir',
+  minRead: 'min de lectura',
+  publishedOn: 'Publicado el',
+  relatedPosts: 'También te puede interesar',
+  backToBlog: '← Volver al blog',
+  ctaTitle: '¿Listo para optimizar tu negocio?',
+  ctaText: 'Descubre cómo RayGold puede transformar la gestión de tu joyería.',
+  ctaButton: 'Solicitar Demo'
+};
+
 export async function getStaticPaths() {
   const slugs = await getAllBlogSlugs();
   return slugs
@@ -17,259 +29,224 @@ export async function getStaticPaths() {
 }
 
 const { slug } = Astro.params;
-
-// Obtener post
 const post = await getBlogPostBySlug(slug, lang);
 
-// Si no existe, redirigir
 if (!post) {
   return Astro.redirect(`/${lang}/blog`);
 }
 
-// Traducciones
-const t = {
-  backToBlog: 'Volver al Blog',
-  minRead: 'min de lectura',
-  share: 'Compartir',
-  relatedPosts: 'Artículos relacionados',
-  publishedOn: 'Publicado el',
-  updatedOn: 'Actualizado el',
-  ctaDemo: {
-    title: '¿Listo para transformar tu negocio?',
-    text: 'Descubre cómo RayGold ERP puede optimizar la gestión de tu empresa de joyería con una demo personalizada.',
-    button: 'Solicitar Demo Gratis'
-  }
-};
-
-// Obtener categoría principal
-const mainCategory = post.blogCategories?.nodes?.[0];
-
-// Obtener posts relacionados
-const relatedPosts = mainCategory 
-  ? await getRelatedPosts(slug, mainCategory.slug, lang, 3)
+const categorySlug = post.blogCategories?.nodes?.[0]?.slug;
+const relatedPosts = categorySlug 
+  ? await getRelatedPosts(slug, categorySlug, lang, 3) 
   : [];
 
-// URLs alternativas
-const alternateUrls = [
-  { lang: 'es', url: `/es/blog/${slug}` },
-  { lang: 'en', url: `/en/blog/${slug}` },
-  { lang: 'fr', url: `/fr/blog/${slug}` },
-  { lang: 'ca', url: `/ca/blog/${slug}` },
-  { lang: 'pt-br', url: `/pt-br/blog/${slug}` },
-];
+const featuredImage = getFeaturedImageUrl(post);
+const readingTime = post.blogSeo?.readingTime || calculateReadingTime(post.content);
 
-// SEO
-const metaTitle = post.blogSeo?.seoTitle || post.title;
-const metaDescription = post.blogSeo?.seoDescription || post.excerpt?.replace(/<[^>]*>/g, '').slice(0, 160);
-
-// Helpers
 function formatDate(dateString) {
   const date = new Date(dateString);
   return date.toLocaleDateString('es-ES', {
-    year: 'numeric',
+    day: 'numeric',
     month: 'long',
-    day: 'numeric'
+    year: 'numeric'
   });
 }
 
-function getReadingTime() {
-  return post.blogSeo?.readingTime || calculateReadingTime(post.content);
-}
+const seoTitle = post.blogSeo?.seoTitle || post.title;
+const seoDescription = post.blogSeo?.seoDescription || post.excerpt?.replace(/<[^>]*>/g, '').slice(0, 160);
+const currentUrl = `https://raygold.es/${lang}/blog/${slug}`;
 
-const pageUrl = `https://raytecno.es/${lang}/blog/${slug}`;
-const featuredImage = getFeaturedImageUrl(post);
+const alternateUrls = [
+  { lang: 'es', url: `/es/blog/${slug}` },
+];
 ---
 
 <Layout 
-  title={metaTitle}
-  description={metaDescription}
+  title={`${seoTitle} | RayGold`}
+  description={seoDescription}
   lang={lang}
   alternateUrls={alternateUrls}
 >
-  <div class="blog-post-page">
-    <!-- Breadcrumb -->
-    <nav class="breadcrumb">
+  <article class="article">
+    <!-- Header -->
+    <header class="article-header">
       <div class="container">
-        <a href={`/${lang}`}>Inicio</a>
-        <span>/</span>
-        <a href={`/${lang}/blog`}>Blog</a>
-        <span>/</span>
-        <span class="current">{post.title}</span>
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb">
+          <a href={`/${lang}`}>{t.home}</a>
+          <span>/</span>
+          <a href={`/${lang}/blog`}>{t.blog}</a>
+        </nav>
+
+        <!-- Category -->
+        {post.blogCategories?.nodes?.[0] && (
+          <span class="category">{post.blogCategories.nodes[0].name}</span>
+        )}
+
+        <!-- Title -->
+        <h1>{post.title}</h1>
+
+        <!-- Meta -->
+        <div class="meta">
+          <time datetime={post.date}>
+            {t.publishedOn} {formatDate(post.date)}
+          </time>
+          <span class="dot">·</span>
+          <span>{readingTime} {t.minRead}</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Featured Image -->
+    {featuredImage && (
+      <figure class="featured-image">
+        <div class="container-wide">
+          <img src={featuredImage} alt={post.title} />
+        </div>
+      </figure>
+    )}
+
+    <!-- Content -->
+    <div class="article-body">
+      <div class="container-narrow">
+        <div class="content" set:html={post.content} />
+
+        <!-- Tags -->
+        {post.blogTags?.nodes?.length > 0 && (
+          <div class="tags">
+            {post.blogTags.nodes.map(tag => (
+              <span class="tag">{tag.name}</span>
+            ))}
+          </div>
+        )}
+
+        <!-- Share -->
+        <div class="share">
+          <span>{t.share}</span>
+          <div class="share-buttons">
+            <a 
+              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(currentUrl)}`}
+              target="_blank"
+              rel="noopener"
+              aria-label="Compartir en Twitter"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+            <a 
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(currentUrl)}`}
+              target="_blank"
+              rel="noopener"
+              aria-label="Compartir en LinkedIn"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </a>
+            <button 
+              class="copy-link"
+              data-url={currentUrl}
+              aria-label="Copiar enlace"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    {post.blogSeo?.ctaEnabled && (
+      <section class="cta">
+        <div class="container-narrow">
+          <div class="cta-box">
+            <h3>{t.ctaTitle}</h3>
+            <p>{t.ctaText}</p>
+            <a href={`/${lang}/contacto`} class="cta-btn">{t.ctaButton}</a>
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- Related Posts -->
+    {relatedPosts.length > 0 && (
+      <section class="related">
+        <div class="container">
+          <h2>{t.relatedPosts}</h2>
+          <div class="related-grid">
+            {relatedPosts.map(related => (
+              <a href={`/${lang}/blog/${related.slug}`} class="related-card">
+                {getFeaturedImageUrl(related) && (
+                  <div class="related-image">
+                    <img src={getFeaturedImageUrl(related)} alt={related.title} loading="lazy" />
+                  </div>
+                )}
+                <div class="related-body">
+                  <h3>{related.title}</h3>
+                  <span class="related-meta">{formatDate(related.date)}</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- Back Link -->
+    <nav class="back-nav">
+      <div class="container">
+        <a href={`/${lang}/blog`}>{t.backToBlog}</a>
       </div>
     </nav>
-
-    <article class="article">
-      <div class="container">
-        <!-- Header -->
-        <header class="article-header">
-          {mainCategory && (
-            <a href={`/${lang}/blog/categoria/${mainCategory.slug}`} class="category-badge">
-              {mainCategory.name}
-            </a>
-          )}
-          
-          <h1>{post.title}</h1>
-          
-          <div class="article-meta">
-            <div class="meta-left">
-              <time datetime={post.date}>
-                {t.publishedOn} {formatDate(post.date)}
-              </time>
-              <span class="reading-time">
-                • {getReadingTime()} {t.minRead}
-              </span>
-            </div>
-            
-            <div class="share-buttons">
-              <span>{t.share}:</span>
-              <a 
-                href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(post.title)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Compartir en Twitter"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                </svg>
-              </a>
-              <a 
-                href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(pageUrl)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Compartir en LinkedIn"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                </svg>
-              </a>
-              <button id="copyLink" aria-label="Copiar enlace" data-url={pageUrl}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
-                  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
-                </svg>
-              </button>
-            </div>
-          </div>
-        </header>
-
-        <!-- Imagen destacada -->
-        {featuredImage && (
-          <figure class="featured-image">
-            <img src={featuredImage} alt={post.title} loading="eager" />
-          </figure>
-        )}
-
-        <!-- Contenido -->
-        <div class="article-content">
-          <div class="content-body" set:html={post.content} />
-
-          <!-- Tags -->
-          {post.blogTags?.nodes && post.blogTags.nodes.length > 0 && (
-            <div class="article-tags">
-              {post.blogTags.nodes.map(tag => (
-                <a href={`/${lang}/blog/etiqueta/${tag.slug}`} class="tag">
-                  #{tag.name}
-                </a>
-              ))}
-            </div>
-          )}
-
-          <!-- CTA -->
-          {post.blogSeo?.ctaEnabled !== false && (
-            <aside class="blog-cta">
-              <div class="cta-content">
-                <div class="cta-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                    <polyline points="22 4 12 14.01 9 11.01"/>
-                  </svg>
-                </div>
-                <div class="cta-text">
-                  <h3>{t.ctaDemo.title}</h3>
-                  <p>{t.ctaDemo.text}</p>
-                </div>
-                <a href={`/${lang}/contacto`} class="cta-button">
-                  {t.ctaDemo.button}
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M5 12h14"/>
-                    <path d="m12 5 7 7-7 7"/>
-                  </svg>
-                </a>
-              </div>
-            </aside>
-          )}
-        </div>
-
-        <!-- Posts relacionados -->
-        {relatedPosts.length > 0 && (
-          <section class="related-posts">
-            <h2>{t.relatedPosts}</h2>
-            <div class="related-grid">
-              {relatedPosts.map(relPost => (
-                <article class="related-card">
-                  {getFeaturedImageUrl(relPost) && (
-                    <a href={`/${lang}/blog/${relPost.slug}`} class="related-image">
-                      <img src={getFeaturedImageUrl(relPost)} alt={relPost.title} loading="lazy" />
-                    </a>
-                  )}
-                  <div class="related-content">
-                    <h3>
-                      <a href={`/${lang}/blog/${relPost.slug}`}>{relPost.title}</a>
-                    </h3>
-                    <div class="related-meta">
-                      <time datetime={relPost.date}>{formatDate(relPost.date)}</time>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
-        )}
-
-        <!-- Volver -->
-        <div class="back-link">
-          <a href={`/${lang}/blog`}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="m15 18-6-6 6-6"/>
-            </svg>
-            {t.backToBlog}
-          </a>
-        </div>
-      </div>
-    </article>
-  </div>
+  </article>
 </Layout>
 
 <style>
-  .blog-post-page {
-    --primary: #c9a227;
-    --primary-dark: #b8931f;
-    --text: #1a1a1a;
-    --text-light: #666;
-    --bg-light: #f8f9fa;
-    --border: #e5e5e5;
-    background: white;
+  .article {
+    --gold: #c9a227;
+    --gold-dark: #a8861e;
+    --text: #111;
+    --text-muted: #555;
+    --text-light: #888;
+    --bg: #fff;
+    --bg-alt: #fafafa;
+    --border: #eee;
   }
 
   .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .container-narrow {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .container-wide {
     max-width: 900px;
     margin: 0 auto;
     padding: 0 1.5rem;
   }
 
-  /* Breadcrumb */
-  .breadcrumb {
-    background: var(--bg-light);
-    padding: 1rem 0;
-    font-size: 0.9rem;
+  /* Header */
+  .article-header {
+    padding: 4rem 0 3rem;
+    text-align: center;
   }
 
-  .breadcrumb .container {
+  .breadcrumb {
     display: flex;
-    align-items: center;
+    justify-content: center;
     gap: 0.5rem;
-    flex-wrap: wrap;
-    max-width: 1200px;
+    font-size: 0.85rem;
+    margin-bottom: 2rem;
   }
 
   .breadcrumb a {
@@ -278,79 +255,199 @@ const featuredImage = getFeaturedImageUrl(post);
   }
 
   .breadcrumb a:hover {
-    color: var(--primary);
+    color: var(--gold);
   }
 
   .breadcrumb span {
-    color: var(--text-light);
+    color: var(--border);
   }
 
-  .breadcrumb .current {
-    color: var(--text);
-    font-weight: 500;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 300px;
-  }
-
-  /* Header */
-  .article-header {
-    text-align: center;
-    padding: 3rem 0 2rem;
-  }
-
-  .category-badge {
+  .category {
     display: inline-block;
-    background: var(--primary);
-    color: white;
-    padding: 0.35rem 1rem;
-    border-radius: 20px;
+    color: var(--gold);
     font-size: 0.8rem;
     font-weight: 600;
     text-transform: uppercase;
-    text-decoration: none;
-    margin-bottom: 1.5rem;
-  }
-
-  .category-badge:hover {
-    background: var(--primary-dark);
+    letter-spacing: 0.08em;
+    margin-bottom: 1rem;
   }
 
   .article-header h1 {
-    font-size: 2.5rem;
-    line-height: 1.3;
+    font-size: 2.75rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
     margin-bottom: 1.5rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .meta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-light);
+  }
+
+  .dot {
+    opacity: 0.5;
+  }
+
+  /* Featured Image */
+  .featured-image {
+    margin: 0 0 3rem;
+  }
+
+  .featured-image img {
+    width: 100%;
+    border-radius: 16px;
+    aspect-ratio: 21/9;
+    object-fit: cover;
+  }
+
+  /* Content */
+  .article-body {
+    padding-bottom: 3rem;
+  }
+
+  .content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+  }
+
+  .content :global(h2) {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--text);
+    margin: 3rem 0 1.25rem;
+    letter-spacing: -0.02em;
+  }
+
+  .content :global(h3) {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--text);
+    margin: 2.5rem 0 1rem;
+    letter-spacing: -0.01em;
+  }
+
+  .content :global(p) {
+    margin-bottom: 1.5rem;
+  }
+
+  .content :global(strong) {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .content :global(a) {
+    color: var(--gold);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .content :global(a:hover) {
+    color: var(--gold-dark);
+  }
+
+  .content :global(ul),
+  .content :global(ol) {
+    margin: 1.5rem 0;
+    padding-left: 1.5rem;
+  }
+
+  .content :global(li) {
+    margin-bottom: 0.75rem;
+  }
+
+  .content :global(blockquote) {
+    border-left: 3px solid var(--gold);
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
     color: var(--text);
   }
 
-  .article-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-    color: var(--text-light);
+  .content :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin: 2rem 0;
+  }
+
+  .content :global(pre) {
+    background: var(--bg-alt);
+    padding: 1.5rem;
+    border-radius: 12px;
+    overflow-x: auto;
+    margin: 2rem 0;
     font-size: 0.9rem;
+  }
+
+  .content :global(code) {
+    background: var(--bg-alt);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+
+  .content :global(pre code) {
+    background: none;
+    padding: 0;
+  }
+
+  /* Tags */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .tag {
+    background: var(--bg-alt);
+    color: var(--text-muted);
+    padding: 0.4rem 0.9rem;
+    border-radius: 100px;
+    font-size: 0.8rem;
+  }
+
+  /* Share */
+  .share {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .share > span {
+    font-size: 0.85rem;
+    color: var(--text-light);
   }
 
   .share-buttons {
     display: flex;
-    align-items: center;
     gap: 0.75rem;
   }
 
   .share-buttons a,
   .share-buttons button {
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
     border-radius: 50%;
-    background: var(--bg-light);
-    color: var(--text-light);
-    text-decoration: none;
+    background: var(--bg-alt);
+    color: var(--text-muted);
     border: none;
     cursor: pointer;
     transition: all 0.2s;
@@ -358,235 +455,103 @@ const featuredImage = getFeaturedImageUrl(post);
 
   .share-buttons a:hover,
   .share-buttons button:hover {
-    background: var(--primary);
-    color: white;
-  }
-
-  /* Featured Image */
-  .featured-image {
-    margin: 0 0 3rem;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-  }
-
-  .featured-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  /* Content */
-  .article-content {
-    max-width: 720px;
-    margin: 0 auto;
-  }
-
-  .content-body {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: var(--text);
-  }
-
-  .content-body :global(h2) {
-    font-size: 1.75rem;
-    margin: 2.5rem 0 1rem;
-  }
-
-  .content-body :global(h3) {
-    font-size: 1.35rem;
-    margin: 2rem 0 0.75rem;
-  }
-
-  .content-body :global(p) {
-    margin-bottom: 1.5rem;
-  }
-
-  .content-body :global(ul),
-  .content-body :global(ol) {
-    margin-bottom: 1.5rem;
-    padding-left: 1.5rem;
-  }
-
-  .content-body :global(blockquote) {
-    border-left: 4px solid var(--primary);
-    padding: 1rem 1.5rem;
-    margin: 2rem 0;
-    background: var(--bg-light);
-    font-style: italic;
-    border-radius: 0 8px 8px 0;
-  }
-
-  .content-body :global(pre) {
-    background: #1a1a1a;
-    color: #f8f8f8;
-    padding: 1.5rem;
-    border-radius: 8px;
-    overflow-x: auto;
-    margin: 2rem 0;
-  }
-
-  .content-body :global(img) {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin: 2rem 0;
-  }
-
-  .content-body :global(a) {
-    color: var(--primary);
-    text-decoration: underline;
-  }
-
-  /* Tags */
-  .article-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin: 3rem 0;
-    padding-top: 2rem;
-    border-top: 1px solid var(--border);
-  }
-
-  .tag {
-    display: inline-block;
-    background: var(--bg-light);
-    color: var(--text-light);
-    padding: 0.4rem 0.8rem;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    text-decoration: none;
-    transition: all 0.2s;
-  }
-
-  .tag:hover {
-    background: var(--primary);
+    background: var(--text);
     color: white;
   }
 
   /* CTA */
-  .blog-cta {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  .cta {
+    padding: 3rem 0;
+  }
+
+  .cta-box {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    color: white;
+    padding: 3rem;
     border-radius: 16px;
-    padding: 2.5rem;
-    margin: 3rem 0;
+    text-align: center;
+  }
+
+  .cta-box h3 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+  }
+
+  .cta-box p {
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    background: var(--gold);
     color: white;
-  }
-
-  .cta-content {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-  }
-
-  .cta-icon {
-    flex-shrink: 0;
-    width: 64px;
-    height: 64px;
-    background: rgba(201, 162, 39, 0.2);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--primary);
-  }
-
-  .cta-text {
-    flex: 1;
-    min-width: 200px;
-  }
-
-  .cta-text h3 {
-    font-size: 1.35rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .cta-text p {
-    font-size: 0.95rem;
-    opacity: 0.9;
-    margin: 0;
-  }
-
-  .cta-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: var(--primary);
-    color: white;
-    padding: 0.9rem 1.75rem;
-    border-radius: 8px;
+    padding: 0.9rem 2rem;
+    border-radius: 100px;
     text-decoration: none;
     font-weight: 600;
-    transition: all 0.3s;
+    font-size: 0.9rem;
+    transition: all 0.2s;
   }
 
-  .cta-button:hover {
-    background: var(--primary-dark);
-    transform: translateX(4px);
+  .cta-btn:hover {
+    background: var(--gold-dark);
+    transform: translateY(-2px);
   }
 
   /* Related Posts */
-  .related-posts {
-    margin-top: 4rem;
-    padding-top: 3rem;
-    border-top: 1px solid var(--border);
+  .related {
+    padding: 4rem 0;
+    background: var(--bg-alt);
   }
 
-  .related-posts h2 {
-    font-size: 1.5rem;
+  .related h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
     margin-bottom: 2rem;
-    text-align: center;
+    letter-spacing: -0.02em;
   }
 
   .related-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+    gap: 2rem;
   }
 
   .related-card {
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-
-  .related-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    text-decoration: none;
   }
 
   .related-image {
-    display: block;
-    height: 140px;
+    aspect-ratio: 4/3;
+    border-radius: 12px;
     overflow: hidden;
+    margin-bottom: 1rem;
   }
 
   .related-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.4s ease;
   }
 
-  .related-content {
-    padding: 1rem;
+  .related-card:hover .related-image img {
+    transform: scale(1.05);
   }
 
-  .related-content h3 {
+  .related-body h3 {
     font-size: 1rem;
-    line-height: 1.4;
-    margin-bottom: 0.5rem;
-  }
-
-  .related-content h3 a {
+    font-weight: 600;
     color: var(--text);
-    text-decoration: none;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+    transition: color 0.2s;
   }
 
-  .related-content h3 a:hover {
-    color: var(--primary);
+  .related-card:hover .related-body h3 {
+    color: var(--gold);
   }
 
   .related-meta {
@@ -594,73 +559,59 @@ const featuredImage = getFeaturedImageUrl(post);
     color: var(--text-light);
   }
 
-  /* Back Link */
-  .back-link {
+  /* Back Nav */
+  .back-nav {
+    padding: 3rem 0;
     text-align: center;
-    padding: 3rem 0 4rem;
   }
 
-  .back-link a {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--text-light);
+  .back-nav a {
+    color: var(--text-muted);
     text-decoration: none;
-    font-weight: 500;
+    font-size: 0.9rem;
     transition: color 0.2s;
   }
 
-  .back-link a:hover {
-    color: var(--primary);
+  .back-nav a:hover {
+    color: var(--gold);
   }
 
   /* Responsive */
   @media (max-width: 768px) {
     .article-header h1 {
-      font-size: 1.75rem;
+      font-size: 2rem;
     }
 
-    .article-meta {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    .content-body {
-      font-size: 1rem;
-    }
-
-    .cta-content {
-      flex-direction: column;
-      text-align: center;
-    }
-
-    .cta-button {
-      width: 100%;
-      justify-content: center;
+    .featured-image img {
+      border-radius: 0;
+      aspect-ratio: 16/9;
     }
 
     .related-grid {
       grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .cta-box {
+      padding: 2rem;
     }
   }
 </style>
 
 <script>
-  // Copy link
   document.addEventListener('DOMContentLoaded', () => {
-    const copyBtn = document.getElementById('copyLink');
+    const copyBtn = document.querySelector('.copy-link');
     if (copyBtn) {
       copyBtn.addEventListener('click', async () => {
         const url = copyBtn.getAttribute('data-url');
-        if (url) {
-          try {
-            await navigator.clipboard.writeText(url);
-            const originalHTML = copyBtn.innerHTML;
-            copyBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>`;
-            setTimeout(() => { copyBtn.innerHTML = originalHTML; }, 2000);
-          } catch (err) {
-            console.error('Failed to copy:', err);
-          }
+        try {
+          await navigator.clipboard.writeText(url);
+          copyBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+          setTimeout(() => {
+            copyBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>';
+          }, 2000);
+        } catch (err) {
+          console.error('Error copying:', err);
         }
       });
     }
