@@ -3,9 +3,24 @@
 import { WORDPRESS_GRAPHQL } from "../config.js";
 
 // ============================================
+// HELPER: Verificar idioma (maneja array o string)
+// ============================================
+function matchesLanguage(post, lang) {
+  const postLang = post.blogSeo?.language;
+  if (!postLang) return false;
+
+  // Si es array (ACF select múltiple)
+  if (Array.isArray(postLang)) {
+    return postLang.includes(lang);
+  }
+  // Si es string
+  return postLang === lang;
+}
+
+// ============================================
 // OBTENER TODOS LOS POSTS DEL BLOG POR IDIOMA
 // ============================================
-export async function getBlogPosts(lang = 'es', first = 100) {
+export async function getBlogPosts(lang = "es", first = 100) {
   const query = `
     query GetBlogPosts($first: Int!) {
       blogPosts(first: $first, where: { status: PUBLISH }) {
@@ -62,9 +77,9 @@ export async function getBlogPosts(lang = 'es', first = 100) {
 
     const { data } = await response.json();
     const posts = data?.blogPosts?.nodes || [];
-    
-    // Filtrar por idioma
-    return posts.filter(post => post.blogSeo?.language === lang);
+
+    // Filtrar por idioma (maneja array o string)
+    return posts.filter((post) => matchesLanguage(post, lang));
   } catch (error) {
     console.error("Error fetching blog posts:", error);
     return [];
@@ -74,7 +89,7 @@ export async function getBlogPosts(lang = 'es', first = 100) {
 // ============================================
 // OBTENER UN POST POR SLUG
 // ============================================
-export async function getBlogPostBySlug(slug, lang = 'es') {
+export async function getBlogPostBySlug(slug, lang = "es") {
   const query = `
     query GetBlogPost($slug: ID!) {
       blogPost(id: $slug, idType: SLUG) {
@@ -135,12 +150,12 @@ export async function getBlogPostBySlug(slug, lang = 'es') {
 
     const { data } = await response.json();
     const post = data?.blogPost;
-    
-    // Verificar idioma
-    if (post && post.blogSeo?.language !== lang) {
+
+    // Verificar idioma (maneja array o string)
+    if (post && !matchesLanguage(post, lang)) {
       return null;
     }
-    
+
     return post;
   } catch (error) {
     console.error("Error fetching blog post:", error);
@@ -151,9 +166,9 @@ export async function getBlogPostBySlug(slug, lang = 'es') {
 // ============================================
 // OBTENER POSTS DESTACADOS
 // ============================================
-export async function getFeaturedPosts(lang = 'es', first = 3) {
+export async function getFeaturedPosts(lang = "es", first = 3) {
   const posts = await getBlogPosts(lang, 50);
-  return posts.filter(post => post.blogSeo?.isFeatured).slice(0, first);
+  return posts.filter((post) => post.blogSeo?.isFeatured).slice(0, first);
 }
 
 // ============================================
@@ -191,25 +206,31 @@ export async function getBlogCategories() {
 // ============================================
 // OBTENER POSTS POR CATEGORÍA
 // ============================================
-export async function getBlogPostsByCategory(categorySlug, lang = 'es') {
+export async function getBlogPostsByCategory(categorySlug, lang = "es") {
   const posts = await getBlogPosts(lang, 100);
-  return posts.filter(post => 
-    post.blogCategories?.nodes?.some(cat => cat.slug === categorySlug)
+  return posts.filter((post) =>
+    post.blogCategories?.nodes?.some((cat) => cat.slug === categorySlug)
   );
 }
 
 // ============================================
 // OBTENER POSTS RELACIONADOS
 // ============================================
-export async function getRelatedPosts(currentSlug, categorySlug, lang = 'es', limit = 3) {
+export async function getRelatedPosts(
+  currentSlug,
+  categorySlug,
+  lang = "es",
+  limit = 3
+) {
   const posts = await getBlogPosts(lang, 50);
-  
+
   // Filtrar por categoría y excluir el post actual
-  const related = posts.filter(post => 
-    post.slug !== currentSlug &&
-    post.blogCategories?.nodes?.some(cat => cat.slug === categorySlug)
+  const related = posts.filter(
+    (post) =>
+      post.slug !== currentSlug &&
+      post.blogCategories?.nodes?.some((cat) => cat.slug === categorySlug)
   );
-  
+
   return related.slice(0, limit);
 }
 
@@ -238,10 +259,17 @@ export async function getAllBlogSlugs() {
     });
 
     const { data } = await response.json();
-    return (data?.blogPosts?.nodes || []).map(post => ({
-      slug: post.slug,
-      lang: post.blogSeo?.language || 'es'
-    }));
+    return (data?.blogPosts?.nodes || []).map((post) => {
+      // Manejar language como array o string
+      let lang = post.blogSeo?.language;
+      if (Array.isArray(lang)) {
+        lang = lang[0] || "es";
+      }
+      return {
+        slug: post.slug,
+        lang: lang || "es",
+      };
+    });
   } catch (error) {
     console.error("Error fetching slugs:", error);
     return [];
@@ -253,7 +281,7 @@ export async function getAllBlogSlugs() {
 // ============================================
 export function calculateReadingTime(content, wordsPerMinute = 200) {
   if (!content) return 5;
-  const text = content.replace(/<[^>]*>/g, '');
+  const text = content.replace(/<[^>]*>/g, "");
   const words = text.split(/\s+/).length;
   return Math.max(1, Math.ceil(words / wordsPerMinute));
 }
