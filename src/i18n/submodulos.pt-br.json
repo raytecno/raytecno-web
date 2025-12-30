@@ -18,26 +18,50 @@
           "name": "Artigos",
           "description": "Gestão completa do catálogo de artigos",
           "images": [
-            { "title": "Lista de Artigos", "description": "Visão geral do catálogo com filtros avançados" },
-            { "title": "Ficha do Artigo", "description": "Detalhe completo com especificações" },
-            { "title": "Configuração", "description": "Personalização de campos e atributos" }
+            {
+              "title": "Lista de Artigos",
+              "description": "Visão geral do catálogo com filtros avançados"
+            },
+            {
+              "title": "Ficha do Artigo",
+              "description": "Detalhe completo com especificações"
+            },
+            {
+              "title": "Configuração",
+              "description": "Personalização de campos e atributos"
+            }
           ]
         },
         "precios": {
           "name": "Preços",
           "description": "Tarifas, descontos e políticas de preços",
           "images": [
-            { "title": "Tarifas", "description": "Gestão de múltiplas tarifas" },
-            { "title": "Descontos", "description": "Configuração de descontos" },
-            { "title": "Histórico", "description": "Rastreabilidade de alterações" }
+            {
+              "title": "Tarifas",
+              "description": "Gestão de múltiplas tarifas"
+            },
+            {
+              "title": "Descontos",
+              "description": "Configuração de descontos"
+            },
+            {
+              "title": "Histórico",
+              "description": "Rastreabilidade de alterações"
+            }
           ]
         },
         "estructuras": {
           "name": "Estruturas",
           "description": "Composição e materiais de cada peça",
           "images": [
-            { "title": "Composição", "description": "Definição de materiais e componentes" },
-            { "title": "Árvore de Materiais", "description": "Visão hierárquica da estrutura" },
+            {
+              "title": "Composição",
+              "description": "Definição de materiais e componentes"
+            },
+            {
+              "title": "Árvore de Materiais",
+              "description": "Visão hierárquica da estrutura"
+            },
             { "title": "Custos", "description": "Cálculo automático de custos" }
           ]
         },
@@ -45,7 +69,10 @@
           "name": "Imagens",
           "description": "Galeria fotográfica e multimídia",
           "images": [
-            { "title": "Galeria", "description": "Gestão de imagens múltiplas" },
+            {
+              "title": "Galeria",
+              "description": "Gestão de imagens múltiplas"
+            },
             { "title": "Visualizador", "description": "Visualização com zoom" },
             { "title": "Importação", "description": "Carga massiva de imagens" }
           ]
@@ -54,8 +81,14 @@
           "name": "Layout",
           "description": "Personalização de vistas e formulários",
           "images": [
-            { "title": "Configuração", "description": "Design personalizado de formulários" },
-            { "title": "Campos", "description": "Campos personalizados sem código" },
+            {
+              "title": "Configuração",
+              "description": "Design personalizado de formulários"
+            },
+            {
+              "title": "Campos",
+              "description": "Campos personalizados sem código"
+            },
             { "title": "Modelos", "description": "Salvamento de configurações" }
           ]
         }
@@ -71,18 +104,36 @@
           "name": "Pedidos",
           "description": "Gestão completa do ciclo de pedidos",
           "images": [
-            { "title": "Lista de Pedidos", "description": "Visão geral com estados e rastreamento" },
-            { "title": "Novo Pedido", "description": "Criação rápida com busca de artigos" },
-            { "title": "Detalhe do Pedido", "description": "Informação completa do pedido" }
+            {
+              "title": "Lista de Pedidos",
+              "description": "Visão geral com estados e rastreamento"
+            },
+            {
+              "title": "Novo Pedido",
+              "description": "Criação rápida com busca de artigos"
+            },
+            {
+              "title": "Detalhe do Pedido",
+              "description": "Informação completa do pedido"
+            }
           ]
         },
         "albaranes": {
           "name": "Remessas",
           "description": "Controle de entregas e expedições",
           "images": [
-            { "title": "Remessas", "description": "Gestão de notas de remessa" },
-            { "title": "Geração", "description": "Criação a partir de pedidos" },
-            { "title": "Impressão", "description": "Documentos personalizáveis" }
+            {
+              "title": "Remessas",
+              "description": "Gestão de notas de remessa"
+            },
+            {
+              "title": "Geração",
+              "description": "Criação a partir de pedidos"
+            },
+            {
+              "title": "Impressão",
+              "description": "Documentos personalizáveis"
+            }
           ]
         },
         "facturas": {
@@ -90,8 +141,14 @@
           "description": "Faturamento eletrônico e tradicional",
           "images": [
             { "title": "Faturas", "description": "Lista de faturas emitidas" },
-            { "title": "Nova Fatura", "description": "Faturamento manual ou de remessas" },
-            { "title": "NF-e", "description": "Faturamento eletrônico integrado" }
+            {
+              "title": "Nova Fatura",
+              "description": "Faturamento manual ou de remessas"
+            },
+            {
+              "title": "NF-e",
+              "description": "Faturamento eletrônico integrado"
+            }
           ]
         },
         "clientes": {
@@ -116,7 +173,10 @@
           "description": "Gestão de ordens de fabricação",
           "images": [
             { "title": "Lista OF", "description": "Visão geral de ordens" },
-            { "title": "Nova OF", "description": "Criação de ordem de trabalho" },
+            {
+              "title": "Nova OF",
+              "description": "Criação de ordem de trabalho"
+            },
             { "title": "Acompanhamento", "description": "Estado da produção" }
           ]
         },
@@ -124,7 +184,10 @@
           "name": "Fases",
           "description": "Controle de fases produtivas",
           "images": [
-            { "title": "Fases de Produção", "description": "Definição do processo produtivo" },
+            {
+              "title": "Fases de Produção",
+              "description": "Definição do processo produtivo"
+            },
             { "title": "Tempos", "description": "Controle de tempos por fase" },
             { "title": "Operários", "description": "Atribuição de recursos" }
           ]
@@ -143,8 +206,14 @@
           "description": "Controle de estoque e movimentos",
           "images": [
             { "title": "Estoque", "description": "Inventário em tempo real" },
-            { "title": "Movimentos", "description": "Rastreabilidade completa" },
-            { "title": "Valorização", "description": "Valorização de existências" }
+            {
+              "title": "Movimentos",
+              "description": "Rastreabilidade completa"
+            },
+            {
+              "title": "Valorização",
+              "description": "Valorização de existências"
+            }
           ]
         }
       }
@@ -169,17 +238,32 @@
           "description": "Controle de recebimentos e pagamentos",
           "images": [
             { "title": "Tesouraria", "description": "Painel de tesouraria" },
-            { "title": "Recebimentos", "description": "Gestão de recebimentos pendentes" },
-            { "title": "Pagamentos", "description": "Controle de pagamentos a fornecedores" }
+            {
+              "title": "Recebimentos",
+              "description": "Gestão de recebimentos pendentes"
+            },
+            {
+              "title": "Pagamentos",
+              "description": "Controle de pagamentos a fornecedores"
+            }
           ]
         },
         "iva": {
           "name": "Impostos",
           "description": "Apuração e declarações",
           "images": [
-            { "title": "Apuração", "description": "Cálculo automático de impostos" },
-            { "title": "Declarações", "description": "Geração de declarações fiscais" },
-            { "title": "Configuração", "description": "Tipos de impostos e retenções" }
+            {
+              "title": "Apuração",
+              "description": "Cálculo automático de impostos"
+            },
+            {
+              "title": "Declarações",
+              "description": "Geração de declarações fiscais"
+            },
+            {
+              "title": "Configuração",
+              "description": "Tipos de impostos e retenções"
+            }
           ]
         },
         "bancos": {
@@ -197,7 +281,10 @@
           "images": [
             { "title": "Balanço", "description": "Balanço patrimonial" },
             { "title": "DRE", "description": "Demonstração de resultados" },
-            { "title": "Índices", "description": "Análise de índices financeiros" }
+            {
+              "title": "Índices",
+              "description": "Análise de índices financeiros"
+            }
           ]
         }
       }
@@ -301,7 +388,10 @@
           "images": [
             { "title": "Produtos", "description": "Gestão do catálogo web" },
             { "title": "Categorias", "description": "Organização de produtos" },
-            { "title": "Sincronização", "description": "Atualização automática" }
+            {
+              "title": "Sincronização",
+              "description": "Atualização automática"
+            }
           ]
         },
         "pedidos": {
@@ -320,6 +410,86 @@
             { "title": "Shopify", "description": "Integração Shopify" },
             { "title": "WooCommerce", "description": "Integração WordPress" },
             { "title": "Marketplaces", "description": "Amazon, eBay, etc." }
+          ]
+        }
+      }
+    },
+    "impresoras3d": {
+      "title": "Impressoras 3D",
+      "subtitle": "Controle e gestão de produção com impressoras 3D",
+      "metaTitle": "Impressoras 3D | RayGold ERP - Fabricação Aditiva",
+      "metaDescription": "Gestão completa de impressoras 3D, trabalhos de impressão, materiais e configuração para joalheria.",
+      "sections": {
+        "impresoras": {
+          "name": "Impressoras",
+          "description": "Gestão do parque de impressoras 3D",
+          "images": [
+            {
+              "title": "Lista de Impressoras",
+              "description": "Visão geral de todas as impressoras"
+            },
+            {
+              "title": "Estado em Tempo Real",
+              "description": "Monitoramento do estado atual"
+            },
+            {
+              "title": "Manutenção",
+              "description": "Histórico e programação de manutenção"
+            }
+          ]
+        },
+        "trabajos": {
+          "name": "Trabalhos",
+          "description": "Fila de trabalhos e produção",
+          "images": [
+            {
+              "title": "Fila de Impressão",
+              "description": "Trabalhos pendentes e em processo"
+            },
+            {
+              "title": "Novo Trabalho",
+              "description": "Criação de ordens de impressão"
+            },
+            {
+              "title": "Histórico",
+              "description": "Registro de trabalhos concluídos"
+            }
+          ]
+        },
+        "materiales": {
+          "name": "Materiais",
+          "description": "Controle de resinas e materiais",
+          "images": [
+            {
+              "title": "Estoque",
+              "description": "Materiais disponíveis em estoque"
+            },
+            {
+              "title": "Consumos",
+              "description": "Acompanhamento de uso por trabalho"
+            },
+            {
+              "title": "Fornecedores",
+              "description": "Gestão de fornecedores de material"
+            }
+          ]
+        },
+        "configuracion": {
+          "name": "Configuração",
+          "description": "Parâmetros e perfis de impressão",
+          "images": [
+            {
+              "title": "Perfis",
+              "description": "Configurações de impressão salvas"
+            },
+            {
+              "title": "Parâmetros",
+              "description": "Ajustes técnicos detalhados"
+            },
+            {
+              "title": "Calibração",
+              "description": "Ferramentas de calibração"
+            }
           ]
         }
       }
