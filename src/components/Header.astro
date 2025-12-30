@@ -1,7 +1,7 @@
 ---
 /**
  * Header.astro - Navegación principal con selector de idiomas
- * Con logo SVG inline (no imagen externa)
+ * Con tema adaptativo: azul oscuro en desktop, blanco en móvil
  */
 import { getPageUrl, type Lang } from "@/config/pages";
 import { getTranslations } from "@/i18n";
@@ -18,11 +18,9 @@ const currentPath = Astro.url.pathname;
 
 // Función para verificar si un link está activo
 const isActive = (path: string) => {
-  // Normalizar paths (quitar trailing slash)
   const normalizedCurrent = currentPath.replace(/\/$/, "");
   const normalizedPath = path.replace(/\/$/, "");
 
-  // Para home, debe ser exacto
   if (normalizedPath === `/${lang}` || normalizedPath === `/${lang}/`) {
     return (
       normalizedCurrent === `/${lang}` ||
@@ -31,7 +29,6 @@ const isActive = (path: string) => {
     );
   }
 
-  // Para otras páginas, verificar si empieza con el path
   return normalizedCurrent.startsWith(normalizedPath);
 };
 
@@ -51,7 +48,7 @@ const homeUrl = `/${lang}/`;
 const modulosUrl = getPageUrl("modulos", lang);
 const preciosUrl = getPageUrl("precios", lang);
 const tecnologiaUrl = getPageUrl("tecnologia", lang);
-const blogUrl = `/${lang}/blog`; // ← NUEVO: URL del Blog
+const blogUrl = `/${lang}/blog`;
 const contactoUrl = getPageUrl("contacto", lang);
 
 // Traducciones del Blog por idioma
@@ -72,7 +69,7 @@ const blogLabel: Record<Lang, string> = {
         <path
           d="M20 2L37 12V28L20 38L3 28V12L20 2Z"
           fill="url(#grad1)"
-          stroke="#fff"
+          stroke="currentColor"
           stroke-width="1"></path>
         <path
           d="M20 8L30 14V26L20 32L10 26V14L20 8Z"
@@ -110,7 +107,6 @@ const blogLabel: Record<Lang, string> = {
         class:list={["nav-link", { active: isActive(tecnologiaUrl) }]}
         >{t.nav?.technology || "Tecnología"}</a
       >
-      <!-- NUEVO: Enlace al Blog -->
       <a href={blogUrl} class:list={["nav-link", { active: isActive(blogUrl) }]}
         >{blogLabel[lang]}</a
       >
@@ -188,6 +184,9 @@ const blogLabel: Record<Lang, string> = {
 </header>
 
 <style>
+  /* ============================================
+     DESKTOP: Tema azul oscuro (default)
+     ============================================ */
   .header {
     position: fixed;
     top: 0;
@@ -220,6 +219,7 @@ const blogLabel: Record<Lang, string> = {
   .logo-icon {
     width: 40px;
     height: 40px;
+    color: white;
   }
 
   .logo-text {
@@ -366,7 +366,7 @@ const blogLabel: Record<Lang, string> = {
     color: #a5b4fc;
   }
 
-  /* Menú móvil */
+  /* Menú móvil - oculto en desktop */
   .mobile-toggle {
     display: none;
     padding: 8px;
@@ -376,17 +376,41 @@ const blogLabel: Record<Lang, string> = {
     cursor: pointer;
   }
 
+  /* ============================================
+     MÓVIL: Tema blanco claro
+     ============================================ */
   @media (max-width: 900px) {
+    /* Header blanco */
+    .header {
+      background: rgba(255, 255, 255, 0.98);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    /* Logo oscuro */
+    .logo-icon {
+      color: #1e293b;
+    }
+
+    .logo-name {
+      color: #1e293b;
+    }
+
+    .logo-tagline {
+      color: #64748b;
+    }
+
+    /* Navegación */
     .nav-main {
       display: none;
       position: absolute;
       top: 72px;
       left: 0;
       right: 0;
-      background: rgba(15, 23, 42, 0.98);
+      background: rgba(255, 255, 255, 0.98);
       flex-direction: column;
       padding: 16px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     }
 
     .nav-main.mobile-open {
@@ -397,23 +421,70 @@ const blogLabel: Record<Lang, string> = {
       padding: 12px 16px;
       width: 100%;
       text-align: center;
+      color: #334155;
     }
 
+    .nav-link:hover {
+      color: #1e293b;
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    .nav-link.active {
+      color: #667eea;
+      background: rgba(102, 126, 234, 0.1);
+      border: 1px solid rgba(102, 126, 234, 0.2);
+    }
+
+    /* Botón móvil */
     .mobile-toggle {
       display: block;
+      color: #334155;
     }
 
     .mobile-toggle.active svg path {
-      stroke: #a5b4fc;
+      stroke: #667eea;
+    }
+
+    /* Selector idioma adaptado */
+    .lang-trigger {
+      background: rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      color: #334155;
+      min-width: auto;
+      padding: 8px 12px;
+    }
+
+    .lang-trigger:hover {
+      background: rgba(0, 0, 0, 0.08);
+      border-color: rgba(0, 0, 0, 0.15);
     }
 
     .lang-name {
       display: none;
     }
 
-    .lang-trigger {
-      min-width: auto;
-      padding: 8px 12px;
+    .lang-dropdown {
+      background: white;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .lang-option {
+      color: #334155;
+    }
+
+    .lang-option:hover {
+      background: rgba(0, 0, 0, 0.04);
+      color: #1e293b;
+    }
+
+    .lang-option.active {
+      background: rgba(102, 126, 234, 0.1);
+      color: #667eea;
+    }
+
+    .lang-check {
+      color: #667eea;
     }
 
     .logo-tagline {
@@ -440,7 +511,7 @@ const blogLabel: Record<Lang, string> = {
     }
   });
 
-  // NUEVO: Menú móvil
+  // Menú móvil
   const mobileToggle = document.querySelector(".mobile-toggle");
   const navMain = document.querySelector(".nav-main");
 

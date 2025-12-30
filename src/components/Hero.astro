@@ -1,7 +1,7 @@
 ---
 /**
  * Hero.astro - Banner hero comercial principal
- * Con soporte multiidioma
+ * Con tema adaptativo: azul oscuro en desktop, blanco en móvil
  */
 import { type Lang, getPageUrl } from "@/config/pages";
 
@@ -9,31 +9,35 @@ interface Props {
   lang?: Lang;
 }
 
-const { lang = 'es' } = Astro.props;
+const { lang = "es" } = Astro.props;
 
 // Traducciones
-const translations: Record<Lang, {
-  badge: string;
-  title: string;
-  subtitle: string;
-  subtitleHighlight: string;
-  stat1Number: string;
-  stat1Label: string;
-  stat2Number: string;
-  stat2Label: string;
-  stat3Number: string;
-  stat3Label: string;
-  ctaPrimary: string;
-  ctaSecondary: string;
-  visualLabel: string;
-  badge1: string;
-  badge2: string;
-  scrollText: string;
-}> = {
+const translations: Record<
+  Lang,
+  {
+    badge: string;
+    title: string;
+    subtitle: string;
+    subtitleHighlight: string;
+    stat1Number: string;
+    stat1Label: string;
+    stat2Number: string;
+    stat2Label: string;
+    stat3Number: string;
+    stat3Label: string;
+    ctaPrimary: string;
+    ctaSecondary: string;
+    visualLabel: string;
+    badge1: string;
+    badge2: string;
+    scrollText: string;
+  }
+> = {
   es: {
     badge: "Desde 1990 · +200 joyerías confían en nosotros",
     title: "El ERP que habla el idioma de tu joyería",
-    subtitle: "Gestiona inventario, fabricación, ventas y contabilidad con un sistema",
+    subtitle:
+      "Gestiona inventario, fabricación, ventas y contabilidad con un sistema",
     subtitleHighlight: "diseñado exclusivamente para joyeros",
     stat1Number: "35",
     stat1Label: "años de experiencia",
@@ -51,7 +55,8 @@ const translations: Record<Lang, {
   en: {
     badge: "Since 1990 · +200 jewelers trust us",
     title: "The ERP that speaks your jewelry's language",
-    subtitle: "Manage inventory, manufacturing, sales and accounting with a system",
+    subtitle:
+      "Manage inventory, manufacturing, sales and accounting with a system",
     subtitleHighlight: "designed exclusively for jewelers",
     stat1Number: "35",
     stat1Label: "years of experience",
@@ -69,7 +74,8 @@ const translations: Record<Lang, {
   fr: {
     badge: "Depuis 1990 · +200 bijouteries nous font confiance",
     title: "L'ERP qui parle le langage de votre bijouterie",
-    subtitle: "Gérez inventaire, fabrication, ventes et comptabilité avec un système",
+    subtitle:
+      "Gérez inventaire, fabrication, ventes et comptabilité avec un système",
     subtitleHighlight: "conçu exclusivement pour les bijoutiers",
     stat1Number: "35",
     stat1Label: "ans d'expérience",
@@ -87,7 +93,8 @@ const translations: Record<Lang, {
   ca: {
     badge: "Des de 1990 · +200 joieries confien en nosaltres",
     title: "L'ERP que parla l'idioma de la teva joieria",
-    subtitle: "Gestiona inventari, fabricació, vendes i comptabilitat amb un sistema",
+    subtitle:
+      "Gestiona inventari, fabricació, vendes i comptabilitat amb un sistema",
     subtitleHighlight: "dissenyat exclusivament per a joiers",
     stat1Number: "35",
     stat1Label: "anys d'experiència",
@@ -105,7 +112,8 @@ const translations: Record<Lang, {
   "pt-br": {
     badge: "Desde 1990 · +200 joalherias confiam em nós",
     title: "O ERP que fala a língua da sua joalheria",
-    subtitle: "Gerencie inventário, fabricação, vendas e contabilidade com um sistema",
+    subtitle:
+      "Gerencie inventário, fabricação, vendas e contabilidade com um sistema",
     subtitleHighlight: "projetado exclusivamente para joalheiros",
     stat1Number: "35",
     stat1Label: "anos de experiência",
@@ -123,8 +131,8 @@ const translations: Record<Lang, {
 };
 
 const t = translations[lang] || translations.es;
-const contactUrl = getPageUrl('contacto', lang);
-const modulosUrl = getPageUrl('modulos', lang);
+const contactUrl = getPageUrl("contacto", lang);
+const modulosUrl = getPageUrl("modulos", lang);
 ---
 
 <section class="hero-section">
@@ -132,7 +140,7 @@ const modulosUrl = getPageUrl('modulos', lang);
     <div class="hero-gradient"></div>
     <div class="hero-pattern"></div>
   </div>
-  
+
   <div class="container">
     <div class="hero-content">
       <div class="hero-text">
@@ -144,10 +152,11 @@ const modulosUrl = getPageUrl('modulos', lang);
 
         <!-- Titular principal -->
         <h1>{t.title}</h1>
-        
+
         <!-- Subtítulo -->
         <p class="hero-subtitle">
-          {t.subtitle} <strong>{t.subtitleHighlight}</strong>. Sin adaptaciones, sin parches.
+          {t.subtitle}
+          <strong>{t.subtitleHighlight}</strong>. Sin adaptaciones, sin parches.
         </p>
 
         <!-- Stats rápidos -->
@@ -172,8 +181,13 @@ const modulosUrl = getPageUrl('modulos', lang);
         <div class="hero-ctas">
           <a href={contactUrl} class="cta-primary">
             <span>{t.ctaPrimary}</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7"></path>
             </svg>
           </a>
           <a href={modulosUrl} class="cta-secondary">
@@ -185,30 +199,50 @@ const modulosUrl = getPageUrl('modulos', lang);
       <!-- Visual lado derecho -->
       <div class="hero-visual">
         <div class="visual-card main">
-          <img src="https://raygoldstorage.blob.core.windows.net/web/A01.png" alt="Dashboard RayGold" />
+          <img
+            src="https://raygoldstorage.blob.core.windows.net/web/A01.png"
+            alt="Dashboard RayGold"
+          />
           <div class="visual-label">
             <span class="label-dot"></span>
             {t.visualLabel}
           </div>
         </div>
         <div class="visual-card floating-1">
-          <img src="https://raygoldstorage.blob.core.windows.net/web/A02.png" alt="Ficha artículo" />
+          <img
+            src="https://raygoldstorage.blob.core.windows.net/web/A02.png"
+            alt="Ficha artículo"
+          />
         </div>
         <div class="visual-card floating-2">
-          <img src="https://raygoldstorage.blob.core.windows.net/web/A03.png" alt="Configuración" />
+          <img
+            src="https://raygoldstorage.blob.core.windows.net/web/A03.png"
+            alt="Configuración"
+          />
         </div>
-        
+
         <!-- Elementos decorativos -->
         <div class="visual-badge badge-1">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
-            <path d="M22 4L12 14.01l-3-3"/>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
+            <path d="M22 4L12 14.01l-3-3"></path>
           </svg>
           <span>{t.badge1}</span>
         </div>
         <div class="visual-badge badge-2">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"
+            ></path>
           </svg>
           <span>{t.badge2}</span>
         </div>
@@ -220,12 +254,15 @@ const modulosUrl = getPageUrl('modulos', lang);
   <div class="scroll-indicator">
     <span>{t.scrollText}</span>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M12 5v14M5 12l7 7 7-7"/>
+      <path d="M12 5v14M5 12l7 7 7-7"></path>
     </svg>
   </div>
 </section>
 
 <style>
+  /* ============================================
+     DESKTOP: Tema azul oscuro (default)
+     ============================================ */
   .hero-section {
     position: relative;
     min-height: 100vh;
@@ -250,7 +287,10 @@ const modulosUrl = getPageUrl('modulos', lang);
   .hero-pattern {
     position: absolute;
     inset: 0;
-    background-image: radial-gradient(rgba(102, 126, 234, 0.1) 1px, transparent 1px);
+    background-image: radial-gradient(
+      rgba(102, 126, 234, 0.1) 1px,
+      transparent 1px
+    );
     background-size: 40px 40px;
     opacity: 0.5;
   }
@@ -456,8 +496,13 @@ const modulosUrl = getPageUrl('modulos', lang);
   }
 
   @keyframes pulse-dot {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
   }
 
   .visual-card.floating-1 {
@@ -479,8 +524,13 @@ const modulosUrl = getPageUrl('modulos', lang);
   }
 
   @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
   }
 
   .visual-badge {
@@ -545,10 +595,18 @@ const modulosUrl = getPageUrl('modulos', lang);
   }
 
   @keyframes bounce {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(8px); }
+    0%,
+    100% {
+      transform: translateX(-50%) translateY(0);
+    }
+    50% {
+      transform: translateX(-50%) translateY(8px);
+    }
   }
 
+  /* ============================================
+     TABLET: Reorganización
+     ============================================ */
   @media (max-width: 1024px) {
     .hero-content {
       grid-template-columns: 1fr;
@@ -592,29 +650,79 @@ const modulosUrl = getPageUrl('modulos', lang);
     }
   }
 
-  @media (max-width: 600px) {
+  /* ============================================
+     MÓVIL: Tema blanco claro
+     ============================================ */
+  @media (max-width: 768px) {
     .hero-section {
       padding: 5rem 1rem 3rem;
     }
 
+    /* Fondo blanco */
+    .hero-gradient {
+      background: linear-gradient(
+        135deg,
+        #ffffff 0%,
+        #f8fafc 50%,
+        #ffffff 100%
+      );
+    }
+
+    .hero-pattern {
+      background-image: radial-gradient(
+        rgba(102, 126, 234, 0.08) 1px,
+        transparent 1px
+      );
+      opacity: 0.8;
+    }
+
+    /* Textos oscuros */
     h1 {
       font-size: 1.75rem;
+      color: #1e293b;
     }
 
     .hero-subtitle {
       font-size: 1rem;
+      color: #64748b;
     }
 
+    .hero-subtitle strong {
+      color: #334155;
+    }
+
+    /* Badge adaptado */
+    .hero-badge {
+      background: rgba(102, 126, 234, 0.1);
+      border-color: rgba(102, 126, 234, 0.2);
+    }
+
+    .hero-badge span:last-child {
+      color: #667eea;
+    }
+
+    /* Stats */
     .hero-stats {
       flex-direction: column;
       gap: 1rem;
+      border-color: #e2e8f0;
+    }
+
+    .stat-number {
+      color: #1e293b;
+    }
+
+    .stat-label {
+      color: #64748b;
     }
 
     .stat-divider {
       width: 40px;
       height: 1px;
+      background: #e2e8f0;
     }
 
+    /* CTAs */
     .hero-ctas {
       flex-direction: column;
     }
@@ -623,6 +731,29 @@ const modulosUrl = getPageUrl('modulos', lang);
     .cta-secondary {
       width: 100%;
       justify-content: center;
+    }
+
+    .cta-secondary {
+      color: #64748b;
+      border-color: #e2e8f0;
+    }
+
+    .cta-secondary:hover {
+      color: #1e293b;
+      border-color: #94a3b8;
+      background: rgba(0, 0, 0, 0.02);
+    }
+
+    /* Visual card */
+    .visual-card {
+      border-color: #e2e8f0;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .visual-label {
+      background: rgba(255, 255, 255, 0.95);
+      color: #1e293b;
+      border: 1px solid #e2e8f0;
     }
 
     .scroll-indicator {
