@@ -14,6 +14,35 @@ interface Props {
 const { lang } = Astro.props;
 const alternateUrls = getAlternateUrls("modulos");
 
+// Slug de la carpeta "modulos" por idioma
+const modulosFolderSlug: Record<Lang, string> = {
+  es: 'modulos',
+  en: 'modules',
+  fr: 'modules',
+  ca: 'moduls',
+  'pt-br': 'modulos',
+};
+
+// Slugs de cada módulo por idioma
+const moduloSlugs: Record<string, Record<Lang, string>> = {
+  maestros: { es: 'maestros', en: 'masters', fr: 'maitres', ca: 'mestres', 'pt-br': 'cadastros' },
+  comercial: { es: 'comercial', en: 'commercial', fr: 'commercial', ca: 'comercial', 'pt-br': 'comercial' },
+  fabricacion: { es: 'fabricacion', en: 'manufacturing', fr: 'fabrication', ca: 'fabricacio', 'pt-br': 'fabricacao' },
+  finanzas: { es: 'finanzas', en: 'finance', fr: 'finances', ca: 'finances', 'pt-br': 'financas' },
+  historicos: { es: 'historicos', en: 'history', fr: 'historique', ca: 'historics', 'pt-br': 'historicos' },
+  estadisticas: { es: 'estadisticas', en: 'statistics', fr: 'statistiques', ca: 'estadistiques', 'pt-br': 'estatisticas' },
+  vendedores: { es: 'vendedores', en: 'sales-reps', fr: 'vendeurs', ca: 'venedors', 'pt-br': 'vendedores' },
+  ecommerce: { es: 'ecommerce', en: 'ecommerce', fr: 'ecommerce', ca: 'ecommerce', 'pt-br': 'ecommerce' },
+  impresoras3d: { es: 'impresoras3d', en: '3dprinters', fr: 'imprimantes3d', ca: 'impressores3d', 'pt-br': 'impressoras3d' },
+};
+
+// Función para obtener la URL de un módulo
+function getModuloUrl(moduloId: string, currentLang: Lang): string {
+  const folder = modulosFolderSlug[currentLang];
+  const slug = moduloSlugs[moduloId]?.[currentLang] || moduloId;
+  return `/${currentLang}/${folder}/${slug}`;
+}
+
 // Definición de los 9 módulos con iconos originales
 const modulos = [
   {
@@ -283,7 +312,7 @@ const mt = modulosT[lang] || modulosT.es;
               const data = mt[modulo.id];
               return (
                 <a
-                  href={`/${lang}/modulos/${modulo.id}`}
+                  href={getModuloUrl(modulo.id, lang)}
                   class="modulo-card"
                   style={`--modulo-color: ${modulo.color}`}
                 >

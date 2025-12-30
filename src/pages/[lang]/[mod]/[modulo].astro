@@ -1,0 +1,157 @@
+---
+/**
+ * Router dinámico para páginas de módulos individuales
+ * Ruta: src/pages/[lang]/[mod]/[modulo].astro
+ */
+import MaestrosPage from "../../../templates/modulos/MaestrosPage.astro";
+import ComercialPage from "../../../templates/modulos/ComercialPage.astro";
+import FabricacionPage from "../../../templates/modulos/FabricacionPage.astro";
+import FinanzasPage from "../../../templates/modulos/FinanzasPage.astro";
+import HistoricosPage from "../../../templates/modulos/HistoricosPage.astro";
+import EstadisticasPage from "../../../templates/modulos/EstadisticasPage.astro";
+import VendedoresPage from "../../../templates/modulos/VendedoresPage.astro";
+import EcommercePage from "../../../templates/modulos/EcommercePage.astro";
+import Impresoras3DPage from "../../../templates/modulos/Impresoras3DPage.astro";
+import { type Lang } from "../../../config/pages";
+
+export function getStaticPaths() {
+  const langs = ["es", "en", "fr", "ca", "pt-br"];
+
+  const modFolder: Record<string, string> = {
+    es: "modulos",
+    en: "modules",
+    fr: "modules",
+    ca: "moduls",
+    "pt-br": "modulos",
+  };
+
+  const modulos: Record<string, Record<string, string>> = {
+    maestros: {
+      es: "maestros",
+      en: "masters",
+      fr: "maitres",
+      ca: "mestres",
+      "pt-br": "cadastros",
+    },
+    comercial: {
+      es: "comercial",
+      en: "commercial",
+      fr: "commercial",
+      ca: "comercial",
+      "pt-br": "comercial",
+    },
+    fabricacion: {
+      es: "fabricacion",
+      en: "manufacturing",
+      fr: "fabrication",
+      ca: "fabricacio",
+      "pt-br": "fabricacao",
+    },
+    finanzas: {
+      es: "finanzas",
+      en: "finance",
+      fr: "finances",
+      ca: "finances",
+      "pt-br": "financas",
+    },
+    historicos: {
+      es: "historicos",
+      en: "history",
+      fr: "historique",
+      ca: "historics",
+      "pt-br": "historicos",
+    },
+    estadisticas: {
+      es: "estadisticas",
+      en: "statistics",
+      fr: "statistiques",
+      ca: "estadistiques",
+      "pt-br": "estatisticas",
+    },
+    vendedores: {
+      es: "vendedores",
+      en: "sales-reps",
+      fr: "vendeurs",
+      ca: "venedors",
+      "pt-br": "vendedores",
+    },
+    ecommerce: {
+      es: "ecommerce",
+      en: "ecommerce",
+      fr: "ecommerce",
+      ca: "ecommerce",
+      "pt-br": "ecommerce",
+    },
+    impresoras3d: {
+      es: "impresoras3d",
+      en: "3dprinters",
+      fr: "imprimantes3d",
+      ca: "impressores3d",
+      "pt-br": "impressoras3d",
+    },
+  };
+
+  const paths = [];
+
+  for (const lang of langs) {
+    for (const [key, slugs] of Object.entries(modulos)) {
+      paths.push({
+        params: { lang, mod: modFolder[lang], modulo: slugs[lang] },
+        props: { moduleKey: key },
+      });
+    }
+  }
+
+  return paths;
+}
+
+const { lang } = Astro.params;
+const { moduleKey } = Astro.props as { moduleKey: string };
+const currentLang = (lang || "es") as Lang;
+---
+
+{
+  moduleKey === "maestros" && (
+    <MaestrosPage lang={currentLang} pageId="maestros" />
+  )
+}
+{
+  moduleKey === "comercial" && (
+    <ComercialPage lang={currentLang} pageId="comercial" />
+  )
+}
+{
+  moduleKey === "fabricacion" && (
+    <FabricacionPage lang={currentLang} pageId="fabricacion" />
+  )
+}
+{
+  moduleKey === "finanzas" && (
+    <FinanzasPage lang={currentLang} pageId="finanzas" />
+  )
+}
+{
+  moduleKey === "historicos" && (
+    <HistoricosPage lang={currentLang} pageId="historicos" />
+  )
+}
+{
+  moduleKey === "estadisticas" && (
+    <EstadisticasPage lang={currentLang} pageId="estadisticas" />
+  )
+}
+{
+  moduleKey === "vendedores" && (
+    <VendedoresPage lang={currentLang} pageId="vendedores" />
+  )
+}
+{
+  moduleKey === "ecommerce" && (
+    <EcommercePage lang={currentLang} pageId="ecommerce" />
+  )
+}
+{
+  moduleKey === "impresoras3d" && (
+    <Impresoras3DPage lang={currentLang} pageId="impresoras3d" />
+  )
+}
