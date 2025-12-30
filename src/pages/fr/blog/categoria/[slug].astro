@@ -1,17 +1,12 @@
 ---
 /**
- * Blog - Categoría
- * @file src/pages/es/blog/categoria/[slug].astro
+ * Blog - Catégorie
+ * @file src/pages/fr/blog/categorie/[slug].astro
  */
 import Layout from "@/layouts/Layout.astro";
-import {
-  getBlogPostsByCategory,
-  getBlogCategories,
-  getFeaturedImageUrl,
-  calculateReadingTime,
-} from "@/lib/blog.js";
+import { getBlogPostsByCategory, getBlogCategories, getFeaturedImageUrl, calculateReadingTime } from "@/lib/blog.js";
 
-// Tipos
+// Types
 interface Category {
   slug: string;
   name: string;
@@ -34,21 +29,21 @@ interface BlogPost {
   };
 }
 
-const lang = "es";
+const lang = 'fr';
 
 const t = {
-  blog: "Blog",
-  minRead: "min",
-  noPosts: "No hay artículos en esta categoría",
-  viewAll: "Todos",
-  backToBlog: "← Volver al blog",
+  blog: 'Blog',
+  minRead: 'min',
+  noPosts: 'Aucun article dans cette catégorie',
+  viewAll: 'Tous',
+  backToBlog: '← Retour au blog'
 };
 
 export async function getStaticPaths() {
   const categories: Category[] = await getBlogCategories();
   return categories.map((cat: Category) => ({
     params: { slug: cat.slug },
-    props: { category: cat },
+    props: { category: cat }
   }));
 }
 
@@ -57,31 +52,34 @@ const { category } = Astro.props as { category: Category };
 
 const [posts, categories]: [BlogPost[], Category[]] = await Promise.all([
   getBlogPostsByCategory(slug, lang),
-  getBlogCategories(),
+  getBlogCategories()
 ]);
 
 function formatDate(dateString: string): string {
   const date = new Date(dateString);
-  return date.toLocaleDateString("es-ES", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
+  return date.toLocaleDateString('fr-FR', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric'
   });
 }
 
 function getReadingTime(post: BlogPost): number {
-  return (
-    post.blogSeo?.readingTime ||
-    calculateReadingTime(post.content || post.excerpt || "")
-  );
+  return post.blogSeo?.readingTime || calculateReadingTime(post.content || post.excerpt || '');
 }
 
-const alternateUrls = [{ lang: "es", url: `/es/blog/categoria/${slug}` }];
+const alternateUrls = [
+  { lang: 'es', url: `/es/blog/categoria/${slug}` },
+  { lang: 'en', url: `/en/blog/category/${slug}` },
+  { lang: 'fr', url: `/fr/blog/categorie/${slug}` },
+  { lang: 'ca', url: `/ca/blog/categoria/${slug}` },
+  { lang: 'pt-br', url: `/pt-br/blog/categoria/${slug}` },
+];
 ---
 
-<Layout
+<Layout 
   title={`${category.name} | Blog | RayGold`}
-  description={`Artículos sobre ${category.name.toLowerCase()} en el blog de RayGold.`}
+  description={`Articles sur ${category.name.toLowerCase()} dans le blog RayGold.`}
   lang={lang}
   alternateUrls={alternateUrls}
 >
@@ -95,83 +93,65 @@ const alternateUrls = [{ lang: "es", url: `/es/blog/categoria/${slug}` }];
           <span>{category.name}</span>
         </nav>
         <h1>{category.name}</h1>
-        <p>{posts.length} {posts.length === 1 ? "artículo" : "artículos"}</p>
-
-        <!-- Categorías -->
+        <p>{posts.length} {posts.length === 1 ? 'article' : 'articles'}</p>
+        
+        <!-- Catégories -->
         <div class="hero-categories">
           <a href={`/${lang}/blog`} class="cat-pill">{t.viewAll}</a>
-          {
-            categories.map((cat: Category) => (
-              <a
-                href={`/${lang}/blog/categoria/${cat.slug}`}
-                class={`cat-pill ${cat.slug === slug ? "active" : ""}`}
-              >
-                {cat.name}
-              </a>
-            ))
-          }
+          {categories.map((cat: Category) => (
+            <a 
+              href={`/${lang}/blog/categorie/${cat.slug}`} 
+              class={`cat-pill ${cat.slug === slug ? 'active' : ''}`}
+            >
+              {cat.name}
+            </a>
+          ))}
         </div>
       </div>
     </section>
 
-    <!-- Contenido -->
+    <!-- Contenu -->
     <section class="content-area">
       <div class="container">
-        {
-          posts.length > 0 ? (
-            <div class="posts-grid">
-              {posts.map((post: BlogPost) => (
-                <article class="post-card">
-                  <a href={`/${lang}/blog/${post.slug}`} class="post-link">
-                    {getFeaturedImageUrl(post) ? (
-                      <div class="post-image">
-                        <img
-                          src={getFeaturedImageUrl(post)}
-                          alt={post.title}
-                          loading="lazy"
-                        />
-                      </div>
-                    ) : (
-                      <div class="post-image placeholder">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="1"
-                        >
-                          <rect x="3" y="3" width="18" height="18" rx="2" />
-                          <circle cx="8.5" cy="8.5" r="1.5" />
-                          <polyline points="21 15 16 10 5 21" />
-                        </svg>
-                      </div>
-                    )}
-                    <div class="post-body">
-                      <h3>{post.title}</h3>
-                      <div class="meta">
-                        <time>{formatDate(post.date)}</time>
-                        <span>·</span>
-                        <span>
-                          {getReadingTime(post)} {t.minRead}
-                        </span>
-                      </div>
+        {posts.length > 0 ? (
+          <div class="posts-grid">
+            {posts.map((post: BlogPost) => (
+              <article class="post-card">
+                <a href={`/${lang}/blog/${post.slug}`} class="post-link">
+                  {getFeaturedImageUrl(post) ? (
+                    <div class="post-image">
+                      <img src={getFeaturedImageUrl(post)} alt={post.title} loading="lazy" />
                     </div>
-                  </a>
-                </article>
-              ))}
-            </div>
-          ) : (
-            <div class="no-posts">
-              <p>{t.noPosts}</p>
-              <a href={`/${lang}/blog`} class="back-btn">
-                {t.backToBlog}
-              </a>
-            </div>
-          )
-        }
+                  ) : (
+                    <div class="post-image placeholder">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                        <polyline points="21 15 16 10 5 21"></polyline>
+                      </svg>
+                    </div>
+                  )}
+                  <div class="post-body">
+                    <h3>{post.title}</h3>
+                    <div class="meta">
+                      <time>{formatDate(post.date)}</time>
+                      <span>·</span>
+                      <span>{getReadingTime(post)} {t.minRead}</span>
+                    </div>
+                  </div>
+                </a>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <div class="no-posts">
+            <p>{t.noPosts}</p>
+            <a href={`/${lang}/blog`} class="back-btn">{t.backToBlog}</a>
+          </div>
+        )}
       </div>
 
-      <!-- Volver -->
+      <!-- Retour -->
       <nav class="back-link">
         <div class="container">
           <a href={`/${lang}/blog`}>{t.backToBlog}</a>
@@ -207,11 +187,7 @@ const alternateUrls = [{ lang: "es", url: `/es/blog/categoria/${slug}` }];
 
   /* ========== HERO ========== */
   .hero {
-    background: linear-gradient(
-      135deg,
-      var(--blue-dark) 0%,
-      var(--blue-medium) 100%
-    );
+    background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue-medium) 100%);
     color: var(--white);
     padding: 4rem 0 3.5rem;
     text-align: center;
@@ -279,7 +255,7 @@ const alternateUrls = [{ lang: "es", url: `/es/blog/categoria/${slug}` }];
     color: var(--white);
   }
 
-  /* ========== CONTENIDO ========== */
+  /* ========== CONTENU ========== */
   .content-area {
     background: var(--white);
     padding: 4rem 0 3rem;

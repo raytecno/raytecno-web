@@ -1,31 +1,31 @@
 ---
 /**
- * Blog - Listado de artículos (Español)
- * @file src/pages/es/blog/index.astro
+ * Blog - Lista de artigos (Português Brasileiro)
+ * @file src/pages/pt-br/blog/index.astro
  */
 import Layout from "@/layouts/Layout.astro";
 import { getBlogPosts, getFeaturedPosts, getBlogCategories, getFeaturedImageUrl, calculateReadingTime } from "@/lib/blog.js";
 
-const lang = 'es';
+const lang = 'pt-br';
 
-// Traducciones
+// Traduções
 const t = {
   title: 'Blog',
-  metaTitle: 'Blog | RayGold ERP para Joyería',
-  metaDescription: 'Artículos sobre gestión de joyería, control de inventario, trazabilidad de metales preciosos y mejores prácticas del sector.',
-  featured: 'Destacados',
-  allPosts: 'Todos los artículos',
-  categories: 'Categorías',
-  readMore: 'Leer más',
-  minRead: 'min de lectura',
-  noPosts: 'No hay artículos disponibles',
-  searchPlaceholder: 'Buscar artículos...',
-  ctaTitle: '¿Quieres ver RayGold en acción?',
-  ctaText: 'Solicita una demo personalizada para tu negocio.',
+  metaTitle: 'Blog | RayGold ERP para Joalheria',
+  metaDescription: 'Artigos sobre gestão de joalheria, controle de estoque, rastreabilidade de metais preciosos e melhores práticas do setor.',
+  featured: 'Destaques',
+  allPosts: 'Todos os artigos',
+  categories: 'Categorias',
+  readMore: 'Ler mais',
+  minRead: 'min de leitura',
+  noPosts: 'Nenhum artigo disponível',
+  searchPlaceholder: 'Buscar artigos...',
+  ctaTitle: 'Quer ver o RayGold em ação?',
+  ctaText: 'Solicite uma demo personalizada para o seu negócio.',
   ctaButton: 'Solicitar Demo'
 };
 
-// Obtener datos
+// Obter dados
 const [posts, featuredPosts, categories] = await Promise.all([
   getBlogPosts(lang),
   getFeaturedPosts(lang, 3),
@@ -41,17 +41,17 @@ const alternateUrls = [
   { lang: 'pt-br', url: '/pt-br/blog' },
 ];
 
-// Formatear fecha
+// Formatar data
 function formatDate(dateString) {
   const date = new Date(dateString);
-  return date.toLocaleDateString('es-ES', {
+  return date.toLocaleDateString('pt-BR', {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
   });
 }
 
-// Obtener tiempo de lectura
+// Obter tempo de leitura
 function getReadingTime(post) {
   return post.blogSeo?.readingTime || calculateReadingTime(post.content || post.excerpt);
 }
@@ -70,7 +70,7 @@ function getReadingTime(post) {
         <h1>{t.title}</h1>
         <p>{t.metaDescription}</p>
         
-        <!-- Buscador -->
+        <!-- Busca -->
         <div class="search-box">
           <input 
             type="search" 
@@ -86,7 +86,7 @@ function getReadingTime(post) {
       </div>
     </section>
 
-    <!-- Posts Destacados -->
+    <!-- Posts em Destaque -->
     {featuredPosts.length > 0 && (
       <section class="featured-section">
         <div class="container">
@@ -126,7 +126,7 @@ function getReadingTime(post) {
       </section>
     )}
 
-    <!-- Listado Principal -->
+    <!-- Lista Principal -->
     <section class="posts-section">
       <div class="container">
         <div class="posts-layout">
@@ -175,7 +175,7 @@ function getReadingTime(post) {
 
           <!-- Sidebar -->
           <aside class="sidebar">
-            <!-- Categorías -->
+            <!-- Categorias -->
             {categories.length > 0 && (
               <div class="sidebar-widget">
                 <h3>{t.categories}</h3>
@@ -196,7 +196,7 @@ function getReadingTime(post) {
             <div class="sidebar-cta">
               <h3>{t.ctaTitle}</h3>
               <p>{t.ctaText}</p>
-              <a href={`/${lang}/contacto`} class="btn-cta">{t.ctaButton}</a>
+              <a href={`/${lang}/contato`} class="btn-cta">{t.ctaButton}</a>
             </div>
           </aside>
         </div>
@@ -596,7 +596,7 @@ function getReadingTime(post) {
 </style>
 
 <script>
-  // Filtro de búsqueda
+  // Filtro de busca
   document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('blogSearch');
     const postsGrid = document.getElementById('postsGrid');

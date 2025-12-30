@@ -1,38 +1,38 @@
 ---
 /**
- * Blog - Listado de artículos (Español)
- * @file src/pages/es/blog/index.astro
+ * Blog - Liste des articles (Français)
+ * @file src/pages/fr/blog/index.astro
  */
 import Layout from "@/layouts/Layout.astro";
 import { getBlogPosts, getFeaturedPosts, getBlogCategories, getFeaturedImageUrl, calculateReadingTime } from "@/lib/blog.js";
 
-const lang = 'es';
+const lang = 'fr';
 
-// Traducciones
+// Traductions
 const t = {
   title: 'Blog',
-  metaTitle: 'Blog | RayGold ERP para Joyería',
-  metaDescription: 'Artículos sobre gestión de joyería, control de inventario, trazabilidad de metales preciosos y mejores prácticas del sector.',
-  featured: 'Destacados',
-  allPosts: 'Todos los artículos',
-  categories: 'Categorías',
-  readMore: 'Leer más',
-  minRead: 'min de lectura',
-  noPosts: 'No hay artículos disponibles',
-  searchPlaceholder: 'Buscar artículos...',
-  ctaTitle: '¿Quieres ver RayGold en acción?',
-  ctaText: 'Solicita una demo personalizada para tu negocio.',
-  ctaButton: 'Solicitar Demo'
+  metaTitle: 'Blog | RayGold ERP pour Bijouterie',
+  metaDescription: 'Articles sur la gestion de bijouterie, le contrôle des stocks, la traçabilité des métaux précieux et les meilleures pratiques du secteur.',
+  featured: 'À la une',
+  allPosts: 'Tous les articles',
+  categories: 'Catégories',
+  readMore: 'Lire la suite',
+  minRead: 'min de lecture',
+  noPosts: 'Aucun article disponible',
+  searchPlaceholder: 'Rechercher des articles...',
+  ctaTitle: 'Vous voulez voir RayGold en action ?',
+  ctaText: 'Demandez une démo personnalisée pour votre entreprise.',
+  ctaButton: 'Demander une démo'
 };
 
-// Obtener datos
+// Obtenir les données
 const [posts, featuredPosts, categories] = await Promise.all([
   getBlogPosts(lang),
   getFeaturedPosts(lang, 3),
   getBlogCategories()
 ]);
 
-// URLs alternativas para SEO
+// URLs alternatives pour le SEO
 const alternateUrls = [
   { lang: 'es', url: '/es/blog' },
   { lang: 'en', url: '/en/blog' },
@@ -41,17 +41,17 @@ const alternateUrls = [
   { lang: 'pt-br', url: '/pt-br/blog' },
 ];
 
-// Formatear fecha
+// Formater la date
 function formatDate(dateString) {
   const date = new Date(dateString);
-  return date.toLocaleDateString('es-ES', {
+  return date.toLocaleDateString('fr-FR', {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
   });
 }
 
-// Obtener tiempo de lectura
+// Obtenir le temps de lecture
 function getReadingTime(post) {
   return post.blogSeo?.readingTime || calculateReadingTime(post.content || post.excerpt);
 }
@@ -70,7 +70,7 @@ function getReadingTime(post) {
         <h1>{t.title}</h1>
         <p>{t.metaDescription}</p>
         
-        <!-- Buscador -->
+        <!-- Recherche -->
         <div class="search-box">
           <input 
             type="search" 
@@ -86,7 +86,7 @@ function getReadingTime(post) {
       </div>
     </section>
 
-    <!-- Posts Destacados -->
+    <!-- Articles à la une -->
     {featuredPosts.length > 0 && (
       <section class="featured-section">
         <div class="container">
@@ -126,11 +126,11 @@ function getReadingTime(post) {
       </section>
     )}
 
-    <!-- Listado Principal -->
+    <!-- Liste principale -->
     <section class="posts-section">
       <div class="container">
         <div class="posts-layout">
-          <!-- Grid de Posts -->
+          <!-- Grille des articles -->
           <div class="posts-grid">
             <h2>{t.allPosts}</h2>
             
@@ -150,7 +150,7 @@ function getReadingTime(post) {
                     <div class="post-content">
                       {post.blogCategories?.nodes?.[0] && (
                         <a 
-                          href={`/${lang}/blog/categoria/${post.blogCategories.nodes[0].slug}`}
+                          href={`/${lang}/blog/categorie/${post.blogCategories.nodes[0].slug}`}
                           class="category-link"
                         >
                           {post.blogCategories.nodes[0].name}
@@ -175,14 +175,14 @@ function getReadingTime(post) {
 
           <!-- Sidebar -->
           <aside class="sidebar">
-            <!-- Categorías -->
+            <!-- Catégories -->
             {categories.length > 0 && (
               <div class="sidebar-widget">
                 <h3>{t.categories}</h3>
                 <ul class="categories-list">
                   {categories.map(cat => (
                     <li>
-                      <a href={`/${lang}/blog/categoria/${cat.slug}`}>
+                      <a href={`/${lang}/blog/categorie/${cat.slug}`}>
                         {cat.name}
                         <span class="count">({cat.count || 0})</span>
                       </a>
@@ -196,7 +196,7 @@ function getReadingTime(post) {
             <div class="sidebar-cta">
               <h3>{t.ctaTitle}</h3>
               <p>{t.ctaText}</p>
-              <a href={`/${lang}/contacto`} class="btn-cta">{t.ctaButton}</a>
+              <a href={`/${lang}/contact`} class="btn-cta">{t.ctaButton}</a>
             </div>
           </aside>
         </div>
@@ -596,7 +596,7 @@ function getReadingTime(post) {
 </style>
 
 <script>
-  // Filtro de búsqueda
+  // Filtre de recherche
   document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('blogSearch');
     const postsGrid = document.getElementById('postsGrid');
