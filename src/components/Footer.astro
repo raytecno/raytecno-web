@@ -1,6 +1,6 @@
 ---
 /**
- * Footer con soporte multiidioma
+ * Footer con soporte multiidioma y tema adaptativo móvil
  * @component
  */
 import { getPageUrl, type Lang } from "@/config/pages";
@@ -188,6 +188,9 @@ const currentYear = new Date().getFullYear();
 </footer>
 
 <style>
+  /* ============================================
+     DESKTOP: Tema azul oscuro (default)
+     ============================================ */
   .footer {
     background: #020617;
     color: white;
@@ -279,7 +282,16 @@ const currentYear = new Date().getFullYear();
     }
   }
 
+  /* ============================================
+     MÓVIL: Tema blanco claro
+     ============================================ */
   @media (max-width: 768px) {
+    .footer {
+      background: #f8fafc;
+      color: #1e293b;
+      border-top: 1px solid #e2e8f0;
+    }
+
     .footer-grid {
       grid-template-columns: 1fr;
       text-align: center;
@@ -291,8 +303,30 @@ const currentYear = new Date().getFullYear();
       justify-content: center;
     }
 
+    .footer-logo h4 {
+      color: #1e293b;
+    }
+
+    .footer-col p {
+      color: #64748b;
+    }
+
+    .footer-col h5 {
+      color: #1e293b;
+    }
+
+    .footer-col a {
+      color: #64748b;
+    }
+
     .footer-col a:hover {
+      color: #1e293b;
       transform: none;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #e2e8f0;
+      color: #94a3b8;
     }
   }
 </style>

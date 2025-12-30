@@ -516,6 +516,54 @@ try {
       font-size: 0.65rem;
     }
   }
+
+  /* ============================================
+   MÓVIL: Tema blanco claro
+   ============================================ */
+  @media (max-width: 768px) {
+    .galeria-page {
+      background: #ffffff !important;
+    }
+
+    .galeria-hero {
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%) !important;
+    }
+
+    .galeria-hero h1 {
+      background: linear-gradient(135deg, #1e293b 0%, #475569 100%) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+    }
+
+    .galeria-hero p {
+      color: #64748b !important;
+    }
+
+    .filter-btn {
+      background: rgba(0, 0, 0, 0.04) !important;
+      color: #64748b !important;
+      border: 1px solid #e2e8f0 !important;
+    }
+
+    .filter-btn.active {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+      color: white !important;
+      border-color: transparent !important;
+    }
+
+    .gallery-card {
+      background: #f8fafc !important;
+      border: 1px solid #e2e8f0 !important;
+    }
+
+    .gallery-card h3 {
+      color: #1e293b !important;
+    }
+
+    .gallery-card p {
+      color: #64748b !important;
+    }
+  }
 </style>
 
 <script>

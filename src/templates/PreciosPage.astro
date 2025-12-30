@@ -1652,6 +1652,86 @@ const t = translations[lang] || translations.es;
       justify-content: center;
     }
   }
+
+  /* ============================================
+   MÓVIL: Tema blanco claro
+   ============================================ */
+  @media (max-width: 768px) {
+    :root {
+      --bg-dark: #ffffff;
+      --bg-card: rgba(248, 250, 252, 0.95);
+      --text-primary: #1e293b;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      --border-subtle: rgba(0, 0, 0, 0.08);
+    }
+
+    .main-content {
+      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%) !important;
+    }
+
+    .hero-title {
+      background: linear-gradient(135deg, #1e293b 0%, #475569 100%) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+    }
+
+    .plan-card {
+      background: #f8fafc !important;
+      border: 1px solid #e2e8f0 !important;
+    }
+
+    .plan-features li {
+      color: #475569 !important;
+      border-bottom-color: #f1f5f9 !important;
+    }
+
+    .plan-cta {
+      background: rgba(0, 0, 0, 0.04) !important;
+      color: #334155 !important;
+      border: 1px solid #e2e8f0 !important;
+    }
+
+    .pricing-toggle {
+      background: rgba(0, 0, 0, 0.04) !important;
+    }
+
+    .toggle-btn {
+      color: #64748b !important;
+    }
+
+    .perpetual-card {
+      background: linear-gradient(
+        135deg,
+        rgba(245, 158, 11, 0.08) 0%,
+        rgba(217, 119, 6, 0.04) 100%
+      ) !important;
+      border: 1px solid rgba(245, 158, 11, 0.2) !important;
+    }
+
+    .faq-item {
+      background: #f8fafc !important;
+      border: 1px solid #e2e8f0 !important;
+    }
+
+    .comparison-box {
+      background: #f8fafc !important;
+      border: 1px solid #e2e8f0 !important;
+    }
+
+    .comparison-item {
+      background: rgba(0, 0, 0, 0.02) !important;
+    }
+
+    .cta-section {
+      background: linear-gradient(
+        135deg,
+        rgba(16, 185, 129, 0.05) 0%,
+        rgba(16, 185, 129, 0.02) 100%
+      ) !important;
+      border-top: 1px solid #e2e8f0 !important;
+    }
+  }
 </style>
 
 <script>

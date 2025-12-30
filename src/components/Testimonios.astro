@@ -1,7 +1,7 @@
 ---
 /**
  * Testimonios.astro - Sección de testimonios / casos de éxito
- * Con soporte multiidioma
+ * Con soporte multiidioma y tema adaptativo móvil
  */
 import { type Lang } from "@/config/pages";
 
@@ -98,45 +98,45 @@ const translations: Record<Lang, {
         resultNumber: "5",
         resultText: "synced stores",
         author: "David Pablo",
-        company: "Brillante Group · Catalonia",
+        company: "Grupo Brillante · Catalonia",
         initials: "DP",
         since: "2009"
       }
     ]
   },
   fr: {
-    badge: "Témoignages",
+    badge: "Cas de succès",
     title: "Ce que disent nos clients",
     subtitle: "De vraies bijouteries avec de vrais résultats",
     clientSince: "Client depuis",
     testimonials: [
       {
-        quote: "Nous avons essayé 3 ERP génériques avant RayGold. Aucun ne comprenait qu'une alliance a de l'or 18k, un diamant de 0,15ct et une gravure.",
-        highlight: "RayGold l'inclut en standard.",
+        quote: "Nous avons essayé 3 ERP génériques avant RayGold. Aucun ne comprenait qu'une bague a de l'or 18k, un diamant de 0.15ct et de la gravure.",
+        highlight: "RayGold l'inclut par défaut.",
         resultNumber: "-60%",
         resultText: "temps d'inventaire",
         author: "Brian Flores",
-        company: "Bijouterie Flores & Fils · Valence",
+        company: "Bijouterie Flores · Valence",
         initials: "BF",
         since: "2012"
       },
       {
-        quote: "Nous gérons 4.000 références avec des variantes or, argent et alliages. Les ordres de fabrication RayGold calculent le métal exact.",
-        highlight: "Avant, on le faisait sur Excel.",
+        quote: "Nous gérons 4.000 références avec des variantes d'or, d'argent et d'alliages. Les ordres de fabrication RayGold calculent le métal exact.",
+        highlight: "Avant on le faisait sur Excel.",
         resultNumber: "12.000€",
-        resultText: "économies annuelles sur les pertes",
+        resultText: "économies annuelles",
         author: "Degan & Ferraz",
-        company: "Fabrications Ferraz · Cordoue",
+        company: "Ferraz Manufacturing · Cordoue",
         initials: "DF",
         since: "2016"
       },
       {
-        quote: "Nous avons ouvert notre cinquième boutique et RayGold a évolué sans problème. Stock centralisé, transferts inter-magasins, commissions...",
+        quote: "Nous avons ouvert notre cinquième magasin et RayGold a évolué sans problème. Stock centralisé, transferts entre magasins...",
         highlight: "C'est notre cerveau opérationnel.",
         resultNumber: "5",
         resultText: "magasins synchronisés",
         author: "David Pablo",
-        company: "Groupe Brillante · Catalogne",
+        company: "Grupo Brillante · Catalogne",
         initials: "DP",
         since: "2009"
       }
@@ -149,7 +149,7 @@ const translations: Record<Lang, {
     clientSince: "Client des de",
     testimonials: [
       {
-        quote: "Vam provar 3 ERPs genèrics abans de RayGold. Cap entenia que una aliança té or de 18k, un diamant de 0,15ct i mà d'obra de gravat.",
+        quote: "Vam provar 3 ERPs genèrics abans de RayGold. Cap entenia que una aliança té or de 18k, un diamant de 0.15ct i mà d'obra de gravat.",
         highlight: "RayGold ho porta de sèrie.",
         resultNumber: "-60%",
         resultText: "temps d'inventari",
@@ -169,7 +169,7 @@ const translations: Record<Lang, {
         since: "2016"
       },
       {
-        quote: "Vam obrir la cinquena botiga i RayGold va escalar sense problemes. Stock centralitzat, traspassos entre botigues, comissions...",
+        quote: "Vam obrir la cinquena botiga i RayGold va escalar sense problemes. Stock centralitzat, traspassos entre botigues...",
         highlight: "És el nostre cervell operatiu.",
         resultNumber: "5",
         resultText: "botigues sincronitzades",
@@ -182,17 +182,17 @@ const translations: Record<Lang, {
   },
   "pt-br": {
     badge: "Casos de sucesso",
-    title: "O que dizem nossos clientes",
+    title: "O que nossos clientes dizem",
     subtitle: "Joalherias reais com resultados reais",
     clientSince: "Cliente desde",
     testimonials: [
       {
-        quote: "Testamos 3 ERPs genéricos antes do RayGold. Nenhum entendia que uma aliança tem ouro 18k, um diamante de 0,15ct e mão de obra de gravação.",
-        highlight: "O RayGold já vem com isso.",
+        quote: "Testamos 3 ERPs genéricos antes do RayGold. Nenhum entendia que uma aliança tem ouro 18k, um diamante de 0.15ct e mão de obra de gravação.",
+        highlight: "RayGold inclui isso por padrão.",
         resultNumber: "-60%",
         resultText: "tempo de inventário",
         author: "Brian Flores",
-        company: "Joalheria Flores & Filhos · Valência",
+        company: "Joalheria Flores · Valência",
         initials: "BF",
         since: "2012"
       },
@@ -207,7 +207,7 @@ const translations: Record<Lang, {
         since: "2016"
       },
       {
-        quote: "Abrimos a quinta loja e o RayGold escalou sem problemas. Estoque centralizado, transferências entre lojas, comissões...",
+        quote: "Abrimos a quinta loja e o RayGold escalou sem problemas. Estoque centralizado, transferências entre lojas...",
         highlight: "É nosso cérebro operacional.",
         resultNumber: "5",
         resultText: "lojas sincronizadas",
@@ -232,26 +232,31 @@ const t = translations[lang] || translations.es;
     </div>
 
     <div class="testimonios-grid">
-      {t.testimonials.map((testimonial, index) => (
-        <article class:list={["testimonio-card", { featured: index === 1 }]}>
+      {t.testimonials.map((testimonio, index) => (
+        <article class={`testimonio-card ${index === 0 ? 'featured' : ''}`}>
           <div class="testimonio-quote">
             <svg class="quote-icon" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"></path>
+              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
             </svg>
             <p>
-              "{testimonial.quote} <strong>{testimonial.highlight}</strong>"
+              {testimonio.quote}
+              <strong> {testimonio.highlight}</strong>
             </p>
           </div>
+
           <div class="testimonio-result">
-            <span class="result-number">{testimonial.resultNumber}</span>
-            <span class="result-text">{testimonial.resultText}</span>
+            <span class="result-number">{testimonio.resultNumber}</span>
+            <span class="result-text">{testimonio.resultText}</span>
           </div>
+
           <div class="testimonio-author">
-            <div class="author-avatar">{testimonial.initials}</div>
+            <div class="author-avatar">
+              {testimonio.initials}
+            </div>
             <div class="author-info">
-              <strong>{testimonial.author}</strong>
-              <span>{testimonial.company}</span>
-              <span class="author-years">{t.clientSince} {testimonial.since}</span>
+              <strong>{testimonio.author}</strong>
+              <span>{testimonio.company}</span>
+              <span class="author-years">{t.clientSince} {testimonio.since}</span>
             </div>
           </div>
         </article>
@@ -261,9 +266,12 @@ const t = translations[lang] || translations.es;
 </section>
 
 <style>
+  /* ============================================
+     DESKTOP: Tema azul oscuro (default)
+     ============================================ */
   .testimonios-section {
     padding: 5rem 1.5rem;
-    background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+    background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
   }
 
   .container {
@@ -279,8 +287,8 @@ const t = translations[lang] || translations.es;
   .section-badge {
     display: inline-block;
     padding: 0.5rem 1rem;
-    background: rgba(102, 126, 234, 0.2);
-    color: #818cf8;
+    background: rgba(16, 185, 129, 0.2);
+    color: #34d399;
     font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
@@ -327,11 +335,7 @@ const t = translations[lang] || translations.es;
 
   .testimonio-card.featured {
     border-color: #667eea;
-    background: linear-gradient(
-      135deg,
-      rgba(102, 126, 234, 0.15) 0%,
-      rgba(30, 41, 59, 0.6) 100%
-    );
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(30, 41, 59, 0.6) 100%);
   }
 
   .testimonio-quote {
@@ -420,17 +424,69 @@ const t = translations[lang] || translations.es;
     font-size: 0.75rem !important;
   }
 
+  /* ============================================
+     MÓVIL: Tema blanco claro
+     ============================================ */
   @media (max-width: 768px) {
     .testimonios-section {
       padding: 3rem 1rem;
+      background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+    }
+
+    .section-badge {
+      background: rgba(16, 185, 129, 0.1);
+      color: #059669;
     }
 
     .section-header h2 {
       font-size: 1.5rem;
+      color: #1e293b;
+    }
+
+    .section-header p {
+      color: #64748b;
     }
 
     .testimonios-grid {
       grid-template-columns: 1fr;
+    }
+
+    .testimonio-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+    }
+
+    .testimonio-card:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    .testimonio-card.featured {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, #f8fafc 100%);
+      border-color: rgba(102, 126, 234, 0.3);
+    }
+
+    .testimonio-quote p {
+      color: #334155;
+    }
+
+    .testimonio-quote strong {
+      color: #1e293b;
+    }
+
+    .result-text {
+      color: #64748b;
+    }
+
+    .testimonio-author {
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .author-info strong {
+      color: #1e293b;
+    }
+
+    .author-info span {
+      color: #64748b;
     }
   }
 </style>

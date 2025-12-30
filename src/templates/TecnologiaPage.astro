@@ -1083,4 +1083,97 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
       justify-content: center;
     }
   }
+
+  /* ============================================
+   MÓVIL: Tema blanco claro
+   ============================================ */
+  @media (max-width: 768px) {
+    :root {
+      --bg-dark: #ffffff;
+      --bg-card: rgba(248, 250, 252, 0.95);
+      --text-primary: #1e293b;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      --border-subtle: rgba(0, 0, 0, 0.08);
+    }
+
+    .tech-page {
+      background: #ffffff !important;
+    }
+
+    .tech-hero {
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%) !important;
+    }
+
+    .hero-title {
+      background: linear-gradient(135deg, #1e293b 0%, #475569 100%) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+    }
+
+    .hero-subtitle {
+      color: #64748b !important;
+    }
+
+    .node {
+      background: #f8fafc !important;
+      border: 1px solid #e2e8f0 !important;
+    }
+
+    .node-subtitle {
+      color: #64748b !important;
+    }
+
+    .tag {
+      background: rgba(102, 126, 234, 0.1) !important;
+      color: #667eea !important;
+    }
+
+    .ai-feature,
+    .service {
+      background: rgba(0, 0, 0, 0.04) !important;
+      color: #334155 !important;
+      border: 1px solid #e2e8f0 !important;
+    }
+
+    .node-ai,
+    .node-cloud {
+      grid-column: span 1 !important;
+    }
+
+    .result-section {
+      background: linear-gradient(
+        135deg,
+        rgba(102, 126, 234, 0.05) 0%,
+        rgba(118, 75, 162, 0.05) 100%
+      ) !important;
+    }
+
+    .result-box {
+      background: #f8fafc !important;
+      border: 1px solid #e2e8f0 !important;
+    }
+
+    .module-tag {
+      background: rgba(102, 126, 234, 0.1) !important;
+      color: #667eea !important;
+    }
+
+    .cta-section {
+      background: linear-gradient(
+        135deg,
+        rgba(102, 126, 234, 0.05) 0%,
+        rgba(118, 75, 162, 0.05) 100%
+      ) !important;
+      border-top: 1px solid #e2e8f0 !important;
+    }
+
+    .cta-section h2 {
+      color: #1e293b !important;
+    }
+
+    .cta-section p {
+      color: #64748b !important;
+    }
+  }
 </style>

@@ -2,6 +2,7 @@
 /**
  * Layout Base para Submódulos
  * Reutilizable por todos los módulos: Maestros, Comercial, etc.
+ * Con tema adaptativo: azul oscuro desktop, blanco móvil
  * 
  * @file src/components/SubmoduloLayout.astro
  */
@@ -101,6 +102,10 @@ const iconosSecciones: Record<string, string> = {
   // E-commerce
   catalogo: `<svg viewBox="0 0 48 48" fill="none"><rect x="6" y="6" width="16" height="16" rx="2" fill="currentColor"/><rect x="26" y="6" width="16" height="16" rx="2" fill="currentColor" opacity="0.7"/><rect x="6" y="26" width="16" height="16" rx="2" fill="currentColor" opacity="0.5"/><rect x="26" y="26" width="16" height="16" rx="2" fill="currentColor" opacity="0.3"/></svg>`,
   integraciones: `<svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="6" fill="currentColor"/><circle cx="12" cy="12" r="4" fill="currentColor" opacity="0.6"/><circle cx="36" cy="12" r="4" fill="currentColor" opacity="0.6"/><circle cx="12" cy="36" r="4" fill="currentColor" opacity="0.6"/><circle cx="36" cy="36" r="4" fill="currentColor" opacity="0.6"/><path d="M14 14l8 8M34 14l-8 8M14 34l8-8M34 34l-8-8" stroke="currentColor" stroke-width="2"/></svg>`,
+  // Impresoras 3D
+  modelos: `<svg viewBox="0 0 48 48" fill="none"><rect x="8" y="8" width="32" height="32" rx="3" fill="currentColor" opacity="0.15"/><rect x="12" y="12" width="24" height="6" rx="1" fill="currentColor"/><path d="M24 22v16" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M18 30h12" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>`,
+  impresion: `<svg viewBox="0 0 48 48" fill="none"><rect x="8" y="8" width="32" height="32" rx="3" fill="currentColor" opacity="0.15"/><rect x="12" y="12" width="24" height="8" rx="2" fill="currentColor"/><rect x="16" y="24" width="16" height="12" rx="2" fill="currentColor" opacity="0.4"/></svg>`,
+  materiales: `<svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="14" fill="currentColor" opacity="0.15"/><circle cx="24" cy="24" r="8" fill="currentColor" opacity="0.4"/><circle cx="24" cy="24" r="4" fill="currentColor"/></svg>`,
 };
 
 // Obtener icono por defecto si no existe
@@ -159,29 +164,23 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
             </div>
 
             <div class="galeria-grid">
-              {seccion.imagenes.map((img, imgIndex: number) => (
-                <div class="galeria-item" style={`--delay: ${imgIndex * 0.1}s`}>
+              {seccion.imagenes.map((imagen, imgIndex: number) => (
+                <article class="galeria-item" style={`--delay: ${imgIndex * 0.1}s`}>
                   <div class="imagen-wrapper">
-                    <img
-                      src={img.url}
-                      alt={img.titulo}
-                      loading="lazy"
-                      onerror={`this.src='https://placehold.co/600x400/1e293b/64748b?text=${encodeURIComponent(common.imageNotAvailable)}'`}
-                    />
+                    <img src={imagen.url} alt={imagen.titulo} loading="lazy" />
                     <div class="imagen-overlay">
-                      <button class="btn-ampliar" data-img={img.url}>
+                      <button class="btn-ampliar" data-img={imagen.url}>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                          <circle cx="11" cy="11" r="8"/>
-                          <path d="M21 21l-4.35-4.35"/>
+                          <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6M7 10h6" />
                         </svg>
                       </button>
                     </div>
                   </div>
                   <div class="imagen-info">
-                    <h4>{img.titulo}</h4>
-                    <p>{img.descripcion}</p>
+                    <h4>{imagen.titulo}</h4>
+                    <p>{imagen.descripcion}</p>
                   </div>
-                </div>
+                </article>
               ))}
             </div>
           </section>
@@ -189,13 +188,13 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
       </div>
     </div>
 
-    <!-- Modal para ampliar imagen -->
-    <div class="modal-imagen" id="modalImagen">
-      <button class="modal-close" aria-label={common.close}>×</button>
-      <img id="modalImg" src="" alt="" />
+    <!-- Modal de imagen -->
+    <div id="modalImagen" class="modal-imagen">
+      <button class="modal-close">×</button>
+      <img id="modalImg" src="" alt="Imagen ampliada" />
     </div>
 
-    <!-- CTA Section -->
+    <!-- CTA -->
     <section class="cta-section">
       <div class="container">
         <p>{common.seeInAction}</p>
@@ -208,6 +207,9 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
 </Layout>
 
 <style>
+  /* ============================================
+     DESKTOP: Tema azul oscuro (default)
+     ============================================ */
   .modulo-page {
     background: #0f172a;
     min-height: 100vh;
@@ -279,7 +281,7 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
     background: rgba(30, 41, 59, 0.8);
     border-bottom: 1px solid #334155;
     position: sticky;
-    top: 0;
+    top: 72px;
     z-index: 50;
     backdrop-filter: blur(8px);
   }
@@ -549,9 +551,19 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
     box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
   }
 
-  /* Responsive */
+  /* ============================================
+     MÓVIL: Tema blanco claro
+     ============================================ */
   @media (max-width: 768px) {
+    .modulo-page {
+      background: #ffffff;
+      color: #1e293b;
+    }
+
+    /* Header */
     .modulo-header {
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+      border-bottom: 1px solid #e2e8f0;
       flex-direction: column;
       align-items: flex-start;
       gap: 1rem;
@@ -564,11 +576,46 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
 
     .header-text h1 {
       font-size: 1.5rem;
+      background: linear-gradient(135deg, #1e293b, #475569);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header-text p {
+      color: #64748b;
+    }
+
+    .back-link {
+      color: #64748b;
+    }
+
+    .back-link:hover {
+      color: var(--modulo-color);
+    }
+
+    /* Navegación de secciones */
+    .secciones-nav {
+      background: rgba(255, 255, 255, 0.95);
+      border-bottom: 1px solid #e2e8f0;
+      top: 72px;
     }
 
     .seccion-tab {
       padding: 0.5rem 1rem;
       min-width: 80px;
+      color: #64748b;
+    }
+
+    .seccion-tab:hover {
+      background: rgba(102, 126, 234, 0.08);
+      color: #1e293b;
+    }
+
+    .seccion-tab.active {
+      background: rgba(102, 126, 234, 0.1);
+      border-color: var(--modulo-color);
+      color: #1e293b;
     }
 
     .tab-icon {
@@ -580,8 +627,49 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
       font-size: 0.7rem;
     }
 
+    /* Contenido */
+    .seccion-intro h2 {
+      color: #1e293b;
+    }
+
+    .seccion-descripcion {
+      color: #64748b;
+    }
+
+    /* Galería */
     .galeria-grid {
       grid-template-columns: 1fr;
+    }
+
+    .galeria-item {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+    }
+
+    .galeria-item:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    .imagen-wrapper {
+      background: #e2e8f0;
+    }
+
+    .imagen-info h4 {
+      color: #1e293b;
+    }
+
+    .imagen-info p {
+      color: #64748b;
+    }
+
+    /* CTA */
+    .cta-section {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .cta-section p {
+      color: #64748b;
     }
   }
 </style>

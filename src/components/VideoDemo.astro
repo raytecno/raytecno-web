@@ -1,7 +1,7 @@
 ---
 /**
  * VideoDemo.astro - Sección de video demo para RayGold
- * Con soporte multiidioma
+ * Con soporte multiidioma y tema adaptativo móvil
  */
 import { type Lang, getPageUrl } from "@/config/pages";
 
@@ -11,18 +11,12 @@ interface Props {
 
 const { lang = 'es' } = Astro.props;
 
-// ============================================
-// CONFIGURACIÓN DE VIDEO
-// ============================================
+// Configuración de video
 const videoType = "self-hosted";
 const videoSrc = "https://raygoldstorage.blob.core.windows.net/web/Video_RayGold.mp4";
 const posterSrc = "https://raygoldstorage.blob.core.windows.net/web/Video_RayGold_poster.jpg";
-const youtubeId = "TU_VIDEO_ID";
-const vimeoId = "TU_VIMEO_ID";
 
-// ============================================
-// TRADUCCIONES
-// ============================================
+// Traducciones
 const translations: Record<Lang, {
   badge: string;
   titleStart: string;
@@ -147,62 +141,36 @@ const contactUrl = getPageUrl('contacto', lang);
       <div class="video-frame">
         <div class="glow-effect"></div>
         
-        {videoType === "self-hosted" && (
-          <div class="video-player" id="videoPlayer">
-            <div class="video-poster" id="videoPoster">
-              <img 
-                src={posterSrc} 
-                alt={t.videoAlt}
-                class="poster-image"
-                onerror="this.style.display='none'"
-              />
-              <div class="poster-overlay">
-                <button class="play-button" id="playButton" aria-label={t.playText}>
-                  <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M8 5v14l11-7z"/>
-                  </svg>
-                </button>
-                <span class="play-text">{t.playText}</span>
-              </div>
+        <div class="video-player" id="videoPlayer">
+          <div class="video-poster" id="videoPoster">
+            <img 
+              src={posterSrc} 
+              alt={t.videoAlt}
+              class="poster-image"
+              onerror="this.style.display='none'"
+            />
+            <div class="poster-overlay">
+              <button class="play-button" id="playButton" aria-label={t.playText}>
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </button>
+              <span class="play-text">{t.playText}</span>
             </div>
-            
-            <video 
-              id="demoVideo"
-              class="video-element"
-              poster={posterSrc}
-              preload="metadata"
-              playsinline
-              controls
-            >
-              <source src={videoSrc} type="video/mp4" />
-              Your browser does not support the video element.
-            </video>
           </div>
-        )}
-
-        {videoType === "youtube" && (
-          <div class="video-embed">
-            <iframe
-              src={`https://www.youtube.com/embed/${youtubeId}?rel=0&modestbranding=1`}
-              title={t.videoAlt}
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
-          </div>
-        )}
-
-        {videoType === "vimeo" && (
-          <div class="video-embed">
-            <iframe
-              src={`https://player.vimeo.com/video/${vimeoId}?title=0&byline=0&portrait=0`}
-              title={t.videoAlt}
-              frameborder="0"
-              allow="autoplay; fullscreen; picture-in-picture"
-              allowfullscreen
-            ></iframe>
-          </div>
-        )}
+          
+          <video 
+            id="demoVideo"
+            class="video-element"
+            poster={posterSrc}
+            preload="metadata"
+            playsinline
+            controls
+          >
+            <source src={videoSrc} type="video/mp4" />
+            Your browser does not support the video element.
+          </video>
+        </div>
       </div>
 
       <!-- Features bajo el video -->
@@ -267,6 +235,9 @@ const contactUrl = getPageUrl('contacto', lang);
 </section>
 
 <style>
+  /* ============================================
+     DESKTOP: Tema azul oscuro (default)
+     ============================================ */
   .video-section {
     padding: 100px 0;
     background: linear-gradient(180deg, #0a0a0f 0%, #12121a 50%, #0a0a0f 100%);
@@ -313,21 +284,16 @@ const contactUrl = getPageUrl('contacto', lang);
     margin-bottom: 20px;
   }
 
-  .section-badge svg {
-    width: 16px;
-    height: 16px;
-  }
-
   .section-title {
-    font-size: clamp(2rem, 5vw, 2.75rem);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
     font-weight: 700;
-    color: #ffffff;
+    color: white;
     margin: 0 0 16px 0;
     line-height: 1.2;
   }
 
   .gradient-text {
-    background: linear-gradient(135deg, #a78bfa 0%, #6366f1 100%);
+    background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -468,20 +434,6 @@ const contactUrl = getPageUrl('contacto', lang);
     display: none;
   }
 
-  .video-embed {
-    position: relative;
-    aspect-ratio: 16 / 9;
-  }
-
-  .video-embed iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-  }
-
   .video-features {
     display: flex;
     justify-content: center;
@@ -577,23 +529,71 @@ const contactUrl = getPageUrl('contacto', lang);
     transform: translateX(4px);
   }
 
+  /* ============================================
+     MÓVIL: Tema blanco claro
+     ============================================ */
   @media (max-width: 768px) {
     .video-section {
       padding: 60px 0;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%);
+    }
+
+    .video-section::before {
+      background-image: radial-gradient(rgba(139, 92, 246, 0.05) 1px, transparent 1px);
     }
 
     .section-header {
       margin-bottom: 32px;
     }
 
+    .section-badge {
+      background: rgba(139, 92, 246, 0.08);
+      border-color: rgba(139, 92, 246, 0.2);
+      color: #8b5cf6;
+    }
+
+    .section-title {
+      color: #1e293b;
+    }
+
+    .section-subtitle {
+      color: #64748b;
+    }
+
+    .video-frame {
+      background: #f1f5f9;
+      box-shadow: 
+        0 0 0 1px rgba(139, 92, 246, 0.1),
+        0 15px 30px -12px rgba(0, 0, 0, 0.15);
+    }
+
+    .glow-effect {
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
+    }
+
     .video-features {
       flex-direction: column;
       gap: 16px;
+      background: rgba(0, 0, 0, 0.02);
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .feature-icon {
+      background: rgba(139, 92, 246, 0.08);
+    }
+
+    .feature-value {
+      color: #1e293b;
+    }
+
+    .feature-label {
+      color: #64748b;
     }
 
     .feature-divider {
       width: 60px;
       height: 1px;
+      background: #e2e8f0;
     }
 
     .play-button {
@@ -605,15 +605,9 @@ const contactUrl = getPageUrl('contacto', lang);
       width: 24px;
       height: 24px;
     }
-  }
 
-  @media (max-width: 480px) {
-    .section-title {
-      font-size: 1.75rem;
-    }
-
-    .section-subtitle {
-      font-size: 1rem;
+    .cta-text {
+      color: #64748b;
     }
 
     .cta-button {

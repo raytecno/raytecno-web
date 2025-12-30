@@ -1,7 +1,7 @@
 ---
 /**
  * Modulos.astro - Sección de módulos del ERP
- * Con soporte multiidioma
+ * Con soporte multiidioma y tema adaptativo móvil
  */
 import { type Lang, getPageUrl } from "@/config/pages";
 
@@ -55,7 +55,7 @@ const translations: Record<Lang, {
   fr: {
     badge: "Solution complète",
     title: "8 modules intégrés pour votre bijouterie",
-    subtitle: "Tout ce dont vous avez besoin en un seul système",
+    subtitle: "Tout ce dont vous avez besoin dans un seul système",
     modulos: [
       { key: "maestros", title: "Maîtres", description: "Articles, fournisseurs, clients et familles" },
       { key: "comercial", title: "Commercial", description: "Ventes, commandes et facturation" },
@@ -82,15 +82,15 @@ const translations: Record<Lang, {
       { key: "ecommerce", title: "Ecommerce", description: "Botigues online i marketplaces" },
     ],
   },
-  "pt-br": {
+  'pt-br': {
     badge: "Solução completa",
     title: "8 módulos integrados para sua joalheria",
     subtitle: "Tudo o que você precisa em um único sistema",
     modulos: [
-      { key: "maestros", title: "Cadastros", description: "Artigos, fornecedores, clientes e famílias" },
+      { key: "maestros", title: "Mestres", description: "Artigos, fornecedores, clientes e famílias" },
       { key: "comercial", title: "Comercial", description: "Vendas, pedidos e faturamento" },
-      { key: "fabricacion", title: "Fabricação", description: "Produção, estoques e qualidade" },
-      { key: "finanzas", title: "Finanças", description: "Contabilidade, tesouraria e impostos" },
+      { key: "fabricacion", title: "Fabricação", description: "Produção, inventários e qualidade" },
+      { key: "finanzas", title: "Finanças", description: "Contabilidade, tesouraria e IVA" },
       { key: "historicos", title: "Históricos", description: "Dados históricos e tendências" },
       { key: "estadisticas", title: "Estatísticas", description: "Relatórios e painéis" },
       { key: "vendedores", title: "Vendedores", description: "Gestão de rotas e visitas" },
@@ -101,38 +101,32 @@ const translations: Record<Lang, {
 
 const t = translations[lang] || translations.es;
 
-// Colores e iconos por módulo
-const moduloConfig: Record<string, { color: string }> = {
-  maestros: { color: "#667eea" },
-  comercial: { color: "#06b6d4" },
-  fabricacion: { color: "#f59e0b" },
-  finanzas: { color: "#10b981" },
-  historicos: { color: "#8b5cf6" },
-  estadisticas: { color: "#ec4899" },
-  vendedores: { color: "#3b82f6" },
-  ecommerce: { color: "#6366f1" },
+// Iconos SVG para cada módulo
+const iconos: Record<string, string> = {
+  maestros: `<svg viewBox="0 0 48 48" fill="none"><rect x="6" y="8" width="36" height="32" rx="3" fill="currentColor" opacity="0.15"/><rect x="10" y="12" width="28" height="6" rx="2" fill="currentColor"/><rect x="10" y="22" width="20" height="3" rx="1" fill="currentColor" opacity="0.6"/><rect x="10" y="28" width="24" height="3" rx="1" fill="currentColor" opacity="0.6"/><circle cx="34" cy="34" r="5" fill="#10b981"/><path d="M32 34l2 2 3-3" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+  comercial: `<svg viewBox="0 0 48 48" fill="none"><rect x="6" y="12" width="36" height="28" rx="3" fill="currentColor" opacity="0.15"/><rect x="6" y="12" width="36" height="10" rx="3" fill="currentColor"/><circle cx="16" cy="17" r="3" fill="white"/><rect x="22" y="15" width="16" height="4" rx="2" fill="white" opacity="0.6"/><rect x="10" y="26" width="12" height="10" rx="2" fill="currentColor" opacity="0.4"/><rect x="26" y="26" width="12" height="10" rx="2" fill="currentColor" opacity="0.4"/></svg>`,
+  fabricacion: `<svg viewBox="0 0 48 48" fill="none"><rect x="4" y="26" width="12" height="16" rx="2" fill="currentColor"/><rect x="18" y="18" width="12" height="24" rx="2" fill="currentColor" opacity="0.7"/><rect x="32" y="10" width="12" height="32" rx="2" fill="currentColor" opacity="0.4"/><circle cx="10" cy="14" r="6" fill="currentColor" opacity="0.3"/><circle cx="10" cy="14" r="3" fill="currentColor"/></svg>`,
+  finanzas: `<svg viewBox="0 0 48 48" fill="none"><rect x="6" y="8" width="36" height="32" rx="3" fill="currentColor" opacity="0.15"/><rect x="10" y="12" width="28" height="8" rx="2" fill="currentColor"/><path d="M16 28h16M16 34h12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><circle cx="36" cy="32" r="6" fill="currentColor" opacity="0.3"/><text x="36" y="35" text-anchor="middle" fill="currentColor" font-size="10" font-weight="bold">€</text></svg>`,
+  historicos: `<svg viewBox="0 0 48 48" fill="none"><rect x="6" y="8" width="36" height="32" rx="3" fill="currentColor" opacity="0.15"/><rect x="10" y="12" width="28" height="6" rx="2" fill="currentColor"/><circle cx="24" cy="30" r="10" fill="currentColor" opacity="0.3"/><path d="M24 24v6l5 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="24" cy="30" r="2" fill="currentColor"/></svg>`,
+  estadisticas: `<svg viewBox="0 0 48 48" fill="none"><rect x="6" y="8" width="36" height="32" rx="3" fill="currentColor" opacity="0.15"/><rect x="10" y="28" width="6" height="10" rx="1" fill="currentColor"/><rect x="19" y="22" width="6" height="16" rx="1" fill="currentColor" opacity="0.7"/><rect x="28" y="16" width="6" height="22" rx="1" fill="currentColor" opacity="0.5"/><path d="M10 20l9-4 9 3 9-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`,
+  vendedores: `<svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="16" r="8" fill="currentColor"/><path d="M12 42c0-8 5-12 12-12s12 4 12 12" fill="currentColor" opacity="0.4"/><circle cx="38" cy="22" r="5" fill="currentColor" opacity="0.6"/><circle cx="10" cy="22" r="5" fill="currentColor" opacity="0.6"/></svg>`,
+  ecommerce: `<svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" fill="currentColor" opacity="0.15"/><ellipse cx="24" cy="24" rx="18" ry="8" stroke="currentColor" stroke-width="2"/><ellipse cx="24" cy="24" rx="8" ry="18" stroke="currentColor" stroke-width="2"/><line x1="6" y1="24" x2="42" y2="24" stroke="currentColor" stroke-width="2"/><line x1="24" y1="6" x2="24" y2="42" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="24" r="3" fill="currentColor"/></svg>`,
 };
 
-// Slugs de submódulos por idioma
-const submoduloSlugs: Record<string, Record<Lang, string>> = {
-  maestros: { es: 'maestros', en: 'masters', fr: 'maitres', ca: 'mestres', 'pt-br': 'cadastros' },
-  comercial: { es: 'comercial', en: 'commercial', fr: 'commercial', ca: 'comercial', 'pt-br': 'comercial' },
-  fabricacion: { es: 'fabricacion', en: 'manufacturing', fr: 'fabrication', ca: 'fabricacio', 'pt-br': 'fabricacao' },
-  finanzas: { es: 'finanzas', en: 'finance', fr: 'finances', ca: 'finances', 'pt-br': 'financas' },
-  historicos: { es: 'historicos', en: 'history', fr: 'historique', ca: 'historics', 'pt-br': 'historicos' },
-  estadisticas: { es: 'estadisticas', en: 'statistics', fr: 'statistiques', ca: 'estadistiques', 'pt-br': 'estatisticas' },
-  vendedores: { es: 'vendedores', en: 'sales-reps', fr: 'vendeurs', ca: 'venedors', 'pt-br': 'vendedores' },
-  ecommerce: { es: 'ecommerce', en: 'ecommerce', fr: 'ecommerce', ca: 'ecommerce', 'pt-br': 'ecommerce' },
+// Colores por módulo
+const colores: Record<string, string> = {
+  maestros: "#667eea",
+  comercial: "#06b6d4",
+  fabricacion: "#f59e0b",
+  finanzas: "#10b981",
+  historicos: "#8b5cf6",
+  estadisticas: "#ec4899",
+  vendedores: "#3b82f6",
+  ecommerce: "#6366f1",
 };
-
-function getModuloUrl(key: string): string {
-  const slugs = submoduloSlugs[key];
-  const modulosSlug = lang === 'en' ? 'modules' : lang === 'fr' ? 'modules' : lang === 'ca' ? 'moduls' : 'modulos';
-  return `/${lang}/${modulosSlug}/${slugs?.[lang] || key}`;
-}
 ---
 
-<section id="modulos" class="modulos-section">
+<section class="modulos-section">
   <div class="modulos-container">
     <div class="modulos-header">
       <span class="section-badge">{t.badge}</span>
@@ -141,113 +135,25 @@ function getModuloUrl(key: string): string {
     </div>
 
     <div class="modulos-grid">
-      {t.modulos.map((modulo) => {
-        const config = moduloConfig[modulo.key];
-        return (
-          <a href={getModuloUrl(modulo.key)} class="modulo-card" style={`--card-color: ${config.color}`}>
-            <div class="modulo-icon">
-              {modulo.key === "maestros" && (
-                <svg viewBox="0 0 64 64" fill="none">
-                  <rect x="8" y="12" width="48" height="40" rx="4" fill="#4a5568" stroke="#718096" stroke-width="2"/>
-                  <rect x="14" y="18" width="36" height="6" rx="2" fill="#a0aec0"/>
-                  <rect x="14" y="28" width="24" height="4" rx="1" fill="#718096"/>
-                  <rect x="14" y="36" width="30" height="4" rx="1" fill="#718096"/>
-                  <rect x="14" y="44" width="20" height="4" rx="1" fill="#718096"/>
-                  <circle cx="46" cy="44" r="6" fill={config.color}/>
-                  <path d="M44 44l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-              )}
-              {modulo.key === "comercial" && (
-                <svg viewBox="0 0 64 64" fill="none">
-                  <rect x="10" y="20" width="44" height="32" rx="4" fill="#4a5568" stroke="#718096" stroke-width="2"/>
-                  <path d="M24 20V14a8 8 0 0116 0v6" stroke="#718096" stroke-width="2" fill="none"/>
-                  <rect x="18" y="28" width="28" height="4" rx="1" fill="#a0aec0"/>
-                  <rect x="18" y="36" width="20" height="4" rx="1" fill="#718096"/>
-                  <circle cx="42" cy="42" r="8" fill={config.color}/>
-                  <path d="M39 42h6M42 39v6" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-              )}
-              {modulo.key === "fabricacion" && (
-                <svg viewBox="0 0 64 64" fill="none">
-                  <rect x="6" y="32" width="24" height="20" rx="2" fill="#4a5568" stroke="#718096" stroke-width="2"/>
-                  <rect x="34" y="24" width="24" height="28" rx="2" fill="#5a6778" stroke="#718096" stroke-width="2"/>
-                  <rect x="10" y="12" width="12" height="20" rx="1" fill={config.color}/>
-                  <rect x="38" y="8" width="8" height="16" rx="1" fill="#fbbf24"/>
-                  <rect x="50" y="14" width="6" height="10" rx="1" fill="#fcd34d"/>
-                  <circle cx="18" cy="42" r="4" fill="#a0aec0"/>
-                  <circle cx="46" cy="38" r="5" fill="#a0aec0"/>
-                  <path d="M6 52h52" stroke="#718096" stroke-width="3"/>
-                </svg>
-              )}
-              {modulo.key === "finanzas" && (
-                <svg viewBox="0 0 64 64" fill="none">
-                  <rect x="8" y="16" width="48" height="36" rx="4" fill="#4a5568" stroke="#718096" stroke-width="2"/>
-                  <rect x="14" y="22" width="36" height="8" rx="2" fill={config.color}/>
-                  <rect x="14" y="34" width="20" height="4" rx="1" fill="#718096"/>
-                  <rect x="14" y="42" width="28" height="4" rx="1" fill="#718096"/>
-                  <circle cx="46" cy="40" r="8" fill="#059669"/>
-                  <text x="46" y="44" text-anchor="middle" fill="white" font-size="12" font-weight="bold">€</text>
-                </svg>
-              )}
-              {modulo.key === "historicos" && (
-                <svg viewBox="0 0 64 64" fill="none">
-                  <rect x="12" y="8" width="40" height="48" rx="4" fill="#4a5568" stroke="#718096" stroke-width="2"/>
-                  <rect x="18" y="14" width="28" height="6" rx="2" fill={config.color}/>
-                  <rect x="18" y="24" width="20" height="3" rx="1" fill="#718096"/>
-                  <rect x="18" y="30" width="24" height="3" rx="1" fill="#718096"/>
-                  <rect x="18" y="36" width="18" height="3" rx="1" fill="#718096"/>
-                  <rect x="18" y="42" width="22" height="3" rx="1" fill="#718096"/>
-                  <circle cx="44" cy="44" r="8" fill="#7c3aed"/>
-                  <path d="M44 40v5h4" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-              )}
-              {modulo.key === "estadisticas" && (
-                <svg viewBox="0 0 64 64" fill="none">
-                  <rect x="8" y="44" width="10" height="12" rx="2" fill="#f9a8d4"/>
-                  <rect x="22" y="32" width="10" height="24" rx="2" fill="#f472b6"/>
-                  <rect x="36" y="20" width="10" height="36" rx="2" fill={config.color}/>
-                  <rect x="50" y="8" width="10" height="48" rx="2" fill="#db2777"/>
-                  <path d="M8 56h52" stroke="#718096" stroke-width="2"/>
-                  <path d="M12 40l12-10 14 6 14-20" stroke="#a855f7" stroke-width="3" stroke-linecap="round" fill="none"/>
-                  <circle cx="12" cy="40" r="3" fill="#a855f7"/>
-                  <circle cx="24" cy="30" r="3" fill="#a855f7"/>
-                  <circle cx="38" cy="36" r="3" fill="#a855f7"/>
-                  <circle cx="52" cy="16" r="3" fill="#a855f7"/>
-                </svg>
-              )}
-              {modulo.key === "vendedores" && (
-                <svg viewBox="0 0 64 64" fill="none">
-                  <circle cx="24" cy="16" r="8" fill="#4a5568" stroke="#718096" stroke-width="2"/>
-                  <path d="M12 52V40a12 12 0 0124 0v12" fill="#4a5568" stroke="#718096" stroke-width="2"/>
-                  <rect x="36" y="32" width="22" height="18" rx="3" fill={config.color} stroke="#2563eb" stroke-width="2"/>
-                  <rect x="42" y="28" width="10" height="6" rx="2" fill="#60a5fa"/>
-                  <rect x="40" y="38" width="14" height="2" rx="1" fill="#93c5fd"/>
-                  <rect x="40" y="42" width="14" height="2" rx="1" fill="#93c5fd"/>
-                  <circle cx="52" cy="14" r="6" fill="#10b981"/>
-                  <path d="M52 11v4M50 13h4" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-              )}
-              {modulo.key === "ecommerce" && (
-                <svg viewBox="0 0 64 64" fill="none">
-                  <circle cx="32" cy="32" r="24" fill="#4a5568" stroke="#718096" stroke-width="2"/>
-                  <ellipse cx="32" cy="32" rx="24" ry="10" fill="none" stroke="#718096" stroke-width="2"/>
-                  <ellipse cx="32" cy="32" rx="10" ry="24" fill="none" stroke="#718096" stroke-width="2"/>
-                  <path d="M8 32h48" stroke="#718096" stroke-width="2"/>
-                  <circle cx="32" cy="32" r="8" fill={config.color}/>
-                  <path d="M29 32l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-              )}
-            </div>
-            <h4>{modulo.title}</h4>
-            <p>{modulo.description}</p>
-          </a>
-        );
-      })}
+      {t.modulos.map((modulo) => (
+        <a
+          href={getPageUrl(`modulos/${modulo.key}` as any, lang)}
+          class="modulo-card"
+          style={`--card-color: ${colores[modulo.key]}`}
+        >
+          <div class="modulo-icon" style={`color: ${colores[modulo.key]}`} set:html={iconos[modulo.key]} />
+          <h4>{modulo.title}</h4>
+          <p>{modulo.description}</p>
+        </a>
+      ))}
     </div>
   </div>
 </section>
 
 <style>
+  /* ============================================
+     DESKTOP: Tema azul oscuro (default)
+     ============================================ */
   .modulos-section {
     padding: 5rem 1.5rem;
     background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
@@ -366,13 +272,27 @@ function getModuloUrl(key: string): string {
     }
   }
 
+  /* ============================================
+     MÓVIL: Tema blanco claro
+     ============================================ */
   @media (max-width: 768px) {
     .modulos-section {
       padding: 3rem 1rem;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    }
+
+    .section-badge {
+      background: rgba(102, 126, 234, 0.1);
+      color: #667eea;
     }
 
     .modulos-header h2 {
       font-size: 1.5rem;
+      color: #1e293b;
+    }
+
+    .modulos-header p {
+      color: #64748b;
     }
 
     .modulos-grid {
@@ -381,7 +301,14 @@ function getModuloUrl(key: string): string {
     }
 
     .modulo-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
       padding: 1.25rem 1rem;
+    }
+
+    .modulo-card:hover {
+      background: #f1f5f9;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
     }
 
     .modulo-icon {
@@ -391,10 +318,12 @@ function getModuloUrl(key: string): string {
 
     .modulo-card h4 {
       font-size: 0.95rem;
+      color: #1e293b;
     }
 
     .modulo-card p {
       font-size: 0.75rem;
+      color: #64748b;
     }
   }
 </style>
