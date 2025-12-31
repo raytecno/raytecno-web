@@ -6,6 +6,7 @@ export default defineConfig({
     locales: ["es", "en", "fr", "ca", "pt-br"],
     routing: {
       prefixDefaultLocale: true, // /es/contacto en lugar de /contacto
+      redirectToDefaultLocale: false, // ← AÑADIR ESTA LÍNEA
     },
   },
 });
