@@ -1,0 +1,175 @@
+---
+/**
+ * Página de Política de Cookies
+ * Fondo azul oscuro, texto blanco - estilo minimalista
+ */
+import Layout from "@/layouts/Layout.astro";
+import { type Lang } from "@/config/pages";
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: "es" } },
+    { params: { lang: "en" } },
+    { params: { lang: "fr" } },
+    { params: { lang: "ca" } },
+    { params: { lang: "pt-br" } },
+  ];
+}
+
+const { lang } = Astro.params as { lang: Lang };
+
+const content = {
+  es: {
+    title: "Política de Cookies",
+    metaDescription: "Política de cookies de RayGold - Software ERP para joyería.",
+    lastUpdate: "Última actualización: Enero 2025",
+    sections: [
+      {
+        title: "¿Qué son las cookies?",
+        text: `Las cookies son pequeños archivos de texto que los sitios web almacenan en tu dispositivo cuando los visitas. Permiten que el sitio recuerde tus acciones y preferencias.`
+      },
+      {
+        title: "Cookies que utilizamos",
+        text: `<strong style="color:white">Cookies técnicas (necesarias)</strong>\nEsenciales para el funcionamiento del sitio: sesión de usuario, preferencia de idioma, configuración de seguridad.\n\n<strong style="color:white">Cookies analíticas</strong>\nGoogle Analytics para análisis de tráfico (duración: hasta 2 años).\n\n<strong style="color:white">Cookies de preferencias</strong>\nIdioma seleccionado y configuración de visualización.`
+      },
+      {
+        title: "Detalle de cookies",
+        text: `• <strong style="color:white">_ga</strong> - Analítica - 2 años - Distinguir usuarios\n• <strong style="color:white">_gid</strong> - Analítica - 24 horas - Distinguir usuarios\n• <strong style="color:white">lang</strong> - Preferencia - 1 año - Idioma seleccionado\n• <strong style="color:white">cookie_consent</strong> - Técnica - 1 año - Preferencias de cookies`
+      },
+      {
+        title: "¿Cómo gestionar las cookies?",
+        text: `Puedes configurar tu navegador para bloquear cookies, aceptar solo algunas, eliminarlas al cerrar el navegador, o recibir avisos antes de que se almacenen.\n\nSi desactivas las cookies, algunas funciones podrían no funcionar correctamente.`
+      },
+      {
+        title: "Más información",
+        text: `Si tienes preguntas sobre nuestra política de cookies:\n\nEmail: info@raytecno.es`
+      }
+    ]
+  },
+  en: {
+    title: "Cookie Policy",
+    metaDescription: "RayGold Cookie Policy - ERP Software for jewelry.",
+    lastUpdate: "Last updated: January 2025",
+    sections: [
+      {
+        title: "What are cookies?",
+        text: `Cookies are small text files that websites store on your device when you visit them. They allow the site to remember your actions and preferences.`
+      },
+      {
+        title: "Cookies we use",
+        text: `<strong style="color:white">Technical cookies (necessary)</strong>\nEssential for website function: user session, language preference, security settings.\n\n<strong style="color:white">Analytics cookies</strong>\nGoogle Analytics for traffic analysis (duration: up to 2 years).\n\n<strong style="color:white">Preference cookies</strong>\nSelected language and display settings.`
+      },
+      {
+        title: "Cookie details",
+        text: `• <strong style="color:white">_ga</strong> - Analytics - 2 years - Distinguish users\n• <strong style="color:white">_gid</strong> - Analytics - 24 hours - Distinguish users\n• <strong style="color:white">lang</strong> - Preference - 1 year - Selected language\n• <strong style="color:white">cookie_consent</strong> - Technical - 1 year - Cookie preferences`
+      },
+      {
+        title: "How to manage cookies?",
+        text: `You can configure your browser to block cookies, accept only some, delete them when closing the browser, or receive warnings before they are stored.\n\nIf you disable cookies, some features may not work properly.`
+      },
+      {
+        title: "More information",
+        text: `If you have questions about our cookie policy:\n\nEmail: info@raytecno.es`
+      }
+    ]
+  },
+  fr: {
+    title: "Politique de Cookies",
+    metaDescription: "Politique de cookies de RayGold.",
+    lastUpdate: "Dernière mise à jour: Janvier 2025",
+    sections: [
+      { title: "Que sont les cookies?", text: `Les cookies sont de petits fichiers texte stockés sur votre appareil.` },
+      { title: "Contact", text: `Email: info@raytecno.es` }
+    ]
+  },
+  ca: {
+    title: "Política de Cookies",
+    metaDescription: "Política de cookies de RayGold.",
+    lastUpdate: "Última actualització: Gener 2025",
+    sections: [
+      { title: "Què són les cookies?", text: `Les cookies són petits arxius de text emmagatzemats al teu dispositiu.` },
+      { title: "Contacte", text: `Email: info@raytecno.es` }
+    ]
+  },
+  "pt-br": {
+    title: "Política de Cookies",
+    metaDescription: "Política de cookies do RayGold.",
+    lastUpdate: "Última atualização: Janeiro 2025",
+    sections: [
+      { title: "O que são cookies?", text: `Cookies são pequenos arquivos de texto armazenados em seu dispositivo.` },
+      { title: "Contato", text: `Email: info@raytecno.es` }
+    ]
+  }
+};
+
+const c = content[lang] || content.es;
+---
+
+<Layout title={c.title} description={c.metaDescription} lang={lang}>
+  <main class="legal-page">
+    <div class="legal-container">
+      <h1>{c.title}</h1>
+      <p class="last-update">{c.lastUpdate}</p>
+      
+      {c.sections.map((section) => (
+        <section class="legal-section">
+          <h2>{section.title}</h2>
+          <p set:html={section.text.replace(/\n/g, '<br>')} />
+        </section>
+      ))}
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .legal-page {
+    background: linear-gradient(180deg, #0f172a 0%, #020617 100%);
+    min-height: 100vh;
+    padding: 120px 24px 80px;
+  }
+
+  .legal-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    color: white;
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+
+  .last-update {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    margin-bottom: 48px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .legal-section {
+    margin-bottom: 40px;
+  }
+
+  h2 {
+    font-size: 1.15rem;
+    color: white;
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+
+  .legal-section p {
+    color: #cbd5e1;
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .legal-page {
+      padding: 100px 20px 60px;
+    }
+    h1 { font-size: 1.75rem; }
+    h2 { font-size: 1.05rem; }
+  }
+</style>

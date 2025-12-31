@@ -1,0 +1,183 @@
+---
+/**
+ * Página de Política de Privacidad
+ * Fondo azul oscuro, texto blanco - estilo minimalista
+ */
+import Layout from "@/layouts/Layout.astro";
+import { type Lang } from "@/config/pages";
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: "es" } },
+    { params: { lang: "en" } },
+    { params: { lang: "fr" } },
+    { params: { lang: "ca" } },
+    { params: { lang: "pt-br" } },
+  ];
+}
+
+const { lang } = Astro.params as { lang: Lang };
+
+const content = {
+  es: {
+    title: "Política de Privacidad",
+    metaDescription: "Política de privacidad de RayGold - Software ERP para joyería.",
+    lastUpdate: "Última actualización: Enero 2025",
+    sections: [
+      {
+        title: "1. Responsable del tratamiento",
+        text: `Raytecno BCN SL (en adelante, "RayGold") con domicilio en Montgat, Barcelona, España, es el responsable del tratamiento de los datos personales.\n\nContacto: info@raytecno.es`
+      },
+      {
+        title: "2. Datos que recopilamos",
+        text: `• Datos de contacto: nombre, email, teléfono, empresa\n• Datos de uso: información sobre cómo utilizas nuestro software\n• Datos técnicos: dirección IP, tipo de navegador\n• Datos comerciales: historial de pedidos, inventario (dentro del ERP)\n\nEn el sector joyero también procesamos datos de inventario de piezas, materiales preciosos y trazabilidad.`
+      },
+      {
+        title: "3. Finalidad del tratamiento",
+        text: `• Prestación del servicio: gestión de tu cuenta, soporte técnico\n• Comunicaciones comerciales: información sobre nuevas funcionalidades (con tu consentimiento)\n• Cumplimiento legal: obligaciones fiscales, libro de policía\n• Mejora del servicio: análisis de uso para mejorar la experiencia`
+      },
+      {
+        title: "4. Base legal",
+        text: `• Ejecución del contrato de licencia del software RayGold\n• Consentimiento expreso para comunicaciones comerciales\n• Cumplimiento de obligaciones legales\n• Interés legítimo en mejorar nuestros servicios`
+      },
+      {
+        title: "5. Conservación de datos",
+        text: `Conservaremos tus datos mientras mantengas una relación contractual con nosotros y durante los plazos legalmente establecidos (facturas: 6 años).`
+      },
+      {
+        title: "6. Tus derechos",
+        text: `Puedes ejercer los derechos de acceso, rectificación, supresión, oposición, portabilidad y limitación contactando: info@raytecno.es`
+      },
+      {
+        title: "7. Seguridad",
+        text: `Implementamos cifrado de datos, copias de seguridad periódicas, control de acceso basado en roles y auditorías de seguridad regulares.`
+      }
+    ]
+  },
+  en: {
+    title: "Privacy Policy",
+    metaDescription: "RayGold Privacy Policy - ERP Software for jewelry.",
+    lastUpdate: "Last updated: January 2025",
+    sections: [
+      {
+        title: "1. Data Controller",
+        text: `Raytecno BCN SL (hereinafter "RayGold"), located in Montgat, Barcelona, Spain, is the data controller.\n\nContact: info@raytecno.es`
+      },
+      {
+        title: "2. Data We Collect",
+        text: `• Contact data: name, email, phone, company\n• Usage data: how you use our software\n• Technical data: IP address, browser type\n• Commercial data: order history, inventory (within ERP)\n\nIn the jewelry sector, we also process precious materials inventory and traceability data.`
+      },
+      {
+        title: "3. Purpose of Processing",
+        text: `• Service provision: account management, technical support\n• Commercial communications: new features info (with consent)\n• Legal compliance: tax obligations, police registry\n• Service improvement: usage analysis`
+      },
+      {
+        title: "4. Your Rights",
+        text: `You may exercise your rights of access, rectification, erasure, objection, portability, and restriction by contacting: info@raytecno.es`
+      },
+      {
+        title: "5. Security",
+        text: `We implement data encryption, regular backups, role-based access control, and regular security audits.`
+      }
+    ]
+  },
+  fr: {
+    title: "Politique de Confidentialité",
+    metaDescription: "Politique de confidentialité de RayGold.",
+    lastUpdate: "Dernière mise à jour: Janvier 2025",
+    sections: [
+      { title: "1. Responsable", text: `Raytecno BCN SL, Montgat, Barcelone, Espagne.\nContact: info@raytecno.es` },
+      { title: "2. Vos droits", text: `Contactez info@raytecno.es pour exercer vos droits.` }
+    ]
+  },
+  ca: {
+    title: "Política de Privacitat",
+    metaDescription: "Política de privacitat de RayGold.",
+    lastUpdate: "Última actualització: Gener 2025",
+    sections: [
+      { title: "1. Responsable", text: `Raytecno BCN SL, Montgat, Barcelona, Espanya.\nContacte: info@raytecno.es` },
+      { title: "2. Els teus drets", text: `Contacta info@raytecno.es per exercir els teus drets.` }
+    ]
+  },
+  "pt-br": {
+    title: "Política de Privacidade",
+    metaDescription: "Política de privacidade do RayGold.",
+    lastUpdate: "Última atualização: Janeiro 2025",
+    sections: [
+      { title: "1. Responsável", text: `Raytecno BCN SL, Montgat, Barcelona, Espanha.\nContato: info@raytecno.es` },
+      { title: "2. Seus direitos", text: `Contate info@raytecno.es para exercer seus direitos.` }
+    ]
+  }
+};
+
+const c = content[lang] || content.es;
+---
+
+<Layout title={c.title} description={c.metaDescription} lang={lang}>
+  <main class="legal-page">
+    <div class="legal-container">
+      <h1>{c.title}</h1>
+      <p class="last-update">{c.lastUpdate}</p>
+      
+      {c.sections.map((section) => (
+        <section class="legal-section">
+          <h2>{section.title}</h2>
+          <p set:html={section.text.replace(/\n/g, '<br>')} />
+        </section>
+      ))}
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .legal-page {
+    background: linear-gradient(180deg, #0f172a 0%, #020617 100%);
+    min-height: 100vh;
+    padding: 120px 24px 80px;
+  }
+
+  .legal-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    color: white;
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+
+  .last-update {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    margin-bottom: 48px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .legal-section {
+    margin-bottom: 40px;
+  }
+
+  h2 {
+    font-size: 1.15rem;
+    color: white;
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+
+  .legal-section p {
+    color: #cbd5e1;
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .legal-page {
+      padding: 100px 20px 60px;
+    }
+    h1 { font-size: 1.75rem; }
+    h2 { font-size: 1.05rem; }
+  }
+</style>

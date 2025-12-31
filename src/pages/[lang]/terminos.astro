@@ -1,0 +1,191 @@
+---
+/**
+ * Página de Términos y Condiciones
+ * Fondo azul oscuro, texto blanco - estilo minimalista
+ */
+import Layout from "@/layouts/Layout.astro";
+import { type Lang } from "@/config/pages";
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: "es" } },
+    { params: { lang: "en" } },
+    { params: { lang: "fr" } },
+    { params: { lang: "ca" } },
+    { params: { lang: "pt-br" } },
+  ];
+}
+
+const { lang } = Astro.params as { lang: Lang };
+
+const content = {
+  es: {
+    title: "Términos y Condiciones",
+    metaDescription: "Términos y condiciones de uso de RayGold - Software ERP para joyería.",
+    lastUpdate: "Última actualización: Enero 2025",
+    sections: [
+      {
+        title: "1. Identificación",
+        text: `Raytecno BCN SL\nMontgat, Barcelona, España\nEmail: info@raytecno.es\n\nAl utilizar nuestros servicios, aceptas estos términos en su totalidad.`
+      },
+      {
+        title: "2. Descripción del servicio",
+        text: `RayGold es un software ERP especializado para el sector joyero:\n\n• Gestión de inventario de piezas y materiales preciosos\n• Control de fabricación y órdenes de trabajo\n• Gestión comercial: pedidos, albaranes, facturas\n• Contabilidad y finanzas\n• Trazabilidad de metales preciosos\n• Libro de policía digital\n• Gestión multitienda`
+      },
+      {
+        title: "3. Licencia de uso",
+        text: `Se te concede una licencia no exclusiva y no transferible para:\n\n• Instalar y usar el software en los puestos contratados\n• Acceder a actualizaciones incluidas en tu plan\n• Recibir soporte técnico según tu contrato\n\nQueda prohibido copiar, modificar, distribuir o realizar ingeniería inversa del software.`
+      },
+      {
+        title: "4. Obligaciones del usuario",
+        text: `• Proporcionar información veraz\n• Mantener la confidencialidad de tus credenciales\n• Realizar copias de seguridad periódicas\n• Cumplir con la normativa del sector joyero\n• No utilizar el software para actividades ilegales`
+      },
+      {
+        title: "5. Propiedad intelectual",
+        text: `RayGold es propiedad exclusiva de Raytecno BCN SL. Los datos introducidos en el sistema son propiedad del cliente.`
+      },
+      {
+        title: "6. Precios y pagos",
+        text: `• Los precios vigentes se publican en raytecno.es/precios\n• Los precios no incluyen IVA salvo indicación expresa\n• En caso de impago, se podrá suspender el acceso al software`
+      },
+      {
+        title: "7. Limitación de responsabilidad",
+        text: `Raytecno BCN SL no será responsable de pérdidas de datos por uso indebido, interrupciones por causas ajenas, ni daños indirectos. El software se proporciona "tal cual".`
+      },
+      {
+        title: "8. Legislación aplicable",
+        text: `Estos términos se rigen por la legislación española. Las partes se someten a los Juzgados de Barcelona.`
+      }
+    ]
+  },
+  en: {
+    title: "Terms and Conditions",
+    metaDescription: "Terms and conditions of use for RayGold - ERP Software for jewelry.",
+    lastUpdate: "Last updated: January 2025",
+    sections: [
+      {
+        title: "1. Identification",
+        text: `Raytecno BCN SL\nMontgat, Barcelona, Spain\nEmail: info@raytecno.es\n\nBy using our services, you accept these terms in full.`
+      },
+      {
+        title: "2. Service Description",
+        text: `RayGold is an ERP software specialized for the jewelry sector:\n\n• Inventory management for pieces and precious materials\n• Manufacturing control and work orders\n• Commercial management: orders, invoices\n• Accounting and finance\n• Precious metals traceability\n• Digital police registry\n• Multi-store management`
+      },
+      {
+        title: "3. License",
+        text: `You are granted a non-exclusive, non-transferable license to:\n\n• Install and use the software on contracted workstations\n• Access updates included in your plan\n• Receive technical support per your contract\n\nCopying, modifying, distributing, or reverse engineering is prohibited.`
+      },
+      {
+        title: "4. User Obligations",
+        text: `• Provide accurate information\n• Maintain credential confidentiality\n• Perform regular backups\n• Comply with jewelry sector regulations\n• Not use the software for illegal activities`
+      },
+      {
+        title: "5. Limitation of Liability",
+        text: `Raytecno BCN SL shall not be liable for data loss due to improper use, service interruptions beyond our control, or indirect damages. The software is provided "as is".`
+      },
+      {
+        title: "6. Applicable Law",
+        text: `These terms are governed by Spanish law. The parties submit to the Courts of Barcelona.`
+      }
+    ]
+  },
+  fr: {
+    title: "Conditions Générales",
+    metaDescription: "Conditions générales d'utilisation de RayGold.",
+    lastUpdate: "Dernière mise à jour: Janvier 2025",
+    sections: [
+      { title: "1. Identification", text: `Raytecno BCN SL, Montgat, Barcelone, Espagne.\nContact: info@raytecno.es` },
+      { title: "2. Loi applicable", text: `Ces conditions sont régies par la loi espagnole.` }
+    ]
+  },
+  ca: {
+    title: "Termes i Condicions",
+    metaDescription: "Termes i condicions d'ús de RayGold.",
+    lastUpdate: "Última actualització: Gener 2025",
+    sections: [
+      { title: "1. Identificació", text: `Raytecno BCN SL, Montgat, Barcelona, Espanya.\nContacte: info@raytecno.es` },
+      { title: "2. Legislació aplicable", text: `Aquests termes es regeixen per la legislació espanyola.` }
+    ]
+  },
+  "pt-br": {
+    title: "Termos e Condições",
+    metaDescription: "Termos e condições de uso do RayGold.",
+    lastUpdate: "Última atualização: Janeiro 2025",
+    sections: [
+      { title: "1. Identificação", text: `Raytecno BCN SL, Montgat, Barcelona, Espanha.\nContato: info@raytecno.es` },
+      { title: "2. Lei aplicável", text: `Estes termos são regidos pela legislação espanhola.` }
+    ]
+  }
+};
+
+const c = content[lang] || content.es;
+---
+
+<Layout title={c.title} description={c.metaDescription} lang={lang}>
+  <main class="legal-page">
+    <div class="legal-container">
+      <h1>{c.title}</h1>
+      <p class="last-update">{c.lastUpdate}</p>
+      
+      {c.sections.map((section) => (
+        <section class="legal-section">
+          <h2>{section.title}</h2>
+          <p set:html={section.text.replace(/\n/g, '<br>')} />
+        </section>
+      ))}
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .legal-page {
+    background: linear-gradient(180deg, #0f172a 0%, #020617 100%);
+    min-height: 100vh;
+    padding: 120px 24px 80px;
+  }
+
+  .legal-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    color: white;
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+
+  .last-update {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    margin-bottom: 48px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .legal-section {
+    margin-bottom: 40px;
+  }
+
+  h2 {
+    font-size: 1.15rem;
+    color: white;
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+
+  .legal-section p {
+    color: #cbd5e1;
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .legal-page {
+      padding: 100px 20px 60px;
+    }
+    h1 { font-size: 1.75rem; }
+    h2 { font-size: 1.05rem; }
+  }
+</style>
