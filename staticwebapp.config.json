@@ -4,11 +4,6 @@
   },
   "routes": [
     {
-      "route": "/",
-      "redirect": "/es/",
-      "statusCode": 302
-    },
-    {
       "route": "/images/*",
       "headers": {
         "Cache-Control": "public, max-age=604800"

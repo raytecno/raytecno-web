@@ -1,6 +1,6 @@
 ---
 /**
- * Blog - Categoría (Rediseñado)
+ * Blog - Categoría (Diseño Minimalista)
  * @file src/pages/es/blog/categoria/[slug].astro
  */
 import Layout from "@/layouts/Layout.astro";
@@ -15,13 +15,12 @@ const lang = "es";
 
 const t = {
   blog: "Blog",
-  articles: "artículos",
   article: "artículo",
+  articles: "artículos",
   minRead: "min",
   noPosts: "No hay artículos en esta categoría",
   viewAll: "Todos",
   backToBlog: "Volver al blog",
-  allArticles: "Todos los artículos",
 };
 
 // Obtener todos los posts del idioma para extraer categorías
@@ -43,7 +42,6 @@ const categories = Array.from(categoriesMap.values());
 export async function getStaticPaths() {
   const allPosts = await getBlogPosts("es");
 
-  // Extraer categorías únicas de los posts en español
   const categoriesMap = new Map();
   allPosts.forEach((post: any) => {
     post.blogCategories?.nodes?.forEach((cat: any) => {
@@ -66,14 +64,13 @@ export async function getStaticPaths() {
 const { slug } = Astro.params;
 const { category } = Astro.props as { category: any };
 
-// Obtener posts de esta categoría en el idioma actual
 const posts = await getBlogPostsByCategory(slug, lang);
 
 function formatDate(dateString: string): string {
   const date = new Date(dateString);
   return date.toLocaleDateString("es-ES", {
     day: "numeric",
-    month: "short",
+    month: "long",
     year: "numeric",
   });
 }
@@ -95,508 +92,341 @@ const alternateUrls = [
 ---
 
 <Layout
-  title={`${category.name} | Blog | RayGold ERP`}
+  title={`${category.name} | Blog | RayGold`}
   description={`Artículos sobre ${category.name.toLowerCase()} - RayGold ERP para Joyería`}
   lang={lang}
   alternateUrls={alternateUrls as any}
 >
-  <main class="category-page">
-    <!-- Hero -->
-    <section class="hero">
+  <main class="page">
+    <!-- Header minimalista -->
+    <header class="header">
       <div class="container">
-        <nav class="breadcrumb">
-          <a href={`/${lang}/blog`}>{t.blog}</a>
+        <a href={`/${lang}/blog`} class="back">
           <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
+            width="20"
+            height="20"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
             stroke-width="2"
           >
-            <polyline points="9 18 15 12 9 6"></polyline>
+            <path d="M19 12H5M12 19l-7-7 7-7"></path>
           </svg>
-          <span>{category.name}</span>
-        </nav>
+          {t.blog}
+        </a>
 
-        <h1>{category.name}</h1>
-        <p class="post-count">
-          {posts.length}
-          {posts.length === 1 ? t.article : t.articles}
-        </p>
+        <div class="title-block">
+          <span class="label">Categoría</span>
+          <h1>{category.name}</h1>
+          <p>{posts.length} {posts.length === 1 ? t.article : t.articles}</p>
+        </div>
 
-        <!-- Categorías filtradas por idioma -->
-        <div class="hero-categories">
-          <a href={`/${lang}/blog`} class="cat-pill">{t.viewAll}</a>
+        <!-- Pills de categorías -->
+        <nav class="categories">
+          <a href={`/${lang}/blog`} class="pill">{t.viewAll}</a>
           {
             categories.map((cat: any) => (
               <a
                 href={`/${lang}/blog/categoria/${cat.slug}`}
-                class={`cat-pill ${cat.slug === slug ? "active" : ""}`}
+                class:list={["pill", { active: cat.slug === slug }]}
               >
                 {cat.name}
               </a>
             ))
           }
-        </div>
+        </nav>
       </div>
-    </section>
+    </header>
 
-    <!-- Grid de artículos -->
-    <section class="content-area">
+    <!-- Artículos -->
+    <section class="articles">
       <div class="container">
         {
           posts.length > 0 ? (
-            <>
-              <div class="section-header">
-                <h2>{t.allArticles}</h2>
-                <span class="count">
-                  {posts.length} {posts.length === 1 ? t.article : t.articles}
-                </span>
-              </div>
-
-              <div class="posts-grid">
-                {posts.map((post: any) => (
-                  <article class="post-card">
-                    <a href={`/${lang}/blog/${post.slug}`} class="post-link">
+            <div class="grid">
+              {posts.map((post: any, index: number) => (
+                <article class="card">
+                  <a href={`/${lang}/blog/${post.slug}`}>
+                    <div class="image">
                       {getFeaturedImageUrl(post) ? (
-                        <div class="post-image">
-                          <img
-                            src={getFeaturedImageUrl(post)}
-                            alt={post.title}
-                            loading="lazy"
-                          />
-                        </div>
+                        <img
+                          src={getFeaturedImageUrl(post)}
+                          alt={post.title}
+                          loading={index < 3 ? "eager" : "lazy"}
+                        />
                       ) : (
-                        <div class="post-image placeholder">
+                        <div class="placeholder">
                           <svg
-                            xmlns="http://www.w3.org/2000/svg"
+                            width="32"
+                            height="32"
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="currentColor"
-                            stroke-width="1"
+                            stroke-width="1.5"
                           >
                             <rect x="3" y="3" width="18" height="18" rx="2" />
                             <circle cx="8.5" cy="8.5" r="1.5" />
-                            <polyline points="21 15 16 10 5 21" />
+                            <path d="M21 15l-5-5L5 21" />
                           </svg>
                         </div>
                       )}
-                      <div class="post-body">
-                        <span class="category-tag">{category.name}</span>
-                        <h3>{post.title}</h3>
-                        {post.excerpt && (
-                          <p class="excerpt" set:html={post.excerpt} />
-                        )}
-                        <div class="meta">
-                          <time datetime={post.date}>
-                            {formatDate(post.date)}
-                          </time>
-                          <span class="dot">·</span>
-                          <span>
-                            {getReadingTime(post)} {t.minRead}
-                          </span>
-                        </div>
+                    </div>
+                    <div class="content">
+                      <h2>{post.title}</h2>
+                      <div class="meta">
+                        <time>{formatDate(post.date)}</time>
+                        <span class="sep">·</span>
+                        <span>
+                          {getReadingTime(post)} {t.minRead}
+                        </span>
                       </div>
-                    </a>
-                  </article>
-                ))}
-              </div>
-            </>
+                    </div>
+                  </a>
+                </article>
+              ))}
+            </div>
           ) : (
-            <div class="no-posts">
-              <div class="no-posts-icon">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="48"
-                  height="48"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                >
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                  <polyline points="14 2 14 8 20 8" />
-                  <line x1="16" y1="13" x2="8" y2="13" />
-                  <line x1="16" y1="17" x2="8" y2="17" />
-                  <polyline points="10 9 9 9 8 9" />
-                </svg>
-              </div>
-              <h3>{t.noPosts}</h3>
-              <p>Explora otras categorías o vuelve al blog principal</p>
-              <a href={`/${lang}/blog`} class="back-btn">
-                {t.backToBlog}
-              </a>
+            <div class="empty">
+              <p>{t.noPosts}</p>
+              <a href={`/${lang}/blog`}>{t.backToBlog}</a>
             </div>
           )
         }
       </div>
     </section>
-
-    <!-- Navegación inferior -->
-    {
-      posts.length > 0 && (
-        <section class="bottom-nav">
-          <div class="container">
-            <a href={`/${lang}/blog`} class="nav-link">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <line x1="19" y1="12" x2="5" y2="12" />
-                <polyline points="12 19 5 12 12 5" />
-              </svg>
-              {t.backToBlog}
-            </a>
-          </div>
-        </section>
-      )
-    }
   </main>
 </Layout>
 
 <style>
-  .category-page {
-    --blue-dark: #0f172a;
-    --blue-medium: #1e293b;
+  /* Reset y variables */
+  .page {
     --gold: #c9a227;
-    --gold-dark: #a8861e;
-    --white: #ffffff;
-    --gray-50: #f8fafc;
-    --gray-100: #f1f5f9;
-    --gray-200: #e2e8f0;
-    --gray-400: #94a3b8;
-    --gray-500: #64748b;
-    --gray-600: #475569;
-    --gray-900: #0f172a;
+    --dark: #111;
+    --gray-600: #525252;
+    --gray-400: #a3a3a3;
+    --gray-200: #e5e5e5;
+    --gray-100: #f5f5f5;
+    --white: #fff;
+    background: var(--white);
+    min-height: 100vh;
   }
 
   .container {
-    max-width: 1140px;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 0 1.5rem;
+    padding: 0 2rem;
   }
 
-  /* ========== HERO ========== */
-  .hero {
-    background: linear-gradient(
-      135deg,
-      var(--blue-dark) 0%,
-      var(--blue-medium) 100%
-    );
-    color: var(--white);
-    padding: 4rem 0 3.5rem;
-    text-align: center;
-  }
-
-  .breadcrumb {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.9rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .breadcrumb a {
-    color: var(--gray-400);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  .breadcrumb a:hover {
-    color: var(--gold);
-  }
-
-  .breadcrumb svg {
-    color: var(--gray-500);
-  }
-
-  .breadcrumb > span {
-    color: var(--white);
-    font-weight: 500;
-  }
-
-  .hero h1 {
-    font-size: 3.5rem;
-    font-weight: 300;
-    letter-spacing: -0.04em;
-    margin-bottom: 0.5rem;
-  }
-
-  .post-count {
-    font-size: 1rem;
-    color: var(--gray-400);
-    margin-bottom: 2rem;
-  }
-
-  .hero-categories {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-  }
-
-  .cat-pill {
-    padding: 0.5rem 1.25rem;
-    font-size: 0.85rem;
-    color: var(--gray-400);
-    text-decoration: none;
-    border-radius: 100px;
-    border: 1px solid transparent;
-    transition: all 0.2s;
-  }
-
-  .cat-pill:hover {
-    color: var(--white);
-    border-color: var(--gray-500);
-  }
-
-  .cat-pill.active {
-    background: var(--gold);
-    color: var(--white);
-    border-color: var(--gold);
-  }
-
-  /* ========== CONTENIDO ========== */
-  .content-area {
-    background: var(--white);
-    padding: 4rem 0 5rem;
-    min-height: 50vh;
-  }
-
-  .section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
+  /* ===== HEADER ===== */
+  .header {
+    padding: 3rem 0 2.5rem;
     border-bottom: 1px solid var(--gray-200);
   }
 
-  .section-header h2 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--gray-900);
-    letter-spacing: -0.02em;
-  }
-
-  .section-header .count {
-    font-size: 0.9rem;
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
     color: var(--gray-400);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    transition: color 0.2s;
   }
 
-  /* Grid de posts */
-  .posts-grid {
+  .back:hover {
+    color: var(--gold);
+  }
+
+  .title-block {
+    margin-bottom: 2rem;
+  }
+
+  .label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .title-block h1 {
+    font-size: 3rem;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    color: var(--dark);
+    margin: 0 0 0.5rem 0;
+    line-height: 1.1;
+  }
+
+  .title-block p {
+    font-size: 1rem;
+    color: var(--gray-400);
+    margin: 0;
+  }
+
+  /* Categorías */
+  .categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .pill {
+    padding: 0.5rem 1rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--gray-600);
+    text-decoration: none;
+    background: var(--gray-100);
+    border-radius: 100px;
+    transition: all 0.2s;
+  }
+
+  .pill:hover {
+    background: var(--gray-200);
+    color: var(--dark);
+  }
+
+  .pill.active {
+    background: var(--dark);
+    color: var(--white);
+  }
+
+  /* ===== ARTÍCULOS ===== */
+  .articles {
+    padding: 3rem 0 5rem;
+  }
+
+  .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    gap: 2.5rem 2rem;
   }
 
-  .post-card {
-    background: var(--white);
-    border-radius: 16px;
-    overflow: hidden;
-    transition:
-      transform 0.3s ease,
-      box-shadow 0.3s ease;
-  }
-
-  .post-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
-  }
-
-  .post-link {
+  /* Card */
+  .card a {
     display: block;
     text-decoration: none;
   }
 
-  .post-image {
-    aspect-ratio: 16/10;
-    border-radius: 16px;
+  .card .image {
+    position: relative;
+    aspect-ratio: 3/2;
+    border-radius: 12px;
     overflow: hidden;
-    margin-bottom: 1.25rem;
     background: var(--gray-100);
+    margin-bottom: 1rem;
   }
 
-  .post-image img {
+  .card .image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: transform 0.4s ease;
   }
 
-  .post-link:hover .post-image img {
-    transform: scale(1.05);
+  .card a:hover .image img {
+    transform: scale(1.03);
   }
 
-  .post-image.placeholder {
+  .card .placeholder {
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  .post-image.placeholder svg {
-    width: 48px;
-    height: 48px;
-    color: var(--gray-300);
-  }
-
-  .post-body {
-    padding: 0 0.25rem;
-  }
-
-  .category-tag {
-    display: inline-block;
-    color: var(--gold);
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 0.5rem;
-  }
-
-  .post-body h3 {
-    font-size: 1.15rem;
-    font-weight: 600;
-    line-height: 1.4;
-    margin-bottom: 0.75rem;
-    color: var(--gray-900);
-    letter-spacing: -0.01em;
-    transition: color 0.2s;
-  }
-
-  .post-link:hover .post-body h3 {
-    color: var(--gold);
-  }
-
-  .excerpt {
-    font-size: 0.9rem;
-    color: var(--gray-500);
-    line-height: 1.6;
-    margin-bottom: 1rem;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .meta {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.8rem;
     color: var(--gray-400);
   }
 
-  .dot {
-    color: var(--gray-300);
+  .card .content {
+    padding: 0 0.25rem;
   }
 
-  /* No posts */
-  .no-posts {
+  .card h2 {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--dark);
+    margin: 0 0 0.625rem 0;
+    transition: color 0.2s;
+  }
+
+  .card a:hover h2 {
+    color: var(--gold);
+  }
+
+  .card .meta {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.8125rem;
+    color: var(--gray-400);
+  }
+
+  .card .sep {
+    color: var(--gray-200);
+  }
+
+  /* Empty state */
+  .empty {
     text-align: center;
     padding: 5rem 2rem;
   }
 
-  .no-posts-icon {
+  .empty p {
+    color: var(--gray-400);
+    font-size: 1.125rem;
     margin-bottom: 1.5rem;
   }
 
-  .no-posts-icon svg {
-    color: var(--gray-300);
-  }
-
-  .no-posts h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--gray-900);
-    margin-bottom: 0.5rem;
-  }
-
-  .no-posts p {
-    color: var(--gray-500);
-    margin-bottom: 2rem;
-  }
-
-  .back-btn {
+  .empty a {
     display: inline-block;
-    background: var(--gold);
+    padding: 0.75rem 1.5rem;
+    background: var(--dark);
     color: var(--white);
-    padding: 0.9rem 2rem;
-    border-radius: 100px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.9rem;
-    transition: all 0.2s;
-  }
-
-  .back-btn:hover {
-    background: var(--gold-dark);
-    transform: translateY(-2px);
-  }
-
-  /* Navegación inferior */
-  .bottom-nav {
-    background: var(--gray-50);
-    padding: 2rem 0;
-  }
-
-  .nav-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--gray-600);
     text-decoration: none;
     font-weight: 500;
-    font-size: 0.95rem;
-    transition: color 0.2s;
+    font-size: 0.875rem;
+    border-radius: 8px;
+    transition: background 0.2s;
   }
 
-  .nav-link:hover {
-    color: var(--gold);
+  .empty a:hover {
+    background: var(--gold);
   }
 
-  .nav-link svg {
-    transition: transform 0.2s;
-  }
-
-  .nav-link:hover svg {
-    transform: translateX(-4px);
-  }
-
-  /* ========== RESPONSIVE ========== */
+  /* ===== RESPONSIVE ===== */
   @media (max-width: 900px) {
-    .posts-grid {
+    .grid {
       grid-template-columns: repeat(2, 1fr);
+      gap: 2rem 1.5rem;
     }
   }
 
-  @media (max-width: 640px) {
-    .hero {
-      padding: 3rem 0 2.5rem;
+  @media (max-width: 600px) {
+    .container {
+      padding: 0 1.25rem;
     }
 
-    .hero h1 {
-      font-size: 2.5rem;
+    .header {
+      padding: 2rem 0 2rem;
     }
 
-    .posts-grid {
+    .title-block h1 {
+      font-size: 2rem;
+    }
+
+    .grid {
       grid-template-columns: 1fr;
-      gap: 1.5rem;
+      gap: 2rem;
     }
 
-    .section-header {
-      flex-direction: column;
-      gap: 0.5rem;
-      align-items: flex-start;
+    .card .image {
+      border-radius: 10px;
     }
   }
 </style>
