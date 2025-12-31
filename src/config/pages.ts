@@ -28,6 +28,28 @@ export const pageSlugs: Record<string, Record<Lang, string>> = {
   nosotros: { es: 'nosotros', en: 'about', fr: 'a-propos', ca: 'nosaltres', 'pt-br': 'sobre' },
 };
 
+// Slugs de la carpeta de módulos por idioma
+export const modFolderSlugs: Record<Lang, string> = {
+  es: 'modulos',
+  en: 'modules',
+  fr: 'modules',
+  ca: 'moduls',
+  'pt-br': 'modulos',
+};
+
+// Slugs de cada submódulo por idioma
+export const moduloSlugs: Record<string, Record<Lang, string>> = {
+  maestros: { es: 'maestros', en: 'masters', fr: 'maitres', ca: 'mestres', 'pt-br': 'cadastros' },
+  comercial: { es: 'comercial', en: 'commercial', fr: 'commercial', ca: 'comercial', 'pt-br': 'comercial' },
+  fabricacion: { es: 'fabricacion', en: 'manufacturing', fr: 'fabrication', ca: 'fabricacio', 'pt-br': 'fabricacao' },
+  finanzas: { es: 'finanzas', en: 'finance', fr: 'finances', ca: 'finances', 'pt-br': 'financas' },
+  historicos: { es: 'historicos', en: 'history', fr: 'historique', ca: 'historics', 'pt-br': 'historicos' },
+  estadisticas: { es: 'estadisticas', en: 'statistics', fr: 'statistiques', ca: 'estadistiques', 'pt-br': 'estatisticas' },
+  vendedores: { es: 'vendedores', en: 'sales-reps', fr: 'vendeurs', ca: 'venedors', 'pt-br': 'vendedores' },
+  ecommerce: { es: 'ecommerce', en: 'ecommerce', fr: 'ecommerce', ca: 'ecommerce', 'pt-br': 'ecommerce' },
+  impresoras3d: { es: 'impresoras3d', en: '3dprinters', fr: 'imprimantes3d', ca: 'impressores3d', 'pt-br': 'impressoras3d' },
+};
+
 /**
  * Obtiene la URL de una página en un idioma específico
  */
@@ -39,6 +61,22 @@ export function getPageUrl(pageKey: string, lang: Lang): string {
   if (!slug) return `/${lang}/`;
   
   return `/${lang}/${slug}`;
+}
+
+/**
+ * Obtiene la URL de un submódulo específico
+ * Ejemplo: getModuloUrl('maestros', 'es') → '/es/modulos/maestros'
+ * Ejemplo: getModuloUrl('maestros', 'en') → '/en/modules/masters'
+ */
+export function getModuloUrl(moduloKey: string, lang: Lang): string {
+  const folderSlug = modFolderSlugs[lang];
+  const moduloSlug = moduloSlugs[moduloKey]?.[lang];
+  
+  if (!folderSlug || !moduloSlug) {
+    return `/${lang}/`;
+  }
+  
+  return `/${lang}/${folderSlug}/${moduloSlug}`;
 }
 
 /**

@@ -3,7 +3,7 @@
  * Modulos.astro - Sección de módulos del ERP
  * Con soporte multiidioma y tema adaptativo móvil
  */
-import { type Lang, getPageUrl } from "@/config/pages";
+import { type Lang, getModuloUrl } from "@/config/pages";
 
 interface Props {
   lang?: Lang;
@@ -137,7 +137,7 @@ const colores: Record<string, string> = {
     <div class="modulos-grid">
       {t.modulos.map((modulo) => (
         <a
-          href={getPageUrl(`modulos/${modulo.key}` as any, lang)}
+          href={getModuloUrl(modulo.key, lang)}
           class="modulo-card"
           style={`--card-color: ${colores[modulo.key]}`}
         >
