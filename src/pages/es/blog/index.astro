@@ -4,61 +4,84 @@
  * @file src/pages/es/blog/index.astro
  */
 import Layout from "@/layouts/Layout.astro";
-import { getBlogPosts, getFeaturedPosts, getBlogCategories, getFeaturedImageUrl, calculateReadingTime } from "@/lib/blog.js";
+import {
+  getBlogPosts,
+  getFeaturedPosts,
+  getFeaturedImageUrl,
+  calculateReadingTime,
+} from "@/lib/blog.js";
 
-const lang = 'es';
+const lang = "es";
 
 const t = {
-  title: 'Blog',
-  metaTitle: 'Blog | RayGold ERP para Joyería',
-  metaDescription: 'Artículos sobre gestión de joyería, control de inventario y mejores prácticas del sector.',
-  featured: 'Destacado',
-  latestPosts: 'Últimos artículos',
-  allPosts: 'Todos los artículos',
-  categories: 'Categorías',
-  minRead: 'min',
-  noPosts: 'No hay artículos disponibles',
-  searchPlaceholder: 'Buscar...',
-  viewAll: 'Todos',
-  ctaTitle: '¿Quieres ver RayGold en acción?',
-  ctaButton: 'Solicitar Demo'
+  title: "Blog",
+  metaTitle: "Blog | RayGold ERP para Joyería",
+  metaDescription:
+    "Artículos sobre gestión de joyería, control de inventario y mejores prácticas del sector.",
+  featured: "Destacado",
+  latestPosts: "Últimos artículos",
+  allPosts: "Todos los artículos",
+  categories: "Categorías",
+  minRead: "min",
+  noPosts: "No hay artículos disponibles",
+  searchPlaceholder: "Buscar...",
+  viewAll: "Todos",
+  ctaTitle: "¿Quieres ver RayGold en acción?",
+  ctaButton: "Solicitar Demo",
 };
 
-const [posts, featuredPosts, categories] = await Promise.all([
+const [posts, featuredPosts] = await Promise.all([
   getBlogPosts(lang),
   getFeaturedPosts(lang, 1),
-  getBlogCategories()
 ]);
 
+// Extraer categorías SOLO de los posts del idioma actual
+const categoriesMap = new Map();
+posts.forEach((post: any) => {
+  post.blogCategories?.nodes?.forEach((cat: any) => {
+    if (!categoriesMap.has(cat.slug)) {
+      categoriesMap.set(cat.slug, { ...cat, count: 1 });
+    } else {
+      categoriesMap.get(cat.slug).count++;
+    }
+  });
+});
+const categories = Array.from(categoriesMap.values());
+
 const alternateUrls = [
-  { lang: 'es', url: '/es/blog' },
-  { lang: 'en', url: '/en/blog' },
-  { lang: 'fr', url: '/fr/blog' },
-  { lang: 'ca', url: '/ca/blog' },
-  { lang: 'pt-br', url: '/pt-br/blog' },
+  { lang: "es", url: "/es/blog" },
+  { lang: "en", url: "/en/blog" },
+  { lang: "fr", url: "/fr/blog" },
+  { lang: "ca", url: "/ca/blog" },
+  { lang: "pt-br", url: "/pt-br/blog" },
 ];
 
-function formatDate(dateString) {
+function formatDate(dateString: string) {
   const date = new Date(dateString);
-  return date.toLocaleDateString('es-ES', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric'
+  return date.toLocaleDateString("es-ES", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
   });
 }
 
-function getReadingTime(post) {
-  return post.blogSeo?.readingTime || calculateReadingTime(post.content || post.excerpt);
+function getReadingTime(post: any) {
+  return (
+    post.blogSeo?.readingTime ||
+    calculateReadingTime(post.content || post.excerpt)
+  );
 }
 
-const regularPosts = posts.filter(p => !featuredPosts.find(f => f.slug === p.slug));
+const regularPosts = posts.filter(
+  (p: any) => !featuredPosts.find((f: any) => f.slug === p.slug)
+);
 ---
 
-<Layout 
+<Layout
   title={t.metaTitle}
   description={t.metaDescription}
   lang={lang}
-  alternateUrls={alternateUrls}
+  alternateUrls={alternateUrls as any}
 >
   <main class="blog-page">
     <!-- Hero con fondo azul oscuro -->
@@ -66,13 +89,17 @@ const regularPosts = posts.filter(p => !featuredPosts.find(f => f.slug === p.slu
       <div class="container">
         <h1>{t.title}</h1>
         <p>{t.metaDescription}</p>
-        
+
         <!-- Categorías en el hero -->
         <div class="hero-categories">
           <a href={`/${lang}/blog`} class="cat-pill active">{t.viewAll}</a>
-          {categories.map(cat => (
-            <a href={`/${lang}/blog/categoria/${cat.slug}`} class="cat-pill">{cat.name}</a>
-          ))}
+          {
+            categories.map((cat: any) => (
+              <a href={`/${lang}/blog/categoria/${cat.slug}`} class="cat-pill">
+                {cat.name}
+              </a>
+            ))
+          }
         </div>
       </div>
     </section>
@@ -80,34 +107,46 @@ const regularPosts = posts.filter(p => !featuredPosts.find(f => f.slug === p.slu
     <!-- Contenido con fondo blanco -->
     <section class="content-area">
       <!-- Post Destacado -->
-      {featuredPosts.length > 0 && (
-        <div class="container">
-          <div class="featured-section">
-            <article class="featured-card">
-              <a href={`/${lang}/blog/${featuredPosts[0].slug}`} class="featured-link">
-                {getFeaturedImageUrl(featuredPosts[0]) && (
-                  <div class="featured-image">
-                    <img src={getFeaturedImageUrl(featuredPosts[0])} alt={featuredPosts[0].title} />
-                    <span class="badge">{t.featured}</span>
-                  </div>
-                )}
-                <div class="featured-body">
-                  {featuredPosts[0].blogCategories?.nodes?.[0] && (
-                    <span class="category">{featuredPosts[0].blogCategories.nodes[0].name}</span>
+      {
+        featuredPosts.length > 0 && (
+          <div class="container">
+            <div class="featured-section">
+              <article class="featured-card">
+                <a
+                  href={`/${lang}/blog/${featuredPosts[0].slug}`}
+                  class="featured-link"
+                >
+                  {getFeaturedImageUrl(featuredPosts[0]) && (
+                    <div class="featured-image">
+                      <img
+                        src={getFeaturedImageUrl(featuredPosts[0])}
+                        alt={featuredPosts[0].title}
+                      />
+                      <span class="badge">{t.featured}</span>
+                    </div>
                   )}
-                  <h2>{featuredPosts[0].title}</h2>
-                  <p set:html={featuredPosts[0].excerpt} />
-                  <div class="meta">
-                    <time>{formatDate(featuredPosts[0].date)}</time>
-                    <span>·</span>
-                    <span>{getReadingTime(featuredPosts[0])} {t.minRead}</span>
+                  <div class="featured-body">
+                    {featuredPosts[0].blogCategories?.nodes?.[0] && (
+                      <span class="category">
+                        {featuredPosts[0].blogCategories.nodes[0].name}
+                      </span>
+                    )}
+                    <h2>{featuredPosts[0].title}</h2>
+                    <p set:html={featuredPosts[0].excerpt} />
+                    <div class="meta">
+                      <time>{formatDate(featuredPosts[0].date)}</time>
+                      <span>·</span>
+                      <span>
+                        {getReadingTime(featuredPosts[0])} {t.minRead}
+                      </span>
+                    </div>
                   </div>
-                </div>
-              </a>
-            </article>
+                </a>
+              </article>
+            </div>
           </div>
-        </div>
-      )}
+        )
+      }
 
       <!-- Grid de Posts -->
       <div class="container">
@@ -115,50 +154,84 @@ const regularPosts = posts.filter(p => !featuredPosts.find(f => f.slug === p.slu
           <div class="section-header">
             <h2>{t.latestPosts}</h2>
             <div class="search-box">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
                 <circle cx="11" cy="11" r="8"></circle>
                 <path d="m21 21-4.35-4.35"></path>
               </svg>
-              <input type="search" id="blogSearch" placeholder={t.searchPlaceholder} />
+              <input
+                type="search"
+                id="blogSearch"
+                placeholder={t.searchPlaceholder}
+              />
             </div>
           </div>
-          
-          {regularPosts.length > 0 ? (
-            <div class="posts-grid" id="postsGrid">
-              {regularPosts.map(post => (
-                <article class="post-card" data-title={post.title.toLowerCase()} data-categories={post.blogCategories?.nodes?.map(c => c.slug).join(' ')}>
-                  <a href={`/${lang}/blog/${post.slug}`} class="post-link">
-                    {getFeaturedImageUrl(post) ? (
-                      <div class="post-image">
-                        <img src={getFeaturedImageUrl(post)} alt={post.title} loading="lazy" />
-                      </div>
-                    ) : (
-                      <div class="post-image placeholder">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                          <rect x="3" y="3" width="18" height="18" rx="2"></rect>
-                          <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                          <polyline points="21 15 16 10 5 21"></polyline>
-                        </svg>
-                      </div>
-                    )}
-                    <div class="post-body">
-                      {post.blogCategories?.nodes?.[0] && (
-                        <span class="category">{post.blogCategories.nodes[0].name}</span>
+
+          {
+            regularPosts.length > 0 ? (
+              <div class="posts-grid" id="postsGrid">
+                {regularPosts.map((post: any) => (
+                  <article
+                    class="post-card"
+                    data-title={post.title.toLowerCase()}
+                    data-categories={post.blogCategories?.nodes
+                      ?.map((c) => c.slug)
+                      .join(" ")}
+                  >
+                    <a href={`/${lang}/blog/${post.slug}`} class="post-link">
+                      {getFeaturedImageUrl(post) ? (
+                        <div class="post-image">
+                          <img
+                            src={getFeaturedImageUrl(post)}
+                            alt={post.title}
+                            loading="lazy"
+                          />
+                        </div>
+                      ) : (
+                        <div class="post-image placeholder">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1"
+                          >
+                            <rect x="3" y="3" width="18" height="18" rx="2" />
+                            <circle cx="8.5" cy="8.5" r="1.5" />
+                            <polyline points="21 15 16 10 5 21" />
+                          </svg>
+                        </div>
                       )}
-                      <h3>{post.title}</h3>
-                      <div class="meta">
-                        <time>{formatDate(post.date)}</time>
-                        <span>·</span>
-                        <span>{getReadingTime(post)} {t.minRead}</span>
+                      <div class="post-body">
+                        {post.blogCategories?.nodes?.[0] && (
+                          <span class="category">
+                            {post.blogCategories.nodes[0].name}
+                          </span>
+                        )}
+                        <h3>{post.title}</h3>
+                        <div class="meta">
+                          <time>{formatDate(post.date)}</time>
+                          <span>·</span>
+                          <span>
+                            {getReadingTime(post)} {t.minRead}
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                  </a>
-                </article>
-              ))}
-            </div>
-          ) : (
-            <p class="no-posts">{t.noPosts}</p>
-          )}
+                    </a>
+                  </article>
+                ))}
+              </div>
+            ) : (
+              <p class="no-posts">{t.noPosts}</p>
+            )
+          }
         </div>
       </div>
 
@@ -172,6 +245,35 @@ const regularPosts = posts.filter(p => !featuredPosts.find(f => f.slug === p.slu
     </section>
   </main>
 </Layout>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const searchInput = document.getElementById("blogSearch");
+    const postsGrid = document.getElementById("postsGrid");
+
+    if (searchInput && postsGrid) {
+      searchInput.addEventListener("input", (e) => {
+        const query = (e.target as HTMLInputElement).value.toLowerCase().trim();
+        const posts = postsGrid.querySelectorAll(".post-card");
+
+        posts.forEach((post) => {
+          const title = post.getAttribute("data-title") || "";
+          const categories = post.getAttribute("data-categories") || "";
+
+          if (
+            title.includes(query) ||
+            categories.includes(query) ||
+            query === ""
+          ) {
+            post.classList.remove("hidden");
+          } else {
+            post.classList.add("hidden");
+          }
+        });
+      });
+    }
+  });
+</script>
 
 <style>
   /* Variables */
@@ -198,7 +300,11 @@ const regularPosts = posts.filter(p => !featuredPosts.find(f => f.slug === p.slu
 
   /* ========== HERO - AZUL OSCURO ========== */
   .hero {
-    background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue-medium) 100%);
+    background: linear-gradient(
+      135deg,
+      var(--blue-dark) 0%,
+      var(--blue-medium) 100%
+    );
     color: var(--white);
     padding: 5rem 0 4rem;
     text-align: center;
@@ -560,28 +666,3 @@ const regularPosts = posts.filter(p => !featuredPosts.find(f => f.slug === p.slu
     }
   }
 </style>
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const searchInput = document.getElementById('blogSearch');
-    const postsGrid = document.getElementById('postsGrid');
-    
-    if (searchInput && postsGrid) {
-      searchInput.addEventListener('input', (e) => {
-        const query = e.target.value.toLowerCase().trim();
-        const posts = postsGrid.querySelectorAll('.post-card');
-        
-        posts.forEach((post) => {
-          const title = post.getAttribute('data-title') || '';
-          const categories = post.getAttribute('data-categories') || '';
-          
-          if (title.includes(query) || categories.includes(query) || query === '') {
-            post.classList.remove('hidden');
-          } else {
-            post.classList.add('hidden');
-          }
-        });
-      });
-    }
-  });
-</script>

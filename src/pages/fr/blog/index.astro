@@ -4,64 +4,86 @@
  * @file src/pages/fr/blog/index.astro
  */
 import Layout from "@/layouts/Layout.astro";
-import { getBlogPosts, getFeaturedPosts, getBlogCategories, getFeaturedImageUrl, calculateReadingTime } from "@/lib/blog.js";
+import {
+  getBlogPosts,
+  getFeaturedPosts,
+  getFeaturedImageUrl,
+  calculateReadingTime,
+} from "@/lib/blog.js";
 
-const lang = 'fr';
+const lang = "fr";
 
 // Traductions
 const t = {
-  title: 'Blog',
-  metaTitle: 'Blog | RayGold ERP pour Bijouterie',
-  metaDescription: 'Articles sur la gestion de bijouterie, le contrôle des stocks, la traçabilité des métaux précieux et les meilleures pratiques du secteur.',
-  featured: 'À la une',
-  allPosts: 'Tous les articles',
-  categories: 'Catégories',
-  readMore: 'Lire la suite',
-  minRead: 'min de lecture',
-  noPosts: 'Aucun article disponible',
-  searchPlaceholder: 'Rechercher des articles...',
-  ctaTitle: 'Vous voulez voir RayGold en action ?',
-  ctaText: 'Demandez une démo personnalisée pour votre entreprise.',
-  ctaButton: 'Demander une démo'
+  title: "Blog",
+  metaTitle: "Blog | RayGold ERP pour Bijouterie",
+  metaDescription:
+    "Articles sur la gestion de bijouterie, le contrôle des stocks, la traçabilité des métaux précieux et les meilleures pratiques du secteur.",
+  featured: "À la une",
+  allPosts: "Tous les articles",
+  categories: "Catégories",
+  readMore: "Lire la suite",
+  minRead: "min de lecture",
+  noPosts: "Aucun article disponible",
+  searchPlaceholder: "Rechercher des articles...",
+  ctaTitle: "Vous voulez voir RayGold en action ?",
+  ctaText: "Demandez une démo personnalisée pour votre entreprise.",
+  ctaButton: "Demander une démo",
 };
 
 // Obtenir les données
-const [posts, featuredPosts, categories] = await Promise.all([
+// Obtenir les données
+const [posts, featuredPosts] = await Promise.all([
   getBlogPosts(lang),
   getFeaturedPosts(lang, 3),
-  getBlogCategories()
 ]);
+
+// Extraire les catégories UNIQUEMENT des articles dans la langue actuelle
+const categoriesMap = new Map();
+posts.forEach((post: any) => {
+  post.blogCategories?.nodes?.forEach((cat: any) => {
+    if (!categoriesMap.has(cat.slug)) {
+      categoriesMap.set(cat.slug, { ...cat, count: 1 });
+    } else {
+      categoriesMap.get(cat.slug).count++;
+    }
+  });
+});
+const categories = Array.from(categoriesMap.values());
 
 // URLs alternatives pour le SEO
 const alternateUrls = [
-  { lang: 'es', url: '/es/blog' },
-  { lang: 'en', url: '/en/blog' },
-  { lang: 'fr', url: '/fr/blog' },
-  { lang: 'ca', url: '/ca/blog' },
-  { lang: 'pt-br', url: '/pt-br/blog' },
+  { lang: "es", url: "/es/blog" },
+  { lang: "en", url: "/en/blog" },
+  { lang: "fr", url: "/fr/blog" },
+  { lang: "ca", url: "/ca/blog" },
+  { lang: "pt-br", url: "/pt-br/blog" },
 ];
 
 // Formater la date
-function formatDate(dateString) {
+function formatDate(dateString: string) {
   const date = new Date(dateString);
-  return date.toLocaleDateString('fr-FR', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
+  return date.toLocaleDateString("fr-FR", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   });
 }
 
 // Obtenir le temps de lecture
-function getReadingTime(post) {
-  return post.blogSeo?.readingTime || calculateReadingTime(post.content || post.excerpt);
+function getReadingTime(post: any) {
+  return (
+    post.blogSeo?.readingTime ||
+    calculateReadingTime(post.content || post.excerpt)
+  );
 }
 ---
 
-<Layout 
+<Layout
   title={t.metaTitle}
   description={t.metaDescription}
   lang={lang}
-  alternateUrls={alternateUrls}
+  alternateUrls={alternateUrls as any}
 >
   <div class="blog-page">
     <!-- Hero -->
@@ -69,16 +91,24 @@ function getReadingTime(post) {
       <div class="container">
         <h1>{t.title}</h1>
         <p>{t.metaDescription}</p>
-        
+
         <!-- Recherche -->
         <div class="search-box">
-          <input 
-            type="search" 
-            id="blogSearch" 
+          <input
+            type="search"
+            id="blogSearch"
             placeholder={t.searchPlaceholder}
             aria-label={t.searchPlaceholder}
           />
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
             <circle cx="11" cy="11" r="8"></circle>
             <path d="m21 21-4.35-4.35"></path>
           </svg>
@@ -87,44 +117,50 @@ function getReadingTime(post) {
     </section>
 
     <!-- Articles à la une -->
-    {featuredPosts.length > 0 && (
-      <section class="featured-section">
-        <div class="container">
-          <h2>{t.featured}</h2>
-          <div class="featured-grid">
-            {featuredPosts.map((post, index) => (
-              <article class={`featured-card ${index === 0 ? 'featured-main' : ''}`}>
-                {getFeaturedImageUrl(post) && (
-                  <div class="featured-image">
-                    <img 
-                      src={getFeaturedImageUrl(post)} 
-                      alt={post.title}
-                      loading={index === 0 ? 'eager' : 'lazy'}
-                    />
-                  </div>
-                )}
-                <div class="featured-content">
-                  {post.blogCategories?.nodes?.[0] && (
-                    <span class="category-badge">
-                      {post.blogCategories.nodes[0].name}
-                    </span>
+    {
+      featuredPosts.length > 0 && (
+        <section class="featured-section">
+          <div class="container">
+            <h2>{t.featured}</h2>
+            <div class="featured-grid">
+              {featuredPosts.map((post: any, index: number) => (
+                <article
+                  class={`featured-card ${index === 0 ? "featured-main" : ""}`}
+                >
+                  {getFeaturedImageUrl(post) && (
+                    <div class="featured-image">
+                      <img
+                        src={getFeaturedImageUrl(post)}
+                        alt={post.title}
+                        loading={index === 0 ? "eager" : "lazy"}
+                      />
+                    </div>
                   )}
-                  <h3>
-                    <a href={`/${lang}/blog/${post.slug}`}>{post.title}</a>
-                  </h3>
-                  <p set:html={post.excerpt} />
-                  <div class="post-meta">
-                    <time datetime={post.date}>{formatDate(post.date)}</time>
-                    <span class="separator">•</span>
-                    <span>{getReadingTime(post)} {t.minRead}</span>
+                  <div class="featured-content">
+                    {post.blogCategories?.nodes?.[0] && (
+                      <span class="category-badge">
+                        {post.blogCategories.nodes[0].name}
+                      </span>
+                    )}
+                    <h3>
+                      <a href={`/${lang}/blog/${post.slug}`}>{post.title}</a>
+                    </h3>
+                    <p set:html={post.excerpt} />
+                    <div class="post-meta">
+                      <time datetime={post.date}>{formatDate(post.date)}</time>
+                      <span class="separator">•</span>
+                      <span>
+                        {getReadingTime(post)} {t.minRead}
+                      </span>
+                    </div>
                   </div>
-                </div>
-              </article>
-            ))}
+                </article>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
-    )}
+        </section>
+      )
+    }
 
     <!-- Liste principale -->
     <section class="posts-section">
@@ -133,64 +169,83 @@ function getReadingTime(post) {
           <!-- Grille des articles -->
           <div class="posts-grid">
             <h2>{t.allPosts}</h2>
-            
-            {posts.length > 0 ? (
-              <div class="grid" id="postsGrid">
-                {posts.map(post => (
-                  <article class="post-card" data-title={post.title.toLowerCase()} data-categories={post.blogCategories?.nodes?.map(c => c.slug).join(' ')}>
-                    {getFeaturedImageUrl(post) && (
-                      <a href={`/${lang}/blog/${post.slug}`} class="post-image">
-                        <img 
-                          src={getFeaturedImageUrl(post)} 
-                          alt={post.title}
-                          loading="lazy"
-                        />
-                      </a>
-                    )}
-                    <div class="post-content">
-                      {post.blogCategories?.nodes?.[0] && (
-                        <a 
-                          href={`/${lang}/blog/categorie/${post.blogCategories.nodes[0].slug}`}
-                          class="category-link"
+
+            {
+              posts.length > 0 ? (
+                <div class="grid" id="postsGrid">
+                  {posts.map((post: any) => (
+                    <article
+                      class="post-card"
+                      data-title={post.title.toLowerCase()}
+                      data-categories={post.blogCategories?.nodes
+                        ?.map((c: any) => c.slug)
+                        .join(" ")}
+                    >
+                      {getFeaturedImageUrl(post) && (
+                        <a
+                          href={`/${lang}/blog/${post.slug}`}
+                          class="post-image"
                         >
-                          {post.blogCategories.nodes[0].name}
+                          <img
+                            src={getFeaturedImageUrl(post)}
+                            alt={post.title}
+                            loading="lazy"
+                          />
                         </a>
                       )}
-                      <h3>
-                        <a href={`/${lang}/blog/${post.slug}`}>{post.title}</a>
-                      </h3>
-                      <p set:html={post.excerpt} />
-                      <div class="post-footer">
-                        <time datetime={post.date}>{formatDate(post.date)}</time>
-                        <span>{getReadingTime(post)} {t.minRead}</span>
+                      <div class="post-content">
+                        {post.blogCategories?.nodes?.[0] && (
+                          <a
+                            href={`/${lang}/blog/categorie/${post.blogCategories.nodes[0].slug}`}
+                            class="category-link"
+                          >
+                            {post.blogCategories.nodes[0].name}
+                          </a>
+                        )}
+                        <h3>
+                          <a href={`/${lang}/blog/${post.slug}`}>
+                            {post.title}
+                          </a>
+                        </h3>
+                        <p set:html={post.excerpt} />
+                        <div class="post-footer">
+                          <time datetime={post.date}>
+                            {formatDate(post.date)}
+                          </time>
+                          <span>
+                            {getReadingTime(post)} {t.minRead}
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            ) : (
-              <p class="no-posts">{t.noPosts}</p>
-            )}
+                    </article>
+                  ))}
+                </div>
+              ) : (
+                <p class="no-posts">{t.noPosts}</p>
+              )
+            }
           </div>
 
           <!-- Sidebar -->
           <aside class="sidebar">
             <!-- Catégories -->
-            {categories.length > 0 && (
-              <div class="sidebar-widget">
-                <h3>{t.categories}</h3>
-                <ul class="categories-list">
-                  {categories.map(cat => (
-                    <li>
-                      <a href={`/${lang}/blog/categorie/${cat.slug}`}>
-                        {cat.name}
-                        <span class="count">({cat.count || 0})</span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
+            {
+              categories.length > 0 && (
+                <div class="sidebar-widget">
+                  <h3>{t.categories}</h3>
+                  <ul class="categories-list">
+                    {categories.map((cat: any) => (
+                      <li>
+                        <a href={`/${lang}/blog/categorie/${cat.slug}`}>
+                          {cat.name}
+                          <span class="count">({cat.count || 0})</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )
+            }
 
             <!-- CTA -->
             <div class="sidebar-cta">
@@ -255,13 +310,13 @@ function getReadingTime(post) {
     border: none;
     border-radius: 50px;
     font-size: 1rem;
-    background: rgba(255,255,255,0.1);
+    background: rgba(255, 255, 255, 0.1);
     color: white;
     backdrop-filter: blur(10px);
   }
 
   .search-box input::placeholder {
-    color: rgba(255,255,255,0.6);
+    color: rgba(255, 255, 255, 0.6);
   }
 
   .search-box svg {
@@ -295,13 +350,15 @@ function getReadingTime(post) {
     background: white;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition:
+      transform 0.3s,
+      box-shadow 0.3s;
   }
 
   .featured-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
   }
 
   .featured-main {
@@ -397,12 +454,14 @@ function getReadingTime(post) {
     border-radius: 12px;
     overflow: hidden;
     border: 1px solid var(--border);
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition:
+      transform 0.3s,
+      box-shadow 0.3s;
   }
 
   .post-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
   }
 
   .post-card.hidden {
@@ -597,23 +656,27 @@ function getReadingTime(post) {
 
 <script>
   // Filtre de recherche
-  document.addEventListener('DOMContentLoaded', () => {
-    const searchInput = document.getElementById('blogSearch');
-    const postsGrid = document.getElementById('postsGrid');
-    
+  document.addEventListener("DOMContentLoaded", () => {
+    const searchInput = document.getElementById("blogSearch");
+    const postsGrid = document.getElementById("postsGrid");
+
     if (searchInput && postsGrid) {
-      searchInput.addEventListener('input', (e) => {
-        const query = e.target.value.toLowerCase().trim();
-        const posts = postsGrid.querySelectorAll('.post-card');
-        
+      searchInput.addEventListener("input", (e) => {
+        const query = (e.target as HTMLInputElement).value.toLowerCase().trim();
+        const posts = postsGrid.querySelectorAll(".post-card");
+
         posts.forEach((post) => {
-          const title = post.getAttribute('data-title') || '';
-          const categories = post.getAttribute('data-categories') || '';
-          
-          if (title.includes(query) || categories.includes(query) || query === '') {
-            post.classList.remove('hidden');
+          const title = post.getAttribute("data-title") || "";
+          const categories = post.getAttribute("data-categories") || "";
+
+          if (
+            title.includes(query) ||
+            categories.includes(query) ||
+            query === ""
+          ) {
+            post.classList.remove("hidden");
           } else {
-            post.classList.add('hidden');
+            post.classList.add("hidden");
           }
         });
       });
