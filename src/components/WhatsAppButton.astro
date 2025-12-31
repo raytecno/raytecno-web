@@ -1,9 +1,11 @@
 ---
 /**
  * Botón flotante de WhatsApp
- * Diseño minimalista con texto
+ * - Móvil: Abre WhatsApp directamente (sin pasar por wa.me)
+ * - Escritorio: Usa wa.me
  */
 import type { Lang } from "@/config/pages";
+import { getWhatsAppData } from "@/config/contact";
 
 interface Props {
   lang: Lang;
@@ -20,13 +22,16 @@ const texts: Record<Lang, string> = {
 };
 
 const tooltip = texts[lang] || texts.es;
+const waData = getWhatsAppData(lang);
 ---
 
 <a
-  href="https://wa.me/34666666666"
+  href={`https://wa.me/${waData.number}?text=${encodeURIComponent(waData.message)}`}
   target="_blank"
   rel="noopener noreferrer"
   class="whatsapp-button"
+  data-wa-number={waData.number}
+  data-wa-message={waData.message}
 >
   <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
     <path
@@ -35,6 +40,24 @@ const tooltip = texts[lang] || texts.es;
   </svg>
   <span>{tooltip}</span>
 </a>
+
+<script>
+  // Detectar si es móvil y abrir WhatsApp directamente
+  document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.querySelector(".whatsapp-button") as HTMLAnchorElement;
+    if (!btn) return;
+
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+    if (isMobile) {
+      const number = btn.dataset.waNumber;
+      const message = encodeURIComponent(btn.dataset.waMessage || "");
+      // En móvil, usar protocolo directo - abre WhatsApp sin intermediarios
+      btn.href = `whatsapp://send?phone=${number}&text=${message}`;
+      btn.removeAttribute("target");
+    }
+  });
+</script>
 
 <style>
   .whatsapp-button {
