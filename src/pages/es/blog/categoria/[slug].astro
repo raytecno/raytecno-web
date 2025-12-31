@@ -1,64 +1,73 @@
 ---
 /**
- * Blog - Categoría
+ * Blog - Categoría (Rediseñado)
  * @file src/pages/es/blog/categoria/[slug].astro
  */
 import Layout from "@/layouts/Layout.astro";
 import {
+  getBlogPosts,
   getBlogPostsByCategory,
-  getBlogCategories,
   getFeaturedImageUrl,
   calculateReadingTime,
 } from "@/lib/blog.js";
-
-// Tipos
-interface Category {
-  slug: string;
-  name: string;
-  count?: number;
-}
-
-interface BlogPost {
-  slug: string;
-  title: string;
-  date: string;
-  excerpt?: string;
-  content?: string;
-  blogSeo?: {
-    readingTime?: number;
-  };
-  featuredImage?: {
-    node?: {
-      sourceUrl?: string;
-    };
-  };
-}
 
 const lang = "es";
 
 const t = {
   blog: "Blog",
+  articles: "artículos",
+  article: "artículo",
   minRead: "min",
   noPosts: "No hay artículos en esta categoría",
   viewAll: "Todos",
-  backToBlog: "← Volver al blog",
+  backToBlog: "Volver al blog",
+  allArticles: "Todos los artículos",
 };
 
+// Obtener todos los posts del idioma para extraer categorías
+const allPosts = await getBlogPosts(lang);
+
+// Extraer categorías SOLO de los posts del idioma actual
+const categoriesMap = new Map();
+allPosts.forEach((post: any) => {
+  post.blogCategories?.nodes?.forEach((cat: any) => {
+    if (!categoriesMap.has(cat.slug)) {
+      categoriesMap.set(cat.slug, { ...cat, count: 1 });
+    } else {
+      categoriesMap.get(cat.slug).count++;
+    }
+  });
+});
+const categories = Array.from(categoriesMap.values());
+
 export async function getStaticPaths() {
-  const categories: Category[] = await getBlogCategories();
-  return categories.map((cat: Category) => ({
+  const allPosts = await getBlogPosts("es");
+
+  // Extraer categorías únicas de los posts en español
+  const categoriesMap = new Map();
+  allPosts.forEach((post: any) => {
+    post.blogCategories?.nodes?.forEach((cat: any) => {
+      if (!categoriesMap.has(cat.slug)) {
+        categoriesMap.set(cat.slug, { ...cat, count: 1 });
+      } else {
+        categoriesMap.get(cat.slug).count++;
+      }
+    });
+  });
+
+  const categories = Array.from(categoriesMap.values());
+
+  return categories.map((cat: any) => ({
     params: { slug: cat.slug },
     props: { category: cat },
   }));
 }
 
 const { slug } = Astro.params;
-const { category } = Astro.props as { category: Category };
+const { category } = Astro.props as { category: any };
 
-const [posts, categories]: [BlogPost[], Category[]] = await Promise.all([
-  getBlogPostsByCategory(slug, lang),
-  getBlogCategories(),
-]);
+// Obtener posts de esta categoría en el idioma actual
+const posts = await getBlogPostsByCategory(slug, lang);
 
 function formatDate(dateString: string): string {
   const date = new Date(dateString);
@@ -69,21 +78,27 @@ function formatDate(dateString: string): string {
   });
 }
 
-function getReadingTime(post: BlogPost): number {
+function getReadingTime(post: any): number {
   return (
     post.blogSeo?.readingTime ||
     calculateReadingTime(post.content || post.excerpt || "")
   );
 }
 
-const alternateUrls = [{ lang: "es", url: `/es/blog/categoria/${slug}` }];
+const alternateUrls = [
+  { lang: "es", url: `/es/blog/categoria/${slug}` },
+  { lang: "en", url: `/en/blog/category/${slug}` },
+  { lang: "fr", url: `/fr/blog/categorie/${slug}` },
+  { lang: "ca", url: `/ca/blog/categoria/${slug}` },
+  { lang: "pt-br", url: `/pt-br/blog/categoria/${slug}` },
+];
 ---
 
 <Layout
-  title={`${category.name} | Blog | RayGold`}
-  description={`Artículos sobre ${category.name.toLowerCase()} en el blog de RayGold.`}
+  title={`${category.name} | Blog | RayGold ERP`}
+  description={`Artículos sobre ${category.name.toLowerCase()} - RayGold ERP para Joyería`}
   lang={lang}
-  alternateUrls={alternateUrls}
+  alternateUrls={alternateUrls as any}
 >
   <main class="category-page">
     <!-- Hero -->
@@ -91,17 +106,31 @@ const alternateUrls = [{ lang: "es", url: `/es/blog/categoria/${slug}` }];
       <div class="container">
         <nav class="breadcrumb">
           <a href={`/${lang}/blog`}>{t.blog}</a>
-          <span>/</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
           <span>{category.name}</span>
         </nav>
-        <h1>{category.name}</h1>
-        <p>{posts.length} {posts.length === 1 ? "artículo" : "artículos"}</p>
 
-        <!-- Categorías -->
+        <h1>{category.name}</h1>
+        <p class="post-count">
+          {posts.length}
+          {posts.length === 1 ? t.article : t.articles}
+        </p>
+
+        <!-- Categorías filtradas por idioma -->
         <div class="hero-categories">
           <a href={`/${lang}/blog`} class="cat-pill">{t.viewAll}</a>
           {
-            categories.map((cat: Category) => (
+            categories.map((cat: any) => (
               <a
                 href={`/${lang}/blog/categoria/${cat.slug}`}
                 class={`cat-pill ${cat.slug === slug ? "active" : ""}`}
@@ -114,55 +143,88 @@ const alternateUrls = [{ lang: "es", url: `/es/blog/categoria/${slug}` }];
       </div>
     </section>
 
-    <!-- Contenido -->
+    <!-- Grid de artículos -->
     <section class="content-area">
       <div class="container">
         {
           posts.length > 0 ? (
-            <div class="posts-grid">
-              {posts.map((post: BlogPost) => (
-                <article class="post-card">
-                  <a href={`/${lang}/blog/${post.slug}`} class="post-link">
-                    {getFeaturedImageUrl(post) ? (
-                      <div class="post-image">
-                        <img
-                          src={getFeaturedImageUrl(post)}
-                          alt={post.title}
-                          loading="lazy"
-                        />
+            <>
+              <div class="section-header">
+                <h2>{t.allArticles}</h2>
+                <span class="count">
+                  {posts.length} {posts.length === 1 ? t.article : t.articles}
+                </span>
+              </div>
+
+              <div class="posts-grid">
+                {posts.map((post: any) => (
+                  <article class="post-card">
+                    <a href={`/${lang}/blog/${post.slug}`} class="post-link">
+                      {getFeaturedImageUrl(post) ? (
+                        <div class="post-image">
+                          <img
+                            src={getFeaturedImageUrl(post)}
+                            alt={post.title}
+                            loading="lazy"
+                          />
+                        </div>
+                      ) : (
+                        <div class="post-image placeholder">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1"
+                          >
+                            <rect x="3" y="3" width="18" height="18" rx="2" />
+                            <circle cx="8.5" cy="8.5" r="1.5" />
+                            <polyline points="21 15 16 10 5 21" />
+                          </svg>
+                        </div>
+                      )}
+                      <div class="post-body">
+                        <span class="category-tag">{category.name}</span>
+                        <h3>{post.title}</h3>
+                        {post.excerpt && (
+                          <p class="excerpt" set:html={post.excerpt} />
+                        )}
+                        <div class="meta">
+                          <time datetime={post.date}>
+                            {formatDate(post.date)}
+                          </time>
+                          <span class="dot">·</span>
+                          <span>
+                            {getReadingTime(post)} {t.minRead}
+                          </span>
+                        </div>
                       </div>
-                    ) : (
-                      <div class="post-image placeholder">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="1"
-                        >
-                          <rect x="3" y="3" width="18" height="18" rx="2" />
-                          <circle cx="8.5" cy="8.5" r="1.5" />
-                          <polyline points="21 15 16 10 5 21" />
-                        </svg>
-                      </div>
-                    )}
-                    <div class="post-body">
-                      <h3>{post.title}</h3>
-                      <div class="meta">
-                        <time>{formatDate(post.date)}</time>
-                        <span>·</span>
-                        <span>
-                          {getReadingTime(post)} {t.minRead}
-                        </span>
-                      </div>
-                    </div>
-                  </a>
-                </article>
-              ))}
-            </div>
+                    </a>
+                  </article>
+                ))}
+              </div>
+            </>
           ) : (
             <div class="no-posts">
-              <p>{t.noPosts}</p>
+              <div class="no-posts-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="48"
+                  height="48"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                  <polyline points="14 2 14 8 20 8" />
+                  <line x1="16" y1="13" x2="8" y2="13" />
+                  <line x1="16" y1="17" x2="8" y2="17" />
+                  <polyline points="10 9 9 9 8 9" />
+                </svg>
+              </div>
+              <h3>{t.noPosts}</h3>
+              <p>Explora otras categorías o vuelve al blog principal</p>
               <a href={`/${lang}/blog`} class="back-btn">
                 {t.backToBlog}
               </a>
@@ -170,19 +232,36 @@ const alternateUrls = [{ lang: "es", url: `/es/blog/categoria/${slug}` }];
           )
         }
       </div>
-
-      <!-- Volver -->
-      <nav class="back-link">
-        <div class="container">
-          <a href={`/${lang}/blog`}>{t.backToBlog}</a>
-        </div>
-      </nav>
     </section>
+
+    <!-- Navegación inferior -->
+    {
+      posts.length > 0 && (
+        <section class="bottom-nav">
+          <div class="container">
+            <a href={`/${lang}/blog`} class="nav-link">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <line x1="19" y1="12" x2="5" y2="12" />
+                <polyline points="12 19 5 12 12 5" />
+              </svg>
+              {t.backToBlog}
+            </a>
+          </div>
+        </section>
+      )
+    }
   </main>
 </Layout>
 
 <style>
-  /* Variables */
   .category-page {
     --blue-dark: #0f172a;
     --blue-medium: #1e293b;
@@ -192,7 +271,6 @@ const alternateUrls = [{ lang: "es", url: `/es/blog/categoria/${slug}` }];
     --gray-50: #f8fafc;
     --gray-100: #f1f5f9;
     --gray-200: #e2e8f0;
-    --gray-300: #cbd5e1;
     --gray-400: #94a3b8;
     --gray-500: #64748b;
     --gray-600: #475569;
@@ -220,6 +298,7 @@ const alternateUrls = [{ lang: "es", url: `/es/blog/categoria/${slug}` }];
   .breadcrumb {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 0.5rem;
     font-size: 0.9rem;
     margin-bottom: 1.5rem;
@@ -232,21 +311,26 @@ const alternateUrls = [{ lang: "es", url: `/es/blog/categoria/${slug}` }];
   }
 
   .breadcrumb a:hover {
-    color: var(--white);
+    color: var(--gold);
   }
 
-  .breadcrumb span {
+  .breadcrumb svg {
     color: var(--gray-500);
   }
 
+  .breadcrumb > span {
+    color: var(--white);
+    font-weight: 500;
+  }
+
   .hero h1 {
-    font-size: 3rem;
+    font-size: 3.5rem;
     font-weight: 300;
     letter-spacing: -0.04em;
     margin-bottom: 0.5rem;
   }
 
-  .hero > .container > p {
+  .post-count {
     font-size: 1rem;
     color: var(--gray-400);
     margin-bottom: 2rem;
@@ -277,23 +361,56 @@ const alternateUrls = [{ lang: "es", url: `/es/blog/categoria/${slug}` }];
   .cat-pill.active {
     background: var(--gold);
     color: var(--white);
+    border-color: var(--gold);
   }
 
   /* ========== CONTENIDO ========== */
   .content-area {
     background: var(--white);
-    padding: 4rem 0 3rem;
+    padding: 4rem 0 5rem;
+    min-height: 50vh;
   }
 
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--gray-200);
+  }
+
+  .section-header h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--gray-900);
+    letter-spacing: -0.02em;
+  }
+
+  .section-header .count {
+    font-size: 0.9rem;
+    color: var(--gray-400);
+  }
+
+  /* Grid de posts */
   .posts-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
-    margin-bottom: 3rem;
   }
 
   .post-card {
     background: var(--white);
+    border-radius: 16px;
+    overflow: hidden;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .post-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
   }
 
   .post-link {
@@ -302,7 +419,7 @@ const alternateUrls = [{ lang: "es", url: `/es/blog/categoria/${slug}` }];
   }
 
   .post-image {
-    aspect-ratio: 4/3;
+    aspect-ratio: 16/10;
     border-radius: 16px;
     overflow: hidden;
     margin-bottom: 1.25rem;
@@ -313,7 +430,7 @@ const alternateUrls = [{ lang: "es", url: `/es/blog/categoria/${slug}` }];
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.4s ease;
+    transition: transform 0.5s ease;
   }
 
   .post-link:hover .post-image img {
@@ -327,13 +444,27 @@ const alternateUrls = [{ lang: "es", url: `/es/blog/categoria/${slug}` }];
   }
 
   .post-image.placeholder svg {
-    width: 40px;
-    height: 40px;
-    color: var(--gray-200);
+    width: 48px;
+    height: 48px;
+    color: var(--gray-300);
+  }
+
+  .post-body {
+    padding: 0 0.25rem;
+  }
+
+  .category-tag {
+    display: inline-block;
+    color: var(--gold);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
   }
 
   .post-body h3 {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     font-weight: 600;
     line-height: 1.4;
     margin-bottom: 0.75rem;
@@ -346,6 +477,17 @@ const alternateUrls = [{ lang: "es", url: `/es/blog/categoria/${slug}` }];
     color: var(--gold);
   }
 
+  .excerpt {
+    font-size: 0.9rem;
+    color: var(--gray-500);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
   .meta {
     display: flex;
     align-items: center;
@@ -354,15 +496,34 @@ const alternateUrls = [{ lang: "es", url: `/es/blog/categoria/${slug}` }];
     color: var(--gray-400);
   }
 
+  .dot {
+    color: var(--gray-300);
+  }
+
+  /* No posts */
   .no-posts {
     text-align: center;
-    padding: 4rem 0;
+    padding: 5rem 2rem;
+  }
+
+  .no-posts-icon {
+    margin-bottom: 1.5rem;
+  }
+
+  .no-posts-icon svg {
+    color: var(--gray-300);
+  }
+
+  .no-posts h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--gray-900);
+    margin-bottom: 0.5rem;
   }
 
   .no-posts p {
     color: var(--gray-500);
-    margin-bottom: 1.5rem;
-    font-size: 1.1rem;
+    margin-bottom: 2rem;
   }
 
   .back-btn {
@@ -379,25 +540,36 @@ const alternateUrls = [{ lang: "es", url: `/es/blog/categoria/${slug}` }];
 
   .back-btn:hover {
     background: var(--gold-dark);
+    transform: translateY(-2px);
   }
 
-  /* Back Link */
-  .back-link {
-    text-align: center;
-    padding-top: 2rem;
-    border-top: 1px solid var(--gray-200);
+  /* Navegación inferior */
+  .bottom-nav {
+    background: var(--gray-50);
+    padding: 2rem 0;
   }
 
-  .back-link a {
-    color: var(--gray-500);
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--gray-600);
     text-decoration: none;
-    font-size: 0.95rem;
     font-weight: 500;
+    font-size: 0.95rem;
     transition: color 0.2s;
   }
 
-  .back-link a:hover {
+  .nav-link:hover {
     color: var(--gold);
+  }
+
+  .nav-link svg {
+    transition: transform 0.2s;
+  }
+
+  .nav-link:hover svg {
+    transform: translateX(-4px);
   }
 
   /* ========== RESPONSIVE ========== */
@@ -408,12 +580,23 @@ const alternateUrls = [{ lang: "es", url: `/es/blog/categoria/${slug}` }];
   }
 
   @media (max-width: 640px) {
+    .hero {
+      padding: 3rem 0 2.5rem;
+    }
+
     .hero h1 {
-      font-size: 2.25rem;
+      font-size: 2.5rem;
     }
 
     .posts-grid {
       grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .section-header {
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: flex-start;
     }
   }
 </style>
