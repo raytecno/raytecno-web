@@ -1,14 +1,18 @@
 ---
 /**
- * Componente: Comparador de inversión - Versión Segura
- * Sin porcentajes agresivos, con disclaimer visible
+ * Componente: Comparador de inversión por años
+ * 
+ * Muestra:
+ * - Año 1: Inversión inicial (implementación + config + licencias)
+ * - Año 2-3: Operación (licencias + mantenimiento)
+ * - Total 3 años
  */
 import type { Lang } from "@/config/pages";
-import {
-  getComparisonData,
-  formatEUR,
+import { 
+  getComparisonData, 
+  formatEUR, 
   comparisonTexts,
-  competitors as competitorsConfig,
+  getAllSources,
 } from "@/config/competitors";
 
 interface Props {
@@ -18,19 +22,15 @@ interface Props {
 const { lang } = Astro.props;
 const t = comparisonTexts[lang] || comparisonTexts.es;
 const data = getComparisonData();
+const allSources = getAllSources();
 
-// Recopilar todas las fuentes
-const allSources = Object.values(competitorsConfig)
-  .filter((c) => c.enabled)
-  .flatMap((c) => c.sources);
-
-// Textos del botón
+// Textos del botón de fuentes
 const sourcesButtonText: Record<string, string> = {
-  es: "Ver fuentes verificadas",
-  en: "View verified sources",
-  fr: "Voir les sources vérifiées",
-  ca: "Veure fonts verificades",
-  "pt-br": "Ver fontes verificadas",
+  es: "📄 Ver fuentes verificadas",
+  en: "📄 View verified sources",
+  fr: "📄 Voir les sources vérifiées",
+  ca: "📄 Veure fonts verificades",
+  "pt-br": "📄 Ver fontes verificadas",
 };
 ---
 
@@ -38,157 +38,196 @@ const sourcesButtonText: Record<string, string> = {
   <div class="container">
     <!-- Header -->
     <div class="header">
-      <span class="badge">📊 {t.estimated}</span>
+      <span class="badge">📊 TCO Estimado</span>
       <h2>{t.title}</h2>
-      <p>{t.scenario}</p>
+      <p class="subtitle">{t.subtitle}</p>
     </div>
 
-    <!-- Tabla compacta -->
-    <div class="table-container">
+    <!-- Tabs de años -->
+    <div class="year-tabs">
+      <button class="year-tab active" data-year="1">
+        <span class="tab-year">{t.year1}</span>
+        <span class="tab-desc">{t.year1Desc}</span>
+      </button>
+      <button class="year-tab" data-year="2">
+        <span class="tab-year">{t.year2}</span>
+        <span class="tab-desc">{t.year2Desc}</span>
+      </button>
+      <button class="year-tab" data-year="3">
+        <span class="tab-year">{t.year3}</span>
+        <span class="tab-desc">{t.year3Desc}</span>
+      </button>
+      <button class="year-tab total-tab" data-year="total">
+        <span class="tab-year">{t.total3Years}</span>
+        <span class="tab-desc">∑</span>
+      </button>
+    </div>
+
+    <!-- Tablas por año -->
+    {[1, 2, 3].map((yearNum) => (
+      <div class={`year-content ${yearNum === 1 ? 'active' : ''}`} data-year-content={yearNum}>
+        <table>
+          <thead>
+            <tr>
+              <th class="concept-col"></th>
+              <th class="raygold-col">
+                <div class="brand raygold">◆ {data.raygold.name}</div>
+              </th>
+              {data.competitors.map(c => (
+                <th>
+                  <div class="brand" style={`color: ${c.color}`}>
+                    {c.name}<span class="est">*</span>
+                  </div>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Licencias -->
+            <tr>
+              <td class="label">{t.licenses}</td>
+              <td class="raygold-cell">{formatEUR(data.raygold.years[yearNum-1].licenses)}</td>
+              {data.competitors.map(c => (
+                <td>{formatEUR(c.years[yearNum-1].licenses)}</td>
+              ))}
+            </tr>
+            
+            <!-- Solo Año 1: Implementación, Configuración, Formación, Migración -->
+            {yearNum === 1 && (
+              <>
+                <tr>
+                  <td class="label">{t.implementation}</td>
+                  <td class="raygold-cell">{formatEUR(data.raygold.years[0].implementation)}</td>
+                  {data.competitors.map(c => (
+                    <td>{formatEUR(c.years[0].implementation)}</td>
+                  ))}
+                </tr>
+                <tr>
+                  <td class="label">{t.configuration}</td>
+                  <td class="raygold-cell included">✓ {t.included}</td>
+                  {data.competitors.map(c => (
+                    <td>{formatEUR(c.years[0].configuration)}</td>
+                  ))}
+                </tr>
+                <tr>
+                  <td class="label">{t.training}</td>
+                  <td class="raygold-cell included">✓ {t.included}</td>
+                  {data.competitors.map(c => (
+                    <td>{formatEUR(c.years[0].training)}</td>
+                  ))}
+                </tr>
+                <tr>
+                  <td class="label">{t.migration}</td>
+                  <td class="raygold-cell included">✓ {t.included}</td>
+                  {data.competitors.map(c => (
+                    <td>{formatEUR(c.years[0].dataMigration)}</td>
+                  ))}
+                </tr>
+              </>
+            )}
+            
+            <!-- Años 2-3: Mantenimiento -->
+            {yearNum > 1 && (
+              <tr>
+                <td class="label">{t.maintenance}</td>
+                <td class="raygold-cell included">✓ {t.included}</td>
+                {data.competitors.map(c => (
+                  <td>{c.years[yearNum-1].maintenance === 0 ? `✓ ${t.included}` : formatEUR(c.years[yearNum-1].maintenance)}</td>
+                ))}
+              </tr>
+            )}
+          </tbody>
+          <tfoot>
+            <tr class="total-row">
+              <td class="label"><strong>{t.yearTotal}</strong></td>
+              <td class="raygold-cell total">
+                <span class="amount">{formatEUR(data.raygold.years[yearNum-1].total)}</span>
+              </td>
+              {data.competitors.map(c => (
+                <td class="total">
+                  <span class="amount">{formatEUR(c.years[yearNum-1].total)}</span>
+                </td>
+              ))}
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    ))}
+
+    <!-- Total 3 años -->
+    <div class="year-content" data-year-content="total">
       <table>
         <thead>
           <tr>
             <th class="concept-col"></th>
             <th class="raygold-col">
-              <div class="brand raygold">
-                <span class="logo">◆</span>
-                RayGold
-              </div>
+              <div class="brand raygold">◆ {data.raygold.name}</div>
             </th>
-            {
-              data.competitors.map((c) => (
-                <th>
-                  <div class="brand" style={`--brand-color: ${c.color}`}>
-                    {c.name}
-                    <span class="estimated-tag">*</span>
-                  </div>
-                </th>
-              ))
-            }
+            {data.competitors.map(c => (
+              <th>
+                <div class="brand" style={`color: ${c.color}`}>
+                  {c.name}<span class="est">*</span>
+                </div>
+              </th>
+            ))}
           </tr>
         </thead>
         <tbody>
-          <!-- Licencias -->
           <tr>
-            <td class="label">{t.license}</td>
-            <td class="raygold-cell">{formatEUR(data.raygold.license)}</td>
-            {data.competitors.map((c) => <td>{formatEUR(c.license)}</td>)}
+            <td class="label">{t.year1}</td>
+            <td class="raygold-cell">{formatEUR(data.raygold.years[0].total)}</td>
+            {data.competitors.map(c => (
+              <td>{formatEUR(c.years[0].total)}</td>
+            ))}
           </tr>
-
-          <!-- Implementación -->
           <tr>
-            <td class="label">{t.implementation}</td>
-            <td class="raygold-cell"
-              >{formatEUR(data.raygold.implementation)}</td
-            >
-            {
-              data.competitors.map((c) => (
-                <td>{formatEUR(c.implementation)}</td>
-              ))
-            }
+            <td class="label">{t.year2}</td>
+            <td class="raygold-cell">{formatEUR(data.raygold.years[1].total)}</td>
+            {data.competitors.map(c => (
+              <td>{formatEUR(c.years[1].total)}</td>
+            ))}
           </tr>
-
-          <!-- Adaptación -->
           <tr>
-            <td class="label">{t.customization}</td>
-            <td class="raygold-cell highlight">
-              {
-                data.raygold.customization === 0
-                  ? "✓ " + t.included
-                  : formatEUR(data.raygold.customization)
-              }
-            </td>
-            {
-              data.competitors.map((c) => (
-                <td class={c.isSpecialized ? "highlight" : ""}>
-                  {c.customization === 0
-                    ? "✓ " + t.included
-                    : formatEUR(c.customization)}
-                </td>
-              ))
-            }
-          </tr>
-
-          <!-- Mantenimiento -->
-          <tr>
-            <td class="label">{t.maintenance}</td>
-            <td class="raygold-cell highlight">
-              {
-                data.raygold.maintenance === 0
-                  ? "✓ " + t.included
-                  : formatEUR(data.raygold.maintenance)
-              }
-            </td>
-            {
-              data.competitors.map((c) => (
-                <td>
-                  {c.maintenance === 0
-                    ? "✓ " + t.included
-                    : formatEUR(c.maintenance)}
-                </td>
-              ))
-            }
+            <td class="label">{t.year3}</td>
+            <td class="raygold-cell">{formatEUR(data.raygold.years[2].total)}</td>
+            {data.competitors.map(c => (
+              <td>{formatEUR(c.years[2].total)}</td>
+            ))}
           </tr>
         </tbody>
         <tfoot>
-          <tr class="total-row">
-            <td class="label"><strong>{t.total}</strong></td>
+          <tr class="total-row grand-total">
+            <td class="label"><strong>{t.total3Years}</strong></td>
             <td class="raygold-cell total">
-              <span class="total-amount">{formatEUR(data.raygold.total)}</span>
+              <span class="amount big">{formatEUR(data.raygold.total)}</span>
             </td>
-            {
-              data.competitors.map((c) => (
-                <td class="total">
-                  <span class="total-amount">{formatEUR(c.total)}</span>
-                </td>
-              ))
-            }
+            {data.competitors.map(c => (
+              <td class="total">
+                <span class="amount">{formatEUR(c.total)}</span>
+              </td>
+            ))}
           </tr>
         </tfoot>
       </table>
-
-      <!-- Disclaimer dentro de la tabla -->
-      <div class="table-footer">
-        <span class="asterisk">*</span>
-        {t.disclaimer}
-      </div>
     </div>
+
+    <!-- Disclaimer -->
+    <p class="disclaimer">{t.disclaimer}</p>
 
     <!-- Botón de fuentes -->
     <div class="sources-section">
       <button class="sources-btn" id="toggleSources">
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-        >
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
-          ></path>
-          <polyline points="14 2 14 8 20 8"></polyline>
-          <line x1="16" y1="13" x2="8" y2="13"></line>
-          <line x1="16" y1="17" x2="8" y2="17"></line>
-        </svg>
         {sourcesButtonText[lang] || sourcesButtonText.es}
       </button>
-
+      
       <div class="sources-panel" id="sourcesPanel">
         <div class="sources-grid">
-          {
-            allSources.map((s) => (
-              <a
-                href={s.url}
-                target="_blank"
-                rel="noopener"
-                class="source-card"
-              >
-                <span class="source-name">{s.name}</span>
-                <span class="source-quote">"{s.quote}"</span>
-              </a>
-            ))
-          }
+          {allSources.map(s => (
+            <a href={s.url} target="_blank" rel="noopener" class="source-card">
+              <span class="source-name">{s.name}</span>
+              <span class="source-quote">"{s.quote}"</span>
+            </a>
+          ))}
         </div>
       </div>
     </div>
@@ -197,11 +236,11 @@ const sourcesButtonText: Record<string, string> = {
 
 <style>
   .cost-comparison {
-    padding: 80px 0;
+    padding: 60px 0;
   }
 
   .container {
-    max-width: 900px;
+    max-width: 950px;
     margin: 0 auto;
     padding: 0 20px;
   }
@@ -209,7 +248,7 @@ const sourcesButtonText: Record<string, string> = {
   /* Header */
   .header {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 32px;
   }
 
   .badge {
@@ -220,54 +259,104 @@ const sourcesButtonText: Record<string, string> = {
     font-size: 0.75rem;
     font-weight: 600;
     border-radius: 20px;
-    margin-bottom: 16px;
-    letter-spacing: 0.5px;
+    margin-bottom: 12px;
   }
 
   .header h2 {
-    font-size: 2rem;
+    font-size: 1.75rem;
     font-weight: 700;
-    color: var(--text-primary, #1e293b);
+    color: var(--text-primary, #f8fafc);
     margin: 0 0 8px 0;
-    background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
   }
 
-  .header p {
+  .subtitle {
     font-size: 0.95rem;
-    color: var(--text-secondary, #64748b);
+    color: var(--text-secondary, #94a3b8);
     margin: 0;
   }
 
-  /* Tabla */
-  .table-container {
-    background: white;
-    border-radius: 20px;
-    box-shadow:
-      0 4px 6px -1px rgba(0, 0, 0, 0.05),
-      0 10px 40px -10px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    border: 1px solid #e2e8f0;
+  /* Year Tabs */
+  .year-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    justify-content: center;
+    flex-wrap: wrap;
   }
 
+  .year-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 100px;
+  }
+
+  .year-tab:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .year-tab.active {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(16, 185, 129, 0.1) 100%);
+    border-color: rgba(16, 185, 129, 0.4);
+  }
+
+  .year-tab.total-tab.active {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(99, 102, 241, 0.1) 100%);
+    border-color: rgba(99, 102, 241, 0.4);
+  }
+
+  .tab-year {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary, #f8fafc);
+  }
+
+  .tab-desc {
+    font-size: 0.7rem;
+    color: var(--text-secondary, #94a3b8);
+    margin-top: 2px;
+  }
+
+  /* Year Content */
+  .year-content {
+    display: none;
+  }
+
+  .year-content.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Table */
   table {
     width: 100%;
     border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
     font-size: 0.85rem;
   }
 
-  th,
-  td {
-    padding: 16px 12px;
+  th, td {
+    padding: 14px 12px;
     text-align: center;
   }
 
   thead th {
-    background: #f8fafc;
-    border-bottom: 1px solid #e2e8f0;
-    font-weight: 600;
+    background: rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   .concept-col {
@@ -275,136 +364,117 @@ const sourcesButtonText: Record<string, string> = {
   }
 
   .brand {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
     font-size: 0.8rem;
     font-weight: 600;
-    color: var(--brand-color, #64748b);
   }
 
   .brand.raygold {
     color: #10b981;
   }
 
-  .brand .logo {
-    font-size: 1rem;
-  }
-
-  .estimated-tag {
-    font-size: 0.7rem;
-    color: #94a3b8;
+  .est {
+    font-size: 0.65rem;
+    color: #64748b;
     margin-left: 2px;
   }
 
   tbody tr {
-    border-bottom: 1px solid #f1f5f9;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
 
   tbody tr:hover {
-    background: #fafbfc;
+    background: rgba(255, 255, 255, 0.02);
   }
 
   .label {
     text-align: left;
-    color: #64748b;
+    color: var(--text-secondary, #94a3b8);
     font-weight: 500;
     font-size: 0.8rem;
   }
 
   td {
-    color: #334155;
-    font-weight: 500;
+    color: var(--text-primary, #e2e8f0);
   }
 
   .raygold-cell {
-    background: rgba(16, 185, 129, 0.04);
-    color: #059669;
+    background: rgba(16, 185, 129, 0.08);
+    color: #10b981;
     font-weight: 600;
   }
 
-  .highlight {
+  .included {
     color: #10b981 !important;
+    font-size: 0.8rem;
   }
 
   /* Total row */
   tfoot .total-row {
-    background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+    background: rgba(16, 185, 129, 0.05);
   }
 
   tfoot .total-row td {
-    padding: 20px 12px;
-    border-top: 2px solid #e2e8f0;
+    padding: 16px 12px;
+    border-top: 2px solid rgba(255, 255, 255, 0.1);
   }
 
-  .total-amount {
-    display: block;
-    font-size: 1.1rem;
+  .amount {
+    font-size: 1rem;
     font-weight: 700;
-    color: #1e293b;
+    color: var(--text-primary, #f8fafc);
   }
 
-  .raygold-cell .total-amount {
-    color: #059669;
-    font-size: 1.25rem;
+  .raygold-cell .amount {
+    color: #10b981;
+    font-size: 1.1rem;
   }
 
-  /* Disclaimer en tabla */
-  .table-footer {
-    padding: 16px 20px;
-    background: #f8fafc;
-    border-top: 1px solid #e2e8f0;
+  .amount.big {
+    font-size: 1.3rem;
+  }
+
+  .grand-total {
+    background: rgba(99, 102, 241, 0.08) !important;
+  }
+
+  /* Disclaimer */
+  .disclaimer {
+    text-align: center;
     font-size: 0.72rem;
-    color: #64748b;
+    color: var(--text-muted, #64748b);
+    margin: 20px 0;
     line-height: 1.5;
   }
 
-  .table-footer .asterisk {
-    color: #f59e0b;
-    font-weight: 700;
-  }
-
-  /* Botón de fuentes */
+  /* Sources */
   .sources-section {
-    margin-top: 32px;
     text-align: center;
+    margin-top: 16px;
   }
 
   .sources-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 24px;
-    background: white;
-    color: #64748b;
-    font-size: 0.85rem;
-    font-weight: 500;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-secondary, #94a3b8);
+    font-size: 0.8rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
     cursor: pointer;
     transition: all 0.2s ease;
   }
 
   .sources-btn:hover {
-    background: #f8fafc;
-    border-color: #cbd5e1;
-    color: #334155;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-primary, #f8fafc);
   }
 
-  .sources-btn svg {
-    opacity: 0.6;
-  }
-
-  /* Panel de fuentes */
   .sources-panel {
     display: none;
-    margin-top: 24px;
-    padding: 24px;
-    background: white;
-    border-radius: 16px;
-    border: 1px solid #e2e8f0;
-    text-align: left;
+    margin-top: 20px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   .sources-panel.active {
@@ -412,42 +482,29 @@ const sourcesButtonText: Record<string, string> = {
     animation: fadeIn 0.3s ease;
   }
 
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
   .sources-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 12px;
   }
 
   .source-card {
     display: block;
-    padding: 14px 16px;
-    background: #f8fafc;
-    border-radius: 10px;
+    padding: 12px 14px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
     text-decoration: none;
     transition: all 0.2s ease;
-    border: 1px solid transparent;
   }
 
   .source-card:hover {
-    background: #f1f5f9;
-    border-color: #e2e8f0;
+    background: rgba(255, 255, 255, 0.06);
     transform: translateY(-2px);
   }
 
   .source-name {
     display: block;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 600;
     color: #667eea;
     margin-bottom: 4px;
@@ -455,119 +512,155 @@ const sourcesButtonText: Record<string, string> = {
 
   .source-quote {
     display: block;
-    font-size: 0.75rem;
-    color: #64748b;
+    font-size: 0.7rem;
+    color: var(--text-secondary, #94a3b8);
     font-style: italic;
   }
 
-  /* Responsive */
+  /* ============================================
+     MÓVIL
+     ============================================ */
   @media (max-width: 768px) {
     .cost-comparison {
-      padding: 60px 0;
+      padding: 40px 0;
     }
 
     .header h2 {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
+      color: #1e293b;
     }
 
-    .table-container {
-      margin: 0 -10px;
-      border-radius: 16px;
-      overflow-x: auto;
+    .subtitle {
+      color: #64748b;
+    }
+
+    .year-tabs {
+      gap: 6px;
+    }
+
+    .year-tab {
+      padding: 10px 14px;
+      min-width: 70px;
+      background: rgba(0, 0, 0, 0.03);
+      border-color: #e2e8f0;
+    }
+
+    .year-tab.active {
+      background: rgba(16, 185, 129, 0.1);
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+
+    .tab-year {
+      font-size: 0.8rem;
+      color: #1e293b;
+    }
+
+    .tab-desc {
+      font-size: 0.65rem;
+      color: #64748b;
     }
 
     table {
-      min-width: 600px;
       font-size: 0.75rem;
+      background: #f8fafc;
+      border-color: #e2e8f0;
     }
 
-    th,
+    thead th {
+      background: #f1f5f9;
+      border-color: #e2e8f0;
+    }
+
+    tbody tr {
+      border-color: #f1f5f9;
+    }
+
+    .label {
+      color: #64748b;
+    }
+
     td {
-      padding: 12px 8px;
+      color: #334155;
+      padding: 10px 8px;
     }
 
-    .concept-col {
-      width: 100px;
+    .raygold-cell {
+      background: rgba(16, 185, 129, 0.08);
     }
 
-    .table-footer {
-      font-size: 0.65rem;
-      padding: 12px 16px;
+    tfoot .total-row {
+      background: rgba(16, 185, 129, 0.05);
+    }
+
+    .amount {
+      color: #1e293b;
+    }
+
+    .disclaimer {
+      color: #64748b;
+    }
+
+    .sources-btn {
+      background: rgba(0, 0, 0, 0.03);
+      border-color: #e2e8f0;
+      color: #64748b;
+    }
+
+    .sources-panel {
+      background: #f8fafc;
+      border-color: #e2e8f0;
+    }
+
+    .source-card {
+      background: white;
     }
 
     .sources-grid {
       grid-template-columns: 1fr;
     }
-  }
 
-  /* Dark mode en desktop */
-  @media (min-width: 769px) and (prefers-color-scheme: dark) {
-    .table-container {
-      background: #1e293b;
-      border-color: #334155;
+    /* Scroll horizontal en tabla si es necesario */
+    .year-content {
+      overflow-x: auto;
     }
 
-    thead th {
-      background: #0f172a;
-      border-color: #334155;
-    }
-
-    tbody tr {
-      border-color: #334155;
-    }
-
-    tbody tr:hover {
-      background: rgba(255, 255, 255, 0.02);
-    }
-
-    .label {
-      color: #94a3b8;
-    }
-
-    td {
-      color: #e2e8f0;
-    }
-
-    .total-amount {
-      color: #f8fafc;
-    }
-
-    .table-footer {
-      background: #0f172a;
-      border-color: #334155;
-      color: #94a3b8;
-    }
-
-    .sources-btn,
-    .sources-panel {
-      background: #1e293b;
-      border-color: #334155;
-      color: #94a3b8;
-    }
-
-    .source-card {
-      background: #0f172a;
+    table {
+      min-width: 500px;
     }
   }
 </style>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const btn = document.getElementById("toggleSources");
-    const panel = document.getElementById("sourcesPanel");
-
-    btn?.addEventListener("click", () => {
-      panel?.classList.toggle("active");
-
-      if (panel?.classList.contains("active")) {
-        btn.style.background = "#f0fdf4";
-        btn.style.borderColor = "#86efac";
-        btn.style.color = "#059669";
-      } else {
-        btn.style.background = "";
-        btn.style.borderColor = "";
-        btn.style.color = "";
-      }
+  document.addEventListener('DOMContentLoaded', () => {
+    // Tabs de años
+    const tabs = document.querySelectorAll('.year-tab');
+    const contents = document.querySelectorAll('.year-content');
+    
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const year = tab.getAttribute('data-year');
+        
+        // Activar tab
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        
+        // Mostrar contenido
+        contents.forEach(c => {
+          if (c.getAttribute('data-year-content') === year) {
+            c.classList.add('active');
+          } else {
+            c.classList.remove('active');
+          }
+        });
+      });
+    });
+    
+    // Botón de fuentes
+    const sourcesBtn = document.getElementById('toggleSources');
+    const sourcesPanel = document.getElementById('sourcesPanel');
+    
+    sourcesBtn?.addEventListener('click', () => {
+      sourcesPanel?.classList.toggle('active');
     });
   });
 </script>
