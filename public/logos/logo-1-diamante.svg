@@ -1,0 +1,32 @@
+<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Diamante estilizado con facetas -->
+  <defs>
+    <linearGradient id="diamondGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea"/>
+      <stop offset="50%" style="stop-color:#764ba2"/>
+      <stop offset="100%" style="stop-color:#667eea"/>
+    </linearGradient>
+    <linearGradient id="diamondGrad2" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#8b5cf6"/>
+      <stop offset="100%" style="stop-color:#a78bfa"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Corona del diamante -->
+  <polygon points="50,8 75,30 50,42 25,30" fill="url(#diamondGrad2)"/>
+  
+  <!-- Faceta izquierda superior -->
+  <polygon points="25,30 50,42 50,30 15,25" fill="#818cf8" opacity="0.9"/>
+  
+  <!-- Faceta derecha superior -->
+  <polygon points="75,30 50,42 50,30 85,25" fill="#667eea" opacity="0.9"/>
+  
+  <!-- Pabellón (parte inferior) izquierda -->
+  <polygon points="25,30 50,42 50,92" fill="url(#diamondGrad1)"/>
+  
+  <!-- Pabellón derecha -->
+  <polygon points="75,30 50,42 50,92" fill="#764ba2"/>
+  
+  <!-- Brillo -->
+  <polygon points="50,8 58,20 50,25 42,20" fill="white" opacity="0.6"/>
+</svg>

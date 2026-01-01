@@ -1,0 +1,32 @@
+<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="hexGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea"/>
+      <stop offset="100%" style="stop-color:#764ba2"/>
+    </linearGradient>
+    <linearGradient id="hexGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#818cf8"/>
+      <stop offset="100%" style="stop-color:#6366f1"/>
+    </linearGradient>
+    <linearGradient id="innerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#a78bfa"/>
+      <stop offset="100%" style="stop-color:#8b5cf6"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Hexágono exterior -->
+  <polygon points="50,5 90,27.5 90,72.5 50,95 10,72.5 10,27.5" fill="url(#hexGrad1)"/>
+  
+  <!-- Hexágono medio (profundidad) -->
+  <polygon points="50,15 78,32.5 78,67.5 50,85 22,67.5 22,32.5" fill="url(#hexGrad2)" opacity="0.7"/>
+  
+  <!-- Hexágono interior (gema) -->
+  <polygon points="50,28 66,40 66,60 50,72 34,60 34,40" fill="url(#innerGrad)"/>
+  
+  <!-- Facetas de la gema interior -->
+  <polygon points="50,28 66,40 50,50" fill="white" opacity="0.3"/>
+  <polygon points="50,28 34,40 50,50" fill="white" opacity="0.15"/>
+  
+  <!-- Brillo central -->
+  <circle cx="45" cy="45" r="4" fill="white" opacity="0.5"/>
+</svg>

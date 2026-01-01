@@ -1,24 +1,43 @@
 ---
 /**
- * Layout principal con Header y Footer multiidioma
+ * Layout principal con SEO completo, Header y Footer multiidioma
+ * 
+ * Incluye:
+ * - SEO completo (meta, OG, Twitter, Schema JSON-LD)
+ * - Header responsive
+ * - Footer con redes sociales
+ * - WhatsApp flotante
  */
+import SEO from "@/components/SEO.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import WhatsAppButton from "@/components/WhatsAppButton.astro";
 import { type Lang } from "@/config/pages";
 
 interface Props {
-  title: string;
+  title?: string;
   description?: string;
+  keywords?: string[];
+  image?: string;
   lang?: Lang;
+  type?: "website" | "article" | "product";
+  noindex?: boolean;
+  publishedTime?: string;
+  modifiedTime?: string;
   alternateUrls?: { lang: Lang; url: string }[];
 }
 
 const { 
-  title, 
-  description = "RayGold - Software ERP especializado para la industria joyera", 
-  lang = 'es',
-  alternateUrls = []
+  title,
+  description,
+  keywords,
+  image,
+  lang = "es",
+  type = "website",
+  noindex = false,
+  publishedTime,
+  modifiedTime,
+  alternateUrls = [],
 } = Astro.props;
 ---
 
@@ -27,30 +46,20 @@ const {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content={description} />
-    <title>{title}</title>
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    
-    <!-- Hreflang tags -->
-    {alternateUrls.map((alt) => (
-      <link rel="alternate" hreflang={alt.lang === 'pt-br' ? 'pt-BR' : alt.lang} href={alt.url} />
-    ))}
-    {alternateUrls.length > 0 && (
-      <link rel="alternate" hreflang="x-default" href={alternateUrls.find(a => a.lang === 'es')?.url || alternateUrls[0]?.url} />
-    )}
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content={lang === 'pt-br' ? 'pt_BR' : lang} />
-    
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
+    <!-- SEO Completo (meta, OG, Twitter, Schema JSON-LD) -->
+    <SEO
+      lang={lang}
+      title={title}
+      description={description}
+      keywords={keywords}
+      image={image}
+      type={type}
+      noindex={noindex}
+      publishedTime={publishedTime}
+      modifiedTime={modifiedTime}
+      alternateUrls={alternateUrls}
+    />
   </head>
   
   <body>

@@ -1,0 +1,167 @@
+---
+/**
+ * Selector de moneda para páginas de precios
+ * Solo aparece si hay más de una moneda disponible para el idioma
+ */
+import { 
+  getAvailableCurrencies, 
+  showCurrencySelector, 
+  defaultCurrency,
+  selectorTexts,
+  getPrices,
+  type Currency 
+} from "@/config/pricing";
+import type { Lang } from "@/config/pages";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const show = showCurrencySelector(lang);
+const currencies = getAvailableCurrencies(lang);
+const defaultCurr = defaultCurrency[lang];
+const texts = selectorTexts[lang];
+
+// Precios para cada moneda (para JavaScript)
+const pricesData: Record<string, ReturnType<typeof getPrices>> = {};
+currencies.forEach(c => {
+  pricesData[c.code] = getPrices(c.code as Currency);
+});
+---
+
+{show && (
+  <div class="currency-selector-wrapper">
+    <label class="currency-label">{texts.currency}:</label>
+    <div class="currency-selector">
+      {currencies.map((curr) => (
+        <button 
+          type="button"
+          class={`currency-btn ${curr.code === defaultCurr ? 'active' : ''}`}
+          data-currency={curr.code}
+          data-prices={JSON.stringify(pricesData[curr.code])}
+        >
+          <span class="currency-flag">{curr.flag}</span>
+          <span class="currency-code">{curr.symbol}</span>
+        </button>
+      ))}
+    </div>
+  </div>
+)}
+
+<style>
+  .currency-selector-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .currency-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary, #94a3b8);
+    font-weight: 500;
+  }
+
+  .currency-selector {
+    display: flex;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 4px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .currency-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    color: var(--text-secondary, #94a3b8);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .currency-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-primary, #ffffff);
+  }
+
+  .currency-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+  }
+
+  .currency-flag {
+    font-size: 1.1rem;
+  }
+
+  .currency-code {
+    font-weight: 600;
+  }
+
+  /* Móvil */
+  @media (max-width: 768px) {
+    .currency-selector {
+      background: rgba(0, 0, 0, 0.04);
+      border-color: rgba(0, 0, 0, 0.08);
+    }
+
+    .currency-btn {
+      color: #64748b;
+    }
+
+    .currency-btn:hover {
+      background: rgba(0, 0, 0, 0.06);
+      color: #1e293b;
+    }
+
+    .currency-label {
+      color: #64748b;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('.currency-btn');
+    
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Actualizar estado activo
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        // Obtener precios
+        const pricesJson = btn.getAttribute('data-prices');
+        if (!pricesJson) return;
+        
+        const prices = JSON.parse(pricesJson);
+        
+        // Actualizar precios en la página
+        // Starter
+        const starterPrice = document.querySelector('[data-price="starter"]');
+        if (starterPrice) starterPrice.textContent = prices.starter;
+        
+        // Professional
+        const proPrice = document.querySelector('[data-price="professional"]');
+        if (proPrice) proPrice.textContent = prices.professional;
+        
+        // Enterprise
+        const entPrice = document.querySelector('[data-price="enterprise"]');
+        if (entPrice) entPrice.textContent = prices.enterprise;
+        
+        // Perpetual
+        const perpPrice = document.querySelector('[data-price="perpetual"]');
+        if (perpPrice) perpPrice.textContent = prices.perpetual;
+      });
+    });
+  });
+</script>

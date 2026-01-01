@@ -1,0 +1,27 @@
+<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea"/>
+      <stop offset="100%" style="stop-color:#764ba2"/>
+    </linearGradient>
+    <linearGradient id="gemGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#a78bfa"/>
+      <stop offset="100%" style="stop-color:#8b5cf6"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Anillo (elipse) -->
+  <ellipse cx="50" cy="62" rx="32" ry="18" stroke="url(#ringGrad)" stroke-width="6" fill="none"/>
+  
+  <!-- Base del engaste -->
+  <path d="M42 52 L50 45 L58 52 L56 55 L50 50 L44 55 Z" fill="url(#ringGrad)"/>
+  
+  <!-- Gema pequeña en la parte superior -->
+  <polygon points="50,22 58,32 50,38 42,32" fill="url(#gemGrad)"/>
+  
+  <!-- Brillo de la gema -->
+  <polygon points="50,22 53,28 50,30 47,28" fill="white" opacity="0.7"/>
+  
+  <!-- Sombra sutil del anillo -->
+  <ellipse cx="50" cy="85" rx="25" ry="6" fill="#764ba2" opacity="0.15"/>
+</svg>

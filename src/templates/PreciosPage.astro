@@ -4,8 +4,12 @@
  * Página de precios de RayGold ERP
  * Diseño minimalista basado en el original
  */
+
 import Layout from "@/layouts/Layout.astro";
 import { getAlternateUrls, getPageUrl, type Lang } from "@/config/pages";
+import CurrencySelector from "@/components/CurrencySelector.astro";
+import { getPrices, defaultCurrency } from "@/config/pricing";
+import CostComparison from "@/components/CostComparison.astro";
 
 interface Props {
   lang: Lang;
@@ -622,7 +626,7 @@ const translations: Record<
     saasDesc: "Ideal para começar rápido.",
     perpetualLabel: "Licença Perpétua",
     perpetualDesc: "Para empresas que preferem controle total.",
-    faqTitle: "Perguntas frequentes",
+    faqTitle: "Preguntas frequentes",
     faq: [
       { q: "Posso mudar de plano?", a: "Sim, a qualquer momento." },
       { q: "Há compromisso?", a: "Não, sem compromisso." },
@@ -641,6 +645,8 @@ const translations: Record<
 };
 
 const t = translations[lang] || translations.es;
+const currency = defaultCurrency[lang];
+const prices = getPrices(currency);
 ---
 
 <Layout
@@ -660,6 +666,9 @@ const t = translations[lang] || translations.es;
         <p class="hero-subtitle">{t.subtitle}</p>
       </div>
     </section>
+
+    <!-- Selector de Moneda (solo EN y PT-BR) -->
+    <CurrencySelector lang={lang} />
 
     <!-- Toggle -->
     <section class="toggle-section">
@@ -722,7 +731,10 @@ const t = translations[lang] || translations.es;
               <p class="plan-description">{t.starter.desc}</p>
             </div>
             <div class="plan-pricing">
-              <span class="price-amount">{t.starter.price}</span>
+              <!-- <span class="price-amount">{t.starter.price}</span> -->
+              <span class="price-amount" data-price="starter"
+                >{prices.starter}</span
+              >
               <span class="price-period">{t.starter.period}</span>
             </div>
             <p class="price-note">{t.starter.note}</p>
@@ -770,7 +782,10 @@ const t = translations[lang] || translations.es;
               <p class="plan-description">{t.professional.desc}</p>
             </div>
             <div class="plan-pricing">
-              <span class="price-amount">{t.professional.price}</span>
+              <!-- <span class="price-amount">{t.professional.price}</span> -->
+              <span class="price-amount" data-price="professional"
+                >{prices.professional}</span
+              >
               <span class="price-period">{t.professional.period}</span>
             </div>
             <p class="price-note">{t.professional.note}</p>
@@ -818,7 +833,10 @@ const t = translations[lang] || translations.es;
               <p class="plan-description">{t.enterprise.desc}</p>
             </div>
             <div class="plan-pricing">
-              <span class="price-amount">{t.enterprise.price}</span>
+              <!-- <span class="price-amount">{t.enterprise.price}</span> -->
+              <span class="price-amount" data-price="enterprise"
+                >{prices.enterprise}</span
+              >
               <span class="price-period">{t.enterprise.period}</span>
             </div>
             <p class="price-note">{t.enterprise.note}</p>
@@ -890,7 +908,10 @@ const t = translations[lang] || translations.es;
             <div class="perpetual-right">
               <div class="perpetual-price">
                 <span class="price-from">{t.perpetual.from}</span>
-                <span class="price-amount">{t.perpetual.price}</span>
+                <!-- <span class="price-amount">{t.perpetual.price}</span> -->
+                <span class="price-amount" data-price="perpetual"
+                  >{prices.perpetual}</span
+                >
               </div>
               <p class="price-detail">{t.perpetual.detail}</p>
             </div>
@@ -975,6 +996,9 @@ const t = translations[lang] || translations.es;
         </div>
       </div>
     </section>
+
+    <!-- Comparativa  -->
+    <CostComparison lang={lang} />
 
     <!-- FAQ -->
     <section class="faq-section">
