@@ -1,17 +1,104 @@
 ---
 /**
- * Redirección según dominio
- * raytecno.es → /es/
- * raytecno.com → /en/
+ * Página raíz con SEO para bots y redirección para usuarios
+ * Los bots ven contenido, los usuarios son redirigidos
  */
 ---
 
-<html>
-  <head
-    ><script>
-      location.replace(
-        location.hostname.indexOf(".com") !== -1 ? "/en/" : "/es/"
-      );
-    </script></head
-  ><body></body>
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO para bots -->
+    <title>
+      RayGold - Software ERP para Joyería | Gestión integral para joyeros
+    </title>
+    <meta
+      name="description"
+      content="El ERP más completo para joyerías. Gestión de inventario, fabricación, ventas y contabilidad. +200 joyerías confían en nosotros desde 1990."
+    />
+    <meta
+      name="keywords"
+      content="ERP joyería, software joyería, gestión joyería, programa joyerías, control stock oro, software fabricación joyas"
+    />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="RayGold - Software ERP para Joyería" />
+    <meta
+      property="og:description"
+      content="El ERP más completo para joyerías. +200 joyerías confían en nosotros desde 1990."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.raytecno.es" />
+    <meta
+      property="og:image"
+      content="https://www.raytecno.es/images/og-image.jpg"
+    />
+
+    <!-- Canonical y alternates -->
+    <link rel="canonical" href="https://www.raytecno.es/es/" />
+    <link rel="alternate" hreflang="es" href="https://www.raytecno.es/es/" />
+    <link rel="alternate" hreflang="en" href="https://www.raytecno.com/en/" />
+    <link rel="alternate" hreflang="fr" href="https://www.raytecno.es/fr/" />
+    <link rel="alternate" hreflang="ca" href="https://www.raytecno.es/ca/" />
+    <link rel="alternate" hreflang="pt" href="https://www.raytecno.es/pt-br/" />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://www.raytecno.es/es/"
+    />
+
+    <!-- Redirección para usuarios (JavaScript) -->
+    <script>
+      (function () {
+        var h = location.hostname;
+        location.replace(h.indexOf(".com") !== -1 ? "/en/" : "/es/");
+      })();
+    </script>
+
+    <!-- Fallback para usuarios sin JavaScript -->
+    <noscript>
+      <meta http-equiv="refresh" content="0; url=/es/" />
+    </noscript>
+  </head>
+  <body>
+    <!-- Contenido para bots (los usuarios no lo ven porque son redirigidos) -->
+    <main>
+      <h1>RayGold - Software ERP para Joyería</h1>
+      <p>
+        El ERP más completo para joyerías. Gestión de inventario, fabricación,
+        ventas y contabilidad.
+      </p>
+      <p>+200 joyerías confían en nosotros desde 1990.</p>
+
+      <h2>Módulos</h2>
+      <ul>
+        <li>
+          <a href="/es/modulos/maestros">Maestros</a> - Gestión de artículos, clientes
+          y proveedores
+        </li>
+        <li>
+          <a href="/es/modulos/comercial">Comercial</a> - Pedidos, albaranes y facturas
+        </li>
+        <li>
+          <a href="/es/modulos/fabricacion">Fabricación</a> - Órdenes de trabajo y
+          producción
+        </li>
+        <li>
+          <a href="/es/modulos/finanzas">Finanzas</a> - Contabilidad y tesorería
+        </li>
+      </ul>
+
+      <h2>Contacto</h2>
+      <p>Email: info@raytecno.es</p>
+      <p>Teléfono: +34 648 088 550</p>
+
+      <p>
+        <a href="/es/">Versión en Español</a> | <a href="/en/"
+          >English Version</a>
+      </p>
+    </main>
+  </body>
 </html>
