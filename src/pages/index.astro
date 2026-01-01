@@ -1,7 +1,7 @@
 ---
 /**
  * Página raíz con SEO para bots y redirección para usuarios
- * Los bots ven contenido, los usuarios son redirigidos
+ * El contenido está oculto visualmente pero los bots lo leen
  */
 ---
 
@@ -50,21 +50,27 @@
       href="https://www.raytecno.es/es/"
     />
 
-    <!-- Redirección para usuarios (JavaScript) -->
+    <!-- Ocultar body ANTES de que se renderice -->
+    <style>
+      body {
+        display: none !important;
+      }
+    </style>
+
+    <!-- Redirección instantánea -->
     <script>
-      (function () {
-        var h = location.hostname;
-        location.replace(h.indexOf(".com") !== -1 ? "/en/" : "/es/");
-      })();
+      location.replace(
+        location.hostname.indexOf(".com") !== -1 ? "/en/" : "/es/"
+      );
     </script>
 
-    <!-- Fallback para usuarios sin JavaScript -->
+    <!-- Fallback sin JavaScript -->
     <noscript>
       <meta http-equiv="refresh" content="0; url=/es/" />
     </noscript>
   </head>
   <body>
-    <!-- Contenido para bots (los usuarios no lo ven porque son redirigidos) -->
+    <!-- Contenido SEO para bots (invisible para usuarios) -->
     <main>
       <h1>RayGold - Software ERP para Joyería</h1>
       <p>
@@ -72,33 +78,15 @@
         ventas y contabilidad.
       </p>
       <p>+200 joyerías confían en nosotros desde 1990.</p>
-
       <h2>Módulos</h2>
       <ul>
-        <li>
-          <a href="/es/modulos/maestros">Maestros</a> - Gestión de artículos, clientes
-          y proveedores
-        </li>
-        <li>
-          <a href="/es/modulos/comercial">Comercial</a> - Pedidos, albaranes y facturas
-        </li>
-        <li>
-          <a href="/es/modulos/fabricacion">Fabricación</a> - Órdenes de trabajo y
-          producción
-        </li>
-        <li>
-          <a href="/es/modulos/finanzas">Finanzas</a> - Contabilidad y tesorería
-        </li>
+        <li><a href="/es/modulos/maestros">Maestros</a></li>
+        <li><a href="/es/modulos/comercial">Comercial</a></li>
+        <li><a href="/es/modulos/fabricacion">Fabricación</a></li>
+        <li><a href="/es/modulos/finanzas">Finanzas</a></li>
       </ul>
-
-      <h2>Contacto</h2>
-      <p>Email: info@raytecno.es</p>
-      <p>Teléfono: +34 648 088 550</p>
-
-      <p>
-        <a href="/es/">Versión en Español</a> | <a href="/en/"
-          >English Version</a>
-      </p>
+      <p>Email: info@raytecno.es | Tel: +34 648 088 550</p>
+      <a href="/es/">Español</a> | <a href="/en/">English</a>
     </main>
   </body>
 </html>
