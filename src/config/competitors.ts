@@ -167,7 +167,7 @@ export function calculateRaygoldByYear(): YearlyBreakdown[] {
       training: 0,
       dataMigration: 0,
       hosting: r.hostingPerYear,
-      maintenance: r.maintenancePerYear,
+      maintenance: 0,
       total: yearlyLicense + r.hostingPerYear + r.maintenancePerYear,
     },
     {
@@ -178,7 +178,7 @@ export function calculateRaygoldByYear(): YearlyBreakdown[] {
       training: 0,
       dataMigration: 0,
       hosting: r.hostingPerYear,
-      maintenance: r.maintenancePerYear,
+      maintenance: 0,
       total: yearlyLicense + r.hostingPerYear + r.maintenancePerYear,
     },
   ];
