@@ -2,6 +2,11 @@
 /**
  * SEO.astro - Componente SEO unificado para RayGold
  * 
+ * CORRECCIONES SEO:
+ * - x-default apunta a /en/ (estándar internacional)
+ * - Canonical URLs siempre con trailing slash
+ * - Hreflang URLs siempre con trailing slash
+ * 
  * Incluye:
  * - Meta tags básicos
  * - Open Graph (Facebook, WhatsApp, LinkedIn)
@@ -9,31 +14,18 @@
  * - hreflang para multiidioma
  * - Schema.org JSON-LD
  * - Breadcrumbs dinámicos
- * 
- * Uso:
- * <SEO 
- *   lang="es"
- *   title="Módulo Maestros"
- *   description="Gestión de artículos, proveedores y clientes"
- *   alternateUrls={alternateUrls}
- * />
  */
 
 import { type Lang } from "@/config/pages";
 
 // ============================================
 // CONFIGURACIÓN DE LA EMPRESA
-// Edita estos valores según necesites
 // ============================================
 const COMPANY = {
   name: "RayGold ERP",
   legalName: "Raytecno BCN SL",
   
-  // Dominios
-  domains: {
-    es: "https://www.raytecno.es",
-    en: "https://www.raytecno.com",
-  },
+  // Dominios - TODO va a .es (el .com redirige)
   primaryDomain: "https://www.raytecno.es",
   
   // Imágenes
@@ -58,7 +50,6 @@ const COMPANY = {
   social: {
     linkedin: "https://www.linkedin.com/in/raytecno-raytecno-062901117",
     twitter: "@raytecno",
-    // Añade más si tienes: facebook, instagram, youtube
   },
   
   // Colores
@@ -67,11 +58,11 @@ const COMPANY = {
   // Datos de la empresa
   foundingDate: "1990",
   
-  // Reviews reales (ajusta estos números a tus datos reales)
+  // Reviews
   reviews: {
-    enabled: true,        // Poner false si no tienes reviews verificables
-    ratingValue: "4.8",   // Puntuación media real
-    reviewCount: "150",   // Número real de reviews
+    enabled: true,
+    ratingValue: "4.8",
+    reviewCount: "150",
     bestRating: "5",
     worstRating: "1",
   },
@@ -170,11 +161,14 @@ const {
 // ============================================
 const config = LANG_CONFIG[lang] || LANG_CONFIG.es;
 
-// Dominio según idioma
-const siteDomain = lang === "en" ? COMPANY.domains.en : COMPANY.domains.es;
+// Siempre usar el dominio principal .es
+const siteDomain = COMPANY.primaryDomain;
 
-// URL actual
-const currentPath = Astro.url.pathname;
+// URL actual - SIEMPRE con trailing slash
+let currentPath = Astro.url.pathname;
+if (!currentPath.endsWith('/')) {
+  currentPath = currentPath + '/';
+}
 const canonicalUrl = `${siteDomain}${currentPath}`;
 
 // Título
@@ -193,6 +187,13 @@ const ogImage = image
 
 // Logo absoluto
 const logoUrl = `${siteDomain}${COMPANY.logo}`;
+
+// ============================================
+// FUNCIÓN HELPER: Asegurar trailing slash
+// ============================================
+function ensureTrailingSlash(url: string): string {
+  return url.endsWith('/') ? url : url + '/';
+}
 
 // ============================================
 // SCHEMA.ORG - ORGANIZATION
@@ -222,7 +223,6 @@ const schemaOrganization = {
   },
   "sameAs": [
     COMPANY.social.linkedin,
-    // Añade más redes sociales aquí
   ].filter(Boolean),
 };
 
@@ -304,7 +304,7 @@ const breadcrumbItems = [
     "@type": "ListItem",
     "position": index + 2,
     "name": segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, " "),
-    "item": `${siteDomain}/${lang}/${pathSegments.slice(0, index + 1).join("/")}`,
+    "item": `${siteDomain}/${lang}/${pathSegments.slice(0, index + 1).join("/")}/`,
   })),
 ];
 
@@ -331,26 +331,27 @@ const schemaBreadcrumb = {
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 )}
 
-<!-- Canonical -->
+<!-- Canonical - SIEMPRE con trailing slash -->
 <link rel="canonical" href={canonicalUrl} />
 
 <!-- ========================================
      HREFLANG (Multiidioma)
+     Todas las URLs con trailing slash
      ======================================== -->
 {alternateUrls.map((alt) => (
   <link 
     rel="alternate" 
     hreflang={LANG_CONFIG[alt.lang]?.hreflang || alt.lang} 
-    href={alt.url} 
+    href={ensureTrailingSlash(`${siteDomain}${alt.url}`)} 
   />
 ))}
 
-<!-- x-default apunta al español -->
+<!-- x-default apunta al INGLÉS (estándar internacional) -->
 {alternateUrls.length > 0 && (
   <link 
     rel="alternate" 
     hreflang="x-default" 
-    href={alternateUrls.find(a => a.lang === "es")?.url || `${COMPANY.domains.es}/es/`} 
+    href={`${siteDomain}/en/`} 
   />
 )}
 

@@ -9,7 +9,6 @@ import { supportedLangs, toolsFolderSlugs, toolSlugs, type Lang } from "@/config
 // Templates
 import CalculadoraPage from "@/templates/CalculadoraPage.astro";
 import CotizacionPage from "@/templates/CotizacionPage.astro";
-import NormativaPage from "@/templates/NormativaPage.astro";
 
 export async function getStaticPaths() {
   const paths: Array<{
@@ -53,7 +52,6 @@ const { lang, toolKey } = Astro.props;
 const toolComponents: Record<string, any> = {
   calculadora: CalculadoraPage,
   cotizacion: CotizacionPage,
-  normativa: NormativaPage,
 };
 
 const ToolComponent = toolComponents[toolKey];

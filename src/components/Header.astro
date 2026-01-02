@@ -33,26 +33,25 @@ const languages: { code: Lang; name: string; flag: string }[] = [
 
 const currentLang = languages.find((l) => l.code === lang) || languages[0];
 
-// URLs de navegación
+// URLs de navegación - TODAS con trailing slash
 const homeUrl = `/${lang}/`;
-const modulosUrl = getPageUrl("modulos", lang);
-const preciosUrl = getPageUrl("precios", lang);
-const tecnologiaUrl = getPageUrl("tecnologia", lang);
-const blogUrl = `/${lang}/blog`;
-const contactoUrl = getPageUrl("contacto", lang);
+const modulosUrl = getPageUrl("modulos", lang) + '/';
+const preciosUrl = getPageUrl("precios", lang) + '/';
+const tecnologiaUrl = getPageUrl("tecnologia", lang) + '/';
+const blogUrl = `/${lang}/blog/`;
+const contactoUrl = getPageUrl("contacto", lang) + '/';
 
-// URLs de herramientas
-const calculadoraUrl = getToolUrl("calculadora", lang);
-const cotizacionUrl = getToolUrl("cotizacion", lang);
-const normativaUrl = getToolUrl("normativa", lang);
+// URLs de herramientas - TODAS con trailing slash
+const calculadoraUrl = getToolUrl("calculadora", lang) + '/';
+const cotizacionUrl = getToolUrl("cotizacion", lang) + '/';
 
 // Traducciones del menú
-const navLabels: Record<Lang, { tools: string; calculator: string; prices: string; compliance: string }> = {
-  es: { tools: "Herramientas", calculator: "Calculadora Rentabilidad", prices: "Cotización Oro/Plata", compliance: "Guía Normativa" },
-  en: { tools: "Tools", calculator: "Profitability Calculator", prices: "Gold/Silver Prices", compliance: "Compliance Guide" },
-  fr: { tools: "Outils", calculator: "Calculateur Rentabilité", prices: "Cours Or/Argent", compliance: "Guide Réglementaire" },
-  ca: { tools: "Eines", calculator: "Calculadora Rendibilitat", prices: "Cotització Or/Plata", compliance: "Guia Normativa" },
-  "pt-br": { tools: "Ferramentas", calculator: "Calculadora Rentabilidade", prices: "Cotação Ouro/Prata", compliance: "Guia Normativo" },
+const navLabels: Record<Lang, { tools: string; calculator: string; prices: string }> = {
+  es: { tools: "Herramientas", calculator: "Calculadora Rentabilidad", prices: "Cotización Oro/Plata" },
+  en: { tools: "Tools", calculator: "Profitability Calculator", prices: "Gold/Silver Prices" },
+  fr: { tools: "Outils", calculator: "Calculateur Rentabilité", prices: "Cours Or/Argent" },
+  ca: { tools: "Eines", calculator: "Calculadora Rendibilitat", prices: "Cotització Or/Plata" },
+  "pt-br": { tools: "Ferramentas", calculator: "Calculadora Rentabilidade", prices: "Cotação Ouro/Prata" },
 };
 
 const blogLabel: Record<Lang, string> = {
@@ -112,13 +111,6 @@ const isToolsActive = currentPath.includes('/herramientas') || currentPath.inclu
               <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
             </svg>
             {nl.prices}
-          </a>
-          <a href={normativaUrl} class="dropdown-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M9 12l2 2 4-4"/>
-              <path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-            {nl.compliance}
           </a>
         </div>
       </div>

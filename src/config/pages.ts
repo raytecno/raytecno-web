@@ -53,13 +53,6 @@ export const toolSlugs: Record<string, Record<Lang, string>> = {
     ca: 'cotitzacio-or-plata', 
     'pt-br': 'cotacao-ouro-prata' 
   },
-  normativa: { 
-    es: 'guia-normativa', 
-    en: 'compliance-guide', 
-    fr: 'guide-reglementaire', 
-    ca: 'guia-normativa', 
-    'pt-br': 'guia-normativo' 
-  },
 };
 
 // Slugs de la carpeta de módulos por idioma

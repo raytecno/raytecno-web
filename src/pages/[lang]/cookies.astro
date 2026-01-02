@@ -1,7 +1,7 @@
 ---
 /**
  * Página de Política de Cookies
- * Fondo azul oscuro, texto blanco - estilo minimalista
+ * NOINDEX - Esta página no debe aparecer en buscadores
  */
 import Layout from "@/layouts/Layout.astro";
 import { type Lang } from "@/config/pages";
@@ -105,7 +105,7 @@ const content = {
 const c = content[lang] || content.es;
 ---
 
-<Layout title={c.title} description={c.metaDescription} lang={lang}>
+<Layout title={c.title} description={c.metaDescription} lang={lang} noindex={true}>
   <main class="legal-page">
     <div class="legal-container">
       <h1>{c.title}</h1>
