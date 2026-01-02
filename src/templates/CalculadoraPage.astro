@@ -14,55 +14,60 @@ const { lang } = Astro.props;
 const alternateUrls = getToolAlternateUrls("calculadora");
 
 // Traducciones
-const t: Record<Lang, {
-  metaTitle: string;
-  metaDesc: string;
-  badge: string;
-  title: string;
-  titleHighlight: string;
-  subtitle: string;
-  // Formulario
-  formTitle: string;
-  goldLabel: string;
-  goldHelp: string;
-  silverLabel: string;
-  silverHelp: string;
-  wasteLabel: string;
-  wasteHelp: string;
-  employeesLabel: string;
-  employeesHelp: string;
-  hoursLabel: string;
-  hoursHelp: string;
-  calculateBtn: string;
-  // Resultados
-  resultsTitle: string;
-  currentLosses: string;
-  goldWaste: string;
-  silverWaste: string;
-  adminTime: string;
-  totalAnnual: string;
-  withRaygold: string;
-  wasteReduction: string;
-  timeReduction: string;
-  annualSavings: string;
-  roi: string;
-  roiMonths: string;
-  // CTA
-  ctaTitle: string;
-  ctaSubtitle: string;
-  ctaButton: string;
-  // Notas
-  disclaimer: string;
-  goldPrice: string;
-  silverPrice: string;
-}> = {
+const t: Record<
+  Lang,
+  {
+    metaTitle: string;
+    metaDesc: string;
+    badge: string;
+    title: string;
+    titleHighlight: string;
+    subtitle: string;
+    // Formulario
+    formTitle: string;
+    goldLabel: string;
+    goldHelp: string;
+    silverLabel: string;
+    silverHelp: string;
+    wasteLabel: string;
+    wasteHelp: string;
+    employeesLabel: string;
+    employeesHelp: string;
+    hoursLabel: string;
+    hoursHelp: string;
+    calculateBtn: string;
+    // Resultados
+    resultsTitle: string;
+    currentLosses: string;
+    goldWaste: string;
+    silverWaste: string;
+    adminTime: string;
+    totalAnnual: string;
+    withRaygold: string;
+    wasteReduction: string;
+    timeReduction: string;
+    annualSavings: string;
+    roi: string;
+    roiMonths: string;
+    // CTA
+    ctaTitle: string;
+    ctaSubtitle: string;
+    ctaButton: string;
+    // Notas
+    disclaimer: string;
+    goldPrice: string;
+    silverPrice: string;
+  }
+> = {
   es: {
     metaTitle: "Calculadora de Rentabilidad | RayGold ERP",
-    metaDesc: "Calcula cuánto dinero está perdiendo tu joyería sin un ERP especializado y cuánto podrías ahorrar con RayGold.",
+    metaDesc:
+      "Calcula cuánto dinero está perdiendo tu joyería sin un ERP especializado y cuánto podrías ahorrar con RayGold.",
     badge: "Herramienta Gratuita",
     title: "Calculadora de",
-    titleHighlight: "Rentabilidad",
-    subtitle: "Descubre cuánto dinero está perdiendo tu taller sin un control adecuado de mermas y procesos",
+    titleHighlight: "Rentabilidad  ",
+    subtitle:
+      "Descubre cuánto dinero está perdiendo tu taller sin un control adecuado de mermas y procesos",
     formTitle: "Datos de tu taller",
     goldLabel: "Gramos de oro procesados/mes",
     goldHelp: "Incluye fundición, fabricación y reparaciones",
@@ -88,19 +93,23 @@ const t: Record<Lang, {
     roi: "Retorno de inversión",
     roiMonths: "meses",
     ctaTitle: "¿Quieres ver estos números en tu taller real?",
-    ctaSubtitle: "Solicita una demo personalizada y analizamos tu caso concreto",
+    ctaSubtitle:
+      "Solicita una demo personalizada y analizamos tu caso concreto",
     ctaButton: "Solicitar demo gratuita",
-    disclaimer: "* Cálculos estimados basados en medias del sector. Los resultados reales pueden variar.",
+    disclaimer:
+      "* Cálculos estimados basados en medias del sector. Los resultados reales pueden variar.",
     goldPrice: "Precio oro usado",
     silverPrice: "Precio plata usado",
   },
   en: {
     metaTitle: "Profitability Calculator | RayGold ERP",
-    metaDesc: "Calculate how much money your jewelry workshop is losing without specialized ERP and how much you could save with RayGold.",
+    metaDesc:
+      "Calculate how much money your jewelry workshop is losing without specialized ERP and how much you could save with RayGold.",
     badge: "Free Tool",
     title: "Profitability",
     titleHighlight: "Calculator",
-    subtitle: "Discover how much money your workshop is losing without proper waste and process control",
+    subtitle:
+      "Discover how much money your workshop is losing without proper waste and process control",
     formTitle: "Your workshop data",
     goldLabel: "Grams of gold processed/month",
     goldHelp: "Includes melting, manufacturing and repairs",
@@ -126,19 +135,23 @@ const t: Record<Lang, {
     roi: "Return on investment",
     roiMonths: "months",
     ctaTitle: "Want to see these numbers for your real workshop?",
-    ctaSubtitle: "Request a personalized demo and we'll analyze your specific case",
+    ctaSubtitle:
+      "Request a personalized demo and we'll analyze your specific case",
     ctaButton: "Request free demo",
-    disclaimer: "* Estimated calculations based on industry averages. Actual results may vary.",
+    disclaimer:
+      "* Estimated calculations based on industry averages. Actual results may vary.",
     goldPrice: "Gold price used",
     silverPrice: "Silver price used",
   },
   fr: {
     metaTitle: "Calculateur de Rentabilité | RayGold ERP",
-    metaDesc: "Calculez combien d'argent votre bijouterie perd sans ERP spécialisé et combien vous pourriez économiser avec RayGold.",
+    metaDesc:
+      "Calculez combien d'argent votre bijouterie perd sans ERP spécialisé et combien vous pourriez économiser avec RayGold.",
     badge: "Outil Gratuit",
     title: "Calculateur de",
     titleHighlight: "Rentabilité",
-    subtitle: "Découvrez combien d'argent votre atelier perd sans contrôle adéquat des pertes et des processus",
+    subtitle:
+      "Découvrez combien d'argent votre atelier perd sans contrôle adéquat des pertes et des processus",
     formTitle: "Données de votre atelier",
     goldLabel: "Grammes d'or traités/mois",
     goldHelp: "Inclut la fonte, la fabrication et les réparations",
@@ -164,19 +177,23 @@ const t: Record<Lang, {
     roi: "Retour sur investissement",
     roiMonths: "mois",
     ctaTitle: "Vous voulez voir ces chiffres pour votre vrai atelier?",
-    ctaSubtitle: "Demandez une démo personnalisée et nous analyserons votre cas spécifique",
+    ctaSubtitle:
+      "Demandez une démo personnalisée et nous analyserons votre cas spécifique",
     ctaButton: "Demander une démo gratuite",
-    disclaimer: "* Calculs estimés basés sur les moyennes du secteur. Les résultats réels peuvent varier.",
+    disclaimer:
+      "* Calculs estimés basés sur les moyennes du secteur. Les résultats réels peuvent varier.",
     goldPrice: "Prix de l'or utilisé",
     silverPrice: "Prix de l'argent utilisé",
   },
   ca: {
     metaTitle: "Calculadora de Rendibilitat | RayGold ERP",
-    metaDesc: "Calcula quants diners està perdent la teva joieria sense un ERP especialitzat i quant podries estalviar amb RayGold.",
+    metaDesc:
+      "Calcula quants diners està perdent la teva joieria sense un ERP especialitzat i quant podries estalviar amb RayGold.",
     badge: "Eina Gratuïta",
     title: "Calculadora de",
     titleHighlight: "Rendibilitat",
-    subtitle: "Descobreix quants diners està perdent el teu taller sense un control adequat de mermes i processos",
+    subtitle:
+      "Descobreix quants diners està perdent el teu taller sense un control adequat de mermes i processos",
     formTitle: "Dades del teu taller",
     goldLabel: "Grams d'or processats/mes",
     goldHelp: "Inclou fosa, fabricació i reparacions",
@@ -202,19 +219,23 @@ const t: Record<Lang, {
     roi: "Retorn d'inversió",
     roiMonths: "mesos",
     ctaTitle: "Vols veure aquests números al teu taller real?",
-    ctaSubtitle: "Sol·licita una demo personalitzada i analitzem el teu cas concret",
+    ctaSubtitle:
+      "Sol·licita una demo personalitzada i analitzem el teu cas concret",
     ctaButton: "Sol·licitar demo gratuïta",
-    disclaimer: "* Càlculs estimats basats en mitjanes del sector. Els resultats reals poden variar.",
+    disclaimer:
+      "* Càlculs estimats basats en mitjanes del sector. Els resultats reals poden variar.",
     goldPrice: "Preu or utilitzat",
     silverPrice: "Preu plata utilitzat",
   },
   "pt-br": {
     metaTitle: "Calculadora de Rentabilidade | RayGold ERP",
-    metaDesc: "Calcule quanto dinheiro sua joalheria está perdendo sem um ERP especializado e quanto poderia economizar com RayGold.",
+    metaDesc:
+      "Calcule quanto dinheiro sua joalheria está perdendo sem um ERP especializado e quanto poderia economizar com RayGold.",
     badge: "Ferramenta Gratuita",
     title: "Calculadora de",
     titleHighlight: "Rentabilidade",
-    subtitle: "Descubra quanto dinheiro sua oficina está perdendo sem controle adequado de perdas e processos",
+    subtitle:
+      "Descubra quanto dinheiro sua oficina está perdendo sem controle adequado de perdas e processos",
     formTitle: "Dados da sua oficina",
     goldLabel: "Gramas de ouro processados/mês",
     goldHelp: "Inclui fundição, fabricação e reparos",
@@ -240,9 +261,11 @@ const t: Record<Lang, {
     roi: "Retorno do investimento",
     roiMonths: "meses",
     ctaTitle: "Quer ver esses números na sua oficina real?",
-    ctaSubtitle: "Solicite uma demo personalizada e analisamos seu caso concreto",
+    ctaSubtitle:
+      "Solicite uma demo personalizada e analisamos seu caso concreto",
     ctaButton: "Solicitar demo gratuita",
-    disclaimer: "* Cálculos estimados baseados em médias do setor. Os resultados reais podem variar.",
+    disclaimer:
+      "* Cálculos estimados baseados em médias do setor. Os resultados reais podem variar.",
     goldPrice: "Preço do ouro usado",
     silverPrice: "Preço da prata usado",
   },
@@ -275,7 +298,8 @@ const currency = currencyInfo[lang];
       <div class="hero-content">
         <span class="hero-badge">{tt.badge}</span>
         <h1 class="hero-title">
-          {tt.title} <span class="highlight">{tt.titleHighlight}</span>
+          {tt.title}
+          <span class="highlight">{tt.titleHighlight}</span>
         </h1>
         <p class="hero-subtitle">{tt.subtitle}</p>
       </div>
@@ -287,7 +311,7 @@ const currency = currencyInfo[lang];
         <!-- Formulario -->
         <div class="calc-form-card">
           <h2 class="form-title">{tt.formTitle}</h2>
-          
+
           <div class="form-group">
             <label for="gold">{tt.goldLabel}</label>
             <input type="number" id="gold" value="500" min="0" step="10" />
@@ -303,7 +327,14 @@ const currency = currencyInfo[lang];
           <div class="form-group">
             <label for="waste">{tt.wasteLabel}</label>
             <div class="input-with-suffix">
-              <input type="number" id="waste" value="3.5" min="0" max="10" step="0.5" />
+              <input
+                type="number"
+                id="waste"
+                value="3.5"
+                min="0"
+                max="10"
+                step="0.5"
+              />
               <span class="suffix">%</span>
             </div>
             <span class="form-help">{tt.wasteHelp}</span>
@@ -322,12 +353,19 @@ const currency = currencyInfo[lang];
           </div>
 
           <button type="button" class="calculate-btn" id="calculateBtn">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <rect x="4" y="2" width="16" height="20" rx="2" />
-              <line x1="8" y1="6" x2="16" y2="6" />
-              <line x1="8" y1="10" x2="16" y2="10" />
-              <line x1="8" y1="14" x2="12" y2="14" />
-              <line x1="8" y1="18" x2="12" y2="18" />
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+              <line x1="8" y1="6" x2="16" y2="6"></line>
+              <line x1="8" y1="10" x2="16" y2="10"></line>
+              <line x1="8" y1="14" x2="12" y2="14"></line>
+              <line x1="8" y1="18" x2="12" y2="18"></line>
             </svg>
             {tt.calculateBtn}
           </button>
@@ -387,7 +425,8 @@ const currency = currencyInfo[lang];
           <!-- Precios referencia -->
           <div class="price-reference">
             <span>{tt.goldPrice}: <strong id="goldPriceRef">-</strong></span>
-            <span>{tt.silverPrice}: <strong id="silverPriceRef">-</strong></span>
+            <span>{tt.silverPrice}: <strong id="silverPriceRef">-</strong></span
+            >
           </div>
 
           <p class="disclaimer">{tt.disclaimer}</p>
@@ -401,8 +440,15 @@ const currency = currencyInfo[lang];
       <p>{tt.ctaSubtitle}</p>
       <a href={contactUrl} class="cta-button">
         {tt.ctaButton}
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M5 12h14M12 5l7 7-7 7"/>
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M5 12h14M12 5l7 7-7 7"></path>
         </svg>
       </a>
     </section>
@@ -412,28 +458,35 @@ const currency = currencyInfo[lang];
 <script define:vars={{ currency, lang }}>
   // Precios de metales (aproximados - en producción usar API)
   const metalPrices = {
-    EUR: { gold: 85, silver: 0.95 },      // €/gramo
-    USD: { gold: 92, silver: 1.05 },      // $/gramo
-    BRL: { gold: 460, silver: 5.20 },     // R$/gramo
+    EUR: { gold: 85, silver: 0.95 }, // €/gramo
+    USD: { gold: 92, silver: 1.05 }, // $/gramo
+    BRL: { gold: 460, silver: 5.2 }, // R$/gramo
   };
 
   const prices = metalPrices[currency.code] || metalPrices.EUR;
-  const hourlyRate = currency.code === 'BRL' ? 50 : currency.code === 'USD' ? 25 : 20; // Coste hora empleado
-  const raygoldCost = currency.code === 'BRL' ? 2500 : currency.code === 'USD' ? 500 : 399; // Coste mensual RayGold
+  const hourlyRate =
+    currency.code === "BRL" ? 50 : currency.code === "USD" ? 25 : 20; // Coste hora empleado
+  const raygoldCost =
+    currency.code === "BRL" ? 2500 : currency.code === "USD" ? 500 : 399; // Coste mensual RayGold
 
   function formatCurrency(value) {
-    return currency.symbol + ' ' + value.toLocaleString(lang === 'pt-br' ? 'pt-BR' : lang, { 
-      minimumFractionDigits: 0, 
-      maximumFractionDigits: 0 
-    });
+    return (
+      currency.symbol +
+      " " +
+      value.toLocaleString(lang === "pt-br" ? "pt-BR" : lang, {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+      })
+    );
   }
 
   function calculate() {
-    const gold = parseFloat(document.getElementById('gold').value) || 0;
-    const silver = parseFloat(document.getElementById('silver').value) || 0;
-    const waste = parseFloat(document.getElementById('waste').value) || 0;
-    const employees = parseFloat(document.getElementById('employees').value) || 0;
-    const hours = parseFloat(document.getElementById('hours').value) || 0;
+    const gold = parseFloat(document.getElementById("gold").value) || 0;
+    const silver = parseFloat(document.getElementById("silver").value) || 0;
+    const waste = parseFloat(document.getElementById("waste").value) || 0;
+    const employees =
+      parseFloat(document.getElementById("employees").value) || 0;
+    const hours = parseFloat(document.getElementById("hours").value) || 0;
 
     // Cálculos de pérdidas actuales (anuales)
     const goldWasteGrams = gold * (waste / 100) * 12;
@@ -446,39 +499,49 @@ const currency = currencyInfo[lang];
     // Con RayGold (merma reducida al 1%)
     const newWaste = 1;
     const goldSaving = gold * ((waste - newWaste) / 100) * 12 * prices.gold;
-    const silverSaving = silver * ((waste - newWaste) / 100) * 12 * prices.silver;
+    const silverSaving =
+      silver * ((waste - newWaste) / 100) * 12 * prices.silver;
     const timeSaving = adminLoss * 0.6; // 60% reducción
     const totalSaving = goldSaving + silverSaving + timeSaving;
 
     // ROI (meses para recuperar inversión anual)
     const annualRaygoldCost = raygoldCost * 12;
-    const roiMonths = totalSaving > 0 ? Math.ceil(annualRaygoldCost / (totalSaving / 12)) : 0;
+    const roiMonths =
+      totalSaving > 0 ? Math.ceil(annualRaygoldCost / (totalSaving / 12)) : 0;
 
     // Actualizar UI
-    document.getElementById('goldLoss').textContent = formatCurrency(goldLoss);
-    document.getElementById('silverLoss').textContent = formatCurrency(silverLoss);
-    document.getElementById('adminLoss').textContent = formatCurrency(adminLoss);
-    document.getElementById('totalLoss').textContent = formatCurrency(totalLoss);
+    document.getElementById("goldLoss").textContent = formatCurrency(goldLoss);
+    document.getElementById("silverLoss").textContent =
+      formatCurrency(silverLoss);
+    document.getElementById("adminLoss").textContent =
+      formatCurrency(adminLoss);
+    document.getElementById("totalLoss").textContent =
+      formatCurrency(totalLoss);
 
-    document.getElementById('wasteSaving').textContent = '+' + formatCurrency(goldSaving + silverSaving);
-    document.getElementById('timeSaving').textContent = '+' + formatCurrency(timeSaving);
-    document.getElementById('totalSaving').textContent = '+' + formatCurrency(totalSaving);
+    document.getElementById("wasteSaving").textContent =
+      "+" + formatCurrency(goldSaving + silverSaving);
+    document.getElementById("timeSaving").textContent =
+      "+" + formatCurrency(timeSaving);
+    document.getElementById("totalSaving").textContent =
+      "+" + formatCurrency(totalSaving);
 
-    document.getElementById('roiMonths').textContent = roiMonths;
+    document.getElementById("roiMonths").textContent = roiMonths;
 
-    document.getElementById('goldPriceRef').textContent = formatCurrency(prices.gold) + '/g';
-    document.getElementById('silverPriceRef').textContent = formatCurrency(prices.silver) + '/g';
+    document.getElementById("goldPriceRef").textContent =
+      formatCurrency(prices.gold) + "/g";
+    document.getElementById("silverPriceRef").textContent =
+      formatCurrency(prices.silver) + "/g";
 
     // Mostrar resultados con animación
-    document.getElementById('resultsCard').classList.add('visible');
+    document.getElementById("resultsCard").classList.add("visible");
   }
 
   // Event listeners
-  document.getElementById('calculateBtn').addEventListener('click', calculate);
-  
+  document.getElementById("calculateBtn").addEventListener("click", calculate);
+
   // Calcular al cambiar cualquier input
-  document.querySelectorAll('input').forEach(input => {
-    input.addEventListener('change', calculate);
+  document.querySelectorAll("input").forEach((input) => {
+    input.addEventListener("change", calculate);
   });
 
   // Calcular al cargar
@@ -510,7 +573,11 @@ const currency = currencyInfo[lang];
   .calc-hero {
     padding: 60px 24px 40px;
     text-align: center;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    background: linear-gradient(
+      135deg,
+      rgba(102, 126, 234, 0.1) 0%,
+      rgba(118, 75, 162, 0.1) 100%
+    );
   }
 
   .hero-content {
@@ -734,7 +801,11 @@ const currency = currencyInfo[lang];
   .roi-block {
     text-align: center;
     padding: 24px;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+    background: linear-gradient(
+      135deg,
+      rgba(102, 126, 234, 0.2) 0%,
+      rgba(118, 75, 162, 0.2) 100%
+    );
     border-radius: 12px;
     margin-bottom: 20px;
   }
@@ -788,7 +859,11 @@ const currency = currencyInfo[lang];
   .cta-section {
     padding: 60px 24px;
     text-align: center;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    background: linear-gradient(
+      135deg,
+      rgba(102, 126, 234, 0.1) 0%,
+      rgba(118, 75, 162, 0.1) 100%
+    );
     border-top: 1px solid var(--border);
   }
 
@@ -850,7 +925,11 @@ const currency = currencyInfo[lang];
     }
 
     .calc-hero {
-      background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+      background: linear-gradient(
+        135deg,
+        rgba(102, 126, 234, 0.05) 0%,
+        rgba(118, 75, 162, 0.05) 100%
+      );
     }
 
     .hero-title {
@@ -880,7 +959,11 @@ const currency = currencyInfo[lang];
     }
 
     .cta-section {
-      background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+      background: linear-gradient(
+        135deg,
+        rgba(102, 126, 234, 0.05) 0%,
+        rgba(118, 75, 162, 0.05) 100%
+      );
       border-top: 1px solid #e2e8f0;
     }
 
