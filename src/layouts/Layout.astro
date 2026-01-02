@@ -1,8 +1,9 @@
 ---
 /**
  * Layout principal con SEO completo, Header y Footer multiidioma
- * 
+ *
  * Incluye:
+ * - Redirección automática .com → .es
  * - SEO completo (meta, OG, Twitter, Schema JSON-LD)
  * - Header responsive
  * - Footer con redes sociales
@@ -27,7 +28,7 @@ interface Props {
   alternateUrls?: { lang: Lang; url: string }[];
 }
 
-const { 
+const {
   title,
   description,
   keywords,
@@ -41,12 +42,27 @@ const {
 } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+
+    <!-- REDIRECCIÓN .COM → .ES (debe ir PRIMERO) -->
+    <script is:inline>
+      (function () {
+        var host = window.location.hostname;
+        if (host === "raytecno.com" || host === "www.raytecno.com") {
+          var newUrl =
+            "https://www.raytecno.es" +
+            window.location.pathname +
+            window.location.search +
+            window.location.hash;
+          window.location.replace(newUrl);
+        }
+      })();
+    </script>
+
     <!-- SEO Completo (meta, OG, Twitter, Schema JSON-LD) -->
     <SEO
       lang={lang}
@@ -61,14 +77,14 @@ const {
       alternateUrls={alternateUrls}
     />
   </head>
-  
+
   <body>
     <Header lang={lang} />
-    
+
     <main class="main-content">
       <slot />
     </main>
-    
+
     <Footer lang={lang} />
     <WhatsAppButton lang={lang} />
   </body>
@@ -76,7 +92,9 @@ const {
 
 <style is:global>
   /* Reset básico */
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -87,7 +105,13 @@ const {
   }
 
   body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family:
+      "Inter",
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      sans-serif;
     line-height: 1.6;
     color: #1e293b;
     background: #0f172a;
