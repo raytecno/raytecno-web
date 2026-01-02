@@ -1,0 +1,62 @@
+---
+/**
+ * Router dinámico para herramientas
+ * Ruta: /[lang]/[tools]/[tool].astro
+ * Genera: /es/herramientas/calculadora-rentabilidad, /en/tools/profitability-calculator, etc.
+ */
+import { supportedLangs, toolsFolderSlugs, toolSlugs, type Lang } from "@/config/pages";
+
+// Templates
+import CalculadoraPage from "@/templates/CalculadoraPage.astro";
+import CotizacionPage from "@/templates/CotizacionPage.astro";
+import NormativaPage from "@/templates/NormativaPage.astro";
+
+export async function getStaticPaths() {
+  const paths: Array<{
+    params: { lang: string; tools: string; tool: string };
+    props: { lang: Lang; toolKey: string };
+  }> = [];
+
+  // Para cada idioma
+  for (const lang of supportedLangs) {
+    const toolsFolder = toolsFolderSlugs[lang];
+    
+    // Para cada herramienta
+    for (const [toolKey, slugs] of Object.entries(toolSlugs)) {
+      const toolSlug = slugs[lang];
+      
+      paths.push({
+        params: {
+          lang: lang,
+          tools: toolsFolder,
+          tool: toolSlug,
+        },
+        props: {
+          lang: lang,
+          toolKey: toolKey,
+        },
+      });
+    }
+  }
+
+  return paths;
+}
+
+interface Props {
+  lang: Lang;
+  toolKey: string;
+}
+
+const { lang, toolKey } = Astro.props;
+
+// Mapear toolKey al componente correspondiente
+const toolComponents: Record<string, any> = {
+  calculadora: CalculadoraPage,
+  cotizacion: CotizacionPage,
+  normativa: NormativaPage,
+};
+
+const ToolComponent = toolComponents[toolKey];
+---
+
+{ToolComponent && <ToolComponent lang={lang} />}

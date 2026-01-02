@@ -1,0 +1,419 @@
+---
+/**
+ * Template: Guía de Normativa - Cuestionario interactivo
+ */
+import Layout from "@/layouts/Layout.astro";
+import { getToolAlternateUrls, getPageUrl, type Lang } from "@/config/pages";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const alternateUrls = getToolAlternateUrls("normativa");
+const contactUrl = getPageUrl("contacto", lang);
+
+// Traducciones compactas
+const t: Record<Lang, any> = {
+  es: {
+    metaTitle: "Guía de Normativa Joyera | RayGold ERP",
+    metaDesc: "Verifica si tu taller cumple con la normativa de metales preciosos.",
+    badge: "Guía Interactiva", title: "Guía de", titleHighlight: "Normativa Joyera",
+    subtitle: "Verifica si tu taller cumple con la normativa de metales preciosos",
+    startBtn: "Comenzar evaluación", questionOf: "Pregunta",
+    yes: "Sí", no: "No", notSure: "No estoy seguro",
+    resultsTitle: "Resultado de tu evaluación", score: "Puntuación",
+    compliant: "¡Excelente! Tu taller cumple con los requisitos principales",
+    partial: "Cumplimiento parcial. Hay aspectos que debes mejorar",
+    needsWork: "Tu taller necesita adaptarse a la normativa vigente",
+    recommendations: "Recomendaciones", categoryTitle: "Por categorías",
+    howHelps: "Cómo RayGold te ayuda",
+    ctaTitle: "¿Quieres automatizar el cumplimiento?",
+    ctaSubtitle: "RayGold gestiona automáticamente la trazabilidad y documentación requerida",
+    ctaButton: "Solicitar demo", restart: "Repetir evaluación",
+    categories: { traceability: "Trazabilidad", marking: "Marcaje", documentation: "Documentación", inventory: "Control de inventario" },
+  },
+  en: {
+    metaTitle: "Jewelry Regulations Guide | RayGold ERP",
+    metaDesc: "Check if your workshop complies with precious metals regulations.",
+    badge: "Interactive Guide", title: "Jewelry", titleHighlight: "Regulations Guide",
+    subtitle: "Check if your workshop complies with precious metals regulations",
+    startBtn: "Start assessment", questionOf: "Question",
+    yes: "Yes", no: "No", notSure: "Not sure",
+    resultsTitle: "Your assessment results", score: "Score",
+    compliant: "Excellent! Your workshop meets the main requirements",
+    partial: "Partial compliance. There are aspects you need to improve",
+    needsWork: "Your workshop needs to adapt to current regulations",
+    recommendations: "Recommendations", categoryTitle: "By category",
+    howHelps: "How RayGold helps",
+    ctaTitle: "Want to automate compliance?",
+    ctaSubtitle: "RayGold automatically manages the required traceability and documentation",
+    ctaButton: "Request demo", restart: "Retake assessment",
+    categories: { traceability: "Traceability", marking: "Hallmarking", documentation: "Documentation", inventory: "Inventory control" },
+  },
+  fr: {
+    metaTitle: "Guide Réglementaire Bijouterie | RayGold ERP",
+    metaDesc: "Vérifiez si votre atelier est conforme à la réglementation.",
+    badge: "Guide Interactif", title: "Guide", titleHighlight: "Réglementaire",
+    subtitle: "Vérifiez si votre atelier est conforme à la réglementation des métaux précieux",
+    startBtn: "Commencer", questionOf: "Question",
+    yes: "Oui", no: "Non", notSure: "Pas sûr",
+    resultsTitle: "Résultats", score: "Score",
+    compliant: "Excellent! Votre atelier répond aux exigences",
+    partial: "Conformité partielle. Il y a des aspects à améliorer",
+    needsWork: "Votre atelier doit s'adapter à la réglementation",
+    recommendations: "Recommandations", categoryTitle: "Par catégorie",
+    howHelps: "Comment RayGold aide",
+    ctaTitle: "Automatiser la conformité?",
+    ctaSubtitle: "RayGold gère automatiquement la traçabilité et documentation",
+    ctaButton: "Demander démo", restart: "Refaire",
+    categories: { traceability: "Traçabilité", marking: "Poinçonnage", documentation: "Documentation", inventory: "Contrôle stocks" },
+  },
+  ca: {
+    metaTitle: "Guia de Normativa Joiera | RayGold ERP",
+    metaDesc: "Verifica si el teu taller compleix amb la normativa.",
+    badge: "Guia Interactiva", title: "Guia de", titleHighlight: "Normativa Joiera",
+    subtitle: "Verifica si el teu taller compleix amb la normativa de metalls preciosos",
+    startBtn: "Començar", questionOf: "Pregunta",
+    yes: "Sí", no: "No", notSure: "No n'estic segur",
+    resultsTitle: "Resultat", score: "Puntuació",
+    compliant: "Excel·lent! El teu taller compleix els requisits",
+    partial: "Compliment parcial. Hi ha aspectes a millorar",
+    needsWork: "El teu taller necessita adaptar-se",
+    recommendations: "Recomanacions", categoryTitle: "Per categories",
+    howHelps: "Com RayGold ajuda",
+    ctaTitle: "Automatitzar el compliment?",
+    ctaSubtitle: "RayGold gestiona automàticament la traçabilitat",
+    ctaButton: "Sol·licitar demo", restart: "Repetir",
+    categories: { traceability: "Traçabilitat", marking: "Marcatge", documentation: "Documentació", inventory: "Control inventari" },
+  },
+  "pt-br": {
+    metaTitle: "Guia de Normativa Joalheira | RayGold ERP",
+    metaDesc: "Verifique se sua oficina cumpre com a regulamentação.",
+    badge: "Guia Interativo", title: "Guia de", titleHighlight: "Normativa Joalheira",
+    subtitle: "Verifique se sua oficina cumpre com a regulamentação de metais preciosos",
+    startBtn: "Iniciar", questionOf: "Pergunta",
+    yes: "Sim", no: "Não", notSure: "Não tenho certeza",
+    resultsTitle: "Resultado", score: "Pontuação",
+    compliant: "Excelente! Sua oficina atende aos requisitos",
+    partial: "Conformidade parcial. Existem aspectos a melhorar",
+    needsWork: "Sua oficina precisa se adaptar",
+    recommendations: "Recomendações", categoryTitle: "Por categorias",
+    howHelps: "Como RayGold ajuda",
+    ctaTitle: "Automatizar a conformidade?",
+    ctaSubtitle: "RayGold gerencia automaticamente a rastreabilidade",
+    ctaButton: "Solicitar demo", restart: "Refazer",
+    categories: { traceability: "Rastreabilidade", marking: "Marcação", documentation: "Documentação", inventory: "Controle estoque" },
+  },
+};
+
+const tt = t[lang] || t.es;
+
+// Preguntas (solo español, las otras se derivan)
+const questions = [
+  { id: 1, category: "traceability", weight: 3,
+    q: { es: "¿Registras el origen de todo el metal precioso que entra en tu taller?", en: "Do you record the origin of all precious metal entering your workshop?", fr: "Enregistrez-vous l'origine de tous les métaux précieux?", ca: "Registres l'origen de tot el metall preciós?", "pt-br": "Você registra a origem de todo metal precioso?" },
+    help: { es: "La Ley de Metales Preciosos exige conocer la procedencia", en: "Regulations require knowing the source", fr: "La réglementation exige de connaître la provenance", ca: "La normativa exigeix conèixer la procedència", "pt-br": "A regulamentação exige conhecer a procedência" },
+    rec: { es: "Implementa un registro de entradas con datos del proveedor", en: "Implement an entry log with supplier data", fr: "Mettez en place un registre des entrées", ca: "Implementa un registre d'entrades", "pt-br": "Implemente um registro de entradas" },
+    rg: { es: "RayGold registra automáticamente cada entrada con trazabilidad completa", en: "RayGold automatically records each entry with complete traceability", fr: "RayGold enregistre automatiquement chaque entrée", ca: "RayGold registra automàticament cada entrada", "pt-br": "RayGold registra automaticamente cada entrada" },
+  },
+  { id: 2, category: "traceability", weight: 3,
+    q: { es: "¿Puedes rastrear cada pieza fabricada hasta su materia prima?", en: "Can you trace each piece back to its raw material?", fr: "Pouvez-vous retracer chaque pièce jusqu'à sa matière première?", ca: "Pots rastrejar cada peça fins a la matèria primera?", "pt-br": "Você consegue rastrear cada peça até sua matéria-prima?" },
+    help: { es: "La trazabilidad completa es obligatoria", en: "Complete traceability is mandatory", fr: "La traçabilité complète est obligatoire", ca: "La traçabilitat completa és obligatòria", "pt-br": "A rastreabilidade completa é obrigatória" },
+    rec: { es: "Establece un sistema de lotes que vincule piezas con materiales", en: "Establish a batch system linking pieces to materials", fr: "Établissez un système de lots", ca: "Estableix un sistema de lots", "pt-br": "Estabeleça um sistema de lotes" },
+    rg: { es: "El módulo de Fabricación vincula automáticamente cada OF con sus materiales", en: "Manufacturing module links each work order to materials", fr: "Le module Fabrication relie automatiquement chaque OF", ca: "El mòdul de Fabricació vincula automàticament", "pt-br": "O módulo de Fabricação vincula automaticamente" },
+  },
+  { id: 3, category: "marking", weight: 3,
+    q: { es: "¿Todas tus piezas llevan el marcaje de ley correspondiente?", en: "Do all your pieces bear the purity hallmark?", fr: "Toutes vos pièces portent-elles le poinçon?", ca: "Totes les peces porten el marcatge de llei?", "pt-br": "Todas as suas peças têm a marcação de teor?" },
+    help: { es: "El contraste de ley es obligatorio en España", en: "Hallmarking is mandatory", fr: "Le poinçonnage est obligatoire", ca: "El contrast de llei és obligatori", "pt-br": "O contraste de teor é obrigatório" },
+    rec: { es: "Marca todas las piezas antes de su venta", en: "Mark all pieces before sale", fr: "Poinçonnez toutes les pièces avant la vente", ca: "Marca totes les peces abans de la venda", "pt-br": "Marque todas as peças antes da venda" },
+    rg: { es: "RayGold controla el estado de marcaje en el flujo de fabricación", en: "RayGold controls hallmarking status in manufacturing flow", fr: "RayGold contrôle l'état de poinçonnage", ca: "RayGold controla l'estat de marcatge", "pt-br": "RayGold controla o estado de marcação" },
+  },
+  { id: 4, category: "marking", weight: 2,
+    q: { es: "¿Tienes registrada tu marca de fabricante?", en: "Is your maker's mark registered?", fr: "Votre poinçon de maître est-il enregistré?", ca: "Tens registrada la marca de fabricant?", "pt-br": "Sua marca de fabricante está registrada?" },
+    help: { es: "Todo fabricante debe tener su punzón registrado", en: "Every manufacturer must have a registered mark", fr: "Tout fabricant doit avoir son poinçon enregistré", ca: "Tot fabricant ha de tenir el punxó registrat", "pt-br": "Todo fabricante deve ter seu punção registrado" },
+    rec: { es: "Registra tu marca en la oficina de contrastes", en: "Register your mark with the assay office", fr: "Enregistrez votre poinçon", ca: "Registra la marca a l'oficina de contrastos", "pt-br": "Registre sua marca no órgão competente" },
+    rg: { es: "RayGold incluye tu marca en toda la documentación", en: "RayGold includes your mark in all documentation", fr: "RayGold inclut votre poinçon dans la documentation", ca: "RayGold inclou la marca en tota la documentació", "pt-br": "RayGold inclui sua marca em toda documentação" },
+  },
+  { id: 5, category: "documentation", weight: 3,
+    q: { es: "¿Mantienes un libro de registro de operaciones?", en: "Do you maintain an operations register?", fr: "Tenez-vous un livre de registre?", ca: "Mantens un llibre de registre d'operacions?", "pt-br": "Você mantém um livro de registro?" },
+    help: { es: "El RD 197/1988 exige llevar un libro de registro", en: "Regulations require keeping a register", fr: "La réglementation exige un registre", ca: "La normativa exigeix portar un llibre de registre", "pt-br": "A regulamentação exige manter um registro" },
+    rec: { es: "Mantén actualizado el libro con todas las compras", en: "Keep the book updated with all purchases", fr: "Maintenez le livre à jour", ca: "Mantén actualitzat el llibre", "pt-br": "Mantenha o livro atualizado" },
+    rg: { es: "RayGold genera automáticamente el libro de registro", en: "RayGold automatically generates the register", fr: "RayGold génère automatiquement le registre", ca: "RayGold genera automàticament el llibre", "pt-br": "RayGold gera automaticamente o registro" },
+  },
+  { id: 6, category: "documentation", weight: 2,
+    q: { es: "¿Guardas documentación de ventas de alto valor?", en: "Do you keep documentation for high-value sales?", fr: "Conservez-vous la documentation des ventes importantes?", ca: "Guardes documentació de vendes d'alt valor?", "pt-br": "Você guarda documentação de vendas de alto valor?" },
+    help: { es: "Ventas de alto valor requieren identificación del comprador", en: "High-value sales require buyer identification", fr: "Les ventes importantes nécessitent identification", ca: "Vendes d'alt valor requereixen identificació", "pt-br": "Vendas de alto valor requerem identificação" },
+    rec: { es: "Implementa identificación para ventas que superen el umbral", en: "Implement identification for sales exceeding thresholds", fr: "Mettez en place identification pour ventes importantes", ca: "Implementa identificació per a vendes superiors", "pt-br": "Implemente identificação para vendas acima do limite" },
+    rg: { es: "El módulo Comercial gestiona documentación de ventas", en: "Commercial module manages sales documentation", fr: "Le module Commercial gère la documentation", ca: "El mòdul Comercial gestiona documentació", "pt-br": "O módulo Comercial gerencia documentação" },
+  },
+  { id: 7, category: "inventory", weight: 2,
+    q: { es: "¿Realizas inventarios periódicos de metales preciosos?", en: "Do you perform periodic precious metal inventories?", fr: "Effectuez-vous des inventaires périodiques?", ca: "Realitzes inventaris periòdics?", "pt-br": "Você realiza inventários periódicos?" },
+    help: { es: "El control de inventario es fundamental para auditorías", en: "Inventory control is essential for audits", fr: "Le contrôle des stocks est essentiel", ca: "El control d'inventari és fonamental", "pt-br": "O controle de estoque é fundamental" },
+    rec: { es: "Establece inventarios mensuales o trimestrales", en: "Establish monthly or quarterly inventories", fr: "Établissez des inventaires mensuels", ca: "Estableix inventaris mensuals o trimestrals", "pt-br": "Estabeleça inventários mensais ou trimestrais" },
+    rg: { es: "RayGold permite inventarios continuos con alertas", en: "RayGold enables continuous inventories with alerts", fr: "RayGold permet des inventaires continus", ca: "RayGold permet inventaris continus amb alertes", "pt-br": "RayGold permite inventários contínuos com alertas" },
+  },
+  { id: 8, category: "inventory", weight: 2,
+    q: { es: "¿Controlas y documentas las mermas de fabricación?", en: "Do you control and document manufacturing waste?", fr: "Contrôlez-vous les pertes de fabrication?", ca: "Controles i documentes les mermes?", "pt-br": "Você controla e documenta as perdas?" },
+    help: { es: "Las mermas deben estar justificadas", en: "Waste must be justified", fr: "Les pertes doivent être justifiées", ca: "Les mermes han d'estar justificades", "pt-br": "As perdas devem estar justificadas" },
+    rec: { es: "Registra todas las mermas por proceso", en: "Record all waste by process", fr: "Enregistrez toutes les pertes par processus", ca: "Registra totes les mermes per procés", "pt-br": "Registre todas as perdas por processo" },
+    rg: { es: "El control de mermas compara con medias del sector", en: "Waste control compares with industry averages", fr: "Le contrôle des pertes compare avec les moyennes", ca: "El control de mermes compara amb mitjanes", "pt-br": "O controle de perdas compara com médias" },
+  },
+  { id: 9, category: "documentation", weight: 2,
+    q: { es: "¿Emites facturas detalladas con la ley del metal?", en: "Do you issue detailed invoices with metal purity?", fr: "Émettez-vous des factures avec le titre du métal?", ca: "Emets factures amb la llei del metall?", "pt-br": "Você emite notas com o teor do metal?" },
+    help: { es: "Las facturas deben especificar la ley del metal", en: "Invoices must specify metal purity", fr: "Les factures doivent spécifier le titre", ca: "Les factures han d'especificar la llei", "pt-br": "As notas devem especificar o teor" },
+    rec: { es: "Incluye siempre tipo de metal, ley y peso", en: "Always include metal type, purity and weight", fr: "Incluez toujours type, titre et poids", ca: "Inclou sempre tipus, llei i pes", "pt-br": "Sempre inclua tipo, teor e peso" },
+    rg: { es: "Las facturas incluyen automáticamente todos los datos", en: "Invoices automatically include all data", fr: "Les factures incluent automatiquement les données", ca: "Les factures inclouen automàticament les dades", "pt-br": "As notas incluem automaticamente os dados" },
+  },
+  { id: 10, category: "traceability", weight: 2,
+    q: { es: "¿Puedes demostrar el origen del metal en reparaciones?", en: "Can you prove metal origin in repairs?", fr: "Pouvez-vous prouver l'origine du métal dans les réparations?", ca: "Pots demostrar l'origen del metall en reparacions?", "pt-br": "Você pode comprovar a origem do metal em reparos?" },
+    help: { es: "El metal añadido debe tener origen documentado", en: "Added metal must have documented origin", fr: "Le métal ajouté doit avoir une origine documentée", ca: "El metall afegit ha de tenir origen documentat", "pt-br": "O metal adicionado deve ter origem documentada" },
+    rec: { es: "Documenta el metal usado en cada reparación", en: "Document metal used in each repair", fr: "Documentez le métal utilisé", ca: "Documenta el metall usat en cada reparació", "pt-br": "Documente o metal usado em cada reparo" },
+    rg: { es: "Las órdenes de reparación registran materiales consumidos", en: "Repair orders record consumed materials", fr: "Les ordres de réparation enregistrent les matériaux", ca: "Les ordres de reparació registren materials", "pt-br": "As ordens de reparo registram materiais" },
+  },
+];
+
+// Preparar preguntas para el idioma actual
+const langQuestions = questions.map(q => ({
+  id: q.id,
+  category: q.category,
+  weight: q.weight,
+  question: q.q[lang] || q.q.es,
+  help: q.help[lang] || q.help.es,
+  recommendation: q.rec[lang] || q.rec.es,
+  raygoldHelp: q.rg[lang] || q.rg.es,
+}));
+---
+
+<Layout title={tt.metaTitle} description={tt.metaDesc} lang={lang} alternateUrls={alternateUrls}>
+  <main class="guide-page">
+    <section class="guide-hero">
+      <div class="hero-content">
+        <span class="hero-badge">{tt.badge}</span>
+        <h1 class="hero-title">{tt.title} <span class="highlight">{tt.titleHighlight}</span></h1>
+        <p class="hero-subtitle">{tt.subtitle}</p>
+      </div>
+    </section>
+
+    <section class="quiz-section">
+      <div class="quiz-container">
+        <div class="quiz-start" id="quizStart">
+          <div class="start-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 12l2 2 4-4"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <h2>10 preguntas sobre cumplimiento</h2>
+          <button class="start-btn" id="startBtn">{tt.startBtn}</button>
+        </div>
+
+        <div class="quiz-question" id="quizQuestion" style="display:none;">
+          <div class="question-progress">
+            <span class="progress-text">{tt.questionOf} <span id="currentQ">1</span>/10</span>
+            <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+          </div>
+          <div class="question-category" id="questionCategory"></div>
+          <h2 class="question-text" id="questionText"></h2>
+          <p class="question-help" id="questionHelp"></p>
+          <div class="answer-buttons">
+            <button class="answer-btn yes" data-answer="yes">{tt.yes}</button>
+            <button class="answer-btn no" data-answer="no">{tt.no}</button>
+            <button class="answer-btn unsure" data-answer="unsure">{tt.notSure}</button>
+          </div>
+        </div>
+
+        <div class="quiz-results" id="quizResults" style="display:none;">
+          <h2>{tt.resultsTitle}</h2>
+          <div class="score-circle">
+            <svg viewBox="0 0 100 100">
+              <defs><linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#667eea"/><stop offset="100%" style="stop-color:#a855f7"/>
+              </linearGradient></defs>
+              <circle class="score-bg" cx="50" cy="50" r="45"/>
+              <circle class="score-fill" cx="50" cy="50" r="45" id="scoreFill"/>
+            </svg>
+            <div class="score-text"><span class="score-number" id="scoreNumber">0</span><span class="score-label">%</span></div>
+          </div>
+          <p class="score-message" id="scoreMessage"></p>
+          <div class="category-scores"><h3>{tt.categoryTitle}</h3><div class="categories-grid" id="categoriesGrid"></div></div>
+          <div class="recommendations"><h3>{tt.recommendations}</h3><div class="recommendations-list" id="recommendationsList"></div></div>
+          <div class="results-actions">
+            <button class="restart-btn" id="restartBtn">{tt.restart}</button>
+            <a href={contactUrl} class="cta-btn">{tt.ctaButton}</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <h2>{tt.ctaTitle}</h2>
+      <p>{tt.ctaSubtitle}</p>
+      <a href={contactUrl} class="cta-button">{tt.ctaButton}
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </section>
+  </main>
+</Layout>
+
+<script define:vars={{ langQuestions, tt }}>
+  let currentQuestion = 0;
+  let answers = [];
+  const questions = langQuestions;
+
+  function startQuiz() {
+    currentQuestion = 0; answers = [];
+    document.getElementById('quizStart').style.display = 'none';
+    document.getElementById('quizResults').style.display = 'none';
+    document.getElementById('quizQuestion').style.display = 'block';
+    showQuestion();
+  }
+
+  function showQuestion() {
+    const q = questions[currentQuestion];
+    document.getElementById('currentQ').textContent = currentQuestion + 1;
+    document.getElementById('progressFill').style.width = ((currentQuestion + 1) / 10 * 100) + '%';
+    document.getElementById('questionCategory').textContent = tt.categories[q.category];
+    document.getElementById('questionText').textContent = q.question;
+    document.getElementById('questionHelp').textContent = q.help;
+  }
+
+  function handleAnswer(answer) {
+    const q = questions[currentQuestion];
+    let score = answer === 'yes' ? q.weight : answer === 'unsure' ? q.weight * 0.5 : 0;
+    answers.push({ question: q, answer, score, maxScore: q.weight });
+    currentQuestion++;
+    currentQuestion < 10 ? showQuestion() : showResults();
+  }
+
+  function showResults() {
+    document.getElementById('quizQuestion').style.display = 'none';
+    document.getElementById('quizResults').style.display = 'block';
+
+    const totalScore = answers.reduce((s, a) => s + a.score, 0);
+    const maxScore = answers.reduce((s, a) => s + a.maxScore, 0);
+    const percentage = Math.round((totalScore / maxScore) * 100);
+
+    const scoreFill = document.getElementById('scoreFill');
+    const circumference = 2 * Math.PI * 45;
+    scoreFill.style.strokeDasharray = circumference;
+    scoreFill.style.strokeDashoffset = circumference;
+    setTimeout(() => { scoreFill.style.strokeDashoffset = circumference - (circumference * percentage / 100); }, 100);
+
+    let count = 0;
+    const scoreNumber = document.getElementById('scoreNumber');
+    const interval = setInterval(() => { count >= percentage ? clearInterval(interval) : scoreNumber.textContent = ++count; }, 20);
+
+    const scoreMessage = document.getElementById('scoreMessage');
+    scoreMessage.textContent = percentage >= 80 ? tt.compliant : percentage >= 50 ? tt.partial : tt.needsWork;
+    scoreMessage.className = 'score-message ' + (percentage >= 80 ? 'compliant' : percentage >= 50 ? 'partial' : 'needs-work');
+
+    const categories = {};
+    answers.forEach(a => {
+      if (!categories[a.question.category]) categories[a.question.category] = { score: 0, max: 0 };
+      categories[a.question.category].score += a.score;
+      categories[a.question.category].max += a.maxScore;
+    });
+
+    const categoriesGrid = document.getElementById('categoriesGrid');
+    categoriesGrid.innerHTML = '';
+    Object.entries(categories).forEach(([cat, data]) => {
+      const pct = Math.round((data.score / data.max) * 100);
+      categoriesGrid.innerHTML += `<div class="category-item"><span class="cat-name">${tt.categories[cat]}</span><div class="cat-bar"><div class="cat-fill" style="width:${pct}%"></div></div><span class="cat-percent">${pct}%</span></div>`;
+    });
+
+    const recommendationsList = document.getElementById('recommendationsList');
+    recommendationsList.innerHTML = '';
+    answers.filter(a => a.answer !== 'yes').forEach(a => {
+      recommendationsList.innerHTML += `<div class="recommendation-item"><div class="rec-problem">${a.question.question}</div><div class="rec-solution">${a.question.recommendation}</div><div class="rec-raygold"><span class="raygold-badge">${tt.howHelps}</span> ${a.question.raygoldHelp}</div></div>`;
+    });
+  }
+
+  document.getElementById('startBtn').addEventListener('click', startQuiz);
+  document.getElementById('restartBtn').addEventListener('click', startQuiz);
+  document.querySelectorAll('.answer-btn').forEach(btn => btn.addEventListener('click', () => handleAnswer(btn.dataset.answer)));
+</script>
+
+<style>
+  :root { --bg-dark:#0f172a; --bg-card:rgba(30,41,59,0.8); --text-primary:#f8fafc; --text-secondary:#94a3b8; --text-muted:#64748b; --accent:#667eea; --accent-light:#a5b4fc; --positive:#10b981; --warning:#f59e0b; --negative:#ef4444; --border:rgba(255,255,255,0.1); }
+  .guide-page { background:var(--bg-dark); min-height:100vh; padding-top:72px; }
+  .guide-hero { padding:60px 24px 40px; text-align:center; background:linear-gradient(135deg,rgba(102,126,234,0.1) 0%,rgba(118,75,162,0.1) 100%); }
+  .hero-content { max-width:700px; margin:0 auto; }
+  .hero-badge { display:inline-block; padding:6px 16px; background:rgba(102,126,234,0.2); border:1px solid rgba(102,126,234,0.3); border-radius:20px; color:var(--accent-light); font-size:0.85rem; font-weight:500; margin-bottom:20px; }
+  .hero-title { font-size:2.5rem; font-weight:700; color:var(--text-primary); margin:0 0 16px; }
+  .hero-title .highlight { background:linear-gradient(135deg,var(--accent),#a855f7); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .hero-subtitle { font-size:1.1rem; color:var(--text-secondary); margin:0; }
+  .quiz-section { padding:40px 24px 60px; }
+  .quiz-container { max-width:700px; margin:0 auto; }
+  .quiz-start { text-align:center; padding:60px 40px; background:var(--bg-card); border:1px solid var(--border); border-radius:20px; }
+  .start-icon { width:80px; height:80px; margin:0 auto 24px; background:linear-gradient(135deg,var(--accent),#a855f7); border-radius:20px; display:flex; align-items:center; justify-content:center; }
+  .start-icon svg { width:40px; height:40px; color:white; }
+  .quiz-start h2 { font-size:1.5rem; color:var(--text-primary); margin:0 0 24px; }
+  .start-btn { padding:14px 32px; background:linear-gradient(135deg,var(--accent),#764ba2); border:none; border-radius:12px; color:white; font-size:1rem; font-weight:600; cursor:pointer; transition:all 0.3s; }
+  .start-btn:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(102,126,234,0.4); }
+  .quiz-question { background:var(--bg-card); border:1px solid var(--border); border-radius:20px; padding:40px; }
+  .question-progress { margin-bottom:24px; }
+  .progress-text { font-size:0.9rem; color:var(--text-secondary); display:block; margin-bottom:8px; }
+  .progress-bar { height:6px; background:rgba(255,255,255,0.1); border-radius:3px; overflow:hidden; }
+  .progress-fill { height:100%; background:linear-gradient(90deg,var(--accent),#a855f7); transition:width 0.3s; }
+  .question-category { display:inline-block; padding:4px 12px; background:rgba(102,126,234,0.2); border-radius:12px; font-size:0.8rem; color:var(--accent-light); margin-bottom:16px; }
+  .question-text { font-size:1.4rem; color:var(--text-primary); margin:0 0 12px; line-height:1.4; }
+  .question-help { font-size:0.95rem; color:var(--text-secondary); margin:0 0 32px; }
+  .answer-buttons { display:flex; gap:12px; }
+  .answer-btn { flex:1; padding:16px 20px; border:2px solid var(--border); border-radius:12px; background:transparent; color:var(--text-primary); font-size:1rem; font-weight:600; cursor:pointer; transition:all 0.2s; }
+  .answer-btn:hover { transform:translateY(-2px); }
+  .answer-btn.yes:hover { border-color:var(--positive); background:rgba(16,185,129,0.1); }
+  .answer-btn.no:hover { border-color:var(--negative); background:rgba(239,68,68,0.1); }
+  .answer-btn.unsure:hover { border-color:var(--warning); background:rgba(245,158,11,0.1); }
+  .quiz-results { background:var(--bg-card); border:1px solid var(--border); border-radius:20px; padding:40px; text-align:center; }
+  .quiz-results h2 { font-size:1.5rem; color:var(--text-primary); margin:0 0 32px; }
+  .score-circle { position:relative; width:180px; height:180px; margin:0 auto 24px; }
+  .score-circle svg { transform:rotate(-90deg); }
+  .score-bg { fill:none; stroke:rgba(255,255,255,0.1); stroke-width:8; }
+  .score-fill { fill:none; stroke:url(#scoreGrad); stroke-width:8; stroke-linecap:round; transition:stroke-dashoffset 1s; }
+  .score-text { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); }
+  .score-number { font-size:3rem; font-weight:700; color:var(--text-primary); }
+  .score-label { font-size:1.5rem; color:var(--text-secondary); }
+  .score-message { font-size:1.1rem; margin:0 0 32px; padding:12px 20px; border-radius:10px; }
+  .score-message.compliant { background:rgba(16,185,129,0.1); color:#34d399; }
+  .score-message.partial { background:rgba(245,158,11,0.1); color:#fbbf24; }
+  .score-message.needs-work { background:rgba(239,68,68,0.1); color:#f87171; }
+  .category-scores { text-align:left; margin-bottom:32px; }
+  .category-scores h3, .recommendations h3 { font-size:1.1rem; color:var(--text-primary); margin:0 0 16px; }
+  .categories-grid { display:flex; flex-direction:column; gap:12px; }
+  .category-item { display:flex; align-items:center; gap:12px; }
+  .cat-name { width:140px; font-size:0.9rem; color:var(--text-secondary); }
+  .cat-bar { flex:1; height:8px; background:rgba(255,255,255,0.1); border-radius:4px; overflow:hidden; }
+  .cat-fill { height:100%; background:linear-gradient(90deg,var(--accent),#a855f7); }
+  .cat-percent { width:50px; text-align:right; font-size:0.9rem; font-weight:600; color:var(--text-primary); }
+  .recommendations { text-align:left; margin-bottom:32px; }
+  .recommendations-list { display:flex; flex-direction:column; gap:16px; }
+  .recommendation-item { background:rgba(0,0,0,0.2); border-radius:12px; padding:20px; }
+  .rec-problem { font-size:0.95rem; color:var(--text-primary); margin-bottom:12px; padding-left:20px; position:relative; }
+  .rec-problem::before { content:"•"; position:absolute; left:0; color:var(--negative); }
+  .rec-solution { font-size:0.9rem; color:var(--text-secondary); margin-bottom:12px; padding-left:20px; }
+  .rec-raygold { font-size:0.85rem; color:var(--accent-light); padding:12px; background:rgba(102,126,234,0.1); border-radius:8px; }
+  .raygold-badge { display:inline-block; padding:2px 8px; background:var(--accent); border-radius:4px; font-size:0.75rem; color:white; margin-right:8px; }
+  .results-actions { display:flex; gap:16px; justify-content:center; }
+  .restart-btn { padding:14px 28px; background:transparent; border:2px solid var(--border); border-radius:12px; color:var(--text-primary); font-size:1rem; font-weight:600; cursor:pointer; transition:all 0.2s; }
+  .restart-btn:hover { border-color:var(--accent); background:rgba(102,126,234,0.1); }
+  .cta-btn { padding:14px 28px; background:linear-gradient(135deg,var(--accent),#764ba2); border:none; border-radius:12px; color:white; font-size:1rem; font-weight:600; text-decoration:none; transition:all 0.3s; }
+  .cta-btn:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(102,126,234,0.4); }
+  .cta-section { padding:60px 24px; text-align:center; background:linear-gradient(135deg,rgba(102,126,234,0.1),rgba(118,75,162,0.1)); border-top:1px solid var(--border); }
+  .cta-section h2 { font-size:1.75rem; font-weight:700; color:var(--text-primary); margin:0 0 12px; }
+  .cta-section p { font-size:1.1rem; color:var(--text-secondary); margin:0 0 32px; }
+  .cta-button { display:inline-flex; align-items:center; gap:10px; padding:14px 28px; background:linear-gradient(135deg,var(--accent),#764ba2); color:white; text-decoration:none; border-radius:12px; font-weight:600; box-shadow:0 4px 20px rgba(102,126,234,0.4); transition:all 0.3s; }
+  .cta-button:hover { transform:translateY(-2px); box-shadow:0 8px 28px rgba(102,126,234,0.5); }
+  @media (max-width:768px) {
+    .answer-buttons { flex-direction:column; }
+    .hero-title { font-size:2rem; }
+    .quiz-start,.quiz-question,.quiz-results { padding:24px; }
+    .results-actions { flex-direction:column; }
+    :root { --bg-dark:#fff; --bg-card:#f8fafc; --text-primary:#1e293b; --text-secondary:#475569; --text-muted:#64748b; --border:rgba(0,0,0,0.1); }
+    .guide-page { background:#fff; }
+    .guide-hero { background:linear-gradient(135deg,rgba(102,126,234,0.05),rgba(118,75,162,0.05)); }
+    .hero-title { color:#1e293b; }
+    .quiz-start,.quiz-question,.quiz-results { background:#f8fafc; border:1px solid #e2e8f0; }
+    .cta-section { background:linear-gradient(135deg,rgba(102,126,234,0.05),rgba(118,75,162,0.05)); border-top:1px solid #e2e8f0; }
+    .cta-section h2 { color:#1e293b; }
+  }
+</style>

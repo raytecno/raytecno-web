@@ -1,0 +1,989 @@
+---
+/**
+ * Template: Cotización Oro y Plata
+ * Widget de precios en tiempo real de metales preciosos
+ */
+import Layout from "@/layouts/Layout.astro";
+import { getToolAlternateUrls, getPageUrl, type Lang } from "@/config/pages";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const alternateUrls = getToolAlternateUrls("cotizacion");
+
+// Traducciones
+const t: Record<Lang, {
+  metaTitle: string;
+  metaDesc: string;
+  badge: string;
+  title: string;
+  titleHighlight: string;
+  subtitle: string;
+  lastUpdate: string;
+  gold: string;
+  silver: string;
+  platinum: string;
+  palladium: string;
+  pricePerGram: string;
+  pricePerOunce: string;
+  pricePerKg: string;
+  change24h: string;
+  high24h: string;
+  low24h: string;
+  calcTitle: string;
+  grams: string;
+  ounces: string;
+  kilos: string;
+  value: string;
+  ctaTitle: string;
+  ctaSubtitle: string;
+  ctaButton: string;
+  disclaimer: string;
+  source: string;
+}> = {
+  es: {
+    metaTitle: "Cotización Oro y Plata en Vivo | RayGold ERP",
+    metaDesc: "Consulta el precio actual del oro y la plata. Cotizaciones en tiempo real para joyeros y profesionales del sector.",
+    badge: "Actualización en tiempo real",
+    title: "Cotización",
+    titleHighlight: "Oro y Plata",
+    subtitle: "Precios actualizados de metales preciosos para profesionales del sector joyero",
+    lastUpdate: "Última actualización",
+    gold: "Oro",
+    silver: "Plata",
+    platinum: "Platino",
+    palladium: "Paladio",
+    pricePerGram: "Precio por gramo",
+    pricePerOunce: "Precio por onza troy",
+    pricePerKg: "Precio por kg",
+    change24h: "Cambio 24h",
+    high24h: "Máx 24h",
+    low24h: "Mín 24h",
+    calcTitle: "Calcula el valor de tu metal",
+    grams: "gramos",
+    ounces: "onzas",
+    kilos: "kilos",
+    value: "Valor",
+    ctaTitle: "¿Necesitas control preciso de tus metales?",
+    ctaSubtitle: "RayGold te permite controlar cada gramo de oro y plata en tu taller",
+    ctaButton: "Descubrir RayGold",
+    disclaimer: "Precios orientativos. Consulte con su proveedor para cotizaciones oficiales.",
+    source: "Fuente: London Bullion Market Association (LBMA)",
+  },
+  en: {
+    metaTitle: "Live Gold and Silver Prices | RayGold ERP",
+    metaDesc: "Check current gold and silver prices. Real-time quotes for jewelers and industry professionals.",
+    badge: "Real-time updates",
+    title: "Gold & Silver",
+    titleHighlight: "Prices",
+    subtitle: "Updated precious metal prices for jewelry industry professionals",
+    lastUpdate: "Last update",
+    gold: "Gold",
+    silver: "Silver",
+    platinum: "Platinum",
+    palladium: "Palladium",
+    pricePerGram: "Price per gram",
+    pricePerOunce: "Price per troy ounce",
+    pricePerKg: "Price per kg",
+    change24h: "24h change",
+    high24h: "24h high",
+    low24h: "24h low",
+    calcTitle: "Calculate your metal value",
+    grams: "grams",
+    ounces: "ounces",
+    kilos: "kilos",
+    value: "Value",
+    ctaTitle: "Need precise control of your metals?",
+    ctaSubtitle: "RayGold lets you control every gram of gold and silver in your workshop",
+    ctaButton: "Discover RayGold",
+    disclaimer: "Indicative prices. Consult your supplier for official quotes.",
+    source: "Source: London Bullion Market Association (LBMA)",
+  },
+  fr: {
+    metaTitle: "Cours de l'Or et de l'Argent en Direct | RayGold ERP",
+    metaDesc: "Consultez le prix actuel de l'or et de l'argent. Cotations en temps réel pour bijoutiers et professionnels.",
+    badge: "Mise à jour en temps réel",
+    title: "Cours de l'Or",
+    titleHighlight: "et de l'Argent",
+    subtitle: "Prix actualisés des métaux précieux pour les professionnels de la bijouterie",
+    lastUpdate: "Dernière mise à jour",
+    gold: "Or",
+    silver: "Argent",
+    platinum: "Platine",
+    palladium: "Palladium",
+    pricePerGram: "Prix par gramme",
+    pricePerOunce: "Prix par once troy",
+    pricePerKg: "Prix par kg",
+    change24h: "Variation 24h",
+    high24h: "Max 24h",
+    low24h: "Min 24h",
+    calcTitle: "Calculez la valeur de votre métal",
+    grams: "grammes",
+    ounces: "onces",
+    kilos: "kilos",
+    value: "Valeur",
+    ctaTitle: "Besoin d'un contrôle précis de vos métaux?",
+    ctaSubtitle: "RayGold vous permet de contrôler chaque gramme d'or et d'argent dans votre atelier",
+    ctaButton: "Découvrir RayGold",
+    disclaimer: "Prix indicatifs. Consultez votre fournisseur pour les cotations officielles.",
+    source: "Source: London Bullion Market Association (LBMA)",
+  },
+  ca: {
+    metaTitle: "Cotització Or i Plata en Viu | RayGold ERP",
+    metaDesc: "Consulta el preu actual de l'or i la plata. Cotitzacions en temps real per a joiers i professionals del sector.",
+    badge: "Actualització en temps real",
+    title: "Cotització",
+    titleHighlight: "Or i Plata",
+    subtitle: "Preus actualitzats de metalls preciosos per a professionals del sector joier",
+    lastUpdate: "Última actualització",
+    gold: "Or",
+    silver: "Plata",
+    platinum: "Platí",
+    palladium: "Pal·ladi",
+    pricePerGram: "Preu per gram",
+    pricePerOunce: "Preu per unça troy",
+    pricePerKg: "Preu per kg",
+    change24h: "Canvi 24h",
+    high24h: "Màx 24h",
+    low24h: "Mín 24h",
+    calcTitle: "Calcula el valor del teu metall",
+    grams: "grams",
+    ounces: "unces",
+    kilos: "quilos",
+    value: "Valor",
+    ctaTitle: "Necessites control precís dels teus metalls?",
+    ctaSubtitle: "RayGold et permet controlar cada gram d'or i plata al teu taller",
+    ctaButton: "Descobrir RayGold",
+    disclaimer: "Preus orientatius. Consulteu amb el vostre proveïdor per a cotitzacions oficials.",
+    source: "Font: London Bullion Market Association (LBMA)",
+  },
+  "pt-br": {
+    metaTitle: "Cotação Ouro e Prata ao Vivo | RayGold ERP",
+    metaDesc: "Consulte o preço atual do ouro e da prata. Cotações em tempo real para joalheiros e profissionais do setor.",
+    badge: "Atualização em tempo real",
+    title: "Cotação",
+    titleHighlight: "Ouro e Prata",
+    subtitle: "Preços atualizados de metais preciosos para profissionais do setor joalheiro",
+    lastUpdate: "Última atualização",
+    gold: "Ouro",
+    silver: "Prata",
+    platinum: "Platina",
+    palladium: "Paládio",
+    pricePerGram: "Preço por grama",
+    pricePerOunce: "Preço por onça troy",
+    pricePerKg: "Preço por kg",
+    change24h: "Variação 24h",
+    high24h: "Máx 24h",
+    low24h: "Mín 24h",
+    calcTitle: "Calcule o valor do seu metal",
+    grams: "gramas",
+    ounces: "onças",
+    kilos: "quilos",
+    value: "Valor",
+    ctaTitle: "Precisa de controle preciso dos seus metais?",
+    ctaSubtitle: "RayGold permite controlar cada grama de ouro e prata na sua oficina",
+    ctaButton: "Descobrir RayGold",
+    disclaimer: "Preços indicativos. Consulte seu fornecedor para cotações oficiais.",
+    source: "Fonte: London Bullion Market Association (LBMA)",
+  },
+};
+
+const tt = t[lang] || t.es;
+const contactUrl = getPageUrl("contacto", lang);
+
+// Moneda según idioma
+const currencyInfo: Record<Lang, { symbol: string; code: string; locale: string }> = {
+  es: { symbol: "€", code: "EUR", locale: "es-ES" },
+  en: { symbol: "$", code: "USD", locale: "en-US" },
+  fr: { symbol: "€", code: "EUR", locale: "fr-FR" },
+  ca: { symbol: "€", code: "EUR", locale: "ca-ES" },
+  "pt-br": { symbol: "R$", code: "BRL", locale: "pt-BR" },
+};
+
+const currency = currencyInfo[lang];
+---
+
+<Layout
+  title={tt.metaTitle}
+  description={tt.metaDesc}
+  lang={lang}
+  alternateUrls={alternateUrls}
+>
+  <main class="prices-page">
+    <!-- Hero Section -->
+    <section class="prices-hero">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="pulse"></span>
+          {tt.badge}
+        </div>
+        <h1 class="hero-title">
+          {tt.title} <span class="highlight">{tt.titleHighlight}</span>
+        </h1>
+        <p class="hero-subtitle">{tt.subtitle}</p>
+        <p class="last-update">{tt.lastUpdate}: <span id="lastUpdate">--:--</span></p>
+      </div>
+    </section>
+
+    <!-- Precios principales -->
+    <section class="prices-section">
+      <div class="prices-grid">
+        <!-- Oro -->
+        <div class="price-card gold">
+          <div class="card-header">
+            <div class="metal-icon gold">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+              </svg>
+            </div>
+            <div class="metal-info">
+              <h2>{tt.gold}</h2>
+              <span class="symbol">XAU</span>
+            </div>
+            <div class="change-badge" id="goldChange">--</div>
+          </div>
+          <div class="card-body">
+            <div class="main-price">
+              <span class="price-value" id="goldGram">--</span>
+              <span class="price-unit">/g</span>
+            </div>
+            <div class="price-details">
+              <div class="detail">
+                <span class="detail-label">{tt.pricePerOunce}</span>
+                <span class="detail-value" id="goldOunce">--</span>
+              </div>
+              <div class="detail">
+                <span class="detail-label">{tt.pricePerKg}</span>
+                <span class="detail-value" id="goldKg">--</span>
+              </div>
+            </div>
+            <div class="price-range">
+              <div class="range-item">
+                <span class="range-label">{tt.low24h}</span>
+                <span class="range-value low" id="goldLow">--</span>
+              </div>
+              <div class="range-bar">
+                <div class="range-current" id="goldRangeCurrent"></div>
+              </div>
+              <div class="range-item">
+                <span class="range-label">{tt.high24h}</span>
+                <span class="range-value high" id="goldHigh">--</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Plata -->
+        <div class="price-card silver">
+          <div class="card-header">
+            <div class="metal-icon silver">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+              </svg>
+            </div>
+            <div class="metal-info">
+              <h2>{tt.silver}</h2>
+              <span class="symbol">XAG</span>
+            </div>
+            <div class="change-badge" id="silverChange">--</div>
+          </div>
+          <div class="card-body">
+            <div class="main-price">
+              <span class="price-value" id="silverGram">--</span>
+              <span class="price-unit">/g</span>
+            </div>
+            <div class="price-details">
+              <div class="detail">
+                <span class="detail-label">{tt.pricePerOunce}</span>
+                <span class="detail-value" id="silverOunce">--</span>
+              </div>
+              <div class="detail">
+                <span class="detail-label">{tt.pricePerKg}</span>
+                <span class="detail-value" id="silverKg">--</span>
+              </div>
+            </div>
+            <div class="price-range">
+              <div class="range-item">
+                <span class="range-label">{tt.low24h}</span>
+                <span class="range-value low" id="silverLow">--</span>
+              </div>
+              <div class="range-bar">
+                <div class="range-current" id="silverRangeCurrent"></div>
+              </div>
+              <div class="range-item">
+                <span class="range-label">{tt.high24h}</span>
+                <span class="range-value high" id="silverHigh">--</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Calculadora rápida -->
+      <div class="quick-calc">
+        <h3>{tt.calcTitle}</h3>
+        <div class="calc-row">
+          <div class="calc-input-group">
+            <input type="number" id="calcAmount" value="100" min="0" step="1" />
+            <select id="calcUnit">
+              <option value="g">{tt.grams}</option>
+              <option value="oz">{tt.ounces}</option>
+              <option value="kg">{tt.kilos}</option>
+            </select>
+            <span class="calc-of">de</span>
+            <select id="calcMetal">
+              <option value="gold">{tt.gold}</option>
+              <option value="silver">{tt.silver}</option>
+            </select>
+          </div>
+          <div class="calc-result">
+            <span class="calc-label">{tt.value}:</span>
+            <span class="calc-value" id="calcValue">--</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Metales secundarios -->
+      <div class="secondary-metals">
+        <div class="secondary-card">
+          <span class="secondary-name">{tt.platinum}</span>
+          <span class="secondary-price" id="platinumPrice">--</span>
+          <span class="secondary-change" id="platinumChange">--</span>
+        </div>
+        <div class="secondary-card">
+          <span class="secondary-name">{tt.palladium}</span>
+          <span class="secondary-price" id="palladiumPrice">--</span>
+          <span class="secondary-change" id="palladiumChange">--</span>
+        </div>
+      </div>
+
+      <p class="source-note">{tt.source}</p>
+      <p class="disclaimer">{tt.disclaimer}</p>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <h2>{tt.ctaTitle}</h2>
+      <p>{tt.ctaSubtitle}</p>
+      <a href={contactUrl} class="cta-button">
+        {tt.ctaButton}
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </section>
+  </main>
+</Layout>
+
+<script define:vars={{ currency, lang }}>
+  const TROY_OUNCE = 31.1035;
+
+  // Precios simulados (en producción usar API real)
+  const mockPrices = {
+    EUR: {
+      gold: { price: 84.50, change: 0.45, low: 83.80, high: 85.20 },
+      silver: { price: 0.94, change: -0.22, low: 0.92, high: 0.96 },
+      platinum: { price: 29.80, change: 0.15 },
+      palladium: { price: 28.50, change: -0.35 },
+    },
+    USD: {
+      gold: { price: 91.80, change: 0.52, low: 91.00, high: 92.50 },
+      silver: { price: 1.02, change: -0.18, low: 1.00, high: 1.04 },
+      platinum: { price: 32.40, change: 0.12 },
+      palladium: { price: 31.00, change: -0.28 },
+    },
+    BRL: {
+      gold: { price: 458.00, change: 0.38, low: 455.00, high: 462.00 },
+      silver: { price: 5.10, change: -0.25, low: 5.00, high: 5.20 },
+      platinum: { price: 162.00, change: 0.10 },
+      palladium: { price: 155.00, change: -0.40 },
+    },
+  };
+
+  const prices = mockPrices[currency.code] || mockPrices.EUR;
+
+  function formatPrice(value, decimals = 2) {
+    return currency.symbol + ' ' + value.toLocaleString(currency.locale, {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals
+    });
+  }
+
+  function formatChange(value) {
+    const sign = value >= 0 ? '+' : '';
+    return sign + value.toFixed(2) + '%';
+  }
+
+  function updatePrices() {
+    // Oro
+    document.getElementById('goldGram').textContent = formatPrice(prices.gold.price);
+    document.getElementById('goldOunce').textContent = formatPrice(prices.gold.price * TROY_OUNCE, 0);
+    document.getElementById('goldKg').textContent = formatPrice(prices.gold.price * 1000, 0);
+    document.getElementById('goldLow').textContent = formatPrice(prices.gold.low);
+    document.getElementById('goldHigh').textContent = formatPrice(prices.gold.high);
+    
+    const goldChangeEl = document.getElementById('goldChange');
+    goldChangeEl.textContent = formatChange(prices.gold.change);
+    goldChangeEl.className = 'change-badge ' + (prices.gold.change >= 0 ? 'positive' : 'negative');
+
+    const goldRange = prices.gold.high - prices.gold.low;
+    const goldPosition = ((prices.gold.price - prices.gold.low) / goldRange) * 100;
+    document.getElementById('goldRangeCurrent').style.left = goldPosition + '%';
+
+    // Plata
+    document.getElementById('silverGram').textContent = formatPrice(prices.silver.price);
+    document.getElementById('silverOunce').textContent = formatPrice(prices.silver.price * TROY_OUNCE);
+    document.getElementById('silverKg').textContent = formatPrice(prices.silver.price * 1000, 0);
+    document.getElementById('silverLow').textContent = formatPrice(prices.silver.low);
+    document.getElementById('silverHigh').textContent = formatPrice(prices.silver.high);
+    
+    const silverChangeEl = document.getElementById('silverChange');
+    silverChangeEl.textContent = formatChange(prices.silver.change);
+    silverChangeEl.className = 'change-badge ' + (prices.silver.change >= 0 ? 'positive' : 'negative');
+
+    const silverRange = prices.silver.high - prices.silver.low;
+    const silverPosition = ((prices.silver.price - prices.silver.low) / silverRange) * 100;
+    document.getElementById('silverRangeCurrent').style.left = silverPosition + '%';
+
+    // Metales secundarios
+    document.getElementById('platinumPrice').textContent = formatPrice(prices.platinum.price) + '/g';
+    const platChangeEl = document.getElementById('platinumChange');
+    platChangeEl.textContent = formatChange(prices.platinum.change);
+    platChangeEl.className = 'secondary-change ' + (prices.platinum.change >= 0 ? 'positive' : 'negative');
+
+    document.getElementById('palladiumPrice').textContent = formatPrice(prices.palladium.price) + '/g';
+    const pallChangeEl = document.getElementById('palladiumChange');
+    pallChangeEl.textContent = formatChange(prices.palladium.change);
+    pallChangeEl.className = 'secondary-change ' + (prices.palladium.change >= 0 ? 'positive' : 'negative');
+
+    // Última actualización
+    const now = new Date();
+    document.getElementById('lastUpdate').textContent = now.toLocaleTimeString(currency.locale, {
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+
+    calculateValue();
+  }
+
+  function calculateValue() {
+    const amount = parseFloat(document.getElementById('calcAmount').value) || 0;
+    const unit = document.getElementById('calcUnit').value;
+    const metal = document.getElementById('calcMetal').value;
+    
+    let grams = amount;
+    if (unit === 'oz') grams = amount * TROY_OUNCE;
+    if (unit === 'kg') grams = amount * 1000;
+    
+    const pricePerGram = metal === 'gold' ? prices.gold.price : prices.silver.price;
+    const value = grams * pricePerGram;
+    
+    document.getElementById('calcValue').textContent = formatPrice(value, 2);
+  }
+
+  document.getElementById('calcAmount').addEventListener('input', calculateValue);
+  document.getElementById('calcUnit').addEventListener('change', calculateValue);
+  document.getElementById('calcMetal').addEventListener('change', calculateValue);
+
+  updatePrices();
+  setInterval(() => {
+    const now = new Date();
+    document.getElementById('lastUpdate').textContent = now.toLocaleTimeString(currency.locale, {
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  }, 30000);
+</script>
+
+<style>
+  :root {
+    --bg-dark: #0f172a;
+    --bg-card: rgba(30, 41, 59, 0.8);
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --accent: #667eea;
+    --accent-light: #a5b4fc;
+    --gold-color: #fbbf24;
+    --silver-color: #94a3b8;
+    --positive: #10b981;
+    --negative: #ef4444;
+    --border: rgba(255, 255, 255, 0.1);
+  }
+
+  .prices-page {
+    background: var(--bg-dark);
+    min-height: 100vh;
+    padding-top: 72px;
+  }
+
+  .prices-hero {
+    padding: 60px 24px 40px;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(148, 163, 184, 0.1) 100%);
+  }
+
+  .hero-content {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    background: rgba(16, 185, 129, 0.2);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 20px;
+    color: #34d399;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+
+  .pulse {
+    width: 8px;
+    height: 8px;
+    background: #10b981;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.2); }
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 16px;
+  }
+
+  .hero-title .highlight {
+    background: linear-gradient(135deg, var(--gold-color) 0%, var(--silver-color) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin: 0 0 16px;
+  }
+
+  .last-update {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  .last-update span {
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  .prices-section {
+    padding: 40px 24px 60px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .prices-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+
+  .price-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .metal-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .metal-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .metal-icon.gold {
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    color: #78350f;
+  }
+
+  .metal-icon.silver {
+    background: linear-gradient(135deg, #e2e8f0 0%, #94a3b8 100%);
+    color: #334155;
+  }
+
+  .metal-info h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  .metal-info .symbol {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .change-badge {
+    margin-left: auto;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .change-badge.positive {
+    background: rgba(16, 185, 129, 0.2);
+    color: #34d399;
+  }
+
+  .change-badge.negative {
+    background: rgba(239, 68, 68, 0.2);
+    color: #f87171;
+  }
+
+  .card-body {
+    padding: 20px;
+  }
+
+  .main-price {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    margin-bottom: 20px;
+  }
+
+  .price-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .price-unit {
+    font-size: 1rem;
+    color: var(--text-muted);
+  }
+
+  .price-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .detail {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .detail-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .detail-value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+  }
+
+  .price-range {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .range-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .range-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+  }
+
+  .range-value {
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .range-value.low { color: #f87171; }
+  .range-value.high { color: #34d399; }
+
+  .range-bar {
+    flex: 1;
+    height: 6px;
+    background: linear-gradient(90deg, #f87171, #fbbf24, #34d399);
+    border-radius: 3px;
+    position: relative;
+  }
+
+  .range-current {
+    position: absolute;
+    top: -4px;
+    width: 14px;
+    height: 14px;
+    background: white;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    transform: translateX(-50%);
+  }
+
+  .quick-calc {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+
+  .quick-calc h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 16px;
+  }
+
+  .calc-row {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .calc-input-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .calc-input-group input,
+  .calc-input-group select {
+    padding: 10px 14px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 1rem;
+  }
+
+  .calc-input-group input {
+    width: 100px;
+  }
+
+  .calc-of {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+
+  .calc-result {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: auto;
+    padding: 12px 20px;
+    background: rgba(102, 126, 234, 0.1);
+    border-radius: 10px;
+  }
+
+  .calc-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  .calc-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-light);
+  }
+
+  .secondary-metals {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .secondary-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+
+  .secondary-name {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  .secondary-price {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-left: auto;
+  }
+
+  .secondary-change {
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .secondary-change.positive { color: #34d399; }
+  .secondary-change.negative { color: #f87171; }
+
+  .source-note {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-align: center;
+    margin: 0 0 8px;
+  }
+
+  .disclaimer {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-align: center;
+    font-style: italic;
+    margin: 0;
+  }
+
+  .cta-section {
+    padding: 60px 24px;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border-top: 1px solid var(--border);
+  }
+
+  .cta-section h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 12px;
+  }
+
+  .cta-section p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin: 0 0 32px;
+  }
+
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, var(--accent) 0%, #764ba2 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 600;
+    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+    transition: all 0.3s ease;
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(102, 126, 234, 0.5);
+  }
+
+  @media (max-width: 768px) {
+    .prices-grid,
+    .secondary-metals {
+      grid-template-columns: 1fr;
+    }
+
+    .calc-row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .calc-result {
+      margin-left: 0;
+      justify-content: center;
+    }
+
+    .hero-title {
+      font-size: 2rem;
+    }
+
+    :root {
+      --bg-dark: #ffffff;
+      --bg-card: #f8fafc;
+      --text-primary: #1e293b;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      --border: rgba(0, 0, 0, 0.1);
+    }
+
+    .prices-page {
+      background: #ffffff;
+    }
+
+    .prices-hero {
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.05) 0%, rgba(148, 163, 184, 0.05) 100%);
+    }
+
+    .hero-title {
+      color: #1e293b;
+    }
+
+    .price-card,
+    .quick-calc,
+    .secondary-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+    }
+
+    .calc-input-group input,
+    .calc-input-group select {
+      background: white;
+      border: 1px solid #e2e8f0;
+      color: #1e293b;
+    }
+
+    .cta-section {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .cta-section h2 {
+      color: #1e293b;
+    }
+  }
+</style>

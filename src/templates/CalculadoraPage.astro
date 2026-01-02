@@ -1,0 +1,891 @@
+---
+/**
+ * Template: Calculadora de Rentabilidad
+ * Herramienta interactiva que muestra el ahorro potencial con RayGold
+ */
+import Layout from "@/layouts/Layout.astro";
+import { getToolAlternateUrls, getPageUrl, type Lang } from "@/config/pages";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const alternateUrls = getToolAlternateUrls("calculadora");
+
+// Traducciones
+const t: Record<Lang, {
+  metaTitle: string;
+  metaDesc: string;
+  badge: string;
+  title: string;
+  titleHighlight: string;
+  subtitle: string;
+  // Formulario
+  formTitle: string;
+  goldLabel: string;
+  goldHelp: string;
+  silverLabel: string;
+  silverHelp: string;
+  wasteLabel: string;
+  wasteHelp: string;
+  employeesLabel: string;
+  employeesHelp: string;
+  hoursLabel: string;
+  hoursHelp: string;
+  calculateBtn: string;
+  // Resultados
+  resultsTitle: string;
+  currentLosses: string;
+  goldWaste: string;
+  silverWaste: string;
+  adminTime: string;
+  totalAnnual: string;
+  withRaygold: string;
+  wasteReduction: string;
+  timeReduction: string;
+  annualSavings: string;
+  roi: string;
+  roiMonths: string;
+  // CTA
+  ctaTitle: string;
+  ctaSubtitle: string;
+  ctaButton: string;
+  // Notas
+  disclaimer: string;
+  goldPrice: string;
+  silverPrice: string;
+}> = {
+  es: {
+    metaTitle: "Calculadora de Rentabilidad | RayGold ERP",
+    metaDesc: "Calcula cuánto dinero está perdiendo tu joyería sin un ERP especializado y cuánto podrías ahorrar con RayGold.",
+    badge: "Herramienta Gratuita",
+    title: "Calculadora de",
+    titleHighlight: "Rentabilidad",
+    subtitle: "Descubre cuánto dinero está perdiendo tu taller sin un control adecuado de mermas y procesos",
+    formTitle: "Datos de tu taller",
+    goldLabel: "Gramos de oro procesados/mes",
+    goldHelp: "Incluye fundición, fabricación y reparaciones",
+    silverLabel: "Gramos de plata procesados/mes",
+    silverHelp: "Incluye todo el metal que manipuláis",
+    wasteLabel: "% de merma actual estimado",
+    wasteHelp: "La media del sector sin control es 3-5%",
+    employeesLabel: "Número de empleados",
+    employeesHelp: "Personal de taller y administración",
+    hoursLabel: "Horas/semana en gestión manual",
+    hoursHelp: "Excel, papeles, búsqueda de información...",
+    calculateBtn: "Calcular mi ahorro",
+    resultsTitle: "Tu análisis de rentabilidad",
+    currentLosses: "Pérdidas actuales estimadas",
+    goldWaste: "Merma de oro",
+    silverWaste: "Merma de plata",
+    adminTime: "Tiempo administrativo",
+    totalAnnual: "Total pérdidas anuales",
+    withRaygold: "Con RayGold ERP",
+    wasteReduction: "Reducción de merma al 1%",
+    timeReduction: "Reducción tiempo admin 60%",
+    annualSavings: "Ahorro anual estimado",
+    roi: "Retorno de inversión",
+    roiMonths: "meses",
+    ctaTitle: "¿Quieres ver estos números en tu taller real?",
+    ctaSubtitle: "Solicita una demo personalizada y analizamos tu caso concreto",
+    ctaButton: "Solicitar demo gratuita",
+    disclaimer: "* Cálculos estimados basados en medias del sector. Los resultados reales pueden variar.",
+    goldPrice: "Precio oro usado",
+    silverPrice: "Precio plata usado",
+  },
+  en: {
+    metaTitle: "Profitability Calculator | RayGold ERP",
+    metaDesc: "Calculate how much money your jewelry workshop is losing without specialized ERP and how much you could save with RayGold.",
+    badge: "Free Tool",
+    title: "Profitability",
+    titleHighlight: "Calculator",
+    subtitle: "Discover how much money your workshop is losing without proper waste and process control",
+    formTitle: "Your workshop data",
+    goldLabel: "Grams of gold processed/month",
+    goldHelp: "Includes melting, manufacturing and repairs",
+    silverLabel: "Grams of silver processed/month",
+    silverHelp: "Includes all metal you handle",
+    wasteLabel: "Estimated current waste %",
+    wasteHelp: "Industry average without control is 3-5%",
+    employeesLabel: "Number of employees",
+    employeesHelp: "Workshop and admin staff",
+    hoursLabel: "Hours/week on manual management",
+    hoursHelp: "Excel, papers, searching for information...",
+    calculateBtn: "Calculate my savings",
+    resultsTitle: "Your profitability analysis",
+    currentLosses: "Estimated current losses",
+    goldWaste: "Gold waste",
+    silverWaste: "Silver waste",
+    adminTime: "Administrative time",
+    totalAnnual: "Total annual losses",
+    withRaygold: "With RayGold ERP",
+    wasteReduction: "Waste reduction to 1%",
+    timeReduction: "60% admin time reduction",
+    annualSavings: "Estimated annual savings",
+    roi: "Return on investment",
+    roiMonths: "months",
+    ctaTitle: "Want to see these numbers for your real workshop?",
+    ctaSubtitle: "Request a personalized demo and we'll analyze your specific case",
+    ctaButton: "Request free demo",
+    disclaimer: "* Estimated calculations based on industry averages. Actual results may vary.",
+    goldPrice: "Gold price used",
+    silverPrice: "Silver price used",
+  },
+  fr: {
+    metaTitle: "Calculateur de Rentabilité | RayGold ERP",
+    metaDesc: "Calculez combien d'argent votre bijouterie perd sans ERP spécialisé et combien vous pourriez économiser avec RayGold.",
+    badge: "Outil Gratuit",
+    title: "Calculateur de",
+    titleHighlight: "Rentabilité",
+    subtitle: "Découvrez combien d'argent votre atelier perd sans contrôle adéquat des pertes et des processus",
+    formTitle: "Données de votre atelier",
+    goldLabel: "Grammes d'or traités/mois",
+    goldHelp: "Inclut la fonte, la fabrication et les réparations",
+    silverLabel: "Grammes d'argent traités/mois",
+    silverHelp: "Inclut tout le métal que vous manipulez",
+    wasteLabel: "% de perte actuel estimé",
+    wasteHelp: "La moyenne du secteur sans contrôle est de 3-5%",
+    employeesLabel: "Nombre d'employés",
+    employeesHelp: "Personnel d'atelier et d'administration",
+    hoursLabel: "Heures/semaine en gestion manuelle",
+    hoursHelp: "Excel, papiers, recherche d'informations...",
+    calculateBtn: "Calculer mes économies",
+    resultsTitle: "Votre analyse de rentabilité",
+    currentLosses: "Pertes actuelles estimées",
+    goldWaste: "Perte d'or",
+    silverWaste: "Perte d'argent",
+    adminTime: "Temps administratif",
+    totalAnnual: "Total pertes annuelles",
+    withRaygold: "Avec RayGold ERP",
+    wasteReduction: "Réduction des pertes à 1%",
+    timeReduction: "Réduction temps admin 60%",
+    annualSavings: "Économies annuelles estimées",
+    roi: "Retour sur investissement",
+    roiMonths: "mois",
+    ctaTitle: "Vous voulez voir ces chiffres pour votre vrai atelier?",
+    ctaSubtitle: "Demandez une démo personnalisée et nous analyserons votre cas spécifique",
+    ctaButton: "Demander une démo gratuite",
+    disclaimer: "* Calculs estimés basés sur les moyennes du secteur. Les résultats réels peuvent varier.",
+    goldPrice: "Prix de l'or utilisé",
+    silverPrice: "Prix de l'argent utilisé",
+  },
+  ca: {
+    metaTitle: "Calculadora de Rendibilitat | RayGold ERP",
+    metaDesc: "Calcula quants diners està perdent la teva joieria sense un ERP especialitzat i quant podries estalviar amb RayGold.",
+    badge: "Eina Gratuïta",
+    title: "Calculadora de",
+    titleHighlight: "Rendibilitat",
+    subtitle: "Descobreix quants diners està perdent el teu taller sense un control adequat de mermes i processos",
+    formTitle: "Dades del teu taller",
+    goldLabel: "Grams d'or processats/mes",
+    goldHelp: "Inclou fosa, fabricació i reparacions",
+    silverLabel: "Grams de plata processats/mes",
+    silverHelp: "Inclou tot el metall que manipuleu",
+    wasteLabel: "% de merma actual estimat",
+    wasteHelp: "La mitjana del sector sense control és 3-5%",
+    employeesLabel: "Nombre d'empleats",
+    employeesHelp: "Personal de taller i administració",
+    hoursLabel: "Hores/setmana en gestió manual",
+    hoursHelp: "Excel, papers, cerca d'informació...",
+    calculateBtn: "Calcular el meu estalvi",
+    resultsTitle: "La teva anàlisi de rendibilitat",
+    currentLosses: "Pèrdues actuals estimades",
+    goldWaste: "Merma d'or",
+    silverWaste: "Merma de plata",
+    adminTime: "Temps administratiu",
+    totalAnnual: "Total pèrdues anuals",
+    withRaygold: "Amb RayGold ERP",
+    wasteReduction: "Reducció de merma a l'1%",
+    timeReduction: "Reducció temps admin 60%",
+    annualSavings: "Estalvi anual estimat",
+    roi: "Retorn d'inversió",
+    roiMonths: "mesos",
+    ctaTitle: "Vols veure aquests números al teu taller real?",
+    ctaSubtitle: "Sol·licita una demo personalitzada i analitzem el teu cas concret",
+    ctaButton: "Sol·licitar demo gratuïta",
+    disclaimer: "* Càlculs estimats basats en mitjanes del sector. Els resultats reals poden variar.",
+    goldPrice: "Preu or utilitzat",
+    silverPrice: "Preu plata utilitzat",
+  },
+  "pt-br": {
+    metaTitle: "Calculadora de Rentabilidade | RayGold ERP",
+    metaDesc: "Calcule quanto dinheiro sua joalheria está perdendo sem um ERP especializado e quanto poderia economizar com RayGold.",
+    badge: "Ferramenta Gratuita",
+    title: "Calculadora de",
+    titleHighlight: "Rentabilidade",
+    subtitle: "Descubra quanto dinheiro sua oficina está perdendo sem controle adequado de perdas e processos",
+    formTitle: "Dados da sua oficina",
+    goldLabel: "Gramas de ouro processados/mês",
+    goldHelp: "Inclui fundição, fabricação e reparos",
+    silverLabel: "Gramas de prata processados/mês",
+    silverHelp: "Inclui todo o metal que vocês manipulam",
+    wasteLabel: "% de perda atual estimado",
+    wasteHelp: "A média do setor sem controle é 3-5%",
+    employeesLabel: "Número de funcionários",
+    employeesHelp: "Pessoal de oficina e administração",
+    hoursLabel: "Horas/semana em gestão manual",
+    hoursHelp: "Excel, papéis, busca de informações...",
+    calculateBtn: "Calcular minha economia",
+    resultsTitle: "Sua análise de rentabilidade",
+    currentLosses: "Perdas atuais estimadas",
+    goldWaste: "Perda de ouro",
+    silverWaste: "Perda de prata",
+    adminTime: "Tempo administrativo",
+    totalAnnual: "Total perdas anuais",
+    withRaygold: "Com RayGold ERP",
+    wasteReduction: "Redução de perda para 1%",
+    timeReduction: "Redução tempo admin 60%",
+    annualSavings: "Economia anual estimada",
+    roi: "Retorno do investimento",
+    roiMonths: "meses",
+    ctaTitle: "Quer ver esses números na sua oficina real?",
+    ctaSubtitle: "Solicite uma demo personalizada e analisamos seu caso concreto",
+    ctaButton: "Solicitar demo gratuita",
+    disclaimer: "* Cálculos estimados baseados em médias do setor. Os resultados reais podem variar.",
+    goldPrice: "Preço do ouro usado",
+    silverPrice: "Preço da prata usado",
+  },
+};
+
+const tt = t[lang] || t.es;
+const contactUrl = getPageUrl("contacto", lang);
+
+// Moneda según idioma
+const currencyInfo: Record<Lang, { symbol: string; code: string }> = {
+  es: { symbol: "€", code: "EUR" },
+  en: { symbol: "$", code: "USD" },
+  fr: { symbol: "€", code: "EUR" },
+  ca: { symbol: "€", code: "EUR" },
+  "pt-br": { symbol: "R$", code: "BRL" },
+};
+
+const currency = currencyInfo[lang];
+---
+
+<Layout
+  title={tt.metaTitle}
+  description={tt.metaDesc}
+  lang={lang}
+  alternateUrls={alternateUrls}
+>
+  <main class="calculator-page">
+    <!-- Hero Section -->
+    <section class="calc-hero">
+      <div class="hero-content">
+        <span class="hero-badge">{tt.badge}</span>
+        <h1 class="hero-title">
+          {tt.title} <span class="highlight">{tt.titleHighlight}</span>
+        </h1>
+        <p class="hero-subtitle">{tt.subtitle}</p>
+      </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section class="calculator-section">
+      <div class="calculator-container">
+        <!-- Formulario -->
+        <div class="calc-form-card">
+          <h2 class="form-title">{tt.formTitle}</h2>
+          
+          <div class="form-group">
+            <label for="gold">{tt.goldLabel}</label>
+            <input type="number" id="gold" value="500" min="0" step="10" />
+            <span class="form-help">{tt.goldHelp}</span>
+          </div>
+
+          <div class="form-group">
+            <label for="silver">{tt.silverLabel}</label>
+            <input type="number" id="silver" value="2000" min="0" step="50" />
+            <span class="form-help">{tt.silverHelp}</span>
+          </div>
+
+          <div class="form-group">
+            <label for="waste">{tt.wasteLabel}</label>
+            <div class="input-with-suffix">
+              <input type="number" id="waste" value="3.5" min="0" max="10" step="0.5" />
+              <span class="suffix">%</span>
+            </div>
+            <span class="form-help">{tt.wasteHelp}</span>
+          </div>
+
+          <div class="form-group">
+            <label for="employees">{tt.employeesLabel}</label>
+            <input type="number" id="employees" value="5" min="1" max="100" />
+            <span class="form-help">{tt.employeesHelp}</span>
+          </div>
+
+          <div class="form-group">
+            <label for="hours">{tt.hoursLabel}</label>
+            <input type="number" id="hours" value="10" min="0" max="40" />
+            <span class="form-help">{tt.hoursHelp}</span>
+          </div>
+
+          <button type="button" class="calculate-btn" id="calculateBtn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="4" y="2" width="16" height="20" rx="2" />
+              <line x1="8" y1="6" x2="16" y2="6" />
+              <line x1="8" y1="10" x2="16" y2="10" />
+              <line x1="8" y1="14" x2="12" y2="14" />
+              <line x1="8" y1="18" x2="12" y2="18" />
+            </svg>
+            {tt.calculateBtn}
+          </button>
+        </div>
+
+        <!-- Resultados -->
+        <div class="calc-results-card" id="resultsCard">
+          <h2 class="results-title">{tt.resultsTitle}</h2>
+
+          <!-- Pérdidas actuales -->
+          <div class="results-block losses">
+            <h3 class="block-title">{tt.currentLosses}</h3>
+            <div class="result-row">
+              <span class="result-label">{tt.goldWaste}</span>
+              <span class="result-value negative" id="goldLoss">-</span>
+            </div>
+            <div class="result-row">
+              <span class="result-label">{tt.silverWaste}</span>
+              <span class="result-value negative" id="silverLoss">-</span>
+            </div>
+            <div class="result-row">
+              <span class="result-label">{tt.adminTime}</span>
+              <span class="result-value negative" id="adminLoss">-</span>
+            </div>
+            <div class="result-row total">
+              <span class="result-label">{tt.totalAnnual}</span>
+              <span class="result-value negative" id="totalLoss">-</span>
+            </div>
+          </div>
+
+          <!-- Con RayGold -->
+          <div class="results-block savings">
+            <h3 class="block-title">{tt.withRaygold}</h3>
+            <div class="result-row">
+              <span class="result-label">{tt.wasteReduction}</span>
+              <span class="result-value positive" id="wasteSaving">-</span>
+            </div>
+            <div class="result-row">
+              <span class="result-label">{tt.timeReduction}</span>
+              <span class="result-value positive" id="timeSaving">-</span>
+            </div>
+            <div class="result-row total highlight">
+              <span class="result-label">{tt.annualSavings}</span>
+              <span class="result-value positive" id="totalSaving">-</span>
+            </div>
+          </div>
+
+          <!-- ROI -->
+          <div class="roi-block">
+            <div class="roi-label">{tt.roi}</div>
+            <div class="roi-value">
+              <span id="roiMonths">-</span>
+              <span class="roi-unit">{tt.roiMonths}</span>
+            </div>
+          </div>
+
+          <!-- Precios referencia -->
+          <div class="price-reference">
+            <span>{tt.goldPrice}: <strong id="goldPriceRef">-</strong></span>
+            <span>{tt.silverPrice}: <strong id="silverPriceRef">-</strong></span>
+          </div>
+
+          <p class="disclaimer">{tt.disclaimer}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <h2>{tt.ctaTitle}</h2>
+      <p>{tt.ctaSubtitle}</p>
+      <a href={contactUrl} class="cta-button">
+        {tt.ctaButton}
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </section>
+  </main>
+</Layout>
+
+<script define:vars={{ currency, lang }}>
+  // Precios de metales (aproximados - en producción usar API)
+  const metalPrices = {
+    EUR: { gold: 85, silver: 0.95 },      // €/gramo
+    USD: { gold: 92, silver: 1.05 },      // $/gramo
+    BRL: { gold: 460, silver: 5.20 },     // R$/gramo
+  };
+
+  const prices = metalPrices[currency.code] || metalPrices.EUR;
+  const hourlyRate = currency.code === 'BRL' ? 50 : currency.code === 'USD' ? 25 : 20; // Coste hora empleado
+  const raygoldCost = currency.code === 'BRL' ? 2500 : currency.code === 'USD' ? 500 : 399; // Coste mensual RayGold
+
+  function formatCurrency(value) {
+    return currency.symbol + ' ' + value.toLocaleString(lang === 'pt-br' ? 'pt-BR' : lang, { 
+      minimumFractionDigits: 0, 
+      maximumFractionDigits: 0 
+    });
+  }
+
+  function calculate() {
+    const gold = parseFloat(document.getElementById('gold').value) || 0;
+    const silver = parseFloat(document.getElementById('silver').value) || 0;
+    const waste = parseFloat(document.getElementById('waste').value) || 0;
+    const employees = parseFloat(document.getElementById('employees').value) || 0;
+    const hours = parseFloat(document.getElementById('hours').value) || 0;
+
+    // Cálculos de pérdidas actuales (anuales)
+    const goldWasteGrams = gold * (waste / 100) * 12;
+    const silverWasteGrams = silver * (waste / 100) * 12;
+    const goldLoss = goldWasteGrams * prices.gold;
+    const silverLoss = silverWasteGrams * prices.silver;
+    const adminLoss = hours * hourlyRate * 52; // 52 semanas
+    const totalLoss = goldLoss + silverLoss + adminLoss;
+
+    // Con RayGold (merma reducida al 1%)
+    const newWaste = 1;
+    const goldSaving = gold * ((waste - newWaste) / 100) * 12 * prices.gold;
+    const silverSaving = silver * ((waste - newWaste) / 100) * 12 * prices.silver;
+    const timeSaving = adminLoss * 0.6; // 60% reducción
+    const totalSaving = goldSaving + silverSaving + timeSaving;
+
+    // ROI (meses para recuperar inversión anual)
+    const annualRaygoldCost = raygoldCost * 12;
+    const roiMonths = totalSaving > 0 ? Math.ceil(annualRaygoldCost / (totalSaving / 12)) : 0;
+
+    // Actualizar UI
+    document.getElementById('goldLoss').textContent = formatCurrency(goldLoss);
+    document.getElementById('silverLoss').textContent = formatCurrency(silverLoss);
+    document.getElementById('adminLoss').textContent = formatCurrency(adminLoss);
+    document.getElementById('totalLoss').textContent = formatCurrency(totalLoss);
+
+    document.getElementById('wasteSaving').textContent = '+' + formatCurrency(goldSaving + silverSaving);
+    document.getElementById('timeSaving').textContent = '+' + formatCurrency(timeSaving);
+    document.getElementById('totalSaving').textContent = '+' + formatCurrency(totalSaving);
+
+    document.getElementById('roiMonths').textContent = roiMonths;
+
+    document.getElementById('goldPriceRef').textContent = formatCurrency(prices.gold) + '/g';
+    document.getElementById('silverPriceRef').textContent = formatCurrency(prices.silver) + '/g';
+
+    // Mostrar resultados con animación
+    document.getElementById('resultsCard').classList.add('visible');
+  }
+
+  // Event listeners
+  document.getElementById('calculateBtn').addEventListener('click', calculate);
+  
+  // Calcular al cambiar cualquier input
+  document.querySelectorAll('input').forEach(input => {
+    input.addEventListener('change', calculate);
+  });
+
+  // Calcular al cargar
+  calculate();
+</script>
+
+<style>
+  /* Variables */
+  :root {
+    --bg-dark: #0f172a;
+    --bg-card: rgba(30, 41, 59, 0.8);
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --accent: #667eea;
+    --accent-light: #a5b4fc;
+    --positive: #10b981;
+    --negative: #ef4444;
+    --border: rgba(255, 255, 255, 0.1);
+  }
+
+  .calculator-page {
+    background: var(--bg-dark);
+    min-height: 100vh;
+    padding-top: 72px;
+  }
+
+  /* Hero */
+  .calc-hero {
+    padding: 60px 24px 40px;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  }
+
+  .hero-content {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: rgba(102, 126, 234, 0.2);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    border-radius: 20px;
+    color: var(--accent-light);
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 16px;
+    line-height: 1.2;
+  }
+
+  .hero-title .highlight {
+    background: linear-gradient(135deg, var(--accent) 0%, #a855f7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* Calculator Section */
+  .calculator-section {
+    padding: 40px 24px 60px;
+  }
+
+  .calculator-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  /* Form Card */
+  .calc-form-card,
+  .calc-results-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+  }
+
+  .form-title,
+  .results-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 24px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+  }
+
+  .form-group input {
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: border-color 0.2s;
+  }
+
+  .form-group input:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  .input-with-suffix {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .input-with-suffix input {
+    flex: 1;
+  }
+
+  .suffix {
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  .form-help {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 6px;
+  }
+
+  .calculate-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 24px;
+    background: linear-gradient(135deg, var(--accent) 0%, #764ba2 100%);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 8px;
+  }
+
+  .calculate-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+  }
+
+  /* Results Card */
+  .calc-results-card {
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+  }
+
+  .calc-results-card.visible {
+    opacity: 1;
+  }
+
+  .results-block {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .block-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin: 0 0 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .result-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .result-row:last-child {
+    border-bottom: none;
+  }
+
+  .result-row.total {
+    margin-top: 8px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    border-bottom: none;
+  }
+
+  .result-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  .result-value {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .result-value.negative {
+    color: var(--negative);
+  }
+
+  .result-value.positive {
+    color: var(--positive);
+  }
+
+  .result-row.total .result-label,
+  .result-row.total .result-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  .result-row.highlight {
+    background: rgba(16, 185, 129, 0.1);
+    margin: 8px -20px -20px;
+    padding: 16px 20px;
+    border-radius: 0 0 12px 12px;
+  }
+
+  /* ROI Block */
+  .roi-block {
+    text-align: center;
+    padding: 24px;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+    border-radius: 12px;
+    margin-bottom: 20px;
+  }
+
+  .roi-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+  }
+
+  .roi-value {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .roi-value span:first-child {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--accent-light);
+  }
+
+  .roi-unit {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+  }
+
+  /* Price Reference */
+  .price-reference {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+
+  .price-reference strong {
+    color: var(--text-secondary);
+  }
+
+  .disclaimer {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-align: center;
+    margin: 0;
+    font-style: italic;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    padding: 60px 24px;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border-top: 1px solid var(--border);
+  }
+
+  .cta-section h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 12px;
+  }
+
+  .cta-section p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin: 0 0 32px;
+  }
+
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, var(--accent) 0%, #764ba2 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+    transition: all 0.3s ease;
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(102, 126, 234, 0.5);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .calculator-container {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-title {
+      font-size: 2rem;
+    }
+
+    /* Tema claro en móvil */
+    :root {
+      --bg-dark: #ffffff;
+      --bg-card: #f8fafc;
+      --text-primary: #1e293b;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      --border: rgba(0, 0, 0, 0.1);
+    }
+
+    .calculator-page {
+      background: #ffffff;
+    }
+
+    .calc-hero {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+    }
+
+    .hero-title {
+      color: #1e293b;
+    }
+
+    .hero-title .highlight {
+      background: linear-gradient(135deg, var(--accent) 0%, #a855f7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .calc-form-card,
+    .calc-results-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+    }
+
+    .form-group input {
+      background: white;
+      border: 1px solid #e2e8f0;
+      color: #1e293b;
+    }
+
+    .results-block {
+      background: rgba(0, 0, 0, 0.03);
+    }
+
+    .cta-section {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .cta-section h2 {
+      color: #1e293b;
+    }
+  }
+</style>

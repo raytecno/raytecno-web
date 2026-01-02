@@ -28,6 +28,40 @@ export const pageSlugs: Record<string, Record<Lang, string>> = {
   nosotros: { es: 'nosotros', en: 'about', fr: 'a-propos', ca: 'nosaltres', 'pt-br': 'sobre' },
 };
 
+// Slugs de la carpeta de herramientas por idioma
+export const toolsFolderSlugs: Record<Lang, string> = {
+  es: 'herramientas',
+  en: 'tools',
+  fr: 'outils',
+  ca: 'eines',
+  'pt-br': 'ferramentas',
+};
+
+// Slugs de cada herramienta por idioma
+export const toolSlugs: Record<string, Record<Lang, string>> = {
+  calculadora: { 
+    es: 'calculadora-rentabilidad', 
+    en: 'profitability-calculator', 
+    fr: 'calculateur-rentabilite', 
+    ca: 'calculadora-rendibilitat', 
+    'pt-br': 'calculadora-rentabilidade' 
+  },
+  cotizacion: { 
+    es: 'cotizacion-oro-plata', 
+    en: 'gold-silver-prices', 
+    fr: 'cours-or-argent', 
+    ca: 'cotitzacio-or-plata', 
+    'pt-br': 'cotacao-ouro-prata' 
+  },
+  normativa: { 
+    es: 'guia-normativa', 
+    en: 'compliance-guide', 
+    fr: 'guide-reglementaire', 
+    ca: 'guia-normativa', 
+    'pt-br': 'guia-normativo' 
+  },
+};
+
 // Slugs de la carpeta de módulos por idioma
 export const modFolderSlugs: Record<Lang, string> = {
   es: 'modulos',
@@ -80,6 +114,22 @@ export function getModuloUrl(moduloKey: string, lang: Lang): string {
 }
 
 /**
+ * Obtiene la URL de una herramienta específica
+ * Ejemplo: getToolUrl('calculadora', 'es') → '/es/herramientas/calculadora-rentabilidad'
+ * Ejemplo: getToolUrl('calculadora', 'en') → '/en/tools/profitability-calculator'
+ */
+export function getToolUrl(toolKey: string, lang: Lang): string {
+  const folderSlug = toolsFolderSlugs[lang];
+  const toolSlug = toolSlugs[toolKey]?.[lang];
+  
+  if (!folderSlug || !toolSlug) {
+    return `/${lang}/`;
+  }
+  
+  return `/${lang}/${folderSlug}/${toolSlug}`;
+}
+
+/**
  * Obtiene la clave de página a partir de un slug
  */
 export function getPageKeyFromSlug(slug: string, lang: Lang): string | null {
@@ -105,12 +155,22 @@ export function getAlternateUrls(pageKey: string): { lang: Lang; url: string }[]
 }
 
 /**
+ * Genera URLs alternativas para herramientas
+ */
+export function getToolAlternateUrls(toolKey: string): { lang: Lang; url: string }[] {
+  return supportedLangs.map(lang => ({
+    lang,
+    url: getToolUrl(toolKey, lang),
+  }));
+}
+
+/**
  * Obtiene el slug de navegación para cada página
  */
-export const navSlugs: Record<Lang, { modulos: string; precios: string; tecnologia: string; contacto: string }> = {
-  es: { modulos: 'modulos', precios: 'precios', tecnologia: 'tecnologia', contacto: 'contacto' },
-  en: { modulos: 'modules', precios: 'pricing', tecnologia: 'technology', contacto: 'contact' },
-  fr: { modulos: 'modules', precios: 'tarifs', tecnologia: 'technologie', contacto: 'contact' },
-  ca: { modulos: 'moduls', precios: 'preus', tecnologia: 'tecnologia', contacto: 'contacte' },
-  'pt-br': { modulos: 'modulos', precios: 'precos', tecnologia: 'tecnologia', contacto: 'contato' },
+export const navSlugs: Record<Lang, { modulos: string; precios: string; tecnologia: string; contacto: string; herramientas: string }> = {
+  es: { modulos: 'modulos', precios: 'precios', tecnologia: 'tecnologia', contacto: 'contacto', herramientas: 'herramientas' },
+  en: { modulos: 'modules', precios: 'pricing', tecnologia: 'technology', contacto: 'contact', herramientas: 'tools' },
+  fr: { modulos: 'modules', precios: 'tarifs', tecnologia: 'technologie', contacto: 'contact', herramientas: 'outils' },
+  ca: { modulos: 'moduls', precios: 'preus', tecnologia: 'tecnologia', contacto: 'contacte', herramientas: 'eines' },
+  'pt-br': { modulos: 'modulos', precios: 'precos', tecnologia: 'tecnologia', contacto: 'contato', herramientas: 'ferramentas' },
 };

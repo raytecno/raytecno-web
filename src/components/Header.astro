@@ -1,9 +1,8 @@
 ---
 /**
- * Header.astro - Navegación principal con selector de idiomas
- * Con tema adaptativo: azul oscuro en desktop, blanco en móvil
+ * Header.astro - Navegación principal con Herramientas dropdown
  */
-import { getPageUrl, type Lang } from "@/config/pages";
+import { getPageUrl, getToolUrl, type Lang } from "@/config/pages";
 import { getTranslations } from "@/i18n";
 
 interface Props {
@@ -13,26 +12,17 @@ interface Props {
 const { lang = "es" } = Astro.props;
 const t = getTranslations(lang);
 
-// Detectar página actual
 const currentPath = Astro.url.pathname;
 
-// Función para verificar si un link está activo
 const isActive = (path: string) => {
   const normalizedCurrent = currentPath.replace(/\/$/, "");
   const normalizedPath = path.replace(/\/$/, "");
-
   if (normalizedPath === `/${lang}` || normalizedPath === `/${lang}/`) {
-    return (
-      normalizedCurrent === `/${lang}` ||
-      normalizedCurrent === `/${lang}/` ||
-      currentPath === `/${lang}/`
-    );
+    return normalizedCurrent === `/${lang}` || normalizedCurrent === `/${lang}/`;
   }
-
   return normalizedCurrent.startsWith(normalizedPath);
 };
 
-// Idiomas soportados
 const languages: { code: Lang; name: string; flag: string }[] = [
   { code: "es", name: "Español", flag: "🇪🇸" },
   { code: "en", name: "English", flag: "🇬🇧" },
@@ -51,29 +41,34 @@ const tecnologiaUrl = getPageUrl("tecnologia", lang);
 const blogUrl = `/${lang}/blog`;
 const contactoUrl = getPageUrl("contacto", lang);
 
-// Traducciones del Blog por idioma
-const blogLabel: Record<Lang, string> = {
-  es: "Blog",
-  en: "Blog",
-  fr: "Blog",
-  ca: "Blog",
-  "pt-br": "Blog",
+// URLs de herramientas
+const calculadoraUrl = getToolUrl("calculadora", lang);
+const cotizacionUrl = getToolUrl("cotizacion", lang);
+const normativaUrl = getToolUrl("normativa", lang);
+
+// Traducciones del menú
+const navLabels: Record<Lang, { tools: string; calculator: string; prices: string; compliance: string }> = {
+  es: { tools: "Herramientas", calculator: "Calculadora Rentabilidad", prices: "Cotización Oro/Plata", compliance: "Guía Normativa" },
+  en: { tools: "Tools", calculator: "Profitability Calculator", prices: "Gold/Silver Prices", compliance: "Compliance Guide" },
+  fr: { tools: "Outils", calculator: "Calculateur Rentabilité", prices: "Cours Or/Argent", compliance: "Guide Réglementaire" },
+  ca: { tools: "Eines", calculator: "Calculadora Rendibilitat", prices: "Cotització Or/Plata", compliance: "Guia Normativa" },
+  "pt-br": { tools: "Ferramentas", calculator: "Calculadora Rentabilidade", prices: "Cotação Ouro/Prata", compliance: "Guia Normativo" },
 };
+
+const blogLabel: Record<Lang, string> = {
+  es: "Blog", en: "Blog", fr: "Blog", ca: "Blog", "pt-br": "Blog",
+};
+
+const nl = navLabels[lang];
+const isToolsActive = currentPath.includes('/herramientas') || currentPath.includes('/tools') || currentPath.includes('/outils') || currentPath.includes('/eines') || currentPath.includes('/ferramentas');
 ---
 
 <header class="header">
   <div class="header-container">
-    <!-- Logo con SVG inline -->
     <a href={`/${lang}/`} class="logo">
       <svg class="logo-icon" viewBox="0 0 40 40" fill="none">
-        <path
-          d="M20 2L37 12V28L20 38L3 28V12L20 2Z"
-          fill="url(#grad1)"
-          stroke="currentColor"
-          stroke-width="1"></path>
-        <path
-          d="M20 8L30 14V26L20 32L10 26V14L20 8Z"
-          fill="rgba(255,255,255,0.3)"></path>
+        <path d="M20 2L37 12V28L20 38L3 28V12L20 2Z" fill="url(#grad1)" stroke="currentColor" stroke-width="1"></path>
+        <path d="M20 8L30 14V26L20 32L10 26V14L20 8Z" fill="rgba(255,255,255,0.3)"></path>
         <defs>
           <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" style="stop-color:#667eea"></stop>
@@ -87,96 +82,76 @@ const blogLabel: Record<Lang, string> = {
       </div>
     </a>
 
-    <!-- Navegación principal -->
     <nav class="nav-main">
-      <a href={homeUrl} class:list={["nav-link", { active: isActive(homeUrl) }]}
-        >{t.nav?.home || "Inicio"}</a
-      >
-      <a
-        href={modulosUrl}
-        class:list={["nav-link", { active: isActive(modulosUrl) }]}
-        >{t.nav?.modules || "Módulos"}</a
-      >
-      <a
-        href={preciosUrl}
-        class:list={["nav-link", { active: isActive(preciosUrl) }]}
-        >{t.nav?.pricing || "Precios"}</a
-      >
-      <a
-        href={tecnologiaUrl}
-        class:list={["nav-link", { active: isActive(tecnologiaUrl) }]}
-        >{t.nav?.technology || "Tecnología"}</a
-      >
-      <a href={blogUrl} class:list={["nav-link", { active: isActive(blogUrl) }]}
-        >{blogLabel[lang]}</a
-      >
-      <a
-        href={contactoUrl}
-        class:list={["nav-link", { active: isActive(contactoUrl) }]}
-        >{t.nav?.contact || "Contacto"}</a
-      >
+      <a href={homeUrl} class:list={["nav-link", { active: isActive(homeUrl) && currentPath === `/${lang}/` }]}>{t.nav?.home || "Inicio"}</a>
+      <a href={modulosUrl} class:list={["nav-link", { active: isActive(modulosUrl) }]}>{t.nav?.modules || "Módulos"}</a>
+      <a href={preciosUrl} class:list={["nav-link", { active: isActive(preciosUrl) }]}>{t.nav?.pricing || "Precios"}</a>
+      <a href={tecnologiaUrl} class:list={["nav-link", { active: isActive(tecnologiaUrl) }]}>{t.nav?.technology || "Tecnología"}</a>
+      
+      <!-- Herramientas Dropdown -->
+      <div class="nav-dropdown">
+        <button class:list={["nav-link dropdown-trigger", { active: isToolsActive }]}>
+          {nl.tools}
+          <svg class="dropdown-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 9l6 6 6-6"></path>
+          </svg>
+        </button>
+        <div class="dropdown-menu">
+          <a href={calculadoraUrl} class="dropdown-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="4" y="2" width="16" height="20" rx="2"/>
+              <line x1="8" y1="6" x2="16" y2="6"/>
+              <line x1="8" y1="10" x2="16" y2="10"/>
+              <line x1="8" y1="14" x2="12" y2="14"/>
+            </svg>
+            {nl.calculator}
+          </a>
+          <a href={cotizacionUrl} class="dropdown-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+              <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+            {nl.prices}
+          </a>
+          <a href={normativaUrl} class="dropdown-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 12l2 2 4-4"/>
+              <path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            {nl.compliance}
+          </a>
+        </div>
+      </div>
+
+      <a href={blogUrl} class:list={["nav-link", { active: isActive(blogUrl) }]}>{blogLabel[lang]}</a>
+      <a href={contactoUrl} class:list={["nav-link", { active: isActive(contactoUrl) }]}>{t.nav?.contact || "Contacto"}</a>
     </nav>
 
-    <!-- Selector de idioma -->
     <div class="lang-selector">
-      <button
-        class="lang-trigger"
-        aria-label="Seleccionar idioma"
-        aria-expanded="false"
-      >
+      <button class="lang-trigger" aria-label="Seleccionar idioma" aria-expanded="false">
         <span class="lang-flag">{currentLang.flag}</span>
         <span class="lang-name">{currentLang.name}</span>
-        <svg
-          class="lang-chevron"
-          width="12"
-          height="12"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-        >
+        <svg class="lang-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M6 9l6 6 6-6"></path>
         </svg>
       </button>
       <div class="lang-dropdown">
-        {
-          languages.map((l) => (
-            <a
-              href={`/${l.code}/`}
-              class:list={["lang-option", { active: l.code === lang }]}
-              hreflang={l.code}
-            >
-              <span class="lang-option-flag">{l.flag}</span>
-              <span class="lang-option-name">{l.name}</span>
-              {l.code === lang && (
-                <svg
-                  class="lang-check"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path d="M20 6L9 17l-5-5" />
-                </svg>
-              )}
-            </a>
-          ))
-        }
+        {languages.map((l) => (
+          <a href={`/${l.code}/`} class:list={["lang-option", { active: l.code === lang }]} hreflang={l.code}>
+            <span class="lang-option-flag">{l.flag}</span>
+            <span class="lang-option-name">{l.name}</span>
+            {l.code === lang && (
+              <svg class="lang-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 6L9 17l-5-5"/>
+              </svg>
+            )}
+          </a>
+        ))}
       </div>
     </div>
 
-    <!-- Menú móvil -->
     <button class="mobile-toggle" aria-label="Menú">
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-      >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M3 12h18M3 6h18M3 18h18"></path>
       </svg>
     </button>
@@ -184,317 +159,72 @@ const blogLabel: Record<Lang, string> = {
 </header>
 
 <style>
-  /* ============================================
-     DESKTOP: Tema azul oscuro (default)
-     ============================================ */
-  .header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    background: rgba(15, 23, 42, 0.95);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
+  .header { position:fixed; top:0; left:0; right:0; z-index:1000; background:rgba(15,23,42,0.95); backdrop-filter:blur(12px); border-bottom:1px solid rgba(255,255,255,0.1); }
+  .header-container { max-width:1280px; margin:0 auto; padding:0 24px; height:72px; display:flex; align-items:center; justify-content:space-between; }
+  .logo { display:flex; align-items:center; gap:12px; text-decoration:none; }
+  .logo-icon { width:40px; height:40px; color:white; }
+  .logo-text { display:flex; flex-direction:column; }
+  .logo-name { font-size:1.1rem; font-weight:700; color:white; letter-spacing:2px; }
+  .logo-tagline { font-size:0.65rem; color:#94a3b8; letter-spacing:0.5px; }
+  .nav-main { display:flex; align-items:center; gap:8px; margin-left:auto; }
+  .nav-link { padding:8px 16px; color:rgba(255,255,255,0.8); text-decoration:none; font-size:0.9rem; font-weight:500; border-radius:8px; transition:all 0.2s; }
+  .nav-link:hover { color:white; background:rgba(255,255,255,0.1); }
+  .nav-link.active { color:white; background:rgba(102,126,234,0.25); border:1px solid rgba(102,126,234,0.4); }
 
-  .header-container {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 24px;
-    height: 72px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+  /* Dropdown */
+  .nav-dropdown { position:relative; }
+  .dropdown-trigger { display:flex; align-items:center; gap:4px; background:none; border:none; cursor:pointer; }
+  .dropdown-chevron { transition:transform 0.2s; }
+  .nav-dropdown:hover .dropdown-chevron { transform:rotate(180deg); }
+  .dropdown-menu { position:absolute; top:calc(100% + 8px); left:50%; transform:translateX(-50%); min-width:220px; background:#1e293b; border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:8px; opacity:0; visibility:hidden; transform:translateX(-50%) translateY(-10px); transition:all 0.2s; z-index:100; box-shadow:0 10px 40px rgba(0,0,0,0.3); }
+  .nav-dropdown:hover .dropdown-menu { opacity:1; visibility:visible; transform:translateX(-50%) translateY(0); }
+  .dropdown-item { display:flex; align-items:center; gap:12px; padding:12px 16px; color:rgba(255,255,255,0.8); text-decoration:none; border-radius:8px; transition:all 0.15s; font-size:0.9rem; }
+  .dropdown-item:hover { background:rgba(255,255,255,0.1); color:white; }
+  .dropdown-item svg { width:18px; height:18px; opacity:0.7; }
 
-  /* Logo */
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
-  }
+  /* Lang selector */
+  .lang-selector { position:relative; margin-left:32px; }
+  .lang-trigger { display:flex; align-items:center; gap:8px; padding:8px 16px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); border-radius:8px; color:white; font-size:0.85rem; font-weight:500; cursor:pointer; transition:all 0.2s; min-width:130px; }
+  .lang-trigger:hover { background:rgba(255,255,255,0.15); border-color:rgba(255,255,255,0.3); }
+  .lang-flag { font-size:1.1rem; }
+  .lang-name { font-weight:500; flex:1; }
+  .lang-chevron { transition:transform 0.2s; }
+  .lang-dropdown { position:absolute; top:calc(100% + 8px); right:0; min-width:180px; background:#1e293b; border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:8px; opacity:0; visibility:hidden; transform:translateY(-10px); transition:all 0.2s; z-index:100; box-shadow:0 10px 40px rgba(0,0,0,0.3); }
+  .lang-selector:hover .lang-dropdown { opacity:1; visibility:visible; transform:translateY(0); }
+  .lang-option { display:flex; align-items:center; gap:10px; padding:10px 12px; color:rgba(255,255,255,0.8); text-decoration:none; border-radius:8px; transition:all 0.15s; }
+  .lang-option:hover { background:rgba(255,255,255,0.1); color:white; }
+  .lang-option.active { background:rgba(102,126,234,0.2); color:#a5b4fc; }
+  .lang-option-flag { font-size:1.25rem; }
+  .lang-option-name { flex:1; font-size:0.9rem; }
+  .lang-check { color:#a5b4fc; }
+  .mobile-toggle { display:none; padding:8px; background:transparent; border:none; color:white; cursor:pointer; }
 
-  .logo-icon {
-    width: 40px;
-    height: 40px;
-    color: white;
-  }
-
-  .logo-text {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .logo-name {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: white;
-    letter-spacing: 2px;
-  }
-
-  .logo-tagline {
-    font-size: 0.65rem;
-    color: #94a3b8;
-    letter-spacing: 0.5px;
-  }
-
-  /* Navegación */
-  .nav-main {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-left: auto;
-  }
-
-  .nav-link {
-    padding: 8px 16px;
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    border-radius: 8px;
-    transition: all 0.2s ease;
-  }
-
-  .nav-link:hover {
-    color: white;
-    background: rgba(255, 255, 255, 0.1);
-  }
-
-  .nav-link.active {
-    color: white;
-    background: rgba(102, 126, 234, 0.25);
-    border: 1px solid rgba(102, 126, 234, 0.4);
-  }
-
-  /* Selector de idioma */
-  .lang-selector {
-    position: relative;
-    margin-left: 32px;
-  }
-
-  .lang-trigger {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
-    color: white;
-    font-size: 0.85rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    min-width: 130px;
-  }
-
-  .lang-trigger:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.3);
-  }
-
-  .lang-flag {
-    font-size: 1.1rem;
-  }
-
-  .lang-name {
-    font-weight: 500;
-    flex: 1;
-  }
-
-  .lang-chevron {
-    transition: transform 0.2s ease;
-  }
-
-  .lang-dropdown {
-    position: absolute;
-    top: calc(100% + 8px);
-    right: 0;
-    min-width: 180px;
-    background: #1e293b;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 8px;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.2s ease;
-    z-index: 100;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-  }
-
-  .lang-selector:hover .lang-dropdown {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-
-  .lang-option {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 12px;
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    border-radius: 8px;
-    transition: all 0.15s ease;
-  }
-
-  .lang-option:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-  }
-
-  .lang-option.active {
-    background: rgba(102, 126, 234, 0.2);
-    color: #a5b4fc;
-  }
-
-  .lang-option-flag {
-    font-size: 1.25rem;
-  }
-
-  .lang-option-name {
-    flex: 1;
-    font-size: 0.9rem;
-  }
-
-  .lang-check {
-    color: #a5b4fc;
-  }
-
-  /* Menú móvil - oculto en desktop */
-  .mobile-toggle {
-    display: none;
-    padding: 8px;
-    background: transparent;
-    border: none;
-    color: white;
-    cursor: pointer;
-  }
-
-  /* ============================================
-     MÓVIL: Tema blanco claro
-     ============================================ */
-  @media (max-width: 900px) {
-    /* Header blanco */
-    .header {
-      background: rgba(255, 255, 255, 0.98);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-    }
-
-    /* Logo oscuro */
-    .logo-icon {
-      color: #1e293b;
-    }
-
-    .logo-name {
-      color: #1e293b;
-    }
-
-    .logo-tagline {
-      color: #64748b;
-    }
-
-    /* Navegación */
-    .nav-main {
-      display: none;
-      position: absolute;
-      top: 72px;
-      left: 0;
-      right: 0;
-      background: rgba(255, 255, 255, 0.98);
-      flex-direction: column;
-      padding: 16px;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    }
-
-    .nav-main.mobile-open {
-      display: flex;
-    }
-
-    .nav-link {
-      padding: 12px 16px;
-      width: 100%;
-      text-align: center;
-      color: #334155;
-    }
-
-    .nav-link:hover {
-      color: #1e293b;
-      background: rgba(0, 0, 0, 0.04);
-    }
-
-    .nav-link.active {
-      color: #667eea;
-      background: rgba(102, 126, 234, 0.1);
-      border: 1px solid rgba(102, 126, 234, 0.2);
-    }
-
-    /* Botón móvil */
-    .mobile-toggle {
-      display: block;
-      color: #334155;
-    }
-
-    .mobile-toggle.active svg path {
-      stroke: #667eea;
-    }
-
-    /* Selector idioma adaptado */
-    .lang-trigger {
-      background: rgba(0, 0, 0, 0.04);
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      color: #334155;
-      min-width: auto;
-      padding: 8px 12px;
-    }
-
-    .lang-trigger:hover {
-      background: rgba(0, 0, 0, 0.08);
-      border-color: rgba(0, 0, 0, 0.15);
-    }
-
-    .lang-name {
-      display: none;
-    }
-
-    .lang-dropdown {
-      background: white;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-    }
-
-    .lang-option {
-      color: #334155;
-    }
-
-    .lang-option:hover {
-      background: rgba(0, 0, 0, 0.04);
-      color: #1e293b;
-    }
-
-    .lang-option.active {
-      background: rgba(102, 126, 234, 0.1);
-      color: #667eea;
-    }
-
-    .lang-check {
-      color: #667eea;
-    }
-
-    .logo-tagline {
-      display: none;
-    }
+  @media (max-width:900px) {
+    .header { background:rgba(255,255,255,0.98); border-bottom:1px solid rgba(0,0,0,0.08); }
+    .logo-icon { color:#1e293b; }
+    .logo-name { color:#1e293b; }
+    .logo-tagline { color:#64748b; display:none; }
+    .nav-main { display:none; position:absolute; top:72px; left:0; right:0; background:rgba(255,255,255,0.98); flex-direction:column; padding:16px; border-bottom:1px solid rgba(0,0,0,0.08); box-shadow:0 4px 20px rgba(0,0,0,0.08); }
+    .nav-main.mobile-open { display:flex; }
+    .nav-link { padding:12px 16px; width:100%; text-align:center; color:#334155; }
+    .nav-link:hover { color:#1e293b; background:rgba(0,0,0,0.04); }
+    .nav-link.active { color:#667eea; background:rgba(102,126,234,0.1); border:1px solid rgba(102,126,234,0.2); }
+    .nav-dropdown { width:100%; }
+    .dropdown-trigger { width:100%; justify-content:center; }
+    .dropdown-menu { position:static; transform:none; width:100%; opacity:1; visibility:visible; background:rgba(0,0,0,0.02); border:none; box-shadow:none; margin-top:8px; }
+    .dropdown-item { color:#334155; justify-content:center; }
+    .mobile-toggle { display:block; color:#334155; }
+    .lang-trigger { background:rgba(0,0,0,0.04); border:1px solid rgba(0,0,0,0.1); color:#334155; min-width:auto; padding:8px 12px; }
+    .lang-name { display:none; }
+    .lang-dropdown { background:white; border:1px solid rgba(0,0,0,0.1); box-shadow:0 10px 40px rgba(0,0,0,0.15); }
+    .lang-option { color:#334155; }
+    .lang-option:hover { background:rgba(0,0,0,0.04); color:#1e293b; }
+    .lang-option.active { background:rgba(102,126,234,0.1); color:#667eea; }
+    .lang-check { color:#667eea; }
   }
 </style>
 
 <script>
-  // Selector de idioma
   document.querySelectorAll(".lang-trigger").forEach((trigger) => {
     trigger.addEventListener("click", () => {
       const expanded = trigger.getAttribute("aria-expanded") === "true";
@@ -511,7 +241,6 @@ const blogLabel: Record<Lang, string> = {
     }
   });
 
-  // Menú móvil
   const mobileToggle = document.querySelector(".mobile-toggle");
   const navMain = document.querySelector(".nav-main");
 
@@ -520,7 +249,6 @@ const blogLabel: Record<Lang, string> = {
     mobileToggle.classList.toggle("active");
   });
 
-  // Cerrar menú al hacer click en un enlace
   document.querySelectorAll(".nav-link").forEach((link) => {
     link.addEventListener("click", () => {
       navMain?.classList.remove("mobile-open");
