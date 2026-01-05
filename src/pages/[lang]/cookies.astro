@@ -30,11 +30,11 @@ const content = {
       },
       {
         title: "Cookies que utilizamos",
-        text: `<strong style="color:white">Cookies técnicas (necesarias)</strong>\nEsenciales para el funcionamiento del sitio: sesión de usuario, preferencia de idioma, configuración de seguridad.\n\n<strong style="color:white">Cookies analíticas</strong>\nGoogle Analytics para análisis de tráfico (duración: hasta 2 años).\n\n<strong style="color:white">Cookies de preferencias</strong>\nIdioma seleccionado y configuración de visualización.`
+        text: `<strong>Cookies técnicas (necesarias)</strong>\nEsenciales para el funcionamiento del sitio: sesión de usuario, preferencia de idioma, configuración de seguridad.\n\n<strong>Cookies analíticas</strong>\nGoogle Analytics para análisis de tráfico (duración: hasta 2 años).\n\n<strong>Cookies de preferencias</strong>\nIdioma seleccionado y configuración de visualización.`
       },
       {
         title: "Detalle de cookies",
-        text: `• <strong style="color:white">_ga</strong> - Analítica - 2 años - Distinguir usuarios\n• <strong style="color:white">_gid</strong> - Analítica - 24 horas - Distinguir usuarios\n• <strong style="color:white">lang</strong> - Preferencia - 1 año - Idioma seleccionado\n• <strong style="color:white">cookie_consent</strong> - Técnica - 1 año - Preferencias de cookies`
+        text: `• <strong>_ga</strong> - Analítica - 2 años - Distinguir usuarios\n• <strong>_gid</strong> - Analítica - 24 horas - Distinguir usuarios\n• <strong>lang</strong> - Preferencia - 1 año - Idioma seleccionado\n• <strong>cookie_consent</strong> - Técnica - 1 año - Preferencias de cookies`
       },
       {
         title: "¿Cómo gestionar las cookies?",
@@ -57,11 +57,11 @@ const content = {
       },
       {
         title: "Cookies we use",
-        text: `<strong style="color:white">Technical cookies (necessary)</strong>\nEssential for website function: user session, language preference, security settings.\n\n<strong style="color:white">Analytics cookies</strong>\nGoogle Analytics for traffic analysis (duration: up to 2 years).\n\n<strong style="color:white">Preference cookies</strong>\nSelected language and display settings.`
+        text: `<strong>Technical cookies (necessary)</strong>\nEssential for website function: user session, language preference, security settings.\n\n<strong>Analytics cookies</strong>\nGoogle Analytics for traffic analysis (duration: up to 2 years).\n\n<strong>Preference cookies</strong>\nSelected language and display settings.`
       },
       {
         title: "Cookie details",
-        text: `• <strong style="color:white">_ga</strong> - Analytics - 2 years - Distinguish users\n• <strong style="color:white">_gid</strong> - Analytics - 24 hours - Distinguish users\n• <strong style="color:white">lang</strong> - Preference - 1 year - Selected language\n• <strong style="color:white">cookie_consent</strong> - Technical - 1 year - Cookie preferences`
+        text: `• <strong>_ga</strong> - Analytics - 2 years - Distinguish users\n• <strong>_gid</strong> - Analytics - 24 hours - Distinguish users\n• <strong>lang</strong> - Preference - 1 year - Selected language\n• <strong>cookie_consent</strong> - Technical - 1 year - Cookie preferences`
       },
       {
         title: "How to manage cookies?",
@@ -165,11 +165,42 @@ const c = content[lang] || content.es;
     line-height: 1.8;
   }
 
+  /* Strong en cookies - desktop */
+  .legal-section p :global(strong) {
+    color: white;
+  }
+
+  /* ============================================
+     MÓVIL: Tema blanco
+     ============================================ */
   @media (max-width: 768px) {
     .legal-page {
       padding: 100px 20px 60px;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
     }
-    h1 { font-size: 1.75rem; }
-    h2 { font-size: 1.05rem; }
+    
+    h1 { 
+      font-size: 1.75rem; 
+      color: #1e293b;
+    }
+    
+    h2 { 
+      font-size: 1.05rem; 
+      color: #1e293b;
+    }
+    
+    .legal-section p {
+      color: #475569;
+    }
+    
+    /* Strong en cookies - móvil */
+    .legal-section p :global(strong) {
+      color: #1e293b;
+    }
+    
+    .last-update {
+      color: #64748b;
+      border-bottom-color: #e2e8f0;
+    }
   }
 </style>

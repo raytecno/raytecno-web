@@ -181,11 +181,32 @@ const c = content[lang] || content.es;
     line-height: 1.8;
   }
 
+  /* ============================================
+     MÓVIL: Tema blanco
+     ============================================ */
   @media (max-width: 768px) {
     .legal-page {
       padding: 100px 20px 60px;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
     }
-    h1 { font-size: 1.75rem; }
-    h2 { font-size: 1.05rem; }
+    
+    h1 { 
+      font-size: 1.75rem; 
+      color: #1e293b;
+    }
+    
+    h2 { 
+      font-size: 1.05rem; 
+      color: #1e293b;
+    }
+    
+    .legal-section p {
+      color: #475569;
+    }
+    
+    .last-update {
+      color: #64748b;
+      border-bottom-color: #e2e8f0;
+    }
   }
 </style>
