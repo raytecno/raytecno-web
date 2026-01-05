@@ -1,0 +1,1183 @@
+---
+/**
+ * Página de Declaración Responsable VERI*FACTU
+ * src/templates/DeclaracionVerifactuPage.astro
+ */
+
+import Layout from '@/layouts/Layout.astro';
+import { type Lang, supportedLangs, getLegalUrl } from '@/config/pages';
+
+interface Props {
+  lang: Lang;
+  pageId: string;
+}
+
+const { lang } = Astro.props;
+
+// Traducciones
+const translations: Record<Lang, {
+  metaTitle: string;
+  metaDescription: string;
+  badge: string;
+  title: string;
+  subtitle: string;
+  downloadPdf: string;
+  lastUpdate: string;
+  sections: {
+    systemData: string;
+    producerData: string;
+    annex: string;
+    compliance: string;
+  };
+  labels: {
+    systemName: string;
+    systemId: string;
+    version: string;
+    components: string;
+    software: string;
+    hardware: string;
+    functionality: string;
+    verifactuOnly: string;
+    multiUser: string;
+    signatureTypes: string;
+    companyName: string;
+    nif: string;
+    address: string;
+    conformity: string;
+    signDate: string;
+    signPlace: string;
+    contactInfo: string;
+    phone: string;
+    email: string;
+    websites: string;
+    technicalCompliance: string;
+  };
+  yes: string;
+  no: string;
+  cta: {
+    title: string;
+    description: string;
+    button: string;
+  };
+}> = {
+  es: {
+    metaTitle: "Declaración Responsable VERI*FACTU | RayGold ERP",
+    metaDescription: "Declaración responsable del sistema informático de facturación RayGold conforme a la normativa VERI*FACTU de la AEAT",
+    badge: "Cumplimiento Normativo",
+    title: "Declaración Responsable VERI*FACTU",
+    subtitle: "Sistema informático de facturación conforme a la normativa fiscal española",
+    downloadPdf: "Descargar PDF oficial",
+    lastUpdate: "Última actualización: 15 de septiembre de 2025",
+    sections: {
+      systemData: "Datos del Sistema Informático",
+      producerData: "Datos de la Entidad Productora",
+      annex: "Anexo - Información Adicional",
+      compliance: "Cumplimiento Técnico",
+    },
+    labels: {
+      systemName: "Nombre del sistema",
+      systemId: "Código identificador",
+      version: "Versión",
+      components: "Componentes",
+      software: "Software",
+      hardware: "Hardware",
+      functionality: "Descripción funcional",
+      verifactuOnly: "¿Solo funciona como VERI*FACTU?",
+      multiUser: "¿Permite múltiples obligados tributarios?",
+      signatureTypes: "Tipos de firma",
+      companyName: "Razón social",
+      nif: "NIF",
+      address: "Dirección",
+      conformity: "Conformidad normativa",
+      signDate: "Fecha de firma",
+      signPlace: "Lugar de firma",
+      contactInfo: "Contacto",
+      phone: "Teléfono",
+      email: "Correo electrónico",
+      websites: "Sitios web",
+      technicalCompliance: "Cumplimiento técnico según Orden HAC/1177/2024",
+    },
+    yes: "SÍ",
+    no: "NO",
+    cta: {
+      title: "¿Necesitas un ERP certificado VERI*FACTU?",
+      description: "RayGold cumple con toda la normativa fiscal española para el sector joyero",
+      button: "Solicitar demo",
+    },
+  },
+  en: {
+    metaTitle: "VERI*FACTU Responsible Declaration | RayGold ERP",
+    metaDescription: "Responsible declaration of the RayGold invoicing system in compliance with Spanish VERI*FACTU regulations",
+    badge: "Regulatory Compliance",
+    title: "VERI*FACTU Responsible Declaration",
+    subtitle: "Invoicing system compliant with Spanish tax regulations",
+    downloadPdf: "Download official PDF",
+    lastUpdate: "Last updated: September 15, 2025",
+    sections: {
+      systemData: "System Information",
+      producerData: "Producer Entity Data",
+      annex: "Annex - Additional Information",
+      compliance: "Technical Compliance",
+    },
+    labels: {
+      systemName: "System name",
+      systemId: "System identifier",
+      version: "Version",
+      components: "Components",
+      software: "Software",
+      hardware: "Hardware",
+      functionality: "Functional description",
+      verifactuOnly: "VERI*FACTU only?",
+      multiUser: "Allows multiple taxpayers?",
+      signatureTypes: "Signature types",
+      companyName: "Company name",
+      nif: "Tax ID (NIF)",
+      address: "Address",
+      conformity: "Regulatory conformity",
+      signDate: "Signature date",
+      signPlace: "Signature place",
+      contactInfo: "Contact",
+      phone: "Phone",
+      email: "Email",
+      websites: "Websites",
+      technicalCompliance: "Technical compliance per Order HAC/1177/2024",
+    },
+    yes: "YES",
+    no: "NO",
+    cta: {
+      title: "Need a VERI*FACTU certified ERP?",
+      description: "RayGold complies with all Spanish tax regulations for the jewelry sector",
+      button: "Request demo",
+    },
+  },
+  fr: {
+    metaTitle: "Déclaration Responsable VERI*FACTU | RayGold ERP",
+    metaDescription: "Déclaration responsable du système de facturation RayGold conforme à la réglementation VERI*FACTU espagnole",
+    badge: "Conformité Réglementaire",
+    title: "Déclaration Responsable VERI*FACTU",
+    subtitle: "Système de facturation conforme à la réglementation fiscale espagnole",
+    downloadPdf: "Télécharger le PDF officiel",
+    lastUpdate: "Dernière mise à jour: 15 septembre 2025",
+    sections: {
+      systemData: "Données du Système",
+      producerData: "Données de l'Entité Productrice",
+      annex: "Annexe - Informations Complémentaires",
+      compliance: "Conformité Technique",
+    },
+    labels: {
+      systemName: "Nom du système",
+      systemId: "Identifiant du système",
+      version: "Version",
+      components: "Composants",
+      software: "Logiciel",
+      hardware: "Matériel",
+      functionality: "Description fonctionnelle",
+      verifactuOnly: "Fonctionne uniquement en VERI*FACTU?",
+      multiUser: "Permet plusieurs contribuables?",
+      signatureTypes: "Types de signature",
+      companyName: "Raison sociale",
+      nif: "NIF (Identifiant fiscal)",
+      address: "Adresse",
+      conformity: "Conformité réglementaire",
+      signDate: "Date de signature",
+      signPlace: "Lieu de signature",
+      contactInfo: "Contact",
+      phone: "Téléphone",
+      email: "Email",
+      websites: "Sites web",
+      technicalCompliance: "Conformité technique selon l'Ordre HAC/1177/2024",
+    },
+    yes: "OUI",
+    no: "NON",
+    cta: {
+      title: "Besoin d'un ERP certifié VERI*FACTU?",
+      description: "RayGold respecte toutes les réglementations fiscales espagnoles pour le secteur de la bijouterie",
+      button: "Demander une démo",
+    },
+  },
+  ca: {
+    metaTitle: "Declaració Responsable VERI*FACTU | RayGold ERP",
+    metaDescription: "Declaració responsable del sistema informàtic de facturació RayGold conforme a la normativa VERI*FACTU de l'AEAT",
+    badge: "Compliment Normatiu",
+    title: "Declaració Responsable VERI*FACTU",
+    subtitle: "Sistema informàtic de facturació conforme a la normativa fiscal espanyola",
+    downloadPdf: "Descarregar PDF oficial",
+    lastUpdate: "Última actualització: 15 de setembre de 2025",
+    sections: {
+      systemData: "Dades del Sistema Informàtic",
+      producerData: "Dades de l'Entitat Productora",
+      annex: "Annex - Informació Addicional",
+      compliance: "Compliment Tècnic",
+    },
+    labels: {
+      systemName: "Nom del sistema",
+      systemId: "Codi identificador",
+      version: "Versió",
+      components: "Components",
+      software: "Programari",
+      hardware: "Maquinari",
+      functionality: "Descripció funcional",
+      verifactuOnly: "Només funciona com VERI*FACTU?",
+      multiUser: "Permet múltiples obligats tributaris?",
+      signatureTypes: "Tipus de signatura",
+      companyName: "Raó social",
+      nif: "NIF",
+      address: "Adreça",
+      conformity: "Conformitat normativa",
+      signDate: "Data de signatura",
+      signPlace: "Lloc de signatura",
+      contactInfo: "Contacte",
+      phone: "Telèfon",
+      email: "Correu electrònic",
+      websites: "Llocs web",
+      technicalCompliance: "Compliment tècnic segons Ordre HAC/1177/2024",
+    },
+    yes: "SÍ",
+    no: "NO",
+    cta: {
+      title: "Necessites un ERP certificat VERI*FACTU?",
+      description: "RayGold compleix amb tota la normativa fiscal espanyola per al sector joier",
+      button: "Sol·licitar demo",
+    },
+  },
+  'pt-br': {
+    metaTitle: "Declaração Responsável VERI*FACTU | RayGold ERP",
+    metaDescription: "Declaração responsável do sistema de faturamento RayGold conforme a regulamentação VERI*FACTU espanhola",
+    badge: "Conformidade Regulatória",
+    title: "Declaração Responsável VERI*FACTU",
+    subtitle: "Sistema de faturamento em conformidade com a regulamentação fiscal espanhola",
+    downloadPdf: "Baixar PDF oficial",
+    lastUpdate: "Última atualização: 15 de setembro de 2025",
+    sections: {
+      systemData: "Dados do Sistema",
+      producerData: "Dados da Entidade Produtora",
+      annex: "Anexo - Informações Adicionais",
+      compliance: "Conformidade Técnica",
+    },
+    labels: {
+      systemName: "Nome do sistema",
+      systemId: "Identificador do sistema",
+      version: "Versão",
+      components: "Componentes",
+      software: "Software",
+      hardware: "Hardware",
+      functionality: "Descrição funcional",
+      verifactuOnly: "Funciona apenas como VERI*FACTU?",
+      multiUser: "Permite múltiplos contribuintes?",
+      signatureTypes: "Tipos de assinatura",
+      companyName: "Razão social",
+      nif: "NIF (ID fiscal)",
+      address: "Endereço",
+      conformity: "Conformidade regulatória",
+      signDate: "Data de assinatura",
+      signPlace: "Local de assinatura",
+      contactInfo: "Contato",
+      phone: "Telefone",
+      email: "Email",
+      websites: "Sites",
+      technicalCompliance: "Conformidade técnica conforme Ordem HAC/1177/2024",
+    },
+    yes: "SIM",
+    no: "NÃO",
+    cta: {
+      title: "Precisa de um ERP certificado VERI*FACTU?",
+      description: "RayGold cumpre toda a regulamentação fiscal espanhola para o setor joalheiro",
+      button: "Solicitar demo",
+    },
+  },
+};
+
+const t = translations[lang] || translations.es;
+
+// URLs alternativas para hreflang
+const alternateUrls = supportedLangs.map(l => ({
+  lang: l,
+  url: getLegalUrl('verifactu', l),
+}));
+
+// URL del PDF (subir a Azure Storage)
+const pdfUrl = "https://raygoldstorage.blob.core.windows.net/web/DECLARACION_RESPONSABLE_VERIFACTU_RAYGOLD.pdf";
+---
+
+<Layout 
+  title={t.metaTitle}
+  description={t.metaDescription}
+  lang={lang}
+  alternateUrls={alternateUrls}
+>
+  <main class="legal-page">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <span class="badge">{t.badge}</span>
+        <h1>{t.title}</h1>
+        <p class="subtitle">{t.subtitle}</p>
+        
+        <a href={pdfUrl} target="_blank" rel="noopener" class="download-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          {t.downloadPdf}
+        </a>
+        
+        <p class="last-update">{t.lastUpdate}</p>
+      </div>
+    </section>
+
+    <!-- Contenido principal -->
+    <section class="content">
+      <div class="container">
+        
+        <!-- Sección 1: Datos del Sistema -->
+        <div class="section-card">
+          <h2>
+            <span class="section-number">1</span>
+            {t.sections.systemData}
+          </h2>
+          
+          <div class="data-grid">
+            <div class="data-item">
+              <span class="label">{t.labels.systemName}</span>
+              <span class="value highlight">RAYGOLD</span>
+            </div>
+            
+            <div class="data-item">
+              <span class="label">{t.labels.systemId}</span>
+              <span class="value">RAYGOLD</span>
+            </div>
+            
+            <div class="data-item">
+              <span class="label">{t.labels.version}</span>
+              <span class="value version-badge">0.1.7</span>
+            </div>
+          </div>
+
+          <!-- Componentes Software -->
+          <div class="subsection">
+            <h3>{t.labels.software}</h3>
+            <div class="tech-grid">
+              <div class="tech-item">
+                <span class="tech-label">Frontend</span>
+                <span class="tech-value">Vue.js 2 + Vuetify</span>
+              </div>
+              <div class="tech-item">
+                <span class="tech-label">Backend</span>
+                <span class="tech-value">ASP.NET Core 8 (C#)</span>
+              </div>
+              <div class="tech-item">
+                <span class="tech-label">Base de datos</span>
+                <span class="tech-value">SQL Server</span>
+              </div>
+              <div class="tech-item">
+                <span class="tech-label">Infraestructura</span>
+                <span class="tech-value">Microsoft Azure</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Componentes Hardware -->
+          <div class="subsection">
+            <h3>{t.labels.hardware}</h3>
+            <ul class="feature-list">
+              <li>Infraestructura Cloud de Microsoft Azure con escalabilidad automática</li>
+              <li>Cada cliente dispone de su propia instancia aislada e independiente</li>
+              <li>Compatible con cualquier dispositivo con navegador web moderno</li>
+              <li>No requiere hardware específico del usuario final</li>
+            </ul>
+          </div>
+
+          <!-- Descripción funcional -->
+          <div class="subsection">
+            <h3>{t.labels.functionality}</h3>
+            <p class="description">
+              RayGold es un sistema informático ERP/CRM especializado en la gestión integral de empresas del sector joyero. 
+              Permite la gestión completa incluyendo: facturación y gestión de documentos fiscales, control de inventario 
+              y stock de materias primas (oro, plata, piedras preciosas), gestión de procesos de fabricación y trazabilidad, 
+              administración de clientes y proveedores, control de recursos humanos, maestro de artículos con características 
+              específicas del sector joyero, análisis y estadísticas de ventas, exportación de datos para cumplimiento fiscal y contable.
+            </p>
+          </div>
+
+          <!-- Preguntas Sí/No -->
+          <div class="yes-no-grid">
+            <div class="yes-no-item">
+              <span class="question">{t.labels.verifactuOnly}</span>
+              <span class="answer yes">{t.yes}</span>
+            </div>
+            <div class="yes-no-item">
+              <span class="question">{t.labels.multiUser}</span>
+              <span class="answer yes">{t.yes}</span>
+            </div>
+          </div>
+
+          <!-- Tipos de firma -->
+          <div class="subsection">
+            <h3>{t.labels.signatureTypes}</h3>
+            <p class="description">
+              Dado que se trata de un sistema que opera exclusivamente como VERI*FACTU, no se realiza firma electrónica 
+              individual de los registros de facturación conforme al artículo 14 de la Orden HAC/1177/2024.
+            </p>
+            <ul class="feature-list">
+              <li>Certificado electrónico cualificado para la remisión autenticada a la AEAT</li>
+              <li>Implementación de huella digital (hash SHA-256) según artículo 13</li>
+              <li>Sistema de encadenamiento criptográfico que garantiza integridad y trazabilidad</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Sección 2: Datos de la Entidad Productora -->
+        <div class="section-card">
+          <h2>
+            <span class="section-number">2</span>
+            {t.sections.producerData}
+          </h2>
+          
+          <div class="company-info">
+            <div class="company-logo">
+              <svg width="48" height="48" viewBox="0 0 64 64" fill="none">
+                <rect x="8" y="8" width="48" height="48" rx="12" fill="url(#logo-gradient)"/>
+                <path d="M20 32h24M32 20v24" stroke="white" stroke-width="4" stroke-linecap="round"/>
+                <defs>
+                  <linearGradient id="logo-gradient" x1="8" y1="8" x2="56" y2="56">
+                    <stop stop-color="#667eea"/>
+                    <stop offset="1" stop-color="#764ba2"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+            
+            <div class="company-details">
+              <h3>RAYTECNO BCN SL</h3>
+              <div class="detail-row">
+                <span class="label">{t.labels.nif}:</span>
+                <span class="value">B65318131</span>
+              </div>
+              <div class="detail-row">
+                <span class="label">{t.labels.address}:</span>
+                <span class="value">Calle de Barcelona, 26 6º-2ª, Montgat 08390, Cataluña, España</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Conformidad normativa -->
+          <div class="subsection conformity">
+            <h3>{t.labels.conformity}</h3>
+            <div class="conformity-box">
+              <p>Raytecno BCN SL manifiesta que el sistema RAYGOLD (versión 0.1.7) cumple con lo dispuesto en:</p>
+              <ul>
+                <li>Artículo 29.2.j) de la Ley 58/2003, de 17 de diciembre, General Tributaria</li>
+                <li>Real Decreto 1007/2023, de 5 de diciembre</li>
+                <li>Orden HAC/1177/2024, de 17 de octubre</li>
+                <li>Especificaciones técnicas publicadas en la sede electrónica de la AEAT</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="signature-info">
+            <div class="signature-item">
+              <span class="label">{t.labels.signDate}:</span>
+              <span class="value">15 de septiembre de 2025</span>
+            </div>
+            <div class="signature-item">
+              <span class="label">{t.labels.signPlace}:</span>
+              <span class="value">Montgat, España</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sección 3: Anexo -->
+        <div class="section-card">
+          <h2>
+            <span class="section-number">3</span>
+            {t.sections.annex}
+          </h2>
+          
+          <div class="contact-grid">
+            <div class="contact-item">
+              <div class="contact-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+              </div>
+              <div class="contact-info">
+                <span class="contact-label">{t.labels.phone}</span>
+                <a href="tel:+34648088550" class="contact-value">648 088 550</a>
+              </div>
+            </div>
+            
+            <div class="contact-item">
+              <div class="contact-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </div>
+              <div class="contact-info">
+                <span class="contact-label">{t.labels.email}</span>
+                <a href="mailto:info@raytecno.es" class="contact-value">info@raytecno.es</a>
+              </div>
+            </div>
+            
+            <div class="contact-item">
+              <div class="contact-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="2" y1="12" x2="22" y2="12"/>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                </svg>
+              </div>
+              <div class="contact-info">
+                <span class="contact-label">{t.labels.websites}</span>
+                <a href="https://raytecno.com" target="_blank" rel="noopener" class="contact-value">raytecno.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sección 4: Cumplimiento Técnico -->
+        <div class="section-card compliance-section">
+          <h2>
+            <span class="section-number">4</span>
+            {t.sections.compliance}
+          </h2>
+          
+          <p class="compliance-intro">{t.labels.technicalCompliance}</p>
+          
+          <div class="compliance-grid">
+            <div class="compliance-item">
+              <div class="compliance-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                  <line x1="16" y1="13" x2="8" y2="13"/>
+                  <line x1="16" y1="17" x2="8" y2="17"/>
+                </svg>
+              </div>
+              <h4>Formato VERI*FACTU</h4>
+              <p>XML conforme al esquema XSD oficial con estructura completa de datos</p>
+            </div>
+            
+            <div class="compliance-item">
+              <div class="compliance-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+              </div>
+              <h4>Hash SHA-256</h4>
+              <p>Encadenamiento criptográfico que garantiza integridad y trazabilidad</p>
+            </div>
+            
+            <div class="compliance-item">
+              <div class="compliance-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  <polyline points="9 12 11 14 15 10"/>
+                </svg>
+              </div>
+              <h4>Firma XAdES-BES</h4>
+              <p>Sello del sistema con validación automática</p>
+            </div>
+            
+            <div class="compliance-item">
+              <div class="compliance-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                </svg>
+              </div>
+              <h4>Transacciones Atómicas</h4>
+              <p>Rollback automático y logs de auditoría completos</p>
+            </div>
+            
+            <div class="compliance-item">
+              <div class="compliance-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="3"/>
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                </svg>
+              </div>
+              <h4>API para AEAT</h4>
+              <p>Modo de acceso restringido para inspección y exportación de datos</p>
+            </div>
+            
+            <div class="compliance-item">
+              <div class="compliance-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                  <polyline points="7.5 4.21 12 6.81 16.5 4.21"/>
+                  <polyline points="7.5 19.79 7.5 14.6 3 12"/>
+                  <polyline points="21 12 16.5 14.6 16.5 19.79"/>
+                  <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                  <line x1="12" y1="22.08" x2="12" y2="12"/>
+                </svg>
+              </div>
+              <h4>Azure Key Vault</h4>
+              <p>Certificados seguros con APIs .NET Core 8 y base de datos transaccional</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-section">
+          <h2>{t.cta.title}</h2>
+          <p>{t.cta.description}</p>
+          <a href={`/${lang}/contacto`} class="cta-btn">{t.cta.button}</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  /* Variables */
+  :root {
+    --primary: #667eea;
+    --primary-dark: #5a67d8;
+    --secondary: #764ba2;
+    --success: #10b981;
+    --bg-dark: #0f172a;
+    --bg-card: rgba(255, 255, 255, 0.03);
+    --border: rgba(255, 255, 255, 0.1);
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+  }
+
+  .legal-page {
+    min-height: 100vh;
+    background: var(--bg-dark);
+    color: var(--text);
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* Hero */
+  .hero {
+    padding: 6rem 0 4rem;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-radius: 50px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #fff, var(--text));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .subtitle {
+    font-size: 1.125rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+  }
+
+  .download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.5rem;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+  }
+
+  .last-update {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-top: 1.5rem;
+  }
+
+  /* Content */
+  .content {
+    padding: 4rem 0;
+  }
+
+  /* Section Cards */
+  .section-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    backdrop-filter: blur(10px);
+  }
+
+  .section-card h2 {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  /* Data Grid */
+  .data-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .data-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .data-item .label {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .data-item .value {
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+
+  .data-item .value.highlight {
+    color: var(--primary);
+    font-size: 1.25rem;
+  }
+
+  .version-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: rgba(16, 185, 129, 0.2);
+    color: var(--success);
+    border-radius: 50px;
+    font-size: 1rem !important;
+  }
+
+  /* Subsections */
+  .subsection {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .subsection h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text);
+  }
+
+  /* Tech Grid */
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+  }
+
+  .tech-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+
+  .tech-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .tech-value {
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  /* Feature List */
+  .feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .feature-list li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .feature-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    width: 6px;
+    height: 6px;
+    background: var(--primary);
+    border-radius: 50%;
+  }
+
+  .description {
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  /* Yes/No Grid */
+  .yes-no-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .yes-no-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+
+  .yes-no-item .question {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+
+  .yes-no-item .answer {
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.875rem;
+  }
+
+  .yes-no-item .answer.yes {
+    background: rgba(16, 185, 129, 0.2);
+    color: var(--success);
+  }
+
+  .yes-no-item .answer.no {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+  }
+
+  /* Company Info */
+  .company-info {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+  }
+
+  .company-logo {
+    flex-shrink: 0;
+  }
+
+  .company-details h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text);
+  }
+
+  .detail-row {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .detail-row .label {
+    color: var(--text-muted);
+    min-width: 80px;
+  }
+
+  .detail-row .value {
+    color: var(--text);
+  }
+
+  /* Conformity */
+  .conformity-box {
+    background: rgba(102, 126, 234, 0.1);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+
+  .conformity-box p {
+    margin-bottom: 1rem;
+    color: var(--text);
+  }
+
+  .conformity-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .conformity-box li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-muted);
+  }
+
+  .conformity-box li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--success);
+    font-weight: bold;
+  }
+
+  /* Signature Info */
+  .signature-info {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .signature-item {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .signature-item .label {
+    color: var(--text-muted);
+  }
+
+  .signature-item .value {
+    font-weight: 600;
+  }
+
+  /* Contact Grid */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .contact-item {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    padding: 1.25rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    transition: border-color 0.2s;
+  }
+
+  .contact-item:hover {
+    border-color: var(--primary);
+  }
+
+  .contact-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-radius: 12px;
+    flex-shrink: 0;
+  }
+
+  .contact-icon svg {
+    color: white;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .contact-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .contact-value {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .contact-value:hover {
+    color: var(--primary);
+  }
+
+  /* Compliance Section */
+  .compliance-intro {
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    font-size: 1rem;
+  }
+
+  .compliance-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .compliance-item {
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    transition: transform 0.2s, border-color 0.2s;
+  }
+
+  .compliance-item:hover {
+    transform: translateY(-2px);
+    border-color: var(--primary);
+  }
+
+  .compliance-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+    border-radius: 12px;
+    margin-bottom: 1rem;
+  }
+
+  .compliance-icon svg {
+    color: var(--primary);
+  }
+
+  .compliance-item h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+  }
+
+  .compliance-item p {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    margin-top: 2rem;
+  }
+
+  .cta-section h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+
+  .cta-section p {
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero {
+      padding: 4rem 0 3rem;
+    }
+
+    .section-card {
+      padding: 1.5rem;
+    }
+
+    .company-info {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .signature-info {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .yes-no-item {
+      flex-direction: column;
+      gap: 0.75rem;
+      text-align: center;
+    }
+  }
+</style>

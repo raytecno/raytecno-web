@@ -1,0 +1,74 @@
+---
+/**
+ * Router dinámico para páginas legales
+ * src/pages/[lang]/[legal]/[page].astro
+ * 
+ * Rutas generadas:
+ * - /es/legal/declaracion-verifactu
+ * - /en/legal/verifactu-declaration
+ * - /fr/legal/declaration-verifactu
+ * - /ca/legal/declaracio-verifactu
+ * - /pt-br/legal/declaracao-verifactu
+ */
+
+import type { GetStaticPaths } from 'astro';
+import { supportedLangs, legalFolderSlugs, legalSlugs, type Lang } from '@/config/pages';
+
+// Templates
+import DeclaracionVerifactuPage from '@/templates/DeclaracionVerifactuPage.astro';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const paths: Array<{
+    params: { lang: string; legal: string; page: string };
+    props: { lang: Lang; pageId: string };
+  }> = [];
+
+  // Generar rutas para cada idioma y cada página legal
+  for (const lang of supportedLangs) {
+    const legalFolder = legalFolderSlugs[lang];
+    
+    for (const [pageId, slugs] of Object.entries(legalSlugs)) {
+      const pageSlug = slugs[lang];
+      
+      paths.push({
+        params: {
+          lang,
+          legal: legalFolder,
+          page: pageSlug,
+        },
+        props: {
+          lang,
+          pageId,
+        },
+      });
+    }
+  }
+
+  return paths;
+};
+
+// Props del componente
+interface Props {
+  lang: Lang;
+  pageId: string;
+}
+
+const { lang, pageId } = Astro.props;
+
+// Map de templates por pageId
+const templates: Record<string, any> = {
+  verifactu: DeclaracionVerifactuPage,
+  // Aquí se añadirían más páginas legales:
+  // privacidad: PrivacidadPage,
+  // terminos: TerminosPage,
+  // cookies: CookiesPage,
+};
+
+const Template = templates[pageId];
+
+if (!Template) {
+  return Astro.redirect(`/${lang}/`);
+}
+---
+
+<Template lang={lang} pageId={pageId} />

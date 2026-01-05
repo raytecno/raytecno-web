@@ -77,6 +77,80 @@ export const moduloSlugs: Record<string, Record<Lang, string>> = {
   impresoras3d: { es: 'impresoras3d', en: '3dprinters', fr: 'imprimantes3d', ca: 'impressores3d', 'pt-br': 'impressoras3d' },
 };
 
+// ============================================
+// SECCIÓN LEGAL - NUEVO
+// ============================================
+
+// Slugs de la carpeta legal por idioma
+export const legalFolderSlugs: Record<Lang, string> = {
+  es: 'legal',
+  en: 'legal',
+  fr: 'legal',
+  ca: 'legal',
+  'pt-br': 'legal',
+};
+
+// Slugs de cada página legal por idioma
+export const legalSlugs: Record<string, Record<Lang, string>> = {
+  verifactu: { 
+    es: 'declaracion-verifactu', 
+    en: 'verifactu-declaration', 
+    fr: 'declaration-verifactu', 
+    ca: 'declaracio-verifactu', 
+    'pt-br': 'declaracao-verifactu' 
+  },
+  privacidad: { 
+    es: 'privacidad', 
+    en: 'privacy', 
+    fr: 'confidentialite', 
+    ca: 'privacitat', 
+    'pt-br': 'privacidade' 
+  },
+  terminos: { 
+    es: 'terminos', 
+    en: 'terms', 
+    fr: 'conditions', 
+    ca: 'termes', 
+    'pt-br': 'termos' 
+  },
+  cookies: { 
+    es: 'cookies', 
+    en: 'cookies', 
+    fr: 'cookies', 
+    ca: 'cookies', 
+    'pt-br': 'cookies' 
+  },
+};
+
+/**
+ * Obtiene la URL de una página legal específica
+ * Ejemplo: getLegalUrl('verifactu', 'es') → '/es/legal/declaracion-verifactu'
+ */
+export function getLegalUrl(legalKey: string, lang: Lang): string {
+  const folderSlug = legalFolderSlugs[lang];
+  const legalSlug = legalSlugs[legalKey]?.[lang];
+  
+  if (!folderSlug || !legalSlug) {
+    return `/${lang}/`;
+  }
+  
+  return `/${lang}/${folderSlug}/${legalSlug}`;
+}
+
+/**
+ * Genera URLs alternativas para páginas legales (hreflang)
+ */
+export function getLegalAlternateUrls(legalKey: string): { lang: Lang; url: string }[] {
+  return supportedLangs.map(lang => ({
+    lang,
+    url: getLegalUrl(legalKey, lang),
+  }));
+}
+
+// ============================================
+// FUNCIONES EXISTENTES
+// ============================================
+
 /**
  * Obtiene la URL de una página en un idioma específico
  */
@@ -92,8 +166,6 @@ export function getPageUrl(pageKey: string, lang: Lang): string {
 
 /**
  * Obtiene la URL de un submódulo específico
- * Ejemplo: getModuloUrl('maestros', 'es') → '/es/modulos/maestros'
- * Ejemplo: getModuloUrl('maestros', 'en') → '/en/modules/masters'
  */
 export function getModuloUrl(moduloKey: string, lang: Lang): string {
   const folderSlug = modFolderSlugs[lang];
@@ -108,8 +180,6 @@ export function getModuloUrl(moduloKey: string, lang: Lang): string {
 
 /**
  * Obtiene la URL de una herramienta específica
- * Ejemplo: getToolUrl('calculadora', 'es') → '/es/herramientas/calculadora-rentabilidad'
- * Ejemplo: getToolUrl('calculadora', 'en') → '/en/tools/profitability-calculator'
  */
 export function getToolUrl(toolKey: string, lang: Lang): string {
   const folderSlug = toolsFolderSlugs[lang];
