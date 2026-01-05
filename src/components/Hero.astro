@@ -2,8 +2,9 @@
 /**
  * Hero.astro - Banner hero comercial principal
  * Con tema adaptativo: azul oscuro en desktop, blanco en móvil
+ * Incluye badge de certificación VERI*FACTU
  */
-import { type Lang, getPageUrl } from "@/config/pages";
+import { type Lang, getPageUrl, getLegalUrl } from "@/config/pages";
 
 interface Props {
   lang?: Lang;
@@ -29,6 +30,7 @@ const translations: Record<Lang, {
   badge1: string;
   badge2: string;
   scrollText: string;
+  verifactuBadge: string;
 }> = {
   es: {
     badge: "Desde 1990 · +200 joyerías confían en nosotros",
@@ -47,6 +49,7 @@ const translations: Record<Lang, {
     badge1: "Stock sincronizado",
     badge2: "Control de costes",
     scrollText: "Descubre más",
+    verifactuBadge: "Certificado VERI*FACTU",
   },
   en: {
     badge: "Since 1990 · +200 jewelers trust us",
@@ -65,6 +68,7 @@ const translations: Record<Lang, {
     badge1: "Synced stock",
     badge2: "Cost control",
     scrollText: "Discover more",
+    verifactuBadge: "VERI*FACTU Certified",
   },
   fr: {
     badge: "Depuis 1990 · +200 bijouteries nous font confiance",
@@ -83,6 +87,7 @@ const translations: Record<Lang, {
     badge1: "Stock synchronisé",
     badge2: "Contrôle des coûts",
     scrollText: "Découvrir plus",
+    verifactuBadge: "Certifié VERI*FACTU",
   },
   ca: {
     badge: "Des de 1990 · +200 joieries confien en nosaltres",
@@ -101,6 +106,7 @@ const translations: Record<Lang, {
     badge1: "Stock sincronitzat",
     badge2: "Control de costos",
     scrollText: "Descobreix més",
+    verifactuBadge: "Certificat VERI*FACTU",
   },
   "pt-br": {
     badge: "Desde 1990 · +200 joalherias confiam em nós",
@@ -119,12 +125,14 @@ const translations: Record<Lang, {
     badge1: "Estoque sincronizado",
     badge2: "Controle de custos",
     scrollText: "Descubra mais",
+    verifactuBadge: "Certificado VERI*FACTU",
   },
 };
 
 const t = translations[lang] || translations.es;
 const contactUrl = getPageUrl('contacto', lang);
 const modulosUrl = getPageUrl('modulos', lang);
+const verifactuUrl = getLegalUrl('verifactu', lang);
 ---
 
 <section class="hero-section">
@@ -136,10 +144,21 @@ const modulosUrl = getPageUrl('modulos', lang);
   <div class="container">
     <div class="hero-content">
       <div class="hero-text">
-        <!-- Badge de confianza -->
-        <div class="hero-badge">
-          <span class="badge-icon">💎</span>
-          <span>{t.badge}</span>
+        <!-- Badges de confianza -->
+        <div class="hero-badges">
+          <div class="hero-badge">
+            <span class="badge-icon">💎</span>
+            <span>{t.badge}</span>
+          </div>
+          
+          <!-- Badge VERI*FACTU -->
+          <a href={verifactuUrl} class="verifactu-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <polyline points="9 12 11 14 15 10"/>
+            </svg>
+            <span>{t.verifactuBadge}</span>
+          </a>
         </div>
 
         <!-- Titular principal -->
@@ -277,6 +296,15 @@ const modulosUrl = getPageUrl('modulos', lang);
     max-width: 560px;
   }
 
+  /* Contenedor de badges */
+  .hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
   .hero-badge {
     display: inline-flex;
     align-items: center;
@@ -285,7 +313,6 @@ const modulosUrl = getPageUrl('modulos', lang);
     background: rgba(102, 126, 234, 0.15);
     border: 1px solid rgba(102, 126, 234, 0.3);
     border-radius: 50px;
-    margin-bottom: 1.5rem;
   }
 
   .badge-icon {
@@ -296,6 +323,39 @@ const modulosUrl = getPageUrl('modulos', lang);
     color: #c4b5fd;
     font-size: 0.8rem;
     font-weight: 500;
+  }
+
+  /* Badge VERI*FACTU */
+  .verifactu-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.875rem;
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .verifactu-badge:hover {
+    background: rgba(16, 185, 129, 0.25);
+    border-color: rgba(16, 185, 129, 0.6);
+    transform: translateY(-1px);
+  }
+
+  .verifactu-badge svg {
+    width: 14px;
+    height: 14px;
+    color: #10b981;
+  }
+
+  .verifactu-badge span {
+    color: #6ee7b7;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
   }
 
   h1 {
@@ -566,6 +626,10 @@ const modulosUrl = getPageUrl('modulos', lang);
       text-align: center;
     }
 
+    .hero-badges {
+      justify-content: center;
+    }
+
     h1 {
       font-size: 2.25rem;
     }
@@ -631,7 +695,12 @@ const modulosUrl = getPageUrl('modulos', lang);
       color: #334155;
     }
 
-    /* Badge adaptado */
+    /* Badges adaptados */
+    .hero-badges {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
     .hero-badge {
       background: rgba(102, 126, 234, 0.1);
       border-color: rgba(102, 126, 234, 0.2);
@@ -639,6 +708,19 @@ const modulosUrl = getPageUrl('modulos', lang);
 
     .hero-badge span:last-child {
       color: #667eea;
+    }
+
+    .verifactu-badge {
+      background: rgba(16, 185, 129, 0.1);
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+
+    .verifactu-badge span {
+      color: #059669;
+    }
+
+    .verifactu-badge svg {
+      color: #059669;
     }
 
     /* Stats */

@@ -2,7 +2,7 @@
 /**
  * Footer minimalista con redes sociales
  */
-import { getPageUrl, getModuloUrl, type Lang } from "@/config/pages";
+import { getPageUrl, getModuloUrl, getLegalUrl, type Lang } from "@/config/pages";
 import { social } from "@/config/contact";
 
 interface Props {
@@ -28,6 +28,7 @@ const footerT = {
     privacy: "Privacidad",
     terms: "Términos",
     cookies: "Cookies",
+    verifactu: "Certificación VERI*FACTU",
     copyright: "Raytecno BCN SL. Todos los derechos reservados.",
     madeWith: "Hecho con",
     forJewelers: "para joyeros",
@@ -48,6 +49,7 @@ const footerT = {
     privacy: "Privacy",
     terms: "Terms",
     cookies: "Cookies",
+    verifactu: "VERI*FACTU Certification",
     copyright: "Raytecno BCN SL. All rights reserved.",
     madeWith: "Made with",
     forJewelers: "for jewelers",
@@ -68,6 +70,7 @@ const footerT = {
     privacy: "Confidentialité",
     terms: "Conditions",
     cookies: "Cookies",
+    verifactu: "Certification VERI*FACTU",
     copyright: "Raytecno BCN SL. Tous droits réservés.",
     madeWith: "Fait avec",
     forJewelers: "pour les bijoutiers",
@@ -88,6 +91,7 @@ const footerT = {
     privacy: "Privacitat",
     terms: "Termes",
     cookies: "Cookies",
+    verifactu: "Certificació VERI*FACTU",
     copyright: "Raytecno BCN SL. Tots els drets reservats.",
     madeWith: "Fet amb",
     forJewelers: "per a joiers",
@@ -108,6 +112,7 @@ const footerT = {
     privacy: "Privacidade",
     terms: "Termos",
     cookies: "Cookies",
+    verifactu: "Certificação VERI*FACTU",
     copyright: "Raytecno BCN SL. Todos os direitos reservados.",
     madeWith: "Feito com",
     forJewelers: "para joalheiros",
@@ -174,6 +179,13 @@ const currentYear = new Date().getFullYear();
       <a href={`/${lang}/privacidad`}>{ft.privacy}</a>
       <a href={`/${lang}/terminos`}>{ft.terms}</a>
       <a href={`/${lang}/cookies`}>{ft.cookies}</a>
+      <a href={getLegalUrl("verifactu", lang)} class="verifactu-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="verifactu-icon">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <polyline points="9 12 11 14 15 10"/>
+        </svg>
+        {ft.verifactu}
+      </a>
     </div>
   </div>
 
@@ -321,6 +333,28 @@ const currentYear = new Date().getFullYear();
     transform: translateX(4px);
   }
 
+  /* Enlace VERI*FACTU destacado */
+  .verifactu-link {
+    display: flex !important;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    color: #10b981 !important;
+    font-weight: 500;
+  }
+
+  .verifactu-link:hover {
+    color: #34d399 !important;
+  }
+
+  .verifactu-icon {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+
   .footer-bottom {
     text-align: center;
     padding: 20px;
@@ -392,6 +426,10 @@ const currentYear = new Date().getFullYear();
     .footer-col a:hover {
       color: #1e293b;
       transform: none;
+    }
+    .verifactu-link {
+      justify-content: center;
+      border-top: 1px solid rgba(0,0,0,0.1);
     }
     .footer-bottom {
       border-top: 1px solid #e2e8f0;
