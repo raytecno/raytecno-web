@@ -70,7 +70,7 @@
               "title": "Galería",
               "description": "Gestión de imágenes múltiples"
             },
-            { "title": "Visor", "description": "Visualización con zoom" },
+            { "title": "Visualizar", "description": "Visualización con zoom" },
             {
               "title": "Importación",
               "description": "Carga masiva de imágenes"

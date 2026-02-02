@@ -6,7 +6,8 @@ export default defineConfig({
   // =============================================
   // Força que TOTES les URLs acabin amb /
   // Això evita duplicats: /es i /es/ seran la mateixa URL
-  trailingSlash: "ignore",
+  //ignore
+  trailingSlash: "alweyas",
 
   // =============================================
   // BUILD OUTPUT
