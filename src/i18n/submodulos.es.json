@@ -44,7 +44,7 @@
               "title": "Costes",
               "description": "Configuración costes y mano de obra"
             },
-            { "title": "Histórico", "description": "Trazabilidad de cambios" }
+            { "title": "Estructurado", "description": "Trazabilidad de precios" }
           ]
         },
         "estructuras": {
@@ -59,7 +59,7 @@
               "title": "Árbol de Materiales",
               "description": "Vista jerárquica de la estructura"
             },
-            { "title": "Costes", "description": "Cálculo automático de costes" }
+            { "title": "Multiples", "description": "Control de multiples" }
           ]
         },
         "imagenes": {
@@ -90,8 +90,8 @@
               "description": "Campos personalizados sin código"
             },
             {
-              "title": "Plantillas",
-              "description": "Guardado de configuraciones"
+              "title": "Orden",
+              "description": "Guardado de orden y configuraciones"
             }
           ]
         }
@@ -131,8 +131,8 @@
             },
             { "title": "Generación", "description": "Creación desde pedidos" },
             {
-              "title": "Impresión",
-              "description": "Documentos personalizables"
+              "title": "Informacion",
+              "description": "Información completa del pedido"
             }
           ]
         },
@@ -160,7 +160,7 @@
           "images": [
             { "title": "Listado", "description": "Directorio de clientes" },
             { "title": "Ficha", "description": "Datos completos del cliente" },
-            { "title": "Histórico", "description": "Historial de operaciones" }
+            { "title": "Direciones", "description": "Listado de direcciones" }
           ]
         }
       }
@@ -268,7 +268,7 @@
               "description": "Localización de operaciones"
             },
             { "title": "Detalle", "description": "Información completa" },
-            { "title": "Exportación", "description": "Descarga de datos" }
+            { "title": "Verifactu", "description": "Facturacion co Verifactu" }
           ]
         },
         "trazabilidad": {
