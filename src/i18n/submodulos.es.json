@@ -78,7 +78,7 @@
           ]
         },
         "layout": {
-          "name": "Layout",
+          "name": "Fabricacion",
           "description": "Personalización de vistas y formularios",
           "images": [
             {
@@ -92,6 +92,10 @@
             {
               "title": "Orden",
               "description": "Guardado de orden y configuraciones"
+            },
+             {
+              "title": "Prueba",
+              "description": "Prueba"
             }
           ]
         }
@@ -268,7 +272,7 @@
               "description": "Localización de operaciones"
             },
             { "title": "Detalle", "description": "Información completa" },
-            { "title": "Verifactu", "description": "Facturacion co Verifactu" }
+            { "title": "Verifactu", "description": "Facturacion con Verifactu" }
           ]
         },
         "trazabilidad": {
