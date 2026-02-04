@@ -130,8 +130,8 @@
               "description": "Vista general con estados y seguimiento"
             },
             {
-              "title": "Nuevo Pedido",
-              "description": "Creación rápida con búsqueda de artículos"
+              "title": "Visual",
+              "description": "Control de pedidos con imagenes"
             },
             {
               "title": "Detalle de Pedido",
@@ -163,22 +163,25 @@
               "description": "Listado de facturas emitidas"
             },
             {
-              "title": "Nueva Factura",
-              "description": "Facturación manual o desde albaranes"
+              "title": "Generación",
+              "description": "Creacion desde pediodos o albaranes"
+            },
+             {
+              "title": "Asientos",
+              "description": "Visualizar asientos de la factura"
             },
             {
-              "title": "Factura-E",
-              "description": "Facturación electrónica integrada"
+              "title": "Impresion",
+              "description": "Control sobre la impresion de facturas"
             }
           ]
         },
-        "clientes": {
-          "name": "Clientes",
-          "description": "Base de datos de clientes",
+        "libro": {
+          "name": "Libro de Oro",
+          "description": "Control y mantenimento ",
           "images": [
-            { "title": "Listado", "description": "Directorio de clientes" },
-            { "title": "Ficha", "description": "Datos completos del cliente" },
-            { "title": "Direciones", "description": "Listado de direcciones" }
+            { "title": "Movimientos", "description": "Gestion de movimientos" },
+            { "title": "Detalles", "description": "Control de saldos" }
           ]
         }
       }
