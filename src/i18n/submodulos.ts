@@ -96,6 +96,7 @@ export const modulosConfig: Record<ModuloId, ModuloConfig> = {
       { id: 'estructuras', prefix: 'E' },
       { id: 'imagenes', prefix: 'I' },
       { id: 'layout', prefix: 'L' },
+      { id: 'Gestion', prefix: 'GES' },
     ],
   },
   comercial: {

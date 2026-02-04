@@ -92,10 +92,24 @@
             {
               "title": "Orden",
               "description": "Guardado de orden y configuraciones"
+            }
+          ]
+        },
+        "gestion": {
+          "name": "Gestiones",
+          "description": "Gestion y personalizacion modular",
+          "images": [
+            {
+              "title": "Multiples",
+              "description": "Control y modulacion"
             },
-             {
-              "title": "Prueba",
-              "description": "Prueba"
+            {
+              "title": "Rutas",
+              "description": "Gestion de rutas de seleccion"
+            },
+            {
+              "title": "Menu",
+              "description": "Creacion de menu principal"
             }
           ]
         }
