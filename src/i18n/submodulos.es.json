@@ -88,10 +88,6 @@
             {
               "title": "Campos",
               "description": "Campos personalizados sin código"
-            },
-            {
-              "title": "Orden",
-              "description": "Guardado de orden y configuraciones"
             }
           ]
         },
@@ -167,13 +163,14 @@
               "description": "Creacion desde pediodos o albaranes"
             },
              {
-              "title": "Asientos",
-              "description": "Visualizar asientos de la factura"
-            },
-            {
               "title": "Impresion",
               "description": "Control sobre la impresion de facturas"
+            },
+             {
+              "title": "Asientos",
+              "description": "Visualizar asientos de la factura"
             }
+           
           ]
         },
         "libro": {
@@ -182,6 +179,14 @@
           "images": [
             { "title": "Movimientos", "description": "Gestion de movimientos" },
             { "title": "Detalles", "description": "Control de saldos" }
+          ]
+        },
+         "depositos": {
+          "name": "Depositos",
+          "description": "Gestion de depositos",
+          "images": [
+            { "title": "Principal", "description": "General de depositoss" },
+            { "title": "Cuentas", "description": "Control de cuentas por deposito" }
           ]
         }
       }
@@ -317,8 +322,8 @@
           "description": "Cuadros de mando visuales",
           "images": [
             { "title": "Principal", "description": "KPIs principales" },
-            { "title": "Ventas", "description": "Métricas comerciales" },
-            { "title": "Producción", "description": "Indicadores de fábrica" }
+            { "title": "Tiempo", "description": "Graficos por meses o años" },
+            { "title": "Articulos", "description": "Graficos por articulos" }
           ]
         },
         "informes": {
@@ -377,24 +382,23 @@
           "name": "Catálogo Online",
           "description": "Publicación de productos",
           "images": [
-            { "title": "Productos", "description": "Gestión del catálogo web" },
+            { "title": "Principal", "description": "Catalogo web " },
             {
-              "title": "Categorías",
-              "description": "Organización de productos"
+              "title": "Seleccion y venta",
+              "description": "Modulado y acceso directo a venta"
             },
             {
-              "title": "Sincronización",
-              "description": "Actualización automática"
+              "title": "Especificaciones",
+              "description": "Concreta detalles"
             }
           ]
         },
         "pedidos": {
-          "name": "Pedidos Web",
-          "description": "Gestión de pedidos online",
+          "name": "Configuacion",
+          "description": "Gestión del catalogo",
           "images": [
-            { "title": "Recepción", "description": "Pedidos entrantes" },
-            { "title": "Procesamiento", "description": "Flujo de trabajo" },
-            { "title": "Envíos", "description": "Logística integrada" }
+            { "title": "Creacion", "description": "Total libertad modular" },
+            { "title": "Importacion", "description": "Recuperacion de datos de fabrica" }
           ]
         },
         "integraciones": {
