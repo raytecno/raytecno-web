@@ -2,25 +2,20 @@ import { defineConfig } from "astro/config";
 
 export default defineConfig({
   // =============================================
-  // TRAILING SLASH - IMPORTANT PER SEO
+  // TRAILING SLASH - CORREGIDO PARA AZURE SWA
   // =============================================
-  // Força que TOTES les URLs acabin amb /
-  // Això evita duplicats: /es i /es/ seran la mateixa URL
-  //ignore
-  trailingSlash: "always",
+  // Azure Static Web Apps elimina el trailing slash (301 redirect).
+  // Ponemos "never" para que Astro genere URLs sin /
+  // y así coincidan con lo que Azure realmente sirve.
+  // Esto resuelve el problema de "Canonicals: Canonicalizada"
+  // que Screaming Frog detectaba en 98 URLs.
+  trailingSlash: "never",
 
   // =============================================
   // BUILD OUTPUT
   // =============================================
-  // 'static' genera HTML estàtic (recomanat per Azure Static Web Apps)
+  // 'static' genera HTML estático (recomendado para Azure Static Web Apps)
   output: "static",
-
-  // =============================================
-  // BASE PATH
-  // =============================================
-  // Si la web està en un subdirectori, canvia això
-  // Per exemple: base: '/blog' si està en example.com/blog
-  // base: '/',
 
   // =============================================
   // I18N - MULTIIDIOMA
@@ -35,11 +30,10 @@ export default defineConfig({
   },
 
   // =============================================
-  // VITE CONFIG (opcional)
+  // VITE CONFIG
   // =============================================
   vite: {
     build: {
-      // Millora la compressió CSS
       cssMinify: true,
     },
   },

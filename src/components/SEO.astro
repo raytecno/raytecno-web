@@ -2,10 +2,12 @@
 /**
  * SEO.astro - Componente SEO unificado para RayGold
  * 
- * CORRECCIONES SEO:
- * - x-default apunta a /en/ (estándar internacional)
- * - Canonical URLs siempre con trailing slash
- * - Hreflang URLs siempre con trailing slash
+ * CORRECCIONES SEO (Febrero 2026 - Post Screaming Frog):
+ * - Canonical URLs SIN trailing slash (Azure SWA elimina la /)
+ * - Hreflang URLs SIN trailing slash (coherente con canonicals)
+ * - x-default apunta a /en (estándar internacional)
+ * - Páginas noindex NO generan hreflang
+ * - Páginas noindex NO aparecen en hreflang de otras páginas
  * 
  * Incluye:
  * - Meta tags básicos
@@ -164,10 +166,17 @@ const config = LANG_CONFIG[lang] || LANG_CONFIG.es;
 // Siempre usar el dominio principal .es
 const siteDomain = COMPANY.primaryDomain;
 
-// URL actual - SIEMPRE con trailing slash
+// ============================================
+// URL CANONICAL - SIN trailing slash
+// Azure Static Web Apps elimina el trailing slash,
+// así que la canonical debe coincidir con la URL real.
+// Excepción: URLs raíz de idioma (/es/, /en/, etc.)
+// se quedan como /es, /en, etc.
+// ============================================
 let currentPath = Astro.url.pathname;
-if (!currentPath.endsWith('/')) {
-  currentPath = currentPath + '/';
+// Eliminar trailing slash (excepto la raíz "/")
+if (currentPath.length > 1 && currentPath.endsWith('/')) {
+  currentPath = currentPath.slice(0, -1);
 }
 const canonicalUrl = `${siteDomain}${currentPath}`;
 
@@ -189,11 +198,33 @@ const ogImage = image
 const logoUrl = `${siteDomain}${COMPANY.logo}`;
 
 // ============================================
-// FUNCIÓN HELPER: Asegurar trailing slash
+// FUNCIÓN HELPER: Eliminar trailing slash
 // ============================================
-function ensureTrailingSlash(url: string): string {
-  return url.endsWith('/') ? url : url + '/';
+function removeTrailingSlash(url: string): string {
+  if (url === '/' || url.endsWith('://')) return url;
+  return url.endsWith('/') ? url.slice(0, -1) : url;
 }
+
+// ============================================
+// FUNCIÓN HELPER: Normalizar URL para hreflang
+// Construye URL absoluta SIN trailing slash
+// ============================================
+function buildHreflangUrl(altUrl: string): string {
+  // Si ya es absoluta, solo quitar trailing slash
+  if (altUrl.startsWith('http')) {
+    return removeTrailingSlash(altUrl);
+  }
+  // Si es relativa, construir con dominio
+  const cleanPath = removeTrailingSlash(altUrl);
+  return `${siteDomain}${cleanPath}`;
+}
+
+// ============================================
+// FILTRAR ALTERNATE URLS
+// Excluir de hreflang las páginas con noindex
+// (cookies, privacidad, terminos)
+// ============================================
+const indexableAlternateUrls = noindex ? [] : alternateUrls;
 
 // ============================================
 // SCHEMA.ORG - ORGANIZATION
@@ -287,6 +318,7 @@ const schemaWebPage = {
 
 // ============================================
 // SCHEMA.ORG - BREADCRUMB
+// URLs en breadcrumbs también sin trailing slash
 // ============================================
 const pathSegments = currentPath
   .split("/")
@@ -298,13 +330,13 @@ const breadcrumbItems = [
     "@type": "ListItem",
     "position": 1,
     "name": config.homeLabel,
-    "item": `${siteDomain}/${lang}/`,
+    "item": `${siteDomain}/${lang}`,
   },
   ...pathSegments.map((segment, index) => ({
     "@type": "ListItem",
     "position": index + 2,
     "name": segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, " "),
-    "item": `${siteDomain}/${lang}/${pathSegments.slice(0, index + 1).join("/")}/`,
+    "item": `${siteDomain}/${lang}/${pathSegments.slice(0, index + 1).join("/")}`,
   })),
 ];
 
@@ -331,27 +363,30 @@ const schemaBreadcrumb = {
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 )}
 
-<!-- Canonical - SIEMPRE con trailing slash -->
+<!-- Canonical - SIN trailing slash (Azure SWA lo elimina) -->
 <link rel="canonical" href={canonicalUrl} />
 
 <!-- ========================================
      HREFLANG (Multiidioma)
-     Todas las URLs con trailing slash
+     - URLs SIN trailing slash (coherente con canonicals)
+     - Solo se generan si la página NO tiene noindex
+     - Esto evita "Canonical no indexable" en Screaming Frog
      ======================================== -->
-{alternateUrls.map((alt) => (
+{indexableAlternateUrls.map((alt) => (
   <link 
     rel="alternate" 
     hreflang={LANG_CONFIG[alt.lang]?.hreflang || alt.lang} 
-    href={ensureTrailingSlash(`${siteDomain}${alt.url}`)} 
+    href={buildHreflangUrl(alt.url)} 
   />
 ))}
 
 <!-- x-default apunta al INGLÉS (estándar internacional) -->
-{alternateUrls.length > 0 && (
+<!-- Solo si hay alternateUrls y la página es indexable -->
+{indexableAlternateUrls.length > 0 && (
   <link 
     rel="alternate" 
     hreflang="x-default" 
-    href={`${siteDomain}/en/`} 
+    href={`${siteDomain}/en`} 
   />
 )}
 
