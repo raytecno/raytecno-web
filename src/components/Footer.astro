@@ -1,6 +1,10 @@
 ---
 /**
  * Footer minimalista con redes sociales
+ * 
+ * CORRECCIÓN SEO (Febrero 2026):
+ * - TODAS las URLs SIN trailing slash
+ * - Coherente con canonicals, Header y Azure SWA
  */
 import { getPageUrl, getModuloUrl, getLegalUrl, type Lang } from "@/config/pages";
 import { social } from "@/config/contact";
@@ -155,7 +159,7 @@ const currentYear = new Date().getFullYear();
       <p>{ft.tagline}</p>
     </div>
 
-    <!-- Columna 2: Módulos -->
+    <!-- Columna 2: Módulos - URLs sin trailing slash -->
     <div class="footer-col">
       <h5>{ft.modules}</h5>
       <a href={getModuloUrl("maestros", lang)}>{ft.masters}</a>
@@ -164,7 +168,7 @@ const currentYear = new Date().getFullYear();
       <a href={getModuloUrl("finanzas", lang)}>{ft.finance}</a>
     </div>
 
-    <!-- Columna 3: Empresa -->
+    <!-- Columna 3: Empresa - URLs sin trailing slash -->
     <div class="footer-col">
       <h5>{ft.company}</h5>
       <a href={`/${lang}/#porque`}>{ft.about}</a>
@@ -173,7 +177,7 @@ const currentYear = new Date().getFullYear();
       <a href={getPageUrl("contacto", lang)}>{ft.contact}</a>
     </div>
 
-    <!-- Columna 4: Legal -->
+    <!-- Columna 4: Legal - URLs sin trailing slash -->
     <div class="footer-col">
       <h5>{ft.legal}</h5>
       <a href={`/${lang}/privacidad`}>{ft.privacy}</a>

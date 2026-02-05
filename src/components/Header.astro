@@ -1,6 +1,10 @@
 ---
 /**
  * Header.astro - Navegación principal con Herramientas dropdown
+ * 
+ * CORRECCIÓN SEO (Febrero 2026):
+ * - TODAS las URLs SIN trailing slash
+ * - Coherente con canonicals y comportamiento de Azure SWA
  */
 import { getPageUrl, getToolUrl, type Lang } from "@/config/pages";
 import { getTranslations } from "@/i18n";
@@ -33,17 +37,20 @@ const languages: { code: Lang; name: string; flag: string }[] = [
 
 const currentLang = languages.find((l) => l.code === lang) || languages[0];
 
-// URLs de navegación - TODAS con trailing slash
-const homeUrl = `/${lang}/`;
-const modulosUrl = getPageUrl("modulos", lang) + '/';
-const preciosUrl = getPageUrl("precios", lang) + '/';
-const tecnologiaUrl = getPageUrl("tecnologia", lang) + '/';
-const blogUrl = `/${lang}/blog/`;
-const contactoUrl = getPageUrl("contacto", lang) + '/';
+// URLs de navegación - SIN trailing slash
+// getPageUrl ya devuelve sin / (ej: /es/modulos)
+// Azure SWA elimina el trailing slash, así que los links
+// deben coincidir con la URL real y la canonical
+const homeUrl = `/${lang}`;
+const modulosUrl = getPageUrl("modulos", lang);
+const preciosUrl = getPageUrl("precios", lang);
+const tecnologiaUrl = getPageUrl("tecnologia", lang);
+const blogUrl = `/${lang}/blog`;
+const contactoUrl = getPageUrl("contacto", lang);
 
-// URLs de herramientas - TODAS con trailing slash
-const calculadoraUrl = getToolUrl("calculadora", lang) + '/';
-const cotizacionUrl = getToolUrl("cotizacion", lang) + '/';
+// URLs de herramientas - SIN trailing slash
+const calculadoraUrl = getToolUrl("calculadora", lang);
+const cotizacionUrl = getToolUrl("cotizacion", lang);
 
 // Traducciones del menú
 const navLabels: Record<Lang, { tools: string; calculator: string; prices: string }> = {
@@ -64,7 +71,7 @@ const isToolsActive = currentPath.includes('/herramientas') || currentPath.inclu
 
 <header class="header">
   <div class="header-container">
-    <a href={`/${lang}/`} class="logo">
+    <a href={`/${lang}`} class="logo">
       <svg class="logo-icon" viewBox="0 0 40 40" fill="none">
         <path d="M20 2L37 12V28L20 38L3 28V12L20 2Z" fill="url(#grad1)" stroke="currentColor" stroke-width="1"></path>
         <path d="M20 8L30 14V26L20 32L10 26V14L20 8Z" fill="rgba(255,255,255,0.3)"></path>
@@ -82,7 +89,7 @@ const isToolsActive = currentPath.includes('/herramientas') || currentPath.inclu
     </a>
 
     <nav class="nav-main">
-      <a href={homeUrl} class:list={["nav-link", { active: isActive(homeUrl) && currentPath === `/${lang}/` }]}>{t.nav?.home || "Inicio"}</a>
+      <a href={homeUrl} class:list={["nav-link", { active: isActive(homeUrl) && (currentPath === `/${lang}` || currentPath === `/${lang}/`) }]}>{t.nav?.home || "Inicio"}</a>
       <a href={modulosUrl} class:list={["nav-link", { active: isActive(modulosUrl) }]}>{t.nav?.modules || "Módulos"}</a>
       <a href={preciosUrl} class:list={["nav-link", { active: isActive(preciosUrl) }]}>{t.nav?.pricing || "Precios"}</a>
       <a href={tecnologiaUrl} class:list={["nav-link", { active: isActive(tecnologiaUrl) }]}>{t.nav?.technology || "Tecnología"}</a>
@@ -119,6 +126,7 @@ const isToolsActive = currentPath.includes('/herramientas') || currentPath.inclu
       <a href={contactoUrl} class:list={["nav-link", { active: isActive(contactoUrl) }]}>{t.nav?.contact || "Contacto"}</a>
     </nav>
 
+    <!-- Selector de idioma - URLs SIN trailing slash -->
     <div class="lang-selector">
       <button class="lang-trigger" aria-label="Seleccionar idioma" aria-expanded="false">
         <span class="lang-flag">{currentLang.flag}</span>
@@ -129,7 +137,7 @@ const isToolsActive = currentPath.includes('/herramientas') || currentPath.inclu
       </button>
       <div class="lang-dropdown">
         {languages.map((l) => (
-          <a href={`/${l.code}/`} class:list={["lang-option", { active: l.code === lang }]} hreflang={l.code}>
+          <a href={`/${l.code}`} class:list={["lang-option", { active: l.code === lang }]} hreflang={l.code}>
             <span class="lang-option-flag">{l.flag}</span>
             <span class="lang-option-name">{l.name}</span>
             {l.code === lang && (
