@@ -5,7 +5,7 @@
  * CORRECCIONES SEO (Febrero 2026 - Post Screaming Frog):
  * - Canonical URLs SIN trailing slash (Azure SWA elimina la /)
  * - Hreflang URLs SIN trailing slash (coherente con canonicals)
- * - x-default apunta a /en (estándar internacional)
+ * - x-default apunta a la versión INGLESA de la página actual
  * - Páginas noindex NO generan hreflang
  * - Páginas noindex NO aparecen en hreflang de otras páginas
  * 
@@ -170,8 +170,6 @@ const siteDomain = COMPANY.primaryDomain;
 // URL CANONICAL - SIN trailing slash
 // Azure Static Web Apps elimina el trailing slash,
 // así que la canonical debe coincidir con la URL real.
-// Excepción: URLs raíz de idioma (/es/, /en/, etc.)
-// se quedan como /es, /en, etc.
 // ============================================
 let currentPath = Astro.url.pathname;
 // Eliminar trailing slash (excepto la raíz "/")
@@ -225,6 +223,23 @@ function buildHreflangUrl(altUrl: string): string {
 // (cookies, privacidad, terminos)
 // ============================================
 const indexableAlternateUrls = noindex ? [] : alternateUrls;
+
+// ============================================
+// OBTENER URL INGLESA PARA X-DEFAULT
+// Busca en alternateUrls la versión en inglés
+// Si no existe, usa /en (home inglesa)
+// ============================================
+function getXDefaultUrl(): string {
+  // Buscar la versión inglesa en alternateUrls
+  const englishAlt = alternateUrls.find(alt => alt.lang === 'en');
+  if (englishAlt) {
+    return buildHreflangUrl(englishAlt.url);
+  }
+  // Fallback: home inglesa
+  return `${siteDomain}/en`;
+}
+
+const xDefaultUrl = getXDefaultUrl();
 
 // ============================================
 // SCHEMA.ORG - ORGANIZATION
@@ -380,13 +395,17 @@ const schemaBreadcrumb = {
   />
 ))}
 
-<!-- x-default apunta al INGLÉS (estándar internacional) -->
-<!-- Solo si hay alternateUrls y la página es indexable -->
+<!-- 
+  x-default: Apunta a la versión INGLESA de la página actual
+  - Si estamos en /es/precios → x-default = /en/pricing
+  - Si estamos en /es/modulos → x-default = /en/modules
+  - Solo se genera si hay alternateUrls y la página es indexable
+-->
 {indexableAlternateUrls.length > 0 && (
   <link 
     rel="alternate" 
     hreflang="x-default" 
-    href={`${siteDomain}/en`} 
+    href={xDefaultUrl} 
   />
 )}
 

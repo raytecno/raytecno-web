@@ -1,7 +1,12 @@
 ---
 /**
  * Página raíz con SEO para bots y redirección para usuarios
- * El contenido está oculto visualmente pero los bots lo leen
+ * 
+ * CORRECCIONES SEO (Febrero 2026):
+ * - Canonical SIN trailing slash (Azure SWA lo elimina)
+ * - Todos los hreflang apuntan a .ES (el .com redirige)
+ * - x-default apunta a /en (estándar internacional)
+ * - URLs SIN trailing slash en todos los enlaces
  */
 ---
 
@@ -12,9 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- SEO para bots -->
-    <title>
-      RayGold - Software ERP para Joyería | Gestión integral para joyeros
-    </title>
+    <title>RayGold - Software ERP para Joyería | Gestión integral para joyeros</title>
     <meta
       name="description"
       content="El ERP más completo para joyerías. Gestión de inventario, fabricación, ventas y contabilidad. +200 joyerías confían en nosotros desde 1990."
@@ -37,18 +40,24 @@
       content="https://www.raytecno.es/images/og-image.jpg"
     />
 
-    <!-- Canonical y alternates -->
-    <link rel="canonical" href="https://www.raytecno.es/es/" />
-    <link rel="alternate" hreflang="es" href="https://www.raytecno.es/es/" />
-    <link rel="alternate" hreflang="en" href="https://www.raytecno.com/en/" />
-    <link rel="alternate" hreflang="fr" href="https://www.raytecno.es/fr/" />
-    <link rel="alternate" hreflang="ca" href="https://www.raytecno.es/ca/" />
-    <link rel="alternate" hreflang="pt" href="https://www.raytecno.es/pt-br/" />
-    <link
-      rel="alternate"
-      hreflang="x-default"
-      href="https://www.raytecno.es/es/"
-    />
+    <!-- 
+      CANONICAL: Apunta a la raíz sin trailing slash
+      La raíz "/" es especial - no tiene idioma, redirige instantáneamente
+    -->
+    <link rel="canonical" href="https://www.raytecno.es" />
+    
+    <!-- 
+      HREFLANG: Todas las URLs SIN trailing slash y en .ES
+      El .com redirige a .es, así que no debe aparecer aquí
+    -->
+    <link rel="alternate" hreflang="es" href="https://www.raytecno.es/es" />
+    <link rel="alternate" hreflang="en" href="https://www.raytecno.es/en" />
+    <link rel="alternate" hreflang="fr" href="https://www.raytecno.es/fr" />
+    <link rel="alternate" hreflang="ca" href="https://www.raytecno.es/ca" />
+    <link rel="alternate" hreflang="pt-BR" href="https://www.raytecno.es/pt-br" />
+    
+    <!-- x-default: Apunta a INGLÉS (estándar internacional) -->
+    <link rel="alternate" hreflang="x-default" href="https://www.raytecno.es/en" />
 
     <!-- Ocultar body ANTES de que se renderice -->
     <style>
@@ -60,13 +69,13 @@
     <!-- Redirección instantánea -->
     <script>
       location.replace(
-        location.hostname.indexOf(".com") !== -1 ? "/en/" : "/es/"
+        location.hostname.indexOf(".com") !== -1 ? "/en" : "/es"
       );
     </script>
 
     <!-- Fallback sin JavaScript -->
     <noscript>
-      <meta http-equiv="refresh" content="0; url=/es/" />
+      <meta http-equiv="refresh" content="0; url=/es" />
     </noscript>
   </head>
   <body>
@@ -86,7 +95,7 @@
         <li><a href="/es/modulos/finanzas">Finanzas</a></li>
       </ul>
       <p>Email: info@raytecno.es | Tel: +34 648 088 550</p>
-      <a href="/es/">Español</a> | <a href="/en/">English</a>
+      <a href="/es">Español</a> | <a href="/en">English</a>
     </main>
   </body>
 </html>
