@@ -337,21 +337,20 @@
       "metaDescription": "Gestión de equipos comerciales, comisiones, objetivos y seguimiento de ventas para joyerías.",
       "sections": {
         "equipo": {
-          "name": "Equipo",
-          "description": "Gestión del equipo comercial",
+          "name": "Aplicacion",
+          "description": "Gestión personalizada de comercial",
           "images": [
-            { "title": "Vendedores", "description": "Listado del equipo" },
-            { "title": "Zonas", "description": "Asignación de territorios" },
-            { "title": "Objetivos", "description": "Metas de venta" }
+            { "title": "Principal", "description": "Inicio personalizado" },
+            { "title": "Menu", "description": "Configuracion modular" },
+            { "title": "Calendario", "description": "Calendario personal por vendedor" }
           ]
         },
         "comisiones": {
-          "name": "Comisiones",
+           "name": "Gestion",
           "description": "Cálculo y liquidación",
           "images": [
-            { "title": "Reglas", "description": "Configuración de comisiones" },
-            { "title": "Cálculo", "description": "Liquidación automática" },
-            { "title": "Histórico", "description": "Pagos realizados" }
+            { "title": "Vendedores", "description": "Gestion de vendedores" },
+            { "title": "Ventas", "description": "Control de ventas por vendedor" }
           ]
         }
       }
