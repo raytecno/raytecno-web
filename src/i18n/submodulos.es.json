@@ -353,15 +353,7 @@
             { "title": "Cálculo", "description": "Liquidación automática" },
             { "title": "Histórico", "description": "Pagos realizados" }
           ]
-        },
-        "rutas": {
-          "name": "Rutas",
-          "description": "Planificación de visitas",
-          "images": [
-            { "title": "Calendario", "description": "Agenda de visitas" },
-            { "title": "Mapa", "description": "Vista geográfica" },
-            { "title": "Informes", "description": "Resultados de visitas" }
-          ]
+        }]
         }
       }
     },
