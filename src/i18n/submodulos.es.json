@@ -332,38 +332,27 @@
     },
     "vendedores": {
       "title": "Vendedores",
-      "subtitle": "Gestión especializada para",
+      "subtitle": "Gestión especializada para vendedores",
       "metaTitle": "Vendedores | RayGold ERP - Gestión Comercial",
       "metaDescription": "Gestión de equipos comerciales, comisiones, objetivos y seguimiento de ventas para joyerías.",
       "sections": {
-        "equipo": {
-          "name": "Equipo",
-          "description": "Gestión del equipo comercial",
+        "aplicacion": {
+          "name": "Aplicacion",
+          "description": "Gestión personalizada de comercial",
           "images": [
-            { "title": "Vendedores", "description": "Listado del equipo" },
-            { "title": "Zonas", "description": "Asignación de territorios" },
-            { "title": "Objetivos", "description": "Metas de venta" }
+            { "title": "Principal", "description": "Inicio personalizado" },
+            { "title": "Menu", "description": "Configuracion modular" },
+            { "title": "Calendario", "description": "Calendario personal por vendedor" }
           ]
         },
-        "comisiones": {
-          "name": "Comisiones",
+        "gestionv": {
+          "name": "Gestion",
           "description": "Cálculo y liquidación",
           "images": [
-            { "title": "Reglas", "description": "Configuración de comisiones" },
-            { "title": "Cálculo", "description": "Liquidación automática" },
-            { "title": "Histórico", "description": "Pagos realizados" }
-          ]
-        },
-        "rutas": {
-          "name": "Rutas",
-          "description": "Planificación de visitas",
-          "images": [
-            { "title": "Calendario", "description": "Agenda de visitas" },
-            { "title": "Mapa", "description": "Vista geográfica" },
-            { "title": "Informes", "description": "Resultados de visitas" }
+            { "title": "Vendedores", "description": "Gestion de vendedores" },
+            { "title": "Ventas", "description": "Control de ventas por vendedor" }
           ]
         }
-      }
     },
     "ecommerce": {
       "title": "E-commerce",
