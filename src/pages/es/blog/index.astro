@@ -3,12 +3,12 @@
  * Blog - Listado Minimalista MEJORADO
  * @file src/pages/es/blog/index.astro
  *
- * Mejoras:
- * - Excerpt visible en cada card (2 líneas)
- * - Hover con sombra suave
- * - Transiciones más elegantes
+ * CORRECCIÓN SEO (Febrero 2026):
+ * - CTA usa getPageUrl() para URLs traducidas
+ * - alternateUrls sin trailing slash
  */
 import Layout from "@/layouts/Layout.astro";
+import { getPageUrl } from "@/config/pages";
 import {
   getBlogPosts,
   getFeaturedPosts,
@@ -51,12 +51,13 @@ posts.forEach((post: any) => {
 });
 const categories = Array.from(categoriesMap.values());
 
+// URLs SIN trailing slash
 const alternateUrls = [
-  { lang: "es", url: "/es/blog" },
-  { lang: "en", url: "/en/blog" },
-  { lang: "fr", url: "/fr/blog" },
-  { lang: "ca", url: "/ca/blog" },
-  { lang: "pt-br", url: "/pt-br/blog" },
+  { lang: "es" as const, url: "/es/blog" },
+  { lang: "en" as const, url: "/en/blog" },
+  { lang: "fr" as const, url: "/fr/blog" },
+  { lang: "ca" as const, url: "/ca/blog" },
+  { lang: "pt-br" as const, url: "/pt-br/blog" },
 ];
 
 function formatDate(dateString: string) {
@@ -95,7 +96,7 @@ const regularPosts = posts.filter(
   title={t.metaTitle}
   description={t.metaDescription}
   lang={lang}
-  alternateUrls={alternateUrls as any}
+  alternateUrls={alternateUrls}
 >
   <main class="blog-page">
     <!-- Header compacto -->
@@ -255,10 +256,10 @@ const regularPosts = posts.filter(
           }
         </div>
 
-        <!-- CTA -->
+        <!-- CTA - CORREGIDO: usar getPageUrl() -->
         <div class="cta-banner">
           <span>{t.ctaTitle}</span>
-          <a href={`/${lang}/contacto`}>{t.ctaButton}</a>
+          <a href={getPageUrl("contacto", lang)}>{t.ctaButton}</a>
         </div>
       </div>
     </section>

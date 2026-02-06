@@ -4,6 +4,7 @@
  * 
  * CORRECCIÓN SEO (Febrero 2026):
  * - TODAS las URLs SIN trailing slash
+ * - URLs legales usando getLegalUrl() para slugs traducidos
  * - Coherente con canonicals, Header y Azure SWA
  */
 import { getPageUrl, getModuloUrl, getLegalUrl, type Lang } from "@/config/pages";
@@ -177,12 +178,12 @@ const currentYear = new Date().getFullYear();
       <a href={getPageUrl("contacto", lang)}>{ft.contact}</a>
     </div>
 
-    <!-- Columna 4: Legal - URLs sin trailing slash -->
+    <!-- Columna 4: Legal - CORREGIDO: usar getLegalUrl() -->
     <div class="footer-col">
       <h5>{ft.legal}</h5>
-      <a href={`/${lang}/privacidad`}>{ft.privacy}</a>
-      <a href={`/${lang}/terminos`}>{ft.terms}</a>
-      <a href={`/${lang}/cookies`}>{ft.cookies}</a>
+      <a href={getLegalUrl("privacidad", lang)}>{ft.privacy}</a>
+      <a href={getLegalUrl("terminos", lang)}>{ft.terms}</a>
+      <a href={getLegalUrl("cookies", lang)}>{ft.cookies}</a>
       <a href={getLegalUrl("verifactu", lang)} class="verifactu-link">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="verifactu-icon">
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
