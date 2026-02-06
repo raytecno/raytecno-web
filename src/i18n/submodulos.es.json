@@ -106,6 +106,10 @@
             {
               "title": "Menu",
               "description": "Creacion de menu principal"
+            },
+             {
+              "title": "Personalizacion",
+              "description": "Selecion de estilos"
             }
           ]
         }
@@ -296,19 +300,8 @@
             { "title": "Detalle", "description": "Información completa" },
             { "title": "Verifactu", "description": "Facturacion con Verifactu" }
           ]
-        },
-        "trazabilidad": {
-          "name": "Trazabilidad",
-          "description": "Seguimiento de piezas",
-          "images": [
-            {
-              "title": "Por Pieza",
-              "description": "Historia de cada artículo"
-            },
-            { "title": "Por Lote", "description": "Trazabilidad por lotes" },
-            { "title": "Certificados", "description": "Documentación asociada" }
-          ]
         }
+       
       }
     },
     "estadisticas": {
@@ -339,7 +332,7 @@
     },
     "vendedores": {
       "title": "Vendedores",
-      "subtitle": "Gestión de rutas, visitas y comisiones",
+      "subtitle": "Gestión especializada para",
       "metaTitle": "Vendedores | RayGold ERP - Gestión Comercial",
       "metaDescription": "Gestión de equipos comerciales, comisiones, objetivos y seguimiento de ventas para joyerías.",
       "sections": {
@@ -400,16 +393,7 @@
             { "title": "Creacion", "description": "Total libertad modular" },
             { "title": "Importacion", "description": "Recuperacion de datos de fabrica" }
           ]
-        },
-        "integraciones": {
-          "name": "Integraciones",
-          "description": "Conexión con plataformas",
-          "images": [
-            { "title": "Shopify", "description": "Integración Shopify" },
-            { "title": "WooCommerce", "description": "Integración WordPress" },
-            { "title": "Marketplaces", "description": "Amazon, eBay, etc." }
-          ]
-        }
+        }  
       }
     },
     "impresoras3d": {
@@ -423,70 +407,8 @@
           "description": "Gestión del parque de impresoras 3D",
           "images": [
             {
-              "title": "Listado de Impresoras",
-              "description": "Vista general del parque de impresoras"
-            },
-            {
-              "title": "Estado en Tiempo Real",
-              "description": "Monitorización del estado de cada impresora"
-            },
-            {
-              "title": "Mantenimiento",
-              "description": "Registro de mantenimientos y calibraciones"
-            }
-          ]
-        },
-        "trabajos": {
-          "name": "Trabajos",
-          "description": "Cola de trabajos y producción",
-          "images": [
-            {
-              "title": "Cola de Impresión",
-              "description": "Trabajos pendientes y en curso"
-            },
-            {
-              "title": "Nuevo Trabajo",
-              "description": "Configuración de nuevo trabajo de impresión"
-            },
-            {
-              "title": "Histórico",
-              "description": "Registro de trabajos completados"
-            }
-          ]
-        },
-        "materiales": {
-          "name": "Materiales",
-          "description": "Gestión de resinas y materiales",
-          "images": [
-            {
-              "title": "Stock de Materiales",
-              "description": "Inventario de resinas y consumibles"
-            },
-            {
-              "title": "Consumos",
-              "description": "Control de consumo por trabajo"
-            },
-            {
-              "title": "Proveedores",
-              "description": "Gestión de proveedores de materiales"
-            }
-          ]
-        },
-        "configuracion": {
-          "name": "Configuración",
-          "description": "Ajustes y perfiles de impresión",
-          "images": [
-            {
-              "title": "Perfiles",
-              "description": "Perfiles de impresión por tipo de pieza"
-            },
-            {
-              "title": "Parámetros",
-              "description": "Configuración de parámetros técnicos"
-            },
-            {
-              "title": "Integración",
-              "description": "Conexión con software de diseño"
+              "title": "Proximamente",
+              "description": ""
             }
           ]
         }
