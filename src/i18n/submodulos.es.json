@@ -337,22 +337,33 @@
       "metaDescription": "Gestión de equipos comerciales, comisiones, objetivos y seguimiento de ventas para joyerías.",
       "sections": {
         "equipo": {
-          "name": "Aplicacion",
-          "description": "Gestión personalizada de comercial",
+          "name": "Equipo",
+          "description": "Gestión del equipo comercial",
           "images": [
-            { "title": "Principal", "description": "Inicio personalizado" },
-            { "title": "Menu", "description": "Configuracion modular" },
-            { "title": "Calendario", "description": "Calendario personal por vendedor" }
+            { "title": "Vendedores", "description": "Listado del equipo" },
+            { "title": "Zonas", "description": "Asignación de territorios" },
+            { "title": "Objetivos", "description": "Metas de venta" }
           ]
         },
         "comisiones": {
-          "name": "Gestion",
+          "name": "Comisiones",
           "description": "Cálculo y liquidación",
           "images": [
-            { "title": "Vendedores", "description": "Gestion de vendedores" },
-            { "title": "Ventas", "description": "Control de ventas por vendedor" }
+            { "title": "Reglas", "description": "Configuración de comisiones" },
+            { "title": "Cálculo", "description": "Liquidación automática" },
+            { "title": "Histórico", "description": "Pagos realizados" }
+          ]
+        },
+        "rutas": {
+          "name": "Rutas",
+          "description": "Planificación de visitas",
+          "images": [
+            { "title": "Calendario", "description": "Agenda de visitas" },
+            { "title": "Mapa", "description": "Vista geográfica" },
+            { "title": "Informes", "description": "Resultados de visitas" }
           ]
         }
+      }
     },
     "ecommerce": {
       "title": "E-commerce",
