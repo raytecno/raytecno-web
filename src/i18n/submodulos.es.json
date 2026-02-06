@@ -345,7 +345,7 @@
             { "title": "Calendario", "description": "Calendario personal por vendedor" }
           ]
         },
-        "gestionV": {
+        "gestionv": {
           "name": "Gestion",
           "description": "Cálculo y liquidación",
           "images": [

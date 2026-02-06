@@ -153,7 +153,7 @@ export const modulosConfig: Record<ModuloId, ModuloConfig> = {
     icon: `<svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="20" r="10" fill="currentColor"/><path d="M16 52c0-10 7-16 16-16s16 6 16 16" fill="currentColor" opacity="0.4"/><circle cx="50" cy="28" r="6" fill="currentColor" opacity="0.6"/><circle cx="14" cy="28" r="6" fill="currentColor" opacity="0.6"/></svg>`,
     secciones: [
       { id: 'aplicacion', prefix: 'VEN' },
-      { id: 'gestionV', prefix: 'VGES' },
+      { id: 'gestionv', prefix: 'VGES' },
       // { id: 'rutas', prefix: 'RUT' },
     ],
   },
