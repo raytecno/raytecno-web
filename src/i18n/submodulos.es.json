@@ -336,7 +336,7 @@
       "metaTitle": "Vendedores | RayGold ERP - Gestión Comercial",
       "metaDescription": "Gestión de equipos comerciales, comisiones, objetivos y seguimiento de ventas para joyerías.",
       "sections": {
-        "aplicacion": {
+        "equipo": {
           "name": "Aplicacion",
           "description": "Gestión personalizada de comercial",
           "images": [
@@ -345,7 +345,7 @@
             { "title": "Calendario", "description": "Calendario personal por vendedor" }
           ]
         },
-        "gestionv": {
+        "comisiones": {
           "name": "Gestion",
           "description": "Cálculo y liquidación",
           "images": [
