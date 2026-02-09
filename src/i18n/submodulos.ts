@@ -104,7 +104,7 @@ export const modulosConfig: Record<ModuloId, ModuloConfig> = {
     icon: `<svg viewBox="0 0 64 64" fill="none"><rect x="8" y="16" width="48" height="36" rx="4" fill="currentColor" opacity="0.2"/><rect x="8" y="16" width="48" height="12" rx="4" fill="currentColor"/><circle cx="20" cy="22" r="3" fill="white"/><rect x="28" y="20" width="20" height="4" rx="2" fill="white" opacity="0.6"/><rect x="14" y="34" width="16" height="12" rx="2" fill="currentColor" opacity="0.4"/><rect x="34" y="34" width="16" height="12" rx="2" fill="currentColor" opacity="0.4"/></svg>`,
     secciones: [
       // { id: 'clientes', prefix: 'CLI' },
-      { id: 'pedidos', prefix: 'COM' },
+      { id: 'pedidos', prefix: 'COMP' },
       { id: 'albaranes', prefix: 'ALB' },
       { id: 'facturas', prefix: 'FAC' },
       { id: 'libro', prefix: 'LO' },
