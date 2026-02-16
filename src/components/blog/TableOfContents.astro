@@ -1,0 +1,125 @@
+---
+/**
+ * Table of Contents - Generada desde headings de render()
+ * src/components/blog/TableOfContents.astro
+ * 
+ * CAMBIO vs WordPress: Antes parseaba el HTML del content de GraphQL.
+ * Ahora recibe los headings directamente de entry.render() de Astro,
+ * que los devuelve como array { depth, slug, text }.
+ */
+
+interface Heading {
+  depth: number;  // 2 = h2, 3 = h3
+  slug: string;   // id del heading generado por Astro
+  text: string;   // texto del heading
+}
+
+interface Props {
+  headings: Heading[];
+  title?: string;
+}
+
+const { headings, title = 'Contenido' } = Astro.props;
+
+// Filtrar solo h2 y h3
+const tocItems = headings.filter(h => h.depth === 2 || h.depth === 3);
+---
+
+{tocItems.length > 0 && (
+  <nav class="toc" aria-label="Tabla de contenidos">
+    <h4 class="toc-title">{title}</h4>
+    <ul class="toc-list">
+      {tocItems.map(item => (
+        <li class={`toc-item level-${item.depth}`}>
+          <a href={`#${item.slug}`} class="toc-link">
+            {item.text}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+)}
+
+<style>
+  .toc {
+    padding: 1rem;
+    background: #f9fafb;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+  }
+
+  .toc-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #6b7280;
+    margin: 0 0 0.75rem 0;
+  }
+
+  .toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .toc-item { margin-bottom: 0.15rem; }
+
+  .level-3 { padding-left: 0.75rem; }
+
+  .toc-link {
+    display: block;
+    padding: 0.35rem 0.6rem;
+    font-size: 0.8rem;
+    color: #4b5563;
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    border-radius: 0 4px 4px 0;
+    transition: all 0.15s;
+    line-height: 1.3;
+  }
+
+  .toc-link:hover {
+    color: #c9a227;
+    background: rgba(201, 162, 39, 0.06);
+    border-left-color: #c9a227;
+  }
+
+  .toc-link.active {
+    color: #c9a227;
+    background: rgba(201, 162, 39, 0.08);
+    border-left-color: #c9a227;
+    font-weight: 500;
+  }
+
+  .level-3 .toc-link { font-size: 0.75rem; color: #94a3b8; }
+  .level-3 .toc-link:hover { color: #c9a227; }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = document.querySelectorAll('h2[id], h3[id]');
+    
+    if (headings.length === 0) return;
+    
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            tocLinks.forEach((link) => {
+              link.classList.remove('active');
+              if (link.getAttribute('href') === `#${id}`) {
+                link.classList.add('active');
+              }
+            });
+          }
+        });
+      },
+      { rootMargin: '-20% 0px -60% 0px', threshold: 0 }
+    );
+    
+    headings.forEach((heading) => observer.observe(heading));
+  });
+</script>

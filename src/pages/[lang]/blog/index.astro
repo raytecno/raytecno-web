@@ -1,0 +1,278 @@
+---
+/**
+ * Blog - Listado de artículos
+ * src/pages/[lang]/blog/index.astro
+ * 
+ * CAMBIOS vs versión WordPress:
+ * - Import de getBlogPosts desde @/lib/blog (Content Collections)
+ * - Ya NO importa de wordpress ni GraphQL
+ * - El resto del template es IDÉNTICO
+ */
+
+import type { GetStaticPaths } from 'astro';
+import Layout from '@/layouts/Layout.astro';
+import { getBlogPosts, getBlogCategories } from '@/lib/blog';
+import { supportedLangs, getPageUrl, type Lang } from '@/config/pages';
+import { getTranslations } from '@/i18n';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return supportedLangs.map(lang => ({
+    params: { lang },
+    props: { lang },
+  }));
+};
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+
+// ============================================
+// OBTENER DATOS (antes: GraphQL → ahora: Content Collections)
+// ============================================
+const posts = await getBlogPosts(lang);
+const categories = await getBlogCategories(lang);
+
+// Traducciones del blog
+const blogT: Record<string, Record<string, string>> = {
+  es: { 
+    title: 'Blog', subtitle: 'Artículos sobre gestión joyera y tecnología ERP',
+    allCategories: 'Todas', noPosts: 'No hay artículos disponibles.',
+    minRead: 'min lectura', ctaTitle: '¿Listo para transformar tu negocio joyero?',
+    ctaButton: 'Contactar',
+  },
+  en: { 
+    title: 'Blog', subtitle: 'Articles about jewelry management and ERP technology',
+    allCategories: 'All', noPosts: 'No articles available.',
+    minRead: 'min read', ctaTitle: 'Ready to transform your jewelry business?',
+    ctaButton: 'Contact Us',
+  },
+  fr: { 
+    title: 'Blog', subtitle: 'Articles sur la gestion joaillière et la technologie ERP',
+    allCategories: 'Toutes', noPosts: 'Aucun article disponible.',
+    minRead: 'min de lecture', ctaTitle: 'Prêt à transformer votre entreprise de joaillerie?',
+    ctaButton: 'Contactez-nous',
+  },
+  ca: { 
+    title: 'Blog', subtitle: 'Articles sobre gestió joiera i tecnologia ERP',
+    allCategories: 'Totes', noPosts: 'No hi ha articles disponibles.',
+    minRead: 'min lectura', ctaTitle: 'Preparat per transformar el teu negoci joier?',
+    ctaButton: 'Contactar',
+  },
+  'pt-br': { 
+    title: 'Blog', subtitle: 'Artigos sobre gestão joalheira e tecnologia ERP',
+    allCategories: 'Todas', noPosts: 'Nenhum artigo disponível.',
+    minRead: 'min de leitura', ctaTitle: 'Pronto para transformar seu negócio joalheiro?',
+    ctaButton: 'Contato',
+  },
+};
+
+const bt = blogT[lang] || blogT['es'];
+
+// Helpers
+function formatDate(dateStr: string): string {
+  return new Date(dateStr).toLocaleDateString(
+    lang === 'pt-br' ? 'pt-BR' : lang === 'ca' ? 'ca-ES' : `${lang}-${lang.toUpperCase()}`,
+    { year: 'numeric', month: 'long', day: 'numeric' }
+  );
+}
+
+function cleanExcerpt(text: string, maxLength: number = 120): string {
+  const clean = text.replace(/<[^>]*>/g, '').replace(/\n/g, ' ').trim();
+  return clean.length > maxLength ? clean.substring(0, maxLength) + '...' : clean;
+}
+
+// Alternate URLs para hreflang
+const alternateUrls = supportedLangs.map(l => ({
+  lang: l,
+  url: `/${l}/blog`,
+}));
+---
+
+<Layout 
+  title={`${bt.title} | RayGold`}
+  description={bt.subtitle}
+  lang={lang}
+  alternateUrls={alternateUrls}
+>
+  <main>
+    <section class="blog-page">
+      <!-- Header -->
+      <div class="blog-header">
+        <div class="container">
+          <div class="header-top">
+            <div class="title-area">
+              <h1>{bt.title}</h1>
+              <p>{bt.subtitle}</p>
+            </div>
+          </div>
+
+          {/* Filtro de categorías */}
+          {categories.length > 0 && (
+            <div class="category-filters">
+              <a href={`/${lang}/blog`} class="filter-btn active">{bt.allCategories}</a>
+              {categories.map(cat => (
+                <a href={`/${lang}/blog?cat=${cat.slug}`} class="filter-btn">
+                  {cat.name} <span class="count">({cat.count})</span>
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+
+      <!-- Listado de posts -->
+      <div class="container blog-content">
+        {posts.length > 0 ? (
+          <div class="posts-grid">
+            {posts.map(post => (
+              <article class="post-card">
+                <a href={`/${lang}/blog/${post.slug}`}>
+                  {post.featuredImage && (
+                    <div class="post-image">
+                      <img 
+                        src={post.featuredImage} 
+                        alt={post.title}
+                        loading="lazy"
+                        width="400"
+                        height="225"
+                      />
+                    </div>
+                  )}
+                  <div class="post-info">
+                    <span class="post-category">{post.category}</span>
+                    <h3>{post.title}</h3>
+                    <p class="post-excerpt">{cleanExcerpt(post.excerpt, 100)}</p>
+                    <div class="post-meta">
+                      <time>{formatDate(post.date)}</time>
+                      <span>·</span>
+                      <span>{post.readingTime} {bt.minRead}</span>
+                    </div>
+                  </div>
+                </a>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <p class="no-posts">{bt.noPosts}</p>
+        )}
+
+        <!-- CTA -->
+        <div class="cta-banner">
+          <span>{bt.ctaTitle}</span>
+          <a href={getPageUrl("contacto", lang)}>{bt.ctaButton}</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .blog-page {
+    --gold: #c9a227;
+    --gold-dark: #a8861e;
+    --dark: #0f172a;
+    --dark-medium: #1e293b;
+    --gray-400: #9ca3af;
+    --gray-200: #e5e7eb;
+    --gray-100: #f3f4f6;
+    --white: #fff;
+    background: var(--white);
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .blog-header {
+    background: linear-gradient(135deg, var(--dark) 0%, var(--dark-medium) 100%);
+    color: var(--white);
+    padding: 2.5rem 0 2rem;
+  }
+
+  .header-top { margin-bottom: 1.5rem; }
+  .title-area h1 { font-size: 2rem; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 0.375rem 0; }
+  .title-area p { font-size: 0.9rem; color: var(--gray-400); }
+
+  .category-filters { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .filter-btn {
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    color: var(--gray-400);
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .filter-btn:hover, .filter-btn.active { color: var(--gold); border-color: var(--gold); background: rgba(201,162,39,0.1); }
+  .filter-btn .count { font-size: 0.7rem; opacity: 0.7; }
+
+  .blog-content { padding: 2rem 0 3rem; }
+
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .post-card {
+    border: 1px solid var(--gray-200);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .post-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+  .post-card a { text-decoration: none; color: inherit; }
+
+  .post-image { aspect-ratio: 16/9; overflow: hidden; }
+  .post-image img { width: 100%; height: 100%; object-fit: cover; }
+
+  .post-info { padding: 1.25rem; }
+  .post-category {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+  }
+  .post-info h3 { font-size: 1.1rem; margin: 0 0 0.5rem 0; line-height: 1.4; }
+  .post-excerpt { font-size: 0.85rem; color: #666; margin: 0 0 0.75rem 0; line-height: 1.5; }
+  .post-meta { display: flex; gap: 0.5rem; font-size: 0.75rem; color: var(--gray-400); }
+
+  .no-posts { text-align: center; padding: 3rem; color: #666; }
+
+  .cta-banner {
+    margin-top: 3rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--dark) 0%, var(--dark-medium) 100%);
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--white);
+  }
+  .cta-banner span { font-size: 1.1rem; font-weight: 500; }
+  .cta-banner a {
+    padding: 0.6rem 1.5rem;
+    background: var(--gold);
+    color: var(--dark);
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .cta-banner a:hover { background: var(--gold-dark); }
+
+  @media (max-width: 640px) {
+    .posts-grid { grid-template-columns: 1fr; }
+    .cta-banner { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>

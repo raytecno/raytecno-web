@@ -1,0 +1,340 @@
+---
+/**
+ * Blog - Artículo individual
+ * src/pages/[lang]/blog/[slug].astro
+ * 
+ * CAMBIOS vs versión WordPress:
+ * - Usa getAllBlogSlugs() para getStaticPaths
+ * - Usa render() de Content Collections para el HTML del Markdown
+ * - Ya NO depende de GraphQL ni WordPress
+ */
+
+import type { GetStaticPaths } from 'astro';
+import Layout from '@/layouts/Layout.astro';
+import BlogCTA from '@/components/blog/BlogCTA.astro';
+import RelatedPosts from '@/components/blog/RelatedPosts.astro';
+import TableOfContents from '@/components/blog/TableOfContents.astro';
+import { getBlogPostBySlug, getRelatedPosts, getTranslations, getAllBlogSlugs } from '@/lib/blog';
+import { supportedLangs, getPageUrl, type Lang } from '@/config/pages';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const allSlugs = await getAllBlogSlugs();
+  
+  return allSlugs.map(({ lang, slug }) => ({
+    params: { lang, slug },
+    props: { lang: lang as Lang, slug },
+  }));
+};
+
+interface Props {
+  lang: Lang;
+  slug: string;
+}
+
+const { lang, slug } = Astro.props;
+
+// Obtener el post
+const post = await getBlogPostBySlug(slug, lang);
+
+if (!post) {
+  return Astro.redirect(`/${lang}/blog`);
+}
+
+// Renderizar el Markdown a HTML
+const { Content, headings } = await post._entry.render();
+
+// Obtener posts relacionados
+const relatedPosts = await getRelatedPosts(post, 3);
+
+// Obtener traducciones para hreflang
+const translations = post.translationGroup 
+  ? await getTranslations(post.translationGroup)
+  : [];
+
+// Alternate URLs (traducciones + idiomas sin traducción apuntan al blog)
+const alternateUrls = supportedLangs.map(l => {
+  const translation = translations.find(t => t.language === l);
+  return {
+    lang: l,
+    url: translation ? `/${l}/blog/${translation.slug}` : `/${l}/blog`,
+  };
+});
+
+// Traducciones UI
+const uiT: Record<string, Record<string, string>> = {
+  es: { backToBlog: '← Volver al blog', minRead: 'min lectura', publishedOn: 'Publicado el', by: 'por', toc: 'Contenido' },
+  en: { backToBlog: '← Back to blog', minRead: 'min read', publishedOn: 'Published on', by: 'by', toc: 'Contents' },
+  fr: { backToBlog: '← Retour au blog', minRead: 'min de lecture', publishedOn: 'Publié le', by: 'par', toc: 'Sommaire' },
+  ca: { backToBlog: '← Tornar al blog', minRead: 'min lectura', publishedOn: 'Publicat el', by: 'per', toc: 'Contingut' },
+  'pt-br': { backToBlog: '← Voltar ao blog', minRead: 'min de leitura', publishedOn: 'Publicado em', by: 'por', toc: 'Conteúdo' },
+};
+const ut = uiT[lang] || uiT['es'];
+
+function formatDate(dateStr: string): string {
+  return new Date(dateStr).toLocaleDateString(
+    lang === 'pt-br' ? 'pt-BR' : lang === 'ca' ? 'ca-ES' : `${lang}-${lang.toUpperCase()}`,
+    { year: 'numeric', month: 'long', day: 'numeric' }
+  );
+}
+
+// Schema.org Article
+const schemaArticle = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": post.seoTitle || post.title,
+  "description": post.seoDescription || post.excerpt,
+  "image": post.featuredImage,
+  "datePublished": post.date,
+  "dateModified": post.modified || post.date,
+  "author": {
+    "@type": "Organization",
+    "name": post.author,
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Raytecno BCN SL",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://raytecno.es/images/raygold-logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": `https://raytecno.es/${lang}/blog/${slug}`
+  }
+};
+---
+
+<Layout
+  title={post.seoTitle || `${post.title} | Blog RayGold`}
+  description={post.seoDescription || post.excerpt}
+  lang={lang}
+  type="article"
+  image={post.featuredImage || undefined}
+  publishedTime={post.date}
+  modifiedTime={post.modified || undefined}
+  alternateUrls={alternateUrls}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(schemaArticle)} />
+
+  <main>
+    <article class="blog-article">
+      <!-- Navegación superior -->
+      <div class="container">
+        <a href={`/${lang}/blog`} class="back-link">{ut.backToBlog}</a>
+      </div>
+
+      <!-- Header del artículo -->
+      <header class="article-header">
+        <div class="container">
+          <span class="article-category">{post.category}</span>
+          <h1>{post.title}</h1>
+          <div class="article-meta">
+            <time>{ut.publishedOn} {formatDate(post.date)}</time>
+            <span>·</span>
+            <span>{post.readingTime} {ut.minRead}</span>
+            <span>·</span>
+            <span>{ut.by} {post.author}</span>
+          </div>
+
+          {/* Traducciones disponibles */}
+          {translations.length > 1 && (
+            <div class="translations">
+              {translations
+                .filter(t => t.language !== lang)
+                .map(t => (
+                  <a href={`/${t.language}/blog/${t.slug}`} class="translation-link">
+                    {t.language.toUpperCase()}
+                  </a>
+                ))
+              }
+            </div>
+          )}
+        </div>
+      </header>
+
+      {/* Imagen destacada */}
+      {post.featuredImage && (
+        <div class="container">
+          <div class="featured-image">
+            <img src={post.featuredImage} alt={post.title} width="1100" height="550" />
+          </div>
+        </div>
+      )}
+
+      <!-- Contenido -->
+      <div class="container article-layout">
+        {/* Sidebar con TOC */}
+        {post.showToc && headings.length > 0 && (
+          <aside class="article-sidebar">
+            <TableOfContents headings={headings} title={ut.toc} />
+          </aside>
+        )}
+
+        {/* Contenido del artículo - render() del Markdown */}
+        <div class="article-content prose">
+          <Content />
+        </div>
+      </div>
+
+      {/* Tags */}
+      {post.tags.length > 0 && (
+        <div class="container">
+          <div class="article-tags">
+            {post.tags.map(tag => (
+              <span class="tag">#{tag}</span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* CTA */}
+      {post.ctaEnabled && (
+        <div class="container">
+          <BlogCTA
+            type={post.ctaType}
+            title={post.ctaTitle}
+            text={post.ctaText}
+            button={post.ctaButton}
+            url={post.ctaUrl}
+            lang={lang}
+          />
+        </div>
+      )}
+
+      {/* Posts relacionados */}
+      {relatedPosts.length > 0 && (
+        <div class="container">
+          <RelatedPosts posts={relatedPosts} lang={lang} />
+        </div>
+      )}
+    </article>
+  </main>
+</Layout>
+
+<style>
+  .blog-article {
+    --gold: #c9a227;
+    --dark: #0f172a;
+    --dark-medium: #1e293b;
+    --gray-400: #9ca3af;
+    --gray-200: #e5e7eb;
+    --white: #fff;
+    background: var(--white);
+    color: #1a1a1a;
+  }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+
+  .back-link {
+    display: inline-block;
+    padding: 1rem 0;
+    font-size: 0.85rem;
+    color: var(--gold);
+    text-decoration: none;
+  }
+  .back-link:hover { text-decoration: underline; }
+
+  .article-header {
+    padding: 1rem 0 2rem;
+  }
+  .article-category {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+  }
+  .article-header h1 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 1rem 0;
+    letter-spacing: -0.02em;
+  }
+  .article-meta {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--gray-400);
+    flex-wrap: wrap;
+  }
+
+  .translations {
+    margin-top: 0.75rem;
+    display: flex;
+    gap: 0.5rem;
+  }
+  .translation-link {
+    padding: 0.2rem 0.6rem;
+    border: 1px solid var(--gray-200);
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--gray-400);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .translation-link:hover { color: var(--gold); border-color: var(--gold); }
+
+  .featured-image {
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+  .featured-image img { width: 100%; height: auto; display: block; }
+
+  .article-layout {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .article-sidebar {
+    position: sticky;
+    top: 90px;
+    align-self: start;
+  }
+
+  /* Estilos prose para el contenido Markdown */
+  .prose :global(h2) { font-size: 1.5rem; font-weight: 600; margin: 2rem 0 1rem; }
+  .prose :global(h3) { font-size: 1.2rem; font-weight: 600; margin: 1.5rem 0 0.75rem; }
+  .prose :global(p) { margin: 0 0 1rem; line-height: 1.7; }
+  .prose :global(ul), .prose :global(ol) { margin: 0 0 1rem; padding-left: 1.5rem; }
+  .prose :global(li) { margin-bottom: 0.4rem; line-height: 1.6; }
+  .prose :global(a) { color: var(--gold); text-decoration: underline; }
+  .prose :global(blockquote) {
+    border-left: 3px solid var(--gold);
+    padding-left: 1rem;
+    margin: 1.5rem 0;
+    color: #555;
+    font-style: italic;
+  }
+  .prose :global(code) { background: #f3f4f6; padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.85rem; }
+  .prose :global(pre) { background: var(--dark); color: #e2e8f0; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0; }
+  .prose :global(img) { max-width: 100%; border-radius: 8px; margin: 1rem 0; }
+
+  .article-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    padding: 1rem 0 2rem;
+    border-top: 1px solid var(--gray-200);
+  }
+  .tag {
+    font-size: 0.75rem;
+    color: var(--gold);
+    background: rgba(201,162,39,0.08);
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+  }
+
+  @media (max-width: 768px) {
+    .article-layout { grid-template-columns: 1fr; }
+    .article-sidebar { display: none; }
+    .article-header h1 { font-size: 1.75rem; }
+  }
+</style>

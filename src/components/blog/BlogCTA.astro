@@ -1,0 +1,118 @@
+---
+/**
+ * Blog CTA - Call to Action dentro de artículos
+ * src/components/blog/BlogCTA.astro
+ * 
+ * Sin cambios funcionales respecto a la versión WordPress.
+ * Solo recibe props directamente (antes venían de ACF).
+ */
+
+import { getPageUrl, type Lang } from '@/config/pages';
+
+interface Props {
+  type: string;
+  title?: string | null;
+  text?: string | null;
+  button?: string | null;
+  url?: string | null;
+  lang: Lang;
+}
+
+const { type, title, text, button, url, lang } = Astro.props;
+
+// Defaults por tipo de CTA
+const defaults: Record<string, Record<string, Record<string, string>>> = {
+  demo: {
+    es: { title: '¿Quieres ver RayGold en acción?', text: 'Solicita una demostración personalizada.', button: 'Solicitar Demo' },
+    en: { title: 'Want to see RayGold in action?', text: 'Request a personalized demo.', button: 'Request Demo' },
+    fr: { title: 'Vous voulez voir RayGold en action?', text: 'Demandez une démonstration personnalisée.', button: 'Demander une démo' },
+    ca: { title: 'Vols veure RayGold en acció?', text: 'Sol·licita una demostració personalitzada.', button: 'Sol·licitar Demo' },
+    'pt-br': { title: 'Quer ver o RayGold em ação?', text: 'Solicite uma demonstração personalizada.', button: 'Solicitar Demo' },
+  },
+  contacto: {
+    es: { title: '¿Tienes dudas?', text: 'Nuestro equipo puede ayudarte.', button: 'Contactar' },
+    en: { title: 'Have questions?', text: 'Our team can help you.', button: 'Contact Us' },
+    fr: { title: 'Des questions?', text: 'Notre équipe peut vous aider.', button: 'Contactez-nous' },
+    ca: { title: 'Tens dubtes?', text: 'El nostre equip pot ajudar-te.', button: 'Contactar' },
+    'pt-br': { title: 'Tem dúvidas?', text: 'Nossa equipe pode ajudá-lo.', button: 'Contato' },
+  },
+  whatsapp: {
+    es: { title: '¿Prefieres hablar directamente?', text: 'Escríbenos por WhatsApp.', button: 'Abrir WhatsApp' },
+    en: { title: 'Prefer to talk directly?', text: 'Write us on WhatsApp.', button: 'Open WhatsApp' },
+    fr: { title: 'Vous préférez parler directement?', text: 'Écrivez-nous sur WhatsApp.', button: 'Ouvrir WhatsApp' },
+    ca: { title: 'Prefereixes parlar directament?', text: "Escriu-nos per WhatsApp.", button: 'Obrir WhatsApp' },
+    'pt-br': { title: 'Prefere falar diretamente?', text: 'Escreva-nos no WhatsApp.', button: 'Abrir WhatsApp' },
+  },
+};
+
+const d = defaults[type]?.[lang] || defaults['demo']?.[lang] || defaults['demo']['es'];
+
+const finalTitle = title || d.title;
+const finalText = text || d.text;
+const finalButton = button || d.button;
+
+// URL del CTA
+let ctaUrl = url;
+if (!ctaUrl) {
+  switch (type) {
+    case 'demo':
+    case 'contacto':
+      ctaUrl = getPageUrl('contacto', lang);
+      break;
+    case 'whatsapp':
+      ctaUrl = 'https://wa.me/34600000000'; // Reemplazar con tu número
+      break;
+    default:
+      ctaUrl = getPageUrl('contacto', lang);
+  }
+}
+
+const isExternal = ctaUrl?.startsWith('http');
+---
+
+<div class="blog-cta">
+  <div class="cta-content">
+    <h3>{finalTitle}</h3>
+    <p>{finalText}</p>
+  </div>
+  <a 
+    href={ctaUrl} 
+    class="cta-button"
+    {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+  >
+    {finalButton}
+  </a>
+</div>
+
+<style>
+  .blog-cta {
+    margin: 2rem 0;
+    padding: 2rem;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .cta-content h3 { color: #fff; font-size: 1.2rem; margin: 0 0 0.5rem 0; }
+  .cta-content p { color: #9ca3af; font-size: 0.9rem; margin: 0; }
+
+  .cta-button {
+    padding: 0.7rem 1.5rem;
+    background: #c9a227;
+    color: #0f172a;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.2s;
+  }
+  .cta-button:hover { background: #a8861e; }
+
+  @media (max-width: 640px) {
+    .blog-cta { flex-direction: column; text-align: center; }
+  }
+</style>
