@@ -54,6 +54,10 @@
         "title": "Històrics",
         "description": "Accés complet a l'historial d'operacions, moviments i traçabilitat de peces."
       },
+       "inventario": {
+        "title": "Inventaris",
+        "description": "Gestió de recursos, stocks, moviments y distribucions"
+      },
       "estadisticas": {
         "title": "Estadístiques",
         "description": "Anàlisi de dades, informes personalitzats i dashboards per a presa de decisions."

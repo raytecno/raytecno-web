@@ -8,6 +8,7 @@ import ComercialPage from "../../../templates/modulos/ComercialPage.astro";
 import FabricacionPage from "../../../templates/modulos/FabricacionPage.astro";
 import FinanzasPage from "../../../templates/modulos/FinanzasPage.astro";
 import HistoricosPage from "../../../templates/modulos/HistoricosPage.astro";
+import InventarioPage from "../../../templates/modulos/InventarioPage.astro";
 import EstadisticasPage from "../../../templates/modulos/EstadisticasPage.astro";
 import VendedoresPage from "../../../templates/modulos/VendedoresPage.astro";
 import EcommercePage from "../../../templates/modulos/EcommercePage.astro";
@@ -60,6 +61,13 @@ export function getStaticPaths() {
       fr: "historique",
       ca: "historics",
       "pt-br": "historicos",
+    },
+     inventario: {
+      es: "inventarios",
+      en: "stocktaking",
+      fr: "stocks",
+      ca: "inventaris",
+      "pt-br": "estoques",
     },
     estadisticas: {
       es: "estadisticas",
@@ -133,6 +141,11 @@ const currentLang = (lang || "es") as Lang;
 {
   moduleKey === "historicos" && (
     <HistoricosPage lang={currentLang} pageId="historicos" />
+  )
+}
+{
+  moduleKey === "inventario" && (
+    <InventarioPage lang={currentLang} pageId="inventario" />
   )
 }
 {

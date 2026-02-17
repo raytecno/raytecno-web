@@ -71,6 +71,7 @@ export const moduloSlugs: Record<string, Record<Lang, string>> = {
   fabricacion: { es: 'fabricacion', en: 'manufacturing', fr: 'fabrication', ca: 'fabricacio', 'pt-br': 'fabricacao' },
   finanzas: { es: 'finanzas', en: 'finance', fr: 'finances', ca: 'finances', 'pt-br': 'financas' },
   historicos: { es: 'historicos', en: 'history', fr: 'historique', ca: 'historics', 'pt-br': 'historicos' },
+  inventarios: { es: 'inventarios', en: 'stocktaking', fr: 'stocks', ca: 'inventaris', 'pt-br': 'estoques' },
   estadisticas: { es: 'estadisticas', en: 'statistics', fr: 'statistiques', ca: 'estadistiques', 'pt-br': 'estatisticas' },
   vendedores: { es: 'vendedores', en: 'sales-reps', fr: 'vendeurs', ca: 'venedors', 'pt-br': 'vendedores' },
   ecommerce: { es: 'ecommerce', en: 'ecommerce', fr: 'ecommerce', ca: 'ecommerce', 'pt-br': 'ecommerce' },

@@ -304,6 +304,25 @@
        
       }
     },
+    "inventario": {
+      "title": "Inventarios",
+      "subtitle": "Gestión de diversos inventarios",
+      "metaTitle": "Inventarios | RayGold ERP - Trazabilidad",
+      "metaDescription": "Gestión de recursos, stocks, movimientos y distribuciones",
+      "sections": {
+        "distribucion": {
+          "name": "Distribuciones",
+          "description": "Gestión de distribuciones y almacenes",
+          "images": [
+            {
+              "title": "Principal",
+              "description": "Listado de distibucion"
+            },
+            { "title": "Generacion", "description": "Información completa" }
+          ]
+        } 
+      }
+    },
     "estadisticas": {
       "title": "Estadísticas",
       "subtitle": "Informes y cuadros de mando para decisiones",

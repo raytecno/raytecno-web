@@ -30,6 +30,7 @@ const moduloSlugs: Record<string, Record<Lang, string>> = {
   fabricacion: { es: 'fabricacion', en: 'manufacturing', fr: 'fabrication', ca: 'fabricacio', 'pt-br': 'fabricacao' },
   finanzas: { es: 'finanzas', en: 'finance', fr: 'finances', ca: 'finances', 'pt-br': 'financas' },
   historicos: { es: 'historicos', en: 'history', fr: 'historique', ca: 'historics', 'pt-br': 'historicos' },
+  inventario: { es: 'inventarios', en: 'stocktaking', fr: 'stocks', ca: 'inventaris', 'pt-br': 'estoques' },
   estadisticas: { es: 'estadisticas', en: 'statistics', fr: 'statistiques', ca: 'estadistiques', 'pt-br': 'estatisticas' },
   vendedores: { es: 'vendedores', en: 'sales-reps', fr: 'vendeurs', ca: 'venedors', 'pt-br': 'vendedores' },
   ecommerce: { es: 'ecommerce', en: 'ecommerce', fr: 'ecommerce', ca: 'ecommerce', 'pt-br': 'ecommerce' },
@@ -95,6 +96,17 @@ const modulos = [
   },
   {
     id: "historicos",
+    color: "#8b5cf6",
+    icono: `<svg viewBox="0 0 64 64" fill="none">
+      <rect x="8" y="12" width="48" height="40" rx="4" fill="currentColor" opacity="0.15"/>
+      <rect x="14" y="18" width="36" height="6" rx="2" fill="currentColor"/>
+      <circle cx="32" cy="38" r="12" fill="currentColor" opacity="0.3"/>
+      <path d="M32 30v8l6 4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+      <circle cx="32" cy="38" r="2" fill="currentColor"/>
+    </svg>`,
+  },
+   {
+    id: "inventario",
     color: "#8b5cf6",
     icono: `<svg viewBox="0 0 64 64" fill="none">
       <rect x="8" y="12" width="48" height="40" rx="4" fill="currentColor" opacity="0.15"/>
@@ -170,6 +182,7 @@ const modulosT: Record<
     fabricacion: { nombre: "Fabricación", descripcion: "Producción, inventarios y calidad" },
     finanzas: { nombre: "Finanzas", descripcion: "Contabilidad, tesorería e IVA" },
     historicos: { nombre: "Históricos", descripcion: "Datos históricos y tendencias" },
+    inventario: { nombre: "Inventarios", descripcion: "Gestión de diversos inventarios" },
     estadisticas: { nombre: "Estadísticas", descripcion: "Informes y cuadros de mando" },
     vendedores: { nombre: "Vendedores", descripcion: "Gestión de rutas y visitas" },
     ecommerce: { nombre: "Ecommerce", descripcion: "Tiendas online y marketplaces" },
@@ -181,6 +194,7 @@ const modulosT: Record<
     fabricacion: { nombre: "Manufacturing", descripcion: "Production, inventory and quality" },
     finanzas: { nombre: "Finance", descripcion: "Accounting, treasury and VAT" },
     historicos: { nombre: "History", descripcion: "Historical data and trends" },
+    inventario: { nombre: "Stocktaking", descripcion: "Management of various inventories" },
     estadisticas: { nombre: "Statistics", descripcion: "Reports and dashboards" },
     vendedores: { nombre: "Sales Reps", descripcion: "Route and visit management" },
     ecommerce: { nombre: "Ecommerce", descripcion: "Online stores and marketplaces" },
@@ -192,6 +206,7 @@ const modulosT: Record<
     fabricacion: { nombre: "Fabrication", descripcion: "Production, inventaires et qualité" },
     finanzas: { nombre: "Finances", descripcion: "Comptabilité, trésorerie et TVA" },
     historicos: { nombre: "Historique", descripcion: "Données historiques et tendances" },
+    inventario: { nombre: "Stocks", descripcion: "Gestion de divers stocks" },
     estadisticas: { nombre: "Statistiques", descripcion: "Rapports et tableaux de bord" },
     vendedores: { nombre: "Vendeurs", descripcion: "Gestion des routes et visites" },
     ecommerce: { nombre: "Ecommerce", descripcion: "Boutiques en ligne et marketplaces" },
@@ -203,6 +218,7 @@ const modulosT: Record<
     fabricacion: { nombre: "Fabricació", descripcion: "Producció, inventaris i qualitat" },
     finanzas: { nombre: "Finances", descripcion: "Comptabilitat, tresoreria i IVA" },
     historicos: { nombre: "Històrics", descripcion: "Dades històriques i tendències" },
+    inventario: { nombre: "Inventaris", descripcion: "Gestió de diversos inventaris" },
     estadisticas: { nombre: "Estadístiques", descripcion: "Informes i quadres de comandament" },
     vendedores: { nombre: "Venedors", descripcion: "Gestió de rutes i visites" },
     ecommerce: { nombre: "Ecommerce", descripcion: "Botigues online i marketplaces" },
@@ -214,6 +230,7 @@ const modulosT: Record<
     fabricacion: { nombre: "Fabricação", descripcion: "Produção, inventários e qualidade" },
     finanzas: { nombre: "Finanças", descripcion: "Contabilidade, tesouraria e IVA" },
     historicos: { nombre: "Históricos", descripcion: "Dados históricos e tendências" },
+    inventario: { nombre: "Estoques", descripcion: "Gestão de diversos estoques" },
     estadisticas: { nombre: "Estatísticas", descripcion: "Relatórios e painéis" },
     vendedores: { nombre: "Vendedores", descripcion: "Gestão de rotas e visitas" },
     ecommerce: { nombre: "Ecommerce", descripcion: "Lojas online e marketplaces" },

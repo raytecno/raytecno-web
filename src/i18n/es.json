@@ -54,6 +54,10 @@
         "title": "Históricos",
         "description": "Acceso completo al historial de operaciones, movimientos y trazabilidad de piezas."
       },
+       "inventario": {
+        "title": "Inventarios",
+        "description": "Gestión de recursos, stocks, movimientos y distribuciones"
+      },
       "estadisticas": {
         "title": "Estadísticas",
         "description": "Análisis de datos, informes personalizados y dashboards para toma de decisiones."
