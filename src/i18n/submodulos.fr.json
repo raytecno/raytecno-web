@@ -339,6 +339,22 @@
         }
       }
     },
+    "inventario": {
+  "title": "Inventaires",
+  "subtitle": "Gestion des inventaires et distributions",
+  "metaTitle": "Inventaires | RayGold ERP - Gestion des Stocks",
+  "metaDescription": "Gestion des ressources, stocks, mouvements et distributions pour bijouteries.",
+  "sections": {
+    "distribucion": {
+      "name": "Distributions",
+      "description": "Gestion des distributions et entrepôts",
+      "images": [
+        { "title": "Principal", "description": "Liste des distributions" },
+        { "title": "Génération", "description": "Information complète" }
+      ]
+    }
+  }
+},
     "estadisticas": {
       "title": "Statistiques",
       "subtitle": "Rapports et tableaux de bord pour décisions",

@@ -315,6 +315,22 @@
         }
       }
     },
+    "inventario": {
+  "title": "Inventários",
+  "subtitle": "Gestão de inventários e distribuições",
+  "metaTitle": "Inventários | RayGold ERP - Gestão de Estoques",
+  "metaDescription": "Gestão de recursos, estoques, movimentos e distribuições para joalherias.",
+  "sections": {
+    "distribucion": {
+      "name": "Distribuições",
+      "description": "Gestão de distribuições e armazéns",
+      "images": [
+        { "title": "Principal", "description": "Lista de distribuições" },
+        { "title": "Geração", "description": "Informação completa" }
+      ]
+    }
+  }
+},
     "estadisticas": {
       "title": "Estatísticas",
       "subtitle": "Relatórios e painéis para decisões",

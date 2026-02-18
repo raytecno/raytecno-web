@@ -303,6 +303,22 @@
         }
       }
     },
+    "inventario": {
+  "title": "Inventaris",
+  "subtitle": "Gestió d'inventaris i distribucions",
+  "metaTitle": "Inventaris | RayGold ERP - Gestió d'Estocs",
+  "metaDescription": "Gestió de recursos, estocs, moviments i distribucions per a joieries.",
+  "sections": {
+    "distribucion": {
+      "name": "Distribucions",
+      "description": "Gestió de distribucions i magatzems",
+      "images": [
+        { "title": "Principal", "description": "Llistat de distribucions" },
+        { "title": "Generació", "description": "Informació completa" }
+      ]
+    }
+  }
+},
     "estadisticas": {
       "title": "Estadístiques",
       "subtitle": "Informes i quadres de comandament per a decisions",
