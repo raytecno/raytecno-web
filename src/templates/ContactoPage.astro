@@ -1447,7 +1447,7 @@ const API_BASE_URL = "https://raygoldapi-c3ckbgc6b5g5bvds.spaincentral-01.azurew
           const data = await response.json();
           localStorage.setItem("access_token", data.access_token);
           localStorage.setItem("user", JSON.stringify(data.user));
-          window.location.href = "/demo";
+          window.location.href = "https://raygoldapp.azurewebsites.net?token=" + data.access_token;
         } catch (error) {
           showError("loginError", error.message || "Error al iniciar sesión");
         } finally {
