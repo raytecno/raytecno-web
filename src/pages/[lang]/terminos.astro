@@ -2,9 +2,10 @@
 /**
  * Página de Términos y Condiciones
  * NOINDEX - Esta página no debe aparecer en buscadores
+ * CORREGIDO: Añadido alternateUrls para hreflang
  */
 import Layout from "@/layouts/Layout.astro";
-import { type Lang } from "@/config/pages";
+import { type Lang, getLegalAlternateUrls } from "@/config/pages";
 
 export function getStaticPaths() {
   return [
@@ -18,6 +19,9 @@ export function getStaticPaths() {
 
 const { lang } = Astro.params as { lang: Lang };
 
+// Generar URLs alternativas para hreflang
+const alternateUrls = getLegalAlternateUrls("terminos");
+
 const content = {
   es: {
     title: "Términos y Condiciones",
@@ -26,94 +30,90 @@ const content = {
     sections: [
       {
         title: "1. Identificación",
-        text: `Raytecno BCN SL\nMontgat, Barcelona, España\nEmail: info@raytecno.es\n\nAl utilizar nuestros servicios, aceptas estos términos en su totalidad.`
+        text: `Raytecno BCN SL, con domicilio en Montgat, Barcelona, España.\nCIF: BXXXXXXXX\nEmail: info@raytecno.es`
       },
       {
-        title: "2. Descripción del servicio",
-        text: `RayGold es un software ERP especializado para el sector joyero:\n\n• Gestión de inventario de piezas y materiales preciosos\n• Control de fabricación y órdenes de trabajo\n• Gestión comercial: pedidos, albaranes, facturas\n• Contabilidad y finanzas\n• Trazabilidad de metales preciosos\n• Libro de policía digital\n• Gestión multitienda`
+        title: "2. Objeto",
+        text: `Estos términos regulan el uso del software RayGold ERP, una solución de gestión empresarial especializada para el sector joyero.`
       },
       {
         title: "3. Licencia de uso",
-        text: `Se te concede una licencia no exclusiva y no transferible para:\n\n• Instalar y usar el software en los puestos contratados\n• Acceder a actualizaciones incluidas en tu plan\n• Recibir soporte técnico según tu contrato\n\nQueda prohibido copiar, modificar, distribuir o realizar ingeniería inversa del software.`
+        text: `Se concede una licencia no exclusiva, intransferible y revocable para usar el software según el plan contratado. Queda prohibida la reproducción, distribución o modificación del software.`
       },
       {
         title: "4. Obligaciones del usuario",
-        text: `• Proporcionar información veraz\n• Mantener la confidencialidad de tus credenciales\n• Realizar copias de seguridad periódicas\n• Cumplir con la normativa del sector joyero\n• No utilizar el software para actividades ilegales`
+        text: `• Proporcionar información veraz\n• Mantener la confidencialidad de las credenciales\n• No usar el software para fines ilegales\n• Cumplir con la normativa del sector joyero`
       },
       {
-        title: "5. Propiedad intelectual",
-        text: `RayGold es propiedad exclusiva de Raytecno BCN SL. Los datos introducidos en el sistema son propiedad del cliente.`
+        title: "5. Precios y pagos",
+        text: `Los precios son los indicados en nuestra web. El pago es mensual anticipado. El impago puede resultar en la suspensión del servicio.`
       },
       {
-        title: "6. Precios y pagos",
-        text: `• Los precios vigentes se publican en raytecno.es/precios\n• Los precios no incluyen IVA salvo indicación expresa\n• En caso de impago, se podrá suspender el acceso al software`
+        title: "6. Soporte técnico",
+        text: `Incluido en todos los planes. Horario: Lunes a Viernes, 9:00-18:00 (CET). Tiempo de respuesta máximo: 4 horas laborables.`
       },
       {
         title: "7. Limitación de responsabilidad",
-        text: `Raytecno BCN SL no será responsable de pérdidas de datos por uso indebido, interrupciones por causas ajenas, ni daños indirectos. El software se proporciona "tal cual".`
+        text: `RayGold no será responsable de daños indirectos. La responsabilidad máxima se limita al importe pagado en los últimos 12 meses.`
       },
       {
         title: "8. Legislación aplicable",
-        text: `Estos términos se rigen por la legislación española. Las partes se someten a los Juzgados de Barcelona.`
+        text: `Estos términos se rigen por la legislación española. Para cualquier controversia, las partes se someten a los juzgados de Barcelona.`
       }
     ]
   },
   en: {
     title: "Terms and Conditions",
-    metaDescription: "Terms and conditions of use for RayGold - ERP Software for jewelry.",
+    metaDescription: "RayGold Terms and Conditions - ERP Software for jewelry.",
     lastUpdate: "Last updated: January 2025",
     sections: [
       {
         title: "1. Identification",
-        text: `Raytecno BCN SL\nMontgat, Barcelona, Spain\nEmail: info@raytecno.es\n\nBy using our services, you accept these terms in full.`
+        text: `Raytecno BCN SL, located in Montgat, Barcelona, Spain.\nEmail: info@raytecno.es`
       },
       {
-        title: "2. Service Description",
-        text: `RayGold is an ERP software specialized for the jewelry sector:\n\n• Inventory management for pieces and precious materials\n• Manufacturing control and work orders\n• Commercial management: orders, invoices\n• Accounting and finance\n• Precious metals traceability\n• Digital police registry\n• Multi-store management`
+        title: "2. Purpose",
+        text: `These terms govern the use of RayGold ERP software, a business management solution specialized for the jewelry sector.`
       },
       {
         title: "3. License",
-        text: `You are granted a non-exclusive, non-transferable license to:\n\n• Install and use the software on contracted workstations\n• Access updates included in your plan\n• Receive technical support per your contract\n\nCopying, modifying, distributing, or reverse engineering is prohibited.`
+        text: `A non-exclusive, non-transferable, revocable license is granted to use the software according to the contracted plan.`
       },
       {
-        title: "4. User Obligations",
-        text: `• Provide accurate information\n• Maintain credential confidentiality\n• Perform regular backups\n• Comply with jewelry sector regulations\n• Not use the software for illegal activities`
+        title: "4. User obligations",
+        text: `• Provide accurate information\n• Maintain credential confidentiality\n• Not use the software for illegal purposes\n• Comply with jewelry sector regulations`
       },
       {
-        title: "5. Limitation of Liability",
-        text: `Raytecno BCN SL shall not be liable for data loss due to improper use, service interruptions beyond our control, or indirect damages. The software is provided "as is".`
-      },
-      {
-        title: "6. Applicable Law",
-        text: `These terms are governed by Spanish law. The parties submit to the Courts of Barcelona.`
+        title: "5. Applicable law",
+        text: `These terms are governed by Spanish law. For any dispute, the parties submit to the courts of Barcelona.`
       }
     ]
   },
   fr: {
     title: "Conditions Générales",
-    metaDescription: "Conditions générales d'utilisation de RayGold.",
+    metaDescription: "Conditions générales de RayGold.",
     lastUpdate: "Dernière mise à jour: Janvier 2025",
     sections: [
-      { title: "1. Identification", text: `Raytecno BCN SL, Montgat, Barcelone, Espagne.\nContact: info@raytecno.es` },
-      { title: "2. Loi applicable", text: `Ces conditions sont régies par la loi espagnole.` }
+      { title: "1. Identification", text: `Raytecno BCN SL, Montgat, Barcelone, Espagne.\nEmail: info@raytecno.es` },
+      { title: "2. Objet", text: `Ces conditions régissent l'utilisation du logiciel RayGold ERP.` }
     ]
   },
   ca: {
     title: "Termes i Condicions",
-    metaDescription: "Termes i condicions d'ús de RayGold.",
+    metaDescription: "Termes i condicions de RayGold.",
     lastUpdate: "Última actualització: Gener 2025",
     sections: [
-      { title: "1. Identificació", text: `Raytecno BCN SL, Montgat, Barcelona, Espanya.\nContacte: info@raytecno.es` },
-      { title: "2. Legislació aplicable", text: `Aquests termes es regeixen per la legislació espanyola.` }
+      { title: "1. Identificació", text: `Raytecno BCN SL, Montgat, Barcelona, Espanya.\nEmail: info@raytecno.es` },
+      { title: "2. Objecte", text: `Aquests termes regulen l'ús del programari RayGold ERP.` }
     ]
   },
   "pt-br": {
     title: "Termos e Condições",
-    metaDescription: "Termos e condições de uso do RayGold.",
+    metaDescription: "Termos e condições do RayGold.",
     lastUpdate: "Última atualização: Janeiro 2025",
     sections: [
-      { title: "1. Identificação", text: `Raytecno BCN SL, Montgat, Barcelona, Espanha.\nContato: info@raytecno.es` },
-      { title: "2. Lei aplicável", text: `Estes termos são regidos pela legislação espanhola.` }
+      { title: "1. Identificação", text: `Raytecno BCN SL, Montgat, Barcelona, Espanha.\nEmail: info@raytecno.es` },
+      { title: "2. Objeto", text: `Estes termos regulam o uso do software RayGold ERP.` }
     ]
   }
 };
@@ -121,7 +121,13 @@ const content = {
 const c = content[lang] || content.es;
 ---
 
-<Layout title={c.title} description={c.metaDescription} lang={lang} noindex={true}>
+<Layout 
+  title={c.title} 
+  description={c.metaDescription} 
+  lang={lang} 
+  noindex={true}
+  alternateUrls={alternateUrls}
+>
   <main class="legal-page">
     <div class="legal-container">
       <h1>{c.title}</h1>
@@ -181,9 +187,6 @@ const c = content[lang] || content.es;
     line-height: 1.8;
   }
 
-  /* ============================================
-     MÓVIL: Tema blanco
-     ============================================ */
   @media (max-width: 768px) {
     .legal-page {
       padding: 100px 20px 60px;

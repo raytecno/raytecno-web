@@ -2,9 +2,10 @@
 /**
  * Página de Política de Privacidad
  * NOINDEX - Esta página no debe aparecer en buscadores
+ * CORREGIDO: Añadido alternateUrls para hreflang
  */
 import Layout from "@/layouts/Layout.astro";
-import { type Lang } from "@/config/pages";
+import { type Lang, getLegalAlternateUrls } from "@/config/pages";
 
 export function getStaticPaths() {
   return [
@@ -17,6 +18,9 @@ export function getStaticPaths() {
 }
 
 const { lang } = Astro.params as { lang: Lang };
+
+// Generar URLs alternativas para hreflang
+const alternateUrls = getLegalAlternateUrls("privacidad");
 
 const content = {
   es: {
@@ -113,7 +117,13 @@ const content = {
 const c = content[lang] || content.es;
 ---
 
-<Layout title={c.title} description={c.metaDescription} lang={lang} noindex={true}>
+<Layout 
+  title={c.title} 
+  description={c.metaDescription} 
+  lang={lang} 
+  noindex={true}
+  alternateUrls={alternateUrls}
+>
   <main class="legal-page">
     <div class="legal-container">
       <h1>{c.title}</h1>
@@ -173,9 +183,6 @@ const c = content[lang] || content.es;
     line-height: 1.8;
   }
 
-  /* ============================================
-     MÓVIL: Tema blanco
-     ============================================ */
   @media (max-width: 768px) {
     .legal-page {
       padding: 100px 20px 60px;
