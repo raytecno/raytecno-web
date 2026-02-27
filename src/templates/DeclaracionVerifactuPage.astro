@@ -2,10 +2,12 @@
 /**
  * Página de Declaración Responsable VERI*FACTU
  * src/templates/DeclaracionVerifactuPage.astro
+ * 
+ * CORREGIDO: El CTA ahora usa getPageUrl('contacto', lang) en vez de hardcodear /contacto
  */
 
 import Layout from "@/layouts/Layout.astro";
-import { type Lang, supportedLangs, getLegalUrl } from "@/config/pages";
+import { type Lang, supportedLangs, getLegalUrl, getPageUrl } from "@/config/pages";
 
 interface Props {
   lang: Lang;
@@ -315,6 +317,9 @@ const alternateUrls = supportedLangs.map((l) => ({
 // URL del PDF (subir a Azure Storage)
 const pdfUrl =
   "https://raygoldstorage.blob.core.windows.net/web/DECLARACION_RESPONSABLE_VERIFACTU_RAYGOLD.pdf";
+
+// URL de contacto traducida
+const contactUrl = getPageUrl('contacto', lang);
 ---
 
 <Layout
@@ -788,11 +793,11 @@ const pdfUrl =
           </div>
         </div>
 
-        <!-- CTA -->
+        <!-- CTA - CORREGIDO: usa contactUrl en vez de hardcodear /contacto -->
         <div class="cta-section">
           <h2>{t.cta.title}</h2>
           <p>{t.cta.description}</p>
-          <a href={`/${lang}/contacto`} class="cta-btn">{t.cta.button}</a>
+          <a href={contactUrl} class="cta-btn">{t.cta.button}</a>
         </div>
       </div>
     </section>
@@ -1340,16 +1345,8 @@ const pdfUrl =
     box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
   }
 
-  /* Responsive */
-
-  /* ============================================
-   REEMPLAZA el @media (max-width: 768px) existente 
-   en DeclaracionVerifactuPage.astro con este bloque:
-   ============================================ */
-
   /* Responsive - MÓVIL TEMA BLANCO */
   @media (max-width: 768px) {
-    /* Variables para tema claro */
     :root {
       --bg-dark: #ffffff;
       --bg-card: rgba(0, 0, 0, 0.02);
