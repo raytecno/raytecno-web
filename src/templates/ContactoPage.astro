@@ -3,9 +3,11 @@
  * Template: Contacto
  * Página de contacto con formulario y login demo
  * Con soporte multiidioma
+ * 
+ * CORREGIDO: El link a términos ahora usa getLegalUrl('terminos', lang) en vez de /legal
  */
 import Layout from "@/layouts/Layout.astro";
-import { getAlternateUrls, getPageUrl, type Lang } from "@/config/pages";
+import { getAlternateUrls, getPageUrl, getLegalUrl, type Lang } from "@/config/pages";
 
 interface Props {
   lang: Lang;
@@ -13,6 +15,9 @@ interface Props {
 
 const { lang } = Astro.props;
 const alternateUrls = getAlternateUrls("contacto");
+
+// URL de términos traducida según idioma
+const termsUrl = getLegalUrl('terminos', lang);
 
 // Traducciones de contacto
 const contactT: Record<
@@ -686,7 +691,7 @@ const API_BASE_URL = "https://raygoldapi-c3ckbgc6b5g5bvds.spaincentral-01.azurew
               </button>
             </form>
 
-            <!-- Register Form -->
+            <!-- Register Form - CORREGIDO: usa termsUrl en vez de /legal -->
             <form id="registerForm" class="auth-form">
               <div class="form-row">
                 <div class="form-group">
@@ -725,7 +730,7 @@ const API_BASE_URL = "https://raygoldapi-c3ckbgc6b5g5bvds.spaincentral-01.azurew
                 <input type="checkbox" id="regTerms" name="terms" required />
                 <label for="regTerms"
                   >{t.register.terms}
-                  <a href="/legal">{t.register.termsLink}</a></label
+                  <a href={termsUrl}>{t.register.termsLink}</a></label
                 >
               </div>
               <div id="registerError" class="error-message"></div>
@@ -846,13 +851,6 @@ const API_BASE_URL = "https://raygoldapi-c3ckbgc6b5g5bvds.spaincentral-01.azurew
     margin-bottom: 24px;
   }
 
-  /* .contacto-hero h1 {
-    font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: 800;
-    color: var(--text-primary);
-    margin: 0 0 16px 0;
-    line-height: 1.1;
-  } */
   .contacto-hero h1 {
     font-size: 2.5rem;
     font-weight: 700;
