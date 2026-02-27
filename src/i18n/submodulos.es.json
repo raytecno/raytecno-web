@@ -320,6 +320,17 @@
             },
             { "title": "Generacion", "description": "Información completa" }
           ]
+        },
+        "stocks": {
+          "name": "Stocks",
+          "description": "Control total de stocks",
+          "images": [
+            {
+              "title": "Principal",
+              "description": "Listado de distibucion"
+            },
+            { "title": "Cuentas corrientes", "description": "" }
+          ]
         } 
       }
     },
