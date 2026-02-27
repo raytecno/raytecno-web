@@ -1,6 +1,12 @@
 /**
  * Configuración de páginas y rutas multiidioma
  * src/config/pages.ts
+ * 
+ * CORRECCIÓN (Febrero 2026):
+ * - getLegalUrl() ahora genera URLs SIN carpeta /legal/ 
+ *   para páginas que están en la raíz de [lang]/
+ *   Ejemplo: /es/privacidad en vez de /es/legal/privacidad
+ * - Las páginas de VERI*FACTU sí usan /legal/ porque están en esa carpeta
  */
 
 export type Lang = 'es' | 'en' | 'fr' | 'ca' | 'pt-br';
@@ -79,10 +85,10 @@ export const moduloSlugs: Record<string, Record<Lang, string>> = {
 };
 
 // ============================================
-// SECCIÓN LEGAL - NUEVO
+// SECCIÓN LEGAL - CORREGIDO
 // ============================================
 
-// Slugs de la carpeta legal por idioma
+// Slugs de la carpeta legal por idioma (solo para páginas dentro de /legal/)
 export const legalFolderSlugs: Record<Lang, string> = {
   es: 'legal',
   en: 'legal',
@@ -92,7 +98,9 @@ export const legalFolderSlugs: Record<Lang, string> = {
 };
 
 // Slugs de cada página legal por idioma
+// NOTA: privacidad, terminos, cookies están EN LA RAÍZ de [lang]/, no en /legal/
 export const legalSlugs: Record<string, Record<Lang, string>> = {
+  // VERI*FACTU sí está en /legal/
   verifactu: { 
     es: 'declaracion-verifactu', 
     en: 'verifactu-declaration', 
@@ -100,6 +108,7 @@ export const legalSlugs: Record<string, Record<Lang, string>> = {
     ca: 'declaracio-verifactu', 
     'pt-br': 'declaracao-verifactu' 
   },
+  // Estas páginas están en la RAÍZ de [lang]/, NO en /legal/
   privacidad: { 
     es: 'privacidad', 
     en: 'privacy', 
@@ -123,19 +132,34 @@ export const legalSlugs: Record<string, Record<Lang, string>> = {
   },
 };
 
+// Páginas legales que SÍ usan la carpeta /legal/
+const legalPagesInFolder = ['verifactu'];
+
 /**
  * Obtiene la URL de una página legal específica
- * Ejemplo: getLegalUrl('verifactu', 'es') → '/es/legal/declaracion-verifactu'
+ * 
+ * CORREGIDO: Solo VERI*FACTU usa /legal/, las demás están en la raíz
+ * 
+ * Ejemplos:
+ * - getLegalUrl('verifactu', 'es')   → '/es/legal/declaracion-verifactu'
+ * - getLegalUrl('privacidad', 'es')  → '/es/privacidad'
+ * - getLegalUrl('cookies', 'en')     → '/en/cookies'
  */
 export function getLegalUrl(legalKey: string, lang: Lang): string {
-  const folderSlug = legalFolderSlugs[lang];
   const legalSlug = legalSlugs[legalKey]?.[lang];
   
-  if (!folderSlug || !legalSlug) {
-    return `/${lang}/`;
+  if (!legalSlug) {
+    return `/${lang}`;
   }
   
-  return `/${lang}/${folderSlug}/${legalSlug}`;
+  // Solo VERI*FACTU usa la carpeta /legal/
+  if (legalPagesInFolder.includes(legalKey)) {
+    const folderSlug = legalFolderSlugs[lang];
+    return `/${lang}/${folderSlug}/${legalSlug}`;
+  }
+  
+  // Las demás páginas legales están en la raíz de [lang]/
+  return `/${lang}/${legalSlug}`;
 }
 
 /**
@@ -157,10 +181,10 @@ export function getLegalAlternateUrls(legalKey: string): { lang: Lang; url: stri
  */
 export function getPageUrl(pageKey: string, lang: Lang): string {
   const slugs = pageSlugs[pageKey];
-  if (!slugs) return `/${lang}/`;
+  if (!slugs) return `/${lang}`;
   
   const slug = slugs[lang];
-  if (!slug) return `/${lang}/`;
+  if (!slug) return `/${lang}`;
   
   return `/${lang}/${slug}`;
 }
@@ -173,7 +197,7 @@ export function getModuloUrl(moduloKey: string, lang: Lang): string {
   const moduloSlug = moduloSlugs[moduloKey]?.[lang];
   
   if (!folderSlug || !moduloSlug) {
-    return `/${lang}/`;
+    return `/${lang}`;
   }
   
   return `/${lang}/${folderSlug}/${moduloSlug}`;
@@ -187,7 +211,7 @@ export function getToolUrl(toolKey: string, lang: Lang): string {
   const toolSlug = toolSlugs[toolKey]?.[lang];
   
   if (!folderSlug || !toolSlug) {
-    return `/${lang}/`;
+    return `/${lang}`;
   }
   
   return `/${lang}/${folderSlug}/${toolSlug}`;
