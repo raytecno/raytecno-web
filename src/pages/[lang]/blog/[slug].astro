@@ -7,6 +7,9 @@
  * - Usa getAllBlogSlugs() para getStaticPaths
  * - Usa render() de Content Collections para el HTML del Markdown
  * - Ya NO depende de GraphQL ni WordPress
+ * 
+ * CORRECCIÓN SEO (Febrero 2026):
+ * - URLs del Schema.org con www. (raytecno.es → www.raytecno.es)
  */
 
 import type { GetStaticPaths } from 'astro';
@@ -77,7 +80,7 @@ function formatDate(dateStr: string): string {
   );
 }
 
-// Schema.org Article
+// Schema.org Article - CORREGIDO: URLs con www.
 const schemaArticle = {
   "@context": "https://schema.org",
   "@type": "Article",
@@ -95,12 +98,12 @@ const schemaArticle = {
     "name": "Raytecno BCN SL",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://raytecno.es/images/raygold-logo.png"
+      "url": "https://www.raytecno.es/images/raygold-logo.png"
     }
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": `https://raytecno.es/${lang}/blog/${slug}`
+    "@id": `https://www.raytecno.es/${lang}/blog/${slug}`
   }
 };
 ---

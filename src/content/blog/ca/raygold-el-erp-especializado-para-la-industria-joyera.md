@@ -6,7 +6,7 @@ featuredImage: "https://raygoldstorage.blob.core.windows.net/web/blog/raygold-er
 draft: false
 
 # Idioma y traducción
-language: es
+language: ca
 translationGroup: "raygold-erp-001"
 
 # SEO
