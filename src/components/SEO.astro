@@ -6,8 +6,7 @@
  * - Canonical URLs SIN trailing slash (Azure SWA elimina la /)
  * - Hreflang URLs SIN trailing slash (coherente con canonicals)
  * - x-default apunta a la versión INGLESA de la página actual
- * - Páginas noindex NO generan hreflang
- * - Páginas noindex NO aparecen en hreflang de otras páginas
+ * - CORREGIDO: Canonical usa alternateUrls[lang] cuando Astro.url falla en build estático
  * 
  * Incluye:
  * - Meta tags básicos
@@ -167,15 +166,50 @@ const config = LANG_CONFIG[lang] || LANG_CONFIG.es;
 const siteDomain = COMPANY.primaryDomain;
 
 // ============================================
-// URL CANONICAL - SIN trailing slash
-// Azure Static Web Apps elimina el trailing slash,
-// así que la canonical debe coincidir con la URL real.
+// FUNCIÓN HELPER: Eliminar trailing slash
 // ============================================
-let currentPath = Astro.url.pathname;
-// Eliminar trailing slash (excepto la raíz "/")
-if (currentPath.length > 1 && currentPath.endsWith('/')) {
-  currentPath = currentPath.slice(0, -1);
+function removeTrailingSlash(url: string): string {
+  if (url === '/' || url.endsWith('://')) return url;
+  return url.endsWith('/') ? url.slice(0, -1) : url;
 }
+
+// ============================================
+// URL CANONICAL - CORREGIDO para build estático
+// 
+// Problema: Astro.url.pathname en build estático a veces
+// devuelve "/" en vez del path real para rutas dinámicas [lang].
+// 
+// Solución: Usar alternateUrls[lang].url como fuente de verdad
+// cuando está disponible, ya que se calcula correctamente
+// en cada página.
+// ============================================
+function getCanonicalPath(): string {
+  // 1. Intentar obtener el path desde alternateUrls (más confiable)
+  const currentLangAlt = alternateUrls.find(alt => alt.lang === lang);
+  if (currentLangAlt?.url) {
+    // Si es URL absoluta, extraer el path
+    if (currentLangAlt.url.startsWith('http')) {
+      try {
+        const urlObj = new URL(currentLangAlt.url);
+        return removeTrailingSlash(urlObj.pathname);
+      } catch {
+        // Si falla el parse, usar tal cual
+        return removeTrailingSlash(currentLangAlt.url);
+      }
+    }
+    // Si es path relativo, usarlo directamente
+    return removeTrailingSlash(currentLangAlt.url);
+  }
+  
+  // 2. Fallback: usar Astro.url.pathname
+  let path = Astro.url.pathname;
+  if (path.length > 1 && path.endsWith('/')) {
+    path = path.slice(0, -1);
+  }
+  return path;
+}
+
+const currentPath = getCanonicalPath();
 const canonicalUrl = `${siteDomain}${currentPath}`;
 
 // Título
@@ -196,14 +230,6 @@ const ogImage = image
 const logoUrl = `${siteDomain}${COMPANY.logo}`;
 
 // ============================================
-// FUNCIÓN HELPER: Eliminar trailing slash
-// ============================================
-function removeTrailingSlash(url: string): string {
-  if (url === '/' || url.endsWith('://')) return url;
-  return url.endsWith('/') ? url.slice(0, -1) : url;
-}
-
-// ============================================
 // FUNCIÓN HELPER: Normalizar URL para hreflang
 // Construye URL absoluta SIN trailing slash
 // ============================================
@@ -219,8 +245,9 @@ function buildHreflangUrl(altUrl: string): string {
 
 // ============================================
 // FILTRAR ALTERNATE URLS
-// Excluir de hreflang las páginas con noindex
-// (cookies, privacidad, terminos)
+// Las páginas noindex NO generan hreflang
+// Esto evita "Canonical no indexable" porque Google
+// no seguirá hreflang hacia páginas que no indexa
 // ============================================
 const indexableAlternateUrls = noindex ? [] : alternateUrls;
 
@@ -378,14 +405,13 @@ const schemaBreadcrumb = {
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 )}
 
-<!-- Canonical - SIN trailing slash (Azure SWA lo elimina) -->
+<!-- Canonical - Usa el path calculado correctamente -->
 <link rel="canonical" href={canonicalUrl} />
 
 <!-- ========================================
      HREFLANG (Multiidioma)
      - URLs SIN trailing slash (coherente con canonicals)
      - Solo se generan si la página NO tiene noindex
-     - Esto evita "Canonical no indexable" en Screaming Frog
      ======================================== -->
 {indexableAlternateUrls.map((alt) => (
   <link 
@@ -395,12 +421,7 @@ const schemaBreadcrumb = {
   />
 ))}
 
-<!-- 
-  x-default: Apunta a la versión INGLESA de la página actual
-  - Si estamos en /es/precios → x-default = /en/pricing
-  - Si estamos en /es/modulos → x-default = /en/modules
-  - Solo se genera si hay alternateUrls y la página es indexable
--->
+<!-- x-default: Solo para páginas indexables con alternateUrls -->
 {indexableAlternateUrls.length > 0 && (
   <link 
     rel="alternate" 
