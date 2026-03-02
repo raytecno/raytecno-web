@@ -1,0 +1,247 @@
+---
+/**
+ * Página de Términos y Condiciones
+ * src/pages/[lang]/[terms].astro
+ * 
+ * Rutas generadas:
+ * - /es/terminos
+ * - /en/terms
+ * - /fr/conditions
+ * - /ca/termes
+ * - /pt-br/termos
+ * 
+ * NOINDEX - Esta página no debe aparecer en buscadores
+ */
+import Layout from "@/layouts/Layout.astro";
+import { type Lang, supportedLangs, getLegalAlternateUrls, legalSlugs } from "@/config/pages";
+
+// Generar rutas estáticas para cada idioma con el slug traducido
+export function getStaticPaths() {
+  return supportedLangs.map((lang) => ({
+    params: { 
+      lang,
+      terms: legalSlugs.terminos[lang]
+    },
+    props: { lang }
+  }));
+}
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+// Generar URLs alternativas para hreflang
+const alternateUrls = getLegalAlternateUrls("terminos");
+
+const content: Record<Lang, {
+  title: string;
+  metaDescription: string;
+  lastUpdate: string;
+  sections: { title: string; text: string }[];
+}> = {
+  es: {
+    title: "Términos y Condiciones",
+    metaDescription: "Términos y condiciones de uso de RayGold - Software ERP para joyería.",
+    lastUpdate: "Última actualización: Enero 2025",
+    sections: [
+      {
+        title: "1. Aceptación de los términos",
+        text: `Al acceder y utilizar el software RayGold, aceptas estos términos y condiciones en su totalidad. Si no estás de acuerdo con alguno de estos términos, no debes utilizar nuestro servicio.`
+      },
+      {
+        title: "2. Descripción del servicio",
+        text: `RayGold es un software ERP (Enterprise Resource Planning) especializado para el sector joyero. Incluye módulos de gestión de inventario, fabricación, ventas, contabilidad y trazabilidad de metales preciosos.`
+      },
+      {
+        title: "3. Licencia de uso",
+        text: `Raytecno BCN SL te otorga una licencia limitada, no exclusiva, intransferible y revocable para usar el software RayGold de acuerdo con el plan contratado.\n\nNo está permitido:\n• Copiar, modificar o distribuir el software\n• Realizar ingeniería inversa\n• Sublicenciar o transferir la licencia\n• Usar el software para fines ilegales`
+      },
+      {
+        title: "4. Pagos y facturación",
+        text: `• Las tarifas se facturan según el plan contratado (mensual o anual)\n• Los precios están sujetos a cambios con 30 días de preaviso\n• El impago puede resultar en la suspensión del servicio\n• No se realizan reembolsos por períodos no utilizados`
+      },
+      {
+        title: "5. Protección de datos",
+        text: `El tratamiento de datos personales se rige por nuestra Política de Privacidad. Nos comprometemos a proteger tus datos conforme al RGPD y la LOPDGDD.`
+      },
+      {
+        title: "6. Limitación de responsabilidad",
+        text: `RayGold se proporciona "tal cual". No garantizamos que el servicio sea ininterrumpido o libre de errores. Nuestra responsabilidad máxima se limita al importe pagado en los últimos 12 meses.`
+      },
+      {
+        title: "7. Modificaciones",
+        text: `Nos reservamos el derecho de modificar estos términos. Los cambios significativos se notificarán con 30 días de antelación.`
+      },
+      {
+        title: "8. Ley aplicable",
+        text: `Estos términos se rigen por la legislación española. Cualquier disputa será sometida a los tribunales de Barcelona.`
+      }
+    ]
+  },
+  en: {
+    title: "Terms and Conditions",
+    metaDescription: "Terms and conditions of use for RayGold - ERP Software for jewelry.",
+    lastUpdate: "Last updated: January 2025",
+    sections: [
+      {
+        title: "1. Acceptance of Terms",
+        text: `By accessing and using RayGold software, you accept these terms and conditions in full. If you disagree with any part of these terms, you must not use our service.`
+      },
+      {
+        title: "2. Service Description",
+        text: `RayGold is an ERP (Enterprise Resource Planning) software specialized for the jewelry industry. It includes inventory management, manufacturing, sales, accounting, and precious metal traceability modules.`
+      },
+      {
+        title: "3. License",
+        text: `Raytecno BCN SL grants you a limited, non-exclusive, non-transferable, revocable license to use RayGold software according to your subscribed plan.\n\nYou may not:\n• Copy, modify or distribute the software\n• Reverse engineer\n• Sublicense or transfer the license\n• Use the software for illegal purposes`
+      },
+      {
+        title: "4. Payments",
+        text: `• Fees are billed according to your plan (monthly or annually)\n• Prices are subject to change with 30 days notice\n• Non-payment may result in service suspension\n• No refunds for unused periods`
+      },
+      {
+        title: "5. Data Protection",
+        text: `Personal data processing is governed by our Privacy Policy. We commit to protecting your data in accordance with GDPR.`
+      },
+      {
+        title: "6. Limitation of Liability",
+        text: `RayGold is provided "as is". We do not guarantee uninterrupted or error-free service. Our maximum liability is limited to the amount paid in the last 12 months.`
+      },
+      {
+        title: "7. Governing Law",
+        text: `These terms are governed by Spanish law. Any dispute shall be submitted to the courts of Barcelona.`
+      }
+    ]
+  },
+  fr: {
+    title: "Conditions Générales",
+    metaDescription: "Conditions générales d'utilisation de RayGold - Logiciel ERP pour bijouterie.",
+    lastUpdate: "Dernière mise à jour: Janvier 2025",
+    sections: [
+      { title: "1. Acceptation", text: `En utilisant RayGold, vous acceptez ces conditions générales.` },
+      { title: "2. Licence", text: `Licence limitée, non exclusive et non transférable pour utiliser le logiciel.` },
+      { title: "3. Responsabilité", text: `Le service est fourni "tel quel". Notre responsabilité est limitée au montant payé.` },
+      { title: "4. Loi applicable", text: `Ces conditions sont régies par la loi espagnole. Tribunaux de Barcelone compétents.` }
+    ]
+  },
+  ca: {
+    title: "Termes i Condicions",
+    metaDescription: "Termes i condicions d'ús de RayGold - Software ERP per a joieria.",
+    lastUpdate: "Última actualització: Gener 2025",
+    sections: [
+      { title: "1. Acceptació", text: `En utilitzar RayGold, acceptes aquests termes i condicions.` },
+      { title: "2. Llicència", text: `Llicència limitada, no exclusiva i intransferible per utilitzar el programari.` },
+      { title: "3. Responsabilitat", text: `El servei es proporciona "tal qual". La nostra responsabilitat es limita a l'import pagat.` },
+      { title: "4. Llei aplicable", text: `Aquests termes es regeixen per la legislació espanyola. Tribunals de Barcelona competents.` }
+    ]
+  },
+  "pt-br": {
+    title: "Termos e Condições",
+    metaDescription: "Termos e condições de uso do RayGold - Software ERP para joalheria.",
+    lastUpdate: "Última atualização: Janeiro 2025",
+    sections: [
+      { title: "1. Aceitação", text: `Ao usar o RayGold, você aceita estes termos e condições.` },
+      { title: "2. Licença", text: `Licença limitada, não exclusiva e intransferível para usar o software.` },
+      { title: "3. Responsabilidade", text: `O serviço é fornecido "como está". Nossa responsabilidade é limitada ao valor pago.` },
+      { title: "4. Lei aplicável", text: `Estes termos são regidos pela lei espanhola. Tribunais de Barcelona competentes.` }
+    ]
+  }
+};
+
+const c = content[lang] || content.es;
+---
+
+<Layout 
+  title={c.title} 
+  description={c.metaDescription} 
+  lang={lang} 
+  noindex={true}
+  alternateUrls={alternateUrls}
+>
+  <main class="legal-page">
+    <div class="legal-container">
+      <h1>{c.title}</h1>
+      <p class="last-update">{c.lastUpdate}</p>
+      
+      {c.sections.map((section) => (
+        <section class="legal-section">
+          <h2>{section.title}</h2>
+          <p set:html={section.text.replace(/\n/g, '<br>')} />
+        </section>
+      ))}
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .legal-page {
+    background: linear-gradient(180deg, #0f172a 0%, #020617 100%);
+    min-height: 100vh;
+    padding: 120px 24px 80px;
+  }
+
+  .legal-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    color: white;
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+
+  .last-update {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    margin-bottom: 48px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .legal-section {
+    margin-bottom: 40px;
+  }
+
+  h2 {
+    font-size: 1.15rem;
+    color: white;
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+
+  .legal-section p {
+    color: #cbd5e1;
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .legal-page {
+      padding: 100px 20px 60px;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    }
+    
+    h1 { 
+      font-size: 1.75rem; 
+      color: #1e293b;
+    }
+    
+    h2 { 
+      font-size: 1.05rem; 
+      color: #1e293b;
+    }
+    
+    .legal-section p {
+      color: #475569;
+    }
+    
+    .last-update {
+      color: #64748b;
+      border-bottom-color: #e2e8f0;
+    }
+  }
+</style>

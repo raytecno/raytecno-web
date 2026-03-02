@@ -1,0 +1,235 @@
+---
+/**
+ * Página de Política de Cookies
+ * src/pages/[lang]/[cookies].astro
+ * 
+ * Rutas generadas:
+ * - /es/cookies
+ * - /en/cookies
+ * - /fr/cookies
+ * - /ca/cookies
+ * - /pt-br/cookies
+ * 
+ * NOINDEX - Esta página no debe aparecer en buscadores
+ */
+import Layout from "@/layouts/Layout.astro";
+import { type Lang, supportedLangs, getLegalAlternateUrls, legalSlugs } from "@/config/pages";
+
+// Generar rutas estáticas para cada idioma con el slug traducido
+export function getStaticPaths() {
+  return supportedLangs.map((lang) => ({
+    params: { 
+      lang,
+      cookies: legalSlugs.cookies[lang]
+    },
+    props: { lang }
+  }));
+}
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+// Generar URLs alternativas para hreflang
+const alternateUrls = getLegalAlternateUrls("cookies");
+
+const content: Record<Lang, {
+  title: string;
+  metaDescription: string;
+  lastUpdate: string;
+  sections: { title: string; text: string }[];
+}> = {
+  es: {
+    title: "Política de Cookies",
+    metaDescription: "Política de cookies de RayGold - Software ERP para joyería.",
+    lastUpdate: "Última actualización: Enero 2025",
+    sections: [
+      {
+        title: "1. ¿Qué son las cookies?",
+        text: `Las cookies son pequeños archivos de texto que se almacenan en tu dispositivo cuando visitas un sitio web. Se utilizan para recordar tus preferencias y mejorar tu experiencia de navegación.`
+      },
+      {
+        title: "2. Tipos de cookies que utilizamos",
+        text: `<strong>Cookies técnicas (necesarias):</strong>\n• Sesión de usuario\n• Preferencias de idioma\n• Seguridad del sitio\n\n<strong>Cookies analíticas:</strong>\n• Google Analytics: para entender cómo usas nuestro sitio\n• Estadísticas de uso anónimas\n\n<strong>Cookies de marketing:</strong>\n• Google Ads: para mostrar anuncios relevantes\n• LinkedIn: para campañas publicitarias`
+      },
+      {
+        title: "3. Gestión de cookies",
+        text: `Puedes configurar tu navegador para rechazar cookies o para que te avise cuando se envíen. Ten en cuenta que algunas funciones del sitio pueden no funcionar correctamente sin cookies.\n\n<strong>Cómo desactivar cookies en tu navegador:</strong>\n• Chrome: Configuración > Privacidad y seguridad > Cookies\n• Firefox: Opciones > Privacidad y seguridad\n• Safari: Preferencias > Privacidad\n• Edge: Configuración > Privacidad`
+      },
+      {
+        title: "4. Cookies de terceros",
+        text: `Utilizamos servicios de terceros que pueden establecer sus propias cookies:\n\n• <strong>Google Analytics:</strong> Análisis de tráfico web\n• <strong>Google Ads:</strong> Publicidad personalizada\n• <strong>LinkedIn:</strong> Seguimiento de conversiones\n\nEstos terceros tienen sus propias políticas de privacidad.`
+      },
+      {
+        title: "5. Consentimiento",
+        text: `Al continuar navegando en nuestro sitio web, aceptas el uso de cookies según esta política. Puedes retirar tu consentimiento en cualquier momento configurando tu navegador.`
+      },
+      {
+        title: "6. Contacto",
+        text: `Si tienes preguntas sobre nuestra política de cookies, contacta con nosotros en: info@raytecno.es`
+      }
+    ]
+  },
+  en: {
+    title: "Cookie Policy",
+    metaDescription: "RayGold Cookie Policy - ERP Software for jewelry.",
+    lastUpdate: "Last updated: January 2025",
+    sections: [
+      {
+        title: "1. What are cookies?",
+        text: `Cookies are small text files stored on your device when you visit a website. They are used to remember your preferences and improve your browsing experience.`
+      },
+      {
+        title: "2. Types of cookies we use",
+        text: `<strong>Technical cookies (necessary):</strong>\n• User session\n• Language preferences\n• Site security\n\n<strong>Analytics cookies:</strong>\n• Google Analytics: to understand how you use our site\n• Anonymous usage statistics\n\n<strong>Marketing cookies:</strong>\n• Google Ads: to show relevant ads\n• LinkedIn: for advertising campaigns`
+      },
+      {
+        title: "3. Cookie management",
+        text: `You can configure your browser to reject cookies or to alert you when cookies are sent. Note that some site features may not work properly without cookies.\n\n<strong>How to disable cookies:</strong>\n• Chrome: Settings > Privacy and security > Cookies\n• Firefox: Options > Privacy & Security\n• Safari: Preferences > Privacy\n• Edge: Settings > Privacy`
+      },
+      {
+        title: "4. Third-party cookies",
+        text: `We use third-party services that may set their own cookies:\n\n• <strong>Google Analytics:</strong> Web traffic analysis\n• <strong>Google Ads:</strong> Personalized advertising\n• <strong>LinkedIn:</strong> Conversion tracking\n\nThese third parties have their own privacy policies.`
+      },
+      {
+        title: "5. Consent",
+        text: `By continuing to browse our website, you accept the use of cookies according to this policy. You can withdraw your consent at any time by configuring your browser.`
+      },
+      {
+        title: "6. Contact",
+        text: `If you have questions about our cookie policy, contact us at: info@raytecno.es`
+      }
+    ]
+  },
+  fr: {
+    title: "Politique de Cookies",
+    metaDescription: "Politique de cookies de RayGold - Logiciel ERP pour bijouterie.",
+    lastUpdate: "Dernière mise à jour: Janvier 2025",
+    sections: [
+      { title: "1. Qu'est-ce qu'un cookie?", text: `Les cookies sont de petits fichiers texte stockés sur votre appareil lorsque vous visitez un site web.` },
+      { title: "2. Types de cookies", text: `• Cookies techniques (nécessaires)\n• Cookies analytiques (Google Analytics)\n• Cookies marketing (Google Ads, LinkedIn)` },
+      { title: "3. Gestion des cookies", text: `Vous pouvez configurer votre navigateur pour refuser les cookies ou pour vous alerter lorsque des cookies sont envoyés.` },
+      { title: "4. Contact", text: `Questions? Contactez-nous: info@raytecno.es` }
+    ]
+  },
+  ca: {
+    title: "Política de Cookies",
+    metaDescription: "Política de cookies de RayGold - Software ERP per a joieria.",
+    lastUpdate: "Última actualització: Gener 2025",
+    sections: [
+      { title: "1. Què són les cookies?", text: `Les cookies són petits arxius de text que s'emmagatzemen al teu dispositiu quan visites un lloc web.` },
+      { title: "2. Tipus de cookies", text: `• Cookies tècniques (necessàries)\n• Cookies analítiques (Google Analytics)\n• Cookies de màrqueting (Google Ads, LinkedIn)` },
+      { title: "3. Gestió de cookies", text: `Pots configurar el teu navegador per rebutjar cookies o per avisar-te quan s'enviïn.` },
+      { title: "4. Contacte", text: `Preguntes? Contacta'ns: info@raytecno.es` }
+    ]
+  },
+  "pt-br": {
+    title: "Política de Cookies",
+    metaDescription: "Política de cookies do RayGold - Software ERP para joalheria.",
+    lastUpdate: "Última atualização: Janeiro 2025",
+    sections: [
+      { title: "1. O que são cookies?", text: `Cookies são pequenos arquivos de texto armazenados no seu dispositivo quando você visita um site.` },
+      { title: "2. Tipos de cookies", text: `• Cookies técnicos (necessários)\n• Cookies analíticos (Google Analytics)\n• Cookies de marketing (Google Ads, LinkedIn)` },
+      { title: "3. Gerenciamento de cookies", text: `Você pode configurar seu navegador para rejeitar cookies ou para alertá-lo quando cookies forem enviados.` },
+      { title: "4. Contato", text: `Perguntas? Contate-nos: info@raytecno.es` }
+    ]
+  }
+};
+
+const c = content[lang] || content.es;
+---
+
+<Layout 
+  title={c.title} 
+  description={c.metaDescription} 
+  lang={lang} 
+  noindex={true}
+  alternateUrls={alternateUrls}
+>
+  <main class="legal-page">
+    <div class="legal-container">
+      <h1>{c.title}</h1>
+      <p class="last-update">{c.lastUpdate}</p>
+      
+      {c.sections.map((section) => (
+        <section class="legal-section">
+          <h2>{section.title}</h2>
+          <p set:html={section.text.replace(/\n/g, '<br>')} />
+        </section>
+      ))}
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .legal-page {
+    background: linear-gradient(180deg, #0f172a 0%, #020617 100%);
+    min-height: 100vh;
+    padding: 120px 24px 80px;
+  }
+
+  .legal-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    color: white;
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+
+  .last-update {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    margin-bottom: 48px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .legal-section {
+    margin-bottom: 40px;
+  }
+
+  h2 {
+    font-size: 1.15rem;
+    color: white;
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+
+  .legal-section p {
+    color: #cbd5e1;
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .legal-page {
+      padding: 100px 20px 60px;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    }
+    
+    h1 { 
+      font-size: 1.75rem; 
+      color: #1e293b;
+    }
+    
+    h2 { 
+      font-size: 1.05rem; 
+      color: #1e293b;
+    }
+    
+    .legal-section p {
+      color: #475569;
+    }
+    
+    .last-update {
+      color: #64748b;
+      border-bottom-color: #e2e8f0;
+    }
+  }
+</style>

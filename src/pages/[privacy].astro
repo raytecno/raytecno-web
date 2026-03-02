@@ -1,28 +1,46 @@
 ---
 /**
  * Página de Política de Privacidad
+ * src/pages/[lang]/[privacy].astro
+ * 
+ * Rutas generadas:
+ * - /es/privacidad
+ * - /en/privacy
+ * - /fr/confidentialite
+ * - /ca/privacitat
+ * - /pt-br/privacidade
+ * 
  * NOINDEX - Esta página no debe aparecer en buscadores
- * CORREGIDO: Añadido alternateUrls para hreflang
  */
 import Layout from "@/layouts/Layout.astro";
-import { type Lang, getLegalAlternateUrls } from "@/config/pages";
+import { type Lang, supportedLangs, getLegalAlternateUrls, legalSlugs } from "@/config/pages";
 
+// Generar rutas estáticas para cada idioma con el slug traducido
 export function getStaticPaths() {
-  return [
-    { params: { lang: "es" } },
-    { params: { lang: "en" } },
-    { params: { lang: "fr" } },
-    { params: { lang: "ca" } },
-    { params: { lang: "pt-br" } },
-  ];
+  return supportedLangs.map((lang) => ({
+    params: { 
+      lang,
+      privacy: legalSlugs.privacidad[lang]
+    },
+    props: { lang }
+  }));
 }
 
-const { lang } = Astro.params as { lang: Lang };
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
 
 // Generar URLs alternativas para hreflang
 const alternateUrls = getLegalAlternateUrls("privacidad");
 
-const content = {
+const content: Record<Lang, {
+  title: string;
+  metaDescription: string;
+  lastUpdate: string;
+  sections: { title: string; text: string }[];
+}> = {
   es: {
     title: "Política de Privacidad",
     metaDescription: "Política de privacidad de RayGold - Software ERP para joyería.",
@@ -87,29 +105,32 @@ const content = {
   },
   fr: {
     title: "Politique de Confidentialité",
-    metaDescription: "Politique de confidentialité de RayGold.",
+    metaDescription: "Politique de confidentialité de RayGold - Logiciel ERP pour bijouterie.",
     lastUpdate: "Dernière mise à jour: Janvier 2025",
     sections: [
       { title: "1. Responsable", text: `Raytecno BCN SL, Montgat, Barcelone, Espagne.\nContact: info@raytecno.es` },
-      { title: "2. Vos droits", text: `Contactez info@raytecno.es pour exercer vos droits.` }
+      { title: "2. Vos droits", text: `Contactez info@raytecno.es pour exercer vos droits d'accès, rectification, suppression, opposition et portabilité.` },
+      { title: "3. Sécurité", text: `Nous mettons en œuvre le chiffrement des données, des sauvegardes régulières et un contrôle d'accès basé sur les rôles.` }
     ]
   },
   ca: {
     title: "Política de Privacitat",
-    metaDescription: "Política de privacitat de RayGold.",
+    metaDescription: "Política de privacitat de RayGold - Software ERP per a joieria.",
     lastUpdate: "Última actualització: Gener 2025",
     sections: [
       { title: "1. Responsable", text: `Raytecno BCN SL, Montgat, Barcelona, Espanya.\nContacte: info@raytecno.es` },
-      { title: "2. Els teus drets", text: `Contacta info@raytecno.es per exercir els teus drets.` }
+      { title: "2. Els teus drets", text: `Contacta info@raytecno.es per exercir els teus drets d'accés, rectificació, supressió, oposició i portabilitat.` },
+      { title: "3. Seguretat", text: `Implementem xifrat de dades, còpies de seguretat periòdiques i control d'accés basat en rols.` }
     ]
   },
   "pt-br": {
     title: "Política de Privacidade",
-    metaDescription: "Política de privacidade do RayGold.",
+    metaDescription: "Política de privacidade do RayGold - Software ERP para joalheria.",
     lastUpdate: "Última atualização: Janeiro 2025",
     sections: [
       { title: "1. Responsável", text: `Raytecno BCN SL, Montgat, Barcelona, Espanha.\nContato: info@raytecno.es` },
-      { title: "2. Seus direitos", text: `Contate info@raytecno.es para exercer seus direitos.` }
+      { title: "2. Seus direitos", text: `Contate info@raytecno.es para exercer seus direitos de acesso, retificação, exclusão, oposição e portabilidade.` },
+      { title: "3. Segurança", text: `Implementamos criptografia de dados, backups regulares e controle de acesso baseado em funções.` }
     ]
   }
 };
