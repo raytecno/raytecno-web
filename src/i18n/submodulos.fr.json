@@ -36,8 +36,14 @@
           "name": "Prix",
           "description": "Tarifs, remises et politiques de prix",
           "images": [
-            { "title": "Tarifs", "description": "Gestion de multiples tarifs" },
-            { "title": "Remises", "description": "Configuration des remises" },
+            {
+              "title": "Tarifs",
+              "description": "Gestion de multiples tarifs"
+            },
+            {
+              "title": "Remises",
+              "description": "Configuration des remises"
+            },
             {
               "title": "Historique",
               "description": "Traçabilité des changements"
@@ -56,14 +62,20 @@
               "title": "Arbre des Matériaux",
               "description": "Vue hiérarchique de la structure"
             },
-            { "title": "Coûts", "description": "Calcul automatique des coûts" }
+            {
+              "title": "Coûts",
+              "description": "Calcul automatique des coûts"
+            }
           ]
         },
         "imagenes": {
           "name": "Images",
           "description": "Galerie photos et multimédia",
           "images": [
-            { "title": "Galerie", "description": "Gestion d'images multiples" },
+            {
+              "title": "Galerie",
+              "description": "Gestion d'images multiples"
+            },
             {
               "title": "Visionneuse",
               "description": "Visualisation avec zoom"
@@ -140,7 +152,10 @@
           "name": "Factures",
           "description": "Facturation électronique et traditionnelle",
           "images": [
-            { "title": "Factures", "description": "Liste des factures émises" },
+            {
+              "title": "Factures",
+              "description": "Liste des factures émises"
+            },
             {
               "title": "Nouvelle Facture",
               "description": "Facturation manuelle ou depuis bons"
@@ -155,8 +170,14 @@
           "name": "Clients",
           "description": "Base de données clients",
           "images": [
-            { "title": "Liste", "description": "Répertoire clients" },
-            { "title": "Fiche", "description": "Données complètes du client" },
+            {
+              "title": "Liste",
+              "description": "Répertoire clients"
+            },
+            {
+              "title": "Fiche",
+              "description": "Données complètes du client"
+            },
             {
               "title": "Historique",
               "description": "Historique des opérations"
@@ -175,12 +196,18 @@
           "name": "Ordres de Fabrication",
           "description": "Gestion des ordres de fabrication",
           "images": [
-            { "title": "Liste OF", "description": "Vue générale des ordres" },
+            {
+              "title": "Liste OF",
+              "description": "Vue générale des ordres"
+            },
             {
               "title": "Nouvel OF",
               "description": "Création d'ordre de travail"
             },
-            { "title": "Suivi", "description": "État de la production" }
+            {
+              "title": "Suivi",
+              "description": "État de la production"
+            }
           ]
         },
         "fases": {
@@ -191,7 +218,10 @@
               "title": "Phases de Production",
               "description": "Définition du processus productif"
             },
-            { "title": "Temps", "description": "Contrôle des temps par phase" },
+            {
+              "title": "Temps",
+              "description": "Contrôle des temps par phase"
+            },
             {
               "title": "Opérateurs",
               "description": "Affectation des ressources"
@@ -202,17 +232,32 @@
           "name": "Fonte",
           "description": "Contrôle du processus de fonte",
           "images": [
-            { "title": "Fontes", "description": "Registre des fontes" },
-            { "title": "Pertes", "description": "Contrôle des pertes" },
-            { "title": "Alliages", "description": "Composition des métaux" }
+            {
+              "title": "Fontes",
+              "description": "Registre des fontes"
+            },
+            {
+              "title": "Pertes",
+              "description": "Contrôle des pertes"
+            },
+            {
+              "title": "Alliages",
+              "description": "Composition des métaux"
+            }
           ]
         },
         "inventario": {
           "name": "Inventaire",
           "description": "Contrôle du stock et mouvements",
           "images": [
-            { "title": "Stock", "description": "Inventaire en temps réel" },
-            { "title": "Mouvements", "description": "Traçabilité complète" },
+            {
+              "title": "Stock",
+              "description": "Inventaire en temps réel"
+            },
+            {
+              "title": "Mouvements",
+              "description": "Traçabilité complète"
+            },
             {
               "title": "Valorisation",
               "description": "Valorisation des existences"
@@ -235,22 +280,27 @@
               "title": "Plan de Comptes",
               "description": "Structure comptable"
             },
-            { "title": "Écritures", "description": "Registre des mouvements" },
-            { "title": "Balance", "description": "États financiers" }
+            {
+              "title": "Écritures",
+              "description": "Registre des mouvements"
+            },
+            {
+              "title": "Balance",
+              "description": "États financiers"
+            }
           ]
         },
         "tesoreria": {
           "name": "Trésorerie",
-          "description": "Contrôle des encaissements et paiements",
+          "description": "Contrôle de liquidité, encaissements et paiements",
           "images": [
-            { "title": "Trésorerie", "description": "Panneau de trésorerie" },
             {
-              "title": "Encaissements",
-              "description": "Gestion des encaissements en attente"
+              "title": "Contrôle de Liquidité",
+              "description": "Tableau de bord avec KPIs de trésorerie nette, ratio de liquidité, jours de couverture et position financière"
             },
             {
-              "title": "Paiements",
-              "description": "Contrôle des paiements fournisseurs"
+              "title": "Échéances Encaissements vs Paiements",
+              "description": "Graphique comparatif des encaissements et paiements avec net cumulé mensuel"
             }
           ]
         },
@@ -273,32 +323,35 @@
           ]
         },
         "balances": {
-  "name": "Bilans",
-  "description": "Bilan de situation et états financiers",
-  "images": [
-    {
-      "title": "Bilan Mensuel",
-      "description": "Vue mensuelle du bilan avec évolution JAN-DÉC"
-    },
-    {
-      "title": "Vue Double",
-      "description": "Bilan en format double Actif/Passif avec sélecteur de rapports"
-    },
-    {
-      "title": "Vue Comptes",
-      "description": "Structure de nœuds avec formules et codes de compte assignés"
-    },
-    {
-      "title": "Bilans + Valeurs",
-      "description": "Détail étendu avec soldes par compte comptable"
-    }
-  ]
-},
+          "name": "Bilans",
+          "description": "Bilan de situation et états financiers",
+          "images": [
+            {
+              "title": "Bilan Mensuel",
+              "description": "Vue mensuelle du bilan avec évolution JAN-DÉC"
+            },
+            {
+              "title": "Vue Double",
+              "description": "Bilan en format double Actif/Passif avec sélecteur de rapports"
+            },
+            {
+              "title": "Vue Comptes",
+              "description": "Structure de nœuds avec formules et codes de compte assignés"
+            },
+            {
+              "title": "Bilans + Valeurs",
+              "description": "Détail étendu avec soldes par compte comptable"
+            }
+          ]
+        },
         "informes": {
           "name": "Rapports",
           "description": "Bilan, compte de résultat et ratios",
           "images": [
-            { "title": "Bilan", "description": "Bilan de situation" },
+            {
+              "title": "Bilan",
+              "description": "Bilan de situation"
+            },
             {
               "title": "Compte de Résultat",
               "description": "Compte de pertes et profits"
@@ -325,7 +378,10 @@
               "title": "Recherche",
               "description": "Localisation des opérations"
             },
-            { "title": "Détail", "description": "Information complète" },
+            {
+              "title": "Détail",
+              "description": "Information complète"
+            },
             {
               "title": "Exportation",
               "description": "Téléchargement des données"
@@ -340,28 +396,40 @@
               "title": "Par Pièce",
               "description": "Histoire de chaque article"
             },
-            { "title": "Par Lot", "description": "Traçabilité par lots" },
-            { "title": "Certificats", "description": "Documentation associée" }
+            {
+              "title": "Par Lot",
+              "description": "Traçabilité par lots"
+            },
+            {
+              "title": "Certificats",
+              "description": "Documentation associée"
+            }
           ]
         }
       }
     },
     "inventario": {
-  "title": "Inventaires",
-  "subtitle": "Gestion des inventaires et distributions",
-  "metaTitle": "Inventaires | RayGold ERP - Gestion des Stocks",
-  "metaDescription": "Gestion des ressources, stocks, mouvements et distributions pour bijouteries.",
-  "sections": {
-    "distribucion": {
-      "name": "Distributions",
-      "description": "Gestion des distributions et entrepôts",
-      "images": [
-        { "title": "Principal", "description": "Liste des distributions" },
-        { "title": "Génération", "description": "Information complète" }
-      ]
-    }
-  }
-},
+      "title": "Inventaires",
+      "subtitle": "Gestion des inventaires et distributions",
+      "metaTitle": "Inventaires | RayGold ERP - Gestion des Stocks",
+      "metaDescription": "Gestion des ressources, stocks, mouvements et distributions pour bijouteries.",
+      "sections": {
+        "distribucion": {
+          "name": "Distributions",
+          "description": "Gestion des distributions et entrepôts",
+          "images": [
+            {
+              "title": "Principal",
+              "description": "Liste des distributions"
+            },
+            {
+              "title": "Génération",
+              "description": "Information complète"
+            }
+          ]
+        }
+      }
+    },
     "estadisticas": {
       "title": "Statistiques",
       "subtitle": "Rapports et tableaux de bord pour décisions",
@@ -372,18 +440,36 @@
           "name": "Tableaux de Bord",
           "description": "Panneaux de contrôle visuels",
           "images": [
-            { "title": "Principal", "description": "KPIs principaux" },
-            { "title": "Ventes", "description": "Métriques commerciales" },
-            { "title": "Production", "description": "Indicateurs d'usine" }
+            {
+              "title": "Principal",
+              "description": "KPIs principaux"
+            },
+            {
+              "title": "Ventes",
+              "description": "Métriques commerciales"
+            },
+            {
+              "title": "Production",
+              "description": "Indicateurs d'usine"
+            }
           ]
         },
         "informes": {
           "name": "Rapports",
           "description": "Rapports personnalisables",
           "images": [
-            { "title": "Catalogue", "description": "Rapports prédéfinis" },
-            { "title": "Concepteur", "description": "Créateur de rapports" },
-            { "title": "Programmation", "description": "Envoi automatique" }
+            {
+              "title": "Catalogue",
+              "description": "Rapports prédéfinis"
+            },
+            {
+              "title": "Concepteur",
+              "description": "Créateur de rapports"
+            },
+            {
+              "title": "Programmation",
+              "description": "Envoi automatique"
+            }
           ]
         }
       }
@@ -398,9 +484,18 @@
           "name": "Équipe",
           "description": "Gestion de l'équipe commerciale",
           "images": [
-            { "title": "Commerciaux", "description": "Liste de l'équipe" },
-            { "title": "Zones", "description": "Attribution des territoires" },
-            { "title": "Objectifs", "description": "Objectifs de vente" }
+            {
+              "title": "Commerciaux",
+              "description": "Liste de l'équipe"
+            },
+            {
+              "title": "Zones",
+              "description": "Attribution des territoires"
+            },
+            {
+              "title": "Objectifs",
+              "description": "Objectifs de vente"
+            }
           ]
         },
         "comisiones": {
@@ -411,17 +506,32 @@
               "title": "Règles",
               "description": "Configuration des commissions"
             },
-            { "title": "Calcul", "description": "Règlement automatique" },
-            { "title": "Historique", "description": "Paiements effectués" }
+            {
+              "title": "Calcul",
+              "description": "Règlement automatique"
+            },
+            {
+              "title": "Historique",
+              "description": "Paiements effectués"
+            }
           ]
         },
         "rutas": {
           "name": "Tournées",
           "description": "Planification des visites",
           "images": [
-            { "title": "Calendrier", "description": "Agenda des visites" },
-            { "title": "Carte", "description": "Vue géographique" },
-            { "title": "Rapports", "description": "Résultats des visites" }
+            {
+              "title": "Calendrier",
+              "description": "Agenda des visites"
+            },
+            {
+              "title": "Carte",
+              "description": "Vue géographique"
+            },
+            {
+              "title": "Rapports",
+              "description": "Résultats des visites"
+            }
           ]
         }
       }
@@ -436,7 +546,10 @@
           "name": "Catalogue en Ligne",
           "description": "Publication des produits",
           "images": [
-            { "title": "Produits", "description": "Gestion du catalogue web" },
+            {
+              "title": "Produits",
+              "description": "Gestion du catalogue web"
+            },
             {
               "title": "Catégories",
               "description": "Organisation des produits"
@@ -451,18 +564,36 @@
           "name": "Commandes Web",
           "description": "Gestion des commandes en ligne",
           "images": [
-            { "title": "Réception", "description": "Commandes entrantes" },
-            { "title": "Traitement", "description": "Flux de travail" },
-            { "title": "Expéditions", "description": "Logistique intégrée" }
+            {
+              "title": "Réception",
+              "description": "Commandes entrantes"
+            },
+            {
+              "title": "Traitement",
+              "description": "Flux de travail"
+            },
+            {
+              "title": "Expéditions",
+              "description": "Logistique intégrée"
+            }
           ]
         },
         "integraciones": {
           "name": "Intégrations",
           "description": "Connexion avec plateformes",
           "images": [
-            { "title": "Shopify", "description": "Intégration Shopify" },
-            { "title": "WooCommerce", "description": "Intégration WordPress" },
-            { "title": "Marketplaces", "description": "Amazon, eBay, etc." }
+            {
+              "title": "Shopify",
+              "description": "Intégration Shopify"
+            },
+            {
+              "title": "WooCommerce",
+              "description": "Intégration WordPress"
+            },
+            {
+              "title": "Marketplaces",
+              "description": "Amazon, eBay, etc."
+            }
           ]
         }
       }

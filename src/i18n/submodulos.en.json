@@ -272,21 +272,17 @@
             }
           ]
         },
-        "cobros": {
-          "name": "Collections",
-          "description": "Accounts receivable management",
+        "tesoreria": {
+          "name": "Treasury",
+          "description": "Liquidity control, collections and payments",
           "images": [
             {
-              "title": "Pending",
-              "description": "Invoices to collect"
+              "title": "Liquidity Dashboard",
+              "description": "Dashboard with net treasury, liquidity ratio, coverage days and financial position KPIs"
             },
             {
-              "title": "Remittances",
-              "description": "Remittance management"
-            },
-            {
-              "title": "Reconciliation",
-              "description": "Account matching"
+              "title": "Collections vs Payments",
+              "description": "Comparative chart of collections and payments with monthly net accumulation"
             }
           ]
         },
@@ -327,27 +323,27 @@
           ]
         },
         "balances": {
-  "name": "Balance Sheets",
-  "description": "Balance sheet and financial statements",
-  "images": [
-    {
-      "title": "Monthly Balance",
-      "description": "Monthly balance sheet view with JAN-DEC evolution"
-    },
-    {
-      "title": "Double View",
-      "description": "Balance in dual Assets/Liabilities format with report selector"
-    },
-    {
-      "title": "Accounts View",
-      "description": "Node structure with formulas and assigned account codes"
-    },
-    {
-      "title": "Balances + Values",
-      "description": "Expanded detail with balances per accounting account"
-    }
-  ]
-}
+          "name": "Balance Sheets",
+          "description": "Balance sheet and financial statements",
+          "images": [
+            {
+              "title": "Monthly Balance",
+              "description": "Monthly balance sheet view with JAN-DEC evolution"
+            },
+            {
+              "title": "Double View",
+              "description": "Balance in dual Assets/Liabilities format with report selector"
+            },
+            {
+              "title": "Accounts View",
+              "description": "Node structure with formulas and assigned account codes"
+            },
+            {
+              "title": "Balances + Values",
+              "description": "Expanded detail with balances per accounting account"
+            }
+          ]
+        }
       }
     },
     "historicos": {

@@ -44,7 +44,10 @@
               "title": "Costes",
               "description": "Configuración costes y mano de obra"
             },
-            { "title": "Estructurado", "description": "Trazabilidad de precios" }
+            {
+              "title": "Estructurado",
+              "description": "Trazabilidad de precios"
+            }
           ]
         },
         "estructuras": {
@@ -59,7 +62,10 @@
               "title": "Árbol de Materiales",
               "description": "Vista jerárquica de la estructura"
             },
-            { "title": "Multiples", "description": "Control de multiples" }
+            {
+              "title": "Multiples",
+              "description": "Control de multiples"
+            }
           ]
         },
         "imagenes": {
@@ -70,7 +76,10 @@
               "title": "Galería",
               "description": "Gestión de imágenes múltiples"
             },
-            { "title": "Visualizar", "description": "Visualización con zoom" },
+            {
+              "title": "Visualizar",
+              "description": "Visualización con zoom"
+            },
             {
               "title": "Importación",
               "description": "Carga masiva de imágenes"
@@ -107,7 +116,7 @@
               "title": "Menu",
               "description": "Creacion de menu principal"
             },
-             {
+            {
               "title": "Personalizacion",
               "description": "Selecion de estilos"
             }
@@ -147,7 +156,10 @@
               "title": "Albaranes",
               "description": "Gestión de albaranes de entrega"
             },
-            { "title": "Generación", "description": "Creación desde pedidos" },
+            {
+              "title": "Generación",
+              "description": "Creación desde pedidos"
+            },
             {
               "title": "Informacion",
               "description": "Información completa del pedido"
@@ -166,31 +178,42 @@
               "title": "Generación",
               "description": "Creacion desde pediodos o albaranes"
             },
-             {
+            {
               "title": "Impresion",
               "description": "Control sobre la impresion de facturas"
             },
-             {
+            {
               "title": "Asientos",
               "description": "Visualizar asientos de la factura"
             }
-           
           ]
         },
         "libro": {
           "name": "Libro de Oro",
           "description": "Control y mantenimento ",
           "images": [
-            { "title": "Movimientos", "description": "Gestion de movimientos" },
-            { "title": "Detalles", "description": "Control de saldos" }
+            {
+              "title": "Movimientos",
+              "description": "Gestion de movimientos"
+            },
+            {
+              "title": "Detalles",
+              "description": "Control de saldos"
+            }
           ]
         },
-         "depositos": {
+        "depositos": {
           "name": "Depositos",
           "description": "Gestion de depositos",
           "images": [
-            { "title": "Principal", "description": "General de depositoss" },
-            { "title": "Cuentas", "description": "Control de cuentas por deposito" }
+            {
+              "title": "Principal",
+              "description": "General de depositoss"
+            },
+            {
+              "title": "Cuentas",
+              "description": "Control de cuentas por deposito"
+            }
           ]
         }
       }
@@ -213,25 +236,46 @@
               "title": "Nueva OT",
               "description": "Creación de orden de trabajo"
             },
-            { "title": "Seguimiento", "description": "Estado de la producción" }
+            {
+              "title": "Seguimiento",
+              "description": "Estado de la producción"
+            }
           ]
         },
         "materiales": {
           "name": "Materiales",
           "description": "Control de materias primas",
           "images": [
-            { "title": "Inventario", "description": "Stock de materiales" },
-            { "title": "Movimientos", "description": "Entradas y salidas" },
-            { "title": "Valoración", "description": "Coste de materiales" }
+            {
+              "title": "Inventario",
+              "description": "Stock de materiales"
+            },
+            {
+              "title": "Movimientos",
+              "description": "Entradas y salidas"
+            },
+            {
+              "title": "Valoración",
+              "description": "Coste de materiales"
+            }
           ]
         },
         "mermas": {
           "name": "Mermas",
           "description": "Control de pérdidas en fabricación",
           "images": [
-            { "title": "Registro", "description": "Control de mermas" },
-            { "title": "Análisis", "description": "Estadísticas de pérdidas" },
-            { "title": "Informes", "description": "Reportes detallados" }
+            {
+              "title": "Registro",
+              "description": "Control de mermas"
+            },
+            {
+              "title": "Análisis",
+              "description": "Estadísticas de pérdidas"
+            },
+            {
+              "title": "Informes",
+              "description": "Reportes detallados"
+            }
           ]
         }
       }
@@ -250,59 +294,58 @@
               "title": "Plan de Cuentas",
               "description": "Estructura contable"
             },
-            { "title": "Asientos", "description": "Registro de movimientos" },
-            { "title": "Balances", "description": "Estados financieros" }
+            {
+              "title": "Asientos",
+              "description": "Registro de movimientos"
+            }
           ]
         },
         "tesoreria": {
-          "name": "Cobros",
-          "description": "Gestión de cuentas por cobrar",
+          "name": "Tesorería",
+          "description": "Control de liquidez, cobros y pagos",
           "images": [
-            { "title": "Pendientes", "description": "Facturas por cobrar" },
-            { "title": "Remesas", "description": "Gestión de remesas" },
-            { "title": "Conciliación", "description": "Cuadre de cuentas" }
+            {
+              "title": "Control de Liquidez",
+              "description": "Dashboard con KPIs de tesorería neta, ratio liquidez, días de cobertura y posición financiera"
+            },
+            {
+              "title": "Vencimientos Cobros vs Pagos",
+              "description": "Gráfico comparativo de cobros y pagos con neto acumulado por mes"
+            }
           ]
         },
         "iva": {
           "name": "IVA",
           "description": "Liquidación y declaraciones",
           "images": [
-            { "title": "Libros", "description": "Registro de IVA" },
-            { "title": "Modelo 303", "description": "Declaración trimestral" },
-            { "title": "SII", "description": "Suministro inmediato" }
+            {
+              "title": "Libros",
+              "description": "Registro de IVA"
+            }
           ]
         },
         "balances": {
-  "name": "Balances",
-  "description": "Balance de situación y estados financieros",
-  "images": [
-    {
-      "title": "Balance por Meses",
-      "description": "Vista mensual del balance de situación con evolución ENE-DIC"
-    },
-    {
-      "title": "Vista Doble",
-      "description": "Balance en formato doble Activo/Pasivo con selector de informes"
-    },
-    {
-      "title": "Vista Cuentas",
-      "description": "Estructura de nodos con fórmulas y códigos de cuenta asignados"
-    },
-    {
-      "title": "Balances + Valores",
-      "description": "Detalle expandido con saldos por cuenta contable"
-    }
-  ]
-},
-"informes": {
-  "name": "Informes",
-  "description": "Balance, PyG y ratios financieros",
-  "images": [
-    { "title": "Balance", "description": "Balance de situación" },
-    { "title": "PyG", "description": "Cuenta de pérdidas y ganancias" },
-    { "title": "Ratios", "description": "Análisis de ratios financieros" }
-  ]
-}
+          "name": "Balances",
+          "description": "Balance de situación y estados financieros",
+          "images": [
+            {
+              "title": "Balance por Meses",
+              "description": "Vista mensual del balance de situación con evolución ENE-DIC"
+            },
+            {
+              "title": "Vista Doble",
+              "description": "Balance en formato doble Activo/Pasivo con selector de informes"
+            },
+            {
+              "title": "Vista Cuentas",
+              "description": "Estructura de nodos con fórmulas y códigos de cuenta asignados"
+            },
+            {
+              "title": "Balances + Valores",
+              "description": "Detalle expandido con saldos por cuenta contable"
+            }
+          ]
+        }
       }
     },
     "historicos": {
@@ -319,11 +362,16 @@
               "title": "Búsqueda",
               "description": "Localización de operaciones"
             },
-            { "title": "Detalle", "description": "Información completa" },
-            { "title": "Verifactu", "description": "Facturacion con Verifactu" }
+            {
+              "title": "Detalle",
+              "description": "Información completa"
+            },
+            {
+              "title": "Verifactu",
+              "description": "Facturacion con Verifactu"
+            }
           ]
         }
-       
       }
     },
     "inventario": {
@@ -340,7 +388,10 @@
               "title": "Principal",
               "description": "Listado de distibucion"
             },
-            { "title": "Generacion", "description": "Información completa" }
+            {
+              "title": "Generacion",
+              "description": "Información completa"
+            }
           ]
         },
         "stocks": {
@@ -351,9 +402,12 @@
               "title": "Principal",
               "description": "Listado de distibucion"
             },
-            { "title": "Cuentas corrientes", "description": "" }
+            {
+              "title": "Cuentas corrientes",
+              "description": ""
+            }
           ]
-        } 
+        }
       }
     },
     "estadisticas": {
@@ -366,18 +420,36 @@
           "name": "Dashboards",
           "description": "Cuadros de mando visuales",
           "images": [
-            { "title": "Principal", "description": "KPIs principales" },
-            { "title": "Tiempo", "description": "Graficos por meses o años" },
-            { "title": "Articulos", "description": "Graficos por articulos" }
+            {
+              "title": "Principal",
+              "description": "KPIs principales"
+            },
+            {
+              "title": "Tiempo",
+              "description": "Graficos por meses o años"
+            },
+            {
+              "title": "Articulos",
+              "description": "Graficos por articulos"
+            }
           ]
         },
         "informes": {
           "name": "Informes",
           "description": "Reportes personalizables",
           "images": [
-            { "title": "Catálogo", "description": "Informes predefinidos" },
-            { "title": "Diseñador", "description": "Creador de informes" },
-            { "title": "Programación", "description": "Envío automático" }
+            {
+              "title": "Catálogo",
+              "description": "Informes predefinidos"
+            },
+            {
+              "title": "Diseñador",
+              "description": "Creador de informes"
+            },
+            {
+              "title": "Programación",
+              "description": "Envío automático"
+            }
           ]
         }
       }
@@ -392,17 +464,32 @@
           "name": "Aplicacion",
           "description": "Gestión personalizada de comercial",
           "images": [
-            { "title": "Principal", "description": "Inicio personalizado" },
-            { "title": "Menu", "description": "Configuracion modular" },
-            { "title": "Calendario", "description": "Calendario personal por vendedor" }
+            {
+              "title": "Principal",
+              "description": "Inicio personalizado"
+            },
+            {
+              "title": "Menu",
+              "description": "Configuracion modular"
+            },
+            {
+              "title": "Calendario",
+              "description": "Calendario personal por vendedor"
+            }
           ]
         },
         "comisiones": {
-           "name": "Gestion",
+          "name": "Gestion",
           "description": "Cálculo y liquidación",
           "images": [
-            { "title": "Vendedores", "description": "Gestion de vendedores" },
-            { "title": "Ventas", "description": "Control de ventas por vendedor" }
+            {
+              "title": "Vendedores",
+              "description": "Gestion de vendedores"
+            },
+            {
+              "title": "Ventas",
+              "description": "Control de ventas por vendedor"
+            }
           ]
         }
       }
@@ -417,7 +504,10 @@
           "name": "Catálogo Online",
           "description": "Publicación de productos",
           "images": [
-            { "title": "Principal", "description": "Catalogo web " },
+            {
+              "title": "Principal",
+              "description": "Catalogo web "
+            },
             {
               "title": "Seleccion y venta",
               "description": "Modulado y acceso directo a venta"
@@ -432,10 +522,16 @@
           "name": "Configuacion",
           "description": "Gestión del catalogo",
           "images": [
-            { "title": "Creacion", "description": "Total libertad modular" },
-            { "title": "Importacion", "description": "Recuperacion de datos de fabrica" }
+            {
+              "title": "Creacion",
+              "description": "Total libertad modular"
+            },
+            {
+              "title": "Importacion",
+              "description": "Recuperacion de datos de fabrica"
+            }
           ]
-        }  
+        }
       }
     },
     "impresoras3d": {

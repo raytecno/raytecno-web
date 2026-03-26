@@ -62,7 +62,10 @@
               "title": "Árvore de Materiais",
               "description": "Visão hierárquica da estrutura"
             },
-            { "title": "Custos", "description": "Cálculo automático de custos" }
+            {
+              "title": "Custos",
+              "description": "Cálculo automático de custos"
+            }
           ]
         },
         "imagenes": {
@@ -73,8 +76,14 @@
               "title": "Galeria",
               "description": "Gestão de imagens múltiplas"
             },
-            { "title": "Visualizador", "description": "Visualização com zoom" },
-            { "title": "Importação", "description": "Carga massiva de imagens" }
+            {
+              "title": "Visualizador",
+              "description": "Visualização com zoom"
+            },
+            {
+              "title": "Importação",
+              "description": "Carga massiva de imagens"
+            }
           ]
         },
         "layout": {
@@ -89,7 +98,10 @@
               "title": "Campos",
               "description": "Campos personalizados sem código"
             },
-            { "title": "Modelos", "description": "Salvamento de configurações" }
+            {
+              "title": "Modelos",
+              "description": "Salvamento de configurações"
+            }
           ]
         }
       }
@@ -140,7 +152,10 @@
           "name": "Faturas",
           "description": "Faturamento eletrônico e tradicional",
           "images": [
-            { "title": "Faturas", "description": "Lista de faturas emitidas" },
+            {
+              "title": "Faturas",
+              "description": "Lista de faturas emitidas"
+            },
             {
               "title": "Nova Fatura",
               "description": "Faturamento manual ou de remessas"
@@ -155,9 +170,18 @@
           "name": "Clientes",
           "description": "Base de dados de clientes",
           "images": [
-            { "title": "Lista", "description": "Diretório de clientes" },
-            { "title": "Ficha", "description": "Dados completos do cliente" },
-            { "title": "Histórico", "description": "Histórico de operações" }
+            {
+              "title": "Lista",
+              "description": "Diretório de clientes"
+            },
+            {
+              "title": "Ficha",
+              "description": "Dados completos do cliente"
+            },
+            {
+              "title": "Histórico",
+              "description": "Histórico de operações"
+            }
           ]
         }
       }
@@ -172,12 +196,18 @@
           "name": "Ordens de Fabricação",
           "description": "Gestão de ordens de fabricação",
           "images": [
-            { "title": "Lista OF", "description": "Visão geral de ordens" },
+            {
+              "title": "Lista OF",
+              "description": "Visão geral de ordens"
+            },
             {
               "title": "Nova OF",
               "description": "Criação de ordem de trabalho"
             },
-            { "title": "Acompanhamento", "description": "Estado da produção" }
+            {
+              "title": "Acompanhamento",
+              "description": "Estado da produção"
+            }
           ]
         },
         "fases": {
@@ -188,24 +218,42 @@
               "title": "Fases de Produção",
               "description": "Definição do processo produtivo"
             },
-            { "title": "Tempos", "description": "Controle de tempos por fase" },
-            { "title": "Operários", "description": "Atribuição de recursos" }
+            {
+              "title": "Tempos",
+              "description": "Controle de tempos por fase"
+            },
+            {
+              "title": "Operários",
+              "description": "Atribuição de recursos"
+            }
           ]
         },
         "fundicion": {
           "name": "Fundição",
           "description": "Controle do processo de fundição",
           "images": [
-            { "title": "Fundições", "description": "Registro de fundições" },
-            { "title": "Perdas", "description": "Controle de perdas" },
-            { "title": "Ligas", "description": "Composição de metais" }
+            {
+              "title": "Fundições",
+              "description": "Registro de fundições"
+            },
+            {
+              "title": "Perdas",
+              "description": "Controle de perdas"
+            },
+            {
+              "title": "Ligas",
+              "description": "Composição de metais"
+            }
           ]
         },
         "inventario": {
           "name": "Estoque",
           "description": "Controle de estoque e movimentos",
           "images": [
-            { "title": "Estoque", "description": "Inventário em tempo real" },
+            {
+              "title": "Estoque",
+              "description": "Inventário em tempo real"
+            },
             {
               "title": "Movimentos",
               "description": "Rastreabilidade completa"
@@ -228,23 +276,31 @@
           "name": "Contabilidade",
           "description": "Plano de contas e lançamentos",
           "images": [
-            { "title": "Plano de Contas", "description": "Estrutura contábil" },
-            { "title": "Lançamentos", "description": "Registro de movimentos" },
-            { "title": "Balanço", "description": "Demonstrações financeiras" }
+            {
+              "title": "Plano de Contas",
+              "description": "Estrutura contábil"
+            },
+            {
+              "title": "Lançamentos",
+              "description": "Registro de movimentos"
+            },
+            {
+              "title": "Balanço",
+              "description": "Demonstrações financeiras"
+            }
           ]
         },
         "tesoreria": {
           "name": "Tesouraria",
-          "description": "Controle de recebimentos e pagamentos",
+          "description": "Controle de liquidez, recebimentos e pagamentos",
           "images": [
-            { "title": "Tesouraria", "description": "Painel de tesouraria" },
             {
-              "title": "Recebimentos",
-              "description": "Gestão de recebimentos pendentes"
+              "title": "Controle de Liquidez",
+              "description": "Dashboard com KPIs de tesouraria líquida, índice de liquidez, dias de cobertura e posição financeira"
             },
             {
-              "title": "Pagamentos",
-              "description": "Controle de pagamentos a fornecedores"
+              "title": "Vencimentos Recebimentos vs Pagamentos",
+              "description": "Gráfico comparativo de recebimentos e pagamentos com líquido acumulado por mês"
             }
           ]
         },
@@ -266,34 +322,40 @@
             }
           ]
         },
-       "balances": {
-  "name": "Balanços",
-  "description": "Balanço patrimonial e demonstrações financeiras",
-  "images": [
-    {
-      "title": "Balanço Mensal",
-      "description": "Visão mensal do balanço patrimonial com evolução JAN-DEZ"
-    },
-    {
-      "title": "Visão Dupla",
-      "description": "Balanço em formato duplo Ativo/Passivo com seletor de relatórios"
-    },
-    {
-      "title": "Visão Contas",
-      "description": "Estrutura de nós com fórmulas e códigos de conta atribuídos"
-    },
-    {
-      "title": "Balanços + Valores",
-      "description": "Detalhe expandido com saldos por conta contábil"
-    }
-  ]
-},
+        "balances": {
+          "name": "Balanços",
+          "description": "Balanço patrimonial e demonstrações financeiras",
+          "images": [
+            {
+              "title": "Balanço Mensal",
+              "description": "Visão mensal do balanço patrimonial com evolução JAN-DEZ"
+            },
+            {
+              "title": "Visão Dupla",
+              "description": "Balanço em formato duplo Ativo/Passivo com seletor de relatórios"
+            },
+            {
+              "title": "Visão Contas",
+              "description": "Estrutura de nós com fórmulas e códigos de conta atribuídos"
+            },
+            {
+              "title": "Balanços + Valores",
+              "description": "Detalhe expandido com saldos por conta contábil"
+            }
+          ]
+        },
         "informes": {
           "name": "Relatórios",
           "description": "Balanço, DRE e índices financeiros",
           "images": [
-            { "title": "Balanço", "description": "Balanço patrimonial" },
-            { "title": "DRE", "description": "Demonstração de resultados" },
+            {
+              "title": "Balanço",
+              "description": "Balanço patrimonial"
+            },
+            {
+              "title": "DRE",
+              "description": "Demonstração de resultados"
+            },
             {
               "title": "Índices",
               "description": "Análise de índices financeiros"
@@ -312,38 +374,62 @@
           "name": "Operações",
           "description": "Histórico de todas as operações",
           "images": [
-            { "title": "Busca", "description": "Localização de operações" },
-            { "title": "Detalhe", "description": "Informação completa" },
-            { "title": "Exportação", "description": "Download de dados" }
+            {
+              "title": "Busca",
+              "description": "Localização de operações"
+            },
+            {
+              "title": "Detalhe",
+              "description": "Informação completa"
+            },
+            {
+              "title": "Exportação",
+              "description": "Download de dados"
+            }
           ]
         },
         "trazabilidad": {
           "name": "Rastreabilidade",
           "description": "Acompanhamento de peças",
           "images": [
-            { "title": "Por Peça", "description": "História de cada artigo" },
-            { "title": "Por Lote", "description": "Rastreabilidade por lotes" },
-            { "title": "Certificados", "description": "Documentação associada" }
+            {
+              "title": "Por Peça",
+              "description": "História de cada artigo"
+            },
+            {
+              "title": "Por Lote",
+              "description": "Rastreabilidade por lotes"
+            },
+            {
+              "title": "Certificados",
+              "description": "Documentação associada"
+            }
           ]
         }
       }
     },
     "inventario": {
-  "title": "Inventários",
-  "subtitle": "Gestão de inventários e distribuições",
-  "metaTitle": "Inventários | RayGold ERP - Gestão de Estoques",
-  "metaDescription": "Gestão de recursos, estoques, movimentos e distribuições para joalherias.",
-  "sections": {
-    "distribucion": {
-      "name": "Distribuições",
-      "description": "Gestão de distribuições e armazéns",
-      "images": [
-        { "title": "Principal", "description": "Lista de distribuições" },
-        { "title": "Geração", "description": "Informação completa" }
-      ]
-    }
-  }
-},
+      "title": "Inventários",
+      "subtitle": "Gestão de inventários e distribuições",
+      "metaTitle": "Inventários | RayGold ERP - Gestão de Estoques",
+      "metaDescription": "Gestão de recursos, estoques, movimentos e distribuições para joalherias.",
+      "sections": {
+        "distribucion": {
+          "name": "Distribuições",
+          "description": "Gestão de distribuições e armazéns",
+          "images": [
+            {
+              "title": "Principal",
+              "description": "Lista de distribuições"
+            },
+            {
+              "title": "Geração",
+              "description": "Informação completa"
+            }
+          ]
+        }
+      }
+    },
     "estadisticas": {
       "title": "Estatísticas",
       "subtitle": "Relatórios e painéis para decisões",
@@ -354,18 +440,36 @@
           "name": "Dashboards",
           "description": "Painéis de controle visuais",
           "images": [
-            { "title": "Principal", "description": "KPIs principais" },
-            { "title": "Vendas", "description": "Métricas comerciais" },
-            { "title": "Produção", "description": "Indicadores de fábrica" }
+            {
+              "title": "Principal",
+              "description": "KPIs principais"
+            },
+            {
+              "title": "Vendas",
+              "description": "Métricas comerciais"
+            },
+            {
+              "title": "Produção",
+              "description": "Indicadores de fábrica"
+            }
           ]
         },
         "informes": {
           "name": "Relatórios",
           "description": "Relatórios personalizáveis",
           "images": [
-            { "title": "Catálogo", "description": "Relatórios predefinidos" },
-            { "title": "Designer", "description": "Criador de relatórios" },
-            { "title": "Agendamento", "description": "Envio automático" }
+            {
+              "title": "Catálogo",
+              "description": "Relatórios predefinidos"
+            },
+            {
+              "title": "Designer",
+              "description": "Criador de relatórios"
+            },
+            {
+              "title": "Agendamento",
+              "description": "Envio automático"
+            }
           ]
         }
       }
@@ -380,27 +484,54 @@
           "name": "Equipe",
           "description": "Gestão da equipe comercial",
           "images": [
-            { "title": "Vendedores", "description": "Lista da equipe" },
-            { "title": "Zonas", "description": "Atribuição de territórios" },
-            { "title": "Metas", "description": "Objetivos de venda" }
+            {
+              "title": "Vendedores",
+              "description": "Lista da equipe"
+            },
+            {
+              "title": "Zonas",
+              "description": "Atribuição de territórios"
+            },
+            {
+              "title": "Metas",
+              "description": "Objetivos de venda"
+            }
           ]
         },
         "comisiones": {
           "name": "Comissões",
           "description": "Cálculo e liquidação",
           "images": [
-            { "title": "Regras", "description": "Configuração de comissões" },
-            { "title": "Cálculo", "description": "Liquidação automática" },
-            { "title": "Histórico", "description": "Pagamentos realizados" }
+            {
+              "title": "Regras",
+              "description": "Configuração de comissões"
+            },
+            {
+              "title": "Cálculo",
+              "description": "Liquidação automática"
+            },
+            {
+              "title": "Histórico",
+              "description": "Pagamentos realizados"
+            }
           ]
         },
         "rutas": {
           "name": "Rotas",
           "description": "Planejamento de visitas",
           "images": [
-            { "title": "Calendário", "description": "Agenda de visitas" },
-            { "title": "Mapa", "description": "Vista geográfica" },
-            { "title": "Relatórios", "description": "Resultados de visitas" }
+            {
+              "title": "Calendário",
+              "description": "Agenda de visitas"
+            },
+            {
+              "title": "Mapa",
+              "description": "Vista geográfica"
+            },
+            {
+              "title": "Relatórios",
+              "description": "Resultados de visitas"
+            }
           ]
         }
       }
@@ -415,8 +546,14 @@
           "name": "Catálogo Online",
           "description": "Publicação de produtos",
           "images": [
-            { "title": "Produtos", "description": "Gestão do catálogo web" },
-            { "title": "Categorias", "description": "Organização de produtos" },
+            {
+              "title": "Produtos",
+              "description": "Gestão do catálogo web"
+            },
+            {
+              "title": "Categorias",
+              "description": "Organização de produtos"
+            },
             {
               "title": "Sincronização",
               "description": "Atualização automática"
@@ -427,18 +564,36 @@
           "name": "Pedidos Web",
           "description": "Gestão de pedidos online",
           "images": [
-            { "title": "Recepção", "description": "Pedidos entrantes" },
-            { "title": "Processamento", "description": "Fluxo de trabalho" },
-            { "title": "Envios", "description": "Logística integrada" }
+            {
+              "title": "Recepção",
+              "description": "Pedidos entrantes"
+            },
+            {
+              "title": "Processamento",
+              "description": "Fluxo de trabalho"
+            },
+            {
+              "title": "Envios",
+              "description": "Logística integrada"
+            }
           ]
         },
         "integraciones": {
           "name": "Integrações",
           "description": "Conexão com plataformas",
           "images": [
-            { "title": "Shopify", "description": "Integração Shopify" },
-            { "title": "WooCommerce", "description": "Integração WordPress" },
-            { "title": "Marketplaces", "description": "Amazon, eBay, etc." }
+            {
+              "title": "Shopify",
+              "description": "Integração Shopify"
+            },
+            {
+              "title": "WooCommerce",
+              "description": "Integração WordPress"
+            },
+            {
+              "title": "Marketplaces",
+              "description": "Amazon, eBay, etc."
+            }
           ]
         }
       }
