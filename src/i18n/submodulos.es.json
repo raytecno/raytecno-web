@@ -280,7 +280,25 @@
             { "title": "Modelo 303", "description": "Declaración trimestral" },
             { "title": "SII", "description": "Suministro inmediato" }
           ]
-        }
+        },
+        "bancos": {
+  "name": "Bancos",
+  "description": "Conciliación bancaria automática",
+  "images": [
+    { "title": "Cuentas", "description": "Gestión de cuentas bancarias" },
+    { "title": "Conciliación", "description": "Conciliación automática" },
+    { "title": "Extractos", "description": "Importación de extractos" }
+  ]
+},
+"informes": {
+  "name": "Informes",
+  "description": "Balance, PyG y ratios financieros",
+  "images": [
+    { "title": "Balance", "description": "Balance de situación" },
+    { "title": "PyG", "description": "Cuenta de pérdidas y ganancias" },
+    { "title": "Ratios", "description": "Análisis de ratios financieros" }
+  ]
+}
       }
     },
     "historicos": {
