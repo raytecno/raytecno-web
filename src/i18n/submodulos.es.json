@@ -288,15 +288,19 @@
       "sections": {
         "contabilidad": {
           "name": "Contabilidad",
-          "description": "Plan contable y asientos",
+          "description": "Plan contable, asientos y saldos",
           "images": [
             {
               "title": "Plan de Cuentas",
-              "description": "Estructura contable"
+              "description": "Mantenimiento del plan contable con grupos, niveles y cuentas PGC y auxiliares"
             },
             {
               "title": "Asientos",
-              "description": "Registro de movimientos"
+              "description": "Registro de movimientos contables"
+            },
+            {
+              "title": "Balance de Sumas y Saldos",
+              "description": "Vista de Debe, Haber y Saldo por cuenta con filtros de nivel y grupo"
             }
           ]
         },
@@ -311,6 +315,24 @@
             {
               "title": "Vencimientos Cobros vs Pagos",
               "description": "Gráfico comparativo de cobros y pagos con neto acumulado por mes"
+            },
+            {
+              "title": "Efectos",
+              "description": "Listado de efectos emitidos y recibidos con estado Pendiente/Cobrado por factura"
+            },
+            {
+              "title": "Detalle de Efectos",
+              "description": "Desglose de efectos por tipo, remesa y banco con importes cobrados y pendientes"
+            }
+          ]
+        },
+        "cobros": {
+          "name": "Remesas",
+          "description": "Gestión de remesas bancarias de cobro",
+          "images": [
+            {
+              "title": "Remesas",
+              "description": "Gestión de remesas al cobro, en efectivo y al descuento con estado y seguimiento bancario"
             }
           ]
         },
@@ -343,6 +365,10 @@
             {
               "title": "Balances + Valores",
               "description": "Detalle expandido con saldos por cuenta contable"
+            },
+            {
+              "title": "Estructura Estados Financieros",
+              "description": "Mantenimiento de nodos con fórmulas y cuentas asignadas para cada elemento del balance"
             }
           ]
         }
