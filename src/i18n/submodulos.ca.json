@@ -257,26 +257,28 @@
             }
           ]
         },
-        "bancos": {
-          "name": "Bancs",
-          "description": "Conciliació bancària automàtica",
-          "images": [
-            { "title": "Bancs", "description": "Gestió de comptes bancaris" },
-            { "title": "Conciliació", "description": "Conciliació automàtica" },
-            { "title": "Extractes", "description": "Importació d'extractes" }
-          ]
-        },
-        "informes": {
-          "name": "Informes",
-          "description": "Balanç, PyG i ràtios financers",
-          "images": [
-            { "title": "Balanç", "description": "Balanç de situació" },
-            { "title": "PyG", "description": "Compte de pèrdues i guanys" },
-            { "title": "Ràtios", "description": "Anàlisi de ràtios financers" }
-          ]
-        }
-      }
+        "balances": {
+  "name": "Balanços",
+  "description": "Balanç de situació i estats financers",
+  "images": [
+    {
+      "title": "Balanç per Mesos",
+      "description": "Vista mensual del balanç de situació amb evolució GEN-DES"
     },
+    {
+      "title": "Vista Doble",
+      "description": "Balanç en format doble Actiu/Passiu amb selector d'informes"
+    },
+    {
+      "title": "Vista Comptes",
+      "description": "Estructura de nodes amb fórmules i codis de compte assignats"
+    },
+    {
+      "title": "Balanços + Valors",
+      "description": "Detall expandit amb saldos per compte comptable"
+    }
+  ]
+},
     "historicos": {
       "title": "Històrics",
       "subtitle": "Dades històriques i traçabilitat completa",

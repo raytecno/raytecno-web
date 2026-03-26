@@ -263,15 +263,6 @@
             { "title": "Conciliación", "description": "Cuadre de cuentas" }
           ]
         },
-        "pagos": {
-          "name": "Pagos",
-          "description": "Gestión de cuentas por pagar",
-          "images": [
-            { "title": "Pendientes", "description": "Facturas por pagar" },
-            { "title": "Programación", "description": "Calendario de pagos" },
-            { "title": "Histórico", "description": "Pagos realizados" }
-          ]
-        },
         "iva": {
           "name": "IVA",
           "description": "Liquidación y declaraciones",
@@ -281,13 +272,26 @@
             { "title": "SII", "description": "Suministro inmediato" }
           ]
         },
-        "bancos": {
-  "name": "Bancos",
-  "description": "Conciliación bancaria automática",
+        "balances": {
+  "name": "Balances",
+  "description": "Balance de situación y estados financieros",
   "images": [
-    { "title": "Cuentas", "description": "Gestión de cuentas bancarias" },
-    { "title": "Conciliación", "description": "Conciliación automática" },
-    { "title": "Extractos", "description": "Importación de extractos" }
+    {
+      "title": "Balance por Meses",
+      "description": "Vista mensual del balance de situación con evolución ENE-DIC"
+    },
+    {
+      "title": "Vista Doble",
+      "description": "Balance en formato doble Activo/Pasivo con selector de informes"
+    },
+    {
+      "title": "Vista Cuentas",
+      "description": "Estructura de nodos con fórmulas y códigos de cuenta asignados"
+    },
+    {
+      "title": "Balances + Valores",
+      "description": "Detalle expandido con saldos por cuenta contable"
+    }
   ]
 },
 "informes": {

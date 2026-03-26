@@ -266,15 +266,28 @@
             }
           ]
         },
-        "bancos": {
-          "name": "Bancos",
-          "description": "Conciliação bancária automática",
-          "images": [
-            { "title": "Bancos", "description": "Gestão de contas bancárias" },
-            { "title": "Conciliação", "description": "Conciliação automática" },
-            { "title": "Extratos", "description": "Importação de extratos" }
-          ]
-        },
+       "balances": {
+  "name": "Balanços",
+  "description": "Balanço patrimonial e demonstrações financeiras",
+  "images": [
+    {
+      "title": "Balanço Mensal",
+      "description": "Visão mensal do balanço patrimonial com evolução JAN-DEZ"
+    },
+    {
+      "title": "Visão Dupla",
+      "description": "Balanço em formato duplo Ativo/Passivo com seletor de relatórios"
+    },
+    {
+      "title": "Visão Contas",
+      "description": "Estrutura de nós com fórmulas e códigos de conta atribuídos"
+    },
+    {
+      "title": "Balanços + Valores",
+      "description": "Detalhe expandido com saldos por conta contábil"
+    }
+  ]
+},
         "informes": {
           "name": "Relatórios",
           "description": "Balanço, DRE e índices financeiros",

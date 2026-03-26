@@ -128,7 +128,7 @@ export const modulosConfig: Record<ModuloId, ModuloConfig> = {
       { id: 'contabilidad', prefix: 'CON' },
       { id: 'tesoreria', prefix: 'TES' },
       { id: 'iva', prefix: 'IVA' },
-      { id: 'bancos', prefix: 'BAN' },
+      { id: 'balances', prefix: 'BAL' },
       { id: 'informes', prefix: 'INF' },
     ],
   },

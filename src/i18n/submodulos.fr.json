@@ -272,21 +272,28 @@
             }
           ]
         },
-        "bancos": {
-          "name": "Banques",
-          "description": "Rapprochement bancaire automatique",
-          "images": [
-            {
-              "title": "Banques",
-              "description": "Gestion des comptes bancaires"
-            },
-            {
-              "title": "Rapprochement",
-              "description": "Rapprochement automatique"
-            },
-            { "title": "Relevés", "description": "Importation des relevés" }
-          ]
-        },
+        "balances": {
+  "name": "Bilans",
+  "description": "Bilan de situation et états financiers",
+  "images": [
+    {
+      "title": "Bilan Mensuel",
+      "description": "Vue mensuelle du bilan avec évolution JAN-DÉC"
+    },
+    {
+      "title": "Vue Double",
+      "description": "Bilan en format double Actif/Passif avec sélecteur de rapports"
+    },
+    {
+      "title": "Vue Comptes",
+      "description": "Structure de nœuds avec formules et codes de compte assignés"
+    },
+    {
+      "title": "Bilans + Valeurs",
+      "description": "Détail étendu avec soldes par compte comptable"
+    }
+  ]
+},
         "informes": {
           "name": "Rapports",
           "description": "Bilan, compte de résultat et ratios",

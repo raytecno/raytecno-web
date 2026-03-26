@@ -325,7 +325,29 @@
               "description": "Immediate supply"
             }
           ]
-        }
+        },
+        "balances": {
+  "name": "Balance Sheets",
+  "description": "Balance sheet and financial statements",
+  "images": [
+    {
+      "title": "Monthly Balance",
+      "description": "Monthly balance sheet view with JAN-DEC evolution"
+    },
+    {
+      "title": "Double View",
+      "description": "Balance in dual Assets/Liabilities format with report selector"
+    },
+    {
+      "title": "Accounts View",
+      "description": "Node structure with formulas and assigned account codes"
+    },
+    {
+      "title": "Balances + Values",
+      "description": "Expanded detail with balances per accounting account"
+    }
+  ]
+}
       }
     },
     "historicos": {
