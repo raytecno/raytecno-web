@@ -268,25 +268,25 @@
     },
     "finanzas": {
       "title": "Finanças",
-      "subtitle": "Contabilidade, tesouraria e impostos integrados",
+      "subtitle": "Contabilidade, tesouraria e IVA integrados",
       "metaTitle": "Finanças | RayGold ERP - Gestão Financeira",
       "metaDescription": "Contabilidade integrada, gestão de recebimentos, pagamentos, bancos e relatórios financeiros para joalherias.",
       "sections": {
         "contabilidad": {
           "name": "Contabilidade",
-          "description": "Plano de contas e lançamentos",
+          "description": "Plano de contas, lançamentos e saldos",
           "images": [
             {
               "title": "Plano de Contas",
-              "description": "Estrutura contábil"
+              "description": "Manutenção do plano de contas com grupos, níveis e contas do PGC e auxiliares"
             },
             {
               "title": "Lançamentos",
-              "description": "Registro de movimentos"
+              "description": "Registro de movimentos contábeis"
             },
             {
-              "title": "Balanço",
-              "description": "Demonstrações financeiras"
+              "title": "Balancete",
+              "description": "Vista de Débito, Crédito e Saldo por conta com filtros de nível e grupo"
             }
           ]
         },
@@ -301,24 +301,28 @@
             {
               "title": "Vencimentos Recebimentos vs Pagamentos",
               "description": "Gráfico comparativo de recebimentos e pagamentos com líquido acumulado por mês"
+            },
+            {
+              "title": "Títulos",
+              "description": "Listagem de títulos emitidos e recebidos com status Pendente/Recebido por fatura"
+            },
+            {
+              "title": "Detalhe de Títulos",
+              "description": "Detalhamento de títulos por tipo, remessa e banco com valores recebidos e pendentes"
             }
           ]
         },
         "iva": {
-          "name": "Impostos",
-          "description": "Apuração e declarações",
+          "name": "IVA e Remessas",
+          "description": "Liquidação de IVA e gestão de remessas bancárias",
           "images": [
             {
-              "title": "Apuração",
-              "description": "Cálculo automático de impostos"
+              "title": "Livros IVA",
+              "description": "Registro e liquidação de IVA"
             },
             {
-              "title": "Declarações",
-              "description": "Geração de declarações fiscais"
-            },
-            {
-              "title": "Configuração",
-              "description": "Tipos de impostos e retenções"
+              "title": "Remessas",
+              "description": "Gestão de remessas a receber, em dinheiro e com desconto com status e rastreamento bancário"
             }
           ]
         },
@@ -341,24 +345,10 @@
             {
               "title": "Balanços + Valores",
               "description": "Detalhe expandido com saldos por conta contábil"
-            }
-          ]
-        },
-        "informes": {
-          "name": "Relatórios",
-          "description": "Balanço, DRE e índices financeiros",
-          "images": [
-            {
-              "title": "Balanço",
-              "description": "Balanço patrimonial"
             },
             {
-              "title": "DRE",
-              "description": "Demonstração de resultados"
-            },
-            {
-              "title": "Índices",
-              "description": "Análise de índices financeiros"
+              "title": "Estrutura Demonstrações Financeiras",
+              "description": "Manutenção de nós com fórmulas e contas atribuídas a cada elemento do balanço"
             }
           ]
         }

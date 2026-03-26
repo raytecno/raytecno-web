@@ -256,19 +256,19 @@
       "sections": {
         "contabilidad": {
           "name": "Accounting",
-          "description": "Chart of accounts and entries",
+          "description": "Chart of accounts, journal entries and balances",
           "images": [
             {
               "title": "Chart of Accounts",
-              "description": "Accounting structure"
+              "description": "Maintenance of the chart of accounts with groups, levels and PGC and auxiliary accounts"
             },
             {
-              "title": "Entries",
-              "description": "Movement registry"
+              "title": "Journal Entries",
+              "description": "Record of accounting movements"
             },
             {
-              "title": "Balances",
-              "description": "Financial statements"
+              "title": "Trial Balance",
+              "description": "Debit, Credit and Balance view per account with level and group filters"
             }
           ]
         },
@@ -283,42 +283,28 @@
             {
               "title": "Collections vs Payments",
               "description": "Comparative chart of collections and payments with monthly net accumulation"
-            }
-          ]
-        },
-        "pagos": {
-          "name": "Payments",
-          "description": "Accounts payable management",
-          "images": [
-            {
-              "title": "Pending",
-              "description": "Invoices to pay"
             },
             {
-              "title": "Scheduling",
-              "description": "Payment calendar"
+              "title": "Bills",
+              "description": "List of issued and received bills with Pending/Collected status per invoice"
             },
             {
-              "title": "History",
-              "description": "Payments made"
+              "title": "Bill Detail",
+              "description": "Breakdown of bills by type, remittance and bank with collected and pending amounts"
             }
           ]
         },
         "iva": {
-          "name": "VAT",
-          "description": "Settlement and declarations",
+          "name": "VAT & Remittances",
+          "description": "VAT settlement and bank remittance management",
           "images": [
             {
-              "title": "Books",
-              "description": "VAT registry"
+              "title": "VAT Books",
+              "description": "VAT registration and settlement"
             },
             {
-              "title": "Form 303",
-              "description": "Quarterly declaration"
-            },
-            {
-              "title": "SII",
-              "description": "Immediate supply"
+              "title": "Remittances",
+              "description": "Management of collection, cash and discount remittances with status and bank tracking"
             }
           ]
         },
@@ -341,6 +327,10 @@
             {
               "title": "Balances + Values",
               "description": "Expanded detail with balances per accounting account"
+            },
+            {
+              "title": "Financial Statements Structure",
+              "description": "Node maintenance with formulas and accounts assigned to each balance sheet element"
             }
           ]
         }

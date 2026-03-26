@@ -268,25 +268,25 @@
     },
     "finanzas": {
       "title": "Finances",
-      "subtitle": "Comptabilité, trésorerie et TVA intégrés",
+      "subtitle": "Comptabilité, trésorerie et TVA intégrées",
       "metaTitle": "Finances | RayGold ERP - Gestion Financière",
       "metaDescription": "Comptabilité intégrée, gestion des encaissements, paiements, banques et rapports financiers pour bijouteries.",
       "sections": {
         "contabilidad": {
           "name": "Comptabilité",
-          "description": "Plan comptable et écritures",
+          "description": "Plan comptable, écritures et soldes",
           "images": [
             {
-              "title": "Plan de Comptes",
-              "description": "Structure comptable"
+              "title": "Plan Comptable",
+              "description": "Maintenance du plan comptable avec groupes, niveaux et comptes PCG et auxiliaires"
             },
             {
               "title": "Écritures",
-              "description": "Registre des mouvements"
+              "description": "Enregistrement des mouvements comptables"
             },
             {
-              "title": "Balance",
-              "description": "États financiers"
+              "title": "Balance des Comptes",
+              "description": "Vue Débit, Crédit et Solde par compte avec filtres de niveau et groupe"
             }
           ]
         },
@@ -301,24 +301,28 @@
             {
               "title": "Échéances Encaissements vs Paiements",
               "description": "Graphique comparatif des encaissements et paiements avec net cumulé mensuel"
+            },
+            {
+              "title": "Effets",
+              "description": "Liste des effets émis et reçus avec statut En attente/Encaissé par facture"
+            },
+            {
+              "title": "Détail des Effets",
+              "description": "Détail des effets par type, remise et banque avec montants encaissés et en attente"
             }
           ]
         },
         "iva": {
-          "name": "TVA",
-          "description": "Liquidation et déclarations",
+          "name": "TVA et Remises",
+          "description": "Liquidation de TVA et gestion des remises bancaires",
           "images": [
             {
-              "title": "Liquidation TVA",
-              "description": "Calcul automatique de TVA"
+              "title": "Livres TVA",
+              "description": "Enregistrement et liquidation de TVA"
             },
             {
-              "title": "Modèles",
-              "description": "Génération des modèles fiscaux"
-            },
-            {
-              "title": "Configuration",
-              "description": "Types de TVA et retenues"
+              "title": "Remises",
+              "description": "Gestion des remises à l'encaissement, en espèces et à l'escompte avec statut et suivi bancaire"
             }
           ]
         },
@@ -341,24 +345,10 @@
             {
               "title": "Bilans + Valeurs",
               "description": "Détail étendu avec soldes par compte comptable"
-            }
-          ]
-        },
-        "informes": {
-          "name": "Rapports",
-          "description": "Bilan, compte de résultat et ratios",
-          "images": [
-            {
-              "title": "Bilan",
-              "description": "Bilan de situation"
             },
             {
-              "title": "Compte de Résultat",
-              "description": "Compte de pertes et profits"
-            },
-            {
-              "title": "Ratios",
-              "description": "Analyse des ratios financiers"
+              "title": "Structure États Financiers",
+              "description": "Maintenance des nœuds avec formules et comptes assignés à chaque élément du bilan"
             }
           ]
         }

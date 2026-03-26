@@ -274,19 +274,19 @@
       "sections": {
         "contabilidad": {
           "name": "Comptabilitat",
-          "description": "Pla comptable i assentaments",
+          "description": "Pla comptable, assentaments i saldos",
           "images": [
             {
               "title": "Pla de Comptes",
-              "description": "Estructura comptable"
+              "description": "Manteniment del pla comptable amb grups, nivells i comptes PGC i auxiliars"
             },
             {
               "title": "Assentaments",
-              "description": "Registre de moviments"
+              "description": "Registre de moviments comptables"
             },
             {
-              "title": "Balanç",
-              "description": "Estats financers"
+              "title": "Balanç de Sumes i Saldos",
+              "description": "Vista de Deure, Haver i Saldo per compte amb filtres de nivell i grup"
             }
           ]
         },
@@ -301,24 +301,28 @@
             {
               "title": "Venciments Cobraments vs Pagaments",
               "description": "Gràfic comparatiu de cobraments i pagaments amb net acumulat per mes"
+            },
+            {
+              "title": "Efectes",
+              "description": "Llistat d'efectes emesos i rebuts amb estat Pendent/Cobrat per factura"
+            },
+            {
+              "title": "Detall d'Efectes",
+              "description": "Desglossament d'efectes per tipus, remesa i banc amb imports cobrats i pendents"
             }
           ]
         },
         "iva": {
-          "name": "IVA",
-          "description": "Liquidació i declaracions",
+          "name": "IVA i Remeses",
+          "description": "Liquidació d'IVA i gestió de remeses bancàries",
           "images": [
             {
-              "title": "Liquidació IVA",
-              "description": "Càlcul automàtic d'IVA"
+              "title": "Llibres IVA",
+              "description": "Registre i liquidació d'IVA"
             },
             {
-              "title": "Models",
-              "description": "Generació de models fiscals"
-            },
-            {
-              "title": "Configuració",
-              "description": "Tipus d'IVA i retencions"
+              "title": "Remeses",
+              "description": "Gestió de remeses al cobrament, en efectiu i al descompte amb estat i seguiment bancari"
             }
           ]
         },
@@ -341,24 +345,10 @@
             {
               "title": "Balanços + Valors",
               "description": "Detall expandit amb saldos per compte comptable"
-            }
-          ]
-        },
-        "informes": {
-          "name": "Informes",
-          "description": "Balanç, PyG i ràtios financers",
-          "images": [
-            {
-              "title": "Balanç",
-              "description": "Balanç de situació"
             },
             {
-              "title": "PyG",
-              "description": "Compte de pèrdues i guanys"
-            },
-            {
-              "title": "Ràtios",
-              "description": "Anàlisi de ràtios financers"
+              "title": "Estructura Estats Financers",
+              "description": "Manteniment de nodes amb fórmules i comptes assignats per a cada element del balanç"
             }
           ]
         }
