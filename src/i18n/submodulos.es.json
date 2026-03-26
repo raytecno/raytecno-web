@@ -254,7 +254,7 @@
             { "title": "Balances", "description": "Estados financieros" }
           ]
         },
-        "cobros": {
+        "tesoreria": {
           "name": "Cobros",
           "description": "Gestión de cuentas por cobrar",
           "images": [
