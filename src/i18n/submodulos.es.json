@@ -326,23 +326,17 @@
             }
           ]
         },
-        "cobros": {
-          "name": "Remesas",
-          "description": "Gestión de remesas bancarias de cobro",
+        "iva": {
+          "name": "IVA y Remesas",
+          "description": "Liquidación de IVA y gestión de remesas bancarias",
           "images": [
+            {
+              "title": "Libros IVA",
+              "description": "Registro y liquidación de IVA"
+            },
             {
               "title": "Remesas",
               "description": "Gestión de remesas al cobro, en efectivo y al descuento con estado y seguimiento bancario"
-            }
-          ]
-        },
-        "iva": {
-          "name": "IVA",
-          "description": "Liquidación y declaraciones",
-          "images": [
-            {
-              "title": "Libros",
-              "description": "Registro de IVA"
             }
           ]
         },
