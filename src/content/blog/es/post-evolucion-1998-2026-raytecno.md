@@ -1,10 +1,12 @@
 ---
 title: "1998 → 2026: 28 años después, la arquitectura ERP de una joyería sigue siendo la misma (y eso es una buena noticia)"
-description: "Recuperamos dos diagramas que diseñé en 1998 para entender el flujo de un taller de joyería integrado. Comparados con cualquier ERP joyero moderno, el esquema conceptual no ha cambiado: lo que cambian son las capas tecnológicas que se construyen sobre él."
+excerpt: "Recuperamos dos diagramas que diseñé en 1998 para entender el flujo de un taller de joyería integrado. Comparados con cualquier ERP joyero moderno, el esquema conceptual no ha cambiado: lo que cambian son las capas tecnológicas que se construyen sobre él."
 author: "Agustín — Equipo RayTecno"
 category: "Arquitectura & ERP"
 tags: ["CIM", "ERP", "joyería", "arquitectura", "trazabilidad", "IoT", "industria 4.0"]
 date: 2026-05-05
+language: "es"
+seoKeyword: "28 años después"
 ---
 
 # 1998 → 2026: 28 años después, la arquitectura ERP de una joyería sigue siendo la misma

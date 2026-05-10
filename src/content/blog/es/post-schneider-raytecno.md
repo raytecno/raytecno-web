@@ -1,10 +1,12 @@
 ---
 title: "El caso Schneider: 5 lecciones de marketing estratégico que toda joyería puede aplicar (con o sin ERP)"
-description: "Cómo una marca secundaria de cerveza duplicó su cuota de mercado en 90 días, y qué pueden aprender las joyerías que compiten contra cadenas dominantes."
+excerpt: "Cómo una marca secundaria de cerveza duplicó su cuota de mercado en 90 días, y qué pueden aprender las joyerías que compiten contra cadenas dominantes."
 author: "Equipo RayTecno"
 category: "Estrategia & ERP"
 tags: ["marketing estratégico", "joyería", "ERP", "segmentación", "datos"]
 date: 2026-05-05
+language: "es"
+seoKeyword: "el caso Schneider"
 ---
 
 # El caso Schneider: 5 lecciones de marketing estratégico que toda joyería puede aplicar

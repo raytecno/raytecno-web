@@ -1,10 +1,12 @@
 ---
 title: "Fundición y microfusión en joyería: el corazón del taller, controlado desde el ERP"
-description: "Análisis técnico del proceso de microfusión a la cera perdida —desde el modelo CAD hasta la pieza acabada—, sus puntos críticos de calidad, sus variables de coste y cómo un ERP joyero moderno controla la trazabilidad del oro y la merma a través de cada fase."
+excerpt: "Análisis técnico del proceso de microfusión a la cera perdida —desde el modelo CAD hasta la pieza acabada—, sus puntos críticos de calidad, sus variables de coste y cómo un ERP joyero moderno controla la trazabilidad del oro y la merma a través de cada fase."
 author: "Equipo RayTecno"
 category: "Fabricación & ERP"
 tags: ["fundición", "microfusión", "cera perdida", "joyería", "ERP", "trazabilidad", "merma", "oro"]
 date: 2026-05-05
+language: "es"
+seoKeyword: "fundición y microfusión en joyería"
 ---
 
 # Fundición y microfusión en joyería: el corazón del taller

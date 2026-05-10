@@ -1,10 +1,12 @@
 ---
 title: "Abastecimiento a tiendas de joyería: cómo decidir cuánto producto enviar a cada punto de venta sin sobrestock ni rotura"
-description: "Guía técnica para joyerías con red de tiendas (propias o en grandes superficies). Fórmula de cálculo de necesidad, clasificación ABC del catálogo y modelo DRP aplicado al sector joyero, integrados en RayTecno."
+excerpt: "Guía técnica para joyerías con red de tiendas (propias o en grandes superficies). Fórmula de cálculo de necesidad, clasificación ABC del catálogo y modelo DRP aplicado al sector joyero, integrados en RayTecno."
 author: "Equipo RayTecno"
 category: "Logística & ERP"
 tags: ["abastecimiento", "DRP", "ABC", "stock", "joyería", "ERP", "retail", "tasa de cobertura"]
 date: 2026-05-05
+language: "es"
+seoKeyword: "abastecimiento a tiendas"
 ---
 
 # Abastecimiento a tiendas de joyería: cómo decidir cuánto enviar a cada punto de venta
