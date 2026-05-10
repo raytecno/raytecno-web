@@ -129,7 +129,7 @@ El cilindro se enfría con agua, lo que rompe el yeso. El árbol metálico se ex
 
 ## 3. Los puntos de control que el ERP debe gestionar
 
-A lo largo de las nueve fases anteriores, hay seis variables críticas que deben quedar registradas en el ERP para que el taller sea gobernable:
+A lo largo de las nueve fases anteriores, hay seis variables críticas que deben quedar registradas en un [ERP para fabricantes de joyería](/es) para que el taller sea gobernable:
 
 ### 3.1 Trazabilidad del metal
 
@@ -166,7 +166,7 @@ En joyería de alto valor, cada pieza única debe tener **registro fotográfico 
 
 ## 4. Los KPIs que la dirección debería ver cada lunes
 
-A nivel directivo, el ruido del taller se condensa en cinco números:
+A nivel directivo, el ruido del taller se condensa en cinco números que un buen [ERP joyero](/es) debería tener siempre a la vista:
 
 | KPI | Qué mide | Rango saludable |
 |---|---|---|

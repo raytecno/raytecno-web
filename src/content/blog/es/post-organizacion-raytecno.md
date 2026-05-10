@@ -63,7 +63,7 @@ Mintzberg propone que toda organización se compone de cinco partes —cúspide 
 
 **Caso joyero:** cadenas de joyería con 20+ tiendas y producción seriada (alianzas, esclavas estándar, sello de comunión). Procesos definidos al milímetro: cada referencia tiene su ficha, cada tienda su manual de operativa, cada empleado su procedimiento. Eficiente para volumen, **rígida ante cambios**.
 
-**Implicación para el ERP:** es el escenario donde un ERP especializado **da sus mayores retornos**. Estandarización de tarifas multitienda, control centralizado de stock, KPIs uniformes, replicación de procesos. RayTecno encaja especialmente bien en este perfil con su arquitectura multi-tenant y sus módulos de fabricación y distribución integrados. Riesgo a vigilar: el principal problema de la burocracia mecánica es la **obsesión por el control**, que puede paralizar la creatividad comercial en tienda.
+**Implicación para el ERP:** es el escenario donde un [ERP especializado en joyería](/es) **da sus mayores retornos**. Estandarización de tarifas multitienda, control centralizado de stock, KPIs uniformes, replicación de procesos. RayTecno encaja especialmente bien en este perfil con su arquitectura multi-tenant y sus módulos de fabricación y distribución integrados. Riesgo a vigilar: el principal problema de la burocracia mecánica es la **obsesión por el control**, que puede paralizar la creatividad comercial en tienda.
 
 ### 2.3 Burocracia profesional — la joyería de alta orfebrería y diseño
 
@@ -166,7 +166,7 @@ Mintzberg lo resume con una idea poderosa: **la organización efectiva es la que
 
 Las preguntas de partida del artículo —quién autoriza, quién decide, quién reporta— no son preguntas que un ERP responda. Son preguntas que **la dirección debe responder antes**, y que un ERP traduce después en permisos, flujos y trazabilidad.
 
-En **RayTecno** llevamos años acompañando joyerías en esta transición: del "lo hace quien puede" al sistema de roles bien delimitados, y de ahí a la operativa multi-tenant que sostiene grupos joyeros completos. Si su empresa está en el momento de redefinir estructura y necesita una base tecnológica que la soporte, [hablemos](https://www.raytecno.es/contacto).
+En **RayTecno** llevamos años acompañando joyerías en esta transición con nuestro [ERP para joyería](/es): del "lo hace quien puede" al sistema de roles bien delimitados, y de ahí a la operativa multi-tenant que sostiene grupos joyeros completos. Si su empresa está en el momento de redefinir estructura y necesita una base tecnológica que la soporte, [hablemos](https://www.raytecno.es/contacto).
 
 ---
 

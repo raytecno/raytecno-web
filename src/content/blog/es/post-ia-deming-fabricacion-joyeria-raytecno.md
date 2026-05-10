@@ -19,7 +19,7 @@ En el sector joyero, donde una pieza con un engaste flojo o un baño irregular d
 
 1. Los **14 puntos de Deming** y su vigencia real en 2026.
 2. Las capacidades de la **IA en fabricación y control de calidad** hoy.
-3. Cómo un **sistema de fabricación flexible (FMS)** integrado en un ERP joyero moderno como **RayTecno** materializa lo que en 1986 era casi filosofía.
+3. Cómo un **sistema de fabricación flexible (FMS)** integrado en un ERP joyero moderno como [RayGold](/es) materializa lo que en 1986 era casi filosofía.
 
 ---
 
@@ -174,7 +174,7 @@ Para que el post sea útil y no triunfalista, conviene nombrar los riesgos reale
 - **Caja negra.** Algunos modelos de deep learning detectan defectos pero no explican por qué. Para un maestro joyero acostumbrado a entender cada decisión, esto puede generar resistencia justificada.
 - **Coste real de implantación.** La IA en producción no es gratis: cámaras industriales, etiquetado de datasets (500-2.000 muestras por tipo de defecto), integración con ERP y formación del equipo. El payback existe, pero requiere inversión inicial.
 - **Falsa sensación de seguridad.** Un modelo con 99% de precisión todavía falla 1 de cada 100 veces. En joyería de alta gama, ese 1% puede ser una pieza muy cara.
-- **Pérdida de oficio.** Si los aprendices delegan en la IA todo lo que antes aprendían inspeccionando manualmente, se pierde transmisión de conocimiento tácito. Hay que diseñar la implantación para que la IA enseñe, no oculte.
+- **Pérdida de oficio.** Si los aprendices delegan en la IA todo lo que antes aprendían inspeccionando manualmente, se pierde transmisión de conocimiento tácito. Hay que diseñar la implantación para que la IA enseñe, no oculte. Por eso, un buen [ERP especializado en joyería](/es) no sustituye al oficio: lo aumenta, manteniendo siempre al humano como decisor final.
 
 ---
 

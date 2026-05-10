@@ -13,7 +13,7 @@ seoKeyword: "abastecimiento joyería ERP"
 
 > *Hay dos formas de equivocarse abasteciendo una tienda: enviar de menos —y perder ventas que no vuelven— o enviar de más —y dejar capital inmovilizado en producto que rota lento. La diferencia entre una joyería que crece y una que se ahoga en stock está en cómo evita ambas.*
 
-Una de las preguntas más frecuentes que recibimos en **RayTecno** procede de joyerías con red de tiendas: **"¿cuánto producto debo mandar a cada tienda y cuándo?"**. La pregunta parece sencilla, pero detrás se esconde uno de los problemas más complejos de la gestión joyera moderna, especialmente cuando hablamos de:
+Una de las preguntas más frecuentes que recibimos sobre nuestro [ERP especializado en joyería](/es) proviene de joyerías con red de tiendas: **"¿cuánto producto debo mandar a cada tienda y cuándo?"**. La pregunta parece sencilla, pero detrás se esconde uno de los problemas más complejos de la gestión joyera moderna, especialmente cuando hablamos de:
 
 - Joyerías con varias tiendas propias en distintas ciudades.
 - Marcas joyeras con presencia en **grandes superficies y centros comerciales** (espacios concesionados o córners), donde el espacio es limitado y caro.
@@ -240,9 +240,9 @@ Para terminar, una forma útil de autodiagnóstico:
 |---|---|---|
 | **1. Manual / intuitivo** | Cada encargado de tienda pide lo que cree, o un comprador central decide a ojo | Sobrestock + rotura simultánea, dependencia de personas, sin trazabilidad |
 | **2. Reglas básicas** | Hojas Excel con stocks mínimos por artículo, revisión semanal manual | Funciona hasta 3-5 tiendas; colapsa con más |
-| **3. DRP integrado en ERP** | Propuestas automáticas calculadas con fórmula de necesidad y validadas por especialistas | Escalable, trazable, mejora con datos históricos y aprendizaje |
+| **3. DRP integrado al ERP** | Propuestas automáticas calculadas con fórmula de necesidad y validadas por especialistas | Escalable, trazable, mejora con datos históricos y aprendizaje |
 
-El salto del nivel 2 al 3 es exactamente lo que un ERP especializado como **RayTecno** está diseñado para acompañar: mantenemos en el sistema el ABC del catálogo, los parámetros por artículo y sucursal, la fórmula de cálculo de necesidad, las propuestas de reposición revisables y la integración con producción y compras. La dirección recupera el control sin dejar de tener flexibilidad táctica en las tiendas.
+El salto del nivel 2 al 3 requiere un [software ERP joyero](/es) que sepa gestionar la complejidad del sector: estacionalidad fuerte, surtidos enormes, producción propia con plazos largos y espacios de venta muy reducidos en córners y grandes superficies.
 
 Si su joyería tiene varias tiendas, presencia en grandes superficies o una combinación de canales que ya no se puede gestionar con hojas de cálculo, [hablemos](https://www.raytecno.es/contacto). Es probable que el problema no sea el equipo —que suele estar haciéndolo lo mejor posible con las herramientas que tiene— sino la falta de un sistema que escale con el negocio.
 

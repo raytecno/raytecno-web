@@ -16,7 +16,7 @@ seoKeyword: "ERP joyería arquitectura"
 
 En 1998 dibujé dos pósters para presentar a clientes joyeros la idea de un **sistema CIM (Computer Integrated Manufacturing)** aplicado a su sector. Por entonces hablar de "0 stocks, 0 retrasos, 0 papeles, calidad total" en talleres donde las hojas de ruta circulaban manchadas de oro entre engastadores y pulidores sonaba más a manifiesto que a propuesta tecnológica.
 
-Casi tres décadas después, esa propuesta ha terminado siendo el estándar. Pero —y esto es lo interesante— **el esquema conceptual no ha cambiado**. Lo que ha cambiado son las **capas tecnológicas** que se han ido apilando encima.
+Casi tres décadas después, esa propuesta ha terminado siendo el estándar de cualquier [ERP joyero](/es) moderno. Pero —y esto es lo interesante— **el esquema conceptual no ha cambiado**. Lo que ha cambiado son las **capas tecnológicas** que se han ido apilando encima.
 
 En este artículo recupero los dos diagramas originales (modernizados visualmente para web), añado un tercero que muestra qué se ha sumado entre 1998 y 2026, y reflexiono sobre lo que esto significa para cualquier joyería que esté replanteándose hoy su sistema de gestión.
 
@@ -140,7 +140,7 @@ Mirar dos pósters de 1998 y verificar que la arquitectura sigue intacta no es u
 
 Si la respuesta es sí, las capas nuevas que se inventen los próximos 28 años se podrán seguir añadiendo sin romper el sistema. Si la respuesta es no, ningún módulo de IA va a salvar al sistema cuando el taller crezca o cambien las normativas.
 
-En **RayTecno** lo planteamos exactamente así: el núcleo es la arquitectura clásica del CIM joyero, probada durante décadas; las capas modernas (trazabilidad, omnicanal, IoT, analítica, cumplimiento) son módulos que se activan según necesite cada joyería. Una joyería pequeña empieza por el núcleo. Un grupo joyero con producción propia y veinte tiendas activa todas las capas.
+En **RayTecno** lo planteamos exactamente así con [RayGold](/es): el núcleo es la arquitectura clásica del CIM joyero, probada durante décadas; las capas modernas (trazabilidad, omnicanal, IoT, analítica, cumplimiento) son módulos que se activan según necesite cada joyería. Una joyería pequeña empieza por el núcleo. Un grupo joyero con producción propia y veinte tiendas activa todas las capas.
 
 La arquitectura es la promesa de que su ERP no se quedará obsoleto cuando llegue la próxima ola de tecnología. Y la próxima ya está llegando.
 

@@ -13,7 +13,7 @@ seoKeyword: "engaste joyería IA 3D"
 
 > *El engaste es la fase del taller donde más oficio se necesita y menos progreso tecnológico ha habido durante décadas. Hasta ahora. La combinación de CAD paramétrico, impresión 3D de alta resolución y visión artificial está rediseñando esta operación —no para sustituir al engastador, sino para devolverle el tiempo de las tareas mecánicas y dejarle concentrarse en lo que solo él sabe hacer.*
 
-Si la fundición es el corazón energético del taller joyero, **el engaste es su corazón artístico**. Es la fase donde una pieza fundida se convierte en joya. Donde el diamante deja de ser una piedra para convertirse en una historia. Y, también, donde más se gana o se pierde valor: una garra mal calibrada o un bisel desnivelado puede destruir una pieza de varios miles de euros en cuestión de segundos.
+Si la fundición es el corazón energético del taller joyero, **el engaste es su corazón artístico**. Es la fase donde una pieza fundida se convierte en joya. Donde el diamante deja de ser una piedra para convertirse en una historia. Y, también, donde más se gana o se pierde valor: una garra mal calibrada o un bisel desnivelado puede destruir una pieza de varios miles de euros en cuestión de segundos. Por eso, contar con un [ERP joyero](/es) que controle costes, trazabilidad de gemas y mermas en cada fase es la diferencia entre un taller que crece y uno que pierde dinero sin saber por qué.
 
 Durante décadas el engaste ha sido **la operación menos automatizada del taller joyero**. La razón es sencilla: requiere sensibilidad táctil, juicio visual y una capacidad de adaptación a cada piedra que las máquinas no podían reproducir. En 2026, esto ha empezado a cambiar —no del todo, no para todos los tipos de engaste, pero sí lo suficiente como para que cualquier taller joyero serio tenga que repensar el proceso.
 
@@ -196,7 +196,7 @@ La conclusión razonable es la misma que ya escribimos en el [post sobre IA y De
 
 ## 9. Lo que un ERP joyero moderno debe controlar en el engaste
 
-Para que toda esta arquitectura conceptual sea operativa, el ERP necesita gestionar específicamente seis bloques:
+Para que toda esta arquitectura conceptual sea operativa, un buen [ERP para joyería](/es) necesita gestionar específicamente seis bloques:
 
 ### 9.1 Maestro de gemas
 
