@@ -1,6 +1,15 @@
 import { defineConfig } from "astro/config";
+import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
+  // =============================================
+  // SITE URL - OBLIGATORIO PARA SITEMAP
+  // =============================================
+  // Sin esto, el sitemap NO se genera correctamente.
+  // Debe coincidir EXACTAMENTE con el dominio canónico
+  // (con www, ya que es lo que sirve Azure SWA).
+  site: "https://www.raytecno.es",
+
   // =============================================
   // TRAILING SLASH - CORREGIDO PARA AZURE SWA
   // =============================================
@@ -28,6 +37,36 @@ export default defineConfig({
       redirectToDefaultLocale: false,
     },
   },
+
+  // =============================================
+  // INTEGRATIONS
+  // =============================================
+  integrations: [
+    sitemap({
+      // Configuración i18n para que el sitemap genere
+      // hreflang automáticamente entre las versiones traducidas
+      i18n: {
+        defaultLocale: "es",
+        locales: {
+          es: "es-ES",
+          ca: "ca-ES",
+          en: "en-US",
+          fr: "fr-FR",
+          "pt-br": "pt-BR",
+        },
+      },
+      // Excluir rutas que no queremos en el sitemap
+      filter: (page) =>
+        !page.includes("/admin") &&
+        !page.includes("/api/") &&
+        !page.includes("/preview") &&
+        !page.includes("/404"),
+      // Configuración por defecto para todas las URLs
+      changefreq: "weekly",
+      priority: 0.7,
+      lastmod: new Date(),
+    }),
+  ],
 
   // =============================================
   // VITE CONFIG
