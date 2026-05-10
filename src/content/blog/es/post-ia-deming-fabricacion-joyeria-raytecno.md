@@ -1,12 +1,12 @@
 ---
 title: "La IA en los sistemas de fabricación de joyería y en sistemas de calidad: cómo evolucionan los 14 puntos de Deming en 2026"
-excerpt: "Comparativa honesta de los 14 puntos de Deming aplicados a fabricación joyera frente a las capacidades de la IA en 2026. Qué se mantiene vigente, qué se ha reformulado, qué es nuevo, y cómo un FMS moderno integra ambos mundos."
+excerpt: "Los 14 puntos de Deming aplicados a fabricación joyera frente a la IA en 2026: qué sigue vigente, qué se ha reformulado, qué es nuevo y cómo un FMS moderno integra calidad clásica e inteligencia artificial."
 author: "Equipo RayTecno"
 category: "Fabricación & IA"
 tags: ["IA", "Deming", "calidad", "FMS", "joyería", "ERP", "Industria 4.0", "machine learning"]
 date: 2026-05-05
 language: "es"
-seoKeyword: "la IA en los sistemas de fabricación"
+seoKeyword: "Deming IA joyería"
 ---
 
 # La IA en los sistemas de fabricación de joyería y en sistemas de calidad

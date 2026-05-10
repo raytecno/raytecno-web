@@ -1,12 +1,12 @@
 ---
 title: "Estrategia, organización y fabricación en joyería: la serie completa del blog de RayTecno"
-excerpt: "Índice editorial de los seis artículos que recorren los grandes temas de gestión joyera moderna: marketing, organización, logística, arquitectura ERP, calidad con IA y fabricación. Una guía integrada para directivos del sector."
+excerpt: "Índice editorial: seis artículos que recorren los grandes temas de gestión joyera moderna —marketing, organización, logística, arquitectura ERP, calidad con IA y fabricación— para directivos del sector."
 author: "Equipo RayTecno"
 category: "Hub editorial"
 tags: ["serie", "joyería", "ERP", "estrategia", "RayTecno", "índice"]
 date: 2026-05-05
 language: "es"
-seoKeyword: "estrategia, organización y fabricación"
+seoKeyword: "gestión joyería moderna"
 featured: true
 ---
 

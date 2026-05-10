@@ -1,12 +1,12 @@
 ---
 title: "Estructura organizacional en joyerías: las 5 configuraciones de Mintzberg aplicadas al taller, la tienda y la distribución"
-excerpt: "De la organización lineal del joyero familiar a la adhocracia del taller de alta gama. Análisis de los modelos organizativos clásicos y modernos aplicados al sector joyero, y por qué la estructura define lo que un ERP puede realmente aportar al negocio."
+excerpt: "De la joyería familiar lineal a la adhocracia del taller de alta gama: modelos organizativos clásicos y modernos aplicados al sector joyero, y por qué la estructura define lo que un ERP puede aportar al negocio."
 author: "Equipo RayTecno"
 category: "Estrategia & ERP"
 tags: ["organización empresarial", "Mintzberg", "joyería", "ERP", "estructura", "departamentalización", "delegación"]
 date: 2026-05-05
 language: "es"
-seoKeyword: "estructura organizacional en joyerías"
+seoKeyword: "organización taller joyería"
 ---
 
 # Estructura organizacional en joyerías: las 5 configuraciones de Mintzberg aplicadas al sector
