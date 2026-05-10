@@ -1,10 +1,12 @@
 ---
 title: "El engaste de gemas en joyería 2026: cómo la IA y las impresoras 3D están transformando la operación más artesanal del taller"
-description: "Análisis técnico del engaste joyero —garras, bisel, pavé, microengaste— y de cómo CAD paramétrico, impresión 3D de alta resolución, visión artificial e incluso robots están redefiniendo la fase más manual del taller. Sin sustituir al engastador, sino devolviéndole su tiempo para lo que realmente importa."
+excerpt: "Análisis técnico del engaste joyero —garras, bisel, pavé, microengaste— y de cómo CAD paramétrico, impresión 3D de alta resolución, visión artificial e incluso robots están redefiniendo la fase más manual del taller. Sin sustituir al engastador, sino devolviéndole su tiempo para lo que realmente importa."
 author: "Equipo RayTecno"
 category: "Fabricación & IA"
 tags: ["engaste", "stone setting", "joyería", "IA", "impresión 3D", "CAD", "ERP", "trazabilidad gemas"]
 date: 2026-05-05
+language: "es"
+seoKeyword: "engaste joyería IA 3D"
 ---
 
 # El engaste de gemas en joyería 2026
