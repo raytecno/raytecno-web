@@ -306,20 +306,64 @@ const schemaSoftware = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": COMPANY.name,
+  "alternateName": "RayGold ERP Joyero",
   "applicationCategory": "BusinessApplication",
-  "operatingSystem": "Windows, Web",
+  "applicationSubCategory": "Enterprise Resource Planning",
+  "operatingSystem": "Windows, Web, Cloud",
   "description": finalDescription,
   "url": COMPANY.primaryDomain,
+  "image": ogImage,
+  "screenshot": `${siteDomain}/images/raygold-dashboard-screenshot.jpg`,
+  "softwareVersion": "2026",
+  "datePublished": "1990-01-01",
+  "dateModified": new Date().toISOString().split("T")[0],
+  "inLanguage": ["es", "en", "fr", "ca", "pt-BR"],
   "author": {
     "@type": "Organization",
     "name": COMPANY.legalName,
+    "url": COMPANY.primaryDomain,
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": COMPANY.legalName,
+    "url": COMPANY.primaryDomain,
+  },
+  "featureList": [
+    "Trazabilidad de oro y plata",
+    "Control de mermas en fundición",
+    "Gestión multitienda",
+    "Impresión 3D integrada",
+    "Cumplimiento VERI*FACTU",
+    "Contabilidad integrada",
+    "Gestión de inventario",
+    "Fabricación y producción",
+    "8 módulos integrados",
+  ],
+  "audience": {
+    "@type": "BusinessAudience",
+    "audienceType": "Joyerías, talleres de fabricación de joyas, distribuidores joyeros",
   },
   "offers": {
     "@type": "Offer",
     "price": "29",
     "priceCurrency": "EUR",
+    "priceSpecification": {
+      "@type": "UnitPriceSpecification",
+      "price": "29",
+      "priceCurrency": "EUR",
+      "unitText": "MONTH",
+      "referenceQuantity": {
+        "@type": "QuantitativeValue",
+        "value": "1",
+        "unitText": "user"
+      }
+    },
     "priceValidUntil": new Date(new Date().getFullYear() + 1, 11, 31).toISOString().split("T")[0],
     "availability": "https://schema.org/InStock",
+    "seller": {
+      "@type": "Organization",
+      "name": COMPANY.legalName,
+    },
   },
   ...(COMPANY.reviews.enabled && {
     "aggregateRating": {

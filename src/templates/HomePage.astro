@@ -24,9 +24,9 @@ const alternateUrls = getAlternateUrls("home");
 // Meta información por idioma
 const metaInfo: Record<Lang, { title: string; description: string }> = {
   es: {
-    title: "RayGold - Software ERP para Joyería",
+    title: "ERP Joyero RayGold | Software de gestión para joyerías y fabricantes",
     description:
-      "El ERP más completo para joyerías. Gestión de inventario, fabricación, ventas y contabilidad. +200 joyerías confían en nosotros desde 1990.",
+      "ERP joyero especializado con trazabilidad de oro y plata, control de mermas en fundición, gestión multitienda e impresión 3D integrada. Cumplimiento VERI*FACTU. +200 joyerías confían en RayGold desde 1990.",
   },
   en: {
     title: "RayGold - ERP Software for Jewelry",
@@ -57,6 +57,7 @@ const meta = metaInfo[lang] || metaInfo.es;
   title={meta.title}
   description={meta.description}
   lang={lang}
+  type="product"
   alternateUrls={alternateUrls}
 >
   <!-- Hero Section - Banner principal con stats y CTAs -->
