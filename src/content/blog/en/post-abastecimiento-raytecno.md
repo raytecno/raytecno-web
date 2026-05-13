@@ -13,7 +13,7 @@ seoKeyword: "jewelry supply ERP"
 
 > *There are two ways to get supply wrong for a store: send too little —and lose sales that won't come back— or send too much —and leave capital tied up in slow-moving stock. The difference between a jewelry business that grows and one that drowns in inventory is in how it avoids both.*
 
-One of the most frequent questions we receive at **RayTecno** comes from jewelry businesses with a store network: **"how much product should I send to each store and when?"**. The question seems simple, but behind it lies one of the most complex problems of modern jewelry management, especially when we talk about:
+One of the most frequent questions we receive about our [specialized jewelry ERP](/en) comes from jewelry businesses with a network of stores: **"how much product should I send to each store and when?"**. The question seems simple, but behind it lies one of the most complex problems of modern jewelry management, especially when we talk about:
 
 - Jewelry businesses with several owned stores in different cities.
 - Jewelry brands present in **large retailers and shopping centers** (concession spaces or corners), where space is limited and expensive.
@@ -242,7 +242,7 @@ To finish, a useful self-diagnostic:
 | **2. Basic rules** | Excel sheets with minimum stocks per item, manual weekly review | Works up to 3-5 stores; collapses with more |
 | **3. DRP integrated in ERP** | Automatic proposals calculated with needs formula and validated by specialists | Scalable, traceable, improves with historical data and learning |
 
-The leap from level 2 to 3 is exactly what a specialized ERP like **RayTecno** is designed to accompany: we maintain in the system the catalog ABC, the parameters per item and branch, the needs calculation formula, the reviewable replenishment proposals and the integration with production and purchases. Management regains control without losing tactical flexibility in the stores.
+The jump from level 2 to level 3 requires a [jewelry ERP software](/en) that knows how to handle sector complexity: we maintain in the system the catalog ABC, the parameters per item and branch, the needs calculation formula, the reviewable replenishment proposals and the integration with production and purchases. Management regains control without losing tactical flexibility in the stores.
 
 If your jewelry business has several stores, presence in large retailers or a combination of channels that can no longer be managed with spreadsheets, [let's talk](https://www.raytecno.es/contact). The problem is probably not the team —which is usually doing the best possible with the tools they have— but the lack of a system that scales with the business.
 

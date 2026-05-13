@@ -63,7 +63,7 @@ Mintzberg proposa que tota organització es compon de cinc parts —cúspide est
 
 **Cas joier:** cadenes de joieria amb 20+ botigues i producció seriada (aliances, esclaves estàndard, segell de comunió). Processos definits al mil·límetre: cada referència té la seva fitxa, cada botiga el seu manual d'operativa, cada empleat el seu procediment. Eficient per a volum, **rígida davant de canvis**.
 
-**Implicació per a l'ERP:** és l'escenari on un ERP especialitzat **dona els seus majors retorns**. Estandardització de tarifes multibotiga, control centralitzat d'estoc, KPIs uniformes, replicació de processos. RayTecno encaixa especialment bé en aquest perfil amb la seva arquitectura multi-tenant i els seus mòduls de fabricació i distribució integrats. Risc a vigilar: el principal problema de la burocràcia mecànica és l'**obsessió pel control**, que pot paralitzar la creativitat comercial a botiga.
+**Implicació per a l'ERP:** és l'escenari on un [ERP especialitzat en joieria](/ca) **dona els seus majors retorns**. Estandardització de tarifes multibotiga, control centralitzat d'estoc, KPIs uniformes, replicació de processos. RayTecno encaixa especialment bé en aquest perfil amb la seva arquitectura multi-tenant i els seus mòduls de fabricació i distribució integrats. Risc a vigilar: el principal problema de la burocràcia mecànica és l'**obsessió pel control**, que pot paralitzar la creativitat comercial a botiga.
 
 ### 2.3 Burocràcia professional — la joieria d'alta orfebreria i disseny
 
@@ -166,7 +166,7 @@ Mintzberg ho resumeix amb una idea poderosa: **l'organització efectiva és la q
 
 Les preguntes de partida de l'article —qui autoritza, qui decideix, qui reporta— no són preguntes que un ERP respongui. Són preguntes que **la direcció ha de respondre abans**, i que un ERP tradueix després en permisos, fluxos i traçabilitat.
 
-A **RayTecno** portem anys acompanyant joieries en aquesta transició: del "ho fa qui pot" al sistema de rols ben delimitats, i d'aquí a l'operativa multi-tenant que sosté grups joiers complets. Si la seva empresa està en el moment de redefinir estructura i necessita una base tecnològica que la suporti, [parlem-ne](https://www.raytecno.es/contacte).
+A **RayTecno** portem anys acompanyant joieries en aquesta transició amb el nostre [ERP per a joieria](/ca): del "ho fa qui pot" al sistema de rols ben delimitats, i d'aquí a l'operativa multi-tenant que sosté grups joiers complets. Si la seva empresa està en el moment de redefinir estructura i necessita una base tecnològica que la suporti, [parlem-ne](https://www.raytecno.es/contacte).
 
 ---
 

@@ -55,7 +55,7 @@ Mintzberg propõe que toda organização se compõe de cinco partes —cúpula e
 
 **Caso joalheiro:** a joalheria tradicional com proprietário à frente, dois ou três vendedores e, talvez, uma oficina de reparo. O dono decide compras, preços, contratação, reparos e atendimento ao cliente difícil. É flexível, rápida, próxima, mas **não escala**: quando o dono falta, o negócio desacelera.
 
-**Implicação para o ERP:** este perfil não precisa de um ERP complexo, mas sim **bem parametrizado e simples**. Risco típico: comprar mais software do que se vai usar. RayTecno permite arrancar com um núcleo funcional (vendas, estoque, faturamento) e crescer modularmente quando a organização o demandar.
+**Implicação para o ERP:** é o cenário onde um [ERP especializado em joalheria](/pt-br) **dá seus maiores retornos**. Risco típico: comprar mais software do que se vai usar. RayTecno permite arrancar com um núcleo funcional (vendas, estoque, faturamento) e crescer modularmente quando a organização o demandar.
 
 ### 2.2 Burocracia Mecânica — a joalheria com cadeia de lojas e produção seriada
 
@@ -166,7 +166,7 @@ Mintzberg o resume com uma ideia poderosa: **a organização efetiva é a que co
 
 As perguntas de partida do artigo —quem autoriza, quem decide, quem reporta— não são perguntas que um ERP responda. São perguntas que **a direção deve responder antes**, e que um ERP traduz depois em permissões, fluxos e rastreabilidade.
 
-Na **RayTecno** levamos anos acompanhando joalherias nesta transição: do "faz quem pode" ao sistema de papéis bem delimitados, e daí à operativa multi-tenant que sustenta grupos joalheiros completos. Se sua empresa está no momento de redefinir estrutura e precisa de uma base tecnológica que a suporte, [conversemos](https://www.raytecno.es/contato).
+Na **RayTecno** levamos anos acompanhando joalherias nesta transição com nosso [ERP para joalheria](/pt-br): do "faz quem pode" ao sistema de papéis bem delimitados, e daí à operativa multi-tenant que sustenta grupos joalheiros completos. Se sua empresa está no momento de redefinir estrutura e precisa de uma base tecnológica que a suporte, [conversemos](https://www.raytecno.es/contato).
 
 ---
 

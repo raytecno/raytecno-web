@@ -129,7 +129,7 @@ Le cylindre est refroidi avec de l'eau, ce qui casse le plâtre. L'arbre métall
 
 ## 3. Les points de contrôle que l'ERP doit gérer
 
-Tout au long des neuf phases précédentes, il y a six variables critiques qui doivent être enregistrées dans l'ERP pour que l'atelier soit gouvernable :
+Tout au long des neuf phases ci-dessus, il y a six variables critiques qui doivent être enregistrées dans un [ERP pour fabricants de bijoux](/fr) pour que l'atelier soit gouvernable :
 
 ### 3.1 Traçabilité du métal
 
@@ -166,7 +166,7 @@ En joaillerie de haute valeur, chaque pièce unique doit avoir un **registre pho
 
 ## 4. Les KPIs que la direction devrait voir chaque lundi
 
-Au niveau directif, le bruit de l'atelier se condense en cinq chiffres :
+Au niveau directif, le bruit de l'atelier se condense en cinq chiffres qu'un bon [ERP joaillerie](/fr) devrait toujours avoir à portée de vue :
 
 | KPI | Ce qu'il mesure | Plage saine |
 |---|---|---|

@@ -13,7 +13,7 @@ seoKeyword: "cravação joalheria IA 3D"
 
 > *A cravação é a fase da oficina onde mais ofício é necessário e menos progresso tecnológico houve durante décadas. Até agora. A combinação de CAD paramétrico, impressão 3D de alta resolução e visão artificial está redesenhando esta operação —não para substituir o cravador, mas para devolver-lhe o tempo das tarefas mecânicas e deixá-lo concentrar-se no que só ele sabe fazer.*
 
-Se a fundição é o coração energético da oficina joalheira, **a cravação é seu coração artístico**. É a fase onde uma peça fundida se converte em joia. Onde o diamante deixa de ser uma pedra para se converter em uma história. E, também, onde mais se ganha ou se perde valor: uma garra mal calibrada ou um bisel desnivelado pode destruir uma peça de vários milhares de euros em questão de segundos.
+Se a fundição é o coração energético da oficina joalheira, **a cravação é seu coração artístico**. É a fase onde uma peça fundida se converte em joia. Onde o diamante deixa de ser uma pedra para se converter em uma história. E, também, onde mais se ganha ou se perde valor: uma garra mal calibrada ou um bisel desnivelado pode destruir uma peça de vários milhares de euros em questão de segundos. Por isso, contar com um [ERP joalheria](/pt-br) que controle custos, rastreabilidade de gemas e perdas em cada fase é a diferença entre uma oficina que cresce e uma que perde dinheiro sem saber por quê.
 
 Durante décadas a cravação foi **a operação menos automatizada da oficina joalheira**. A razão é simples: requer sensibilidade tátil, julgamento visual e uma capacidade de adaptação a cada pedra que as máquinas não podiam reproduzir. Em 2026, isto começou a mudar —não totalmente, não para todos os tipos de cravação, mas o suficiente para que qualquer oficina joalheira séria tenha que repensar o processo.
 
@@ -196,7 +196,7 @@ A conclusão razoável é a mesma que já escrevemos no [post sobre IA e Deming]
 
 ## 9. O que um ERP joalheiro moderno deve controlar na cravação
 
-Para que toda esta arquitetura conceitual seja operacional, o ERP precisa gerenciar especificamente seis blocos:
+Para que toda esta arquitetura conceitual seja operacional, um bom [ERP para joalheria](/pt-br) precisa gerenciar especificamente seis blocos:
 
 ### 9.1 Cadastro de gemas
 

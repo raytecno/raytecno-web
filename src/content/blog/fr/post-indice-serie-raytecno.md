@@ -12,7 +12,7 @@ featured: true
 
 # Stratégie, organisation et fabrication en joaillerie : la série complète
 
-> *Une joaillerie moderne ne se gère pas depuis une seule discipline. Elle a besoin de penser au marketing comme Schneider, à la structure comme Mintzberg, à la logistique comme un retailer multi-boutique, à l'architecture technologique comme un fabricant industriel, à la qualité comme Deming et à la fabrication comme un atelier de précision. Le blog RayTecno est conçu comme une carte pour les directifs du secteur qui veulent avoir une vision intégrée, pas fragmentée.*
+> *Une joaillerie moderne ne se gère pas depuis une seule discipline. Elle a besoin de penser au marketing comme Schneider, à la structure comme Mintzberg, à la logistique comme un retailer multi-boutique, à l'architecture technologique —sur un [ERP joaillerie](/fr) solide— comme un fabricant industriel, à la qualité comme Deming et à la fabrication comme un atelier de précision. Le blog RayTecno est conçu comme une carte pour les directifs du secteur qui veulent avoir une vision intégrée, pas fragmentée.*
 
 Cette série d'articles est **le résultat d'années d'accompagnement de joailleries réelles** —d'ateliers familiaux avec production propre à des groupes avec un réseau de boutiques en grandes surfaces— dans leurs décisions de gestion, organisation et technologie. Chaque post résout un problème concret. Ensemble, ils dessinent un cadre complet pour comprendre comment se gère une joaillerie en 2026.
 
@@ -193,7 +193,7 @@ Nous publions une analyse stratégique par mois. Les nouveaux articles étendent
 - Applications concrètes d'IA dans les phases de l'atelier (sertissage, polissage, contrôle qualité).
 - Cas pratiques anonymisés d'implantations réelles.
 
-Si vous voulez les recevoir dans votre courriel ou discuter de l'un des sujets traités ici appliqué à votre entreprise, [parlons-en](https://www.raytecno.es/contact).
+Si vous voulez les recevoir dans votre courriel, découvrir [RayGold](/fr) lors d'une démo personnalisée, ou discuter de l'un des sujets traités ici appliqué à votre entreprise, [parlons-en](https://www.raytecno.es/contact).
 
 ---
 

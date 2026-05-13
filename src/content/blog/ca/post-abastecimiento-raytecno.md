@@ -13,7 +13,7 @@ seoKeyword: "abastiment joieria ERP"
 
 > *Hi ha dues maneres d'equivocar-se abastint una botiga: enviar de menys —i perdre vendes que no tornen— o enviar de més —i deixar capital immobilitzat en producte que rota lent. La diferència entre una joieria que creix i una que s'ofega en estoc està en com evita ambdues.*
 
-Una de les preguntes més freqüents que rebem a **RayTecno** prové de joieries amb xarxa de botigues: **"quant producte he d'enviar a cada botiga i quan?"**. La pregunta sembla senzilla, però al darrere s'amaga un dels problemes més complexos de la gestió joiera moderna, especialment quan parlem de:
+Una de les preguntes més freqüents que rebem sobre el nostre [ERP especialitzat en joieria](/ca) prové de joieries amb xarxa de botigues: **"quant producte he d'enviar a cada botiga i quan?"**. La pregunta sembla senzilla, però al darrere s'amaga un dels problemes més complexos de la gestió joiera moderna, especialment quan parlem de:
 
 - Joieries amb diverses botigues pròpies a diferents ciutats.
 - Marques joieres amb presència en **grans superfícies i centres comercials** (espais concessionats o córners), on l'espai és limitat i car.
@@ -242,7 +242,7 @@ Per acabar, una manera útil d'autodiagnòstic:
 | **2. Regles bàsiques** | Fulls Excel amb estocs mínims per article, revisió setmanal manual | Funciona fins a 3-5 botigues; col·lapsa amb més |
 | **3. DRP integrat a l'ERP** | Propostes automàtiques calculades amb fórmula de necessitat i validades per especialistes | Escalable, traçable, millora amb dades històriques i aprenentatge |
 
-El salt del nivell 2 al 3 és exactament el que un ERP especialitzat com **RayTecno** està dissenyat per acompanyar: mantenim al sistema l'ABC del catàleg, els paràmetres per article i sucursal, la fórmula de càlcul de necessitat, les propostes de reposició revisables i la integració amb producció i compres. La direcció recupera el control sense deixar de tenir flexibilitat tàctica a les botigues.
+El salt del nivell 2 al 3 requereix un [programari ERP joier](/ca) que sàpiga gestionar la complexitat del sector: estacionalitat forta, assortits enormes, producció pròpia amb terminis llargs i espais de venda molt reduïts en córners i grans superfícies.
 
 Si la seva joieria té diverses botigues, presència en grans superfícies o una combinació de canals que ja no es pot gestionar amb fulls de càlcul, [parlem-ne](https://www.raytecno.es/contacte). És probable que el problema no sigui l'equip —que sol estar fent-ho el millor possible amb les eines que té— sinó la manca d'un sistema que escali amb el negoci.
 

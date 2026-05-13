@@ -16,7 +16,7 @@ seoKeyword: "jewelry ERP architecture"
 
 In 1998 I drew two posters to present jewelry clients with the idea of a **CIM (Computer Integrated Manufacturing) system** applied to their sector. Back then, talking about "0 stocks, 0 delays, 0 papers, total quality" in workshops where route sheets circulated stained with gold between setters and polishers sounded more like a manifesto than a technological proposal.
 
-Almost three decades later, that proposal has ended up being the standard. But —and this is what's interesting— **the conceptual scheme has not changed**. What has changed are the **technological layers** that have been stacked on top.
+Almost three decades later, that proposal has ended up being the standard for any modern [jewelry ERP](/en). But —and this is the interesting part— **the conceptual scheme has not changed**. What has changed are the **technological layers** that have been piling up on top.
 
 In this article I recover the two original diagrams (visually modernized for the web), add a third that shows what has been added between 1998 and 2026, and reflect on what this means for any jewelry business rethinking its management system today.
 
@@ -140,7 +140,7 @@ Looking at two posters from 1998 and verifying that the architecture remains int
 
 If the answer is yes, the new layers that are invented over the next 28 years will be able to continue being added without breaking the system. If the answer is no, no AI module will save the system when the workshop grows or regulations change.
 
-At **RayTecno** we approach it exactly like this: the core is the classic architecture of jewelry CIM, proven for decades; the modern layers (traceability, omnichannel, IoT, analytics, compliance) are modules that are activated as each jewelry business needs. A small jewelry business starts with the core. A jewelry group with its own production and twenty stores activates all the layers.
+At **RayTecno** we approach it exactly this way with [RayGold](/en): the core is the classic CIM jewelry architecture, proven for decades; the modern layers (traceability, omnichannel, IoT, analytics, compliance) are modules that activate as each jewelry business needs.. A small jewelry business starts with the core. A jewelry group with its own production and twenty stores activates all the layers.
 
 The architecture is the promise that your ERP will not become obsolete when the next wave of technology arrives. And the next one is already arriving.
 

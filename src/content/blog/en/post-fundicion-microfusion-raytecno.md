@@ -129,7 +129,7 @@ The cylinder is cooled with water, which breaks the plaster. The metal tree is e
 
 ## 3. The control points the ERP must manage
 
-Throughout the previous nine phases, there are six critical variables that must be recorded in the ERP for the workshop to be governable:
+Throughout the nine phases above, there are six critical variables that must be recorded in an [ERP for jewelry manufacturers](/en) for the workshop to be governable:
 
 ### 3.1 Metal traceability
 
@@ -166,7 +166,7 @@ In high-value jewelry, each unique piece must have a **photographic record at ea
 
 ## 4. The KPIs management should see every Monday
 
-At management level, workshop noise condenses into five numbers:
+At management level, workshop noise condenses into five numbers that a good [jewelry ERP](/en) should always have in sight:
 
 | KPI | What it measures | Healthy range |
 |---|---|---|

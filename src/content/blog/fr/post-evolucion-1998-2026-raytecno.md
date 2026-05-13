@@ -16,7 +16,7 @@ seoKeyword: "ERP joaillerie architecture"
 
 En 1998 j'ai dessiné deux posters pour présenter à des clients joailliers l'idée d'un **système CIM (Computer Integrated Manufacturing)** appliqué à leur secteur. À l'époque, parler de « 0 stocks, 0 retards, 0 papiers, qualité totale » dans des ateliers où les feuilles de route circulaient tachées d'or entre sertisseurs et polisseurs sonnait plus comme un manifeste que comme une proposition technologique.
 
-Près de trois décennies plus tard, cette proposition a fini par devenir le standard. Mais —et c'est ce qui est intéressant— **le schéma conceptuel n'a pas changé**. Ce qui a changé, ce sont les **couches technologiques** qui se sont empilées par-dessus.
+Près de trois décennies plus tard, cette proposition a fini par devenir le standard de tout [ERP joaillerie](/fr) moderne. Mais —et c'est l'intéressant— **le schéma conceptuel n'a pas changé**. Ce qui a changé, ce sont les **couches technologiques** qui se sont empilées dessus.
 
 Dans cet article, je reprends les deux diagrammes originaux (modernisés visuellement pour le web), j'en ajoute un troisième qui montre ce qui a été ajouté entre 1998 et 2026, et je réfléchis à ce que cela signifie pour toute joaillerie qui repense aujourd'hui son système de gestion.
 
@@ -140,7 +140,7 @@ Regarder deux posters de 1998 et vérifier que l'architecture reste intacte n'es
 
 Si la réponse est oui, les nouvelles couches qui s'inventeront au cours des 28 prochaines années pourront continuer à s'ajouter sans casser le système. Si la réponse est non, aucun module d'IA ne sauvera le système quand l'atelier grandira ou que les réglementations changeront.
 
-Chez **RayTecno** nous l'abordons exactement comme ça : le noyau est l'architecture classique du CIM joaillier, éprouvée pendant des décennies ; les couches modernes (traçabilité, omnicanal, IoT, analytique, conformité) sont des modules qui s'activent selon les besoins de chaque joaillerie. Une petite joaillerie commence par le noyau. Un groupe joaillier avec production propre et vingt boutiques active toutes les couches.
+Chez **RayTecno** nous le concevons exactement ainsi avec [RayGold](/fr) : le noyau est l'architecture classique du CIM joaillier, éprouvée pendant des décennies ; les couches modernes (traçabilité, omnicanal, IoT, analytique, conformité) sont des modules qui s'activent selon les besoins de chaque joaillerie. Une petite joaillerie commence par le noyau. Un groupe joaillier avec production propre et vingt boutiques active toutes les couches.
 
 L'architecture est la promesse que votre ERP ne deviendra pas obsolète quand arrivera la prochaine vague de technologie. Et la prochaine arrive déjà.
 

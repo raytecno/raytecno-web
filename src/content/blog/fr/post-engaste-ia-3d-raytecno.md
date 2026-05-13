@@ -13,7 +13,7 @@ seoKeyword: "sertissage joaillerie IA 3D"
 
 > *Le sertissage est la phase de l'atelier où le plus de savoir-faire est nécessaire et où le moins de progrès technologique a eu lieu pendant des décennies. Jusqu'à présent. La combinaison de la CAO paramétrique, de l'impression 3D haute résolution et de la vision artificielle redéfinit cette opération —non pas pour remplacer le sertisseur, mais pour lui rendre le temps consacré aux tâches mécaniques et le laisser se concentrer sur ce que lui seul sait faire.*
 
-Si la fonte est le cœur énergétique de l'atelier joaillier, **le sertissage en est le cœur artistique**. C'est la phase où une pièce fondue devient un bijou. Où le diamant cesse d'être une pierre pour devenir une histoire. Et, aussi, où la valeur se gagne ou se perd le plus : un griffe mal calibrée ou un chaton désaxé peut détruire une pièce de plusieurs milliers d'euros en quelques secondes.
+Si la fonte est le cœur énergétique de l'atelier joaillier, **le sertissage en est le cœur artistique**. C'est la phase où une pièce fondue devient un bijou. Où le diamant cesse d'être une pierre pour devenir une histoire. Et, aussi, où la valeur se gagne ou se perd le plus : un griffe mal calibrée ou un chaton désaxé peut détruire une pièce de plusieurs milliers d'euros en quelques secondes. C'est pourquoi disposer d'un [ERP joaillerie](/fr) qui contrôle les coûts, la traçabilité des gemmes et les pertes à chaque phase fait la différence entre un atelier qui croît et un qui perd de l'argent sans savoir pourquoi.
 
 Pendant des décennies, le sertissage a été **l'opération la moins automatisée de l'atelier joaillier**. La raison est simple : il nécessite une sensibilité tactile, un jugement visuel et une capacité d'adaptation à chaque pierre que les machines ne pouvaient reproduire. En 2026, cela a commencé à changer —pas entièrement, pas pour tous les types de sertissage, mais suffisamment pour que tout atelier joaillier sérieux doive repenser le processus.
 
@@ -196,7 +196,7 @@ La conclusion raisonnable est la même que celle que nous avons écrite dans le 
 
 ## 9. Ce qu'un ERP joaillier moderne doit contrôler dans le sertissage
 
-Pour que toute cette architecture conceptuelle soit opérationnelle, l'ERP doit gérer spécifiquement six blocs :
+Pour que toute cette architecture conceptuelle soit opérationnelle, un bon [ERP pour la joaillerie](/fr) doit gérer spécifiquement six blocs :
 
 ### 9.1 Fichier maître de gemmes
 

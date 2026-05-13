@@ -12,7 +12,7 @@ featured: true
 
 # Estratégia, organização e fabricação em joalheria: a série completa
 
-> *Uma joalheria moderna não se gerencia desde uma única disciplina. Precisa pensar em marketing como Schneider, em estrutura como Mintzberg, em logística como um varejista multi-loja, em arquitetura tecnológica como um fabricante industrial, em qualidade como Deming e em fabricação como uma oficina de precisão. O blog da RayTecno está pensado como um mapa para diretivos do setor que querem ter visão integrada, não fragmentada.*
+> *Uma joalheria moderna não se gerencia desde uma única disciplina. Precisa pensar em marketing como Schneider, em estrutura como Mintzberg, em logística como um varejista multi-loja, em arquitetura tecnológica —sobre um [ERP joalheria](/pt-br) sólido— como um fabricante industrial, em qualidade como Deming e em fabricação como uma oficina de precisão. O blog da RayTecno está pensado como um mapa para diretivos do setor que querem ter visão integrada, não fragmentada.*
 
 Esta série de artigos é **o resultado de anos acompanhando joalherias reais** —desde oficinas familiares com produção própria até grupos com rede de lojas em grandes superfícies— em suas decisões de gestão, organização e tecnologia. Cada post resolve um problema concreto. Juntos, desenham um marco completo para entender como se gerencia uma joalheria em 2026.
 
@@ -193,7 +193,7 @@ Publicamos uma análise estratégica por mês. Os novos artigos estendem a séri
 - Aplicações concretas de IA em fases da oficina (cravação, polimento, controle de qualidade).
 - Casos práticos anonimizados de implantações reais.
 
-Se quer recebê-los em seu e-mail ou discutir algum dos temas tratados aqui aplicado à sua empresa, [conversemos](https://www.raytecno.es/contato).
+Se quer recebê-los em seu e-mail, conhecer o [RayGold](/pt-br) em uma demo personalizada, ou discutir algum dos temas tratados aqui aplicado à sua empresa, [conversemos](https://www.raytecno.es/contato).
 
 ---
 

@@ -19,7 +19,7 @@ Dans le secteur joaillier, où une pièce avec un sertissage lâche ou un bain i
 
 1. Les **14 points de Deming** et leur validité réelle en 2026.
 2. Les capacités de l'**IA en fabrication et contrôle qualité** aujourd'hui.
-3. Comment un **système de fabrication flexible (FMS)** intégré dans un ERP joaillier moderne comme **RayTecno** matérialise ce qui en 1986 était presque de la philosophie.
+3. Comment un **système de fabrication flexible (FMS)** intégré dans un ERP joaillier moderne comme [RayGold](/fr) matérialise ce qui en 1986 était presque philosophie.
 
 ---
 
@@ -174,7 +174,7 @@ Pour que le post soit utile et non triomphaliste, il convient de nommer les risq
 - **Boîte noire.** Certains modèles de deep learning détectent des défauts mais n'expliquent pas pourquoi. Pour un maître joaillier habitué à comprendre chaque décision, cela peut générer une résistance justifiée.
 - **Coût réel d'implantation.** L'IA en production n'est pas gratuite : caméras industrielles, étiquetage de datasets (500-2 000 échantillons par type de défaut), intégration avec ERP et formation de l'équipe. Le retour sur investissement existe, mais nécessite un investissement initial.
 - **Fausse sensation de sécurité.** Un modèle avec 99% de précision rate encore 1 fois sur 100. En joaillerie haut de gamme, ce 1% peut être une pièce très chère.
-- **Perte de métier.** Si les apprentis délèguent à l'IA tout ce qu'ils apprenaient avant en inspectant manuellement, on perd la transmission de connaissance tacite. Il faut concevoir l'implantation pour que l'IA enseigne, ne cache pas.
+- **Perte de métier.** Si les apprentis délèguent à l'IA tout ce qu'ils apprenaient avant en inspectant manuellement, la transmission de la connaissance tacite se perd. L'implantation doit être conçue pour que l'IA enseigne, et non cache. C'est pourquoi un bon [ERP spécialisé en joaillerie](/fr) ne remplace pas le métier : il l'augmente, en maintenant toujours l'humain comme décideur final.
 
 ---
 

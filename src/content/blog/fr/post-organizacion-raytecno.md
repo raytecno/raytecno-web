@@ -55,7 +55,7 @@ Mintzberg propose que toute organisation se compose de cinq parties —sommet st
 
 **Cas joaillier :** la joaillerie traditionnelle avec propriétaire à la tête, deux ou trois vendeurs et, peut-être, un atelier de réparation. Le patron décide des achats, des prix, du recrutement, des réparations et de l'attention au client difficile. C'est flexible, rapide, proche, mais **ne passe pas à l'échelle** : quand le patron manque, l'entreprise ralentit.
 
-**Implication pour l'ERP :** ce profil n'a pas besoin d'un ERP complexe, mais d'un **bien paramétré et simple**. Risque typique : acheter plus de logiciel que ce qui sera utilisé. RayTecno permet de démarrer avec un noyau fonctionnel (ventes, stock, facturation) et de croître modulairement quand l'organisation le demande.
+**Implication pour l'ERP :** c'est le scénario où un [ERP spécialisé en joaillerie](/fr) **donne ses plus grands retours**. Risque typique : acheter plus de logiciel que ce qui sera utilisé. RayTecno permet de démarrer avec un noyau fonctionnel (ventes, stock, facturation) et de croître modulairement quand l'organisation le demande.
 
 ### 2.2 Bureaucratie Mécanique — la joaillerie avec chaîne de boutiques et production en série
 
@@ -166,7 +166,7 @@ Mintzberg le résume avec une idée puissante : **l'organisation efficace est ce
 
 Les questions de départ de l'article —qui autorise, qui décide, qui reporte— ne sont pas des questions auxquelles un ERP répond. Ce sont des questions auxquelles **la direction doit répondre avant**, et qu'un ERP traduit ensuite en permissions, flux et traçabilité.
 
-Chez **RayTecno** nous accompagnons depuis des années des joailleries dans cette transition : du « le fait celui qui peut » au système de rôles bien délimités, et de là à l'opérationnel multi-tenant qui soutient des groupes joailliers complets. Si votre entreprise est au moment de redéfinir sa structure et a besoin d'une base technologique qui la supporte, [parlons-en](https://www.raytecno.es/contact).
+Chez **RayTecno** nous accompagnons depuis des années des joailleries dans cette transition avec notre [ERP pour la joaillerie](/fr) : du « le fait celui qui peut » au système de rôles bien délimités, et de là à l'opérationnel multi-tenant qui soutient des groupes joailliers complets. Si votre entreprise est au moment de redéfinir sa structure et a besoin d'une base technologique qui la supporte, [parlons-en](https://www.raytecno.es/contact).
 
 ---
 

@@ -13,7 +13,7 @@ seoKeyword: "abastecimento joalheria ERP"
 
 > *Há duas formas de errar abastecendo uma loja: enviar de menos —e perder vendas que não voltam— ou enviar demais —e deixar capital imobilizado em produto que gira lento. A diferença entre uma joalheria que cresce e uma que se afoga em estoque está em como evita ambas.*
 
-Uma das perguntas mais frequentes que recebemos na **RayTecno** vem de joalherias com rede de lojas: **"quanto produto devo mandar a cada loja e quando?"**. A pergunta parece simples, mas por trás se esconde um dos problemas mais complexos da gestão joalheira moderna, especialmente quando falamos de:
+Uma das perguntas mais frequentes que recebemos sobre nosso [ERP especializado em joalheria](/pt-br) vem de joalherias com rede de lojas: **"quanto produto devo mandar a cada loja e quando?"**. A pergunta parece simples, mas por trás se esconde um dos problemas mais complexos da gestão joalheira moderna, especialmente quando falamos de:
 
 - Joalherias com várias lojas próprias em diferentes cidades.
 - Marcas joalheiras com presença em **grandes superfícies e shoppings** (espaços concessionados ou córneres), onde o espaço é limitado e caro.
@@ -242,7 +242,7 @@ Para terminar, uma forma útil de autodiagnóstico:
 | **2. Regras básicas** | Planilhas Excel com estoques mínimos por artigo, revisão semanal manual | Funciona até 3-5 lojas; colapsa com mais |
 | **3. DRP integrado em ERP** | Propostas automáticas calculadas com fórmula de necessidade e validadas por especialistas | Escalável, rastreável, melhora com dados históricos e aprendizagem |
 
-O salto do nível 2 ao 3 é exatamente o que um ERP especializado como **RayTecno** está desenhado para acompanhar: mantemos no sistema o ABC do catálogo, os parâmetros por artigo e filial, a fórmula de cálculo de necessidade, as propostas de reposição revisáveis e a integração com produção e compras. A direção recupera o controle sem deixar de ter flexibilidade tática nas lojas.
+O salto do nível 2 ao 3 é exatamente o que um ERP especializado como [software ERP joalheiro](/pt-br) está desenhado para acompanhar: mantemos no sistema o ABC do catálogo, os parâmetros por artigo e filial, a fórmula de cálculo de necessidade, as propostas de reposição revisáveis e a integração com produção e compras. A direção recupera o controle sem deixar de ter flexibilidade tática nas lojas.
 
 Se sua joalheria tem várias lojas, presença em grandes superfícies ou uma combinação de canais que já não se pode gerenciar com planilhas, [conversemos](https://www.raytecno.es/contato). É provável que o problema não seja a equipe —que costuma estar fazendo o melhor possível com as ferramentas que tem— mas a falta de um sistema que escale com o negócio.
 

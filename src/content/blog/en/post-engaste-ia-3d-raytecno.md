@@ -13,7 +13,7 @@ seoKeyword: "jewelry stone setting AI 3D"
 
 > *Stone setting is the workshop phase where most craftsmanship is needed and the least technological progress has been made for decades. Until now. The combination of parametric CAD, high-resolution 3D printing and computer vision is redesigning this operation —not to replace the setter, but to give back the time spent on mechanical tasks and let them focus on what only they can do.*
 
-If casting is the energetic heart of the jewelry workshop, **stone setting is its artistic heart**. It is the phase where a cast piece becomes a jewel. Where the diamond stops being a stone and becomes a story. And, also, where most value is gained or lost: a poorly calibrated prong or an uneven bezel can destroy a piece worth several thousand euros in seconds.
+If casting is the energetic heart of the jewelry workshop, **stone setting is its artistic heart**. It is the phase where a cast piece becomes a jewel. Where the diamond stops being a stone and becomes a story. And, also, where most value is gained or lost: a poorly calibrated prong or an uneven bezel can destroy a piece worth several thousand euros in seconds. That is why having a [jewelry ERP](/en) that controls costs, gem traceability and scrap at every phase is the difference between a workshop that grows and one that loses money without knowing why.
 
 For decades, stone setting has been **the least automated operation in the jewelry workshop**. The reason is simple: it requires tactile sensitivity, visual judgment and an ability to adapt to each stone that machines could not reproduce. In 2026, this has begun to change —not entirely, not for all types of setting, but enough that any serious jewelry workshop must rethink the process.
 
@@ -196,7 +196,7 @@ The reasonable conclusion is the same one we already wrote in the [post on AI an
 
 ## 9. What a modern jewelry ERP must control in stone setting
 
-For all this conceptual architecture to be operational, the ERP needs to specifically manage six blocks:
+For all this conceptual architecture to be operational, a good [ERP for jewelry](/en) needs to specifically manage six blocks:
 
 ### 9.1 Gem master
 

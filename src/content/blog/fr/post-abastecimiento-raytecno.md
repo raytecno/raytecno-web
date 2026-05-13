@@ -13,7 +13,7 @@ seoKeyword: "approvisionnement joaillerie ERP"
 
 > *Il y a deux façons de se tromper dans l'approvisionnement d'une boutique : envoyer trop peu —et perdre des ventes qui ne reviennent pas— ou envoyer trop —et laisser du capital immobilisé dans du produit qui tourne lentement. La différence entre une joaillerie qui croît et une qui se noie dans le stock réside dans la façon dont elle évite les deux.*
 
-Une des questions les plus fréquentes que nous recevons chez **RayTecno** vient de joailleries avec un réseau de boutiques : **« combien de produit dois-je envoyer à chaque boutique et quand ? »**. La question semble simple, mais derrière se cache l'un des problèmes les plus complexes de la gestion joaillère moderne, en particulier quand on parle de :
+L'une des questions les plus fréquentes que nous recevons sur notre [ERP spécialisé en joaillerie](/fr) vient de joailleries avec un réseau de boutiques : **« combien de produit dois-je envoyer à chaque boutique et quand ? »**. La question semble simple, mais derrière se cache l'un des problèmes les plus complexes de la gestion joaillère moderne, en particulier quand on parle de :
 
 - Joailleries avec plusieurs boutiques propres dans différentes villes.
 - Marques joaillères présentes dans **grandes surfaces et centres commerciaux** (espaces concédés ou corners), où l'espace est limité et cher.
@@ -242,7 +242,7 @@ Pour terminer, une manière utile d'auto-diagnostic :
 | **2. Règles basiques** | Feuilles Excel avec stocks minimums par article, révision hebdomadaire manuelle | Fonctionne jusqu'à 3-5 boutiques ; s'effondre au-delà |
 | **3. DRP intégré dans l'ERP** | Propositions automatiques calculées avec formule de besoin et validées par spécialistes | Évolutif, traçable, s'améliore avec données historiques et apprentissage |
 
-Le saut du niveau 2 au 3 est exactement ce qu'un ERP spécialisé comme **RayTecno** est conçu pour accompagner : nous maintenons dans le système l'ABC du catalogue, les paramètres par article et succursale, la formule de calcul de besoin, les propositions de réapprovisionnement révisables et l'intégration avec production et achats. La direction reprend le contrôle sans perdre la flexibilité tactique dans les boutiques.
+Le passage du niveau 2 au niveau 3 nécessite un [logiciel ERP joaillerie](/fr) qui sache gérer la complexité du secteur : nous maintenons dans le système l'ABC du catalogue, les paramètres par article et succursale, la formule de calcul de besoin, les propositions de réapprovisionnement révisables et l'intégration avec production et achats. La direction reprend le contrôle sans perdre la flexibilité tactique dans les boutiques.
 
 Si votre joaillerie a plusieurs boutiques, une présence en grandes surfaces ou une combinaison de canaux qui ne peut plus être gérée avec des feuilles de calcul, [parlons-en](https://www.raytecno.es/contact). Le problème n'est probablement pas l'équipe —qui fait généralement de son mieux avec les outils dont elle dispose— mais le manque d'un système qui évolue avec l'entreprise.
 

@@ -16,7 +16,7 @@ seoKeyword: "ERP joieria arquitectura"
 
 El 1998 vaig dibuixar dos pòsters per presentar a clients joiers la idea d'un **sistema CIM (Computer Integrated Manufacturing)** aplicat al seu sector. Aleshores parlar de "0 estocs, 0 retards, 0 papers, qualitat total" en tallers on els fulls de ruta circulaven tacats d'or entre encastadors i polidors sonava més a manifest que a proposta tecnològica.
 
-Gairebé tres dècades després, aquesta proposta ha acabat sent l'estàndard. Però —i això és el que és interessant— **l'esquema conceptual no ha canviat**. El que ha canviat són les **capes tecnològiques** que s'han anat apilant a sobre.
+Gairebé tres dècades després, aquesta proposta ha acabat sent l'estàndard de qualsevol [ERP joier](/ca) modern. Però —i això és el que és interessant— **l'esquema conceptual no ha canviat**. El que ha canviat són les **capes tecnològiques** que s'han anat apilant a sobre.
 
 En aquest article recupero els dos diagrames originals (modernitzats visualment per a web), afegeixo un tercer que mostra què s'ha sumat entre 1998 i 2026, i reflexiono sobre el que això significa per a qualsevol joieria que s'estigui replantejant avui el seu sistema de gestió.
 
@@ -140,7 +140,7 @@ Mirar dos pòsters de 1998 i verificar que l'arquitectura continua intacta no é
 
 Si la resposta és sí, les capes noves que s'inventin els pròxims 28 anys es podran continuar afegint sense trencar el sistema. Si la resposta és no, cap mòdul d'IA salvarà el sistema quan el taller creixi o canviïn les normatives.
 
-A **RayTecno** ho plantegem exactament així: el nucli és l'arquitectura clàssica del CIM joier, provada durant dècades; les capes modernes (traçabilitat, omnicanal, IoT, analítica, compliment) són mòduls que s'activen segons necessiti cada joieria. Una joieria petita comença pel nucli. Un grup joier amb producció pròpia i vint botigues activa totes les capes.
+A **RayTecno** ho plantegem exactament així amb [RayGold](/ca): el nucli és l'arquitectura clàssica del CIM joier, provada durant dècades; les capes modernes (traçabilitat, omnicanal, IoT, analítica, compliment) són mòduls que s'activen segons necessiti cada joieria. Una joieria petita comença pel nucli. Un grup joier amb producció pròpia i vint botigues activa totes les capes.
 
 L'arquitectura és la promesa que el seu ERP no quedarà obsolet quan arribi la pròxima onada de tecnologia. I la pròxima ja està arribant.
 

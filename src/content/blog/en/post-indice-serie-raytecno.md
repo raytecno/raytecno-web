@@ -12,7 +12,7 @@ featured: true
 
 # Strategy, organization and manufacturing in jewelry: the complete series
 
-> *A modern jewelry business is not managed from a single discipline. It needs to think about marketing like Schneider, structure like Mintzberg, logistics like a multi-store retailer, technological architecture like an industrial manufacturer, quality like Deming and manufacturing like a precision workshop. The RayTecno blog is designed as a map for sector executives who want an integrated, not fragmented, vision.*
+> *A modern jewelry business is not managed from a single discipline. It needs to think about marketing like Schneider, structure like Mintzberg, logistics like a multi-store retailer, technological architecture —on a solid [jewelry ERP](/en)— like an industrial manufacturer, quality like Deming and manufacturing like a precision workshop. The RayTecno blog is designed as a map for sector executives who want an integrated, not fragmented, vision.*
 
 This article series is **the result of years accompanying real jewelry businesses** —from family workshops with their own production to groups with store networks in large retailers— in their management, organization and technology decisions. Each post solves a specific problem. Together, they outline a complete framework for understanding how a jewelry business is managed in 2026.
 
@@ -193,7 +193,7 @@ We publish a strategic analysis every month. New articles extend the series in t
 - Concrete AI applications in workshop phases (setting, polishing, quality control).
 - Anonymized practical cases of real implementations.
 
-If you want to receive them in your email or discuss any of the topics covered here applied to your company, [let's talk](https://www.raytecno.es/contact).
+If you want to receive them in your email, see [RayGold](/en) in a personalized demo, or discuss any of the topics covered here applied to your company, [let's talk](https://www.raytecno.es/contact).
 
 ---
 

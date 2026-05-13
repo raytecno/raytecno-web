@@ -13,7 +13,7 @@ seoKeyword: "encast joieria IA 3D"
 
 > *L'encast és la fase del taller on més ofici es necessita i menys progrés tecnològic hi ha hagut durant dècades. Fins ara. La combinació de CAD paramètric, impressió 3D d'alta resolució i visió artificial està redissenyant aquesta operació —no per substituir l'encastador, sinó per tornar-li el temps de les tasques mecàniques i deixar-lo concentrar-se en el que només ell sap fer.*
 
-Si la fosa és el cor energètic del taller joier, **l'encast n'és el cor artístic**. És la fase on una peça fosa es converteix en joia. On el diamant deixa de ser una pedra per convertir-se en una història. I, també, on més es guanya o es perd valor: una grapa mal calibrada o un bisell desnivellat pot destruir una peça de diversos milers d'euros en qüestió de segons.
+Si la fosa és el cor energètic del taller joier, **l'encast n'és el cor artístic**. És la fase on una peça fosa es converteix en joia. On el diamant deixa de ser una pedra per convertir-se en una història. I, també, on més es guanya o es perd valor: una grapa mal calibrada o un bisell desnivellat pot destruir una peça de diversos milers d'euros en qüestió de segons. Per això, comptar amb un [ERP joier](/ca) que controli costos, traçabilitat de gemmes i minves en cada fase és la diferència entre un taller que creix i un que perd diners sense saber per què.
 
 Durant dècades l'encast ha estat **l'operació menys automatitzada del taller joier**. La raó és senzilla: requereix sensibilitat tàctil, judici visual i una capacitat d'adaptació a cada pedra que les màquines no podien reproduir. El 2026, això ha començat a canviar —no del tot, no per a tots els tipus d'encast, però sí prou perquè qualsevol taller joier seriós hagi de repensar el procés.
 
@@ -196,7 +196,7 @@ La conclusió raonable és la mateixa que ja vam escriure al [post sobre IA i De
 
 ## 9. El que un ERP joier modern ha de controlar en l'encast
 
-Perquè tota aquesta arquitectura conceptual sigui operativa, l'ERP necessita gestionar específicament sis blocs:
+Perquè tota aquesta arquitectura conceptual sigui operativa, un bon [ERP per a joieria](/ca) necessita gestionar específicament sis blocs:
 
 ### 9.1 Mestre de gemmes
 

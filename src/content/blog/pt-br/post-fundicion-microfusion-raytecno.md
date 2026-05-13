@@ -129,7 +129,7 @@ O cilindro é resfriado com água, o que quebra o gesso. A árvore metálica é 
 
 ## 3. Os pontos de controle que o ERP deve gerenciar
 
-Ao longo das nove fases anteriores, há seis variáveis críticas que devem ficar registradas no ERP para que a oficina seja governável:
+Ao longo das nove fases anteriores, há seis variáveis críticas que devem ficar registradas em um [ERP para fabricantes de joias](/pt-br) para que a oficina seja governável:
 
 ### 3.1 Rastreabilidade do metal
 
@@ -166,7 +166,7 @@ Em joalheria de alto valor, cada peça única deve ter **registro fotográfico e
 
 ## 4. Os KPIs que a direção deveria ver cada segunda-feira
 
-A nível diretivo, o ruído da oficina se condensa em cinco números:
+A nível diretivo, o ruído da oficina se condensa em cinco números que um bom [ERP joalheria](/pt-br) deveria ter sempre à vista:
 
 | KPI | O que mede | Faixa saudável |
 |---|---|---|

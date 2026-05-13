@@ -37,7 +37,7 @@ relatedSlugs: []
 
 ## Qu'est-ce que RayGold ?
 
-RayGold est un système ERP conçu spécifiquement pour l'industrie joaillière. À la différence des ERP génériques comme SAP Business One, Odoo ou Microsoft Dynamics 365, RayGold comprend les particularités du secteur : la traçabilité des métaux précieux, le contrôle des pertes en fonte, la gestion du livre d'or et la conformité avec des réglementations spécifiques comme VERI*FACTU.
+RayGold est un [logiciel ERP joaillerie](/fr) conçu spécifiquement pour l'industrie. À la différence des ERP génériques comme SAP Business One, Odoo ou Microsoft Dynamics 365, RayGold comprend les particularités du secteur : la traçabilité des métaux précieux, le contrôle des pertes en fonte, la gestion du livre d'or et la conformité avec des réglementations spécifiques comme VERI*FACTU.
 
 ## Modules principaux
 
@@ -55,4 +55,4 @@ Gestion des ventes, commandes et facturation adaptée au secteur. Prix au poids 
 
 ## Pourquoi choisir RayGold ?
 
-Le principal avantage de RayGold face aux ERP génériques est que vous n'avez pas besoin de personnalisation. Les fonctionnalités spécifiques du secteur joaillier sont intégrées en standard, ce qui réduit le coût d'implantation et le temps de mise en route.
+Le principal avantage d'un [ERP joaillerie](/fr) comme RayGold face aux ERP génériques est que vous n'avez pas besoin de personnalisation. Les fonctionnalités spécifiques du secteur joaillier sont intégrées en standard, ce qui réduit le coût d'implantation et le temps de mise en route.

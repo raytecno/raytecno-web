@@ -129,7 +129,7 @@ El cilindre es refreda amb aigua, cosa que trenca el guix. L'arbre metàl·lic s
 
 ## 3. Els punts de control que l'ERP ha de gestionar
 
-Al llarg de les nou fases anteriors, hi ha sis variables crítiques que han de quedar registrades a l'ERP perquè el taller sigui governable:
+Al llarg de les nou fases anteriors, hi ha sis variables crítiques que han de quedar registrades en un [ERP per a fabricants de joieria](/ca) perquè el taller sigui governable:
 
 ### 3.1 Traçabilitat del metall
 
@@ -166,7 +166,7 @@ En joieria d'alt valor, cada peça única ha de tenir **registre fotogràfic en 
 
 ## 4. Els KPIs que la direcció hauria de veure cada dilluns
 
-A nivell directiu, el soroll del taller es condensa en cinc números:
+A nivell directiu, el soroll del taller es condensa en cinc nombres que un bon [ERP joier](/ca) hauria de tenir sempre a la vista:
 
 | KPI | Què mesura | Rang saludable |
 |---|---|---|

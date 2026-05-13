@@ -19,7 +19,7 @@ No setor joalheiro, onde uma peça com uma cravação frouxa ou um banho irregul
 
 1. Os **14 pontos de Deming** e sua vigência real em 2026.
 2. As capacidades da **IA em fabricação e controle de qualidade** hoje.
-3. Como um **sistema de fabricação flexível (FMS)** integrado em um ERP joalheiro moderno como **RayTecno** materializa o que em 1986 era quase filosofia.
+3. Como um **sistema de fabricação flexível (FMS)** integrado em um ERP joalheiro moderno como [RayGold](/pt-br) materializa o que em 1986 era quase filosofia.
 
 ---
 
@@ -174,7 +174,7 @@ Para que o post seja útil e não triunfalista, convém nomear os riscos reais:
 - **Caixa preta.** Alguns modelos de deep learning detectam defeitos mas não explicam por quê. Para um mestre joalheiro acostumado a entender cada decisão, isto pode gerar resistência justificada.
 - **Custo real de implantação.** A IA em produção não é grátis: câmeras industriais, etiquetagem de datasets (500-2.000 amostras por tipo de defeito), integração com ERP e formação da equipe. O payback existe, mas requer investimento inicial.
 - **Falsa sensação de segurança.** Um modelo com 99% de precisão ainda falha 1 a cada 100 vezes. Em joalheria de alta gama, esse 1% pode ser uma peça muito cara.
-- **Perda de ofício.** Se os aprendizes delegam à IA tudo o que antes aprendiam inspecionando manualmente, se perde transmissão de conhecimento tácito. Há que projetar a implantação para que a IA ensine, não oculte.
+- **Perda de ofício.** Se os aprendizes delegam à IA tudo o que antes aprendiam inspecionando manualmente, perde-se transmissão de conhecimento tácito. Deve-se desenhar a implantação para que a IA ensine, não oculte. Por isso, um bom [ERP especializado em joalheria](/pt-br) não substitui o ofício: o aumenta, mantendo sempre o humano como decisor final.
 
 ---
 

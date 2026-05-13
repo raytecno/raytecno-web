@@ -12,7 +12,7 @@ featured: true
 
 # Estratègia, organització i fabricació en joieria: la sèrie completa
 
-> *Una joieria moderna no es gestiona des d'una sola disciplina. Necessita pensar en màrqueting com Schneider, en estructura com Mintzberg, en logística com un retailer multi-botiga, en arquitectura tecnològica com un fabricant industrial, en qualitat com Deming i en fabricació com un taller de precisió. El blog de RayTecno està pensat com un mapa per a directius del sector que volen tenir visió integrada, no fragmentada.*
+> *Una joieria moderna no es gestiona des d'una sola disciplina. Necessita pensar en màrqueting com Schneider, en estructura com Mintzberg, en logística com un retailer multi-botiga, en arquitectura tecnològica —sobre un [ERP joier](/ca) sòlid— com un fabricant industrial, en qualitat com Deming i en fabricació com un taller de precisió. El blog de RayTecno està pensat com un mapa per a directius del sector que volen tenir visió integrada, no fragmentada.*
 
 Aquesta sèrie d'articles és **el resultat d'anys acompanyant joieries reals** —des de tallers familiars amb producció pròpia fins a grups amb xarxa de botigues en grans superfícies— en les seves decisions de gestió, organització i tecnologia. Cada post resol un problema concret. Junts, dibuixen un marc complet per entendre com es gestiona una joieria el 2026.
 
@@ -193,7 +193,7 @@ Publiquem una anàlisi estratègica al mes. Els nous articles estenen la sèrie 
 - Aplicacions concretes d'IA en fases del taller (encast, poliment, control de qualitat).
 - Casos pràctics anonimitzats d'implantacions reals.
 
-Si vol rebre'ls al seu correu o discutir algun dels temes tractats aquí aplicat a la seva empresa, [parlem-ne](https://www.raytecno.es/contacte).
+Si vol rebre'ls al seu correu, conèixer [RayGold](/ca) en una demo personalitzada, o discutir algun dels temes tractats aquí aplicat a la seva empresa, [parlem-ne](https://www.raytecno.es/contacte).
 
 ---
 

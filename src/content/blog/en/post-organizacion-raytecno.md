@@ -55,7 +55,7 @@ Mintzberg proposes that every organization is composed of five parts —strategi
 
 **Jewelry case:** the traditional jewelry business with the owner at the helm, two or three salespeople and, perhaps, a repair workshop. The owner decides on purchases, prices, hiring, repairs and difficult customer service. It is flexible, fast, close, but **does not scale**: when the owner is absent, the business slows down.
 
-**Implication for the ERP:** this profile does not need a complex ERP, but a **well parameterized and simple** one. Typical risk: buying more software than will be used. RayTecno allows starting with a functional core (sales, stock, invoicing) and growing modularly when the organization demands it.
+**Implication for the ERP:** this is the scenario where a [specialized jewelry ERP](/en) **gives its greatest returns**. Typical risk: buying more software than will be used. RayTecno allows starting with a functional core (sales, stock, invoicing) and growing modularly when the organization demands it.
 
 ### 2.2 Machine Bureaucracy — the jewelry business with chain of stores and serial production
 
@@ -166,7 +166,7 @@ Mintzberg sums it up with a powerful idea: **the effective organization is the o
 
 The questions opening this article —who authorizes, who decides, who reports— are not questions that an ERP answers. They are questions that **management must answer first**, and that an ERP then translates into permissions, flows and traceability.
 
-At **RayTecno** we have spent years accompanying jewelry businesses in this transition: from "whoever can does it" to a system of well-defined roles, and from there to the multi-tenant operations supporting entire jewelry groups. If your company is at the moment of redefining structure and needs a technological base to support it, [let's talk](https://www.raytecno.es/contact).
+At **RayTecno** we have spent years accompanying jewelry businesses in this transition with our [ERP for jewelry](/en): from "whoever can does it" to a system of well-defined roles, and from there to the multi-tenant operations supporting entire jewelry groups. If your company is at the moment of redefining structure and needs a technological base to support it, [let's talk](https://www.raytecno.es/contact).
 
 ---
 

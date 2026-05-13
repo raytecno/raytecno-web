@@ -19,7 +19,7 @@ In the jewelry sector, where a piece with a loose setting or an irregular platin
 
 1. **Deming's 14 points** and their real validity in 2026.
 2. The capabilities of **AI in manufacturing and quality control** today.
-3. How a **flexible manufacturing system (FMS)** integrated in a modern jewelry ERP like **RayTecno** materializes what in 1986 was almost philosophy.
+3. How a **flexible manufacturing system (FMS)** integrated into a modern jewelry ERP like [RayGold](/en) materializes what in 1986 was almost philosophy.
 
 ---
 
@@ -174,7 +174,7 @@ For the post to be useful and not triumphalist, it is worth naming the real risk
 - **Black box.** Some deep learning models detect defects but don't explain why. For a master jeweler used to understanding every decision, this can generate justified resistance.
 - **Real implementation cost.** AI in production is not free: industrial cameras, dataset labeling (500-2,000 samples per defect type), ERP integration and team training. Payback exists, but requires initial investment.
 - **False sense of security.** A model with 99% accuracy still fails 1 out of 100 times. In high-end jewelry, that 1% can be a very expensive piece.
-- **Loss of craft.** If apprentices delegate to AI everything they used to learn by inspecting manually, transmission of tacit knowledge is lost. Implementation must be designed so that AI teaches, doesn't hide.
+- **Loss of craft.** If apprentices delegate to AI everything they used to learn by inspecting manually, tacit knowledge transmission is lost. Implementation must be designed so AI teaches, not hides. That is why a good [specialized jewelry ERP](/en) does not replace the craft: it augments it, keeping the human as the final decision-maker.
 
 ---
 

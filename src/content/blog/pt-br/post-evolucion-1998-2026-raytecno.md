@@ -16,7 +16,7 @@ seoKeyword: "ERP joalheria arquitetura"
 
 Em 1998 desenhei dois pôsteres para apresentar a clientes joalheiros a ideia de um **sistema CIM (Computer Integrated Manufacturing)** aplicado ao seu setor. Naquela época falar de "0 estoques, 0 atrasos, 0 papéis, qualidade total" em oficinas onde as folhas de rota circulavam manchadas de ouro entre cravadores e polidores soava mais a manifesto do que a proposta tecnológica.
 
-Quase três décadas depois, essa proposta acabou sendo o padrão. Mas —e isto é o interessante— **o esquema conceitual não mudou**. O que mudou são as **camadas tecnológicas** que foram se empilhando em cima.
+Quase três décadas depois, essa proposta acabou se tornando o padrão de qualquer [ERP joalheria](/pt-br) moderno. Mas —e isso é o interessante— **o esquema conceitual não mudou**. O que mudou são as **camadas tecnológicas** que foram se empilhando em cima.
 
 Neste artigo recupero os dois diagramas originais (modernizados visualmente para web), adiciono um terceiro que mostra o que se somou entre 1998 e 2026, e reflito sobre o que isso significa para qualquer joalheria que esteja repensando hoje seu sistema de gestão.
 
@@ -140,7 +140,7 @@ Olhar dois pôsteres de 1998 e verificar que a arquitetura continua intacta não
 
 Se a resposta for sim, as camadas novas que se inventem nos próximos 28 anos poderão continuar sendo adicionadas sem quebrar o sistema. Se a resposta for não, nenhum módulo de IA vai salvar o sistema quando a oficina crescer ou mudarem as normas.
 
-Na **RayTecno** o colocamos exatamente assim: o núcleo é a arquitetura clássica do CIM joalheiro, comprovada durante décadas; as camadas modernas (rastreabilidade, omnicanal, IoT, análise, conformidade) são módulos que se ativam segundo necessite cada joalheria. Uma joalheria pequena começa pelo núcleo. Um grupo joalheiro com produção própria e vinte lojas ativa todas as camadas.
+Na **RayTecno** o colocamos exatamente assim com o [RayGold](/pt-br): o núcleo é a arquitetura clássica do CIM joalheiro, comprovada durante décadas; as camadas modernas (rastreabilidade, omnicanal, IoT, análise, conformidade) são módulos que se ativam segundo necessite cada joalheria. Uma joalheria pequena começa pelo núcleo. Um grupo joalheiro com produção própria e vinte lojas ativa todas as camadas.
 
 A arquitetura é a promessa de que seu ERP não ficará obsoleto quando chegar a próxima onda de tecnologia. E a próxima já está chegando.
 

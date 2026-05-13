@@ -19,7 +19,7 @@ Al sector joier, on una peça amb un encast fluix o un bany irregular destrueix 
 
 1. Els **14 punts de Deming** i la seva vigència real el 2026.
 2. Les capacitats de la **IA en fabricació i control de qualitat** avui.
-3. Com un **sistema de fabricació flexible (FMS)** integrat en un ERP joier modern com **RayTecno** materialitza el que el 1986 era gairebé filosofia.
+3. Com un **sistema de fabricació flexible (FMS)** integrat en un ERP joier modern com [RayGold](/ca) materialitza el que el 1986 era gairebé filosofia.
 
 ---
 
@@ -174,7 +174,7 @@ Perquè el post sigui útil i no triomfalista, convé anomenar els riscos reals:
 - **Caixa negra.** Alguns models de deep learning detecten defectes però no expliquen per què. Per a un mestre joier acostumat a entendre cada decisió, això pot generar resistència justificada.
 - **Cost real d'implantació.** La IA en producció no és gratis: càmeres industrials, etiquetatge de datasets (500-2.000 mostres per tipus de defecte), integració amb ERP i formació de l'equip. El payback existeix, però requereix inversió inicial.
 - **Falsa sensació de seguretat.** Un model amb 99% de precisió encara falla 1 de cada 100 vegades. En joieria d'alta gamma, aquest 1% pot ser una peça molt cara.
-- **Pèrdua d'ofici.** Si els aprenents deleguen en la IA tot el que abans aprenien inspeccionant manualment, es perd transmissió de coneixement tàcit. Cal dissenyar la implantació perquè la IA ensenyi, no amagui.
+- **Pèrdua d'ofici.** Si els aprenents deleguen en la IA tot el que abans aprenien inspeccionant manualment, es perd transmissió de coneixement tàcit. Cal dissenyar la implantació perquè la IA ensenyi, no oculti. Per això, un bon [ERP especialitzat en joieria](/ca) no substitueix l'ofici: l'augmenta, mantenint sempre l'humà com a decisor final.
 
 ---
 
