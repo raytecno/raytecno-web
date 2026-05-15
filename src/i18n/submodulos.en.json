@@ -16,19 +16,19 @@
       "sections": {
         "articulos": {
           "name": "Items",
-          "description": "Complete catalog item management",
+          "description": "Complete management of the item catalog",
           "images": [
             {
               "title": "Item List",
-              "description": "General view of catalog with advanced filters"
+              "description": "Catalog overview with advanced filters"
             },
             {
-              "title": "Item Card",
+              "title": "Item Detail",
               "description": "Complete detail with specifications"
             },
             {
-              "title": "Configuration",
-              "description": "Field and attribute customization"
+              "title": "Image Configuration",
+              "description": "Customization of images and documents"
             }
           ]
         },
@@ -37,16 +37,16 @@
           "description": "Rates, discounts and pricing policies",
           "images": [
             {
-              "title": "Price Lists",
-              "description": "Multiple price list management"
+              "title": "Rates",
+              "description": "Management of multiple rates"
             },
             {
-              "title": "Discounts",
-              "description": "Discount configuration"
+              "title": "Costs",
+              "description": "Configuration of costs and labor"
             },
             {
-              "title": "History",
-              "description": "Change traceability"
+              "title": "Structured",
+              "description": "Price traceability"
             }
           ]
         },
@@ -56,15 +56,15 @@
           "images": [
             {
               "title": "Composition",
-              "description": "Material and component definition"
+              "description": "Definition of materials and components"
             },
             {
               "title": "Material Tree",
-              "description": "Hierarchical structure view"
+              "description": "Hierarchical view of the structure"
             },
             {
-              "title": "Costs",
-              "description": "Automatic cost calculation"
+              "title": "Multiples",
+              "description": "Multiples control"
             }
           ]
         },
@@ -77,7 +77,7 @@
               "description": "Multiple image management"
             },
             {
-              "title": "Viewer",
+              "title": "View",
               "description": "Visualization with zoom"
             },
             {
@@ -87,8 +87,8 @@
           ]
         },
         "layout": {
-          "name": "Layout",
-          "description": "View and form customization",
+          "name": "Manufacturing",
+          "description": "Customization of views and forms",
           "images": [
             {
               "title": "Configuration",
@@ -97,10 +97,28 @@
             {
               "title": "Fields",
               "description": "Custom fields without code"
+            }
+          ]
+        },
+        "gestion": {
+          "name": "Management",
+          "description": "Modular management and customization",
+          "images": [
+            {
+              "title": "Multiples",
+              "description": "Control and modulation"
             },
             {
-              "title": "Templates",
-              "description": "Save configurations"
+              "title": "Routes",
+              "description": "Selection routes management"
+            },
+            {
+              "title": "Menu",
+              "description": "Main menu creation"
+            },
+            {
+              "title": "Customization",
+              "description": "Style selection"
             }
           ]
         }
@@ -110,19 +128,19 @@
       "title": "Sales",
       "subtitle": "Complete sales, orders and invoicing for your jewelry business",
       "metaTitle": "Sales | RayGold ERP - Sales Management",
-      "metaDescription": "Total control of sales, orders, delivery notes and invoicing for jewelry businesses with RayGold ERP.",
+      "metaDescription": "Total control of sales, orders, delivery notes and invoicing for jewelers with RayGold ERP.",
       "sections": {
         "pedidos": {
           "name": "Orders",
-          "description": "Complete order cycle management",
+          "description": "Complete management of the order cycle",
           "images": [
             {
               "title": "Order List",
-              "description": "General view with status and tracking"
+              "description": "Overview with statuses and tracking"
             },
             {
-              "title": "New Order",
-              "description": "Quick creation with item search"
+              "title": "Visual",
+              "description": "Order control with images"
             },
             {
               "title": "Order Detail",
@@ -132,19 +150,19 @@
         },
         "albaranes": {
           "name": "Delivery Notes",
-          "description": "Delivery and shipment control",
+          "description": "Control of deliveries and shipments",
           "images": [
             {
               "title": "Delivery Notes",
-              "description": "Delivery note management"
+              "description": "Delivery notes management"
             },
             {
               "title": "Generation",
               "description": "Creation from orders"
             },
             {
-              "title": "Printing",
-              "description": "Customizable documents"
+              "title": "Information",
+              "description": "Complete order information"
             }
           ]
         },
@@ -157,118 +175,150 @@
               "description": "List of issued invoices"
             },
             {
-              "title": "New Invoice",
-              "description": "Manual or from delivery notes"
+              "title": "Generation",
+              "description": "Creation from orders or delivery notes"
             },
             {
-              "title": "E-Invoice",
-              "description": "Integrated electronic invoicing"
+              "title": "Printing",
+              "description": "Control over invoice printing"
+            },
+            {
+              "title": "Entries",
+              "description": "View invoice accounting entries"
             }
           ]
         },
-        "clientes": {
-          "name": "Customers",
-          "description": "Customer database",
+        "libro": {
+          "name": "Gold Book",
+          "description": "Control and maintenance",
           "images": [
-            {
-              "title": "List",
-              "description": "Customer directory"
-            },
-            {
-              "title": "Card",
-              "description": "Complete customer data"
-            },
-            {
-              "title": "History",
-              "description": "Operation history"
-            }
-          ]
-        }
-      }
-    },
-    "fabricacion": {
-      "title": "Manufacturing",
-      "subtitle": "Production, inventory and quality control",
-      "metaTitle": "Manufacturing | RayGold ERP - Production Control",
-      "metaDescription": "Production planning and tracking, work orders and material control for jewelry businesses.",
-      "sections": {
-        "ordenes": {
-          "name": "Work Orders",
-          "description": "Manufacturing order management",
-          "images": [
-            {
-              "title": "WO List",
-              "description": "General order view"
-            },
-            {
-              "title": "New WO",
-              "description": "Work order creation"
-            },
-            {
-              "title": "Tracking",
-              "description": "Production status"
-            }
-          ]
-        },
-        "materiales": {
-          "name": "Materials",
-          "description": "Raw material control",
-          "images": [
-            {
-              "title": "Inventory",
-              "description": "Material stock"
-            },
             {
               "title": "Movements",
-              "description": "Inputs and outputs"
+              "description": "Movement management"
             },
             {
-              "title": "Valuation",
-              "description": "Material cost"
+              "title": "Details",
+              "description": "Balance control"
             }
           ]
         },
-        "mermas": {
-          "name": "Waste",
-          "description": "Manufacturing loss control",
+        "depositos": {
+          "name": "Deposits",
+          "description": "Deposit management",
           "images": [
             {
-              "title": "Registry",
-              "description": "Waste control"
+              "title": "Main",
+              "description": "Deposits overview"
             },
             {
-              "title": "Analysis",
-              "description": "Loss statistics"
-            },
-            {
-              "title": "Reports",
-              "description": "Detailed reports"
+              "title": "Accounts",
+              "description": "Account control by deposit"
             }
           ]
         }
       }
     },
+   "fabricacion": {
+  "title": "Manufacturing",
+  "subtitle": "Planning, production, materials and labor management",
+  "metaTitle": "Manufacturing | RayGold ERP - Production Control",
+  "metaDescription": "Plan management, manufacturing map, material management, casting, shipments and labor control for jewelers.",
+  "sections": {
+    "planes": {
+      "name": "Plans",
+      "description": "Launching and processing of manufacturing plans",
+      "images": [
+        {
+          "title": "Plans List",
+          "description": "Overview of plans with status, color, execution, form and reservations"
+        },
+        {
+          "title": "MRP and Launch",
+          "description": "Plan processing with printing options: rings, casting orders, waxes, manufacturing envelopes and stamping"
+        }
+      ]
+    },
+    "mapa": {
+      "name": "Manufacturing Map",
+      "description": "Overview of plans and production routes",
+      "images": [
+        {
+          "title": "Production Flow",
+          "description": "Visual control of the flow by phases: modeling, waxes and casting, finishing, plating and shipping with item and customer detail"
+        }
+      ]
+    },
+    "materiales": {
+      "name": "Materials",
+      "description": "Management of needs and availability",
+      "images": [
+        {
+          "title": "Material Maintenance",
+          "description": "Control of components by plan with required, available, reserve, shortages, continuous and unit values by warehouse"
+        }
+      ]
+    },
+    "fundicion": {
+      "name": "Casting",
+      "description": "Management of casting processes",
+      "images": [
+        {
+          "title": "Casting Maintenance",
+          "description": "Casting control with production metrics: ingots, scraps, slag and losses by operator and route"
+        }
+      ]
+    },
+    "expediciones": {
+      "name": "Shipments",
+      "description": "Management of shipments and deliveries",
+      "images": [
+        {
+          "title": "Shipment Maintenance",
+          "description": "Shipment editing with identification, movement and warehouse, status, commercial references and observations"
+        }
+      ]
+    },
+    "laboral": {
+      "name": "Labor Management",
+      "description": "Operators, attendance and labor configuration",
+      "images": [
+        {
+          "title": "Labor Management",
+          "description": "Internal and external operators, shifts, schedules, breaks, contracts, collective agreements, categories, training and payroll concepts"
+        },
+        {
+          "title": "External Operators",
+          "description": "External operator maintenance with personal, labor, financial, address and contact information"
+        },
+        {
+          "title": "Attendance Control",
+          "description": "Daily clock-ins, absences, requests, incidents, HR, biometric devices, geolocation and productivity"
+        }
+      ]
+    }
+  }
+}
     "finanzas": {
       "title": "Finance",
       "subtitle": "Integrated accounting, treasury and VAT",
       "metaTitle": "Finance | RayGold ERP - Financial Management",
-      "metaDescription": "Integrated accounting, collections, payments, banking and financial reports for jewelry businesses.",
+      "metaDescription": "Integrated accounting, management of collections, payments, banks and financial reports for jewelers.",
       "sections": {
         "contabilidad": {
           "name": "Accounting",
-          "description": "Chart of accounts, journal entries and balances",
+          "description": "Chart of accounts, entries and balances",
           "images": [
             {
               "title": "Chart of Accounts",
-              "description": "Maintenance of the chart of accounts with groups, levels and PGC and auxiliary accounts"
+              "description": "Maintenance of the chart of accounts with groups, levels and GAAP and auxiliary accounts"
             },
             {
-              "title": "Journal Entries",
-              "description": "Record of accounting movements"
+              "title": "Entries",
+              "description": "Recording of accounting movements"
             },
             {
               "title": "Trial Balance",
-              "description": "Debit, Credit and Balance view per account with level and group filters"
+              "description": "View of Debit, Credit and Balance by account with level and group filters"
             }
           ]
         },
@@ -277,48 +327,48 @@
           "description": "Liquidity control, collections and payments",
           "images": [
             {
-              "title": "Liquidity Dashboard",
-              "description": "Dashboard with net treasury, liquidity ratio, coverage days and financial position KPIs"
+              "title": "Liquidity Control",
+              "description": "Dashboard with KPIs of net treasury, liquidity ratio, days of coverage and financial position"
             },
             {
-              "title": "Collections vs Payments",
-              "description": "Comparative chart of collections and payments with monthly net accumulation"
+              "title": "Due Dates Collections vs Payments",
+              "description": "Comparative chart of collections and payments with accumulated net by month"
             },
             {
               "title": "Bills",
-              "description": "List of issued and received bills with Pending/Collected status per invoice"
+              "description": "List of issued and received bills with Pending/Collected status by invoice"
             },
             {
               "title": "Bill Detail",
-              "description": "Breakdown of bills by type, remittance and bank with collected and pending amounts"
+              "description": "Breakdown of bills by type, batch and bank with collected and pending amounts"
             }
           ]
         },
         "iva": {
-          "name": "VAT & Remittances",
-          "description": "VAT settlement and bank remittance management",
+          "name": "VAT and Batches",
+          "description": "VAT settlement and bank batch management",
           "images": [
             {
               "title": "VAT Books",
               "description": "VAT registration and settlement"
             },
             {
-              "title": "Remittances",
-              "description": "Management of collection, cash and discount remittances with status and bank tracking"
+              "title": "Batches",
+              "description": "Management of collection, cash and discount batches with status and bank tracking"
             }
           ]
         },
         "balances": {
-          "name": "Balance Sheets",
+          "name": "Balances",
           "description": "Balance sheet and financial statements",
           "images": [
             {
               "title": "Monthly Balance",
-              "description": "Monthly balance sheet view with JAN-DEC evolution"
+              "description": "Monthly view of the balance sheet with JAN-DEC evolution"
             },
             {
               "title": "Double View",
-              "description": "Balance in dual Assets/Liabilities format with report selector"
+              "description": "Balance sheet in double format Assets/Liabilities with report selector"
             },
             {
               "title": "Accounts View",
@@ -326,21 +376,21 @@
             },
             {
               "title": "Balances + Values",
-              "description": "Expanded detail with balances per accounting account"
+              "description": "Expanded detail with balances by accounting account"
             },
             {
               "title": "Financial Statements Structure",
-              "description": "Node maintenance with formulas and accounts assigned to each balance sheet element"
+              "description": "Maintenance of nodes with formulas and accounts assigned for each balance sheet element"
             }
           ]
         }
       }
     },
     "historicos": {
-      "title": "History",
+      "title": "Historical",
       "subtitle": "Historical data and complete traceability",
-      "metaTitle": "History | RayGold ERP - Traceability",
-      "metaDescription": "Complete access to operation history, movements and jewelry piece traceability.",
+      "metaTitle": "Historical | RayGold ERP - Traceability",
+      "metaDescription": "Complete access to the history of operations, movements and traceability of jewelry pieces.",
       "sections": {
         "operaciones": {
           "name": "Operations",
@@ -348,47 +398,29 @@
           "images": [
             {
               "title": "Search",
-              "description": "Operation lookup"
+              "description": "Operations lookup"
             },
             {
               "title": "Detail",
               "description": "Complete information"
             },
             {
-              "title": "Export",
-              "description": "Data download"
-            }
-          ]
-        },
-        "trazabilidad": {
-          "name": "Traceability",
-          "description": "Piece tracking",
-          "images": [
-            {
-              "title": "By Piece",
-              "description": "History of each item"
-            },
-            {
-              "title": "By Batch",
-              "description": "Batch traceability"
-            },
-            {
-              "title": "Certificates",
-              "description": "Associated documentation"
+              "title": "Verifactu",
+              "description": "Invoicing with Verifactu"
             }
           ]
         }
       }
     },
     "inventario": {
-      "title": "Inventory",
-      "subtitle": "Inventory and distribution management",
-      "metaTitle": "Inventory | RayGold ERP - Stock Management",
-      "metaDescription": "Resource management, stock, movements and distributions for jewelry businesses.",
+      "title": "Inventories",
+      "subtitle": "Management of various inventories",
+      "metaTitle": "Inventories | RayGold ERP - Traceability",
+      "metaDescription": "Management of resources, stocks, movements and distributions",
       "sections": {
         "distribucion": {
           "name": "Distributions",
-          "description": "Distribution and warehouse management",
+          "description": "Management of distributions and warehouses",
           "images": [
             {
               "title": "Main",
@@ -399,30 +431,44 @@
               "description": "Complete information"
             }
           ]
+        },
+        "stocks": {
+          "name": "Stocks",
+          "description": "Total stock control",
+          "images": [
+            {
+              "title": "Main",
+              "description": "Distribution list"
+            },
+            {
+              "title": "Current accounts",
+              "description": ""
+            }
+          ]
         }
       }
     },
     "estadisticas": {
-      "title": "Analytics",
-      "subtitle": "Reports and dashboards for decision making",
-      "metaTitle": "Analytics | RayGold ERP - Business Intelligence",
-      "metaDescription": "Data analysis, custom reports and dashboards for decision making in jewelry businesses.",
+      "title": "Statistics",
+      "subtitle": "Reports and dashboards for decisions",
+      "metaTitle": "Statistics | RayGold ERP - Business Intelligence",
+      "metaDescription": "Data analysis, custom reports and dashboards for decision making in jewelers.",
       "sections": {
         "dashboards": {
           "name": "Dashboards",
-          "description": "Visual control panels",
+          "description": "Visual dashboards",
           "images": [
             {
               "title": "Main",
-              "description": "Key KPIs"
+              "description": "Main KPIs"
             },
             {
-              "title": "Sales",
-              "description": "Commercial metrics"
+              "title": "Time",
+              "description": "Charts by month or year"
             },
             {
-              "title": "Production",
-              "description": "Factory indicators"
+              "title": "Items",
+              "description": "Charts by item"
             }
           ]
         },
@@ -436,73 +482,51 @@
             },
             {
               "title": "Designer",
-              "description": "Report creator"
+              "description": "Report builder"
             },
             {
               "title": "Scheduling",
-              "description": "Automatic sending"
+              "description": "Automatic delivery"
             }
           ]
         }
       }
     },
     "vendedores": {
-      "title": "Sales Team",
-      "subtitle": "Route, visit and commission management",
-      "metaTitle": "Sales Team | RayGold ERP - Commercial Management",
-      "metaDescription": "Commercial team management, commissions, objectives and sales tracking for jewelry businesses.",
+      "title": "Sales Reps",
+      "subtitle": "Specialized management for sales reps",
+      "metaTitle": "Sales Reps | RayGold ERP - Commercial Management",
+      "metaDescription": "Management of sales teams, commissions, targets and sales tracking for jewelers.",
       "sections": {
         "equipo": {
-          "name": "Team",
-          "description": "Commercial team management",
+          "name": "Application",
+          "description": "Custom sales rep management",
           "images": [
             {
-              "title": "Salespeople",
-              "description": "Team list"
+              "title": "Main",
+              "description": "Custom home"
             },
             {
-              "title": "Zones",
-              "description": "Territory assignment"
+              "title": "Menu",
+              "description": "Modular configuration"
             },
             {
-              "title": "Objectives",
-              "description": "Sales goals"
+              "title": "Calendar",
+              "description": "Personal calendar per sales rep"
             }
           ]
         },
         "comisiones": {
-          "name": "Commissions",
+          "name": "Management",
           "description": "Calculation and settlement",
           "images": [
             {
-              "title": "Rules",
-              "description": "Commission configuration"
+              "title": "Sales Reps",
+              "description": "Sales rep management"
             },
             {
-              "title": "Calculation",
-              "description": "Automatic settlement"
-            },
-            {
-              "title": "History",
-              "description": "Payments made"
-            }
-          ]
-        },
-        "rutas": {
-          "name": "Routes",
-          "description": "Visit planning",
-          "images": [
-            {
-              "title": "Calendar",
-              "description": "Visit agenda"
-            },
-            {
-              "title": "Map",
-              "description": "Geographic view"
-            },
-            {
-              "title": "Reports",
-              "description": "Visit results"
+              "title": "Sales",
+              "description": "Sales control by rep"
             }
           ]
         }
@@ -510,61 +534,39 @@
     },
     "ecommerce": {
       "title": "E-commerce",
-      "subtitle": "Online stores and integrated marketplaces",
+      "subtitle": "Integrated online stores and marketplaces",
       "metaTitle": "E-commerce | RayGold ERP - Online Sales",
-      "metaDescription": "Online store integration, stock synchronization and web order management for jewelry businesses.",
+      "metaDescription": "Integration with online store, stock synchronization and management of web orders for jewelers.",
       "sections": {
         "catalogo": {
           "name": "Online Catalog",
           "description": "Product publishing",
           "images": [
             {
-              "title": "Products",
-              "description": "Web catalog management"
+              "title": "Main",
+              "description": "Web catalog"
             },
             {
-              "title": "Categories",
-              "description": "Product organization"
+              "title": "Selection and sale",
+              "description": "Modular and direct access to sale"
             },
             {
-              "title": "Synchronization",
-              "description": "Automatic update"
+              "title": "Specifications",
+              "description": "Detail specification"
             }
           ]
         },
         "pedidos": {
-          "name": "Web Orders",
-          "description": "Online order management",
+          "name": "Configuration",
+          "description": "Catalog management",
           "images": [
             {
-              "title": "Reception",
-              "description": "Incoming orders"
+              "title": "Creation",
+              "description": "Total modular freedom"
             },
             {
-              "title": "Processing",
-              "description": "Workflow"
-            },
-            {
-              "title": "Shipping",
-              "description": "Integrated logistics"
-            }
-          ]
-        },
-        "integraciones": {
-          "name": "Integrations",
-          "description": "Platform connections",
-          "images": [
-            {
-              "title": "Shopify",
-              "description": "Shopify integration"
-            },
-            {
-              "title": "WooCommerce",
-              "description": "WordPress integration"
-            },
-            {
-              "title": "Marketplaces",
-              "description": "Amazon, eBay, etc."
+              "title": "Import",
+              "description": "Data recovery from factory"
             }
           ]
         }
@@ -572,79 +574,17 @@
     },
     "impresoras3d": {
       "title": "3D Printers",
-      "subtitle": "Production control and management with 3D printers",
+      "subtitle": "Control and management of 3D printing production",
       "metaTitle": "3D Printers | RayGold ERP - 3D Production",
-      "metaDescription": "Production control and management with 3D printers for jewelry. Job management, materials and configuration.",
+      "metaDescription": "Control and management of 3D printing production for jewelry. Management of jobs, materials and configuration.",
       "sections": {
         "impresoras": {
           "name": "Printers",
-          "description": "3D printer fleet management",
+          "description": "Management of the 3D printer fleet",
           "images": [
             {
-              "title": "Printer List",
-              "description": "General view of printer fleet"
-            },
-            {
-              "title": "Real-Time Status",
-              "description": "Monitoring each printer status"
-            },
-            {
-              "title": "Maintenance",
-              "description": "Maintenance and calibration records"
-            }
-          ]
-        },
-        "trabajos": {
-          "name": "Jobs",
-          "description": "Job queue and production",
-          "images": [
-            {
-              "title": "Print Queue",
-              "description": "Pending and ongoing jobs"
-            },
-            {
-              "title": "New Job",
-              "description": "New print job configuration"
-            },
-            {
-              "title": "History",
-              "description": "Completed jobs record"
-            }
-          ]
-        },
-        "materiales": {
-          "name": "Materials",
-          "description": "Resin and materials management",
-          "images": [
-            {
-              "title": "Material Stock",
-              "description": "Resin and consumables inventory"
-            },
-            {
-              "title": "Consumption",
-              "description": "Consumption control per job"
-            },
-            {
-              "title": "Suppliers",
-              "description": "Material supplier management"
-            }
-          ]
-        },
-        "configuracion": {
-          "name": "Configuration",
-          "description": "Settings and print profiles",
-          "images": [
-            {
-              "title": "Profiles",
-              "description": "Print profiles by piece type"
-            },
-            {
-              "title": "Parameters",
-              "description": "Technical parameter settings"
-            },
-            {
-              "title": "Integration",
-              "description": "Design software connection"
+              "title": "Coming Soon",
+              "description": ""
             }
           ]
         }

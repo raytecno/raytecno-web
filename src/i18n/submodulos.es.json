@@ -218,68 +218,86 @@
         }
       }
     },
-    "fabricacion": {
-      "title": "Fabricación",
-      "subtitle": "Producción, inventarios y control de calidad",
-      "metaTitle": "Fabricación | RayGold ERP - Control de Producción",
-      "metaDescription": "Planificación y seguimiento de la producción, órdenes de trabajo y control de materiales para joyerías.",
-      "sections": {
-        "ordenes": {
-          "name": "Órdenes de Trabajo",
-          "description": "Gestión de órdenes de fabricación",
-          "images": [
-            {
-              "title": "Listado OT",
-              "description": "Vista general de órdenes"
-            },
-            {
-              "title": "Nueva OT",
-              "description": "Creación de orden de trabajo"
-            },
-            {
-              "title": "Seguimiento",
-              "description": "Estado de la producción"
-            }
-          ]
+   "fabricacion": {
+  "title": "Fabricación",
+  "subtitle": "Planificación, producción, materiales y gestión laboral",
+  "metaTitle": "Fabricación | RayGold ERP - Control de Producción",
+  "metaDescription": "Planificación de planes, mapa de fabricación, gestión de materiales, fundición, expediciones y control laboral para joyerías.",
+  "sections": {
+    "planes": {
+      "name": "Planes",
+      "description": "Lanzamiento y procesamiento de planes de fabricación",
+      "images": [
+        {
+          "title": "Listado de Planes",
+          "description": "Vista general de planes con estado, color, ejecución, forma y reservas"
         },
-        "materiales": {
-          "name": "Materiales",
-          "description": "Control de materias primas",
-          "images": [
-            {
-              "title": "Inventario",
-              "description": "Stock de materiales"
-            },
-            {
-              "title": "Movimientos",
-              "description": "Entradas y salidas"
-            },
-            {
-              "title": "Valoración",
-              "description": "Coste de materiales"
-            }
-          ]
-        },
-        "mermas": {
-          "name": "Mermas",
-          "description": "Control de pérdidas en fabricación",
-          "images": [
-            {
-              "title": "Registro",
-              "description": "Control de mermas"
-            },
-            {
-              "title": "Análisis",
-              "description": "Estadísticas de pérdidas"
-            },
-            {
-              "title": "Informes",
-              "description": "Reportes detallados"
-            }
-          ]
+        {
+          "title": "MRP y Lanzamiento",
+          "description": "Procesamiento de planes con opciones de impresión: alianzas, pedidos de fundición, ceras, sobres de fabricación y estampación"
         }
-      }
+      ]
     },
+    "mapa": {
+      "name": "Mapa de Fabricación",
+      "description": "Vista general de planes y rutas de producción",
+      "images": [
+        {
+          "title": "Flujo de Producción",
+          "description": "Control visual del flujo por fases: modelaje, ceras y fundición, acabados, baños y expedición con detalle de artículo y cliente"
+        }
+      ]
+    },
+    "materiales": {
+      "name": "Materiales",
+      "description": "Gestión de necesidades y disponibilidad",
+      "images": [
+        {
+          "title": "Mantenimiento Materiales",
+          "description": "Control de componentes por plan con necesarias, disponible, reserva, faltas, continua y unitaria por almacén"
+        }
+      ]
+    },
+    "fundicion": {
+      "name": "Fundición",
+      "description": "Gestión de procesos de fundición",
+      "images": [
+        {
+          "title": "Mantenimiento Fundición",
+          "description": "Control de fundiciones con métricas de producción: troncos, retales, escoria y mermas por operario y ruta"
+        }
+      ]
+    },
+    "expediciones": {
+      "name": "Expediciones",
+      "description": "Gestión de expediciones y envíos",
+      "images": [
+        {
+          "title": "Mantenimiento Expediciones",
+          "description": "Edición de expediciones con identificación, movimiento y almacén, estado, referencias comerciales y observaciones"
+        }
+      ]
+    },
+    "laboral": {
+      "name": "Gestión Laboral",
+      "description": "Operarios, presencia y configuración laboral",
+      "images": [
+        {
+          "title": "Gestión Laboral",
+          "description": "Operarios internos y externos, turnos, horarios, descansos, contratos, convenios, categorías, formaciones y conceptos de nómina"
+        },
+        {
+          "title": "Operarios Externos",
+          "description": "Mantenimiento de operarios externos con datos personales, laborales, financieros, dirección y contacto"
+        },
+        {
+          "title": "Control de Presencia",
+          "description": "Fichajes diarios, ausencias, solicitudes, incidencias, RRHH, dispositivos biométricos, geolocalización y productividad"
+        }
+      ]
+    }
+  }
+}
     "finanzas": {
       "title": "Finanzas",
       "subtitle": "Contabilidad, tesorería e IVA integrados",

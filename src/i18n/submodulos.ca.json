@@ -218,68 +218,86 @@
         }
       }
     },
-    "fabricacion": {
-      "title": "Fabricació",
-      "subtitle": "Producció, inventaris i control de qualitat",
-      "metaTitle": "Fabricació | RayGold ERP - Control de Producció",
-      "metaDescription": "Planificació i seguiment de la producció, ordres de treball i control de materials per a joieries.",
-      "sections": {
-        "ordenes": {
-          "name": "Ordres de Treball",
-          "description": "Gestió d'ordres de fabricació",
-          "images": [
-            {
-              "title": "Llistat OT",
-              "description": "Vista general d'ordres"
-            },
-            {
-              "title": "Nova OT",
-              "description": "Creació d'ordre de treball"
-            },
-            {
-              "title": "Seguiment",
-              "description": "Estat de la producció"
-            }
-          ]
+  "fabricacion": {
+  "title": "Fabricació",
+  "subtitle": "Planificació, producció, materials i gestió laboral",
+  "metaTitle": "Fabricació | RayGold ERP - Control de Producció",
+  "metaDescription": "Planificació de plans, mapa de fabricació, gestió de materials, fosa, expedicions i control laboral per a joieries.",
+  "sections": {
+    "planes": {
+      "name": "Plans",
+      "description": "Llançament i processament de plans de fabricació",
+      "images": [
+        {
+          "title": "Llistat de Plans",
+          "description": "Vista general de plans amb estat, color, execució, forma i reserves"
         },
-        "materiales": {
-          "name": "Materials",
-          "description": "Control de matèries primeres",
-          "images": [
-            {
-              "title": "Inventari",
-              "description": "Estoc de materials"
-            },
-            {
-              "title": "Moviments",
-              "description": "Entrades i sortides"
-            },
-            {
-              "title": "Valoració",
-              "description": "Cost de materials"
-            }
-          ]
-        },
-        "mermas": {
-          "name": "Minves",
-          "description": "Control de pèrdues en fabricació",
-          "images": [
-            {
-              "title": "Registre",
-              "description": "Control de minves"
-            },
-            {
-              "title": "Anàlisi",
-              "description": "Estadístiques de pèrdues"
-            },
-            {
-              "title": "Informes",
-              "description": "Informes detallats"
-            }
-          ]
+        {
+          "title": "MRP i Llançament",
+          "description": "Processament de plans amb opcions d'impressió: aliances, comandes de fosa, ceres, sobres de fabricació i estampació"
         }
-      }
+      ]
     },
+    "mapa": {
+      "name": "Mapa de Fabricació",
+      "description": "Vista general de plans i rutes de producció",
+      "images": [
+        {
+          "title": "Flux de Producció",
+          "description": "Control visual del flux per fases: modelatge, ceres i fosa, acabats, banys i expedició amb detall d'article i client"
+        }
+      ]
+    },
+    "materiales": {
+      "name": "Materials",
+      "description": "Gestió de necessitats i disponibilitat",
+      "images": [
+        {
+          "title": "Manteniment Materials",
+          "description": "Control de components per pla amb necessàries, disponible, reserva, faltes, contínua i unitària per magatzem"
+        }
+      ]
+    },
+    "fundicion": {
+      "name": "Fosa",
+      "description": "Gestió de processos de fosa",
+      "images": [
+        {
+          "title": "Manteniment Fosa",
+          "description": "Control de foses amb mètriques de producció: troncs, retalls, escòria i minves per operari i ruta"
+        }
+      ]
+    },
+    "expediciones": {
+      "name": "Expedicions",
+      "description": "Gestió d'expedicions i enviaments",
+      "images": [
+        {
+          "title": "Manteniment Expedicions",
+          "description": "Edició d'expedicions amb identificació, moviment i magatzem, estat, referències comercials i observacions"
+        }
+      ]
+    },
+    "laboral": {
+      "name": "Gestió Laboral",
+      "description": "Operaris, presència i configuració laboral",
+      "images": [
+        {
+          "title": "Gestió Laboral",
+          "description": "Operaris interns i externs, torns, horaris, descansos, contractes, convenis, categories, formacions i conceptes de nòmina"
+        },
+        {
+          "title": "Operaris Externs",
+          "description": "Manteniment d'operaris externs amb dades personals, laborals, financeres, adreça i contacte"
+        },
+        {
+          "title": "Control de Presència",
+          "description": "Fitxatges diaris, absències, sol·licituds, incidències, RRHH, dispositius biomètrics, geolocalització i productivitat"
+        }
+      ]
+    }
+  }
+}
     "finanzas": {
       "title": "Finances",
       "subtitle": "Comptabilitat, tresoreria i IVA integrats",

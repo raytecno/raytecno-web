@@ -115,10 +115,12 @@ export const modulosConfig: Record<ModuloId, ModuloConfig> = {
     color: '#f59e0b',
     icon: `<svg viewBox="0 0 64 64" fill="none"><rect x="6" y="32" width="16" height="20" rx="2" fill="currentColor"/><rect x="24" y="24" width="16" height="28" rx="2" fill="currentColor" opacity="0.7"/><rect x="42" y="16" width="16" height="36" rx="2" fill="currentColor" opacity="0.4"/><circle cx="14" cy="18" r="8" fill="currentColor" opacity="0.3"/><circle cx="14" cy="18" r="4" fill="currentColor"/></svg>`,
     secciones: [
-      { id: 'ordenes', prefix: 'FAB' },
-      { id: 'fases', prefix: 'FAS' },
+      { id: 'planes', prefix: 'PLA' },
+      { id: 'mapa', prefix: 'MAP' },
+      { id: 'materiales', prefix: 'MAT' },
       { id: 'fundicion', prefix: 'FUN' },
-      { id: 'inventario', prefix: 'INV' },
+      { id: 'expediciones', prefix: 'EXP' },
+      { id: 'laboral', prefix: 'LAB' },
     ],
   },
   finanzas: {

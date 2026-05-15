@@ -10,43 +10,43 @@
     },
     "maestros": {
       "title": "Cadastros",
-      "subtitle": "Artigos, fornecedores, clientes e famílias",
+      "subtitle": "Itens, fornecedores, clientes e famílias",
       "metaTitle": "Cadastros | RayGold ERP - Gestão de Catálogo",
-      "metaDescription": "Gestão completa de artigos, preços, estruturas e imagens do seu catálogo de joalheria com RayGold ERP.",
+      "metaDescription": "Gestão completa de itens, preços, estruturas e imagens do seu catálogo de joalheria com RayGold ERP.",
       "sections": {
         "articulos": {
-          "name": "Artigos",
-          "description": "Gestão completa do catálogo de artigos",
+          "name": "Itens",
+          "description": "Gestão completa do catálogo de itens",
           "images": [
             {
-              "title": "Lista de Artigos",
+              "title": "Lista de Itens",
               "description": "Visão geral do catálogo com filtros avançados"
             },
             {
-              "title": "Ficha do Artigo",
+              "title": "Ficha do Item",
               "description": "Detalhe completo com especificações"
             },
             {
-              "title": "Configuração",
-              "description": "Personalização de campos e atributos"
+              "title": "Configuração de Imagens",
+              "description": "Personalização de imagens e documentos"
             }
           ]
         },
         "precios": {
           "name": "Preços",
-          "description": "Tarifas, descontos e políticas de preços",
+          "description": "Tabelas, descontos e políticas de preços",
           "images": [
             {
-              "title": "Tarifas",
-              "description": "Gestão de múltiplas tarifas"
+              "title": "Tabelas",
+              "description": "Gestão de múltiplas tabelas"
             },
             {
-              "title": "Descontos",
-              "description": "Configuração de descontos"
+              "title": "Custos",
+              "description": "Configuração de custos e mão de obra"
             },
             {
-              "title": "Histórico",
-              "description": "Rastreabilidade de alterações"
+              "title": "Estruturado",
+              "description": "Rastreabilidade de preços"
             }
           ]
         },
@@ -63,8 +63,8 @@
               "description": "Visão hierárquica da estrutura"
             },
             {
-              "title": "Custos",
-              "description": "Cálculo automático de custos"
+              "title": "Múltiplos",
+              "description": "Controle de múltiplos"
             }
           ]
         },
@@ -77,18 +77,18 @@
               "description": "Gestão de imagens múltiplas"
             },
             {
-              "title": "Visualizador",
+              "title": "Visualizar",
               "description": "Visualização com zoom"
             },
             {
               "title": "Importação",
-              "description": "Carga massiva de imagens"
+              "description": "Carga em massa de imagens"
             }
           ]
         },
         "layout": {
-          "name": "Layout",
-          "description": "Personalização de vistas e formulários",
+          "name": "Fabricação",
+          "description": "Personalização de telas e formulários",
           "images": [
             {
               "title": "Configuração",
@@ -97,10 +97,28 @@
             {
               "title": "Campos",
               "description": "Campos personalizados sem código"
+            }
+          ]
+        },
+        "gestion": {
+          "name": "Gestões",
+          "description": "Gestão e personalização modular",
+          "images": [
+            {
+              "title": "Múltiplos",
+              "description": "Controle e modulação"
             },
             {
-              "title": "Modelos",
-              "description": "Salvamento de configurações"
+              "title": "Rotas",
+              "description": "Gestão de rotas de seleção"
+            },
+            {
+              "title": "Menu",
+              "description": "Criação de menu principal"
+            },
+            {
+              "title": "Personalização",
+              "description": "Seleção de estilos"
             }
           ]
         }
@@ -110,7 +128,7 @@
       "title": "Comercial",
       "subtitle": "Vendas, pedidos e faturamento completo para sua joalheria",
       "metaTitle": "Comercial | RayGold ERP - Gestão de Vendas",
-      "metaDescription": "Controle total de vendas, pedidos, remessas e faturamento para joalherias com RayGold ERP.",
+      "metaDescription": "Controle total de vendas, pedidos, notas de entrega e faturamento para joalherias com RayGold ERP.",
       "sections": {
         "pedidos": {
           "name": "Pedidos",
@@ -118,11 +136,11 @@
           "images": [
             {
               "title": "Lista de Pedidos",
-              "description": "Visão geral com estados e rastreamento"
+              "description": "Visão geral com status e acompanhamento"
             },
             {
-              "title": "Novo Pedido",
-              "description": "Criação rápida com busca de artigos"
+              "title": "Visual",
+              "description": "Controle de pedidos com imagens"
             },
             {
               "title": "Detalhe do Pedido",
@@ -131,20 +149,20 @@
           ]
         },
         "albaranes": {
-          "name": "Remessas",
+          "name": "Notas de Entrega",
           "description": "Controle de entregas e expedições",
           "images": [
             {
-              "title": "Remessas",
-              "description": "Gestão de notas de remessa"
+              "title": "Notas de Entrega",
+              "description": "Gestão de notas de entrega"
             },
             {
               "title": "Geração",
               "description": "Criação a partir de pedidos"
             },
             {
-              "title": "Impressão",
-              "description": "Documentos personalizáveis"
+              "title": "Informação",
+              "description": "Informação completa do pedido"
             }
           ]
         },
@@ -157,128 +175,142 @@
               "description": "Lista de faturas emitidas"
             },
             {
-              "title": "Nova Fatura",
-              "description": "Faturamento manual ou de remessas"
+              "title": "Geração",
+              "description": "Criação a partir de pedidos ou notas de entrega"
             },
             {
-              "title": "NF-e",
-              "description": "Faturamento eletrônico integrado"
+              "title": "Impressão",
+              "description": "Controle sobre a impressão de faturas"
+            },
+            {
+              "title": "Lançamentos",
+              "description": "Visualizar lançamentos contábeis da fatura"
             }
           ]
         },
-        "clientes": {
-          "name": "Clientes",
-          "description": "Base de dados de clientes",
+        "libro": {
+          "name": "Livro de Ouro",
+          "description": "Controle e manutenção",
           "images": [
-            {
-              "title": "Lista",
-              "description": "Diretório de clientes"
-            },
-            {
-              "title": "Ficha",
-              "description": "Dados completos do cliente"
-            },
-            {
-              "title": "Histórico",
-              "description": "Histórico de operações"
-            }
-          ]
-        }
-      }
-    },
-    "fabricacion": {
-      "title": "Fabricação",
-      "subtitle": "Produção, estoques e controle de qualidade",
-      "metaTitle": "Fabricação | RayGold ERP - Controle de Produção",
-      "metaDescription": "Planejamento e acompanhamento da produção, ordens de trabalho e controle de materiais para joalherias.",
-      "sections": {
-        "ordenes": {
-          "name": "Ordens de Fabricação",
-          "description": "Gestão de ordens de fabricação",
-          "images": [
-            {
-              "title": "Lista OF",
-              "description": "Visão geral de ordens"
-            },
-            {
-              "title": "Nova OF",
-              "description": "Criação de ordem de trabalho"
-            },
-            {
-              "title": "Acompanhamento",
-              "description": "Estado da produção"
-            }
-          ]
-        },
-        "fases": {
-          "name": "Fases",
-          "description": "Controle de fases produtivas",
-          "images": [
-            {
-              "title": "Fases de Produção",
-              "description": "Definição do processo produtivo"
-            },
-            {
-              "title": "Tempos",
-              "description": "Controle de tempos por fase"
-            },
-            {
-              "title": "Operários",
-              "description": "Atribuição de recursos"
-            }
-          ]
-        },
-        "fundicion": {
-          "name": "Fundição",
-          "description": "Controle do processo de fundição",
-          "images": [
-            {
-              "title": "Fundições",
-              "description": "Registro de fundições"
-            },
-            {
-              "title": "Perdas",
-              "description": "Controle de perdas"
-            },
-            {
-              "title": "Ligas",
-              "description": "Composição de metais"
-            }
-          ]
-        },
-        "inventario": {
-          "name": "Estoque",
-          "description": "Controle de estoque e movimentos",
-          "images": [
-            {
-              "title": "Estoque",
-              "description": "Inventário em tempo real"
-            },
             {
               "title": "Movimentos",
-              "description": "Rastreabilidade completa"
+              "description": "Gestão de movimentos"
             },
             {
-              "title": "Valorização",
-              "description": "Valorização de existências"
+              "title": "Detalhes",
+              "description": "Controle de saldos"
+            }
+          ]
+        },
+        "depositos": {
+          "name": "Depósitos",
+          "description": "Gestão de depósitos",
+          "images": [
+            {
+              "title": "Principal",
+              "description": "Visão geral de depósitos"
+            },
+            {
+              "title": "Contas",
+              "description": "Controle de contas por depósito"
             }
           ]
         }
       }
     },
+   "fabricacion": {
+  "title": "Fabricação",
+  "subtitle": "Planejamento, produção, materiais e gestão trabalhista",
+  "metaTitle": "Fabricação | RayGold ERP - Controle de Produção",
+  "metaDescription": "Planejamento de planos, mapa de fabricação, gestão de materiais, fundição, expedições e controle trabalhista para joalherias.",
+  "sections": {
+    "planes": {
+      "name": "Planos",
+      "description": "Lançamento e processamento de planos de fabricação",
+      "images": [
+        {
+          "title": "Lista de Planos",
+          "description": "Visão geral de planos com status, cor, execução, forma e reservas"
+        },
+        {
+          "title": "MRP e Lançamento",
+          "description": "Processamento de planos com opções de impressão: alianças, pedidos de fundição, ceras, envelopes de fabricação e estampagem"
+        }
+      ]
+    },
+    "mapa": {
+      "name": "Mapa de Fabricação",
+      "description": "Visão geral de planos e rotas de produção",
+      "images": [
+        {
+          "title": "Fluxo de Produção",
+          "description": "Controle visual do fluxo por fases: modelagem, ceras e fundição, acabamentos, banhos e expedição com detalhe de item e cliente"
+        }
+      ]
+    },
+    "materiales": {
+      "name": "Materiais",
+      "description": "Gestão de necessidades e disponibilidade",
+      "images": [
+        {
+          "title": "Manutenção de Materiais",
+          "description": "Controle de componentes por plano com necessárias, disponível, reserva, faltas, contínua e unitária por armazém"
+        }
+      ]
+    },
+    "fundicion": {
+      "name": "Fundição",
+      "description": "Gestão de processos de fundição",
+      "images": [
+        {
+          "title": "Manutenção de Fundição",
+          "description": "Controle de fundições com métricas de produção: lingotes, retalhos, escória e perdas por operário e rota"
+        }
+      ]
+    },
+    "expediciones": {
+      "name": "Expedições",
+      "description": "Gestão de expedições e envios",
+      "images": [
+        {
+          "title": "Manutenção de Expedições",
+          "description": "Edição de expedições com identificação, movimento e armazém, status, referências comerciais e observações"
+        }
+      ]
+    },
+    "laboral": {
+      "name": "Gestão Trabalhista",
+      "description": "Operários, presença e configuração trabalhista",
+      "images": [
+        {
+          "title": "Gestão Trabalhista",
+          "description": "Operários internos e externos, turnos, horários, descansos, contratos, convenções coletivas, categorias, formações e conceitos de folha de pagamento"
+        },
+        {
+          "title": "Operários Externos",
+          "description": "Manutenção de operários externos com dados pessoais, trabalhistas, financeiros, endereço e contato"
+        },
+        {
+          "title": "Controle de Presença",
+          "description": "Registros diários de ponto, ausências, solicitações, ocorrências, RH, dispositivos biométricos, geolocalização e produtividade"
+        }
+      ]
+    }
+  }
+}
     "finanzas": {
       "title": "Finanças",
-      "subtitle": "Contabilidade, tesouraria e IVA integrados",
+      "subtitle": "Contabilidade, tesouraria e impostos integrados",
       "metaTitle": "Finanças | RayGold ERP - Gestão Financeira",
       "metaDescription": "Contabilidade integrada, gestão de recebimentos, pagamentos, bancos e relatórios financeiros para joalherias.",
       "sections": {
         "contabilidad": {
           "name": "Contabilidade",
-          "description": "Plano de contas, lançamentos e saldos",
+          "description": "Plano contábil, lançamentos e saldos",
           "images": [
             {
               "title": "Plano de Contas",
-              "description": "Manutenção do plano de contas com grupos, níveis e contas do PGC e auxiliares"
+              "description": "Manutenção do plano contábil com grupos, níveis e contas e auxiliares"
             },
             {
               "title": "Lançamentos",
@@ -286,7 +318,7 @@
             },
             {
               "title": "Balancete",
-              "description": "Vista de Débito, Crédito e Saldo por conta com filtros de nível e grupo"
+              "description": "Visão de Débito, Crédito e Saldo por conta com filtros de nível e grupo"
             }
           ]
         },
@@ -304,25 +336,25 @@
             },
             {
               "title": "Títulos",
-              "description": "Listagem de títulos emitidos e recebidos com status Pendente/Recebido por fatura"
+              "description": "Lista de títulos emitidos e recebidos com status Pendente/Recebido por fatura"
             },
             {
               "title": "Detalhe de Títulos",
-              "description": "Detalhamento de títulos por tipo, remessa e banco com valores recebidos e pendentes"
+              "description": "Desdobramento de títulos por tipo, remessa e banco com valores recebidos e pendentes"
             }
           ]
         },
         "iva": {
-          "name": "IVA e Remessas",
-          "description": "Liquidação de IVA e gestão de remessas bancárias",
+          "name": "Impostos e Remessas",
+          "description": "Liquidação de impostos e gestão de remessas bancárias",
           "images": [
             {
-              "title": "Livros IVA",
-              "description": "Registro e liquidação de IVA"
+              "title": "Livros de Impostos",
+              "description": "Registro e liquidação de impostos"
             },
             {
               "title": "Remessas",
-              "description": "Gestão de remessas a receber, em dinheiro e com desconto com status e rastreamento bancário"
+              "description": "Gestão de remessas em cobrança, em dinheiro e em desconto com status e acompanhamento bancário"
             }
           ]
         },
@@ -331,7 +363,7 @@
           "description": "Balanço patrimonial e demonstrações financeiras",
           "images": [
             {
-              "title": "Balanço Mensal",
+              "title": "Balanço por Meses",
               "description": "Visão mensal do balanço patrimonial com evolução JAN-DEZ"
             },
             {
@@ -348,7 +380,7 @@
             },
             {
               "title": "Estrutura Demonstrações Financeiras",
-              "description": "Manutenção de nós com fórmulas e contas atribuídas a cada elemento do balanço"
+              "description": "Manutenção de nós com fórmulas e contas atribuídas para cada elemento do balanço"
             }
           ]
         }
@@ -373,26 +405,8 @@
               "description": "Informação completa"
             },
             {
-              "title": "Exportação",
-              "description": "Download de dados"
-            }
-          ]
-        },
-        "trazabilidad": {
-          "name": "Rastreabilidade",
-          "description": "Acompanhamento de peças",
-          "images": [
-            {
-              "title": "Por Peça",
-              "description": "História de cada artigo"
-            },
-            {
-              "title": "Por Lote",
-              "description": "Rastreabilidade por lotes"
-            },
-            {
-              "title": "Certificados",
-              "description": "Documentação associada"
+              "title": "Verifactu",
+              "description": "Faturamento com Verifactu"
             }
           ]
         }
@@ -400,9 +414,9 @@
     },
     "inventario": {
       "title": "Inventários",
-      "subtitle": "Gestão de inventários e distribuições",
-      "metaTitle": "Inventários | RayGold ERP - Gestão de Estoques",
-      "metaDescription": "Gestão de recursos, estoques, movimentos e distribuições para joalherias.",
+      "subtitle": "Gestão de diversos inventários",
+      "metaTitle": "Inventários | RayGold ERP - Rastreabilidade",
+      "metaDescription": "Gestão de recursos, estoques, movimentos e distribuições",
       "sections": {
         "distribucion": {
           "name": "Distribuições",
@@ -410,11 +424,25 @@
           "images": [
             {
               "title": "Principal",
-              "description": "Lista de distribuições"
+              "description": "Lista de distribuição"
             },
             {
               "title": "Geração",
               "description": "Informação completa"
+            }
+          ]
+        },
+        "stocks": {
+          "name": "Estoques",
+          "description": "Controle total de estoques",
+          "images": [
+            {
+              "title": "Principal",
+              "description": "Lista de distribuição"
+            },
+            {
+              "title": "Contas correntes",
+              "description": ""
             }
           ]
         }
@@ -435,12 +463,12 @@
               "description": "KPIs principais"
             },
             {
-              "title": "Vendas",
-              "description": "Métricas comerciais"
+              "title": "Tempo",
+              "description": "Gráficos por meses ou anos"
             },
             {
-              "title": "Produção",
-              "description": "Indicadores de fábrica"
+              "title": "Itens",
+              "description": "Gráficos por item"
             }
           ]
         },
@@ -466,61 +494,39 @@
     },
     "vendedores": {
       "title": "Vendedores",
-      "subtitle": "Gestão de rotas, visitas e comissões",
+      "subtitle": "Gestão especializada para vendedores",
       "metaTitle": "Vendedores | RayGold ERP - Gestão Comercial",
       "metaDescription": "Gestão de equipes comerciais, comissões, metas e acompanhamento de vendas para joalherias.",
       "sections": {
         "equipo": {
-          "name": "Equipe",
-          "description": "Gestão da equipe comercial",
+          "name": "Aplicação",
+          "description": "Gestão personalizada de comercial",
           "images": [
             {
-              "title": "Vendedores",
-              "description": "Lista da equipe"
+              "title": "Principal",
+              "description": "Início personalizado"
             },
             {
-              "title": "Zonas",
-              "description": "Atribuição de territórios"
+              "title": "Menu",
+              "description": "Configuração modular"
             },
             {
-              "title": "Metas",
-              "description": "Objetivos de venda"
+              "title": "Calendário",
+              "description": "Calendário pessoal por vendedor"
             }
           ]
         },
         "comisiones": {
-          "name": "Comissões",
+          "name": "Gestão",
           "description": "Cálculo e liquidação",
           "images": [
             {
-              "title": "Regras",
-              "description": "Configuração de comissões"
+              "title": "Vendedores",
+              "description": "Gestão de vendedores"
             },
             {
-              "title": "Cálculo",
-              "description": "Liquidação automática"
-            },
-            {
-              "title": "Histórico",
-              "description": "Pagamentos realizados"
-            }
-          ]
-        },
-        "rutas": {
-          "name": "Rotas",
-          "description": "Planejamento de visitas",
-          "images": [
-            {
-              "title": "Calendário",
-              "description": "Agenda de visitas"
-            },
-            {
-              "title": "Mapa",
-              "description": "Vista geográfica"
-            },
-            {
-              "title": "Relatórios",
-              "description": "Resultados de visitas"
+              "title": "Vendas",
+              "description": "Controle de vendas por vendedor"
             }
           ]
         }
@@ -537,52 +543,30 @@
           "description": "Publicação de produtos",
           "images": [
             {
-              "title": "Produtos",
-              "description": "Gestão do catálogo web"
+              "title": "Principal",
+              "description": "Catálogo web"
             },
             {
-              "title": "Categorias",
-              "description": "Organização de produtos"
+              "title": "Seleção e venda",
+              "description": "Modulado e acesso direto à venda"
             },
             {
-              "title": "Sincronização",
-              "description": "Atualização automática"
+              "title": "Especificações",
+              "description": "Detalhes concretos"
             }
           ]
         },
         "pedidos": {
-          "name": "Pedidos Web",
-          "description": "Gestão de pedidos online",
+          "name": "Configuração",
+          "description": "Gestão do catálogo",
           "images": [
             {
-              "title": "Recepção",
-              "description": "Pedidos entrantes"
+              "title": "Criação",
+              "description": "Total liberdade modular"
             },
             {
-              "title": "Processamento",
-              "description": "Fluxo de trabalho"
-            },
-            {
-              "title": "Envios",
-              "description": "Logística integrada"
-            }
-          ]
-        },
-        "integraciones": {
-          "name": "Integrações",
-          "description": "Conexão com plataformas",
-          "images": [
-            {
-              "title": "Shopify",
-              "description": "Integração Shopify"
-            },
-            {
-              "title": "WooCommerce",
-              "description": "Integração WordPress"
-            },
-            {
-              "title": "Marketplaces",
-              "description": "Amazon, eBay, etc."
+              "title": "Importação",
+              "description": "Recuperação de dados de fábrica"
             }
           ]
         }
@@ -591,78 +575,16 @@
     "impresoras3d": {
       "title": "Impressoras 3D",
       "subtitle": "Controle e gestão de produção com impressoras 3D",
-      "metaTitle": "Impressoras 3D | RayGold ERP - Fabricação Aditiva",
-      "metaDescription": "Gestão completa de impressoras 3D, trabalhos de impressão, materiais e configuração para joalheria.",
+      "metaTitle": "Impressoras 3D | RayGold ERP - Produção 3D",
+      "metaDescription": "Controle e gestão de produção com impressoras 3D para joalheria. Gestão de trabalhos, materiais e configuração.",
       "sections": {
         "impresoras": {
           "name": "Impressoras",
           "description": "Gestão do parque de impressoras 3D",
           "images": [
             {
-              "title": "Lista de Impressoras",
-              "description": "Visão geral de todas as impressoras"
-            },
-            {
-              "title": "Estado em Tempo Real",
-              "description": "Monitoramento do estado atual"
-            },
-            {
-              "title": "Manutenção",
-              "description": "Histórico e programação de manutenção"
-            }
-          ]
-        },
-        "trabajos": {
-          "name": "Trabalhos",
-          "description": "Fila de trabalhos e produção",
-          "images": [
-            {
-              "title": "Fila de Impressão",
-              "description": "Trabalhos pendentes e em processo"
-            },
-            {
-              "title": "Novo Trabalho",
-              "description": "Criação de ordens de impressão"
-            },
-            {
-              "title": "Histórico",
-              "description": "Registro de trabalhos concluídos"
-            }
-          ]
-        },
-        "materiales": {
-          "name": "Materiais",
-          "description": "Controle de resinas e materiais",
-          "images": [
-            {
-              "title": "Estoque",
-              "description": "Materiais disponíveis em estoque"
-            },
-            {
-              "title": "Consumos",
-              "description": "Acompanhamento de uso por trabalho"
-            },
-            {
-              "title": "Fornecedores",
-              "description": "Gestão de fornecedores de material"
-            }
-          ]
-        },
-        "configuracion": {
-          "name": "Configuração",
-          "description": "Parâmetros e perfis de impressão",
-          "images": [
-            {
-              "title": "Perfis",
-              "description": "Configurações de impressão salvas"
-            },
-            {
-              "title": "Parâmetros",
-              "description": "Ajustes técnicos detalhados"
-            },
-            {
-              "title": "Calibração",
-              "description": "Ferramentas de calibração"
+              "title": "Em Breve",
+              "description": ""
             }
           ]
         }
