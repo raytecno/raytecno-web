@@ -27,8 +27,8 @@
               "description": "Detall complet amb especificacions"
             },
             {
-              "title": "Configuració",
-              "description": "Personalització de camps i atributs"
+              "title": "Configuració d'Imatges",
+              "description": "Personalització d'imatges i documents"
             }
           ]
         },
@@ -41,12 +41,12 @@
               "description": "Gestió de múltiples tarifes"
             },
             {
-              "title": "Descomptes",
-              "description": "Configuració de descomptes"
+              "title": "Costos",
+              "description": "Configuració de costos i mà d'obra"
             },
             {
-              "title": "Històric",
-              "description": "Traçabilitat de canvis"
+              "title": "Estructurat",
+              "description": "Traçabilitat de preus"
             }
           ]
         },
@@ -63,8 +63,8 @@
               "description": "Vista jeràrquica de l'estructura"
             },
             {
-              "title": "Costos",
-              "description": "Càlcul automàtic de costos"
+              "title": "Múltiples",
+              "description": "Control de múltiples"
             }
           ]
         },
@@ -77,7 +77,7 @@
               "description": "Gestió d'imatges múltiples"
             },
             {
-              "title": "Visor",
+              "title": "Visualitzar",
               "description": "Visualització amb zoom"
             },
             {
@@ -87,7 +87,7 @@
           ]
         },
         "layout": {
-          "name": "Disseny",
+          "name": "Fabricació",
           "description": "Personalització de vistes i formularis",
           "images": [
             {
@@ -97,10 +97,28 @@
             {
               "title": "Camps",
               "description": "Camps personalitzats sense codi"
+            }
+          ]
+        },
+        "gestion": {
+          "name": "Gestions",
+          "description": "Gestió i personalització modular",
+          "images": [
+            {
+              "title": "Múltiples",
+              "description": "Control i modulació"
             },
             {
-              "title": "Plantilles",
-              "description": "Desament de configuracions"
+              "title": "Rutes",
+              "description": "Gestió de rutes de selecció"
+            },
+            {
+              "title": "Menú",
+              "description": "Creació de menú principal"
+            },
+            {
+              "title": "Personalització",
+              "description": "Selecció d'estils"
             }
           ]
         }
@@ -121,8 +139,8 @@
               "description": "Vista general amb estats i seguiment"
             },
             {
-              "title": "Nova Comanda",
-              "description": "Creació ràpida amb cerca d'articles"
+              "title": "Visual",
+              "description": "Control de comandes amb imatges"
             },
             {
               "title": "Detall de Comanda",
@@ -143,8 +161,8 @@
               "description": "Creació des de comandes"
             },
             {
-              "title": "Impressió",
-              "description": "Documents personalitzables"
+              "title": "Informació",
+              "description": "Informació completa de la comanda"
             }
           ]
         },
@@ -157,30 +175,44 @@
               "description": "Llistat de factures emeses"
             },
             {
-              "title": "Nova Factura",
-              "description": "Facturació manual o des d'albarans"
+              "title": "Generació",
+              "description": "Creació des de comandes o albarans"
             },
             {
-              "title": "Factura-E",
-              "description": "Facturació electrònica integrada"
+              "title": "Impressió",
+              "description": "Control sobre la impressió de factures"
+            },
+            {
+              "title": "Assentaments",
+              "description": "Visualitzar assentaments de la factura"
             }
           ]
         },
-        "clientes": {
-          "name": "Clients",
-          "description": "Base de dades de clients",
+        "libro": {
+          "name": "Llibre d'Or",
+          "description": "Control i manteniment",
           "images": [
             {
-              "title": "Llistat",
-              "description": "Directori de clients"
+              "title": "Moviments",
+              "description": "Gestió de moviments"
             },
             {
-              "title": "Fitxa",
-              "description": "Dades completes del client"
+              "title": "Detalls",
+              "description": "Control de saldos"
+            }
+          ]
+        },
+        "depositos": {
+          "name": "Dipòsits",
+          "description": "Gestió de dipòsits",
+          "images": [
+            {
+              "title": "Principal",
+              "description": "General de dipòsits"
             },
             {
-              "title": "Històric",
-              "description": "Historial d'operacions"
+              "title": "Comptes",
+              "description": "Control de comptes per dipòsit"
             }
           ]
         }
@@ -193,15 +225,15 @@
       "metaDescription": "Planificació i seguiment de la producció, ordres de treball i control de materials per a joieries.",
       "sections": {
         "ordenes": {
-          "name": "Ordres de Fabricació",
+          "name": "Ordres de Treball",
           "description": "Gestió d'ordres de fabricació",
           "images": [
             {
-              "title": "Llistat OF",
+              "title": "Llistat OT",
               "description": "Vista general d'ordres"
             },
             {
-              "title": "Nova OF",
+              "title": "Nova OT",
               "description": "Creació d'ordre de treball"
             },
             {
@@ -210,57 +242,39 @@
             }
           ]
         },
-        "fases": {
-          "name": "Fases",
-          "description": "Control de fases productives",
+        "materiales": {
+          "name": "Materials",
+          "description": "Control de matèries primeres",
           "images": [
             {
-              "title": "Fases de Producció",
-              "description": "Definició del procés productiu"
-            },
-            {
-              "title": "Temps",
-              "description": "Control de temps per fase"
-            },
-            {
-              "title": "Operaris",
-              "description": "Assignació de recursos"
-            }
-          ]
-        },
-        "fundicion": {
-          "name": "Fosa",
-          "description": "Control del procés de fosa",
-          "images": [
-            {
-              "title": "Foses",
-              "description": "Registre de foses"
-            },
-            {
-              "title": "Pèrdues",
-              "description": "Control de pèrdues"
-            },
-            {
-              "title": "Aliatges",
-              "description": "Composició de metalls"
-            }
-          ]
-        },
-        "inventario": {
-          "name": "Inventari",
-          "description": "Control d'estoc i moviments",
-          "images": [
-            {
-              "title": "Estoc",
-              "description": "Inventari en temps real"
+              "title": "Inventari",
+              "description": "Estoc de materials"
             },
             {
               "title": "Moviments",
-              "description": "Traçabilitat completa"
+              "description": "Entrades i sortides"
             },
             {
               "title": "Valoració",
-              "description": "Valoració d'existències"
+              "description": "Cost de materials"
+            }
+          ]
+        },
+        "mermas": {
+          "name": "Minves",
+          "description": "Control de pèrdues en fabricació",
+          "images": [
+            {
+              "title": "Registre",
+              "description": "Control de minves"
+            },
+            {
+              "title": "Anàlisi",
+              "description": "Estadístiques de pèrdues"
+            },
+            {
+              "title": "Informes",
+              "description": "Informes detallats"
             }
           ]
         }
@@ -373,26 +387,8 @@
               "description": "Informació completa"
             },
             {
-              "title": "Exportació",
-              "description": "Descàrrega de dades"
-            }
-          ]
-        },
-        "trazabilidad": {
-          "name": "Traçabilitat",
-          "description": "Seguiment de peces",
-          "images": [
-            {
-              "title": "Per Peça",
-              "description": "Història de cada article"
-            },
-            {
-              "title": "Per Lot",
-              "description": "Traçabilitat per lots"
-            },
-            {
-              "title": "Certificats",
-              "description": "Documentació associada"
+              "title": "Verifactu",
+              "description": "Facturació amb Verifactu"
             }
           ]
         }
@@ -400,9 +396,9 @@
     },
     "inventario": {
       "title": "Inventaris",
-      "subtitle": "Gestió d'inventaris i distribucions",
-      "metaTitle": "Inventaris | RayGold ERP - Gestió d'Estocs",
-      "metaDescription": "Gestió de recursos, estocs, moviments i distribucions per a joieries.",
+      "subtitle": "Gestió de diversos inventaris",
+      "metaTitle": "Inventaris | RayGold ERP - Traçabilitat",
+      "metaDescription": "Gestió de recursos, estocs, moviments i distribucions",
       "sections": {
         "distribucion": {
           "name": "Distribucions",
@@ -410,11 +406,25 @@
           "images": [
             {
               "title": "Principal",
-              "description": "Llistat de distribucions"
+              "description": "Llistat de distribució"
             },
             {
               "title": "Generació",
               "description": "Informació completa"
+            }
+          ]
+        },
+        "stocks": {
+          "name": "Estocs",
+          "description": "Control total d'estocs",
+          "images": [
+            {
+              "title": "Principal",
+              "description": "Llistat de distribució"
+            },
+            {
+              "title": "Comptes corrents",
+              "description": ""
             }
           ]
         }
@@ -427,20 +437,20 @@
       "metaDescription": "Anàlisi de dades, informes personalitzats i dashboards per a presa de decisions en joieries.",
       "sections": {
         "dashboards": {
-          "name": "Quadres de Comandament",
-          "description": "Panells de control visuals",
+          "name": "Dashboards",
+          "description": "Quadres de comandament visuals",
           "images": [
             {
               "title": "Principal",
               "description": "KPIs principals"
             },
             {
-              "title": "Vendes",
-              "description": "Mètriques comercials"
+              "title": "Temps",
+              "description": "Gràfics per mesos o anys"
             },
             {
-              "title": "Producció",
-              "description": "Indicadors de fàbrica"
+              "title": "Articles",
+              "description": "Gràfics per articles"
             }
           ]
         },
@@ -466,61 +476,39 @@
     },
     "vendedores": {
       "title": "Venedors",
-      "subtitle": "Gestió de rutes, visites i comissions",
+      "subtitle": "Gestió especialitzada per a venedors",
       "metaTitle": "Venedors | RayGold ERP - Gestió Comercial",
       "metaDescription": "Gestió d'equips comercials, comissions, objectius i seguiment de vendes per a joieries.",
       "sections": {
         "equipo": {
-          "name": "Equip",
-          "description": "Gestió de l'equip comercial",
+          "name": "Aplicació",
+          "description": "Gestió personalitzada de comercial",
           "images": [
             {
-              "title": "Venedors",
-              "description": "Llistat de l'equip"
+              "title": "Principal",
+              "description": "Inici personalitzat"
             },
             {
-              "title": "Zones",
-              "description": "Assignació de territoris"
+              "title": "Menú",
+              "description": "Configuració modular"
             },
             {
-              "title": "Objectius",
-              "description": "Metes de venda"
+              "title": "Calendari",
+              "description": "Calendari personal per venedor"
             }
           ]
         },
         "comisiones": {
-          "name": "Comissions",
+          "name": "Gestió",
           "description": "Càlcul i liquidació",
           "images": [
             {
-              "title": "Regles",
-              "description": "Configuració de comissions"
+              "title": "Venedors",
+              "description": "Gestió de venedors"
             },
             {
-              "title": "Càlcul",
-              "description": "Liquidació automàtica"
-            },
-            {
-              "title": "Històric",
-              "description": "Pagaments realitzats"
-            }
-          ]
-        },
-        "rutas": {
-          "name": "Rutes",
-          "description": "Planificació de visites",
-          "images": [
-            {
-              "title": "Calendari",
-              "description": "Agenda de visites"
-            },
-            {
-              "title": "Mapa",
-              "description": "Vista geogràfica"
-            },
-            {
-              "title": "Informes",
-              "description": "Resultats de visites"
+              "title": "Vendes",
+              "description": "Control de vendes per venedor"
             }
           ]
         }
@@ -537,52 +525,30 @@
           "description": "Publicació de productes",
           "images": [
             {
-              "title": "Productes",
-              "description": "Gestió del catàleg web"
+              "title": "Principal",
+              "description": "Catàleg web"
             },
             {
-              "title": "Categories",
-              "description": "Organització de productes"
+              "title": "Selecció i venda",
+              "description": "Modulat i accés directe a venda"
             },
             {
-              "title": "Sincronització",
-              "description": "Actualització automàtica"
+              "title": "Especificacions",
+              "description": "Concreta detalls"
             }
           ]
         },
         "pedidos": {
-          "name": "Comandes Web",
-          "description": "Gestió de comandes en línia",
+          "name": "Configuració",
+          "description": "Gestió del catàleg",
           "images": [
             {
-              "title": "Recepció",
-              "description": "Comandes entrants"
+              "title": "Creació",
+              "description": "Total llibertat modular"
             },
             {
-              "title": "Processament",
-              "description": "Flux de treball"
-            },
-            {
-              "title": "Enviaments",
-              "description": "Logística integrada"
-            }
-          ]
-        },
-        "integraciones": {
-          "name": "Integracions",
-          "description": "Connexió amb plataformes",
-          "images": [
-            {
-              "title": "Shopify",
-              "description": "Integració Shopify"
-            },
-            {
-              "title": "WooCommerce",
-              "description": "Integració WordPress"
-            },
-            {
-              "title": "Marketplaces",
-              "description": "Amazon, eBay, etc."
+              "title": "Importació",
+              "description": "Recuperació de dades de fàbrica"
             }
           ]
         }
@@ -599,70 +565,8 @@
           "description": "Gestió del parc d'impressores 3D",
           "images": [
             {
-              "title": "Llistat d'Impressores",
-              "description": "Vista general del parc d'impressores"
-            },
-            {
-              "title": "Estat en Temps Real",
-              "description": "Monitorització de l'estat de cada impressora"
-            },
-            {
-              "title": "Manteniment",
-              "description": "Registre de manteniments i calibracions"
-            }
-          ]
-        },
-        "trabajos": {
-          "name": "Treballs",
-          "description": "Cua de treballs i producció",
-          "images": [
-            {
-              "title": "Cua d'Impressió",
-              "description": "Treballs pendents i en curs"
-            },
-            {
-              "title": "Nou Treball",
-              "description": "Configuració de nou treball d'impressió"
-            },
-            {
-              "title": "Històric",
-              "description": "Registre de treballs completats"
-            }
-          ]
-        },
-        "materiales": {
-          "name": "Materials",
-          "description": "Gestió de resines i materials",
-          "images": [
-            {
-              "title": "Estoc de Materials",
-              "description": "Inventari de resines i consumibles"
-            },
-            {
-              "title": "Consums",
-              "description": "Control de consum per treball"
-            },
-            {
-              "title": "Proveïdors",
-              "description": "Gestió de proveïdors de materials"
-            }
-          ]
-        },
-        "configuracion": {
-          "name": "Configuració",
-          "description": "Ajustos i perfils d'impressió",
-          "images": [
-            {
-              "title": "Perfils",
-              "description": "Perfils d'impressió per tipus de peça"
-            },
-            {
-              "title": "Paràmetres",
-              "description": "Configuració de paràmetres tècnics"
-            },
-            {
-              "title": "Integració",
-              "description": "Connexió amb programari de disseny"
+              "title": "Pròximament",
+              "description": ""
             }
           ]
         }
