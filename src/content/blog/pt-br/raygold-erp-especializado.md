@@ -2,7 +2,6 @@
 title: "RAYGOLD: O ERP Especializado para a Indústria Joalheira"
 excerpt: "Descubra como o RayGold revoluciona a gestão integral de empresas joalheiras com rastreabilidade de metais preciosos, controle de perdas e conformidade normativa."
 date: 2025-12-15
-featuredImage: "https://raygoldstorage.blob.core.windows.net/web/blog/raygold-erp-joyeria.jpg"
 draft: false
 
 # Idioma e tradução

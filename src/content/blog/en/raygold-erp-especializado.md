@@ -2,7 +2,6 @@
 title: "RAYGOLD: The Specialized ERP for the Jewelry Industry"
 excerpt: "Discover how RayGold revolutionizes integrated management for jewelry businesses with precious metal traceability, scrap control and regulatory compliance."
 date: 2025-12-15
-featuredImage: "https://raygoldstorage.blob.core.windows.net/web/blog/raygold-erp-joyeria.jpg"
 draft: false
 
 # Language and translation
