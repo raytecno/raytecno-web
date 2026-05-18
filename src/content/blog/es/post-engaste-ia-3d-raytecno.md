@@ -196,7 +196,7 @@ La conclusión razonable es la misma que ya escribimos en el [post sobre IA y De
 
 ## 9. Lo que un ERP joyero moderno debe controlar en el engaste
 
-Para que toda esta arquitectura conceptual sea operativa, un buen [ERP para joyería](/es) necesita gestionar específicamente seis bloques:
+Para que toda esta arquitectura conceptual sea operativa, un buen [ERP para joyería](/es/erp-joyeria) necesita gestionar específicamente seis bloques:
 
 ### 9.1 Maestro de gemas
 

@@ -200,7 +200,7 @@ Comparada con el mecanizado CNC, la microfusión es **más sostenible** en uso d
 
 ## 6. Cómo lo materializa RayTecno
 
-En **RayTecno** el módulo de fabricación gestiona la microfusión joyera con seis bloques integrados:
+En nuestro [ERP para joyería](/es/erp-joyeria) **RayGold**, el módulo de fabricación gestiona la microfusión joyera con seis bloques integrados:
 
 1. **Maestro de modelos y cauchos** con versionado, BOM, vida útil y coste teórico actualizable a precio de oro.
 2. **Órdenes de fabricación** que generan automáticamente la documentación del árbol (peso esperado, número de piezas, aleación).
