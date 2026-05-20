@@ -54,7 +54,7 @@ export const social = {
     handle: "@raytecno",
   },
   facebook: {
-    url: "https://www.facebook.com/raytecnogold",
+    url: "https://www.facebook.com/profile.php?id=61590229018054",
     handle: "raytecno",
   },
   instagram: {
