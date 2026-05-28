@@ -202,20 +202,15 @@ const verifactuUrl = getLegalUrl('verifactu', lang);
       </div>
 
       <!-- Visual lado derecho -->
-      <!-- <div class="hero-visual">
+      <div class="hero-visual">
         <div class="visual-card main">
-          <img src="https://raygoldstorage.blob.core.windows.net/web/InicioFIN3.png" alt="Dashboard RayGold" />
+          <img src="https://raygoldstorage.blob.core.windows.net/web/InicioFin4.png" alt="Dashboard RayGold" />
           <div class="visual-label">
             <span class="label-dot"></span>
             {t.visualLabel}
           </div>
         </div>
-        <div class="visual-card floating-1">
-          <img src="https://raygoldstorage.blob.core.windows.net/web/A02.png" alt="Ficha artículo" />
-        </div>
-        <div class="visual-card floating-2">
-          <img src="https://raygoldstorage.blob.core.windows.net/web/I02.png" alt="Configuración" />
-        </div>
+       
         
         <!-- Elementos decorativos -->
         <div class="visual-badge badge-1">
@@ -230,16 +225,6 @@ const verifactuUrl = getLegalUrl('verifactu', lang);
             <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
           </svg>
           <span>{t.badge2}</span>
-        </div>
-      </div> -->
-      <!-- Visual lado derecho -->
-      <div class="hero-visual">
-        <div class="visual-card main">
-          <img src="https://raygoldstorage.blob.core.windows.net/web/InicioFin4.png" alt="Dashboard RayGold" />
-          <div class="visual-label">
-            <span class="label-dot"></span>
-            {t.visualLabel}
-          </div>
         </div>
       </div>
     </div>
@@ -498,7 +483,9 @@ const verifactuUrl = getLegalUrl('verifactu', lang);
 
   .visual-card.main {
     width: 100%;
-    height: 100%;
+    height: 320px;
+    top: 50%;
+    transform: translateY(-50%);
     z-index: 2;
   }
 
