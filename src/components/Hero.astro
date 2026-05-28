@@ -3,6 +3,7 @@
  * Hero.astro - Banner hero comercial principal
  * Con tema adaptativo: azul oscuro en desktop, blanco en móvil
  * Incluye badge de certificación VERI*FACTU
+ * Visual lado derecho: carrusel de imágenes con autoplay
  */
 import { type Lang, getPageUrl, getLegalUrl } from "@/config/pages";
 
@@ -133,6 +134,13 @@ const t = translations[lang] || translations.es;
 const contactUrl = getPageUrl('contacto', lang);
 const modulosUrl = getPageUrl('modulos', lang);
 const verifactuUrl = getLegalUrl('verifactu', lang);
+
+// Imágenes del carrusel
+const carouselImages = [
+  { src: "https://raygoldstorage.blob.core.windows.net/web/InicioFIN3.png", alt: "Dashboard RayGold" },
+  { src: "https://raygoldstorage.blob.core.windows.net/web/InicioFon4.png", alt: "Articulos de planes" },
+  { src: "https://raygoldstorage.blob.core.windows.net/web/I02.png", alt: "Configuración" },
+];
 ---
 
 <section class="hero-section">
@@ -201,30 +209,27 @@ const verifactuUrl = getLegalUrl('verifactu', lang);
         </div>
       </div>
 
-      <!-- Visual lado derecho -->
+      <!-- Visual lado derecho: carrusel -->
       <div class="hero-visual">
-        <div class="visual-card main">
-          <img src="https://raygoldstorage.blob.core.windows.net/web/InicioFin4.png" alt="Dashboard RayGold" />
+        <div class="carousel" id="hero-carousel">
+          <div class="carousel-track">
+            {carouselImages.map((img, i) => (
+              <div class={`carousel-slide ${i === 0 ? 'active' : ''}`}>
+                <img src={img.src} alt={img.alt} />
+              </div>
+            ))}
+          </div>
+
           <div class="visual-label">
             <span class="label-dot"></span>
             {t.visualLabel}
           </div>
-        </div>
-       
-        
-        <!-- Elementos decorativos -->
-        <div class="visual-badge badge-1">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
-            <path d="M22 4L12 14.01l-3-3"/>
-          </svg>
-          <span>{t.badge1}</span>
-        </div>
-        <div class="visual-badge badge-2">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
-          </svg>
-          <span>{t.badge2}</span>
+
+          <div class="carousel-dots">
+            {carouselImages.map((_, i) => (
+              <button class={`carousel-dot ${i === 0 ? 'active' : ''}`} data-index={i} aria-label={`Slide ${i + 1}`}></button>
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -461,32 +466,45 @@ const verifactuUrl = getLegalUrl('verifactu', lang);
     background: rgba(255, 255, 255, 0.05);
   }
 
-  /* Visual lado derecho */
+  /* ============================================
+     Visual lado derecho: carrusel
+     ============================================ */
   .hero-visual {
     position: relative;
-    height: 500px;
+    height: 420px;
   }
 
-  .visual-card {
-    position: absolute;
+  .carousel {
+    position: relative;
+    width: 100%;
+    height: 100%;
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4);
     border: 1px solid #334155;
   }
 
-  .visual-card img {
+  .carousel-track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .carousel-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+
+  .carousel-slide.active {
+    opacity: 1;
+  }
+
+  .carousel-slide img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-  }
-
-  .visual-card.main {
-    width: 100%;
-    height: 320px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 2;
   }
 
   .visual-label {
@@ -503,6 +521,7 @@ const verifactuUrl = getLegalUrl('verifactu', lang);
     font-size: 0.8rem;
     color: white;
     font-weight: 500;
+    z-index: 3;
   }
 
   .label-dot {
@@ -518,68 +537,31 @@ const verifactuUrl = getLegalUrl('verifactu', lang);
     50% { opacity: 0.5; }
   }
 
-  .visual-card.floating-1 {
-    width: 180px;
-    height: 120px;
-    top: 10px;
-    right: -20px;
-    z-index: 3;
-    animation: float 6s ease-in-out infinite;
-  }
-
-  .visual-card.floating-2 {
-    width: 160px;
-    height: 110px;
-    bottom: 20px;
-    left: -30px;
-    z-index: 1;
-    animation: float 6s ease-in-out infinite 2s;
-  }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
-
-  .visual-badge {
+  .carousel-dots {
     position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
-    align-items: center;
     gap: 8px;
-    padding: 10px 14px;
-    background: rgba(30, 41, 59, 0.95);
-    backdrop-filter: blur(8px);
-    border: 1px solid #334155;
-    border-radius: 10px;
-    z-index: 4;
+    z-index: 3;
   }
 
-  .visual-badge svg {
-    width: 18px;
-    height: 18px;
-    color: #10b981;
+  .carousel-dot {
+    width: 9px;
+    height: 9px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: all 0.3s ease;
   }
 
-  .visual-badge span {
-    font-size: 0.8rem;
-    color: white;
-    font-weight: 500;
-  }
-
-  .visual-badge.badge-1 {
-    top: 60px;
-    left: -40px;
-    animation: float 5s ease-in-out infinite 1s;
-  }
-
-  .visual-badge.badge-2 {
-    bottom: 80px;
-    right: 20px;
-    animation: float 5s ease-in-out infinite 3s;
-  }
-
-  .visual-badge.badge-2 svg {
-    color: #f59e0b;
+  .carousel-dot.active {
+    background: white;
+    width: 24px;
+    border-radius: 5px;
   }
 
   /* Scroll indicator */
@@ -638,22 +620,9 @@ const verifactuUrl = getLegalUrl('verifactu', lang);
     }
 
     .hero-visual {
-      height: 350px;
+      height: 320px;
       max-width: 500px;
       margin: 0 auto;
-    }
-
-    .visual-card.floating-1,
-    .visual-card.floating-2,
-    .visual-badge {
-      display: none;
-    }
-
-    .visual-card.main {
-      position: relative;
-      transform: none;
-      top: auto;
-      height: 100%;
     }
   }
 
@@ -761,8 +730,8 @@ const verifactuUrl = getLegalUrl('verifactu', lang);
       background: rgba(0, 0, 0, 0.02);
     }
 
-    /* Visual card */
-    .visual-card {
+    /* Carrusel */
+    .carousel {
       border-color: #e2e8f0;
       box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
     }
@@ -778,3 +747,46 @@ const verifactuUrl = getLegalUrl('verifactu', lang);
     }
   }
 </style>
+
+<script>
+  function initHeroCarousel() {
+    const carousel = document.getElementById('hero-carousel');
+    if (!carousel) return;
+
+    const slides = carousel.querySelectorAll('.carousel-slide');
+    const dots = carousel.querySelectorAll('.carousel-dot');
+    if (slides.length === 0) return;
+
+    let current = 0;
+    let timer: ReturnType<typeof setInterval>;
+
+    function show(index: number) {
+      slides[current].classList.remove('active');
+      dots[current].classList.remove('active');
+      current = (index + slides.length) % slides.length;
+      slides[current].classList.add('active');
+      dots[current].classList.add('active');
+    }
+
+    function next() { show(current + 1); }
+
+    function start() { timer = setInterval(next, 5000); }
+    function stop() { clearInterval(timer); }
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        stop();
+        show(Number(dot.getAttribute('data-index')));
+        start();
+      });
+    });
+
+    carousel.addEventListener('mouseenter', stop);
+    carousel.addEventListener('mouseleave', start);
+
+    start();
+  }
+
+  document.addEventListener('astro:page-load', initHeroCarousel);
+  initHeroCarousel();
+</script>
