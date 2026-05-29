@@ -1,13 +1,14 @@
 ---
 /**
  * Template: Contacto
- * Página de contacto con formulario y login demo
+ * Página de contacto con formulario de mensaje y card de contactos directos
  * Con soporte multiidioma
- * 
- * CORREGIDO: El link a términos ahora usa getLegalUrl('terminos', lang) en vez de /legal
+ *
+ * Cambios: eliminada la card de acceso demo (login/registro).
+ * Los contactos directos se han movido a su propia card.
  */
 import Layout from "@/layouts/Layout.astro";
-import { getAlternateUrls, getPageUrl, getLegalUrl, type Lang } from "@/config/pages";
+import { getAlternateUrls, type Lang } from "@/config/pages";
 
 interface Props {
   lang: Lang;
@@ -16,16 +17,12 @@ interface Props {
 const { lang } = Astro.props;
 const alternateUrls = getAlternateUrls("contacto");
 
-// URL de términos traducida según idioma
-const termsUrl = getLegalUrl('terminos', lang);
-
 // Traducciones de contacto
 const contactT: Record<
   Lang,
   {
     metaTitle: string;
     metaDesc: string;
-    badge: string;
     title: string;
     titleHighlight: string;
     subtitle: string;
@@ -46,40 +43,23 @@ const contactT: Record<
       submit: string;
       sending: string;
     };
-    demoCard: { title: string; subtitle: string; features: string[] };
-    loginTab: string;
-    registerTab: string;
-    login: {
-      user: string;
-      password: string;
-      submit: string;
-      forgot: string;
-    };
-    register: {
-      name: string;
-      surname: string;
-      company: string;
-      email: string;
-      user: string;
-      password: string;
-      terms: string;
-      termsLink: string;
-      submit: string;
-    };
     directContact: {
       title: string;
-      phone: string;
-      whatsapp: string;
-      email: string;
+      subtitle: string;
+      phoneLabel: string;
+      whatsappLabel: string;
+      emailLabel: string;
+      scheduleTitle: string;
+      scheduleValue: string;
+      responseTitle: string;
+      responseValue: string;
     };
-    cta: { title: string; subtitle: string; button: string };
   }
 > = {
   es: {
     metaTitle: "Contacto | RayGold ERP para Joyería",
     metaDesc:
       "Contacta con RayGold para solicitar una demo gratuita o información sobre nuestro software ERP para joyerías.",
-    badge: "Contacto",
     title: "¿Listo para transformar",
     titleHighlight: "tu joyería?",
     subtitle:
@@ -114,47 +94,22 @@ const contactT: Record<
       submit: "Enviar mensaje",
       sending: "Enviando...",
     },
-    demoCard: {
-      title: "Acceso Demo",
-      subtitle: "Prueba RayGold gratis",
-      features: ["Sin compromiso", "Datos de ejemplo", "Todas las funciones"],
-    },
-    loginTab: "Iniciar sesión",
-    registerTab: "Crear cuenta",
-    login: {
-      user: "Usuario",
-      password: "Contraseña",
-      submit: "Entrar",
-      forgot: "¿Olvidaste tu contraseña?",
-    },
-    register: {
-      name: "Nombre",
-      surname: "Apellido",
-      company: "Empresa",
-      email: "Email",
-      user: "Usuario",
-      password: "Contraseña",
-      terms: "Acepto los",
-      termsLink: "términos y condiciones",
-      submit: "Crear cuenta",
-    },
     directContact: {
       title: "Contacto directo",
-      phone: "Llámanos",
-      whatsapp: "WhatsApp",
-      email: "Email",
-    },
-    cta: {
-      title: "¿Prefieres que te llamemos?",
-      subtitle: "Déjanos tu teléfono y te contactamos",
-      button: "Solicitar llamada",
+      subtitle: "Habla con nosotros por tu canal preferido",
+      phoneLabel: "Llámanos",
+      whatsappLabel: "WhatsApp",
+      emailLabel: "Email",
+      scheduleTitle: "Horario de atención",
+      scheduleValue: "Lunes a viernes · 9:00 - 18:00 h",
+      responseTitle: "Tiempo de respuesta",
+      responseValue: "Menos de 24 horas",
     },
   },
   en: {
     metaTitle: "Contact | RayGold ERP for Jewelry",
     metaDesc:
       "Contact RayGold to request a free demo or information about our ERP software for jewelers.",
-    badge: "Contact",
     title: "Ready to transform",
     titleHighlight: "your jewelry business?",
     subtitle:
@@ -190,47 +145,22 @@ const contactT: Record<
       submit: "Send message",
       sending: "Sending...",
     },
-    demoCard: {
-      title: "Demo Access",
-      subtitle: "Try RayGold for free",
-      features: ["No commitment", "Sample data", "All features"],
-    },
-    loginTab: "Sign in",
-    registerTab: "Create account",
-    login: {
-      user: "Username",
-      password: "Password",
-      submit: "Sign in",
-      forgot: "Forgot your password?",
-    },
-    register: {
-      name: "Name",
-      surname: "Surname",
-      company: "Company",
-      email: "Email",
-      user: "Username",
-      password: "Password",
-      terms: "I accept the",
-      termsLink: "terms and conditions",
-      submit: "Create account",
-    },
     directContact: {
       title: "Direct contact",
-      phone: "Call us",
-      whatsapp: "WhatsApp",
-      email: "Email",
-    },
-    cta: {
-      title: "Prefer us to call you?",
-      subtitle: "Leave your phone and we'll contact you",
-      button: "Request call",
+      subtitle: "Reach out through your preferred channel",
+      phoneLabel: "Call us",
+      whatsappLabel: "WhatsApp",
+      emailLabel: "Email",
+      scheduleTitle: "Business hours",
+      scheduleValue: "Monday to Friday · 9:00 - 18:00",
+      responseTitle: "Response time",
+      responseValue: "Less than 24 hours",
     },
   },
   fr: {
     metaTitle: "Contact | RayGold ERP pour Bijouterie",
     metaDesc:
       "Contactez RayGold pour demander une démo gratuite ou des informations sur notre logiciel ERP pour bijouteries.",
-    badge: "Contact",
     title: "Prêt à transformer",
     titleHighlight: "votre bijouterie?",
     subtitle:
@@ -266,47 +196,22 @@ const contactT: Record<
       submit: "Envoyer message",
       sending: "Envoi...",
     },
-    demoCard: {
-      title: "Accès Démo",
-      subtitle: "Essayez RayGold gratuitement",
-      features: ["Sans engagement", "Données exemple", "Toutes fonctions"],
-    },
-    loginTab: "Connexion",
-    registerTab: "Créer compte",
-    login: {
-      user: "Utilisateur",
-      password: "Mot de passe",
-      submit: "Connexion",
-      forgot: "Mot de passe oublié?",
-    },
-    register: {
-      name: "Prénom",
-      surname: "Nom",
-      company: "Entreprise",
-      email: "Email",
-      user: "Utilisateur",
-      password: "Mot de passe",
-      terms: "J'accepte les",
-      termsLink: "conditions générales",
-      submit: "Créer compte",
-    },
     directContact: {
       title: "Contact direct",
-      phone: "Appelez-nous",
-      whatsapp: "WhatsApp",
-      email: "Email",
-    },
-    cta: {
-      title: "Préférez-vous qu'on vous appelle?",
-      subtitle: "Laissez votre téléphone et nous vous contacterons",
-      button: "Demander appel",
+      subtitle: "Joignez-nous par votre canal préféré",
+      phoneLabel: "Appelez-nous",
+      whatsappLabel: "WhatsApp",
+      emailLabel: "Email",
+      scheduleTitle: "Horaires",
+      scheduleValue: "Lundi à vendredi · 9h00 - 18h00",
+      responseTitle: "Temps de réponse",
+      responseValue: "Moins de 24 heures",
     },
   },
   ca: {
     metaTitle: "Contacte | RayGold ERP per a Joieria",
     metaDesc:
       "Contacta amb RayGold per sol·licitar una demo gratuïta o informació sobre el nostre software ERP per a joieries.",
-    badge: "Contacte",
     title: "Preparat per transformar",
     titleHighlight: "la teva joieria?",
     subtitle:
@@ -342,47 +247,22 @@ const contactT: Record<
       submit: "Enviar missatge",
       sending: "Enviant...",
     },
-    demoCard: {
-      title: "Accés Demo",
-      subtitle: "Prova RayGold gratis",
-      features: ["Sense compromís", "Dades d'exemple", "Totes les funcions"],
-    },
-    loginTab: "Iniciar sessió",
-    registerTab: "Crear compte",
-    login: {
-      user: "Usuari",
-      password: "Contrasenya",
-      submit: "Entrar",
-      forgot: "Has oblidat la contrasenya?",
-    },
-    register: {
-      name: "Nom",
-      surname: "Cognom",
-      company: "Empresa",
-      email: "Email",
-      user: "Usuari",
-      password: "Contrasenya",
-      terms: "Accepto els",
-      termsLink: "termes i condicions",
-      submit: "Crear compte",
-    },
     directContact: {
       title: "Contacte directe",
-      phone: "Truca'ns",
-      whatsapp: "WhatsApp",
-      email: "Email",
-    },
-    cta: {
-      title: "Prefereixis que et truquem?",
-      subtitle: "Deixa'ns el teu telèfon i et contactem",
-      button: "Sol·licitar trucada",
+      subtitle: "Parla amb nosaltres pel teu canal preferit",
+      phoneLabel: "Truca'ns",
+      whatsappLabel: "WhatsApp",
+      emailLabel: "Email",
+      scheduleTitle: "Horari d'atenció",
+      scheduleValue: "Dilluns a divendres · 9:00 - 18:00 h",
+      responseTitle: "Temps de resposta",
+      responseValue: "Menys de 24 hores",
     },
   },
   "pt-br": {
     metaTitle: "Contato | RayGold ERP para Joalheria",
     metaDesc:
       "Entre em contato com RayGold para solicitar uma demo gratuita ou informações sobre nosso software ERP para joalherias.",
-    badge: "Contato",
     title: "Pronto para transformar",
     titleHighlight: "sua joalheria?",
     subtitle:
@@ -418,48 +298,25 @@ const contactT: Record<
       submit: "Enviar mensagem",
       sending: "Enviando...",
     },
-    demoCard: {
-      title: "Acesso Demo",
-      subtitle: "Experimente RayGold grátis",
-      features: ["Sem compromisso", "Dados exemplo", "Todas funções"],
-    },
-    loginTab: "Entrar",
-    registerTab: "Criar conta",
-    login: {
-      user: "Usuário",
-      password: "Senha",
-      submit: "Entrar",
-      forgot: "Esqueceu sua senha?",
-    },
-    register: {
-      name: "Nome",
-      surname: "Sobrenome",
-      company: "Empresa",
-      email: "Email",
-      user: "Usuário",
-      password: "Senha",
-      terms: "Aceito os",
-      termsLink: "termos e condições",
-      submit: "Criar conta",
-    },
     directContact: {
       title: "Contato direto",
-      phone: "Ligue-nos",
-      whatsapp: "WhatsApp",
-      email: "Email",
-    },
-    cta: {
-      title: "Prefere que ligamos?",
-      subtitle: "Deixe seu telefone e entramos em contato",
-      button: "Solicitar ligação",
+      subtitle: "Fale conosco pelo seu canal preferido",
+      phoneLabel: "Ligue para nós",
+      whatsappLabel: "WhatsApp",
+      emailLabel: "Email",
+      scheduleTitle: "Horário de atendimento",
+      scheduleValue: "Segunda a sexta · 9:00 - 18:00",
+      responseTitle: "Tempo de resposta",
+      responseValue: "Menos de 24 horas",
     },
   },
 };
 
 const t = contactT[lang] || contactT.es;
 
-// API URL
-const API_BASE_URL = "https://raygoldapi-c3ckbgc6b5g5bvds.spaincentral-01.azurewebsites.net";
+// API URL del formulario de contacto
+const CONTACT_API_URL =
+  "https://raygoldapi-c3ckbgc6b5g5bvds.spaincentral-01.azurewebsites.net/api/contacto";
 ---
 
 <Layout
@@ -608,10 +465,10 @@ const API_BASE_URL = "https://raygoldapi-c3ckbgc6b5g5bvds.spaincentral-01.azurew
             </form>
           </div>
 
-          <!-- Card 2: Demo Access -->
-          <div class="contact-card demo-card">
+          <!-- Card 2: Contacto Directo -->
+          <div class="contact-card direct-contact-card">
             <div class="card-header">
-              <div class="card-icon demo">
+              <div class="card-icon contact">
                 <svg
                   width="24"
                   height="24"
@@ -620,134 +477,24 @@ const API_BASE_URL = "https://raygoldapi-c3ckbgc6b5g5bvds.spaincentral-01.azurew
                   stroke="currentColor"
                   stroke-width="2"
                 >
-                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                  <line x1="8" y1="21" x2="16" y2="21"></line>
-                  <line x1="12" y1="17" x2="12" y2="21"></line>
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"
+                  ></path>
                 </svg>
               </div>
               <div>
-                <h3>{t.demoCard.title}</h3>
-                <p>{t.demoCard.subtitle}</p>
+                <h3>{t.directContact.title}</h3>
+                <p>{t.directContact.subtitle}</p>
               </div>
             </div>
 
-            <div class="demo-features">
-              {
-                t.demoCard.features.map((feature) => (
-                  <div class="demo-feature">
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                    >
-                      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
-                    </svg>
-                    {feature}
-                  </div>
-                ))
-              }
-            </div>
-
-            <!-- Tabs Login/Register -->
-            <div class="auth-tabs">
-              <button class="auth-tab active" data-tab="login"
-                >{t.loginTab}</button
-              >
-              <button class="auth-tab" data-tab="register"
-                >{t.registerTab}</button
-              >
-            </div>
-
-            <!-- Login Form -->
-            <form id="loginForm" class="auth-form active">
-              <div class="form-group">
-                <label for="loginUsuario">{t.login.user}</label>
-                <input type="text" id="loginUsuario" name="usuario" required />
-              </div>
-              <div class="form-group">
-                <label for="loginPassword">{t.login.password}</label>
-                <input
-                  type="password"
-                  id="loginPassword"
-                  name="password"
-                  required
-                />
-              </div>
-              <div id="loginError" class="error-message"></div>
-              <button type="submit" class="btn-auth">
-                {t.login.submit}
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </button>
-            </form>
-
-            <!-- Register Form - CORREGIDO: usa termsUrl en vez de /legal -->
-            <form id="registerForm" class="auth-form">
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="regNombre">{t.register.name} *</label>
-                  <input type="text" id="regNombre" name="nombre" required />
-                </div>
-                <div class="form-group">
-                  <label for="regApellido">{t.register.surname}</label>
-                  <input type="text" id="regApellido" name="apellido" />
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="regEmpresa">{t.register.company}</label>
-                <input type="text" id="regEmpresa" name="empresa" />
-              </div>
-              <div class="form-group">
-                <label for="regEmail">{t.register.email} *</label>
-                <input type="email" id="regEmail" name="email" required />
-              </div>
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="regUsuario">{t.register.user} *</label>
-                  <input type="text" id="regUsuario" name="usuario" required />
-                </div>
-                <div class="form-group">
-                  <label for="regPassword">{t.register.password} *</label>
-                  <input
-                    type="password"
-                    id="regPassword"
-                    name="password"
-                    required
-                  />
-                </div>
-              </div>
-              <div class="form-group checkbox-group">
-                <input type="checkbox" id="regTerms" name="terms" required />
-                <label for="regTerms"
-                  >{t.register.terms}
-                  <a href={termsUrl}>{t.register.termsLink}</a></label
-                >
-              </div>
-              <div id="registerError" class="error-message"></div>
-              <div id="registerSuccess" class="success-message"></div>
-              <button type="submit" class="btn-auth">
-                {t.register.submit}
-              </button>
-            </form>
-
-            <!-- Direct Contact -->
-            <div class="direct-contact">
-              <h4>{t.directContact.title}</h4>
-              <div class="contact-links">
-                <a href="tel:+34648088550" class="contact-link phone">
+            <div class="contact-channels">
+              <!-- Teléfono -->
+              <a href="tel:+34648088550" class="contact-channel">
+                <div class="channel-icon phone-bg">
                   <svg
-                    width="18"
-                    height="18"
+                    width="22"
+                    height="22"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -757,17 +504,35 @@ const API_BASE_URL = "https://raygoldapi-c3ckbgc6b5g5bvds.spaincentral-01.azurew
                       d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"
                     ></path>
                   </svg>
-                  +34 648 088 550
-                </a>
-                <a
-                  href="https://wa.me/34648088550"
-                  target="_blank"
-                  rel="noopener"
-                  class="contact-link whatsapp"
+                </div>
+                <div class="channel-info">
+                  <span class="channel-label">{t.directContact.phoneLabel}</span>
+                  <span class="channel-value">+34 648 088 550</span>
+                </div>
+                <svg
+                  class="channel-arrow"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
                 >
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </a>
+
+              <!-- WhatsApp -->
+              <a
+                href="https://wa.me/34648088550"
+                target="_blank"
+                rel="noopener"
+                class="contact-channel"
+              >
+                <div class="channel-icon whatsapp-bg">
                   <svg
-                    width="18"
-                    height="18"
+                    width="22"
+                    height="22"
                     viewBox="0 0 24 24"
                     fill="currentColor"
                   >
@@ -775,12 +540,30 @@ const API_BASE_URL = "https://raygoldapi-c3ckbgc6b5g5bvds.spaincentral-01.azurew
                       d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"
                     ></path>
                   </svg>
-                  WhatsApp
-                </a>
-                <a href="mailto:info@raytecno.es" class="contact-link email">
+                </div>
+                <div class="channel-info">
+                  <span class="channel-label">{t.directContact.whatsappLabel}</span>
+                  <span class="channel-value">+34 648 088 550</span>
+                </div>
+                <svg
+                  class="channel-arrow"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </a>
+
+              <!-- Email -->
+              <a href="mailto:info@raytecno.es" class="contact-channel">
+                <div class="channel-icon email-bg">
                   <svg
-                    width="18"
-                    height="18"
+                    width="22"
+                    height="22"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -791,8 +574,64 @@ const API_BASE_URL = "https://raygoldapi-c3ckbgc6b5g5bvds.spaincentral-01.azurew
                     ></path>
                     <polyline points="22,6 12,13 2,6"></polyline>
                   </svg>
-                  info@raytecno.es
-                </a>
+                </div>
+                <div class="channel-info">
+                  <span class="channel-label">{t.directContact.emailLabel}</span>
+                  <span class="channel-value">info@raytecno.es</span>
+                </div>
+                <svg
+                  class="channel-arrow"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </a>
+            </div>
+
+            <!-- Información adicional -->
+            <div class="contact-info-grid">
+              <div class="info-block">
+                <div class="info-icon">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                </div>
+                <div>
+                  <span class="info-label">{t.directContact.scheduleTitle}</span>
+                  <span class="info-value">{t.directContact.scheduleValue}</span>
+                </div>
+              </div>
+
+              <div class="info-block">
+                <div class="info-icon">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <span class="info-label">{t.directContact.responseTitle}</span>
+                  <span class="info-value">{t.directContact.responseValue}</span>
+                </div>
               </div>
             </div>
           </div>
@@ -837,20 +676,6 @@ const API_BASE_URL = "https://raygoldapi-c3ckbgc6b5g5bvds.spaincentral-01.azurew
     margin: 0 auto;
   }
 
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(102, 126, 234, 0.1);
-    border: 1px solid rgba(102, 126, 234, 0.3);
-    color: #818cf8;
-    padding: 8px 16px;
-    border-radius: 100px;
-    font-size: 0.85rem;
-    font-weight: 500;
-    margin-bottom: 24px;
-  }
-
   .contacto-hero h1 {
     font-size: 2.5rem;
     font-weight: 700;
@@ -861,6 +686,7 @@ const API_BASE_URL = "https://raygoldapi-c3ckbgc6b5g5bvds.spaincentral-01.azurew
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
+
   .gradient-text {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     -webkit-background-clip: text;
@@ -883,6 +709,7 @@ const API_BASE_URL = "https://raygoldapi-c3ckbgc6b5g5bvds.spaincentral-01.azurew
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 32px;
+    align-items: start;
   }
 
   /* Contact Card */
@@ -912,9 +739,10 @@ const API_BASE_URL = "https://raygoldapi-c3ckbgc6b5g5bvds.spaincentral-01.azurew
     align-items: center;
     justify-content: center;
     color: white;
+    flex-shrink: 0;
   }
 
-  .card-icon.demo {
+  .card-icon.contact {
     background: linear-gradient(135deg, var(--accent-green) 0%, #059669 100%);
   }
 
@@ -985,6 +813,16 @@ const API_BASE_URL = "https://raygoldapi-c3ckbgc6b5g5bvds.spaincentral-01.azurew
     color: var(--text-muted);
   }
 
+  .form-group select {
+    background-color: #1e293b;
+    color: #ffffff;
+  }
+
+  .form-group select option {
+    background-color: #1e293b;
+    color: #ffffff;
+  }
+
   .input-prefix {
     display: flex;
     align-items: center;
@@ -1011,6 +849,7 @@ const API_BASE_URL = "https://raygoldapi-c3ckbgc6b5g5bvds.spaincentral-01.azurew
     min-width: 0;
     width: 100%;
   }
+
   .btn-submit {
     display: flex;
     align-items: center;
@@ -1033,171 +872,140 @@ const API_BASE_URL = "https://raygoldapi-c3ckbgc6b5g5bvds.spaincentral-01.azurew
     box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
   }
 
-  /* Demo Card */
-  .demo-features {
+  /* ============================================
+     Card de Contacto Directo
+     ============================================ */
+  .contact-channels {
     display: flex;
-    gap: 16px;
-    margin-bottom: 24px;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 12px;
   }
 
-  .demo-feature {
+  .contact-channel {
     display: flex;
     align-items: center;
-    gap: 6px;
-    font-size: 0.85rem;
-    color: var(--accent-green);
+    gap: 16px;
+    padding: 16px 18px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-subtle);
+    border-radius: 14px;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: all 0.25s ease;
   }
 
-  /* Auth Tabs */
-  .auth-tabs {
-    display: flex;
-    gap: 4px;
-    background: rgba(255, 255, 255, 0.05);
-    padding: 4px;
-    border-radius: 10px;
-    margin-bottom: 20px;
+  .contact-channel:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-purple);
+    background: rgba(102, 126, 234, 0.08);
   }
 
-  .auth-tab {
-    flex: 1;
-    padding: 10px 16px;
-    background: transparent;
-    border: none;
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    font-weight: 500;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-
-  .auth-tab.active {
-    background: var(--accent-green);
-    color: white;
-  }
-
-  .auth-form {
-    display: none;
-    flex-direction: column;
-    gap: 14px;
-  }
-
-  .auth-form.active {
-    display: flex;
-  }
-
-  .btn-auth {
+  .channel-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 11px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    padding: 12px 20px;
-    background: linear-gradient(135deg, var(--accent-green) 0%, #059669 100%);
     color: white;
-    border: none;
-    border-radius: 10px;
-    font-size: 0.95rem;
+    flex-shrink: 0;
+  }
+
+  .channel-icon.phone-bg {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+
+  .channel-icon.whatsapp-bg {
+    background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+  }
+
+  .channel-icon.email-bg {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  }
+
+  .channel-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .channel-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+
+  .channel-value {
+    font-size: 1rem;
+    color: var(--text-primary);
     font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
   }
 
-  .btn-auth:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+  .channel-arrow {
+    color: var(--text-muted);
+    transition: transform 0.25s ease;
+    flex-shrink: 0;
   }
 
-  .checkbox-group {
-    flex-direction: row !important;
-    align-items: center;
-    gap: 8px !important;
+  .contact-channel:hover .channel-arrow {
+    transform: translateX(3px);
+    color: var(--accent-purple);
   }
 
-  .checkbox-group input {
-    width: auto;
-  }
-
-  .checkbox-group label {
-    color: var(--text-secondary);
-  }
-
-  .checkbox-group a {
-    color: var(--accent-green);
-    text-decoration: none;
-  }
-
-  .error-message,
-  .success-message {
-    padding: 10px 14px;
-    border-radius: 8px;
-    font-size: 0.85rem;
-    display: none;
-  }
-
-  .error-message.show {
-    display: block;
-    background: rgba(239, 68, 68, 0.15);
-    border: 1px solid rgba(239, 68, 68, 0.3);
-    color: #fca5a5;
-  }
-
-  .success-message.show {
-    display: block;
-    background: rgba(16, 185, 129, 0.15);
-    border: 1px solid rgba(16, 185, 129, 0.3);
-    color: #6ee7b7;
-  }
-
-  /* Direct Contact */
-  .direct-contact {
+  /* Bloques de información adicional */
+  .contact-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
     margin-top: 24px;
     padding-top: 24px;
     border-top: 1px solid var(--border-subtle);
   }
 
-  .direct-contact h4 {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin: 0 0 16px 0;
-  }
-
-  .contact-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
-  .contact-link {
+  .info-block {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 10px 16px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--border-subtle);
+    gap: 12px;
+    padding: 14px;
+    background: rgba(255, 255, 255, 0.03);
     border-radius: 10px;
-    color: var(--text-secondary);
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: all 0.2s ease;
   }
 
-  .contact-link:hover {
-    border-color: var(--accent-purple);
+  .info-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+    background: rgba(102, 126, 234, 0.15);
+    color: var(--accent-purple);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .info-block > div:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .info-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    font-weight: 500;
+  }
+
+  .info-value {
+    font-size: 0.85rem;
     color: var(--text-primary);
-  }
-
-  .contact-link.whatsapp {
-    color: #25d366;
-  }
-
-  .contact-link.whatsapp:hover {
-    border-color: #25d366;
-    background: rgba(37, 211, 102, 0.1);
+    font-weight: 500;
   }
 
   /* Responsive */
@@ -1224,18 +1032,14 @@ const API_BASE_URL = "https://raygoldapi-c3ckbgc6b5g5bvds.spaincentral-01.azurew
       grid-column: span 1;
     }
 
-    .demo-features {
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .contact-links {
-      flex-direction: column;
+    .contact-info-grid {
+      grid-template-columns: 1fr;
     }
   }
+
   /* ============================================
-   MÓVIL: Tema blanco claro
-   ============================================ */
+     MÓVIL: Tema blanco claro
+     ============================================ */
   @media (max-width: 768px) {
     :root {
       --bg-dark: #ffffff;
@@ -1247,31 +1051,21 @@ const API_BASE_URL = "https://raygoldapi-c3ckbgc6b5g5bvds.spaincentral-01.azurew
       --accent-purple: #667eea;
     }
 
-    .form-group select option {
-    background: #ffffff !important;
-    color: #1e293b !important;
-    }
-
-    .contact-page {
+    .contacto-page {
       background: #ffffff !important;
     }
 
-    .contact-hero {
-      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%) !important;
-    }
-
-    .hero-title {
+    .contacto-hero h1 {
       background: linear-gradient(135deg, #1e293b 0%, #475569 100%) !important;
       -webkit-background-clip: text !important;
       -webkit-text-fill-color: transparent !important;
     }
 
-    .hero-subtitle {
+    .contacto-hero p {
       color: #64748b !important;
     }
 
-    .contact-card,
-    .demo-card {
+    .contact-card {
       background: #f8fafc !important;
       border: 1px solid #e2e8f0 !important;
     }
@@ -1296,6 +1090,16 @@ const API_BASE_URL = "https://raygoldapi-c3ckbgc6b5g5bvds.spaincentral-01.azurew
       color: #1e293b !important;
     }
 
+    .form-group select {
+      background-color: #ffffff !important;
+      color: #1e293b !important;
+    }
+
+    .form-group select option {
+      background: #ffffff !important;
+      color: #1e293b !important;
+    }
+
     .form-group input::placeholder,
     .form-group textarea::placeholder {
       color: #94a3b8 !important;
@@ -1312,330 +1116,108 @@ const API_BASE_URL = "https://raygoldapi-c3ckbgc6b5g5bvds.spaincentral-01.azurew
       border-right: 1px solid #e2e8f0 !important;
     }
 
-    .demo-feature {
-      color: #475569 !important;
-    }
-
-    .tab-btn {
-      color: #64748b !important;
-    }
-
-    .tab-btn.active {
-      color: #667eea !important;
-      border-bottom-color: #667eea !important;
-    }
-
-    .direct-contact {
-      background: #f8fafc !important;
+    /* Canales de contacto */
+    .contact-channel {
+      background: #ffffff !important;
       border: 1px solid #e2e8f0 !important;
     }
 
-    .direct-contact h4 {
+    .contact-channel:hover {
+      background: rgba(102, 126, 234, 0.05) !important;
+    }
+
+    .channel-value {
       color: #1e293b !important;
     }
 
-    .contact-item span {
-      color: #475569 !important;
+    .channel-label {
+      color: #64748b !important;
     }
 
-    .cta-section {
-      background: linear-gradient(
-        135deg,
-        rgba(102, 126, 234, 0.05) 0%,
-        rgba(118, 75, 162, 0.05) 100%
-      ) !important;
+    /* Información adicional */
+    .contact-info-grid {
       border-top: 1px solid #e2e8f0 !important;
     }
 
-    .cta-section h2 {
+    .info-block {
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+    }
+
+    .info-value {
       color: #1e293b !important;
     }
-
-    .cta-section p {
-      color: #64748b !important;
-    }
   }
-
-  .form-group select {
-  background-color: #1e293b;
-  color: #ffffff;
-}
-
-.form-group select option {
-  background-color: #1e293b;
-  color: #ffffff;
-}
 </style>
 
-<script define:vars={{ API_BASE_URL }}>
+<script define:vars={{ CONTACT_API_URL }}>
   document.addEventListener("DOMContentLoaded", () => {
-    // Tab switching
-    const authTabs = document.querySelectorAll(".auth-tab");
-    const loginForm = document.getElementById("loginForm");
-    const registerForm = document.getElementById("registerForm");
     const contactForm = document.getElementById("contactForm");
 
-    function switchTab(tab) {
-      authTabs.forEach((t) => t.classList.remove("active"));
-      document.querySelector(`[data-tab="${tab}"]`)?.classList.add("active");
-
-      if (tab === "login") {
-        loginForm?.classList.add("active");
-        registerForm?.classList.remove("active");
-      } else {
-        loginForm?.classList.remove("active");
-        registerForm?.classList.add("active");
-      }
-    }
-
-    authTabs.forEach((tab) => {
-      tab.addEventListener("click", () => {
-        switchTab(tab.getAttribute("data-tab") || "login");
-      });
-    });
-
-    // Helper functions
-    function showError(id, message) {
-      const el = document.getElementById(id);
-      if (el) {
-        el.textContent = message;
-        el.classList.add("show");
-      }
-    }
-
-    function showSuccess(id, message) {
-      const el = document.getElementById(id);
-      if (el) {
-        el.textContent = message;
-        el.classList.add("show");
-      }
-    }
-
-    function clearErrors() {
-      document
-        .querySelectorAll(".error-message, .success-message")
-        .forEach((el) => {
-          el.classList.remove("show");
-          el.textContent = "";
-        });
-    }
-
-    // Login
-    if (loginForm) {
-      loginForm.addEventListener("submit", async function (e) {
+    if (contactForm) {
+      contactForm.addEventListener("submit", async function (e) {
         e.preventDefault();
-        clearErrors();
 
-        const usuario = document.getElementById("loginUsuario")?.value.trim();
-        const password = document.getElementById("loginPassword")?.value;
+        const formData = new FormData(contactForm);
+        const data = {
+          empresa: formData.get("empresa") || "",
+          nombre: formData.get("nombre") || "",
+          telefono: formData.get("telefono") || "",
+          email: formData.get("email") || "",
+          interes: formData.get("interes") || "informacion",
+          tamano: formData.get("tamano") || "1-5",
+          mensaje: formData.get("mensaje") || "",
+        };
 
-        if (!usuario || !password) {
-          showError("loginError", "Por favor, completa todos los campos");
+        if (!data.nombre.trim()) {
+          alert("Por favor, introduce tu nombre");
           return;
         }
 
-        const btn = loginForm.querySelector(".btn-auth");
+        if (!data.email.trim()) {
+          alert("Por favor, introduce tu email");
+          return;
+        }
+
+        const btn = contactForm.querySelector(".btn-submit");
         if (!btn) return;
 
         const originalText = btn.innerHTML;
-        btn.innerHTML = "<span>Iniciando sesión...</span>";
+        btn.innerHTML = "<span>Enviando...</span>";
         btn.disabled = true;
 
         try {
-          const response = await fetch(API_BASE_URL + "/identity/login", {
+          const response = await fetch(CONTACT_API_URL, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              Usuario: usuario.toUpperCase(),
-              Password: password.toUpperCase(),
-              TipoLoginBiometrico: false,
-            }),
+            body: JSON.stringify(data),
           });
 
-          if (!response.ok) {
-            const errorData = await response.text();
-            throw new Error(errorData || "Credenciales inválidas");
+          const responseText = await response.text();
+          let result;
+          try {
+            result = JSON.parse(responseText);
+          } catch {
+            result = { success: response.ok, message: responseText };
           }
 
-          const data = await response.json();
-          localStorage.setItem("access_token", data.access_token);
-          localStorage.setItem("user", JSON.stringify(data.user));
-          window.location.href = "https://raygoldapp.azurewebsites.net?token=" + data.access_token;
+          if (!response.ok) {
+            throw new Error(result.message || "Error al enviar");
+          }
+
+          alert(
+            result.message ||
+              "¡Gracias! Te responderemos en menos de 24 horas."
+          );
+          contactForm.reset();
         } catch (error) {
-          showError("loginError", error.message || "Error al iniciar sesión");
+          console.error("Error contacto:", error);
+          alert(error.message || "Error al enviar. Inténtalo de nuevo.");
         } finally {
           btn.innerHTML = originalText;
           btn.disabled = false;
         }
       });
     }
-
-    // Register
-    if (registerForm) {
-      registerForm.addEventListener("submit", async function (e) {
-        e.preventDefault();
-        clearErrors();
-
-        const nombre = document.getElementById("regNombre")?.value.trim();
-        const apellido =
-          document.getElementById("regApellido")?.value.trim() || "";
-        const empresa =
-          document.getElementById("regEmpresa")?.value.trim() || "";
-        const email = document.getElementById("regEmail")?.value.trim();
-        const usuario = document.getElementById("regUsuario")?.value.trim();
-        const password = document.getElementById("regPassword")?.value;
-        const terms = document.getElementById("regTerms")?.checked;
-
-        if (!nombre || !email || !usuario || !password) {
-          showError(
-            "registerError",
-            "Por favor, completa los campos obligatorios"
-          );
-          return;
-        }
-
-        if (usuario.length < 4) {
-          showError(
-            "registerError",
-            "El usuario debe tener al menos 4 caracteres"
-          );
-          return;
-        }
-
-        if (password.length < 6) {
-          showError(
-            "registerError",
-            "La contraseña debe tener al menos 6 caracteres"
-          );
-          return;
-        }
-
-        if (!terms) {
-          showError(
-            "registerError",
-            "Debes aceptar los términos y condiciones"
-          );
-          return;
-        }
-
-        const btn = registerForm.querySelector(".btn-auth");
-        if (!btn) return;
-
-        const originalText = btn.innerHTML;
-        btn.innerHTML = "<span>Creando cuenta...</span>";
-        btn.disabled = true;
-
-        try {
-          const response = await fetch(API_BASE_URL + "/identity/register", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              Usuario: usuario.toUpperCase(),
-              Password: password,
-              Email: email,
-              FirstName: nombre,
-              LastName: apellido || nombre,
-              Empresa: empresa || "DEMO",
-              Tipo: "WEB",
-              RoleTipo: "Demo",
-              Permiso: "LECTURA",
-              Secutity: 9,
-              Modelo: 99,
-              Visible: true,
-              Grupo: "WEB",
-            }),
-          });
-
-          if (!response.ok) {
-            const errorData = await response.text();
-            throw new Error(errorData || "Error al crear la cuenta");
-          }
-
-          showSuccess(
-            "registerSuccess",
-            "¡Cuenta creada! Ahora puedes iniciar sesión."
-          );
-          setTimeout(() => {
-            switchTab("login");
-            const loginUsuario = document.getElementById("loginUsuario");
-            if (loginUsuario) loginUsuario.value = usuario;
-          }, 2000);
-        } catch (error) {
-          showError(
-            "registerError",
-            error.message || "Error al crear la cuenta"
-          );
-        } finally {
-          btn.innerHTML = originalText;
-          btn.disabled = false;
-        }
-      });
-    }
-
-    // Contact Form
-    
- // Contact Form - RaygoldApi
-if (contactForm) {
-  contactForm.addEventListener("submit", async function (e) {
-    e.preventDefault();
-
-    const formData = new FormData(contactForm);
-    const data = {
-      empresa: formData.get("empresa") || "",
-      nombre: formData.get("nombre") || "",
-      telefono: formData.get("telefono") || "",
-      email: formData.get("email") || "",
-      interes: formData.get("interes") || "informacion",
-      tamano: formData.get("tamano") || "1-5",
-      mensaje: formData.get("mensaje") || "",
-    };
-
-    if (!data.nombre.trim()) {
-      alert("Por favor, introduce tu nombre");
-      return;
-    }
-
-    if (!data.email.trim()) {
-      alert("Por favor, introduce tu email");
-      return;
-    }
-
-    const btn = contactForm.querySelector(".btn-submit");
-    if (!btn) return;
-
-    const originalText = btn.innerHTML;
-    btn.innerHTML = "<span>Enviando...</span>";
-    btn.disabled = true;
-
-    try {
-      const response = await fetch("https://raygoldapi-c3ckbgc6b5g5bvds.spaincentral-01.azurewebsites.net/api/contacto", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-
-      const responseText = await response.text();
-      let result;
-      try {
-        result = JSON.parse(responseText);
-      } catch {
-        result = { success: response.ok, message: responseText };
-      }
-
-      if (!response.ok) {
-        throw new Error(result.message || "Error al enviar");
-      }
-
-      alert(result.message || "¡Gracias! Te responderemos en menos de 24 horas.");
-      contactForm.reset();
-    } catch (error) {
-      console.error("Error contacto:", error);
-      alert(error.message || "Error al enviar. Inténtalo de nuevo.");
-    } finally {
-      btn.innerHTML = originalText;
-      btn.disabled = false;
-    }
-  });
-}
   });
 </script>
