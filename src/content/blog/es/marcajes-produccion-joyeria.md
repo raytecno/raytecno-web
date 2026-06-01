@@ -1,124 +1,132 @@
 ---
-title: "Marcajes de producción en joyería: controla tu taller en tiempo real"
-subtitle: "Del parte de papel al dato vivo. Cómo la recogida de datos en planta convierte el taller joyero en un proceso medible, trazable y sin pérdidas de oro invisibles."
-excerpt: "Los marcajes de producción capturan el dato en el taller de joyería en tiempo real: tiempos por fase, peso y mermas de oro. Descubre cómo transforman tu producción."
-date: 2026-06-01
+title: "El caso Schneider: 5 lecciones de marketing estratégico que toda joyería puede aplicar"
+subtitle: "Cómo una marca secundaria duplicó su cuota de mercado en 90 días, y qué pueden aprender las joyerías que compiten contra cadenas dominantes."
+excerpt: "5 lecciones de marketing estratégico para joyerías que compiten contra cadenas grandes: segmentación, posicionamiento, foco de canal y decisiones basadas en datos del ERP."
+date: 2026-05-05
 language: es
-translationGroup: "control-produccion-001"
-seoTitle: "Marcajes de producción en joyería | Control de taller en tiempo real"
-seoDescription: "Los marcajes de producción capturan tiempos, peso y mermas de oro en tu taller de joyería en tiempo real. Adiós al parte de papel. Descubre cómo funcionan."
-seoKeyword: "marcajes de producción joyería"
-seoKeywordsSecondary: "control de producción joyería, software producción joyería, recogida de datos en planta, control de mermas oro"
-category: fabricacion
-tags: ["producción", "marcajes", "trazabilidad", "mermas", "taller joyería"]
-series: "Control de producción en joyería"
-seriesPart: 1
-ctaType: demo
+translationGroup: "marketing-estrategico-001"
+seoTitle: "Marketing estratégico para joyerías | 5 lecciones | RayGold"
+seoDescription: "5 lecciones de marketing estratégico que una joyería puede aplicar para competir contra cadenas grandes: segmentación, posicionamiento y datos del ERP."
+seoKeyword: "marketing estratégico joyería"
+seoKeywordsSecondary: "estrategia joyería, segmentación clientes joyería, posicionamiento joyería, marketing para joyerías"
+category: estrategia
+tags: ["marketing estratégico", "joyería", "ERP", "segmentación", "datos"]
+ctaType: contacto
 ctaUrl: "https://www.raytecno.es/es/contacto"
-readingTime: 12
-relatedSlugs: ["mapa-fabrica-joyeria", "analisis-produccion-joyeria"]
-faq:
-  - q: "¿Qué es un marcaje de producción en joyería?"
-    a: "Un marcaje de producción es el registro que hace el operario en su puesto al empezar y al terminar una fase de fabricación. Captura en tiempo real los tiempos de cada fase, el peso de entrada y salida del oro y quién ha realizado cada paso, sustituyendo al parte de papel."
-  - q: "¿Cómo ayudan los marcajes a controlar las mermas de oro?"
-    a: "Al registrar el peso de entrada y de salida en cada fase, el sistema calcula la merma producida en cada paso y la asocia a un proceso y un operario concretos, en lugar de descubrir al final que faltan gramos sin poder atribuirlos."
-  - q: "¿Cómo registra el marcaje el operario en el taller?"
-    a: "El operario puede leer el código de barras o QR del sobre de fabricación con un lector, usar una tablet táctil en el puesto o marcar desde su propio móvil, según lo más cómodo en cada sección. Todo alimenta el mismo sistema sin interrumpir el trabajo."
-  - q: "¿Qué se gana frente a un parte de papel o una hoja de Excel?"
-    a: "Con papel o Excel el dato se introduce a destiempo e incompleto y solo sirve para constatar lo que ya pasó. Con los marcajes la información es inmediata, se refleja al instante en el Mapa de Fábrica y permite conocer tiempos reales por fase, controlar el oro y decidir mientras el pedido aún está en el taller."
+readingTime: 10
+relatedSlugs: ["organizacion-empresarial-joyeria", "arquitectura-erp-joyeria"]
 ---
 
-# Marcajes de producción en joyería: por qué saber qué pasa en el taller en tiempo real lo cambia todo
+# El caso Schneider: 5 lecciones de marketing estratégico que toda joyería puede aplicar
 
-En la mayoría de talleres de joyería, la pregunta más difícil de responder no es *cuánto cuesta una pieza*, sino algo aparentemente más simple: **¿dónde está ahora mismo cada pedido y quién lo tiene en las manos?**
+> *"Lo que importa es la cerveza."* Con esa frase aparentemente simple, una marca secundaria pasó de un 2,1 % a un 4,1 % de cuota de mercado en apenas dos meses, en uno de los sectores más concentrados y competitivos de su país.
 
-Quien ha gestionado un taller lo sabe. El oro entra en fundición, pasa a sacadores, de ahí a bombos, pulido, engastado, baños, acabados… y en cada salto hay un momento en el que la pieza "desaparece" del radar. No físicamente —está en una bandeja, en un sobre, en la mesa de alguien— sino en cuanto a información: nadie sabe con exactitud cuándo entró en esa fase, cuánto lleva esperando, cuánto oro pesaba al empezar y cuánto pesa ahora. Esa zona ciega es donde se pierden los plazos de entrega, donde se escapan las mermas y donde se vuelve imposible saber el coste real de fabricar.
+En el mundo del retail joyero ocurre algo muy parecido a lo que vivió el mercado cervecero argentino a comienzos de los 2000: pocos actores grandes concentran la mayor parte del volumen, las cadenas internacionales presionan con marketing masivo, y las joyerías independientes —incluso las que tienen producto excelente— luchan por hacerse oír.
 
-La **recogida de datos en planta** —lo que en RayGold llamamos los **marcajes de producción**— existe para eliminar esa zona ciega. Y aunque suene a un detalle técnico, es probablemente el cambio que más impacto tiene en el día a día de un taller joyero.
+El **caso Schneider** (CCU, 2001) es uno de los ejemplos más estudiados de cómo una marca secundaria, con presupuesto limitado, logra romper la inercia del mercado. Y aunque hablamos de cerveza, las lecciones son **directamente trasladables** a cualquier joyería que quiera competir con cadenas grandes en un mercado maduro.
 
-## El problema: un taller que funciona "de memoria"
-
-Pensemos en cómo se controla la producción en un taller que todavía no ha dado este paso.
-
-Lo más habitual es el **parte de papel**: el sobre de fabricación lleva una hoja donde, en teoría, cada operario apunta lo que hace. En la práctica, esas hojas se rellenan a destiempo, con letra apresurada, a veces al final del día reconstruyendo de memoria, y muchas veces no se rellenan. El resultado es un registro incompleto que llega a la oficina con días de retraso y que casi nunca cuadra.
-
-La alternativa "moderna" suele ser una **hoja de cálculo** donde alguien vuelca esos partes. Mejora la legibilidad, pero arrastra el mismo problema de fondo: el dato se introduce *después*, una sola persona lo centraliza, y para cuando está en el ordenador ya no sirve para decidir nada —solo para constatar lo que ya pasó.
-
-En ambos casos, el taller funciona de memoria. Y eso tiene consecuencias muy concretas para una joyería:
-
-- **No se conocen los tiempos reales.** Se sabe lo que *debería* tardar cada fase, pero no lo que tarda de verdad. Por eso los plazos de entrega se prometen a ojo y se incumplen sin saber por qué.
-- **Las mermas de oro son invisibles hasta que es tarde.** Si el peso solo se controla al principio y al final del proceso completo, una merma anómala en una fase intermedia se detecta semanas después —cuando ya no se puede atribuir a nada concreto.
-- **El cuello de botella es una sospecha, no un dato.** Todos en el taller "intuyen" qué fase va más lenta, pero nadie lo puede demostrar con números, así que es imposible justificar dónde invertir.
-- **El coste real de cada pieza es una estimación.** Sin horas reales por fase, el coste de fabricación se calcula con tiempos teóricos que rara vez coinciden con la realidad. Y en joyería, donde el margen y el precio del oro lo condicionan todo, ese desfase se traduce directamente en dinero.
-
-## La solución: que el dato nazca en el puesto, en el momento exacto
-
-El marcaje de producción invierte el orden de las cosas. En lugar de reconstruir lo que pasó, **el dato se captura en el mismo instante en que ocurre, en el propio puesto de trabajo y por el propio operario.**
-
-La idea es deliberadamente sencilla, porque tiene que funcionar en un taller real, con las manos ocupadas y sin interrumpir el trabajo. El operario, cuando empieza a trabajar un lote, hace un **marcaje de entrada**; cuando lo termina y lo pasa a la siguiente fase, hace un **marcaje de salida**. Eso es todo. Pero ese gesto mínimo, repetido a lo largo de toda la ruta de fabricación, genera la información que antes no existía.
-
-Y lo hace adaptándose a cómo trabaja cada taller, no al revés. En RayGold, el operario puede marcar de varias formas según el puesto:
-
-- **Leyendo el código del sobre de fabricación** con un lector de código de barras o QR. El sobre ya identifica el plan, la línea y el artículo, así que un simple escaneo basta para registrar el movimiento sin teclear nada.
-- **Desde una Tablet o pantalla táctil** instalada en el puesto, pensada para usarse con un par de toques.
-- **Desde el propio móvil del operario**, especialmente útil para operarios externos o secciones donde no tiene sentido fijar una pantalla.
-
-El operario elige lo más cómodo para su sección, y todo alimenta el mismo sistema.
-
-## Qué se registra en cada marcaje (y por qué importa)
-
-Un marcaje no es solo "fulano tocó esta pieza". Captura tres cosas que, juntas, son la materia prima de todo el control de producción:
-
-**Tiempos reales por fase.** Al registrar entrada y salida, el sistema sabe exactamente cuánto tiempo ha estado cada lote *en proceso* en una fase y, lo que es igual de revelador, cuánto tiempo ha estado *esperando* entre una fase y la siguiente. En la mayoría de talleres, el tiempo de espera entre fases supera con creces al tiempo de trabajo efectivo —y hasta que no se mide, nadie es consciente de ello.
-
-**Peso y mermas.** En joyería, el control no puede limitarse al tiempo: hay que seguir el oro. El marcaje permite registrar el **peso de entrada y de salida** de cada fase y, con ello, la **merma** que se produce en cada paso. Esto cambia por completo la gestión del metal precioso: en lugar de descubrir al final que "han faltado unos gramos", se ve en qué fase concreta y con qué operario se produjo cada pérdida, y se puede comparar con la merma tolerable de ese proceso.
-
-**Quién, cuándo y dónde.** Cada marcaje queda asociado al operario —interno o externo— que lo realizó. No para vigilar a nadie, sino para poder analizar el rendimiento por sección, detectar dónde se concentra el retrabajo y reconocer qué partes del proceso funcionan bien.
-
-## El salto de calidad: del dato al Mapa de Fábrica en tiempo real
-
-Aquí es donde la recogida de datos deja de ser un registro administrativo y se convierte en una herramienta de dirección.
-
-Cada marcaje que hace un operario en planta **se refleja al instante en el Mapa de Fábrica**: la vista visual del taller donde se ve, fase por fase, qué hay en proceso, qué está esperando y qué ya ha pasado. Cuando un operario marca la salida de pulido, la pieza "se mueve" en el mapa en ese mismo momento. El responsable de producción no tiene que llamar a nadie ni bajar al taller para saber cómo va un pedido: lo ve en pantalla, vivo.
-
-Esa misma información, acumulada, es la que alimenta después el **análisis de la producción**: los tiempos de ciclo reales, el cuello de botella demostrado con números, las desviaciones entre lo previsto y lo ejecutado, el balance de oro de cada plan. Nada de eso sería posible sin el dato de origen. **Los marcajes son los cimientos sobre los que se construye todo el control de fabricación.**
-
-## Lo que gana una joyería que mide su planta
-
-Cuando un taller pasa de funcionar de memoria a funcionar con datos en tiempo real, los beneficios se notan rápido y en sitios muy concretos:
-
-- **Plazos de entrega fiables.** Con tiempos reales por fase, se puede saber si un pedido llegará a tiempo *antes* de que sea tarde, y actuar sobre la fase que lo está frenando.
-- **Control real del oro.** Las mermas dejan de ser una sorpresa de fin de mes para convertirse en un dato vigilado fase a fase, con responsable y comparativa.
-- **Trazabilidad completa.** Cada pieza tiene una historia registrada: por dónde pasó, cuándo, quién la trabajó y con qué peso. Imprescindible para la calidad y para responder ante cualquier reclamación o auditoría.
-- **Decisiones basadas en hechos.** El cuello de botella, el rendimiento por sección o el coste real de fabricar dejan de ser opiniones y pasan a ser números sobre los que decidir dónde invertir y qué mejorar.
-- **Menos trabajo administrativo.** Se acaban los partes de papel, las transcripciones a Excel y las horas de oficina reconstruyendo lo que pasó en el taller.
-
-## En resumen
-
-La recogida de datos en planta no es un lujo tecnológico ni un capricho de digitalización. Es lo que permite que un taller de joyería —un entorno artesanal, exigente y donde el material vale lo que vale— se gestione con la misma precisión con la que se fabrica una pieza.
-
-El gesto es mínimo: un operario que marca una entrada y una salida. El resultado es enorme: un taller que se conoce a sí mismo, que sabe dónde está cada pedido, que controla cada gramo de oro y que puede prometer plazos y cumplirlos.
-
-En RayGold lo hemos diseñado para que funcione en el taller real, no en el ideal: con lectores, tabletas o el móvil del operario, sin interrumpir el trabajo y reflejándose al instante en el Mapa de Fábrica. Porque el primer paso para mejorar la producción de una joyería es, sencillamente, **poder verla**.
-
-## Preguntas frecuentes sobre los marcajes de producción
-
-### ¿Qué es un marcaje de producción en joyería?
-
-Un marcaje de producción es el registro que hace el operario en su puesto al empezar y al terminar una fase de fabricación. Captura en tiempo real los tiempos de cada fase, el peso de entrada y salida del oro y quién ha realizado cada paso. Sustituye al parte de papel, haciendo que el dato nazca en el taller en el momento exacto en que ocurre.
-
-### ¿Cómo ayudan los marcajes a controlar las mermas de oro?
-
-Al registrar el peso de entrada y de salida en cada fase, el sistema calcula la merma producida en cada paso y la asocia a un proceso y a un operario concretos. En lugar de descubrir al final del proceso que faltan gramos sin poder atribuirlos, se ve en qué fase exacta se ha producido cada pérdida y se compara con la merma tolerable de ese proceso.
-
-### ¿Cómo registra el marcaje el operario en el taller?
-
-El operario puede marcar de la forma más cómoda según su puesto: leyendo el código de barras o QR del sobre de fabricación con un lector, usando una tablet o pantalla táctil instalada en el puesto, o desde su propio móvil. Todas las opciones alimentan el mismo sistema sin interrumpir el trabajo.
-
-### ¿Qué se gana frente a un parte de papel o una hoja de Excel?
-
-Con papel o Excel el dato se introduce a destiempo y de forma incompleta, por lo que solo sirve para constatar lo que ya pasó. Con los marcajes, la información es inmediata y se refleja al instante en el Mapa de Fábrica, lo que permite conocer tiempos reales por fase, controlar el oro gramo a gramo y tomar decisiones mientras el pedido aún está en el taller.
+En este artículo analizamos las cinco lecciones clave del caso y las aterrizamos al sector joyero, mostrando además cómo un ERP especializado como **RayGold** convierte cada una de esas lecciones en algo medible y operativo.
 
 ---
 
-*¿Quieres ver cómo funcionan los marcajes de producción de RayGold en tu taller? Forman parte del [software de producción para joyería de RayGold](https://www.raytecno.es/es/erp-joyeria). [Solicita una demo](https://www.raytecno.es/es/contacto) y te lo enseñamos sobre tu propio flujo de fabricación.*
+## El contexto: un mercado concentrado y maduro
+
+Antes de entrar en las lecciones, conviene entender el escenario. En 2001, el mercado cervecero argentino estaba dominado por un líder con cerca de dos tercios de la cuota, un segundo competidor fuerte, y por detrás CCU —dueña de Schneider— peleando un espacio mucho más pequeño.
+
+Schneider era una marca con tradición pero **sin posicionamiento claro** en las zonas de mayor volumen del país. CCU no podía permitirse una guerra de precios ni de inversión publicitaria contra los líderes.
+
+¿Le suena familiar? Cambie "cervecera" por "joyería independiente" y "líder de mercado" por "cadena multinacional con presencia en centros comerciales", y tendrá el mapa competitivo de buena parte del retail joyero europeo y latinoamericano.
+
+---
+
+## Lección 1 — Segmentar antes que atacar
+
+Schneider **no intentó robar clientes al líder**. Identificó un segmento concreto —consumidores racionales que valoraban marca conocida, calidad estándar y precio accesible— y diseñó toda su estrategia para ese perfil.
+
+### Aplicación al sector joyero
+
+La mayoría de joyerías independientes cometen el error opuesto: intentan ser "para todos". Resultado: ni la novia que busca anillo de compromiso, ni el ejecutivo que regala un reloj de gama media, ni la cliente recurrente que repone bisutería se sienten realmente identificados.
+
+**Cómo lo facilita un ERP:**
+
+Un ERP como RayGold permite segmentar la cartera de clientes por ticket medio y frecuencia de compra, familias de producto preferidas (oro, plata, diamante, perla, taller propio), canal de origen (tienda física, web, mayorista, B2B) y margen real generado por cliente.
+
+Sin estos datos, "segmentar" es un ejercicio de intuición. Con ellos, es una decisión basada en evidencia.
+
+---
+
+## Lección 2 — Posicionarse contra los estereotipos del sector
+
+Cuando se analizó el mercado cervecero, se detectaron dos clichés repetidos por todas las marcas: **el origen extranjero** ("cerveza alemana, holandesa, americana…") y **el precio bajo como sinónimo de calidad inferior**.
+
+Schneider hizo justo lo contrario: era nacional, de buena calidad y precio accesible. En lugar de disimularlo, lo convirtió en bandera con el slogan *"Lo que importa es la cerveza"*. Una frase que, leída hoy, parece obvia. En su momento fue **disruptiva** porque rompía el manual.
+
+### Aplicación al sector joyero
+
+El sector joyero está saturado de los mismos clichés: "diseño italiano", "tradición artesanal centenaria", "joya de lujo accesible", imágenes en blanco y negro de manos de orfebre.
+
+Un posicionamiento diferencial puede construirse desde lo opuesto: trazabilidad real del oro, transparencia total en márgenes, atención personalizada con datos del cliente, o una propuesta clara de **valor objetivo** ("lo que importa es la pieza, no el envoltorio").
+
+**Cómo lo facilita un ERP:**
+
+La trazabilidad —desde el lingote hasta la pieza vendida— solo es posible con un sistema que controle fabricación, stock, lotes y ventas de forma integrada. Es decir, **el posicionamiento "transparencia" no es un eslogan: es una capacidad operativa** que el ERP habilita.
+
+---
+
+## Lección 3 — Foco en un solo canal para maximizar impacto
+
+Schneider no se dispersó. Eligió **un único medio** y dentro de él una voz reconocible, machacando una sola idea hasta la saturación útil. La tentación de "estar en todos lados" (TV, radio, vía pública, redes, influencers) es lo que diluye los presupuestos pequeños y los vuelve invisibles.
+
+### Aplicación al sector joyero
+
+Una joyería con presupuesto de marketing limitado debe elegir **un canal donde pueda dominar**, no presencia simbólica en todos. Algunas opciones según perfil: joyería de novia hacia Instagram y colaboración con wedding planners locales; joyería de inversión y oro hacia SEO técnico y contenido educativo; joyería corporativa B2B hacia LinkedIn y email segmentado; joyería de barrio y fidelización hacia WhatsApp Business y CRM con histórico.
+
+**Cómo lo facilita un ERP:**
+
+Sin datos de cliente, no hay canal directo. Un ERP con módulo CRM permite construir bases segmentadas (cumpleaños, aniversarios de compra, productos de interés) que alimentan campañas de email o WhatsApp con tasas de conversión muy superiores al marketing masivo.
+
+---
+
+## Lección 4 — Construir imaginario de marca, no solo describir el producto
+
+La campaña de Schneider no enumeraba grados de alcohol ni hablaba de la calidad del lúpulo. Construyó **un imaginario**: un personaje, un tono reconocible, un cierre repetido. La marca pasó de ser "una más en la góndola" a tener **carácter reconocible**.
+
+### Aplicación al sector joyero
+
+Una joyería sin imaginario es una vitrina con piezas. Una joyería con imaginario es una experiencia que el cliente quiere repetir y recomendar.
+
+El imaginario se construye con coherencia visual (web, packaging, tienda, redes), un tono editorial reconocible, rituales de venta (cómo se entrega una pieza, qué historia la acompaña) y una postventa memorable (limpieza gratuita anual, garantía clara, recordatorios).
+
+**Cómo lo facilita un ERP:**
+
+El postventa coherente —el detalle que más fideliza— es imposible sin sistema. Recordar que una clienta compró su anillo hace exactamente un año, enviarle un mensaje personalizado y ofrecerle limpieza gratuita es una acción que **solo escala si el ERP la automatiza**.
+
+---
+
+## Lección 5 — Medir resultados con KPIs concretos, no con sensaciones
+
+El equipo de Schneider sabía exactamente qué había pasado: una cuota de partida en torno al 2 %, un salto a más del 4 % en unos noventa días, y un avance claro en su posición de ventas. No "fue una buena campaña", sino una campaña con **KPIs medidos antes, durante y después**.
+
+### Aplicación al sector joyero
+
+Demasiadas joyerías evalúan campañas con frases como "este mes vendimos más" o "noté más gente en tienda". Sin KPIs, no hay aprendizaje posible.
+
+KPIs mínimos que toda joyería debería medir: ticket medio por familia de producto, tasa de conversión (visitas a ventas), frecuencia de recompra por cliente, margen real por línea (no facturación), rotación de stock por familia, y coste de adquisición de cliente nuevo frente al valor de un cliente recurrente.
+
+**Cómo lo facilita un ERP:**
+
+Estos indicadores no se calculan en una hoja de cálculo a final de mes: se monitorizan **en tiempo real** desde el cuadro de mando del ERP. Es la diferencia entre conducir mirando el retrovisor y conducir mirando el parabrisas.
+
+---
+
+## Conclusión: estrategia + datos = ventaja competitiva sostenible
+
+El caso Schneider no funcionó porque tuvieran más presupuesto, mejor producto o más historia. Funcionó porque **combinaron una estrategia clara con ejecución medible**. Esa fórmula es perfectamente replicable en el sector joyero —de hecho, es la única forma realista en la que una joyería independiente puede competir con cadenas grandes a medio plazo.
+
+La parte estratégica depende del equipo directivo. La parte ejecutable y medible depende, en gran medida, de la **infraestructura tecnológica** que soporte el negocio.
+
+RayGold es un ERP especializado para joyería, con módulos de fabricación, distribución, retail y CRM diseñados específicamente para los retos del sector. Si su joyería está en el momento de redefinir estrategia y necesita una base de datos sólida sobre la que apoyarla, puede conocer el [software de gestión para joyería de RayGold](https://www.raytecno.es/es/erp-joyeria) o [solicitar una demostración](https://www.raytecno.es/es/contacto).
+
+---
+
+**¿Le ha resultado útil este artículo?** Compártalo con su equipo directivo.
