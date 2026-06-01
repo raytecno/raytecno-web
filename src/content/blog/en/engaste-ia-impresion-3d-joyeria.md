@@ -1,4 +1,4 @@
----
+﻿---
 title: "Stone setting in jewelry 2026: how AI and 3D printers are transforming the most artisanal operation in the workshop"
 excerpt: "How parametric CAD, high-resolution 3D printing and computer vision are transforming jewelry stone setting in 2026, without replacing the setter but giving back the time for what only they can do."
 author: "RayTecno Team"
@@ -11,13 +11,13 @@ seoKeyword: "jewelry stone setting AI 3D"
 
 # Stone setting in jewelry 2026
 
-> *Stone setting is the workshop phase where most craftsmanship is needed and the least technological progress has been made for decades. Until now. The combination of parametric CAD, high-resolution 3D printing and computer vision is redesigning this operation —not to replace the setter, but to give back the time spent on mechanical tasks and let them focus on what only they can do.*
+> *Stone setting is the workshop phase where most craftsmanship is needed and the least technological progress has been made for decades. Until now. The combination of parametric CAD, high-resolution 3D printing and computer vision is redesigning this operation â€”not to replace the setter, but to give back the time spent on mechanical tasks and let them focus on what only they can do.*
 
 If casting is the energetic heart of the jewelry workshop, **stone setting is its artistic heart**. It is the phase where a cast piece becomes a jewel. Where the diamond stops being a stone and becomes a story. And, also, where most value is gained or lost: a poorly calibrated prong or an uneven bezel can destroy a piece worth several thousand euros in seconds. That is why having a [jewelry ERP](/en) that controls costs, gem traceability and scrap at every phase is the difference between a workshop that grows and one that loses money without knowing why.
 
-For decades, stone setting has been **the least automated operation in the jewelry workshop**. The reason is simple: it requires tactile sensitivity, visual judgment and an ability to adapt to each stone that machines could not reproduce. In 2026, this has begun to change —not entirely, not for all types of setting, but enough that any serious jewelry workshop must rethink the process.
+For decades, stone setting has been **the least automated operation in the jewelry workshop**. The reason is simple: it requires tactile sensitivity, visual judgment and an ability to adapt to each stone that machines could not reproduce. In 2026, this has begun to change â€”not entirely, not for all types of setting, but enough that any serious jewelry workshop must rethink the process.
 
-In this article we go through the **most used types of setting**, the **critical points where quality and money are lost**, and how **CAD, 3D printing, computer vision and AI** are transforming each phase. And, most importantly, **what remains exclusively human territory** —because in this, as in almost everything else in the jewelry trade, real progress is about **augmentation, not replacement**.
+In this article we go through the **most used types of setting**, the **critical points where quality and money are lost**, and how **CAD, 3D printing, computer vision and AI** are transforming each phase. And, most importantly, **what remains exclusively human territory** â€”because in this, as in almost everything else in the jewelry trade, real progress is about **augmentation, not replacement**.
 
 ---
 
@@ -33,9 +33,9 @@ The most recognizable: four or six metal prongs hold a central stone. It is the 
 
 A metal band completely surrounds the stone. It is the safest setting but the most demanding: the bezel must fit the gem's girdle to the millimeter so that it is perfectly centered and without gaps. Common errors: bezel too high covering the brilliance, uneven bezel, poor upper closure.
 
-### 1.3 Bead setting / pavé
+### 1.3 Bead setting / pavÃ©
 
-Multiple small stones (melee) are held by tiny metal beads raised from the plate itself. It is a **very labor-intensive** setting: each stone requires milling the seat, placing the stone, raising the beads and polishing them. A ring with full pavé can take **6-10 hours of expert setter work** depending on complexity.
+Multiple small stones (melee) are held by tiny metal beads raised from the plate itself. It is a **very labor-intensive** setting: each stone requires milling the seat, placing the stone, raising the beads and polishing them. A ring with full pavÃ© can take **6-10 hours of expert setter work** depending on complexity.
 
 ### 1.4 Channel setting
 
@@ -59,8 +59,8 @@ Before talking about what changes with technology, it is worth understanding wha
 - **Damage to the gem during closure**: hammering or pressure on the prong can chip the diamond's girdle or microfracture softer stones (emerald, opal, turquoise).
 - **Lack of symmetry**: prongs never come out exactly equal. The piece passes the setter's visual inspection but not that of a customer's macro camera.
 - **Unproductive time**: much of the setter's time is not setting, it is **preparation**: measuring, milling, adjusting, cleaning casting residues from the seats.
-- **Gem loss**: in pavé and micro-setting, the small stones lost during the process are a silent economic drain that few workshops measure.
-- **Manual final inspection**: post-setting quality control is done by eye with a loupe. Inspector fatigue reduces accuracy by **20-30% after 30-40 minutes** of continuous inspection —consistent data with any industrial visual inspection.
+- **Gem loss**: in pavÃ© and micro-setting, the small stones lost during the process are a silent economic drain that few workshops measure.
+- **Manual final inspection**: post-setting quality control is done by eye with a loupe. Inspector fatigue reduces accuracy by **20-30% after 30-40 minutes** of continuous inspection â€”consistent data with any industrial visual inspection.
 
 Each of these points is where current technology adds value. Let's go one by one.
 
@@ -70,7 +70,7 @@ Each of these points is where current technology adds value. Let's go one by one
 
 Historically, the setter received the cast piece and, on it, decided how to work. In 2026, **the setting is designed in CAD before anything is cast**.
 
-Specialized parametric software in jewelry —Rhino with jewelry plugins, MatrixGold, 3Design, RhinoGold— allows you to:
+Specialized parametric software in jewelry â€”Rhino with jewelry plugins, MatrixGold, 3Design, RhinoGoldâ€” allows you to:
 
 - **Calculate the exact seat for each stone** according to its actual measured size (not declared).
 - **Design the prongs or bezel with optimal height, angle and thickness** for each type of gem.
@@ -83,7 +83,7 @@ Specialized parametric software in jewelry —Rhino with jewelry plugins, Matrix
 
 ## 4. 3D printing: from model to perfect seat
 
-3D printing has **revolutionized stone setting through an indirect route**: the piece is no longer printed in metal —that is still casting—, but the **model in castable resin** that defines the exact seat for the stones before pouring is printed.
+3D printing has **revolutionized stone setting through an indirect route**: the piece is no longer printed in metal â€”that is still castingâ€”, but the **model in castable resin** that defines the exact seat for the stones before pouring is printed.
 
 ### 4.1 Relevant technologies in 2026
 
@@ -93,7 +93,7 @@ Specialized parametric software in jewelry —Rhino with jewelry plugins, Matrix
 
 ### 4.2 Current precision
 
-Professional 3D printers for jewelry achieve tolerances of **±0.05 mm** verified by optical and laser inspection against the CAD model. This is **sufficient for seats of stones up to 1 mm in diameter** without the need for subsequent milling.
+Professional 3D printers for jewelry achieve tolerances of **Â±0.05 mm** verified by optical and laser inspection against the CAD model. This is **sufficient for seats of stones up to 1 mm in diameter** without the need for subsequent milling.
 
 ### 4.3 Operational implications for stone setting
 
@@ -123,9 +123,9 @@ High-resolution macro cameras capture the piece from multiple angles. Deep learn
 
 - **Uneven prongs in height, angle or thickness** (with tolerances of the order of tenths of a millimeter).
 - **Off-center or tilted stones**.
-- **Microfractures in gems** from **0.02 mm** —invisible to the naked eye even with a jeweler's loupe.
+- **Microfractures in gems** from **0.02 mm** â€”invisible to the naked eye even with a jeweler's loupe.
 - **Polishing residues or dust in the setting**.
-- **Asymmetries** in pavé and micro-setting.
+- **Asymmetries** in pavÃ© and micro-setting.
 
 General industrial sector data (extrapolable to jewelry): computer vision systems achieve **99% detection accuracy**, inspect the equivalent of more than 10,000 pieces/hour at less than 100 ms per inspection, and maintain the same standard 24 hours without fatigue. In a jewelry workshop the volume is much lower, but **consistency and objectivity** are what changes the game.
 
@@ -137,7 +137,7 @@ Systems such as **Gemtelligence** and **Digital Gemmology 3.0** use computer vis
 - **100% accuracy** distinguishing natural diamonds from synthetics and simulants.
 - **70% reduction in grading inconsistencies** according to the International Gem Society.
 
-This, applied to the jewelry workshop, means that the stones arriving at the setter come already **classified, grouped and matched** with superhuman precision —especially important in earrings, wedding bands and sets where visual symmetry between stones is critical.
+This, applied to the jewelry workshop, means that the stones arriving at the setter come already **classified, grouped and matched** with superhuman precision â€”especially important in earrings, wedding bands and sets where visual symmetry between stones is critical.
 
 ### 5.3 Detection of visible inclusions according to setting
 
@@ -157,7 +157,7 @@ The typical process:
 4. The stone is positioned in the seat.
 5. A microactuator closes the beads or prongs with calibrated pressure.
 
-**Where it works well**: regular pavé, repetitive geometries, identical calibrated stones.
+**Where it works well**: regular pavÃ©, repetitive geometries, identical calibrated stones.
 
 **Where humans still win**: high jewelry pieces, unique gems, invisible settings, pieces with irregular geometry or aesthetic decisions.
 
@@ -170,17 +170,17 @@ It is the direction in which the sector is going, but **the current cost of equi
 | Phase | Traditional setting | Setting 2026 |
 |---|---|---|
 | **Seat design** | By hand by setter on cast piece | Calculated in parametric CAD before casting |
-| **Hole milling** | Manual with bur, 2-3 min per hole | Comes 3D-printed with ±0.05 mm tolerance |
-| **Stone placement** | Tweezers, loupe, steady hand | Same in high jewelry; robotic in mass pavé |
+| **Hole milling** | Manual with bur, 2-3 min per hole | Comes 3D-printed with Â±0.05 mm tolerance |
+| **Stone placement** | Tweezers, loupe, steady hand | Same in high jewelry; robotic in mass pavÃ© |
 | **Closure** | Calibrated pressure by setter's hand | Same in unique pieces; calibrated mechanical in series |
 | **Quality control** | Visual inspection by eye and with loupe | Computer vision with defect detection at 0.02 mm |
 | **Gem grading** | Human expert, ~70% consistency | AI with 70% fewer documented inconsistencies |
-| **Mass pavé / melee** | 6-10 hours per ring | 1-2 hours with stone-in-place + 3D printing |
+| **Mass pavÃ© / melee** | 6-10 hours per ring | 1-2 hours with stone-in-place + 3D printing |
 | **Gem traceability** | Paper delivery note, easy to lose | Batch-piece-operator recorded in ERP |
 
 ---
 
-## 8. What remains —and will remain— exclusively human
+## 8. What remains â€”and will remainâ€” exclusively human
 
 It is important to say this clearly, because none of the technologies described eliminates the setter. They redefine them.
 
@@ -190,7 +190,7 @@ It is important to say this clearly, because none of the technologies described 
 - **The relationship with the customer**. When a customer brings their mother's ring to be reset, there is no AI that can convey the emotional importance of doing it right.
 - **The transmission of the trade**. A master setter teaches by imitation, by nuance, over years. That cannot be digitized.
 
-The reasonable conclusion is the same one we already wrote in the [post on AI and Deming](/blog/post-ia-deming-fabricacion-joyeria-raytecno): well-implemented technology **multiplies the capacity of the trade**, it does not replace it. Poorly implemented, it destroys it.
+The reasonable conclusion is the same one we already wrote in the [post on AI and Deming](/blog/ia-deming-fabricacion-joyeria): well-implemented technology **multiplies the capacity of the trade**, it does not replace it. Poorly implemented, it destroys it.
 
 ---
 
@@ -212,7 +212,7 @@ Each finished piece has the batch number of each set gem associated with it. If 
 
 ### 9.4 Setting time per operator and type
 
-Fundamental KPI: average setting time per type (prongs, bezel, pavé, etc.) and per operator. Allows calculating real cost per piece and planning workshop load with data.
+Fundamental KPI: average setting time per type (prongs, bezel, pavÃ©, etc.) and per operator. Allows calculating real cost per piece and planning workshop load with data.
 
 ### 9.5 Gem loss per phase
 
@@ -230,9 +230,9 @@ For a long time the jewelry sector operated under a false dichotomy: either you 
 
 The workshops that are growing combine both: human craftsmanship for what only craftsmanship can do, and engineering for everything else. CAD that designs the seats. 3D printing that materializes them with sub-millimeter precision. Computer vision that verifies what the human eye no longer reaches. ERP that connects everything and allows management to understand where their business is.
 
-And, at the center of it all, the **human setter** —now with more time to focus on the pieces that justify their trade, instead of mechanically milling seats that the 3D printer already delivers ready.
+And, at the center of it all, the **human setter** â€”now with more time to focus on the pieces that justify their trade, instead of mechanically milling seats that the 3D printer already delivers ready.
 
-If your workshop does setting and still works as it did twenty years ago —measuring by eye, manual milling, quality control by visual inspection at the end—, [let's talk](https://www.raytecno.es/contact). The first step is not to buy a 3D printer. It is to understand how the complete flow is redesigned, from the CAD model to delivery to the customer, so that the technological investment makes sense.
+If your workshop does setting and still works as it did twenty years ago â€”measuring by eye, manual milling, quality control by visual inspection at the endâ€”, [let's talk](https://www.raytecno.es/contact). The first step is not to buy a 3D printer. It is to understand how the complete flow is redesigned, from the CAD model to delivery to the customer, so that the technological investment makes sense.
 
 ---
 
@@ -240,7 +240,7 @@ If your workshop does setting and still works as it did twenty years ago —meas
 
 - *Casting and microfusion in jewelry: the heart of the workshop, controlled from the ERP*
 - *AI in jewelry manufacturing systems and quality systems: how Deming's 14 points evolve in 2026*
-- *1998 → 2026: 28 years later, the ERP architecture of a jewelry workshop remains the same*
+- *1998 â†’ 2026: 28 years later, the ERP architecture of a jewelry workshop remains the same*
 - *Supplying jewelry stores: how to decide how much product to send to each point of sale*
 
 ---

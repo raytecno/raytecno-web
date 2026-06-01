@@ -17,6 +17,7 @@ const blogCollection = defineCollection({
     // BÁSICOS (equivale al CPT de WordPress)
     // ============================================
     title: z.string(),
+    subtitle: z.string().optional().describe('Subtítulo / entradilla bajo el H1'),
     excerpt: z.string().max(300).describe('Extracto para tarjetas y meta description'),
     date: z.coerce.date(),
     modified: z.coerce.date().optional(),
@@ -36,6 +37,12 @@ const blogCollection = defineCollection({
     seoDescription: z.string().optional().describe('Meta description (si difiere del excerpt)'),
     seoKeyword: z.string().describe('Keyword principal para posicionar'),
     seoKeywordsSecondary: z.string().optional().describe('Keywords secundarias separadas por coma'),
+
+    // ============================================
+    // SERIE DE ARTÍCULOS
+    // ============================================
+    series: z.string().optional().describe('Nombre de la serie, ej: "Control de producción en joyería"'),
+    seriesPart: z.number().optional().describe('Número de parte dentro de la serie'),
 
     // ============================================
     // CATEGORÍAS Y ETIQUETAS (equivale a taxonomías WP)

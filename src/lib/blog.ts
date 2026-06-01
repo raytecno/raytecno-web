@@ -8,6 +8,9 @@
  * minimizar cambios en los componentes de página.
  * 
  * @file src/lib/blog.ts
+ *
+ * AÑADIDO (Junio 2026):
+ * - Mapeo de campos faq, subtitle, series y seriesPart desde el frontmatter
  */
 
 import { getCollection, type CollectionEntry } from 'astro:content';
@@ -21,6 +24,7 @@ export type BlogPost = CollectionEntry<'blog'>;
 export interface BlogPostProcessed {
   slug: string;
   title: string;
+  subtitle: string | null;
   excerpt: string;
   content: string;
   date: string;
@@ -34,6 +38,8 @@ export interface BlogPostProcessed {
   seoKeyword: string;
   category: string;
   tags: string[];
+  series: string | null;
+  seriesPart: number | null;
   ctaEnabled: boolean;
   ctaType: string;
   ctaTitle: string | null;
@@ -44,6 +50,7 @@ export interface BlogPostProcessed {
   showToc: boolean;
   author: string;
   relatedSlugs: string[];
+  faq: { q: string; a: string }[] | null;
   // Referencia original para render()
   _entry: CollectionEntry<'blog'>;
 }
@@ -81,6 +88,7 @@ function processEntry(entry: CollectionEntry<'blog'>): BlogPostProcessed {
   return {
     slug: extractSlug(entry),
     title: data.title,
+    subtitle: data.subtitle || null,
     excerpt: data.excerpt,
     content: body || '',
     date: data.date.toISOString(),
@@ -94,6 +102,8 @@ function processEntry(entry: CollectionEntry<'blog'>): BlogPostProcessed {
     seoKeyword: data.seoKeyword,
     category: data.category,
     tags: data.tags,
+    series: data.series || null,
+    seriesPart: data.seriesPart ?? null,
     ctaEnabled: data.ctaEnabled,
     ctaType: data.ctaType,
     ctaTitle: data.ctaTitle || null,
@@ -104,6 +114,7 @@ function processEntry(entry: CollectionEntry<'blog'>): BlogPostProcessed {
     showToc: data.showToc,
     author: data.author,
     relatedSlugs: data.relatedSlugs,
+    faq: data.faq || null,
     _entry: entry,
   };
 }

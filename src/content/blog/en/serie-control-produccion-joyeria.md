@@ -1,6 +1,6 @@
----
+﻿---
 title: "Strategy, organization and manufacturing in jewelry: the complete RayTecno blog series"
-excerpt: "Editorial index: six articles covering the major topics of modern jewelry management —marketing, organization, logistics, ERP architecture, AI quality and manufacturing— for sector executives."
+excerpt: "Editorial index: six articles covering the major topics of modern jewelry management â€”marketing, organization, logistics, ERP architecture, AI quality and manufacturingâ€” for sector executives."
 author: "RayTecno Team"
 category: "Editorial hub"
 tags: ["series", "jewelry", "ERP", "strategy", "RayTecno", "index"]
@@ -12,9 +12,9 @@ featured: true
 
 # Strategy, organization and manufacturing in jewelry: the complete series
 
-> *A modern jewelry business is not managed from a single discipline. It needs to think about marketing like Schneider, structure like Mintzberg, logistics like a multi-store retailer, technological architecture —on a solid [jewelry ERP](/en)— like an industrial manufacturer, quality like Deming and manufacturing like a precision workshop. The RayTecno blog is designed as a map for sector executives who want an integrated, not fragmented, vision.*
+> *A modern jewelry business is not managed from a single discipline. It needs to think about marketing like Schneider, structure like Mintzberg, logistics like a multi-store retailer, technological architecture â€”on a solid [jewelry ERP](/en)â€” like an industrial manufacturer, quality like Deming and manufacturing like a precision workshop. The RayTecno blog is designed as a map for sector executives who want an integrated, not fragmented, vision.*
 
-This article series is **the result of years accompanying real jewelry businesses** —from family workshops with their own production to groups with store networks in large retailers— in their management, organization and technology decisions. Each post solves a specific problem. Together, they outline a complete framework for understanding how a jewelry business is managed in 2026.
+This article series is **the result of years accompanying real jewelry businesses** â€”from family workshops with their own production to groups with store networks in large retailersâ€” in their management, organization and technology decisions. Each post solves a specific problem. Together, they outline a complete framework for understanding how a jewelry business is managed in 2026.
 
 If you are new to the blog, this index guides you on what to read first according to your profile and need. If you have followed us for some time, it serves as a reference map to return to the articles that interest you.
 
@@ -24,40 +24,40 @@ If you are new to the blog, this index guides you on what to read first accordin
 
 We have structured the articles into **three thematic blocks**:
 
-1. **Strategy and organization** — how to think about the jewelry business from management.
-2. **Logistics and ERP architecture** — how to size and connect operational parts.
-3. **Manufacturing, quality and AI** — how to manage the workshop with current technology.
+1. **Strategy and organization** â€” how to think about the jewelry business from management.
+2. **Logistics and ERP architecture** â€” how to size and connect operational parts.
+3. **Manufacturing, quality and AI** â€” how to manage the workshop with current technology.
 
 Each article is independent and can be read separately. But there is a **recommended sequence** if you want to go through them in order.
 
 ---
 
-## Block 1 · Strategy and organization
+## Block 1 Â· Strategy and organization
 
-### 1.1 [The Schneider case: 5 strategic marketing lessons applicable to jewelry](/blog/post-schneider-raytecno)
+### 1.1 [The Schneider case: 5 strategic marketing lessons applicable to jewelry](/blog/marketing-estrategico-joyeria)
 
 **For whom:** owners and commercial management of jewelry businesses competing against larger chains in mature markets.
 
 **What it solves:** how a secondary brand with a limited budget can break market inertia and capture share against dominant competitors.
 
 **What you will learn:**
-- Five lessons from the Schneider case —the Argentine brewer that went from 2.1% to 4.1% share in 90 days— grounded in the jewelry sector.
+- Five lessons from the Schneider case â€”the Argentine brewer that went from 2.1% to 4.1% share in 90 daysâ€” grounded in the jewelry sector.
 - How to segment the customer portfolio with real ERP data instead of intuition.
 - Why dominating **a single channel** beats being present in many.
-- How to build brand imagery beyond sector clichés ("Italian design", "centuries-old tradition").
+- How to build brand imagery beyond sector clichÃ©s ("Italian design", "centuries-old tradition").
 
 **Reading:** ~10 minutes.
 
 ---
 
-### 1.2 [Types of business organization in the jewelry sector: Mintzberg's 5 configurations](/blog/post-organizacion-raytecno)
+### 1.2 [Types of business organization in the jewelry sector: Mintzberg's 5 configurations](/blog/organizacion-empresarial-joyeria)
 
-**For whom:** jewelry managers in size transition (family → medium, medium → group) who detect that the current structure does not scale.
+**For whom:** jewelry managers in size transition (family â†’ medium, medium â†’ group) who detect that the current structure does not scale.
 
 **What it solves:** how to identify which organizational configuration fits each type of jewelry business and why structure defines what the ERP can contribute.
 
 **What you will learn:**
-- Mintzberg's five configurations —Simple Structure, Machine Bureaucracy, Professional Bureaucracy, Divisionalized, Adhocracy— applied to real jewelry profiles.
+- Mintzberg's five configurations â€”Simple Structure, Machine Bureaucracy, Professional Bureaucracy, Divisionalized, Adhocracyâ€” applied to real jewelry profiles.
 - How classic concepts (delegation, command areas, line/staff, departmentalization) translate into ERP permissions and flows.
 - Summary table for self-diagnosis: which configuration is yours and what fit it has with technology.
 
@@ -65,9 +65,9 @@ Each article is independent and can be read separately. But there is a **recomme
 
 ---
 
-## Block 2 · Logistics and ERP architecture
+## Block 2 Â· Logistics and ERP architecture
 
-### 2.1 [Supplying jewelry stores: how to decide how much product to send to each point of sale](/blog/post-abastecimiento-raytecno)
+### 2.1 [Supplying jewelry stores: how to decide how much product to send to each point of sale](/blog/abastecimiento-tiendas-joyeria)
 
 **For whom:** jewelry businesses with their own store network or with presence in large retailers, where the decision of "how much to send and when" is currently managed with spreadsheets.
 
@@ -83,11 +83,11 @@ Each article is independent and can be read separately. But there is a **recomme
 
 ---
 
-### 2.2 [1998 → 2026: 28 years later, the ERP architecture of a jewelry business is still the same](/blog/post-evolucion-1998-2026-raytecno)
+### 2.2 [1998 â†’ 2026: 28 years later, the ERP architecture of a jewelry business is still the same](/blog/arquitectura-erp-joyeria)
 
 **For whom:** management evaluating an ERP change and wanting to understand what changes and what doesn't over time in technological architecture.
 
-**What it solves:** offers an architectural lens —instead of a feature checklist— to make technology investment decisions.
+**What it solves:** offers an architectural lens â€”instead of a feature checklistâ€” to make technology investment decisions.
 
 **What you will learn:**
 - The classic CIM architecture (administration, planning, CAD, quality, production control, sales, purchases, manufacturing) that remains valid.
@@ -99,13 +99,13 @@ Each article is independent and can be read separately. But there is a **recomme
 
 ---
 
-## Block 3 · Manufacturing, quality and AI
+## Block 3 Â· Manufacturing, quality and AI
 
-### 3.1 [Casting and microfusion in jewelry: the heart of the workshop, controlled from the ERP](/blog/post-fundicion-microfusion-raytecno)
+### 3.1 [Casting and microfusion in jewelry: the heart of the workshop, controlled from the ERP](/blog/fundicion-microfusion-joyeria)
 
 **For whom:** production managers of workshops with their own casting who want to systematize cost, scrap and quality control.
 
-**What it solves:** turn casting —the moment of greatest risk and greatest value of the workshop— into a measurable and governable process from the ERP.
+**What it solves:** turn casting â€”the moment of greatest risk and greatest value of the workshopâ€” into a measurable and governable process from the ERP.
 
 **What you will learn:**
 - The **9 phases of lost-wax microfusion** with the critical points of each.
@@ -117,7 +117,7 @@ Each article is independent and can be read separately. But there is a **recomme
 
 ---
 
-### 3.2 [AI in jewelry manufacturing systems and quality systems: how Deming's 14 points evolve in 2026](/blog/post-ia-deming-fabricacion-joyeria-raytecno)
+### 3.2 [AI in jewelry manufacturing systems and quality systems: how Deming's 14 points evolve in 2026](/blog/ia-deming-fabricacion-joyeria)
 
 **For whom:** management wondering if AI is hype or if it has real application in their workshop, and how it fits with classic quality principles.
 
@@ -141,9 +141,9 @@ Not all readers have the same entry point. These are three routes by profile:
 
 Start with **strategy** and go down in technical concretion:
 
-1. Schneider case (marketing) →
-2. Mintzberg (organization) →
-3. Evolution 1998→2026 (architecture) →
+1. Schneider case (marketing) â†’
+2. Mintzberg (organization) â†’
+3. Evolution 1998â†’2026 (architecture) â†’
 4. AI + Deming (quality and manufacturing vision)
 
 Gives you the complete management lens in approximately one hour of total reading.
@@ -152,19 +152,19 @@ Gives you the complete management lens in approximately one hour of total readin
 
 Start with **manufacturing** and move up to strategy:
 
-1. Casting and microfusion (heart of the workshop) →
-2. AI + Deming (quality) →
-3. Evolution 1998→2026 (architecture) →
+1. Casting and microfusion (heart of the workshop) â†’
+2. AI + Deming (quality) â†’
+3. Evolution 1998â†’2026 (architecture) â†’
 4. Mintzberg (organization to scale)
 
 ### If you are commercial or retail manager
 
 Start with **logistics and marketing**:
 
-1. Supplying stores (DRP, ABC) →
-2. Schneider case (strategic marketing) →
-3. Mintzberg (organization of commercial teams) →
-4. Evolution 1998→2026 (architecture)
+1. Supplying stores (DRP, ABC) â†’
+2. Schneider case (strategic marketing) â†’
+3. Mintzberg (organization of commercial teams) â†’
+4. Evolution 1998â†’2026 (architecture)
 
 ---
 
@@ -172,7 +172,7 @@ Start with **logistics and marketing**:
 
 All articles share a background idea, indebted to Deming but perfectly valid in 2026:
 
-> **Quality —of the product, of the organization, of the information, of the management decision— is built into the system, not inspected at the end.**
+> **Quality â€”of the product, of the organization, of the information, of the management decisionâ€” is built into the system, not inspected at the end.**
 
 Applied to the different dimensions of the jewelry business:
 
@@ -201,4 +201,4 @@ If you want to receive them in your email, see [RayGold](/en) in a personalized 
 
 ---
 
-*RayTecno is a specialized ERP for the jewelry sector covering manufacturing, multi-store retail, wholesale and omnichannel on multi-tenant architecture. We built it over years alongside real jewelry businesses —Goldfénix, Souldiamond and other brands that trust us— solving concrete sector problems.*
+*RayTecno is a specialized ERP for the jewelry sector covering manufacturing, multi-store retail, wholesale and omnichannel on multi-tenant architecture. We built it over years alongside real jewelry businesses â€”GoldfÃ©nix, Souldiamond and other brands that trust usâ€” solving concrete sector problems.*

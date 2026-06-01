@@ -10,6 +10,9 @@
  * 
  * CORRECCIÓN SEO (Febrero 2026):
  * - URLs del Schema.org con www. (raytecno.es → www.raytecno.es)
+ *
+ * AÑADIDO (Junio 2026):
+ * - FAQPage Schema.org generado desde el campo `faq` del frontmatter
  */
 
 import type { GetStaticPaths } from 'astro';
@@ -106,6 +109,18 @@ const schemaArticle = {
     "@id": `https://www.raytecno.es/${lang}/blog/${slug}`
   }
 };
+
+// Schema.org FAQPage - solo si el post define preguntas en su frontmatter (campo faq)
+// El texto visible de la FAQ vive en el cuerpo del Markdown; este schema lo refleja
+const faqSchema = post.faq && post.faq.length > 0 ? {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": post.faq.map((item: { q: string; a: string }) => ({
+    "@type": "Question",
+    "name": item.q,
+    "acceptedAnswer": { "@type": "Answer", "text": item.a }
+  }))
+} : null;
 ---
 
 <Layout
@@ -119,6 +134,7 @@ const schemaArticle = {
   alternateUrls={alternateUrls}
 >
   <script type="application/ld+json" set:html={JSON.stringify(schemaArticle)} />
+  {faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
 
   <main>
     <article class="blog-article">
