@@ -27,7 +27,7 @@ export const raygold = {
   name: "RayGold",
   pricePerUserMonth: 49,
   // Año 1 - Inversión inicial
-  implementation: 8000, // Implementación básica
+  implementation: 5250, // Implementación básica
   configuration: 0, // Ya está configurado para joyería
   training: 1200, // Incluido
   dataMigration: 2000, // Incluido
@@ -114,6 +114,26 @@ export const competitors = {
         name: "cargas.com",
         url: "https://cargas.com/software/microsoft/dynamics-365-business-central/pricing/",
         quote: "Implementation $40,000 - $100,000+",
+      },
+    ],
+  },
+
+  piro: {
+    name: "PIRO",
+    enabled: true,
+    pricePerUserMonth: 110, // Derivado del rango oficial: ~950$/mes total (mediana) ÷ 10 usuarios ≈ 88€/usuario equivalente
+    implementation: 0, // No publica desglose; se factura según propuesta
+    configuration: 0,
+    training: 0,
+    dataMigration: 0,
+    hostingPerYear: 0, // Incluido (SaaS, solo nube)
+    maintenancePerYear: 0, // Bug-fixing incluido; SLA premium aparte
+    color: "#1a1a2e", // Azul oscuro PIRO, distinto de Dynamics
+    sources: [
+      {
+        name: "gopiro.com (oficial)",
+        url: "https://www.gopiro.com/faq",
+        quote: "Mid-size operations: from $700–$1,200/month",
       },
     ],
   },
@@ -332,9 +352,9 @@ export const comparisonTexts: Record<
     included: "Incluido",
     sources: "Ver fuentes",
     disclaimer:
-      "* Estimaciones basadas en fuentes públicas (2024-2025). Los precios reales varían según región, partner y configuración.",
+      "* Estimaciones basadas en fuentes públicas (2024-2026). Los precios reales varían según región, partner y configuración.",
     disclaimerExtended:
-      "Esta tabla es meramente orientativa. La opción más económica no siempre es la mejor elección. A la hora de seleccionar un ERP, es fundamental considerar otros factores como: funcionalidades específicas del sector, soporte técnico, escalabilidad, facilidad de uso, integración con sistemas existentes y la experiencia del proveedor en tu industria. Recomendamos solicitar presupuestos personalizados a cada proveedor.",
+      "Esta tabla es meramente orientativa. La opción más económica no siempre es la mejor elección. A la hora de seleccionar un ERP, es fundamental considerar otros factores como: funcionalidades específicas del sector, soporte técnico, escalabilidad, facilidad de uso, integración con sistemas existentes y la experiencia del proveedor en tu industria. Recomendamos solicitar presupuestos personalizados a cada proveedor. PIRO no publica precios por usuario ni desglose por concepto; su coste se estima sobre el rango oficial para empresa mediana (700–1.200 $/mes), con implementación y formación incluidas en la cifra equivalente.",
   },
   en: {
     title: "Approximate costs by option",
@@ -360,7 +380,7 @@ export const comparisonTexts: Record<
     disclaimer:
       "* Estimates based on public sources (2024-2025). Actual prices vary by region, partner and configuration.",
     disclaimerExtended:
-      "This table is for guidance only. The cheapest option is not always the best choice. When selecting an ERP, it is essential to consider other factors such as: industry-specific features, technical support, scalability, ease of use, integration with existing systems, and the provider's experience in your industry. We recommend requesting personalized quotes from each vendor.",
+      "This table is for guidance only. The cheapest option is not always the best choice. When selecting an ERP, it is essential to consider other factors such as: industry-specific features, technical support, scalability, ease of use, integration with existing systems, and the provider's experience in your industry. We recommend requesting personalized quotes from each vendor. PIRO does not publish per-user pricing or a cost breakdown; its cost is estimated from the official range for mid-size businesses (US$700–1,200/month), with implementation and training included in the equivalent figure.",
   },
   fr: {
     title: "Coûts approximatifs par option",
@@ -386,7 +406,7 @@ export const comparisonTexts: Record<
     disclaimer:
       "* Estimations basées sur des sources publiques. Les prix réels varient.",
     disclaimerExtended:
-      "Ce tableau est purement indicatif. L'option la moins chère n'est pas toujours le meilleur choix. Lors de la sélection d'un ERP, il est essentiel de considérer d'autres facteurs.",
+      "Ce tableau est purement indicatif. L'option la moins chère n'est pas toujours le meilleur choix. Lors de la sélection d'un ERP, il est essentiel de considérer d'autres facteurs. PIRO ne publie pas de tarifs par utilisateur ni de détail des coûts ; son coût est estimé à partir de la fourchette officielle pour les PME (700–1 200 $/mois), implémentation et formation comprises dans le montant équivalent.",
   },
   ca: {
     title: "Costos aproximats segons opció",
@@ -412,7 +432,7 @@ export const comparisonTexts: Record<
     disclaimer:
       "* Estimacions basades en fonts públiques. Els preus reals varien.",
     disclaimerExtended:
-      "Aquesta taula és merament orientativa. L'opció més econòmica no sempre és la millor elecció. A l'hora de seleccionar un ERP, és fonamental considerar altres factors.",
+      "Aquesta taula és merament orientativa. L'opció més econòmica no sempre és la millor elecció. A l'hora de seleccionar un ERP, és fonamental considerar altres factors. PIRO no publica preus per usuari ni desglossament per concepte; el seu cost s'estima sobre el rang oficial per a empresa mitjana (700–1.200 $/mes), amb implementació i formació incloses en la xifra equivalent.",
   },
   "pt-br": {
     title: "Custos aproximados por opção",
@@ -438,6 +458,6 @@ export const comparisonTexts: Record<
     disclaimer:
       "* Estimativas baseadas em fontes públicas. Os preços reais variam.",
     disclaimerExtended:
-      "Esta tabela é meramente orientativa. A opção mais econômica nem sempre é a melhor escolha. Ao selecionar um ERP, é fundamental considerar outros fatores.",
+      "Esta tabela é meramente orientativa. A opção mais econômica nem sempre é a melhor escolha. Ao selecionar um ERP, é fundamental considerar outros fatores. PIRO não publica preços por usuário nem detalhamento de custos; seu custo é estimado com base na faixa oficial para empresas de médio porte (US$ 700–1.200/mês), com implementação e treinamento incluídos no valor equivalente.",
   },
 };
