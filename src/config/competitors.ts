@@ -122,10 +122,10 @@ export const competitors = {
     name: "PIRO",
     enabled: true,
     pricePerUserMonth: 110, // Derivado del rango oficial: ~950$/mes total (mediana) ÷ 10 usuarios ≈ 88€/usuario equivalente
-    implementation: 0, // No publica desglose; se factura según propuesta
-    configuration: 0,
-    training: 0,
-    dataMigration: 0,
+    implementation: 1, // No publica desglose; se factura según propuesta
+    configuration: 1,
+    training: 1,
+    dataMigration: 1,
     hostingPerYear: 0, // Incluido (SaaS, solo nube)
     maintenancePerYear: 0, // Bug-fixing incluido; SLA premium aparte
     color: "#1a1a2e", // Azul oscuro PIRO, distinto de Dynamics

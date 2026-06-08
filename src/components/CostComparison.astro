@@ -29,9 +29,9 @@ function formatEUR(value: number): string {
 
 // Helper para mostrar valor o "Incluido"
 function displayValue(value: number, includedText: string): string {
+  if (value === 1) return "Según propuesta";
   return value === 0 ? `✓ ${includedText}` : formatEUR(value);
 }
-
 // Textos del botón de fuentes
 const sourcesButtonText: Record<string, string> = {
   es: "📄 Ver fuentes consultadas",
