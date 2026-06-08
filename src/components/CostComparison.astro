@@ -30,6 +30,8 @@ function formatEUR(value: number): string {
 // Helper para mostrar valor o "Incluido"
 function displayValue(value: number, includedText: string): string {
   if (value === 1) return "Según propuesta";
+  if (value === 2) return "En setup";
+  if (value === 3) return "En onboarding";
   return value === 0 ? `✓ ${includedText}` : formatEUR(value);
 }
 // Textos del botón de fuentes

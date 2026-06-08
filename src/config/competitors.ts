@@ -123,8 +123,8 @@ export const competitors = {
     enabled: true,
     pricePerUserMonth: 110, // Derivado del rango oficial: ~950$/mes total (mediana) ÷ 10 usuarios ≈ 88€/usuario equivalente
     implementation: 1, // No publica desglose; se factura según propuesta
-    configuration: 1,
-    training: 1,
+    configuration: 2,
+    training: 3,
     dataMigration: 1,
     hostingPerYear: 0, // Incluido (SaaS, solo nube)
     maintenancePerYear: 0, // Bug-fixing incluido; SLA premium aparte
