@@ -33,7 +33,7 @@ export const raygold = {
   dataMigration: 2000, // Incluido
   hostingPerYear: 420, // Incluido en suscripción (Azure)
   // Años 2-3
-  maintenancePerYear: 1200, // Soporte y actualizaciones
+  maintenancePerYear: 0, // Soporte y actualizaciones
   // Colores
   color: "#10b981",
   highlight: true,
