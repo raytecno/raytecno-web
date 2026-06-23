@@ -98,7 +98,7 @@
               "title": "Campos",
               "description": "Campos personalizados sin código"
             },
-             {
+            {
               "title": "Fabrica",
               "description": "Control sobre linea de fabricación"
             }
@@ -222,86 +222,86 @@
         }
       }
     },
-   "fabricacion": {
-  "title": "Fabricación",
-  "subtitle": "Planificación, producción, materiales y gestión laboral",
-  "metaTitle": "Fabricación | RayGold ERP - Control de Producción",
-  "metaDescription": "Planificación de planes, mapa de fabricación, gestión de materiales, fundición, expediciones y control laboral para joyerías.",
-  "sections": {
-    "planes": {
-      "name": "Planes",
-      "description": "Lanzamiento y procesamiento de planes de fabricación",
-      "images": [
-        {
-          "title": "Listado de Planes",
-          "description": "Vista general de planes con estado, color, ejecución, forma y reservas"
+    "fabricacion": {
+      "title": "Fabricación",
+      "subtitle": "Planificación, producción, materiales y gestión laboral",
+      "metaTitle": "Fabricación | RayGold ERP - Control de Producción",
+      "metaDescription": "Planificación de planes, mapa de fabricación, gestión de materiales, fundición, expediciones y control laboral para joyerías.",
+      "sections": {
+        "planes": {
+          "name": "Planes",
+          "description": "Lanzamiento y procesamiento de planes de fabricación",
+          "images": [
+            {
+              "title": "Listado de Planes",
+              "description": "Vista general de planes con estado, color, ejecución, forma y reservas"
+            },
+            {
+              "title": "MRP y Lanzamiento",
+              "description": "Procesamiento de planes con opciones de impresión: alianzas, pedidos de fundición, ceras, sobres de fabricación y estampación"
+            }
+          ]
         },
-        {
-          "title": "MRP y Lanzamiento",
-          "description": "Procesamiento de planes con opciones de impresión: alianzas, pedidos de fundición, ceras, sobres de fabricación y estampación"
-        }
-      ]
-    },
-    "mapa": {
-      "name": "Mapa de Fabricación",
-      "description": "Vista general de planes y rutas de producción",
-      "images": [
-        {
-          "title": "Flujo de Producción",
-          "description": "Control visual del flujo por fases: modelaje, ceras y fundición, acabados, baños y expedición con detalle de artículo y cliente"
-        }
-      ]
-    },
-    "materiales": {
-      "name": "Materiales",
-      "description": "Gestión de necesidades y disponibilidad",
-      "images": [
-        {
-          "title": "Mantenimiento Materiales",
-          "description": "Control de componentes por plan con necesarias, disponible, reserva, faltas, continua y unitaria por almacén"
-        }
-      ]
-    },
-    "fundicion": {
-      "name": "Fundición",
-      "description": "Gestión de procesos de fundición",
-      "images": [
-        {
-          "title": "Mantenimiento Fundición",
-          "description": "Control de fundiciones con métricas de producción: troncos, retales, escoria y mermas por operario y ruta"
-        }
-      ]
-    },
-    "expediciones": {
-      "name": "Expediciones",
-      "description": "Gestión de expediciones y envíos",
-      "images": [
-        {
-          "title": "Mantenimiento Expediciones",
-          "description": "Edición de expediciones con identificación, movimiento y almacén, estado, referencias comerciales y observaciones"
-        }
-      ]
-    },
-    "laboral": {
-      "name": "Gestión Laboral",
-      "description": "Operarios, presencia y configuración laboral",
-      "images": [
-        {
-          "title": "Gestión Laboral",
-          "description": "Operarios internos y externos, turnos, horarios, descansos, contratos, convenios, categorías, formaciones y conceptos de nómina"
+        "mapa": {
+          "name": "Mapa de Fabricación",
+          "description": "Vista general de planes y rutas de producción",
+          "images": [
+            {
+              "title": "Flujo de Producción",
+              "description": "Control visual del flujo por fases: modelaje, ceras y fundición, acabados, baños y expedición con detalle de artículo y cliente"
+            }
+          ]
         },
-        {
-          "title": "Operarios Externos",
-          "description": "Mantenimiento de operarios externos con datos personales, laborales, financieros, dirección y contacto"
+        "materiales": {
+          "name": "Materiales",
+          "description": "Gestión de necesidades y disponibilidad",
+          "images": [
+            {
+              "title": "Mantenimiento Materiales",
+              "description": "Control de componentes por plan con necesarias, disponible, reserva, faltas, continua y unitaria por almacén"
+            }
+          ]
         },
-        {
-          "title": "Control de Presencia",
-          "description": "Fichajes diarios, ausencias, solicitudes, incidencias, RRHH, dispositivos biométricos, geolocalización y productividad"
+        "fundicion": {
+          "name": "Fundición",
+          "description": "Gestión de procesos de fundición",
+          "images": [
+            {
+              "title": "Mantenimiento Fundición",
+              "description": "Control de fundiciones con métricas de producción: troncos, retales, escoria y mermas por operario y ruta"
+            }
+          ]
+        },
+        "expediciones": {
+          "name": "Expediciones",
+          "description": "Gestión de expediciones y envíos",
+          "images": [
+            {
+              "title": "Mantenimiento Expediciones",
+              "description": "Edición de expediciones con identificación, movimiento y almacén, estado, referencias comerciales y observaciones"
+            }
+          ]
+        },
+        "laboral": {
+          "name": "Gestión Laboral",
+          "description": "Operarios, presencia y configuración laboral",
+          "images": [
+            {
+              "title": "Gestión Laboral",
+              "description": "Operarios internos y externos, turnos, horarios, descansos, contratos, convenios, categorías, formaciones y conceptos de nómina"
+            },
+            {
+              "title": "Operarios Externos",
+              "description": "Mantenimiento de operarios externos con datos personales, laborales, financieros, dirección y contacto"
+            },
+            {
+              "title": "Control de Presencia",
+              "description": "Fichajes diarios, ausencias, solicitudes, incidencias, RRHH, dispositivos biométricos, geolocalización y productividad"
+            }
+          ]
         }
-      ]
-    }
-  }
-},
+      }
+    },
     "finanzas": {
       "title": "Finanzas",
       "subtitle": "Contabilidad, tesorería e IVA integrados",
@@ -421,7 +421,7 @@
       "subtitle": "Gestión de diversos inventarios",
       "metaTitle": "Inventarios | RayGold ERP - Trazabilidad",
       "metaDescription": "Gestión de recursos, stocks, movimientos y distribuciones",
-      "sections": {   
+      "sections": {
         "stocks": {
           "name": "Stocks",
           "description": "Control total de stocks",
@@ -533,6 +533,24 @@
               "description": "Control de ventas por vendedor"
             }
           ]
+        },
+         "pipeline": {
+          "name": "Pipeline",
+          "description": "Gestión de oportunidades",
+          "images": [
+            {
+              "title": "Principal",
+              "description": "Control general de oportunidades"
+            },
+            {
+              "title": "Mantenimiento",
+              "description": "Control de los datos"
+            },
+             {
+              "title": "Historico",
+              "description": "Visualizacion de cierres"
+            }
+          ]
         }
       }
     },
@@ -589,6 +607,64 @@
             {
               "title": "Proximamente",
               "description": ""
+            }
+          ]
+        }
+      }
+    },
+    "portal": {
+      "title": "Portal Cliente",
+      "subtitle": "Acceso de clientes a pedidos y facturas",
+      "metaTitle": "Portal Cliente | RayGold ERP Joyería",
+      "metaDescription": "Portal web para que tus clientes consulten sus pedidos y facturas en tiempo real.",
+      "sections": {
+        "pedidos": {
+          "name": "Pedidos",
+          "description": "Consulta de pedidos del cliente",
+          "images": [
+            {
+              "title": "Listado",
+              "description": "Listado de pedidos del cliente"
+            },
+            {
+              "title": "Detalle",
+              "description": "Detalle y estado del pedido"
+            }
+          ]
+        },
+        "facturas": {
+          "name": "Facturas",
+          "description": "Consulta y descarga de facturas",
+          "images": [
+            {
+              "title": "Listado",
+              "description": "Listado de facturas del cliente"
+            },
+            {
+              "title": "Descarga",
+              "description": "Descarga de facturas en PDF"
+            }
+          ]
+        }
+      }
+    },
+    "asistenteia": {
+      "title": "Asistente IA",
+      "subtitle": "Asistente inteligente integrado en el ERP",
+      "metaTitle": "Asistente IA | RayGold ERP Joyería",
+      "metaDescription": "Asistente basado en inteligencia artificial para consultas y soporte dentro del ERP.",
+      "sections": {
+        "consultas": {
+          "name": "Consultas",
+          "description": "Consultas en lenguaje natural sobre tus datos",
+          "images": [
+            {
+              "title": "Chat",
+              "description": "Interacción mediante chat con el asistente"
+            },
+            {
+              "title": "Respuestas",
+              "description": "Respuestas y sugerencias basadas en IA"
             }
           ]
         }

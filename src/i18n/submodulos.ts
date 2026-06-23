@@ -11,7 +11,7 @@ import submodulosCa from './submodulos.ca.json';
 import submodulosPtBr from './submodulos.pt-br.json';
 
 // Tipos
-export type ModuloId = 'maestros' | 'comercial' | 'fabricacion' | 'finanzas' | 'historicos' | 'inventario' | 'estadisticas' | 'vendedores' | 'ecommerce' | 'impresoras3d';
+export type ModuloId = 'maestros' | 'comercial' | 'fabricacion' | 'finanzas' | 'historicos' | 'inventario' | 'estadisticas' | 'vendedores' | 'ecommerce' | 'impresoras3d' | 'portal' | 'asistenteia';
 
 export interface ImageTranslation {
   title: string;
@@ -162,6 +162,7 @@ export const modulosConfig: Record<ModuloId, ModuloConfig> = {
     secciones: [
       { id: 'equipo', prefix: 'VEN' },
       { id: 'comisiones', prefix: 'COM' },
+      { id: 'pipeline', prefix: 'PIP' },
     ],
   },
   ecommerce: {
@@ -178,6 +179,21 @@ export const modulosConfig: Record<ModuloId, ModuloConfig> = {
     secciones: [
       { id: 'impresoras', prefix: '3DP' }
 
+    ],
+  },
+  portal: {
+    color: '#0ea5e9',
+    icon: `<svg viewBox="0 0 64 64" fill="none"><rect x="8" y="12" width="48" height="40" rx="4" fill="currentColor" opacity="0.2"/><rect x="8" y="12" width="48" height="10" rx="4" fill="currentColor"/><circle cx="14" cy="17" r="2" fill="white"/><circle cx="21" cy="17" r="2" fill="white"/><circle cx="28" cy="17" r="2" fill="white"/><rect x="14" y="28" width="16" height="18" rx="2" fill="currentColor" opacity="0.4"/><rect x="34" y="28" width="16" height="8" rx="2" fill="currentColor" opacity="0.6"/><rect x="34" y="40" width="16" height="6" rx="2" fill="currentColor" opacity="0.4"/></svg>`,
+    secciones: [
+      { id: 'pedidos', prefix: 'PORP' },
+      { id: 'facturas', prefix: 'PORF' },
+    ],
+  },
+  asistenteia: {
+    color: '#a855f7',
+    icon: `<svg viewBox="0 0 64 64" fill="none"><rect x="14" y="20" width="36" height="28" rx="6" fill="currentColor" opacity="0.2"/><rect x="14" y="20" width="36" height="28" rx="6" stroke="currentColor" stroke-width="2"/><circle cx="25" cy="34" r="3" fill="currentColor"/><circle cx="39" cy="34" r="3" fill="currentColor"/><path d="M26 41h12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M32 12v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><circle cx="32" cy="11" r="3" fill="currentColor"/><path d="M8 30v8M56 30v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>`,
+    secciones: [
+      { id: 'consultas', prefix: 'IAC' },
     ],
   },
 };

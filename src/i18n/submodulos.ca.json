@@ -533,6 +533,24 @@
               "description": "Control de vendes per venedor"
             }
           ]
+        },
+        "pipeline": {
+          "name": "Pipeline",
+          "description": "Gestió d'oportunitats",
+          "images": [
+            {
+              "title": "Principal",
+              "description": "Control general d'oportunitats"
+            },
+            {
+              "title": "Manteniment",
+              "description": "Control de les dades"
+            },
+            {
+              "title": "Històric",
+              "description": "Visualització de tancaments"
+            }
+          ]
         }
       }
     },
@@ -589,6 +607,64 @@
             {
               "title": "Pròximament",
               "description": ""
+            }
+          ]
+        }
+      }
+    },
+    "portal": {
+      "title": "Portal Client",
+      "subtitle": "Accés dels clients a comandes i factures",
+      "metaTitle": "Portal Client | RayGold ERP Joieria",
+      "metaDescription": "Portal web perquè els teus clients consultin les seves comandes i factures en temps real.",
+      "sections": {
+        "pedidos": {
+          "name": "Comandes",
+          "description": "Consulta de comandes del client",
+          "images": [
+            {
+              "title": "Llistat",
+              "description": "Llistat de comandes del client"
+            },
+            {
+              "title": "Detall",
+              "description": "Detall i estat de la comanda"
+            }
+          ]
+        },
+        "facturas": {
+          "name": "Factures",
+          "description": "Consulta i descàrrega de factures",
+          "images": [
+            {
+              "title": "Llistat",
+              "description": "Llistat de factures del client"
+            },
+            {
+              "title": "Descàrrega",
+              "description": "Descàrrega de factures en PDF"
+            }
+          ]
+        }
+      }
+    },
+    "asistenteia": {
+      "title": "Assistent IA",
+      "subtitle": "Assistent intel·ligent integrat en l'ERP",
+      "metaTitle": "Assistent IA | RayGold ERP Joieria",
+      "metaDescription": "Assistent basat en intel·ligència artificial per a consultes i suport dins de l'ERP.",
+      "sections": {
+        "consultas": {
+          "name": "Consultes",
+          "description": "Consultes en llenguatge natural sobre les teves dades",
+          "images": [
+            {
+              "title": "Xat",
+              "description": "Interacció mitjançant xat amb l'assistent"
+            },
+            {
+              "title": "Respostes",
+              "description": "Respostes i suggeriments basats en IA"
             }
           ]
         }

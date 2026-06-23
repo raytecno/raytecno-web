@@ -533,6 +533,24 @@
               "description": "Controle de vendas por vendedor"
             }
           ]
+        },
+        "pipeline": {
+          "name": "Pipeline",
+          "description": "Gestão de oportunidades",
+          "images": [
+            {
+              "title": "Principal",
+              "description": "Controle geral de oportunidades"
+            },
+            {
+              "title": "Manutenção",
+              "description": "Controle dos dados"
+            },
+            {
+              "title": "Histórico",
+              "description": "Visualização de fechamentos"
+            }
+          ]
         }
       }
     },
@@ -589,6 +607,42 @@
             {
               "title": "Em Breve",
               "description": ""
+            }
+          ]
+        }
+      }
+    },
+    "portal": {
+      "title": "Portal do Cliente",
+      "subtitle": "Acesso dos clientes a pedidos e faturas",
+      "metaTitle": "Portal do Cliente | RayGold ERP Joalheria",
+      "metaDescription": "Portal web para que seus clientes consultem seus pedidos e faturas em tempo real.",
+      "sections": {
+        "pedidos": {
+          "name": "Pedidos",
+          "description": "Consulta de pedidos do cliente",
+          "images": [
+            {
+              "title": "Listagem",
+              "description": "Listagem de pedidos do cliente"
+            },
+            {
+              "title": "Detalhe",
+              "description": "Detalhe e status do pedido"
+            }
+          ]
+        },
+        "facturas": {
+          "name": "Faturas",
+          "description": "Consulta e download de faturas",
+          "images": [
+            {
+              "title": "Listagem",
+              "description": "Listagem de faturas do cliente"
+            },
+            {
+              "title": "Download",
+              "description": "Download de faturas em PDF"
             }
           ]
         }

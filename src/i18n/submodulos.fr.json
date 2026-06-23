@@ -533,6 +533,24 @@
               "description": "Contrôle des ventes par vendeur"
             }
           ]
+        },
+        "pipeline": {
+          "name": "Pipeline",
+          "description": "Gestion des opportunités",
+          "images": [
+            {
+              "title": "Principal",
+              "description": "Contrôle général des opportunités"
+            },
+            {
+              "title": "Maintenance",
+              "description": "Contrôle des données"
+            },
+            {
+              "title": "Historique",
+              "description": "Visualisation des clôtures"
+            }
+          ]
         }
       }
     },
@@ -589,6 +607,64 @@
             {
               "title": "Bientôt Disponible",
               "description": ""
+            }
+          ]
+        }
+      }
+    },
+    "portal": {
+      "title": "Portail Client",
+      "subtitle": "Accès des clients aux commandes et factures",
+      "metaTitle": "Portail Client | RayGold ERP Joaillerie",
+      "metaDescription": "Portail web permettant à vos clients de consulter leurs commandes et factures en temps réel.",
+      "sections": {
+        "pedidos": {
+          "name": "Commandes",
+          "description": "Consultation des commandes du client",
+          "images": [
+            {
+              "title": "Liste",
+              "description": "Liste des commandes du client"
+            },
+            {
+              "title": "Détail",
+              "description": "Détail et statut de la commande"
+            }
+          ]
+        },
+        "facturas": {
+          "name": "Factures",
+          "description": "Consultation et téléchargement des factures",
+          "images": [
+            {
+              "title": "Liste",
+              "description": "Liste des factures du client"
+            },
+            {
+              "title": "Téléchargement",
+              "description": "Téléchargement des factures en PDF"
+            }
+          ]
+        }
+      }
+    },
+    "asistenteia": {
+      "title": "Assistant IA",
+      "subtitle": "Assistant intelligent intégré à l'ERP",
+      "metaTitle": "Assistant IA | RayGold ERP Joaillerie",
+      "metaDescription": "Assistant basé sur l'intelligence artificielle pour les consultations et le support au sein de l'ERP.",
+      "sections": {
+        "consultas": {
+          "name": "Consultations",
+          "description": "Consultations en langage naturel sur vos données",
+          "images": [
+            {
+              "title": "Chat",
+              "description": "Interaction par chat avec l'assistant"
+            },
+            {
+              "title": "Réponses",
+              "description": "Réponses et suggestions basées sur l'IA"
             }
           ]
         }

@@ -533,6 +533,24 @@
               "description": "Sales control by rep"
             }
           ]
+        },
+         "pipeline": {
+          "name": "Pipeline",
+          "description": "Opportunity management",
+          "images": [
+            {
+              "title": "Main",
+              "description": "General opportunity control"
+            },
+            {
+              "title": "Maintenance",
+              "description": "Data control"
+            },
+            {
+              "title": "History",
+              "description": "Closing visualization"
+            }
+          ]
         }
       }
     },
@@ -589,6 +607,64 @@
             {
               "title": "Coming Soon",
               "description": ""
+            }
+          ]
+        }
+      }
+    },
+    "portal": {
+      "title": "Customer Portal",
+      "subtitle": "Customer access to orders and invoices",
+      "metaTitle": "Customer Portal | RayGold Jewelry ERP",
+      "metaDescription": "Web portal for your customers to check their orders and invoices in real time.",
+      "sections": {
+        "pedidos": {
+          "name": "Orders",
+          "description": "Customer order lookup",
+          "images": [
+            {
+              "title": "List",
+              "description": "Customer order list"
+            },
+            {
+              "title": "Detail",
+              "description": "Order detail and status"
+            }
+          ]
+        },
+        "facturas": {
+          "name": "Invoices",
+          "description": "Invoice lookup and download",
+          "images": [
+            {
+              "title": "List",
+              "description": "Customer invoice list"
+            },
+            {
+              "title": "Download",
+              "description": "Invoice download in PDF"
+            }
+          ]
+        }
+      }
+    },
+    "asistenteia": {
+      "title": "AI Assistant",
+      "subtitle": "Intelligent assistant integrated into the ERP",
+      "metaTitle": "AI Assistant | RayGold Jewelry ERP",
+      "metaDescription": "AI-powered assistant for queries and support within the ERP.",
+      "sections": {
+        "consultas": {
+          "name": "Queries",
+          "description": "Natural language queries about your data",
+          "images": [
+            {
+              "title": "Chat",
+              "description": "Chat-based interaction with the assistant"
+            },
+            {
+              "title": "Answers",
+              "description": "AI-based answers and suggestions"
             }
           ]
         }
