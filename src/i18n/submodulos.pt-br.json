@@ -97,6 +97,10 @@
             {
               "title": "Campos",
               "description": "Campos personalizados sem código"
+            },
+            {
+              "title": "Fábrica",
+              "description": "Controle sobre a linha de fabricação"
             }
           ]
         },
@@ -218,86 +222,86 @@
         }
       }
     },
-   "fabricacion": {
-  "title": "Fabricação",
-  "subtitle": "Planejamento, produção, materiais e gestão trabalhista",
-  "metaTitle": "Fabricação | RayGold ERP - Controle de Produção",
-  "metaDescription": "Planejamento de planos, mapa de fabricação, gestão de materiais, fundição, expedições e controle trabalhista para joalherias.",
-  "sections": {
-    "planes": {
-      "name": "Planos",
-      "description": "Lançamento e processamento de planos de fabricação",
-      "images": [
-        {
-          "title": "Lista de Planos",
-          "description": "Visão geral de planos com status, cor, execução, forma e reservas"
+    "fabricacion": {
+      "title": "Fabricação",
+      "subtitle": "Planejamento, produção, materiais e gestão trabalhista",
+      "metaTitle": "Fabricação | RayGold ERP - Controle de Produção",
+      "metaDescription": "Planejamento de planos, mapa de fabricação, gestão de materiais, fundição, expedições e controle trabalhista para joalherias.",
+      "sections": {
+        "planes": {
+          "name": "Planos",
+          "description": "Lançamento e processamento de planos de fabricação",
+          "images": [
+            {
+              "title": "Lista de Planos",
+              "description": "Visão geral de planos com status, cor, execução, forma e reservas"
+            },
+            {
+              "title": "MRP e Lançamento",
+              "description": "Processamento de planos com opções de impressão: alianças, pedidos de fundição, ceras, envelopes de fabricação e estampagem"
+            }
+          ]
         },
-        {
-          "title": "MRP e Lançamento",
-          "description": "Processamento de planos com opções de impressão: alianças, pedidos de fundição, ceras, envelopes de fabricação e estampagem"
-        }
-      ]
-    },
-    "mapa": {
-      "name": "Mapa de Fabricação",
-      "description": "Visão geral de planos e rotas de produção",
-      "images": [
-        {
-          "title": "Fluxo de Produção",
-          "description": "Controle visual do fluxo por fases: modelagem, ceras e fundição, acabamentos, banhos e expedição com detalhe de item e cliente"
-        }
-      ]
-    },
-    "materiales": {
-      "name": "Materiais",
-      "description": "Gestão de necessidades e disponibilidade",
-      "images": [
-        {
-          "title": "Manutenção de Materiais",
-          "description": "Controle de componentes por plano com necessárias, disponível, reserva, faltas, contínua e unitária por armazém"
-        }
-      ]
-    },
-    "fundicion": {
-      "name": "Fundição",
-      "description": "Gestão de processos de fundição",
-      "images": [
-        {
-          "title": "Manutenção de Fundição",
-          "description": "Controle de fundições com métricas de produção: lingotes, retalhos, escória e perdas por operário e rota"
-        }
-      ]
-    },
-    "expediciones": {
-      "name": "Expedições",
-      "description": "Gestão de expedições e envios",
-      "images": [
-        {
-          "title": "Manutenção de Expedições",
-          "description": "Edição de expedições com identificação, movimento e armazém, status, referências comerciais e observações"
-        }
-      ]
-    },
-    "laboral": {
-      "name": "Gestão Trabalhista",
-      "description": "Operários, presença e configuração trabalhista",
-      "images": [
-        {
-          "title": "Gestão Trabalhista",
-          "description": "Operários internos e externos, turnos, horários, descansos, contratos, convenções coletivas, categorias, formações e conceitos de folha de pagamento"
+        "mapa": {
+          "name": "Mapa de Fabricação",
+          "description": "Visão geral de planos e rotas de produção",
+          "images": [
+            {
+              "title": "Fluxo de Produção",
+              "description": "Controle visual do fluxo por fases: modelagem, ceras e fundição, acabamentos, banhos e expedição com detalhe de item e cliente"
+            }
+          ]
         },
-        {
-          "title": "Operários Externos",
-          "description": "Manutenção de operários externos com dados pessoais, trabalhistas, financeiros, endereço e contato"
+        "materiales": {
+          "name": "Materiais",
+          "description": "Gestão de necessidades e disponibilidade",
+          "images": [
+            {
+              "title": "Manutenção de Materiais",
+              "description": "Controle de componentes por plano com necessárias, disponível, reserva, faltas, contínua e unitária por armazém"
+            }
+          ]
         },
-        {
-          "title": "Controle de Presença",
-          "description": "Registros diários de ponto, ausências, solicitações, ocorrências, RH, dispositivos biométricos, geolocalização e produtividade"
+        "fundicion": {
+          "name": "Fundição",
+          "description": "Gestão de processos de fundição",
+          "images": [
+            {
+              "title": "Manutenção de Fundição",
+              "description": "Controle de fundições com métricas de produção: lingotes, retalhos, escória e perdas por operário e rota"
+            }
+          ]
+        },
+        "expediciones": {
+          "name": "Expedições",
+          "description": "Gestão de expedições e envios",
+          "images": [
+            {
+              "title": "Manutenção de Expedições",
+              "description": "Edição de expedições com identificação, movimento e armazém, status, referências comerciais e observações"
+            }
+          ]
+        },
+        "laboral": {
+          "name": "Gestão Trabalhista",
+          "description": "Operários, presença e configuração trabalhista",
+          "images": [
+            {
+              "title": "Gestão Trabalhista",
+              "description": "Operários internos e externos, turnos, horários, descansos, contratos, convenções coletivas, categorias, formações e conceitos de folha de pagamento"
+            },
+            {
+              "title": "Operários Externos",
+              "description": "Manutenção de operários externos com dados pessoais, trabalhistas, financeiros, endereço e contato"
+            },
+            {
+              "title": "Controle de Presença",
+              "description": "Registros diários de ponto, ausências, solicitações, ocorrências, RH, dispositivos biométricos, geolocalização e produtividade"
+            }
+          ]
         }
-      ]
-    }
-  }
-},
+      }
+    },
     "finanzas": {
       "title": "Finanças",
       "subtitle": "Contabilidade, tesouraria e impostos integrados",
@@ -418,20 +422,6 @@
       "metaTitle": "Inventários | RayGold ERP - Rastreabilidade",
       "metaDescription": "Gestão de recursos, estoques, movimentos e distribuições",
       "sections": {
-        "distribucion": {
-          "name": "Distribuições",
-          "description": "Gestão de distribuições e armazéns",
-          "images": [
-            {
-              "title": "Principal",
-              "description": "Lista de distribuição"
-            },
-            {
-              "title": "Geração",
-              "description": "Informação completa"
-            }
-          ]
-        },
         "stocks": {
           "name": "Estoques",
           "description": "Controle total de estoques",
@@ -442,7 +432,21 @@
             },
             {
               "title": "Contas correntes",
-              "description": ""
+              "description": "Controle da conta por estoque"
+            }
+          ]
+        },
+        "recuento": {
+          "name": "Contagem Física",
+          "description": "Gestão de contagens de estoque e inventários",
+          "images": [
+            {
+              "title": "Estoque",
+              "description": "Informações sobre estoques"
+            },
+            {
+              "title": "Inventários",
+              "description": "Informações sobre inventários"
             }
           ]
         }

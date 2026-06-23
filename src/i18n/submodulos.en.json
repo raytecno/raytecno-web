@@ -97,6 +97,10 @@
             {
               "title": "Fields",
               "description": "Custom fields without code"
+            },
+            {
+              "title": "Factory",
+              "description": "Control over the production line"
             }
           ]
         },
@@ -218,86 +222,86 @@
         }
       }
     },
-   "fabricacion": {
-  "title": "Manufacturing",
-  "subtitle": "Planning, production, materials and labor management",
-  "metaTitle": "Manufacturing | RayGold ERP - Production Control",
-  "metaDescription": "Plan management, manufacturing map, material management, casting, shipments and labor control for jewelers.",
-  "sections": {
-    "planes": {
-      "name": "Plans",
-      "description": "Launching and processing of manufacturing plans",
-      "images": [
-        {
-          "title": "Plans List",
-          "description": "Overview of plans with status, color, execution, form and reservations"
+    "fabricacion": {
+      "title": "Manufacturing",
+      "subtitle": "Planning, production, materials and labor management",
+      "metaTitle": "Manufacturing | RayGold ERP - Production Control",
+      "metaDescription": "Plan management, manufacturing map, material management, casting, shipments and labor control for jewelers.",
+      "sections": {
+        "planes": {
+          "name": "Plans",
+          "description": "Launching and processing of manufacturing plans",
+          "images": [
+            {
+              "title": "Plans List",
+              "description": "Overview of plans with status, color, execution, form and reservations"
+            },
+            {
+              "title": "MRP and Launch",
+              "description": "Plan processing with printing options: rings, casting orders, waxes, manufacturing envelopes and stamping"
+            }
+          ]
         },
-        {
-          "title": "MRP and Launch",
-          "description": "Plan processing with printing options: rings, casting orders, waxes, manufacturing envelopes and stamping"
-        }
-      ]
-    },
-    "mapa": {
-      "name": "Manufacturing Map",
-      "description": "Overview of plans and production routes",
-      "images": [
-        {
-          "title": "Production Flow",
-          "description": "Visual control of the flow by phases: modeling, waxes and casting, finishing, plating and shipping with item and customer detail"
-        }
-      ]
-    },
-    "materiales": {
-      "name": "Materials",
-      "description": "Management of needs and availability",
-      "images": [
-        {
-          "title": "Material Maintenance",
-          "description": "Control of components by plan with required, available, reserve, shortages, continuous and unit values by warehouse"
-        }
-      ]
-    },
-    "fundicion": {
-      "name": "Casting",
-      "description": "Management of casting processes",
-      "images": [
-        {
-          "title": "Casting Maintenance",
-          "description": "Casting control with production metrics: ingots, scraps, slag and losses by operator and route"
-        }
-      ]
-    },
-    "expediciones": {
-      "name": "Shipments",
-      "description": "Management of shipments and deliveries",
-      "images": [
-        {
-          "title": "Shipment Maintenance",
-          "description": "Shipment editing with identification, movement and warehouse, status, commercial references and observations"
-        }
-      ]
-    },
-    "laboral": {
-      "name": "Labor Management",
-      "description": "Operators, attendance and labor configuration",
-      "images": [
-        {
-          "title": "Labor Management",
-          "description": "Internal and external operators, shifts, schedules, breaks, contracts, collective agreements, categories, training and payroll concepts"
+        "mapa": {
+          "name": "Manufacturing Map",
+          "description": "Overview of plans and production routes",
+          "images": [
+            {
+              "title": "Production Flow",
+              "description": "Visual control of the flow by phases: modeling, waxes and casting, finishing, plating and shipping with item and customer detail"
+            }
+          ]
         },
-        {
-          "title": "External Operators",
-          "description": "External operator maintenance with personal, labor, financial, address and contact information"
+        "materiales": {
+          "name": "Materials",
+          "description": "Management of needs and availability",
+          "images": [
+            {
+              "title": "Material Maintenance",
+              "description": "Control of components by plan with required, available, reserve, shortages, continuous and unit values by warehouse"
+            }
+          ]
         },
-        {
-          "title": "Attendance Control",
-          "description": "Daily clock-ins, absences, requests, incidents, HR, biometric devices, geolocation and productivity"
+        "fundicion": {
+          "name": "Casting",
+          "description": "Management of casting processes",
+          "images": [
+            {
+              "title": "Casting Maintenance",
+              "description": "Casting control with production metrics: ingots, scraps, slag and losses by operator and route"
+            }
+          ]
+        },
+        "expediciones": {
+          "name": "Shipments",
+          "description": "Management of shipments and deliveries",
+          "images": [
+            {
+              "title": "Shipment Maintenance",
+              "description": "Shipment editing with identification, movement and warehouse, status, commercial references and observations"
+            }
+          ]
+        },
+        "laboral": {
+          "name": "Labor Management",
+          "description": "Operators, attendance and labor configuration",
+          "images": [
+            {
+              "title": "Labor Management",
+              "description": "Internal and external operators, shifts, schedules, breaks, contracts, collective agreements, categories, training and payroll concepts"
+            },
+            {
+              "title": "External Operators",
+              "description": "External operator maintenance with personal, labor, financial, address and contact information"
+            },
+            {
+              "title": "Attendance Control",
+              "description": "Daily clock-ins, absences, requests, incidents, HR, biometric devices, geolocation and productivity"
+            }
+          ]
         }
-      ]
-    }
-  }
-},
+      }
+    },
     "finanzas": {
       "title": "Finance",
       "subtitle": "Integrated accounting, treasury and VAT",
@@ -418,20 +422,6 @@
       "metaTitle": "Inventories | RayGold ERP - Traceability",
       "metaDescription": "Management of resources, stocks, movements and distributions",
       "sections": {
-        "distribucion": {
-          "name": "Distributions",
-          "description": "Management of distributions and warehouses",
-          "images": [
-            {
-              "title": "Main",
-              "description": "Distribution list"
-            },
-            {
-              "title": "Generation",
-              "description": "Complete information"
-            }
-          ]
-        },
         "stocks": {
           "name": "Stocks",
           "description": "Total stock control",
@@ -442,7 +432,21 @@
             },
             {
               "title": "Current accounts",
-              "description": ""
+              "description": "Account control by stock"
+            }
+          ]
+        },
+        "recuento": {
+          "name": "Physical Count",
+          "description": "Management of stock counts and inventories",
+          "images": [
+            {
+              "title": "Stock",
+              "description": "Stock information"
+            },
+            {
+              "title": "Inventories",
+              "description": "Inventory information"
             }
           ]
         }

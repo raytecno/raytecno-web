@@ -421,21 +421,7 @@
       "subtitle": "Gestión de diversos inventarios",
       "metaTitle": "Inventarios | RayGold ERP - Trazabilidad",
       "metaDescription": "Gestión de recursos, stocks, movimientos y distribuciones",
-      "sections": {
-        "distribucion": {
-          "name": "Distribuciones",
-          "description": "Gestión de distribuciones y almacenes",
-          "images": [
-            {
-              "title": "Principal",
-              "description": "Listado de distibucion"
-            },
-            {
-              "title": "Generacion",
-              "description": "Información completa"
-            }
-          ]
-        },
+      "sections": {   
         "stocks": {
           "name": "Stocks",
           "description": "Control total de stocks",
@@ -447,6 +433,20 @@
             {
               "title": "Cuentas corrientes",
               "description": ""
+            }
+          ]
+        },
+        "recuento": {
+          "name": "Recuento Fisico",
+          "description": "Gestión de recuentos en stock y inventarios",
+          "images": [
+            {
+              "title": "Stock",
+              "description": "Informacion sobre Stocks"
+            },
+            {
+              "title": "Inventarios",
+              "description": "Información sobre inventarios"
             }
           ]
         }

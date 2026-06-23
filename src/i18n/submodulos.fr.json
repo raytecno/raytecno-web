@@ -97,6 +97,10 @@
             {
               "title": "Champs",
               "description": "Champs personnalisés sans code"
+            },
+            {
+              "title": "Usine",
+              "description": "Contrôle sur la ligne de fabrication"
             }
           ]
         },
@@ -218,86 +222,86 @@
         }
       }
     },
-  "fabricacion": {
-  "title": "Fabrication",
-  "subtitle": "Planification, production, matériaux et gestion du travail",
-  "metaTitle": "Fabrication | RayGold ERP - Contrôle de Production",
-  "metaDescription": "Planification de plans, carte de fabrication, gestion des matériaux, fonte, expéditions et contrôle du travail pour joailleries.",
-  "sections": {
-    "planes": {
-      "name": "Plans",
-      "description": "Lancement et traitement de plans de fabrication",
-      "images": [
-        {
-          "title": "Liste de Plans",
-          "description": "Vue d'ensemble des plans avec statut, couleur, exécution, forme et réserves"
+    "fabricacion": {
+      "title": "Fabrication",
+      "subtitle": "Planification, production, matériaux et gestion du travail",
+      "metaTitle": "Fabrication | RayGold ERP - Contrôle de Production",
+      "metaDescription": "Planification de plans, carte de fabrication, gestion des matériaux, fonte, expéditions et contrôle du travail pour joailleries.",
+      "sections": {
+        "planes": {
+          "name": "Plans",
+          "description": "Lancement et traitement de plans de fabrication",
+          "images": [
+            {
+              "title": "Liste de Plans",
+              "description": "Vue d'ensemble des plans avec statut, couleur, exécution, forme et réserves"
+            },
+            {
+              "title": "MRP et Lancement",
+              "description": "Traitement des plans avec options d'impression : alliances, commandes de fonte, cires, enveloppes de fabrication et estampage"
+            }
+          ]
         },
-        {
-          "title": "MRP et Lancement",
-          "description": "Traitement des plans avec options d'impression : alliances, commandes de fonte, cires, enveloppes de fabrication et estampage"
-        }
-      ]
-    },
-    "mapa": {
-      "name": "Carte de Fabrication",
-      "description": "Vue d'ensemble des plans et routes de production",
-      "images": [
-        {
-          "title": "Flux de Production",
-          "description": "Contrôle visuel du flux par phases : modelage, cires et fonte, finitions, bains et expédition avec détail d'article et client"
-        }
-      ]
-    },
-    "materiales": {
-      "name": "Matériaux",
-      "description": "Gestion des besoins et disponibilité",
-      "images": [
-        {
-          "title": "Maintenance Matériaux",
-          "description": "Contrôle des composants par plan avec nécessaires, disponible, réserve, manquants, continue et unitaire par entrepôt"
-        }
-      ]
-    },
-    "fundicion": {
-      "name": "Fonte",
-      "description": "Gestion des processus de fonte",
-      "images": [
-        {
-          "title": "Maintenance Fonte",
-          "description": "Contrôle des fontes avec métriques de production : lingots, chutes, scories et pertes par opérateur et route"
-        }
-      ]
-    },
-    "expediciones": {
-      "name": "Expéditions",
-      "description": "Gestion des expéditions et envois",
-      "images": [
-        {
-          "title": "Maintenance Expéditions",
-          "description": "Édition d'expéditions avec identification, mouvement et entrepôt, statut, références commerciales et observations"
-        }
-      ]
-    },
-    "laboral": {
-      "name": "Gestion du Travail",
-      "description": "Opérateurs, présence et configuration du travail",
-      "images": [
-        {
-          "title": "Gestion du Travail",
-          "description": "Opérateurs internes et externes, équipes, horaires, pauses, contrats, conventions collectives, catégories, formations et concepts de paie"
+        "mapa": {
+          "name": "Carte de Fabrication",
+          "description": "Vue d'ensemble des plans et routes de production",
+          "images": [
+            {
+              "title": "Flux de Production",
+              "description": "Contrôle visuel du flux par phases : modelage, cires et fonte, finitions, bains et expédition avec détail d'article et client"
+            }
+          ]
         },
-        {
-          "title": "Opérateurs Externes",
-          "description": "Maintenance des opérateurs externes avec données personnelles, professionnelles, financières, adresse et contact"
+        "materiales": {
+          "name": "Matériaux",
+          "description": "Gestion des besoins et disponibilité",
+          "images": [
+            {
+              "title": "Maintenance Matériaux",
+              "description": "Contrôle des composants par plan avec nécessaires, disponible, réserve, manquants, continue et unitaire par entrepôt"
+            }
+          ]
         },
-        {
-          "title": "Contrôle de Présence",
-          "description": "Pointages quotidiens, absences, demandes, incidents, RH, dispositifs biométriques, géolocalisation et productivité"
+        "fundicion": {
+          "name": "Fonte",
+          "description": "Gestion des processus de fonte",
+          "images": [
+            {
+              "title": "Maintenance Fonte",
+              "description": "Contrôle des fontes avec métriques de production : lingots, chutes, scories et pertes par opérateur et route"
+            }
+          ]
+        },
+        "expediciones": {
+          "name": "Expéditions",
+          "description": "Gestion des expéditions et envois",
+          "images": [
+            {
+              "title": "Maintenance Expéditions",
+              "description": "Édition d'expéditions avec identification, mouvement et entrepôt, statut, références commerciales et observations"
+            }
+          ]
+        },
+        "laboral": {
+          "name": "Gestion du Travail",
+          "description": "Opérateurs, présence et configuration du travail",
+          "images": [
+            {
+              "title": "Gestion du Travail",
+              "description": "Opérateurs internes et externes, équipes, horaires, pauses, contrats, conventions collectives, catégories, formations et concepts de paie"
+            },
+            {
+              "title": "Opérateurs Externes",
+              "description": "Maintenance des opérateurs externes avec données personnelles, professionnelles, financières, adresse et contact"
+            },
+            {
+              "title": "Contrôle de Présence",
+              "description": "Pointages quotidiens, absences, demandes, incidents, RH, dispositifs biométriques, géolocalisation et productivité"
+            }
+          ]
         }
-      ]
-    }
-  }
-},
+      }
+    },
     "finanzas": {
       "title": "Finances",
       "subtitle": "Comptabilité, trésorerie et TVA intégrées",
@@ -418,20 +422,6 @@
       "metaTitle": "Inventaires | RayGold ERP - Traçabilité",
       "metaDescription": "Gestion des ressources, stocks, mouvements et distributions",
       "sections": {
-        "distribucion": {
-          "name": "Distributions",
-          "description": "Gestion des distributions et entrepôts",
-          "images": [
-            {
-              "title": "Principal",
-              "description": "Liste de distribution"
-            },
-            {
-              "title": "Génération",
-              "description": "Information complète"
-            }
-          ]
-        },
         "stocks": {
           "name": "Stocks",
           "description": "Contrôle total des stocks",
@@ -442,7 +432,21 @@
             },
             {
               "title": "Comptes courants",
-              "description": ""
+              "description": "Contrôle du compte par stock"
+            }
+          ]
+        },
+        "recuento": {
+          "name": "Comptage Physique",
+          "description": "Gestion des comptages de stock et inventaires",
+          "images": [
+            {
+              "title": "Stock",
+              "description": "Informations sur les stocks"
+            },
+            {
+              "title": "Inventaires",
+              "description": "Informations sur les inventaires"
             }
           ]
         }
