@@ -144,8 +144,8 @@ export const modulosConfig: Record<ModuloId, ModuloConfig> = {
     color: '#8b5cf6',
     icon: `<svg viewBox="0 0 64 64" fill="none"><rect x="8" y="12" width="48" height="40" rx="4" fill="currentColor" opacity="0.2"/><rect x="14" y="18" width="36" height="6" rx="2" fill="currentColor"/><circle cx="32" cy="38" r="12" fill="currentColor" opacity="0.3"/><path d="M32 30v8l6 4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><circle cx="32" cy="38" r="2" fill="currentColor"/></svg>`,
     secciones: [
-      { id: 'distribucion', prefix: 'DIS' },
-      { id: 'stocks', prefix: 'STK' }
+      { id: 'stocks', prefix: 'STK' },
+       { id: 'recuento', prefix: 'REC' }
     ],
   },
   estadisticas: {
