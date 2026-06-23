@@ -97,6 +97,10 @@
             {
               "title": "Campos",
               "description": "Campos personalizados sin código"
+            },
+             {
+              "title": "Fabrica",
+              "description": "Control sobre linea de fabricación"
             }
           ]
         },
