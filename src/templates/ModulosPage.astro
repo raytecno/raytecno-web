@@ -35,6 +35,8 @@ const moduloSlugs: Record<string, Record<Lang, string>> = {
   vendedores: { es: 'vendedores', en: 'sales-reps', fr: 'vendeurs', ca: 'venedors', 'pt-br': 'vendedores' },
   ecommerce: { es: 'ecommerce', en: 'ecommerce', fr: 'ecommerce', ca: 'ecommerce', 'pt-br': 'ecommerce' },
   impresoras3d: { es: 'impresoras3d', en: '3dprinters', fr: 'imprimantes3d', ca: 'impressores3d', 'pt-br': 'impressoras3d' },
+  portal: { es: 'portal', en: 'portal', fr: 'portail', ca: 'portal', 'pt-br': 'portal' },
+  asistenteia: { es: 'asistente-ia', en: 'ai-assistant', fr: 'assistant-ia', ca: 'assistent-ia', 'pt-br': 'assistente-ia' },
 };
 
 // Función para obtener la URL de un módulo
@@ -44,7 +46,7 @@ function getModuloUrl(moduloId: string, currentLang: Lang): string {
   return `/${currentLang}/${folder}/${slug}`;
 }
 
-// Definición de los 9 módulos con iconos originales
+// Definición de los 11 módulos con iconos originales
 const modulos = [
   {
     id: "maestros",
@@ -169,6 +171,34 @@ const modulos = [
       <rect x="40" y="52" width="10" height="4" rx="1" fill="currentColor"/>
     </svg>`,
   },
+  {
+    id: "portal",
+    color: "#0ea5e9",
+    icono: `<svg viewBox="0 0 64 64" fill="none">
+      <rect x="8" y="12" width="48" height="40" rx="4" fill="currentColor" opacity="0.15"/>
+      <rect x="8" y="12" width="48" height="10" rx="4" fill="currentColor"/>
+      <circle cx="14" cy="17" r="2" fill="white"/>
+      <circle cx="21" cy="17" r="2" fill="white"/>
+      <circle cx="28" cy="17" r="2" fill="white"/>
+      <rect x="14" y="28" width="16" height="18" rx="2" fill="currentColor" opacity="0.4"/>
+      <rect x="34" y="28" width="16" height="8" rx="2" fill="currentColor" opacity="0.6"/>
+      <rect x="34" y="40" width="16" height="6" rx="2" fill="currentColor" opacity="0.4"/>
+    </svg>`,
+  },
+  {
+    id: "asistenteia",
+    color: "#a855f7",
+    icono: `<svg viewBox="0 0 64 64" fill="none">
+      <rect x="14" y="20" width="36" height="28" rx="6" fill="currentColor" opacity="0.15"/>
+      <rect x="14" y="20" width="36" height="28" rx="6" stroke="currentColor" stroke-width="2"/>
+      <circle cx="25" cy="34" r="3" fill="currentColor"/>
+      <circle cx="39" cy="34" r="3" fill="currentColor"/>
+      <path d="M26 41h12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M32 12v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+      <circle cx="32" cy="11" r="3" fill="currentColor"/>
+      <path d="M8 30v8M56 30v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+    </svg>`,
+  },
 ];
 
 // Traducciones de módulos
@@ -187,6 +217,8 @@ const modulosT: Record<
     vendedores: { nombre: "Vendedores", descripcion: "Gestión de rutas y visitas" },
     ecommerce: { nombre: "Ecommerce", descripcion: "Tiendas online y marketplaces" },
     impresoras3d: { nombre: "Impresoras 3D", descripcion: "Control y gestión de producción con impresoras 3D" },
+     portal: { nombre: "Portal Cliente", descripcion: "Acceso de clientes a pedidos y facturas" },
+    asistenteia: { nombre: "Asistente IA", descripcion: "Asistente inteligente integrado en el ERP" },
   },
   en: {
     maestros: { nombre: "Masters", descripcion: "Items, suppliers, customers and families" },
@@ -199,6 +231,8 @@ const modulosT: Record<
     vendedores: { nombre: "Sales Reps", descripcion: "Route and visit management" },
     ecommerce: { nombre: "Ecommerce", descripcion: "Online stores and marketplaces" },
     impresoras3d: { nombre: "3D Printers", descripcion: "Production control and management with 3D printers" },
+    portal: { nombre: "Customer Portal", descripcion: "Customer access to orders and invoices" },
+    asistenteia: { nombre: "AI Assistant", descripcion: "Intelligent assistant integrated into the ERP" },
   },
   fr: {
     maestros: { nombre: "Maîtres", descripcion: "Articles, fournisseurs, clients et familles" },
@@ -211,6 +245,8 @@ const modulosT: Record<
     vendedores: { nombre: "Vendeurs", descripcion: "Gestion des routes et visites" },
     ecommerce: { nombre: "Ecommerce", descripcion: "Boutiques en ligne et marketplaces" },
     impresoras3d: { nombre: "Imprimantes 3D", descripcion: "Contrôle et gestion de production avec imprimantes 3D" },
+    portal: { nombre: "Portail Client", descripcion: "Accès des clients aux commandes et factures" },
+    asistenteia: { nombre: "Assistant IA", descripcion: "Assistant intelligent intégré à l'ERP" },
   },
   ca: {
     maestros: { nombre: "Mestres", descripcion: "Articles, proveïdors, clients i famílies" },
@@ -223,6 +259,9 @@ const modulosT: Record<
     vendedores: { nombre: "Venedors", descripcion: "Gestió de rutes i visites" },
     ecommerce: { nombre: "Ecommerce", descripcion: "Botigues online i marketplaces" },
     impresoras3d: { nombre: "Impressores 3D", descripcion: "Control i gestió de producció amb impressores 3D" },
+    portal: { nombre: "Portal Client", descripcion: "Accés dels clients a comandes i factures" },
+    asistenteia: { nombre: "Assistent IA", descripcion: "Assistent intel·ligent integrat en l'ERP" },
+
   },
   "pt-br": {
     maestros: { nombre: "Mestres", descripcion: "Artigos, fornecedores, clientes e famílias" },
@@ -235,6 +274,8 @@ const modulosT: Record<
     vendedores: { nombre: "Vendedores", descripcion: "Gestão de rotas e visitas" },
     ecommerce: { nombre: "Ecommerce", descripcion: "Lojas online e marketplaces" },
     impresoras3d: { nombre: "Impressoras 3D", descripcion: "Controle e gestão de produção com impressoras 3D" },
+    portal: { nombre: "Portal do Cliente", descripcion: "Acesso dos clientes a pedidos e faturas" },
+    asistenteia: { nombre: "Assistente IA", descripcion: "Assistente inteligente integrado ao ERP" },
   },
 };
 
@@ -251,9 +292,9 @@ const pageTranslations: Record<Lang, {
 }> = {
   es: {
     metaTitle: "Módulos | RayGold ERP",
-    metaDescription: "Descubre los 9 módulos del ERP RayGold para joyerías.",
+    metaDescription: "Descubre los 11 módulos del ERP RayGold para joyerías.",
     title: "Módulos del ERP",
-    subtitle: "9 módulos especializados para cubrir todas las necesidades de tu joyería",
+    subtitle: "11 módulos especializados para cubrir todas las necesidades de tu joyería",
     ctaTitle: "¿Listo para empezar?",
     ctaDesc: "Solicita una demo y descubre todo lo que RayGold puede hacer por tu joyería",
     ctaDemo: "Solicitar demo",
@@ -261,9 +302,9 @@ const pageTranslations: Record<Lang, {
   },
   en: {
     metaTitle: "Modules | RayGold ERP",
-    metaDescription: "Discover the 9 modules of RayGold ERP for jewelry businesses.",
+    metaDescription: "Discover the 11 modules of RayGold ERP for jewelry businesses.",
     title: "ERP Modules",
-    subtitle: "9 specialized modules to cover all your jewelry business needs",
+    subtitle: "11 specialized modules to cover all your jewelry business needs",
     ctaTitle: "Ready to get started?",
     ctaDesc: "Request a demo and discover everything RayGold can do for your jewelry business",
     ctaDemo: "Request demo",
@@ -271,9 +312,9 @@ const pageTranslations: Record<Lang, {
   },
   fr: {
     metaTitle: "Modules | RayGold ERP",
-    metaDescription: "Découvrez les 9 modules de l'ERP RayGold pour bijouteries.",
+    metaDescription: "Découvrez les 11 modules de l'ERP RayGold pour bijouteries.",
     title: "Modules ERP",
-    subtitle: "9 modules spécialisés pour répondre à tous les besoins de votre bijouterie",
+    subtitle: "11 modules spécialisés pour répondre à tous les besoins de votre bijouterie",
     ctaTitle: "Prêt à commencer?",
     ctaDesc: "Demandez une démo et découvrez tout ce que RayGold peut faire pour votre bijouterie",
     ctaDemo: "Demander une démo",
@@ -281,9 +322,9 @@ const pageTranslations: Record<Lang, {
   },
   ca: {
     metaTitle: "Mòduls | RayGold ERP",
-    metaDescription: "Descobreix els 9 mòduls de l'ERP RayGold per a joieries.",
+    metaDescription: "Descobreix els 11 mòduls de l'ERP RayGold per a joieries.",
     title: "Mòduls de l'ERP",
-    subtitle: "9 mòduls especialitzats per cobrir totes les necessitats de la teva joieria",
+    subtitle: "11 mòduls especialitzats per cobrir totes les necessitats de la teva joieria",
     ctaTitle: "Preparat per començar?",
     ctaDesc: "Sol·licita una demo i descobreix tot el que RayGold pot fer per la teva joieria",
     ctaDemo: "Sol·licitar demo",
@@ -291,9 +332,9 @@ const pageTranslations: Record<Lang, {
   },
   "pt-br": {
     metaTitle: "Módulos | RayGold ERP",
-    metaDescription: "Descubra os 9 módulos do ERP RayGold para joalherias.",
+    metaDescription: "Descubra os 11 módulos do ERP RayGold para joalherias.",
     title: "Módulos do ERP",
-    subtitle: "9 módulos especializados para cobrir todas as necessidades da sua joalheria",
+    subtitle: "11 módulos especializados para cobrir todas as necessidades da sua joalheria",
     ctaTitle: "Pronto para começar?",
     ctaDesc: "Solicite uma demonstração e descubra tudo o que o RayGold pode fazer pela sua joalheria",
     ctaDemo: "Solicitar demo",
