@@ -95,6 +95,7 @@ const isToolsActive = currentPath.includes('/herramientas') || currentPath.inclu
       <a href={tecnologiaUrl} class:list={["nav-link", { active: isActive(tecnologiaUrl) }]}>{t.nav?.technology || "Tecnología"}</a>
       
       <!-- Herramientas Dropdown -->
+      {/*
       <div class="nav-dropdown">
         <button class:list={["nav-link dropdown-trigger", { active: isToolsActive }]}>
           {nl.tools}
@@ -121,6 +122,7 @@ const isToolsActive = currentPath.includes('/herramientas') || currentPath.inclu
           </a>
         </div>
       </div>
+        */}
 
       <a href={blogUrl} class:list={["nav-link", { active: isActive(blogUrl) }]}>{blogLabel[lang]}</a>
       <a href={contactoUrl} class:list={["nav-link", { active: isActive(contactoUrl) }]}>{t.nav?.contact || "Contacto"}</a>
