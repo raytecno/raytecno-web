@@ -162,7 +162,6 @@ export const modulosConfig: Record<ModuloId, ModuloConfig> = {
     secciones: [
       { id: 'equipo', prefix: 'VEN' },
       { id: 'comisiones', prefix: 'COM' },
-      { id: 'tienda', prefix: 'TIE' },
       { id: 'pipeline', prefix: 'PIP' },
     ],
   },
@@ -171,6 +170,7 @@ export const modulosConfig: Record<ModuloId, ModuloConfig> = {
     icon: `<svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="24" fill="currentColor" opacity="0.2"/><ellipse cx="32" cy="32" rx="24" ry="10" stroke="currentColor" stroke-width="2"/><ellipse cx="32" cy="32" rx="10" ry="24" stroke="currentColor" stroke-width="2"/><line x1="8" y1="32" x2="56" y2="32" stroke="currentColor" stroke-width="2"/><circle cx="32" cy="32" r="4" fill="currentColor"/></svg>`,
     secciones: [
       { id: 'catalogo', prefix: 'CAT' },
+      { id: 'tienda', prefix: 'TIE' },
       { id: 'pedidos', prefix: 'CONF' },
     ],
   },
