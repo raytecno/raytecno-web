@@ -36,6 +36,7 @@ const translations: Record<Lang, {
       { key: "estadisticas", title: "Estadísticas", description: "Informes y cuadros de mando" },
       { key: "vendedores", title: "Vendedores", description: "Gestión de rutas y visitas" },
       { key: "ecommerce", title: "Ecommerce", description: "Tiendas online y marketplaces" },
+      { key: "impresoras3d", title: "Impresoras 3D", description: "Control y gestión de producción con impresoras 3D" },
       { key: "portal", title: "Portal Cliente", description: "Acceso de clientes a pedidos y facturas" },
       { key: "asistenteia", title: "Asistente IA", description: "Asistente inteligente integrado en el ERP" },
 
@@ -55,6 +56,7 @@ const translations: Record<Lang, {
       { key: "estadisticas", title: "Statistics", description: "Reports and dashboards" },
       { key: "vendedores", title: "Sales Reps", description: "Route and visit management" },
       { key: "ecommerce", title: "Ecommerce", description: "Online stores and marketplaces" },
+      { key: "impresoras3d", title: "3D Printers", description: "Production control and management with 3D printers" },
       { key: "portal", title: "Customer Portal", description: "Customer access to orders and invoices" },
       { key: "asistenteia", title: "AI Assistant", description: "Intelligent assistant integrated into the ERP" },
     ],
@@ -73,6 +75,7 @@ const translations: Record<Lang, {
       { key: "estadisticas", title: "Statistiques", description: "Rapports et tableaux de bord" },
       { key: "vendedores", title: "Vendeurs", description: "Gestion des routes et visites" },
       { key: "ecommerce", title: "Ecommerce", description: "Boutiques en ligne et marketplaces" },
+      { key: "impresoras3d", title: "Imprimantes 3D", description: "Contrôle et gestion de production avec imprimantes 3D" },
       { key: "portal", title: "Portail Client", description: "Accès des clients aux commandes et factures" },
       { key: "asistenteia", title: "Assistant IA", description: "Assistant intelligent intégré à l'ERP" },
     ],
@@ -91,7 +94,8 @@ const translations: Record<Lang, {
       { key: "estadisticas", title: "Estadístiques", description: "Informes i quadres de comandament" },
       { key: "vendedores", title: "Venedors", description: "Gestió de rutes i visites" },
       { key: "ecommerce", title: "Ecommerce", description: "Botigues online i marketplaces" },
-       { key: "portal", title: "Portal Client", description: "Accés dels clients a comandes i factures" },
+      { key: "impresoras3d", title: "Impressores 3D", description: "Control i gestió de producció amb impressores 3D" },
+      { key: "portal", title: "Portal Client", description: "Accés dels clients a comandes i factures" },
       { key: "asistenteia", title: "Assistent IA", description: "Assistent intel·ligent integrat en l'ERP" },
 
     ],
@@ -110,6 +114,7 @@ const translations: Record<Lang, {
       { key: "estadisticas", title: "Estatísticas", description: "Relatórios e painéis" },
       { key: "vendedores", title: "Vendedores", description: "Gestão de rotas e visitas" },
       { key: "ecommerce", title: "Ecommerce", description: "Lojas online e marketplaces" },
+      { key: "impresoras3d", title: "Impressoras 3D", description: "Controle e gestão de produção com impressoras 3D" },
       { key: "portal", title: "Portal do Cliente", description: "Acesso dos clientes a pedidos e faturas" },
       { key: "asistenteia", title: "Assistente IA", description: "Assistente inteligente integrado ao ERP" },
     ],
@@ -129,6 +134,7 @@ const iconos: Record<string, string> = {
   estadisticas: `<svg viewBox="0 0 48 48" fill="none"><rect x="6" y="8" width="36" height="32" rx="3" fill="currentColor" opacity="0.15"/><rect x="10" y="28" width="6" height="10" rx="1" fill="currentColor"/><rect x="19" y="22" width="6" height="16" rx="1" fill="currentColor" opacity="0.7"/><rect x="28" y="16" width="6" height="22" rx="1" fill="currentColor" opacity="0.5"/><path d="M10 20l9-4 9 3 9-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`,
   vendedores: `<svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="16" r="8" fill="currentColor"/><path d="M12 42c0-8 5-12 12-12s12 4 12 12" fill="currentColor" opacity="0.4"/><circle cx="38" cy="22" r="5" fill="currentColor" opacity="0.6"/><circle cx="10" cy="22" r="5" fill="currentColor" opacity="0.6"/></svg>`,
   ecommerce: `<svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" fill="currentColor" opacity="0.15"/><ellipse cx="24" cy="24" rx="18" ry="8" stroke="currentColor" stroke-width="2"/><ellipse cx="24" cy="24" rx="8" ry="18" stroke="currentColor" stroke-width="2"/><line x1="6" y1="24" x2="42" y2="24" stroke="currentColor" stroke-width="2"/><line x1="24" y1="6" x2="24" y2="42" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="24" r="3" fill="currentColor"/></svg>`,
+  impresoras3d: `<svg viewBox="0 0 64 64" fill="none"><rect x="8" y="8" width="48" height="48" rx="4" fill="currentColor" opacity="0.15"/><rect x="12" y="12" width="40" height="8" rx="2" fill="currentColor"/><rect x="16" y="24" width="32" height="24" rx="2" fill="currentColor" opacity="0.3"/><path d="M32 28v16" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M24 36h16" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="32" cy="36" r="6" fill="currentColor" opacity="0.5"/><rect x="14" y="52" width="10" height="4" rx="1" fill="currentColor"/><rect x="40" y="52" width="10" height="4" rx="1" fill="currentColor"/></svg>`,
   portal: `<svg viewBox="0 0 48 48" fill="none"><rect x="6" y="8" width="36" height="32" rx="3" fill="currentColor" opacity="0.15"/><rect x="6" y="8" width="36" height="8" rx="3" fill="currentColor"/><circle cx="11" cy="12" r="1.5" fill="white"/><circle cx="16" cy="12" r="1.5" fill="white"/><circle cx="21" cy="12" r="1.5" fill="white"/><rect x="10" y="21" width="12" height="14" rx="2" fill="currentColor" opacity="0.4"/><rect x="26" y="21" width="12" height="6" rx="2" fill="currentColor" opacity="0.6"/><rect x="26" y="30" width="12" height="5" rx="2" fill="currentColor" opacity="0.4"/></svg>`,
   asistenteia: `<svg viewBox="0 0 48 48" fill="none"><rect x="10" y="15" width="28" height="22" rx="5" fill="currentColor" opacity="0.15"/><rect x="10" y="15" width="28" height="22" rx="5" stroke="currentColor" stroke-width="2"/><circle cx="19" cy="26" r="2.5" fill="currentColor"/><circle cx="29" cy="26" r="2.5" fill="currentColor"/><path d="M20 32h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M24 9v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="24" cy="8" r="2.5" fill="currentColor"/><path d="M6 22v6M42 22v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`,
 };
@@ -144,6 +150,7 @@ const colores: Record<string, string> = {
   estadisticas: "#ec4899",
   vendedores: "#3b82f6",
   ecommerce: "#6366f1",
+  impresoras3d : "#14b8a6",
   portal: "#0ea5e9",
   asistenteia: "#a855f7",
 };
