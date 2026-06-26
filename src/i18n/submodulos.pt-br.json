@@ -542,24 +542,6 @@
             }
           ]
         },
-        "tienda": {
-          "name": "Loja Online",
-          "description": "Lojas e PDV",
-          "images": [
-            {
-              "title": "PDV",
-              "description": "Gestão de vendas para lojas"
-            },
-            {
-              "title": "Distribuição",
-              "description": "Planos de distribuição para lojas"
-            },
-            {
-              "title": "Contagem",
-              "description": "Contagem cíclica por classes"
-            }
-          ]
-        },
         "pipeline": {
           "name": "Pipeline",
           "description": "Gestão de oportunidades",
@@ -601,6 +583,24 @@
             {
               "title": "Especificações",
               "description": "Detalhes concretos"
+            }
+          ]
+        },
+        "tienda": {
+          "name": "Loja Online",
+          "description": "Lojas e PDV",
+          "images": [
+            {
+              "title": "PDV",
+              "description": "Gestão de vendas para lojas"
+            },
+            {
+              "title": "Distribuição",
+              "description": "Planos de distribuição para lojas"
+            },
+            {
+              "title": "Contagem",
+              "description": "Contagem cíclica por classes"
             }
           ]
         },

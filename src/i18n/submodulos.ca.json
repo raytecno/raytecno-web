@@ -542,24 +542,6 @@
             }
           ]
         },
-        "tienda": {
-          "name": "Botiga Online",
-          "description": "Botigues i TPV",
-          "images": [
-            {
-              "title": "TPV",
-              "description": "Gestió de vendes per a botigues"
-            },
-            {
-              "title": "Distribució",
-              "description": "Plans de distribució a botigues"
-            },
-            {
-              "title": "Recompte",
-              "description": "Recompte cíclic per classes"
-            }
-          ]
-        },
         "pipeline": {
           "name": "Pipeline",
           "description": "Gestió d'oportunitats",
@@ -601,6 +583,24 @@
             {
               "title": "Especificacions",
               "description": "Concreta detalls"
+            }
+          ]
+        },
+          "tienda": {
+          "name": "Botiga Online",
+          "description": "Botigues i TPV",
+          "images": [
+            {
+              "title": "TPV",
+              "description": "Gestió de vendes per a botigues"
+            },
+            {
+              "title": "Distribució",
+              "description": "Plans de distribució a botigues"
+            },
+            {
+              "title": "Recompte",
+              "description": "Recompte cíclic per classes"
             }
           ]
         },

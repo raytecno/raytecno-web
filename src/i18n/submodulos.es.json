@@ -542,24 +542,6 @@
             }
           ]
         },
-        "tienda": {
-          "name": "Tienda Online",
-          "description": "tinedas y TPV",
-          "images": [
-            {
-              "title": "TPV",
-              "description": "Gestion de ventas para tiendas"
-            },
-            {
-              "title": "Distribución",
-              "description": "Planes de distribución a tiendas"
-            },
-            {
-              "title": "Recuento",
-              "description": "Recuento cíclico por clases"
-            }
-          ]
-        },
          "pipeline": {
           "name": "Pipeline",
           "description": "Gestión de oportunidades",
@@ -601,6 +583,24 @@
             {
               "title": "Especificaciones",
               "description": "Concreta detalles"
+            }
+          ]
+        },
+          "tienda": {
+          "name": "Tienda Online",
+          "description": "tinedas y TPV",
+          "images": [
+            {
+              "title": "TPV",
+              "description": "Gestion de ventas para tiendas"
+            },
+            {
+              "title": "Distribución",
+              "description": "Planes de distribución a tiendas"
+            },
+            {
+              "title": "Recuento",
+              "description": "Recuento cíclico por clases"
             }
           ]
         },
