@@ -162,6 +162,7 @@ export const modulosConfig: Record<ModuloId, ModuloConfig> = {
     secciones: [
       { id: 'equipo', prefix: 'VEN' },
       { id: 'comisiones', prefix: 'COM' },
+      { id: 'tienda', prefix: 'TIE' },
       { id: 'pipeline', prefix: 'PIP' },
     ],
   },

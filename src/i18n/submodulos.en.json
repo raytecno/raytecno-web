@@ -534,7 +534,25 @@
             }
           ]
         },
-         "pipeline": {
+        "tienda": {
+          "name": "Online Store",
+          "description": "Stores and POS",
+          "images": [
+            {
+              "title": "POS",
+              "description": "Sales management for stores"
+            },
+            {
+              "title": "Distribution",
+              "description": "Distribution plans to stores"
+            },
+            {
+              "title": "Count",
+              "description": "Cyclic count by classes"
+            }
+          ]
+        },
+        "pipeline": {
           "name": "Pipeline",
           "description": "Opportunity management",
           "images": [

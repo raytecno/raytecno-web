@@ -29,7 +29,7 @@ export const raygold = {
   // Año 1 - Inversión inicial
   implementation: 5250, // Implementación básica
   configuration: 0, // Ya está configurado para joyería
-  training: 1200, // Incluido
+  training: 0, // Incluido
   dataMigration: 2000, // Incluido
   hostingPerYear: 420, // Incluido en suscripción (Azure)
   // Años 2-3

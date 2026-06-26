@@ -534,6 +534,24 @@
             }
           ]
         },
+        "tienda": {
+          "name": "Boutique en Ligne",
+          "description": "Boutiques et TPV",
+          "images": [
+            {
+              "title": "TPV",
+              "description": "Gestion des ventes pour boutiques"
+            },
+            {
+              "title": "Distribution",
+              "description": "Plans de distribution aux boutiques"
+            },
+            {
+              "title": "Comptage",
+              "description": "Comptage cyclique par classes"
+            }
+          ]
+        },
         "pipeline": {
           "name": "Pipeline",
           "description": "Gestion des opportunités",
