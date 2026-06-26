@@ -4,6 +4,7 @@
  * Página de inicio de RayGold
  *
  * USA LOS COMPONENTES ORIGINALES con soporte multiidioma
+ * Fondos intercalados: oscuro / claro / oscuro / claro / oscuro
  */
 import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
@@ -60,21 +61,57 @@ const meta = metaInfo[lang] || metaInfo.es;
   type="product"
   alternateUrls={alternateUrls}
 >
-  <!-- Hero Section - Banner principal con stats y CTAs -->
+  <!-- Hero Section - Banner principal (fondo oscuro propio) -->
   <Hero lang={lang} />
 
-  <!-- Módulos - 8 módulos del ERP -->
-  <Modulos lang={lang} />
+  <!-- Módulos - fondo CLARO -->
+  <div class="section-bg section-bg--light">
+    <Modulos lang={lang} />
+  </div>
 
-  <!-- Por Qué RayGold - Diferenciadores -->
-  <PorQueRayGold lang={lang} />
+  <!-- Por Qué RayGold - fondo OSCURO -->
+  <div class="section-bg section-bg--dark">
+    <PorQueRayGold lang={lang} />
+  </div>
 
-  <!-- Video Demo - Demostración del ERP -->
-  <VideoDemo lang={lang} />
+  <!-- Video Demo - fondo CLARO -->
+  <div class="section-bg section-bg--light">
+    <VideoDemo lang={lang} />
+  </div>
 
-  <!-- Testimonios - Casos de éxito -->
-  <Testimonios lang={lang} />
+  <!-- Testimonios - fondo OSCURO -->
+  <div class="section-bg section-bg--dark">
+    <Testimonios lang={lang} />
+  </div>
 
-  <!-- WhatsApp Button - Botón flotante -->
+  <!-- WhatsApp Button - flotante -->
   <WhatsAppButton lang={lang} />
 </Layout>
+
+<style>
+  .section-bg {
+    position: relative;
+  }
+
+  .section-bg--dark {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+  }
+
+  .section-bg--light {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%);
+  }
+
+  /* Transición suave entre la zona oscura y la clara
+     usando un degradado de empalme en el borde */
+  .section-bg--light::before,
+  .section-bg--dark::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 80px;
+    pointer-events: none;
+    z-index: 1;
+  }
+</style>
