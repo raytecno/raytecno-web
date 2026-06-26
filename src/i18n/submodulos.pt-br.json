@@ -647,6 +647,22 @@
           ]
         }
       }
+    },
+    "asistenteia": {
+      "title": "Assistente IA",
+      "subtitle": "Assistente inteligente integrado ao ERP",
+      "metaTitle": "Assistente IA | RayGold ERP Joalheria",
+      "metaDescription": "Assistente baseado em inteligência artificial para consultas e suporte dentro do ERP.",
+      "sections": {
+        "consultas": {
+          "name": "Consultas",
+          "description": "Consultas em linguagem natural sobre seus dados",
+          "images": [
+            { "title": "Chat", "description": "Interação por chat com o assistente" },
+            { "title": "Respostas", "description": "Respostas e sugestões baseadas em IA" }
+          ]
+        }
+      }
     }
   }
 }
