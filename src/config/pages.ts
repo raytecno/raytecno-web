@@ -81,7 +81,9 @@ export const moduloSlugs: Record<string, Record<Lang, string>> = {
   estadisticas: { es: 'estadisticas', en: 'statistics', fr: 'statistiques', ca: 'estadistiques', 'pt-br': 'estatisticas' },
   vendedores: { es: 'vendedores', en: 'sales-reps', fr: 'vendeurs', ca: 'venedors', 'pt-br': 'vendedores' },
   ecommerce: { es: 'ecommerce', en: 'ecommerce', fr: 'ecommerce', ca: 'ecommerce', 'pt-br': 'ecommerce' },
-  impresoras3d: { es: 'impresoras3d', en: '3dprinters', fr: 'imprimantes3d', ca: 'impressores3d', 'pt-br': 'impressoras3d' },
+ impresoras3d: { es: 'impresoras3d', en: '3dprinters', fr: 'imprimantes3d', ca: 'impressores3d', 'pt-br': 'impressoras3d' },
+  portal: { es: 'portal', en: 'portal', fr: 'portail', ca: 'portal', 'pt-br': 'portal' },
+  asistenteia: { es: 'asistente-ia', en: 'ai-assistant', fr: 'assistant-ia', ca: 'assistent-ia', 'pt-br': 'assistente-ia' },
 };
 
 // ============================================

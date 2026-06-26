@@ -13,6 +13,8 @@ import EstadisticasPage from "../../../templates/modulos/EstadisticasPage.astro"
 import VendedoresPage from "../../../templates/modulos/VendedoresPage.astro";
 import EcommercePage from "../../../templates/modulos/EcommercePage.astro";
 import Impresoras3DPage from "../../../templates/modulos/Impresoras3DPage.astro";
+import PortalPage from "../../../templates/modulos/PortalPage.astro";
+import AsistenteIAPage from "../../../templates/modulos/AsistenteIAPage.astro";
 import { type Lang } from "../../../config/pages";
 
 export function getStaticPaths() {
@@ -97,6 +99,27 @@ export function getStaticPaths() {
       ca: "impressores3d",
       "pt-br": "impressoras3d",
     },
+    impresoras3d: {
+      es: "impresoras3d",
+      en: "3dprinters",
+      fr: "imprimantes3d",
+      ca: "impressores3d",
+      "pt-br": "impressoras3d",
+    },
+    portal: {
+      es: "portal",
+      en: "portal",
+      fr: "portail",
+      ca: "portal",
+      "pt-br": "portal",
+    },
+    asistenteia: {
+      es: "asistente-ia",
+      en: "ai-assistant",
+      fr: "assistant-ia",
+      ca: "assistent-ia",
+      "pt-br": "assistente-ia",
+    },
   };
 
   const paths = [];
@@ -166,5 +189,15 @@ const currentLang = (lang || "es") as Lang;
 {
   moduleKey === "impresoras3d" && (
     <Impresoras3DPage lang={currentLang} pageId="impresoras3d" />
+  )
+}
+{
+  moduleKey === "portal" && (
+    <PortalPage lang={currentLang} pageId="portal" />
+  )
+}
+{
+  moduleKey === "asistenteia" && (
+    <AsistenteIAPage lang={currentLang} pageId="asistenteia" />
   )
 }
