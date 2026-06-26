@@ -267,8 +267,16 @@
           "description": "Gestió de processos de fosa",
           "images": [
             {
-              "title": "Manteniment Fosa",
-              "description": "Control de foses amb mètriques de producció: troncs, retalls, escòria i minves per operari i ruta"
+              "title": "Manteniment Fundició",
+              "description": "Control de fundicions amb mètriques de producció: troncs, retalls, escòria i minves per operari i ruta"
+            },
+            {
+              "title": "Minva",
+              "description": "Resum de minva i informació de materials"
+            },
+            {
+              "title": "Arbre",
+              "description": "Gestió de l'arbre de fundició"
             }
           ]
         },

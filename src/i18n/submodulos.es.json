@@ -269,6 +269,14 @@
             {
               "title": "Mantenimiento Fundición",
               "description": "Control de fundiciones con métricas de producción: troncos, retales, escoria y mermas por operario y ruta"
+            },
+            {
+              "title": "Merma",
+              "description": "Resumen de merma e informacion de materiales"
+            },
+            {
+              "title": "Arbol",
+              "description": "Gestion del arbol de fundicion"
             }
           ]
         },

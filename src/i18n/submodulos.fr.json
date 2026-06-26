@@ -267,8 +267,16 @@
           "description": "Gestion des processus de fonte",
           "images": [
             {
-              "title": "Maintenance Fonte",
-              "description": "Contrôle des fontes avec métriques de production : lingots, chutes, scories et pertes par opérateur et route"
+              "title": "Maintenance Fonderie",
+              "description": "Contrôle des fonderies avec métriques de production : troncs, chutes, scories et pertes par opérateur et route"
+            },
+            {
+              "title": "Perte",
+              "description": "Résumé des pertes et informations sur les matériaux"
+            },
+            {
+              "title": "Arbre",
+              "description": "Gestion de l'arbre de fonderie"
             }
           ]
         },

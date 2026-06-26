@@ -268,7 +268,15 @@
           "images": [
             {
               "title": "Casting Maintenance",
-              "description": "Casting control with production metrics: ingots, scraps, slag and losses by operator and route"
+              "description": "Casting control with production metrics: trees, scrap, slag and losses by operator and route"
+            },
+            {
+              "title": "Loss",
+              "description": "Loss summary and material information"
+            },
+            {
+              "title": "Tree",
+              "description": "Casting tree management"
             }
           ]
         },

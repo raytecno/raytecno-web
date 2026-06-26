@@ -267,8 +267,16 @@
           "description": "Gestão de processos de fundição",
           "images": [
             {
-              "title": "Manutenção de Fundição",
-              "description": "Controle de fundições com métricas de produção: lingotes, retalhos, escória e perdas por operário e rota"
+              "title": "Manutenção Fundição",
+              "description": "Controle de fundições com métricas de produção: troncos, retalhos, escória e perdas por operário e rota"
+            },
+            {
+              "title": "Perda",
+              "description": "Resumo de perda e informações de materiais"
+            },
+            {
+              "title": "Árvore",
+              "description": "Gestão da árvore de fundição"
             }
           ]
         },
