@@ -75,7 +75,7 @@ import VideoDemo from "../components/VideoDemo.astro";
 ```javascript
 // En VideoDemo.astro, línea ~15
 const videoType = "self-hosted";
-const videoSrc = "https://raygoldstorage.blob.core.windows.net/web/Video_RayGold2.mp4";
+const videoSrc = "https://youtu.be/Roh6rYr7ILw";
 const posterSrc = "https://tucontainer.blob.core.windows.net/videos/raygold-demo-poster.jpg";
 ```
 
