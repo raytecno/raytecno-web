@@ -1,41 +1,64 @@
 ---
+---
+/**
+ * Analytics.astro — Google Analytics 4 con Consent Mode v2
+ *
+ * Todo el JS va en un único bloque emitido con set:html.
+ * Motivo: dentro de una expresión JSX, Astro parsea el contenido
+ * de <script> como hijos y rompe con caracteres como '<'.
+ * Con set:html el contenido se emite literalmente.
+ *
+ * Orden de ejecución (importante):
+ *   1. stub de gtag
+ *   2. consent default: todo denegado
+ *   3. restauración de la elección guardada (si existe)
+ *   4. config
+ * Los pasos 2-4 ocurren antes de que cargue gtag/js, que es
+ * asíncrono. El stub encola en dataLayer, así que es correcto.
+ */
 const GA_ID = import.meta.env.PUBLIC_GA_ID;
 const isProd = import.meta.env.PROD;
+
+const bootstrap = `
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+window.gtag = gtag;
+
+gtag('consent', 'default', {
+  ad_storage: 'denied',
+  ad_user_data: 'denied',
+  ad_personalization: 'denied',
+  analytics_storage: 'denied',
+  functionality_storage: 'granted',
+  security_storage: 'granted',
+  wait_for_update: 500
+});
+
+// Restaura la elección guardada por CookieBanner.astro.
+// Debe ejecutarse antes del config para no enviar la vista
+// de página inicial como denegada a un usuario que ya aceptó.
+try {
+  var _cc = JSON.parse(localStorage.getItem('raygold_cookie_consent') || 'null');
+  if (_cc && _cc.v === 1 && Date.now() - _cc.ts < 31536000000) {
+    gtag('consent', 'update', {
+      analytics_storage: _cc.analytics ? 'granted' : 'denied',
+      ad_storage: _cc.marketing ? 'granted' : 'denied',
+      ad_user_data: _cc.marketing ? 'granted' : 'denied',
+      ad_personalization: _cc.marketing ? 'granted' : 'denied'
+    });
+  }
+} catch (e) {}
+
+gtag('js', new Date());
+gtag('config', '${GA_ID}', { anonymize_ip: true });
+`;
 ---
-{isProd && GA_ID && (
-  <>
-    <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      window.gtag = gtag;
-      gtag('consent', 'default', {
-        ad_storage: 'denied',
-        ad_user_data: 'denied',
-        ad_personalization: 'denied',
-        analytics_storage: 'denied',
-        functionality_storage: 'granted',
-        security_storage: 'granted',
-        wait_for_update: 500
-      });
-      gtag('js', new Date());
-      <script is:inline>
-      // Restaura la elección guardada antes de que gtag envíe nada
-      try {
-        var _cc = JSON.parse(localStorage.getItem('raygold_cookie_consent') || 'null');
-        if (_cc && _cc.v === 1 && Date.now() - _cc.ts < 31536000000) {
-          gtag('consent', 'update', {
-            analytics_storage: _cc.analytics ? 'granted' : 'denied',
-            ad_storage: _cc.marketing ? 'granted' : 'denied',
-            ad_user_data: _cc.marketing ? 'granted' : 'denied',
-            ad_personalization: _cc.marketing ? 'granted' : 'denied'
-          });
-        }
-      } catch (e) {}
-    </script>
-    </script>
-    <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
-    <script is:inline define:vars={{ GA_ID }}>
-      gtag('config', GA_ID, { anonymize_ip: true });
-    </script>
-  </>
-)}
+
+{
+  isProd && GA_ID && (
+    <>
+      <script is:inline set:html={bootstrap} />
+      <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
+    </>
+  )
+}
