@@ -1,0 +1,476 @@
+---
+/**
+ * CookieBanner.astro — Modal de consentimiento de cookies
+ *
+ * Consent Mode v2 + AEPD:
+ * - Aceptar y Rechazar con el mismo peso visual (sin patrones oscuros)
+ * - Rechazar es un solo clic, igual que aceptar
+ * - Sin botón de cerrar: no elegir NO equivale a aceptar
+ * - Elección persistida 12 meses en localStorage
+ * - Reapertura desde el footer con window.openCookiePreferences()
+ *
+ * La restauración del consentimiento guardado NO vive aquí:
+ * está en Analytics.astro, dentro del <head>, para llegar
+ * dentro de la ventana de wait_for_update (500 ms).
+ */
+import { type Lang } from "@/config/pages";
+
+interface Props {
+  lang?: Lang;
+  policyUrl?: string;
+}
+
+const { lang = "es", policyUrl } = Astro.props;
+
+// Ajusta esta ruta si tu página de cookies usa otro slug por idioma
+const cookiesUrl = policyUrl ?? `/${lang}/cookies`;
+
+const t: Record<Lang, Record<string, string>> = {
+  es: {
+    title: "Cookies en RayGold",
+    intro:
+      "Usamos cookies propias y de terceros para entender cómo se usa la web y mejorarla. Puedes aceptarlas todas, rechazarlas todas o elegir por categoría.",
+    accept: "Aceptar todas",
+    reject: "Rechazar todas",
+    settings: "Configurar",
+    save: "Guardar preferencias",
+    back: "Volver",
+    policy: "Política de cookies",
+    necessaryTitle: "Necesarias",
+    necessaryDesc:
+      "Imprescindibles para que la web funcione: idioma, seguridad y navegación. No se pueden desactivar.",
+    always: "Siempre activas",
+    analyticsTitle: "Analíticas",
+    analyticsDesc:
+      "Nos dicen qué páginas se visitan y cómo se navega, de forma agregada. Sin ellas no sabemos qué mejorar.",
+    marketingTitle: "Marketing",
+    marketingDesc:
+      "Permiten medir la eficacia de nuestras campañas y mostrar contenido más relevante.",
+  },
+  ca: {
+    title: "Galetes a RayGold",
+    intro:
+      "Fem servir galetes pròpies i de tercers per entendre com s'utilitza el web i millorar-lo. Pots acceptar-les totes, rebutjar-les totes o triar per categoria.",
+    accept: "Acceptar-les totes",
+    reject: "Rebutjar-les totes",
+    settings: "Configurar",
+    save: "Desar preferències",
+    back: "Tornar",
+    policy: "Política de galetes",
+    necessaryTitle: "Necessàries",
+    necessaryDesc:
+      "Imprescindibles perquè el web funcioni: idioma, seguretat i navegació. No es poden desactivar.",
+    always: "Sempre actives",
+    analyticsTitle: "Analítiques",
+    analyticsDesc:
+      "Ens diuen quines pàgines es visiten i com es navega, de manera agregada. Sense elles no sabem què millorar.",
+    marketingTitle: "Màrqueting",
+    marketingDesc:
+      "Permeten mesurar l'eficàcia de les nostres campanyes i mostrar contingut més rellevant.",
+  },
+  en: {
+    title: "Cookies on RayGold",
+    intro:
+      "We use our own and third-party cookies to understand how the site is used and improve it. Accept all, reject all, or choose by category.",
+    accept: "Accept all",
+    reject: "Reject all",
+    settings: "Customise",
+    save: "Save preferences",
+    back: "Back",
+    policy: "Cookie policy",
+    necessaryTitle: "Necessary",
+    necessaryDesc:
+      "Required for the site to work: language, security and navigation. These cannot be turned off.",
+    always: "Always on",
+    analyticsTitle: "Analytics",
+    analyticsDesc:
+      "Tell us which pages are visited and how people navigate, in aggregate. Without them we can't tell what to improve.",
+    marketingTitle: "Marketing",
+    marketingDesc:
+      "Let us measure how our campaigns perform and show more relevant content.",
+  },
+  fr: {
+    title: "Cookies sur RayGold",
+    intro:
+      "Nous utilisons des cookies internes et tiers pour comprendre l'usage du site et l'améliorer. Acceptez tout, refusez tout ou choisissez par catégorie.",
+    accept: "Tout accepter",
+    reject: "Tout refuser",
+    settings: "Personnaliser",
+    save: "Enregistrer les préférences",
+    back: "Retour",
+    policy: "Politique de cookies",
+    necessaryTitle: "Nécessaires",
+    necessaryDesc:
+      "Indispensables au fonctionnement du site : langue, sécurité et navigation. Non désactivables.",
+    always: "Toujours actifs",
+    analyticsTitle: "Analytiques",
+    analyticsDesc:
+      "Indiquent quelles pages sont consultées et comment, de façon agrégée. Sans elles, impossible de savoir quoi améliorer.",
+    marketingTitle: "Marketing",
+    marketingDesc:
+      "Permettent de mesurer l'efficacité de nos campagnes et d'afficher un contenu plus pertinent.",
+  },
+  "pt-br": {
+    title: "Cookies no RayGold",
+    intro:
+      "Usamos cookies próprios e de terceiros para entender como o site é usado e melhorá-lo. Aceite todos, recuse todos ou escolha por categoria.",
+    accept: "Aceitar todos",
+    reject: "Recusar todos",
+    settings: "Configurar",
+    save: "Salvar preferências",
+    back: "Voltar",
+    policy: "Política de cookies",
+    necessaryTitle: "Necessários",
+    necessaryDesc:
+      "Essenciais para o site funcionar: idioma, segurança e navegação. Não podem ser desativados.",
+    always: "Sempre ativos",
+    analyticsTitle: "Analíticos",
+    analyticsDesc:
+      "Mostram quais páginas são visitadas e como se navega, de forma agregada. Sem eles não sabemos o que melhorar.",
+    marketingTitle: "Marketing",
+    marketingDesc:
+      "Permitem medir a eficácia das nossas campanhas e exibir conteúdo mais relevante.",
+  },
+};
+
+const c = t[lang];
+---
+
+<div class="cc-overlay" id="cc-overlay" hidden>
+  <div
+    class="cc-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="cc-title"
+    aria-describedby="cc-intro"
+  >
+    <div class="cc-head">
+      <svg class="cc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5Z" />
+        <circle cx="9" cy="10" r="1" fill="currentColor" stroke="none" />
+        <circle cx="14" cy="15" r="1" fill="currentColor" stroke="none" />
+        <circle cx="8.5" cy="15.5" r="1" fill="currentColor" stroke="none" />
+      </svg>
+      <h2 class="cc-title" id="cc-title">{c.title}</h2>
+    </div>
+
+    <!-- Vista 1: resumen -->
+    <div class="cc-view" id="cc-view-main">
+      <p class="cc-intro" id="cc-intro">{c.intro}</p>
+      <a class="cc-policy" href={cookiesUrl}>{c.policy}</a>
+
+      <div class="cc-actions">
+        <button type="button" class="cc-btn cc-btn-primary" data-cc="accept">{c.accept}</button>
+        <button type="button" class="cc-btn cc-btn-primary" data-cc="reject">{c.reject}</button>
+      </div>
+      <button type="button" class="cc-link" data-cc="open-settings">{c.settings}</button>
+    </div>
+
+    <!-- Vista 2: configuración por categoría -->
+    <div class="cc-view" id="cc-view-settings" hidden>
+      <div class="cc-cat">
+        <div class="cc-cat-head">
+          <span class="cc-cat-title">{c.necessaryTitle}</span>
+          <span class="cc-badge">{c.always}</span>
+        </div>
+        <p class="cc-cat-desc">{c.necessaryDesc}</p>
+      </div>
+
+      <div class="cc-cat">
+        <div class="cc-cat-head">
+          <label class="cc-cat-title" for="cc-analytics">{c.analyticsTitle}</label>
+          <label class="cc-switch">
+            <input type="checkbox" id="cc-analytics" />
+            <span class="cc-slider"></span>
+          </label>
+        </div>
+        <p class="cc-cat-desc">{c.analyticsDesc}</p>
+      </div>
+
+      <div class="cc-cat">
+        <div class="cc-cat-head">
+          <label class="cc-cat-title" for="cc-marketing">{c.marketingTitle}</label>
+          <label class="cc-switch">
+            <input type="checkbox" id="cc-marketing" />
+            <span class="cc-slider"></span>
+          </label>
+        </div>
+        <p class="cc-cat-desc">{c.marketingDesc}</p>
+      </div>
+
+      <div class="cc-actions">
+        <button type="button" class="cc-btn cc-btn-primary" data-cc="save">{c.save}</button>
+      </div>
+      <button type="button" class="cc-link" data-cc="close-settings">{c.back}</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .cc-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(2, 6, 23, 0.72);
+    backdrop-filter: blur(6px);
+    animation: cc-fade 0.25s ease;
+  }
+  .cc-overlay[hidden] { display: none; }
+
+  .cc-modal {
+    width: 100%;
+    max-width: 520px;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    background: #1e293b;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+    animation: cc-rise 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .cc-head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .cc-icon { width: 28px; height: 28px; color: #a5b4fc; flex-shrink: 0; }
+  .cc-title { font-size: 1.25rem; font-weight: 700; color: #fff; line-height: 1.3; }
+
+  .cc-intro { font-size: 0.925rem; line-height: 1.65; color: rgba(255, 255, 255, 0.75); }
+
+  .cc-policy {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 0.85rem;
+    color: #a5b4fc;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .cc-policy:hover { color: #c7d2fe; }
+
+  .cc-actions { display: flex; gap: 12px; margin-top: 24px; }
+
+  .cc-btn {
+    flex: 1;
+    padding: 13px 20px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.18s, border-color 0.18s, transform 0.18s;
+  }
+  .cc-btn:hover {
+    background: rgba(102, 126, 234, 0.28);
+    border-color: rgba(102, 126, 234, 0.55);
+    transform: translateY(-1px);
+  }
+  .cc-btn:focus-visible { outline: 2px solid #a5b4fc; outline-offset: 2px; }
+
+  .cc-link {
+    display: block;
+    width: 100%;
+    margin-top: 14px;
+    padding: 6px;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.55);
+    font-family: inherit;
+    font-size: 0.82rem;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+  }
+  .cc-link:hover { color: rgba(255, 255, 255, 0.85); }
+  .cc-link:focus-visible { outline: 2px solid #a5b4fc; outline-offset: 2px; border-radius: 6px; }
+
+  /* Categorías */
+  .cc-cat { padding: 16px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+  .cc-cat:last-of-type { border-bottom: none; }
+  .cc-cat-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .cc-cat-title { font-size: 0.95rem; font-weight: 600; color: #fff; }
+  .cc-cat-desc { margin-top: 6px; font-size: 0.82rem; line-height: 1.55; color: rgba(255, 255, 255, 0.6); }
+
+  .cc-badge {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #a5b4fc;
+    background: rgba(102, 126, 234, 0.16);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    padding: 4px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  /* Interruptor */
+  .cc-switch { position: relative; display: inline-block; width: 44px; height: 24px; flex-shrink: 0; }
+  .cc-switch input { position: absolute; opacity: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+  .cc-slider {
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.16);
+    border-radius: 999px;
+    transition: background 0.2s;
+    pointer-events: none;
+  }
+  .cc-slider::before {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    left: 3px;
+    top: 3px;
+    background: #fff;
+    border-radius: 50%;
+    transition: transform 0.2s;
+  }
+  .cc-switch input:checked + .cc-slider { background: #667eea; }
+  .cc-switch input:checked + .cc-slider::before { transform: translateX(20px); }
+  .cc-switch input:focus-visible + .cc-slider { outline: 2px solid #a5b4fc; outline-offset: 2px; }
+
+  @keyframes cc-fade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes cc-rise {
+    from { opacity: 0; transform: translateY(16px) scale(0.98); }
+    to { opacity: 1; transform: none; }
+  }
+
+  @media (max-width: 520px) {
+    .cc-modal { padding: 24px 20px; border-radius: 16px; }
+    .cc-title { font-size: 1.1rem; }
+    .cc-actions { flex-direction: column; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cc-overlay, .cc-modal { animation: none; }
+    .cc-btn:hover { transform: none; }
+    .cc-slider, .cc-slider::before { transition: none; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var KEY = "raygold_cookie_consent";
+    var MAX_AGE = 365 * 24 * 60 * 60 * 1000; // 12 meses
+
+    var overlay = document.getElementById("cc-overlay");
+    if (!overlay) return;
+
+    var viewMain = document.getElementById("cc-view-main");
+    var viewSettings = document.getElementById("cc-view-settings");
+    var inAnalytics = document.getElementById("cc-analytics");
+    var inMarketing = document.getElementById("cc-marketing");
+    var lastFocus = null;
+
+    function stored() {
+      try {
+        var raw = localStorage.getItem(KEY);
+        if (!raw) return null;
+        var d = JSON.parse(raw);
+        if (!d || d.v !== 1) return null;
+        if (Date.now() - d.ts > MAX_AGE) return null;
+        return d;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function apply(analytics, marketing, isFirstChoice) {
+      if (typeof window.gtag !== "function") return;
+      window.gtag("consent", "update", {
+        analytics_storage: analytics ? "granted" : "denied",
+        ad_storage: marketing ? "granted" : "denied",
+        ad_user_data: marketing ? "granted" : "denied",
+        ad_personalization: marketing ? "granted" : "denied",
+      });
+      // La vista de página inicial ya se envió sin consentimiento.
+      // Solo al conceder por primera vez la reenviamos, para no perder la sesión.
+      if (isFirstChoice && analytics) {
+        window.gtag("event", "page_view");
+      }
+    }
+
+    function save(analytics, marketing) {
+      var first = stored() === null;
+      try {
+        localStorage.setItem(
+          KEY,
+          JSON.stringify({ v: 1, ts: Date.now(), analytics: analytics, marketing: marketing })
+        );
+      } catch (e) {}
+      apply(analytics, marketing, first);
+      close();
+    }
+
+    function open() {
+      lastFocus = document.activeElement;
+      var d = stored();
+      inAnalytics.checked = d ? !!d.analytics : false;
+      inMarketing.checked = d ? !!d.marketing : false;
+      viewSettings.hidden = true;
+      viewMain.hidden = false;
+      overlay.hidden = false;
+      document.body.style.overflow = "hidden";
+      var btn = overlay.querySelector("[data-cc='accept']");
+      if (btn) btn.focus();
+    }
+
+    function close() {
+      overlay.hidden = true;
+      document.body.style.overflow = "";
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+
+    overlay.addEventListener("click", function (e) {
+      var el = e.target.closest("[data-cc]");
+      if (!el) return;
+      var action = el.getAttribute("data-cc");
+      if (action === "accept") save(true, true);
+      else if (action === "reject") save(false, false);
+      else if (action === "save") save(inAnalytics.checked, inMarketing.checked);
+      else if (action === "open-settings") {
+        viewMain.hidden = true;
+        viewSettings.hidden = false;
+        inAnalytics.focus();
+      } else if (action === "close-settings") {
+        viewSettings.hidden = true;
+        viewMain.hidden = false;
+        overlay.querySelector("[data-cc='accept']").focus();
+      }
+    });
+
+    // Escape solo cierra si ya hay una elección previa (reapertura desde el footer).
+    // En la primera visita hay que elegir: cerrar sin elegir no es consentir.
+    document.addEventListener("keydown", function (e) {
+      if (overlay.hidden) return;
+      if (e.key === "Escape" && stored()) close();
+      if (e.key !== "Tab") return;
+      var f = overlay.querySelectorAll(
+        "button:not([hidden]), a[href], input:not([disabled])"
+      );
+      var vis = Array.prototype.filter.call(f, function (el) {
+        return el.offsetParent !== null;
+      });
+      if (!vis.length) return;
+      var first = vis[0];
+      var last = vis[vis.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    });
+
+    // Permite reabrir el modal desde un enlace del footer
+    window.openCookiePreferences = open;
+
+    // Primera visita o consentimiento caducado: mostrar
+    if (!stored()) open();
+  })();
+</script>
