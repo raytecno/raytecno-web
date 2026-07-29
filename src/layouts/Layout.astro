@@ -10,6 +10,7 @@
  * - WhatsApp flotante
  */
 import SEO from "@/components/SEO.astro";
+import Analytics from "@/components/Analytics.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import WhatsAppButton from "@/components/WhatsAppButton.astro";
@@ -76,6 +77,7 @@ const {
       modifiedTime={modifiedTime}
       alternateUrls={alternateUrls}
     />
+    <Analytics />
   </head>
 
   <body>
