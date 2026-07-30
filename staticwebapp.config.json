@@ -1,6 +1,9 @@
 {
-  "navigationFallback": {
-    "rewrite": "/index.html"
+  "trailingSlash": "never",
+  "responseOverrides": {
+    "404": {
+      "rewrite": "/404.html"
+    }
   },
   "routes": [
     {
@@ -9,6 +12,140 @@
         "Cache-Control": "public, max-age=604800"
       }
     },
+
+    {
+      "route": "/contacto",
+      "redirect": "/es/contacto",
+      "statusCode": 301
+    },
+    {
+      "route": "/contacte",
+      "redirect": "/ca/contacte",
+      "statusCode": 301
+    },
+    {
+      "route": "/contact",
+      "redirect": "/en/contact",
+      "statusCode": 301
+    },
+    {
+      "route": "/contato",
+      "redirect": "/pt-br/contato",
+      "statusCode": 301
+    },
+
+    {
+      "route": "/blog/arquitectura-erp-joyeria",
+      "redirect": "/es/blog/arquitectura-erp-joyeria",
+      "statusCode": 301
+    },
+    {
+      "route": "/blog/marcajes-produccion-joyeria",
+      "redirect": "/es/blog/marcajes-produccion-joyeria",
+      "statusCode": 301
+    },
+    {
+      "route": "/blog/abastecimiento-tiendas-joyeria",
+      "redirect": "/es/blog/abastecimiento-tiendas-joyeria",
+      "statusCode": 301
+    },
+    {
+      "route": "/blog/organizacion-empresarial-joyeria",
+      "redirect": "/es/blog/organizacion-empresarial-joyeria",
+      "statusCode": 301
+    },
+    {
+      "route": "/blog/fundicion-microfusion-joyeria",
+      "redirect": "/es/blog/fundicion-microfusion-joyeria",
+      "statusCode": 301
+    },
+    {
+      "route": "/blog/ia-deming-fabricacion-joyeria",
+      "redirect": "/es/blog/ia-deming-fabricacion-joyeria",
+      "statusCode": 301
+    },
+    {
+      "route": "/blog/marketing-estrategico-joyeria",
+      "redirect": "/es/blog/marketing-estrategico-joyeria",
+      "statusCode": 301
+    },
+    {
+      "route": "/blog/mapa-fabrica-joyeria",
+      "redirect": "/es/blog/mapa-fabrica-joyeria",
+      "statusCode": 301
+    },
+    {
+      "route": "/blog/analisis-produccion-joyeria",
+      "redirect": "/es/blog/analisis-produccion-joyeria",
+      "statusCode": 301
+    },
+    {
+      "route": "/blog/engaste-ia-impresion-3d-joyeria",
+      "redirect": "/es/blog/engaste-ia-impresion-3d-joyeria",
+      "statusCode": 301
+    },
+    {
+      "route": "/blog/serie-control-produccion-joyeria",
+      "redirect": "/es/blog/serie-control-produccion-joyeria",
+      "statusCode": 301
+    },
+
+    {
+      "route": "/blog/post-ia-deming-fabricacion-joyeria-raytecno",
+      "redirect": "/es/blog/ia-deming-fabricacion-joyeria",
+      "statusCode": 301
+    },
+    {
+      "route": "/blog/post-marcajes-produccion-raytecno",
+      "redirect": "/es/blog/marcajes-produccion-joyeria",
+      "statusCode": 301
+    },
+    {
+      "route": "/blog/post-mapa-fabrica-raytecno",
+      "redirect": "/es/blog/mapa-fabrica-joyeria",
+      "statusCode": 301
+    },
+    {
+      "route": "/blog/post-analisis-produccion-raytecno",
+      "redirect": "/es/blog/analisis-produccion-joyeria",
+      "statusCode": 301
+    },
+    {
+      "route": "/blog/post-fundicion-microfusion-raytecno",
+      "redirect": "/es/blog/fundicion-microfusion-joyeria",
+      "statusCode": 301
+    },
+    {
+      "route": "/blog/post-engaste-ia-3d-raytecno",
+      "redirect": "/es/blog/engaste-ia-impresion-3d-joyeria",
+      "statusCode": 301
+    },
+    {
+      "route": "/blog/post-abastecimiento-raytecno",
+      "redirect": "/es/blog/abastecimiento-tiendas-joyeria",
+      "statusCode": 301
+    },
+    {
+      "route": "/blog/post-organizacion-raytecno",
+      "redirect": "/es/blog/organizacion-empresarial-joyeria",
+      "statusCode": 301
+    },
+    {
+      "route": "/blog/post-schneider-raytecno",
+      "redirect": "/es/blog/marketing-estrategico-joyeria",
+      "statusCode": 301
+    },
+    {
+      "route": "/blog/post-evolucion-1998-2026-raytecno",
+      "redirect": "/es/blog/arquitectura-erp-joyeria",
+      "statusCode": 301
+    },
+    {
+      "route": "/blog/post-indice-serie-raytecno",
+      "redirect": "/es/blog/serie-control-produccion-joyeria",
+      "statusCode": 301
+    },
+
     {
       "route": "/es/blog/post-marcajes-produccion-raytecno",
       "redirect": "/es/blog/marcajes-produccion-joyeria",
@@ -64,6 +201,7 @@
       "redirect": "/es/blog/serie-control-produccion-joyeria",
       "statusCode": 301
     },
+
     {
       "route": "/ca/blog/post-marcajes-produccion-raytecno",
       "redirect": "/ca/blog/marcajes-produccion-joyeria",
@@ -119,6 +257,7 @@
       "redirect": "/ca/blog/serie-control-produccion-joyeria",
       "statusCode": 301
     },
+
     {
       "route": "/en/blog/post-marcajes-produccion-raytecno",
       "redirect": "/en/blog/marcajes-produccion-joyeria",
@@ -174,6 +313,7 @@
       "redirect": "/en/blog/serie-control-produccion-joyeria",
       "statusCode": 301
     },
+
     {
       "route": "/fr/blog/post-marcajes-produccion-raytecno",
       "redirect": "/fr/blog/marcajes-produccion-joyeria",
@@ -229,6 +369,7 @@
       "redirect": "/fr/blog/serie-control-produccion-joyeria",
       "statusCode": 301
     },
+
     {
       "route": "/pt-br/blog/post-marcajes-produccion-raytecno",
       "redirect": "/pt-br/blog/marcajes-produccion-joyeria",
