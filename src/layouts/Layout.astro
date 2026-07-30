@@ -11,6 +11,7 @@
  */
 import SEO from "@/components/SEO.astro";
 import Analytics from "@/components/Analytics.astro";
+import AnalyticsEvents from "@/components/AnalyticsEvents.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import CookieBanner from "@/components/Cookiebanner.astro";
@@ -90,6 +91,7 @@ const {
 
     <Footer lang={lang} />
     <WhatsAppButton lang={lang} />
+    <AnalyticsEvents />
     <CookieBanner lang={lang} />
   </body>
 </html>
