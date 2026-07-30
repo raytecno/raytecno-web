@@ -5,7 +5,12 @@
       "rewrite": "/404.html"
     }
   },
-  "routes": [
+   "routes": [
+    {
+      "route": "/",
+      "redirect": "/es",
+      "statusCode": 301
+    },
     {
       "route": "/images/*",
       "headers": {
