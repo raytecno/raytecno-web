@@ -2,11 +2,23 @@
 /**
  * Blog - Listado de artículos
  * src/pages/[lang]/blog/index.astro
- * 
+ *
  * CAMBIOS vs versión WordPress:
  * - Import de getBlogPosts desde @/lib/blog (Content Collections)
  * - Ya NO importa de wordpress ni GraphQL
- * - El resto del template es IDÉNTICO
+ *
+ * CORRECCIÓN (Julio 2026 - Post Screaming Frog):
+ * - Los enlaces de filtro usaban el nombre crudo de la categoría como slug,
+ *   generando URLs con espacios y "&" sin escapar:
+ *      /es/blog?cat=Fabricación%20&%20ERP
+ *   El "&" sin codificar partía la query string en dos parámetros.
+ * - Se slugifica localmente con slugify() en lugar de confiar en cat.slug,
+ *   para no tocar getBlogCategories() ni sus otros consumidores.
+ * - El filtro NO existía: no había script que leyera ?cat=. Los botones
+ *   cambiaban la URL pero el listado seguía mostrando todos los posts.
+ *   Ahora se filtra en cliente vía data-cat.
+ * - rel="nofollow" en los filtros: estas URLs canonicalizan a /[lang]/blog,
+ *   no aportan indexación y consumían presupuesto de rastreo.
  */
 
 import type { GetStaticPaths } from 'astro';
@@ -30,6 +42,26 @@ const { lang } = Astro.props;
 const t = getTranslations(lang);
 
 // ============================================
+// SLUGIFY - Normaliza nombres de categoría a slug seguro para URL
+//
+// "Fabricación & ERP"  -> "fabricacion-erp"
+// "Estratègia & ERP"   -> "estrategia-erp"
+// "Fabricação & IA"    -> "fabricacao-ia"
+// "Hub editorial"      -> "hub-editorial"
+//
+// NFD separa el carácter base de su diacrítico; el rango \u0300-\u036f
+// elimina los diacríticos combinantes resultantes.
+// ============================================
+function slugify(value: string): string {
+  return (value || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+// ============================================
 // OBTENER DATOS (antes: GraphQL → ahora: Content Collections)
 // ============================================
 const posts = await getBlogPosts(lang);
@@ -37,33 +69,38 @@ const categories = await getBlogCategories(lang);
 
 // Traducciones del blog
 const blogT: Record<string, Record<string, string>> = {
-  es: { 
+  es: {
     title: 'Blog', subtitle: 'Artículos sobre gestión joyera y tecnología ERP',
     allCategories: 'Todas', noPosts: 'No hay artículos disponibles.',
+    noResults: 'No hay artículos en esta categoría.',
     minRead: 'min lectura', ctaTitle: '¿Listo para transformar tu negocio joyero?',
     ctaButton: 'Contactar',
   },
-  en: { 
+  en: {
     title: 'Blog', subtitle: 'Articles about jewelry management and ERP technology',
     allCategories: 'All', noPosts: 'No articles available.',
+    noResults: 'No articles in this category.',
     minRead: 'min read', ctaTitle: 'Ready to transform your jewelry business?',
     ctaButton: 'Contact Us',
   },
-  fr: { 
+  fr: {
     title: 'Blog', subtitle: 'Articles sur la gestion joaillière et la technologie ERP',
     allCategories: 'Toutes', noPosts: 'Aucun article disponible.',
+    noResults: 'Aucun article dans cette catégorie.',
     minRead: 'min de lecture', ctaTitle: 'Prêt à transformer votre entreprise de joaillerie?',
     ctaButton: 'Contactez-nous',
   },
-  ca: { 
+  ca: {
     title: 'Blog', subtitle: 'Articles sobre gestió joiera i tecnologia ERP',
     allCategories: 'Totes', noPosts: 'No hi ha articles disponibles.',
+    noResults: 'No hi ha articles en aquesta categoria.',
     minRead: 'min lectura', ctaTitle: 'Preparat per transformar el teu negoci joier?',
     ctaButton: 'Contactar',
   },
-  'pt-br': { 
+  'pt-br': {
     title: 'Blog', subtitle: 'Artigos sobre gestão joalheira e tecnologia ERP',
     allCategories: 'Todas', noPosts: 'Nenhum artigo disponível.',
+    noResults: 'Nenhum artigo nesta categoria.',
     minRead: 'min de leitura', ctaTitle: 'Pronto para transformar seu negócio joalheiro?',
     ctaButton: 'Contato',
   },
@@ -89,6 +126,42 @@ const alternateUrls = supportedLangs.map(l => ({
   lang: l,
   url: `/${l}/blog`,
 }));
+
+// ============================================
+// SCRIPT DE FILTRADO EN CLIENTE
+//
+// Se guarda como string en frontmatter y se inyecta con set:html.
+// El JS evita deliberadamente el carácter "<" (se usa forEach y !==)
+// para no confundir al parser de Astro.
+// ============================================
+const filterScript = `
+(function () {
+  function applyFilter() {
+    var params = new URLSearchParams(window.location.search);
+    var cat = params.get('cat') || '';
+    var cards = document.querySelectorAll('[data-cat]');
+    var buttons = document.querySelectorAll('.filter-btn');
+    var visible = 0;
+
+    cards.forEach(function (card) {
+      var match = cat === '' || card.getAttribute('data-cat') === cat;
+      card.hidden = !match;
+      if (match) { visible = visible + 1; }
+    });
+
+    buttons.forEach(function (btn) {
+      var slug = btn.getAttribute('data-cat-slug') || '';
+      btn.classList.toggle('active', slug === cat);
+    });
+
+    var empty = document.getElementById('no-results');
+    if (empty) { empty.hidden = visible !== 0; }
+  }
+
+  applyFilter();
+  window.addEventListener('popstate', applyFilter);
+})();
+`;
 ---
 
 <Layout 
@@ -112,9 +185,18 @@ const alternateUrls = supportedLangs.map(l => ({
           {/* Filtro de categorías */}
           {categories.length > 0 && (
             <div class="category-filters">
-              <a href={`/${lang}/blog`} class="filter-btn active">{bt.allCategories}</a>
+              <a
+                href={`/${lang}/blog`}
+                class="filter-btn active"
+                data-cat-slug=""
+              >{bt.allCategories}</a>
               {categories.map(cat => (
-                <a href={`/${lang}/blog?cat=${cat.slug}`} class="filter-btn">
+                <a
+                  href={`/${lang}/blog?cat=${slugify(cat.name)}`}
+                  class="filter-btn"
+                  data-cat-slug={slugify(cat.name)}
+                  rel="nofollow"
+                >
                   {cat.name} <span class="count">({cat.count})</span>
                 </a>
               ))}
@@ -126,35 +208,38 @@ const alternateUrls = supportedLangs.map(l => ({
       <!-- Listado de posts -->
       <div class="container blog-content">
         {posts.length > 0 ? (
-          <div class="posts-grid">
-            {posts.map(post => (
-              <article class="post-card">
-                <a href={`/${lang}/blog/${post.slug}`}>
-                  {post.featuredImage && (
-                    <div class="post-image">
-                      <img 
-                        src={post.featuredImage} 
-                        alt={post.title}
-                        loading="lazy"
-                        width="400"
-                        height="225"
-                      />
+          <Fragment>
+            <div class="posts-grid">
+              {posts.map(post => (
+                <article class="post-card" data-cat={slugify(post.category)}>
+                  <a href={`/${lang}/blog/${post.slug}`}>
+                    {post.featuredImage && (
+                      <div class="post-image">
+                        <img 
+                          src={post.featuredImage} 
+                          alt={post.title}
+                          loading="lazy"
+                          width="400"
+                          height="225"
+                        />
+                      </div>
+                    )}
+                    <div class="post-info">
+                      <span class="post-category">{post.category}</span>
+                      <h3>{post.title}</h3>
+                      <p class="post-excerpt">{cleanExcerpt(post.excerpt, 100)}</p>
+                      <div class="post-meta">
+                        <time>{formatDate(post.date)}</time>
+                        <span>·</span>
+                        <span>{post.readingTime} {bt.minRead}</span>
+                      </div>
                     </div>
-                  )}
-                  <div class="post-info">
-                    <span class="post-category">{post.category}</span>
-                    <h3>{post.title}</h3>
-                    <p class="post-excerpt">{cleanExcerpt(post.excerpt, 100)}</p>
-                    <div class="post-meta">
-                      <time>{formatDate(post.date)}</time>
-                      <span>·</span>
-                      <span>{post.readingTime} {bt.minRead}</span>
-                    </div>
-                  </div>
-                </a>
-              </article>
-            ))}
-          </div>
+                  </a>
+                </article>
+              ))}
+            </div>
+            <p class="no-posts" id="no-results" hidden>{bt.noResults}</p>
+          </Fragment>
         ) : (
           <p class="no-posts">{bt.noPosts}</p>
         )}
@@ -167,6 +252,8 @@ const alternateUrls = supportedLangs.map(l => ({
       </div>
     </section>
   </main>
+
+  <script is:inline set:html={filterScript}></script>
 </Layout>
 
 <style>
@@ -228,6 +315,7 @@ const alternateUrls = supportedLangs.map(l => ({
   }
   .post-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
   .post-card a { text-decoration: none; color: inherit; }
+  .post-card[hidden] { display: none; }
 
   .post-image { aspect-ratio: 16/9; overflow: hidden; }
   .post-image img { width: 100%; height: 100%; object-fit: cover; }
@@ -247,6 +335,7 @@ const alternateUrls = supportedLangs.map(l => ({
   .post-meta { display: flex; gap: 0.5rem; font-size: 0.75rem; color: var(--gray-400); }
 
   .no-posts { text-align: center; padding: 3rem; color: #666; }
+  .no-posts[hidden] { display: none; }
 
   .cta-banner {
     margin-top: 3rem;
