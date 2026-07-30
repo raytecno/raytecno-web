@@ -1,20 +1,22 @@
 ---
----
 /**
  * Analytics.astro — Google Analytics 4 con Consent Mode v2
  *
- * Todo el JS va en un único bloque emitido con set:html.
- * Motivo: dentro de una expresión JSX, Astro parsea el contenido
- * de <script> como hijos y rompe con caracteres como '<'.
- * Con set:html el contenido se emite literalmente.
+ * Todo el JS va en un unico bloque emitido con set:html.
+ * Motivo: dentro de una expresion JSX, Astro parsea el contenido
+ * de las etiquetas de script como hijos y rompe con caracteres
+ * como el simbolo de menor que. Con set:html se emite literal.
  *
- * Orden de ejecución (importante):
+ * Orden de ejecucion (importante):
  *   1. stub de gtag
  *   2. consent default: todo denegado
- *   3. restauración de la elección guardada (si existe)
+ *   3. restauracion de la eleccion guardada, si existe
  *   4. config
  * Los pasos 2-4 ocurren antes de que cargue gtag/js, que es
- * asíncrono. El stub encola en dataLayer, así que es correcto.
+ * asincrono. El stub encola en dataLayer, asi que es correcto.
+ *
+ * NOTA: no escribir etiquetas HTML entre angulos en estos
+ * comentarios. El compilador de Astro las detecta y falla.
  */
 const GA_ID = import.meta.env.PUBLIC_GA_ID;
 const isProd = import.meta.env.PROD;
@@ -34,9 +36,6 @@ gtag('consent', 'default', {
   wait_for_update: 500
 });
 
-// Restaura la elección guardada por CookieBanner.astro.
-// Debe ejecutarse antes del config para no enviar la vista
-// de página inicial como denegada a un usuario que ya aceptó.
 try {
   var _cc = JSON.parse(localStorage.getItem('raygold_cookie_consent') || 'null');
   if (_cc && _cc.v === 1 && Date.now() - _cc.ts < 31536000000) {
@@ -52,13 +51,15 @@ try {
 gtag('js', new Date());
 gtag('config', '${GA_ID}', { anonymize_ip: true });
 `;
+
+const gtagSrc = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
 ---
 
 {
   isProd && GA_ID && (
-    <>
-      <script is:inline set:html={bootstrap} />
-      <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
-    </>
+    <Fragment>
+      <script is:inline set:html={bootstrap}></script>
+      <script is:inline async src={gtagSrc}></script>
+    </Fragment>
   )
 }
