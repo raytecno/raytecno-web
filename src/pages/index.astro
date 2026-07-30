@@ -1,0 +1,27 @@
+---
+// src/pages/index.astro
+//
+// Stub técnico. Azure Static Web Apps (Oryx) exige un index.html en la raíz
+// de dist/ o el build falla con "Failed to find a default file".
+//
+// Esta página NO se sirve al usuario: la regla "/" → "/es" (301) de
+// staticwebapp.config.json se evalúa antes que los ficheros estáticos.
+// El meta refresh es solo una red de seguridad por si la regla no aplicara.
+//
+// NO añadir hreflang aquí: es noindex y no debe participar en el grafo
+// multiidioma (era el origen del error de enlaces de vuelta).
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="noindex, follow" />
+    <title>RayGold</title>
+    <link rel="canonical" href="https://www.raytecno.es/es" />
+    <meta http-equiv="refresh" content="0; url=/es" />
+  </head>
+  <body>
+    <a href="/es">RayGold - Software ERP para Joyería</a>
+  </body>
+</html>
