@@ -49,7 +49,8 @@ try {
 } catch (e) {}
 
 gtag('js', new Date());
-gtag('config', '${GA_ID}', { anonymize_ip: true });
+var _dbg = location.search.indexOf('ga_debug') !== -1;
+gtag('config', '${GA_ID}', { anonymize_ip: true, debug_mode: _dbg });
 `;
 
 const gtagSrc = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
