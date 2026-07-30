@@ -490,7 +490,7 @@ const CONTACT_API_URL =
 
             <div class="contact-channels">
               <!-- Teléfono -->
-              <a href="tel:+34648088550" class="contact-channel">
+              <a href="tel:+34648088550" class="contact-channel" data-ga="contacto_click" data-ga-canal="telefono" data-ga-ubicacion="pagina_contacto">
                 <div class="channel-icon phone-bg">
                   <svg
                     width="22"
@@ -528,6 +528,9 @@ const CONTACT_API_URL =
                 target="_blank"
                 rel="noopener"
                 class="contact-channel"
+                data-ga="contacto_click" 
+                data-ga-canal="whatsapp" 
+                data-ga-ubicacion="pagina_contacto"
               >
                 <div class="channel-icon whatsapp-bg">
                   <svg
@@ -559,7 +562,7 @@ const CONTACT_API_URL =
               </a>
 
               <!-- Email -->
-              <a href="mailto:info@raytecno.es" class="contact-channel">
+              <a href="mailto:info@raytecno.es" class="contact-channel" data-ga="contacto_click" data-ga-canal="email" data-ga-ubicacion="pagina_contacto">
                 <div class="channel-icon email-bg">
                   <svg
                     width="22"
@@ -1154,6 +1157,23 @@ const CONTACT_API_URL =
   document.addEventListener("DOMContentLoaded", () => {
     const contactForm = document.getElementById("contactForm");
 
+    // Envío seguro: si analytics falla, el formulario sigue funcionando
+    const ga = (name, params) => {
+      if (typeof window.gaEvent === "function") window.gaEvent(name, params);
+    };
+
+    // Página interna desde la que llegó el usuario al formulario
+    const origen = (() => {
+      try {
+        const r = document.referrer;
+        if (!r) return "directo";
+        const u = new URL(r);
+        return u.host === location.host ? u.pathname : "externo";
+      } catch {
+        return "directo";
+      }
+    })();
+
     if (contactForm) {
       contactForm.addEventListener("submit", async function (e) {
         e.preventDefault();
@@ -1170,11 +1190,13 @@ const CONTACT_API_URL =
         };
 
         if (!data.nombre.trim()) {
+          ga("form_error", { elemento: "nombre_vacio" });
           alert("Por favor, introduce tu nombre");
           return;
         }
 
         if (!data.email.trim()) {
+          ga("form_error", { elemento: "email_vacio" });
           alert("Por favor, introduce tu email");
           return;
         }
@@ -1205,12 +1227,18 @@ const CONTACT_API_URL =
             throw new Error(result.message || "Error al enviar");
           }
 
+          ga("generate_lead", {
+            origen: origen,
+            elemento: data.interes,
+          });
+
           alert(
             result.message ||
               "¡Gracias! Te responderemos en menos de 24 horas."
           );
           contactForm.reset();
         } catch (error) {
+          ga("form_error", { elemento: "envio_api" });
           console.error("Error contacto:", error);
           alert(error.message || "Error al enviar. Inténtalo de nuevo.");
         } finally {
