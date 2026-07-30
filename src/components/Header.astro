@@ -5,6 +5,11 @@
  * CORRECCIÓN SEO (Febrero 2026):
  * - TODAS las URLs SIN trailing slash
  * - Coherente con canonicals y comportamiento de Azure SWA
+ *
+ * INSTRUMENTACIÓN GA4 (Julio 2026):
+ * - data-ga en logo, navegación y herramientas
+ * - data-lang-switch en el selector de idioma
+ * - El parámetro idioma lo añade AnalyticsEvents.astro automáticamente
  */
 import { getPageUrl, getToolUrl, type Lang } from "@/config/pages";
 import { getTranslations } from "@/i18n";
@@ -71,7 +76,13 @@ const isToolsActive = currentPath.includes('/herramientas') || currentPath.inclu
 
 <header class="header">
   <div class="header-container">
-    <a href={`/${lang}`} class="logo">
+    <a
+      href={`/${lang}`}
+      class="logo"
+      data-ga="cta_click"
+      data-ga-elemento="logo"
+      data-ga-ubicacion="header"
+    >
       <svg class="logo-icon" viewBox="0 0 40 40" fill="none">
         <path d="M20 2L37 12V28L20 38L3 28V12L20 2Z" fill="url(#grad1)" stroke="currentColor" stroke-width="1"></path>
         <path d="M20 8L30 14V26L20 32L10 26V14L20 8Z" fill="rgba(255,255,255,0.3)"></path>
@@ -89,10 +100,34 @@ const isToolsActive = currentPath.includes('/herramientas') || currentPath.inclu
     </a>
 
     <nav class="nav-main">
-      <a href={homeUrl} class:list={["nav-link", { active: isActive(homeUrl) && (currentPath === `/${lang}` || currentPath === `/${lang}/`) }]}>{t.nav?.home || "Inicio"}</a>
-      <a href={modulosUrl} class:list={["nav-link", { active: isActive(modulosUrl) }]}>{t.nav?.modules || "Módulos"}</a>
-      <a href={preciosUrl} class:list={["nav-link", { active: isActive(preciosUrl) }]}>{t.nav?.pricing || "Precios"}</a>
-      <a href={tecnologiaUrl} class:list={["nav-link", { active: isActive(tecnologiaUrl) }]}>{t.nav?.technology || "Tecnología"}</a>
+      <a
+        href={homeUrl}
+        class:list={["nav-link", { active: isActive(homeUrl) && (currentPath === `/${lang}` || currentPath === `/${lang}/`) }]}
+        data-ga="cta_click"
+        data-ga-elemento="inicio"
+        data-ga-ubicacion="header"
+      >{t.nav?.home || "Inicio"}</a>
+      <a
+        href={modulosUrl}
+        class:list={["nav-link", { active: isActive(modulosUrl) }]}
+        data-ga="cta_click"
+        data-ga-elemento="modulos"
+        data-ga-ubicacion="header"
+      >{t.nav?.modules || "Módulos"}</a>
+      <a
+        href={preciosUrl}
+        class:list={["nav-link", { active: isActive(preciosUrl) }]}
+        data-ga="cta_click"
+        data-ga-elemento="precios"
+        data-ga-ubicacion="header"
+      >{t.nav?.pricing || "Precios"}</a>
+      <a
+        href={tecnologiaUrl}
+        class:list={["nav-link", { active: isActive(tecnologiaUrl) }]}
+        data-ga="cta_click"
+        data-ga-elemento="tecnologia"
+        data-ga-ubicacion="header"
+      >{t.nav?.technology || "Tecnología"}</a>
       
       <!-- Herramientas Dropdown -->
       {/*
@@ -104,7 +139,7 @@ const isToolsActive = currentPath.includes('/herramientas') || currentPath.inclu
           </svg>
         </button>
         <div class="dropdown-menu">
-          <a href={calculadoraUrl} class="dropdown-item">
+          <a href={calculadoraUrl} class="dropdown-item" data-ga="cta_click" data-ga-elemento="calculadora_rentabilidad" data-ga-ubicacion="header">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <rect x="4" y="2" width="16" height="20" rx="2"/>
               <line x1="8" y1="6" x2="16" y2="6"/>
@@ -113,7 +148,7 @@ const isToolsActive = currentPath.includes('/herramientas') || currentPath.inclu
             </svg>
             {nl.calculator}
           </a>
-          <a href={cotizacionUrl} class="dropdown-item">
+          <a href={cotizacionUrl} class="dropdown-item" data-ga="cta_click" data-ga-elemento="cotizacion_oro_plata" data-ga-ubicacion="header">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M12 2L2 7l10 5 10-5-10-5z"/>
               <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
@@ -124,8 +159,20 @@ const isToolsActive = currentPath.includes('/herramientas') || currentPath.inclu
       </div>
         */}
 
-      <a href={blogUrl} class:list={["nav-link", { active: isActive(blogUrl) }]}>{blogLabel[lang]}</a>
-      <a href={contactoUrl} class:list={["nav-link", { active: isActive(contactoUrl) }]}>{t.nav?.contact || "Contacto"}</a>
+      <a
+        href={blogUrl}
+        class:list={["nav-link", { active: isActive(blogUrl) }]}
+        data-ga="cta_click"
+        data-ga-elemento="blog"
+        data-ga-ubicacion="header"
+      >{blogLabel[lang]}</a>
+      <a
+        href={contactoUrl}
+        class:list={["nav-link", { active: isActive(contactoUrl) }]}
+        data-ga="contacto_click"
+        data-ga-canal="pagina_contacto"
+        data-ga-ubicacion="header"
+      >{t.nav?.contact || "Contacto"}</a>
     </nav>
 
     <!-- Selector de idioma - URLs SIN trailing slash -->
@@ -139,7 +186,12 @@ const isToolsActive = currentPath.includes('/herramientas') || currentPath.inclu
       </button>
       <div class="lang-dropdown">
         {languages.map((l) => (
-          <a href={`/${l.code}`} class:list={["lang-option", { active: l.code === lang }]} hreflang={l.code}>
+          <a
+            href={`/${l.code}`}
+            class:list={["lang-option", { active: l.code === lang }]}
+            hreflang={l.code}
+            data-lang-switch={l.code}
+          >
             <span class="lang-option-flag">{l.flag}</span>
             <span class="lang-option-name">{l.name}</span>
             {l.code === lang && (
