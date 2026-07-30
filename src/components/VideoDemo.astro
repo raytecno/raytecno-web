@@ -162,6 +162,7 @@ const contactUrl = getPageUrl('contacto', lang);
           <video 
             id="demoVideo"
             class="video-element"
+            data-ga-video="demo_home"
             poster={posterSrc}
             preload="metadata"
             playsinline
@@ -223,7 +224,13 @@ const contactUrl = getPageUrl('contacto', lang);
     <!-- CTA -->
     <div class="video-cta">
       <p class="cta-text">{t.ctaText}</p>
-      <a href={contactUrl} class="cta-button">
+      <a href={contactUrl}
+        class="cta-button"
+        data-ga="contacto_click"
+        data-ga-canal="pagina_contacto"
+        data-ga-elemento="solicitar_demo"
+        data-ga-ubicacion="video_demo"
+      >
         {t.ctaButton}
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <line x1="5" y1="12" x2="19" y2="12"></line>
