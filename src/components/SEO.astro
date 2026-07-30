@@ -263,7 +263,7 @@ function getXDefaultUrl(): string {
     return buildHreflangUrl(englishAlt.url);
   }
   // Fallback: home inglesa
-  return `${siteDomain}/en`;
+   return canonicalUrl;
 }
 
 const xDefaultUrl = getXDefaultUrl();

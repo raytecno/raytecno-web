@@ -58,13 +58,17 @@ const translations = post.translationGroup
   : [];
 
 // Alternate URLs (traducciones + idiomas sin traducción apuntan al blog)
-const alternateUrls = supportedLangs.map(l => {
+const alternateUrls = supportedLangs.flatMap(l => {
   const translation = translations.find(t => t.language === l);
-  return {
-    lang: l,
-    url: translation ? `/${l}/blog/${translation.slug}` : `/${l}/blog`,
-  };
+  return translation
+    ? [{ lang: l, url: `/${l}/blog/${translation.slug}` }]
+    : [];
 });
+
+// Garantizar la autorreferencia aunque translationGroup falte o venga vacío
+if (!alternateUrls.some(a => a.lang === lang)) {
+  alternateUrls.unshift({ lang, url: `/${lang}/blog/${slug}` });
+}
 
 // Traducciones UI
 const uiT: Record<string, Record<string, string>> = {
