@@ -1,13 +1,21 @@
 ---
 /**
  * SEO.astro - Componente SEO unificado para RayGold
- * 
+ *
  * CORRECCIONES SEO (Febrero 2026 - Post Screaming Frog):
  * - Canonical URLs SIN trailing slash (Azure SWA elimina la /)
  * - Hreflang URLs SIN trailing slash (coherente con canonicals)
  * - x-default apunta a la versión INGLESA de la página actual
  * - CORREGIDO: Canonical usa alternateUrls[lang] cuando Astro.url falla en build estático
- * 
+ *
+ * CORRECCIONES SEO (Agosto 2026):
+ * - [1] Título: no se duplica la marca si el title ya contiene "RayGold"
+ *       (causaba "Modules | RayGold ERP | RayGold ERP")
+ * - [2] Eliminado <meta name="keywords"> (ignorado por Google desde 2009)
+ * - [3] og:image:alt describe la imagen, ya no repite el título
+ * - [4] x-default: fallback real a /en (antes devolvía canonicalUrl)
+ * - [5] sameAs completo y apuntando a la página de EMPRESA de LinkedIn
+ *
  * Incluye:
  * - Meta tags básicos
  * - Open Graph (Facebook, WhatsApp, LinkedIn)
@@ -25,19 +33,19 @@ import { type Lang } from "@/config/pages";
 const COMPANY = {
   name: "RayGold ERP",
   legalName: "Raytecno BCN SL",
-  
+
   // Dominios - TODO va a .es (el .com redirige)
   primaryDomain: "https://www.raytecno.es",
-  
+
   // Imágenes
   logo: "/images/logo.svg",
   defaultOgImage: "/images/og-default.jpg",
-  
+
   // Contacto
   phone: "+34648088550",
   phoneDisplay: "+34 648 088 550",
   email: "info@raytecno.es",
-  
+
   // Dirección
   address: {
     street: "Montgat",
@@ -46,28 +54,40 @@ const COMPANY = {
     postalCode: "08390",
     country: "ES",
   },
-  
+
   // Redes sociales
+  // NOTA: para schema Organization, LinkedIn debe ser la página de EMPRESA
+  // (/company/...), no un perfil personal (/in/...).
   social: {
-    linkedin: "https://www.linkedin.com/in/raytecno-raytecno-062901117",
+    linkedinCompany: "https://www.linkedin.com/company/raytecno",
     twitter: "@raytecno",
+    twitterUrl: "https://x.com/raytecno95",
+    facebook: "https://www.facebook.com/profile.php?id=61590229018054",
+    instagram: "https://www.instagram.com/raytecno95",
+    youtube: "https://www.youtube.com/channel/UCj1uXyyAcJ7ucQPLbHUH7gA",
   },
-  
+
   // Colores
   themeColor: "#667eea",
-  
+
   // Datos de la empresa
   foundingDate: "1990",
-  
+
   // Reviews
   reviews: {
-    enabled: true,
+    enabled: false,
     ratingValue: "4.8",
     reviewCount: "150",
     bestRating: "5",
     worstRating: "1",
   },
 };
+
+// Longitud máxima recomendada de título (solo aviso en desarrollo)
+const MAX_TITLE_LENGTH = 60;
+
+// Detecta si un título ya contiene la marca, para no duplicarla
+const BRAND_PATTERN = /raygold/i;
 
 // ============================================
 // CONFIGURACIÓN POR IDIOMA
@@ -80,6 +100,7 @@ const LANG_CONFIG: Record<Lang, {
   defaultDescription: string;
   defaultKeywords: string[];
   homeLabel: string;
+  ogImageAlt: string;
 }> = {
   es: {
     locale: "es_ES",
@@ -89,6 +110,7 @@ const LANG_CONFIG: Record<Lang, {
     defaultDescription: "Software de gestión integral para el sector joyero. ERP especializado con módulos de fabricación, trazabilidad de metales preciosos, control de mermas y más. +35 años de experiencia.",
     defaultKeywords: ["ERP joyería", "software joyería", "gestión joyería", "RayGold", "fabricación joyas", "control mermas oro", "trazabilidad metales preciosos", "Raytecno"],
     homeLabel: "Inicio",
+    ogImageAlt: "Pantalla del ERP RayGold para joyería mostrando el control de fabricación",
   },
   en: {
     locale: "en_US",
@@ -98,6 +120,7 @@ const LANG_CONFIG: Record<Lang, {
     defaultDescription: "Comprehensive management software for the jewelry industry. Specialized ERP with manufacturing modules, precious metal traceability, waste control and more. +35 years of experience.",
     defaultKeywords: ["jewelry ERP", "jewelry software", "jewelry management", "RayGold", "jewelry manufacturing", "gold waste control", "precious metal traceability", "Raytecno"],
     homeLabel: "Home",
+    ogImageAlt: "RayGold jewelry ERP screen showing manufacturing control",
   },
   fr: {
     locale: "fr_FR",
@@ -107,6 +130,7 @@ const LANG_CONFIG: Record<Lang, {
     defaultDescription: "Logiciel de gestion intégrale pour le secteur bijoutier. ERP spécialisé avec modules de fabrication, traçabilité des métaux précieux, contrôle des pertes et plus. +35 ans d'expérience.",
     defaultKeywords: ["ERP bijouterie", "logiciel bijouterie", "gestion bijouterie", "RayGold", "fabrication bijoux", "contrôle pertes or", "traçabilité métaux précieux", "Raytecno"],
     homeLabel: "Accueil",
+    ogImageAlt: "Écran de l'ERP RayGold pour bijouterie montrant le contrôle de fabrication",
   },
   ca: {
     locale: "ca_ES",
@@ -116,6 +140,7 @@ const LANG_CONFIG: Record<Lang, {
     defaultDescription: "Programari de gestió integral per al sector joier. ERP especialitzat amb mòduls de fabricació, traçabilitat de metalls preciosos, control de pèrdues i més. +35 anys d'experiència.",
     defaultKeywords: ["ERP joieria", "programari joieria", "gestió joieria", "RayGold", "fabricació joies", "control pèrdues or", "traçabilitat metalls preciosos", "Raytecno"],
     homeLabel: "Inici",
+    ogImageAlt: "Pantalla de l'ERP RayGold per a joieria mostrant el control de fabricació",
   },
   "pt-br": {
     locale: "pt_BR",
@@ -125,6 +150,7 @@ const LANG_CONFIG: Record<Lang, {
     defaultDescription: "Software de gestão integral para o setor joalheiro. ERP especializado com módulos de fabricação, rastreabilidade de metais preciosos, controle de perdas e mais. +35 anos de experiência.",
     defaultKeywords: ["ERP joalheria", "software joalheria", "gestão joalheria", "RayGold", "fabricação joias", "controle perdas ouro", "rastreabilidade metais preciosos", "Raytecno"],
     homeLabel: "Início",
+    ogImageAlt: "Tela do ERP RayGold para joalheria mostrando o controle de fabricação",
   },
 };
 
@@ -137,6 +163,8 @@ interface Props {
   description?: string;
   keywords?: string[];
   image?: string;
+  /** Texto alternativo de la imagen OG. Describe la IMAGEN, no la página. */
+  imageAlt?: string;
   type?: "website" | "article" | "product";
   noindex?: boolean;
   publishedTime?: string;
@@ -150,6 +178,7 @@ const {
   description,
   keywords,
   image,
+  imageAlt,
   type = "website",
   noindex = false,
   publishedTime,
@@ -175,10 +204,10 @@ function removeTrailingSlash(url: string): string {
 
 // ============================================
 // URL CANONICAL - CORREGIDO para build estático
-// 
+//
 // Problema: Astro.url.pathname en build estático a veces
 // devuelve "/" en vez del path real para rutas dinámicas [lang].
-// 
+//
 // Solución: Usar alternateUrls[lang].url como fuente de verdad
 // cuando está disponible, ya que se calcula correctamente
 // en cada página.
@@ -200,7 +229,7 @@ function getCanonicalPath(): string {
     // Si es path relativo, usarlo directamente
     return removeTrailingSlash(currentLangAlt.url);
   }
-  
+
   // 2. Fallback: usar Astro.url.pathname
   let path = Astro.url.pathname;
   if (path.length > 1 && path.endsWith('/')) {
@@ -212,19 +241,38 @@ function getCanonicalPath(): string {
 const currentPath = getCanonicalPath();
 const canonicalUrl = `${siteDomain}${currentPath}`;
 
-// Título
-const fullTitle = title ? `${title} | ${COMPANY.name}` : config.defaultTitle;
+// ============================================
+// TÍTULO - [1] Sin duplicar la marca
+//
+// Antes: `${title} | ${COMPANY.name}` siempre.
+// Si la página ya traía "RayGold" en su title, el resultado
+// era "Modules | RayGold ERP | RayGold ERP".
+// ============================================
+const fullTitle = title
+  ? (BRAND_PATTERN.test(title) ? title : `${title} | ${COMPANY.name}`)
+  : config.defaultTitle;
+
+// Aviso SOLO en desarrollo: Google muestra ~60 caracteres
+if (import.meta.env.DEV && fullTitle.length > MAX_TITLE_LENGTH) {
+  console.warn(
+    `[SEO] Título de ${fullTitle.length} car. (recomendado <= ${MAX_TITLE_LENGTH}) en ${currentPath}\n      "${fullTitle}"`
+  );
+}
 
 // Descripción
 const finalDescription = description || config.defaultDescription;
 
-// Keywords
+// Keywords - NO se emiten como meta tag (Google las ignora desde 2009).
+// Se conservan como documentación interna de la intención de cada idioma.
 const finalKeywords = keywords || config.defaultKeywords;
 
 // Imagen OG
-const ogImage = image 
+const ogImage = image
   ? (image.startsWith("http") ? image : `${siteDomain}${image}`)
   : `${siteDomain}${COMPANY.defaultOgImage}`;
+
+// [3] Alt de la imagen OG: describe la imagen, no repite el título
+const ogImageAlt = imageAlt || config.ogImageAlt;
 
 // Logo absoluto
 const logoUrl = `${siteDomain}${COMPANY.logo}`;
@@ -252,18 +300,18 @@ function buildHreflangUrl(altUrl: string): string {
 const indexableAlternateUrls = noindex ? [] : alternateUrls;
 
 // ============================================
-// OBTENER URL INGLESA PARA X-DEFAULT
-// Busca en alternateUrls la versión en inglés
-// Si no existe, usa /en (home inglesa)
+// [4] X-DEFAULT
+// Busca la versión inglesa de la página actual.
+// Si no existe, cae a la HOME inglesa (/en).
+// Antes devolvía canonicalUrl, lo que hacía que una página
+// sin versión EN declarase como x-default su versión FR o CA.
 // ============================================
 function getXDefaultUrl(): string {
-  // Buscar la versión inglesa en alternateUrls
   const englishAlt = alternateUrls.find(alt => alt.lang === 'en');
   if (englishAlt) {
     return buildHreflangUrl(englishAlt.url);
   }
-  // Fallback: home inglesa
-   return canonicalUrl;
+  return `${siteDomain}/en`;
 }
 
 const xDefaultUrl = getXDefaultUrl();
@@ -294,13 +342,22 @@ const schemaOrganization = {
     "contactType": "sales",
     "availableLanguage": ["Spanish", "English", "French", "Catalan", "Portuguese"],
   },
+  // [5] Perfiles oficiales completos. LinkedIn = página de empresa.
   "sameAs": [
-    COMPANY.social.linkedin,
+    COMPANY.social.linkedinCompany,
+    COMPANY.social.twitterUrl,
+    COMPANY.social.facebook,
+    COMPANY.social.instagram,
+    COMPANY.social.youtube,
   ].filter(Boolean),
 };
 
 // ============================================
 // SCHEMA.ORG - SOFTWARE APPLICATION
+//
+// IMPORTANTE: "offers.price" debe coincidir EXACTAMENTE
+// con lo publicado en /[lang]/precios. Una discrepancia
+// genera aviso en Search Console.
 // ============================================
 const schemaSoftware = {
   "@context": "https://schema.org",
@@ -337,7 +394,6 @@ const schemaSoftware = {
     "Contabilidad integrada",
     "Gestión de inventario",
     "Fabricación y producción",
-    "8 módulos integrados",
   ],
   "audience": {
     "@type": "BusinessAudience",
@@ -438,7 +494,6 @@ const schemaBreadcrumb = {
      ======================================== -->
 <title>{fullTitle}</title>
 <meta name="description" content={finalDescription} />
-<meta name="keywords" content={finalKeywords.join(", ")} />
 <meta name="author" content={COMPANY.legalName} />
 <meta name="language" content={config.languageName} />
 
@@ -458,19 +513,19 @@ const schemaBreadcrumb = {
      - Solo se generan si la página NO tiene noindex
      ======================================== -->
 {indexableAlternateUrls.map((alt) => (
-  <link 
-    rel="alternate" 
-    hreflang={LANG_CONFIG[alt.lang]?.hreflang || alt.lang} 
-    href={buildHreflangUrl(alt.url)} 
+  <link
+    rel="alternate"
+    hreflang={LANG_CONFIG[alt.lang]?.hreflang || alt.lang}
+    href={buildHreflangUrl(alt.url)}
   />
 ))}
 
 <!-- x-default: Solo para páginas indexables con alternateUrls -->
 {indexableAlternateUrls.length > 0 && (
-  <link 
-    rel="alternate" 
-    hreflang="x-default" 
-    href={xDefaultUrl} 
+  <link
+    rel="alternate"
+    hreflang="x-default"
+    href={xDefaultUrl}
   />
 )}
 
@@ -484,7 +539,7 @@ const schemaBreadcrumb = {
 <meta property="og:image" content={ogImage} />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content={fullTitle} />
+<meta property="og:image:alt" content={ogImageAlt} />
 <meta property="og:locale" content={config.locale} />
 <meta property="og:site_name" content={COMPANY.name} />
 
@@ -514,6 +569,7 @@ const schemaBreadcrumb = {
 <meta name="twitter:title" content={fullTitle} />
 <meta name="twitter:description" content={finalDescription} />
 <meta name="twitter:image" content={ogImage} />
+<meta name="twitter:image:alt" content={ogImageAlt} />
 
 <!-- ========================================
      TEMA Y COLORES
@@ -543,11 +599,11 @@ const schemaBreadcrumb = {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
 <!-- ========================================
-     SCHEMA.ORG JSON-LD 
+     SCHEMA.ORG JSON-LD
      ======================================== -->
-<script type="application/ld+json" set:html={JSON.stringify(schemaOrganization)} />
-<script type="application/ld+json" set:html={JSON.stringify(schemaWebPage)} />
-<script type="application/ld+json" set:html={JSON.stringify(schemaBreadcrumb)} />
+<script type="application/ld+json" set:html={JSON.stringify(schemaOrganization)}></script>
+<script type="application/ld+json" set:html={JSON.stringify(schemaWebPage)}></script>
+<script type="application/ld+json" set:html={JSON.stringify(schemaBreadcrumb)}></script>
 {type === "product" && (
-  <script type="application/ld+json" set:html={JSON.stringify(schemaSoftware)} />
+  <script type="application/ld+json" set:html={JSON.stringify(schemaSoftware)}></script>
 )}
