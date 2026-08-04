@@ -655,6 +655,7 @@ const contactUrl = getPageUrl('contacto', lang);
     let player: any = null;
     let poll: number | null = null;
     let started = false;
+    let initializing = false;
     const milestones = [10, 25, 50, 75];
     const sent = new Set<number>();
 
@@ -720,7 +721,8 @@ const contactUrl = getPageUrl('contacto', lang);
       });
 
     const startVideo = async () => {
-      if (player) return;
+      if (initializing || player) return;
+      initializing = true;
 
       poster.classList.add('hidden');
       await loadApi();
@@ -763,7 +765,10 @@ const contactUrl = getPageUrl('contacto', lang);
       });
     };
 
-    playButton.addEventListener('click', startVideo);
+    playButton.addEventListener('click', (e) => {
+      e.stopPropagation();
+      startVideo();
+    });
     poster.addEventListener('click', startVideo);
   });
 </script>
