@@ -2,6 +2,7 @@
 /**
  * VideoDemo.astro - Sección de video demo para RayGold
  * Con soporte multiidioma y tema adaptativo móvil
+ * Reproductor: YouTube (facade + IFrame API + eventos GA4 manuales)
  */
 import { type Lang, getPageUrl } from "@/config/pages";
 
@@ -11,9 +12,9 @@ interface Props {
 
 const { lang = 'es' } = Astro.props;
 
-// Configuración de video
-const videoType = "self-hosted";
-const videoSrc = "https://raygoldstorage.blob.core.windows.net/web/Video_RayGold2.mp4";
+// Configuración de video (YouTube)
+const videoType = "youtube";
+const youtubeId = "DEg5bo16s2Y";
 const posterSrc = "https://raygoldstorage.blob.core.windows.net/web/Video_RayGold_poster.jpg";
 
 // Traducciones
@@ -141,16 +142,23 @@ const contactUrl = getPageUrl('contacto', lang);
       <div class="video-frame">
         <div class="glow-effect"></div>
         
-        <div class="video-player" id="videoPlayer">
+        <div
+          class="video-player"
+          id="videoPlayer"
+          data-video-id={youtubeId}
+          data-video-title={t.videoAlt}
+          data-video-provider={videoType}
+        >
           <div class="video-poster" id="videoPoster">
             <img 
               src={posterSrc} 
               alt={t.videoAlt}
               class="poster-image"
+              loading="lazy"
               onerror="this.style.display='none'"
             />
             <div class="poster-overlay">
-              <button class="play-button" id="playButton" aria-label={t.playText}>
+              <button class="play-button" id="playButton" type="button" aria-label={t.playText}>
                 <svg viewBox="0 0 24 24" fill="currentColor">
                   <path d="M8 5v14l11-7z"/>
                 </svg>
@@ -158,19 +166,9 @@ const contactUrl = getPageUrl('contacto', lang);
               <span class="play-text">{t.playText}</span>
             </div>
           </div>
-          
-          <video 
-            id="demoVideo"
-            class="video-element"
-            data-ga-video="demo_home"
-            poster={posterSrc}
-            preload="metadata"
-            playsinline
-            controls
-          >
-            <source src={videoSrc} type="video/mp4" />
-            Your browser does not support the video element.
-          </video>
+
+          <!-- El iframe de YouTube se inserta aquí al pulsar play -->
+          <div class="video-embed" id="ytMount"></div>
         </div>
       </div>
 
@@ -412,6 +410,11 @@ const contactUrl = getPageUrl('contacto', lang);
     box-shadow: 0 15px 50px rgba(139, 92, 246, 0.5);
   }
 
+  .play-button:focus-visible {
+    outline: 3px solid #a78bfa;
+    outline-offset: 4px;
+  }
+
   .play-button svg {
     width: 32px;
     height: 32px;
@@ -425,15 +428,20 @@ const contactUrl = getPageUrl('contacto', lang);
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
   }
 
-  .video-element {
+  /* Contenedor del iframe de YouTube */
+  .video-embed {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    display: none;
-    position: relative;
     z-index: 1;
   }
 
-  .video-element.active {
+  .video-embed :global(iframe) {
+    width: 100%;
+    height: 100%;
+    border: 0;
     display: block;
   }
 
@@ -622,28 +630,140 @@ const contactUrl = getPageUrl('contacto', lang);
       justify-content: center;
     }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .play-button {
+      animation: none;
+    }
+  }
 </style>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
+    const playerEl = document.getElementById('videoPlayer');
     const poster = document.getElementById('videoPoster');
-    const video = document.getElementById('demoVideo') as HTMLVideoElement;
     const playButton = document.getElementById('playButton');
+    const mount = document.getElementById('ytMount');
 
-    if (poster && video && playButton) {
-      const startVideo = () => {
-        poster.classList.add('hidden');
-        video.classList.add('active');
-        video.play();
+    if (!playerEl || !poster || !playButton || !mount) return;
+
+    const w = window as any;
+    const videoId = playerEl.dataset.videoId || '';
+    const videoTitle = playerEl.dataset.videoTitle || 'RayGold Demo';
+    const videoUrl = 'https://www.youtube.com/watch?v=' + videoId;
+
+    let player: any = null;
+    let poll: number | null = null;
+    let started = false;
+    const milestones = [10, 25, 50, 75];
+    const sent = new Set<number>();
+
+    const gaEvent = (name: string, params: Record<string, unknown>) => {
+      if (typeof w.gtag === 'function') w.gtag('event', name, params);
+    };
+
+    const baseParams = () => {
+      const current = player && player.getCurrentTime ? Math.round(player.getCurrentTime()) : 0;
+      const duration = player && player.getDuration ? Math.round(player.getDuration()) : 0;
+      return {
+        video_provider: 'youtube',
+        video_title: videoTitle,
+        video_url: videoUrl,
+        video_current_time: current,
+        video_duration: duration,
+        visible: true,
+        ubicacion: 'video_demo',
+        idioma: document.documentElement.lang || 'es'
       };
+    };
 
-      playButton.addEventListener('click', startVideo);
-      poster.addEventListener('click', startVideo);
+    const stopPoll = () => {
+      if (poll !== null) {
+        window.clearInterval(poll);
+        poll = null;
+      }
+    };
 
-      video.addEventListener('ended', () => {
-        poster.classList.remove('hidden');
-        video.classList.remove('active');
+    const startPoll = () => {
+      stopPoll();
+      poll = window.setInterval(() => {
+        if (!player || !player.getDuration) return;
+        const duration = player.getDuration();
+        if (!duration) return;
+        const percent = (player.getCurrentTime() / duration) * 100;
+        milestones.forEach((m) => {
+          if (percent >= m && !sent.has(m)) {
+            sent.add(m);
+            gaEvent('video_progress', { ...baseParams(), video_percent: m });
+          }
+        });
+      }, 1000);
+    };
+
+    const loadApi = (): Promise<void> =>
+      new Promise((resolve) => {
+        if (w.YT && w.YT.Player) {
+          resolve();
+          return;
+        }
+        const previous = w.onYouTubeIframeAPIReady;
+        w.onYouTubeIframeAPIReady = () => {
+          if (typeof previous === 'function') previous();
+          resolve();
+        };
+        if (!document.getElementById('yt-iframe-api')) {
+          const script = document.createElement('script');
+          script.id = 'yt-iframe-api';
+          script.src = 'https://www.youtube.com/iframe_api';
+          document.head.appendChild(script);
+        }
       });
-    }
+
+    const startVideo = async () => {
+      if (player) return;
+
+      poster.classList.add('hidden');
+      await loadApi();
+
+      const target = document.createElement('div');
+      target.id = 'ytPlayerTarget';
+      mount.appendChild(target);
+
+      player = new w.YT.Player(target, {
+        videoId,
+        host: 'https://www.youtube-nocookie.com',
+        playerVars: {
+          autoplay: 1,
+          rel: 0,
+          modestbranding: 1,
+          playsinline: 1,
+          enablejsapi: 1,
+          origin: window.location.origin
+        },
+        events: {
+          onReady: (e: any) => {
+            e.target.playVideo();
+          },
+          onStateChange: (e: any) => {
+            const state = e.data;
+            if (state === w.YT.PlayerState.PLAYING) {
+              if (!started) {
+                started = true;
+                gaEvent('video_start', baseParams());
+              }
+              startPoll();
+            } else if (state === w.YT.PlayerState.PAUSED) {
+              stopPoll();
+            } else if (state === w.YT.PlayerState.ENDED) {
+              stopPoll();
+              gaEvent('video_complete', { ...baseParams(), video_percent: 100 });
+            }
+          }
+        }
+      });
+    };
+
+    playButton.addEventListener('click', startVideo);
+    poster.addEventListener('click', startVideo);
   });
 </script>
