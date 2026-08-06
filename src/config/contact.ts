@@ -62,7 +62,7 @@ export const social = {
     handle: "@raytecno",
   },
   youtube: {
-    url: "https://www.youtube.com/channel/UCj1uXyyAcJ7ucQPLbHUH7gA",
+    url: "https://youtube.com/@raytecnobcn?si=TpJy90rEnuwgzMGT",
     handle: "raytecno",
   },
 };
