@@ -307,6 +307,24 @@
               "description": "Daily clock-ins, absences, requests, incidents, HR, biometric devices, geolocation and productivity"
             }
           ]
+        },
+        "tasas": {
+          "name": "Hourly Rates",
+          "description": "Production costs per section: rates calculated, not typed in",
+          "images": [
+            {
+              "title": "Rates per Fiscal Year",
+              "description": "Annual hours and capacity per section, fixed, variable and percentage cost breakdown, and the calculated rate per year (KP26 · KSPI)"
+            },
+            {
+              "title": "Mass Recalculation",
+              "description": "Change one factor and recalculate every rate, with prior simulation and a variance report in green and red (CK40N)"
+            },
+            {
+              "title": "Year-End Closing",
+              "description": "Actual rate at year-end using shop-floor tracked hours, with plan vs actual variance per section (KSII)"
+            }
+          ]
         }
       }
     },
@@ -586,7 +604,7 @@
             }
           ]
         },
-          "tienda": {
+        "tienda": {
           "name": "Online Store",
           "description": "Stores and POS",
           "images": [

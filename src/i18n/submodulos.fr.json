@@ -307,6 +307,25 @@
               "description": "Pointages quotidiens, absences, demandes, incidents, RH, dispositifs biométriques, géolocalisation et productivité"
             }
           ]
+        },
+
+        "tasas": {
+          "name": "Taux Horaires",
+          "description": "Coûts de production par section : des tarifs calculés, pas saisis",
+          "images": [
+            {
+              "title": "Taux par exercice",
+              "description": "Heures annuelles et capacité par section, ventilation des coûts fixe, variable et pourcentage, et tarif calculé par exercice (KP26 · KSPI)"
+            },
+            {
+              "title": "Réactualisation massive",
+              "description": "Modifiez un facteur et recalculez tous les tarifs, avec simulation préalable et rapport d'écarts en vert et rouge (CK40N)"
+            },
+            {
+              "title": "Clôture et écarts",
+              "description": "Tarif réel à la clôture avec les heures pointées en atelier et l'écart plan/réel par section (KSII)"
+            }
+          ]
         }
       }
     },
@@ -541,7 +560,7 @@
               "description": "Contrôle des ventes par vendeur"
             }
           ]
-        },  
+        },
         "pipeline": {
           "name": "Pipeline",
           "description": "Gestion des opportunités",
@@ -586,7 +605,7 @@
             }
           ]
         },
-         "tienda": {
+        "tienda": {
           "name": "Boutique en Ligne",
           "description": "Boutiques et TPV",
           "images": [

@@ -4,6 +4,7 @@
  * Producción, inventarios y control de calidad
  */
 import SubmoduloLayout from "@/components/SubmoduloLayout.astro";
+import ComparativaTasasHorarias from "@/components/ComparativaTasasHorarias.astro";
 
 interface Props {
   lang: string;
@@ -13,4 +14,6 @@ interface Props {
 const { lang } = Astro.props;
 ---
 
-<SubmoduloLayout lang={lang} moduloId="fabricacion" />
+<SubmoduloLayout lang={lang} moduloId="fabricacion" extraSeccionId="tasas">
+  <ComparativaTasasHorarias slot="extra" lang={lang} />
+</SubmoduloLayout>

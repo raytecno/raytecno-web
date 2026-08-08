@@ -307,6 +307,25 @@
               "description": "Registros diários de ponto, ausências, solicitações, ocorrências, RH, dispositivos biométricos, geolocalização e produtividade"
             }
           ]
+        },
+
+        "tasas": {
+          "name": "Taxas Horárias",
+          "description": "Custos de produção por seção: tarifas calculadas, não digitadas",
+          "images": [
+            {
+              "title": "Taxas por exercício",
+              "description": "Horas anuais e capacidade de cada seção, detalhamento de custos fixo, variável e percentual, e tarifa calculada por exercício (KP26 · KSPI)"
+            },
+            {
+              "title": "Reatualização em massa",
+              "description": "Altere um fator e recalcule todas as tarifas com simulação prévia e relatório de variações em verde e vermelho (CK40N)"
+            },
+            {
+              "title": "Fechamento e desvios",
+              "description": "Tarifa real no fechamento com as horas apontadas na fábrica e o desvio plano contra real por seção (KSII)"
+            }
+          ]
         }
       }
     },

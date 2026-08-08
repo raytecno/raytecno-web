@@ -307,6 +307,24 @@
               "description": "Fichajes diarios, ausencias, solicitudes, incidencias, RRHH, dispositivos biométricos, geolocalización y productividad"
             }
           ]
+        },
+        "tasas": {
+          "name": "Tasas Horarias",
+          "description": "Costes de producción por sección: tarifas calculadas, no tecleadas",
+          "images": [
+            {
+              "title": "Tasas por Ejercicio",
+              "description": "Horas anuales y capacidad de cada sección, desglose de costes fijo, variable y porcentaje, y tarifa calculada por ejercicio (KP26 · KSPI)"
+            },
+            {
+              "title": "Reactualización masiva",
+              "description": "Cambia un factor y recalcula todas las tarifas con simulación previa e informe de variaciones en verde y rojo (CK40N)"
+            },
+            {
+              "title": "Cierre y desviaciones",
+              "description": "Tarifa real al cierre del ejercicio con las horas de los marcajes de planta y desviación plan contra real por sección (KSII)"
+            }
+          ]
         }
       }
     },

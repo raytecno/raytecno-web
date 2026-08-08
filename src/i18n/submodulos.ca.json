@@ -307,6 +307,25 @@
               "description": "Fitxatges diaris, absències, sol·licituds, incidències, RRHH, dispositius biomètrics, geolocalització i productivitat"
             }
           ]
+        },
+
+        "tasas": {
+          "name": "Tarifes Horàries",
+          "description": "Costos de producció per secció: tarifes calculades, no teclejades",
+          "images": [
+            {
+              "title": "Tarifes per exercici",
+              "description": "Hores anuals i capacitat de cada secció, desglossament de costos fix, variable i percentatge, i tarifa calculada per exercici (KP26 · KSPI)"
+            },
+            {
+              "title": "Reactualització massiva",
+              "description": "Canvia un factor i recalcula totes les tarifes amb simulació prèvia i informe de variacions en verd i vermell (CK40N)"
+            },
+            {
+              "title": "Tancament i desviacions",
+              "description": "Tarifa real al tancament amb les hores dels marcatges de planta i desviació pla contra real per secció (KSII)"
+            }
+          ]
         }
       }
     },
@@ -586,7 +605,7 @@
             }
           ]
         },
-          "tienda": {
+        "tienda": {
           "name": "Botiga Online",
           "description": "Botigues i TPV",
           "images": [
