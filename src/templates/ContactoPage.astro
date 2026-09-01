@@ -368,6 +368,19 @@ const CONTACT_API_URL =
             </div>
 
             <form id="contactForm" class="contact-form">
+              {/* Campo trampa: invisible para personas, irresistible para bots.
+                  No usar display:none, muchos bots ya lo detectan. */}
+              <div class="hp-campo" aria-hidden="true">
+                <label for="hp-website">No rellenar este campo</label>
+                <input
+                  type="text"
+                  id="hp-website"
+                  name="website"
+                  tabindex="-1"
+                  autocomplete="off"
+                />
+              </div>
+
               <div class="form-row">
                 <div class="form-group">
                   <label for="empresa">{t.form.company}</label>
@@ -1151,11 +1164,81 @@ const CONTACT_API_URL =
       color: #1e293b !important;
     }
   }
+
+  /* Campo trampa antispam: fuera de la pantalla, no oculto */
+  .hp-campo {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
 </style>
 
 <script define:vars={{ CONTACT_API_URL }}>
   document.addEventListener("DOMContentLoaded", () => {
     const contactForm = document.getElementById("contactForm");
+
+    // Momento de carga: sirve para descartar envíos instantáneos
+    const cargadoEn = Date.now();
+
+    // TODO i18n: este mensaje sigue en español en los cinco idiomas
+    const MSG_OK = "¡Gracias! Te responderemos en menos de 24 horas.";
+
+    // Puntua de 0 a 4 la probabilidad de que un texto sea generado por un bot.
+    // Exigimos 2 reglas y no 1 para no penalizar apellidos eslavos o alemanes.
+    const puntuarBasura = (texto) => {
+      const t = (texto || "").trim();
+      if (t.length < 8) return 0;
+
+      const letras = [...t].filter((c) => /\p{L}/u.test(c));
+      if (letras.length < 8) return 0;
+
+      const esVocal = (c) => /[aeiou\u00e1\u00e9\u00ed\u00f3\u00fa\u00e0\u00e8\u00ec\u00f2\u00f9\u00e2\u00ea\u00ee\u00f4\u00fb\u00e3\u00f5\u00e4\u00eb\u00ef\u00f6\u00fcy]/i.test(c);
+      let score = 0;
+
+      // 1. Proporcion de vocales fuera del rango de es/ca/en/fr/pt
+      const ratio = letras.filter(esVocal).length / letras.length;
+      if (ratio < 0.18 || ratio > 0.72) score++;
+
+      // 2. Cinco consonantes seguidas. Ignora siglas en mayusculas
+      //    para no marcar razones sociales tipo "Raytecno BCN SL"
+      let racha = "";
+      for (const c of t + " ") {
+        if (/\p{L}/u.test(c) && !esVocal(c)) {
+          racha += c;
+        } else {
+          if (racha.length >= 5 && racha !== racha.toUpperCase()) {
+            score++;
+            break;
+          }
+          racha = "";
+        }
+      }
+
+      // 3. Cambios de minuscula a mayuscula dentro de la palabra
+      let cambios = 0;
+      for (let i = 1; i < t.length; i++) {
+        if (/\p{Ll}/u.test(t[i - 1]) && /\p{Lu}/u.test(t[i])) cambios++;
+      }
+      if (cambios >= 3) score++;
+
+      // 4. Mayusculas repartidas al azar: ni texto normal ni sigla completa
+      const mayus = letras.filter((c) => /\p{Lu}/u.test(c)).length;
+      if (
+        letras.length >= 10 &&
+        mayus / letras.length > 0.35 &&
+        mayus < letras.length
+      ) {
+        score++;
+      }
+
+      // 5. Bloque largo sin un solo espacio
+      if (t.length > 15 && !t.includes(" ")) score++;
+
+      return score;
+    };
 
     // Envío seguro: si analytics falla, el formulario sigue funcionando
     const ga = (name, params) => {
@@ -1187,7 +1270,29 @@ const CONTACT_API_URL =
           interes: formData.get("interes") || "informacion",
           tamano: formData.get("tamano") || "1-5",
           mensaje: formData.get("mensaje") || "",
+          // Señales antispam, tambien las valida la API
+          website: formData.get("website") || "",
+          elapsed: Date.now() - cargadoEn,
         };
+
+        // Filtro antispam. Si salta, fingimos exito y no enviamos nada:
+        // si devolvieramos un error, el bot aprenderia que campo le delata.
+        const motivo = data.website
+          ? "honeypot"
+          : data.elapsed < 3000
+            ? "demasiado_rapido"
+            : [data.empresa, data.nombre, data.mensaje].some(
+                  (v) => puntuarBasura(v) >= 2
+                )
+              ? "texto_generado"
+              : null;
+
+        if (motivo) {
+          ga("form_spam", { elemento: motivo });
+          alert(MSG_OK);
+          contactForm.reset();
+          return;
+        }
 
         if (!data.nombre.trim()) {
           ga("form_error", { elemento: "nombre_vacio" });
@@ -1232,10 +1337,7 @@ const CONTACT_API_URL =
             elemento: data.interes,
           });
 
-          alert(
-            result.message ||
-              "¡Gracias! Te responderemos en menos de 24 horas."
-          );
+          alert(result.message || MSG_OK);
           contactForm.reset();
         } catch (error) {
           ga("form_error", { elemento: "envio_api" });
