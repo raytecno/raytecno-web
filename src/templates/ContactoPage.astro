@@ -1240,6 +1240,28 @@ const CONTACT_API_URL =
       return score;
     };
 
+    // Email valido de verdad. El type="email" del navegador acepta
+    // barbaridades como "B..GFG.@GMAIL.COM": puntos seguidos y punto final.
+    const emailValido = (e) =>
+      /^[^\s@.]+(\.[^\s@.]+)*@[^\s@.]+(\.[^\s@.]+)+$/.test((e || "").trim());
+
+    // Un unico caracter repetido: "RRR", "FF", "444444"
+    const esRepeticion = (t) => {
+      const s = (t || "").trim().replace(/\s/g, "");
+      return s.length >= 2 && new Set(s).size === 1;
+    };
+
+    // Texto de cierta longitud sin una sola letra: "4444444444444"
+    const sinLetras = (t) => {
+      const s = (t || "").trim();
+      return s.length >= 4 && ![...s].some((c) => /\p{L}/u.test(c));
+    };
+
+    // Un campo es relleno si repite un caracter, no tiene letras,
+    // o parece texto generado por un bot
+    const esRelleno = (v) =>
+      esRepeticion(v) || sinLetras(v) || puntuarBasura(v) >= 2;
+
     // Envío seguro: si analytics falla, el formulario sigue funcionando
     const ga = (name, params) => {
       if (typeof window.gaEvent === "function") window.gaEvent(name, params);
@@ -1275,16 +1297,22 @@ const CONTACT_API_URL =
           elapsed: Date.now() - cargadoEn,
         };
 
+        // Email mal formado: aqui SI avisamos, porque una persona real
+        // que se equivoca escribiendo su email merece saberlo.
+        if (data.email.trim() && !emailValido(data.email)) {
+          ga("form_error", { elemento: "email_invalido" });
+          alert("Revisa tu email, no parece una direccion valida");
+          return;
+        }
+
         // Filtro antispam. Si salta, fingimos exito y no enviamos nada:
         // si devolvieramos un error, el bot aprenderia que campo le delata.
         const motivo = data.website
           ? "honeypot"
           : data.elapsed < 3000
             ? "demasiado_rapido"
-            : [data.empresa, data.nombre, data.mensaje].some(
-                  (v) => puntuarBasura(v) >= 2
-                )
-              ? "texto_generado"
+            : [data.empresa, data.nombre, data.mensaje].some(esRelleno)
+              ? "relleno"
               : null;
 
         if (motivo) {
