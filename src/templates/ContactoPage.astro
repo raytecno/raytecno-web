@@ -33,6 +33,8 @@ const contactT: Record<
       name: string;
       namePlaceholder: string;
       phone: string;
+      phonePrefix: string;
+      phonePlaceholder: string;
       email: string;
       interest: string;
       interestOptions: { value: string; label: string }[];
@@ -42,6 +44,15 @@ const contactT: Record<
       messagePlaceholder: string;
       submit: string;
       sending: string;
+    };
+    validation: {
+      company: string;
+      name: string;
+      email: string;
+      messageShort: string;
+      messageInvalid: string;
+      success: string;
+      failure: string;
     };
     directContact: {
       title: string;
@@ -74,6 +85,8 @@ const contactT: Record<
       name: "Nombre",
       namePlaceholder: "Juan García",
       phone: "Teléfono",
+      phonePrefix: "+34",
+      phonePlaceholder: "612 345 678",
       email: "Email",
       interest: "Interés principal",
       interestOptions: [
@@ -93,6 +106,16 @@ const contactT: Record<
       messagePlaceholder: "Cuéntanos sobre tu joyería y qué necesitas...",
       submit: "Enviar mensaje",
       sending: "Enviando...",
+    },
+    validation: {
+      company: "Este nombre de empresa no parece válido",
+      name: "Este nombre no parece válido",
+      email: "Revisa tu email, no parece una dirección válida",
+      messageShort:
+        "Cuéntanos brevemente qué necesitas (mínimo 20 caracteres)",
+      messageInvalid: "Este mensaje no parece válido. Explícanos qué necesitas",
+      success: "¡Gracias! Te responderemos en menos de 24 horas.",
+      failure: "No se ha podido enviar. Inténtalo de nuevo.",
     },
     directContact: {
       title: "Contacto directo",
@@ -124,6 +147,8 @@ const contactT: Record<
       name: "Name",
       namePlaceholder: "John Smith",
       phone: "Phone",
+      phonePrefix: "+34",
+      phonePlaceholder: "612 345 678",
       email: "Email",
       interest: "Main interest",
       interestOptions: [
@@ -144,6 +169,15 @@ const contactT: Record<
         "Tell us about your jewelry business and what you need...",
       submit: "Send message",
       sending: "Sending...",
+    },
+    validation: {
+      company: "This company name does not look valid",
+      name: "This name does not look valid",
+      email: "Please check your email, it does not look like a valid address",
+      messageShort: "Tell us briefly what you need (minimum 20 characters)",
+      messageInvalid: "This message does not look valid. Tell us what you need",
+      success: "Thank you! We will get back to you within 24 hours.",
+      failure: "The message could not be sent. Please try again.",
     },
     directContact: {
       title: "Direct contact",
@@ -175,6 +209,8 @@ const contactT: Record<
       name: "Nom",
       namePlaceholder: "Jean Dupont",
       phone: "Téléphone",
+      phonePrefix: "+33",
+      phonePlaceholder: "6 12 34 56 78",
       email: "Email",
       interest: "Intérêt principal",
       interestOptions: [
@@ -195,6 +231,17 @@ const contactT: Record<
         "Parlez-nous de votre bijouterie et de vos besoins...",
       submit: "Envoyer message",
       sending: "Envoi...",
+    },
+    validation: {
+      company: "Ce nom d'entreprise ne semble pas valide",
+      name: "Ce nom ne semble pas valide",
+      email: "Vérifiez votre email, il ne semble pas valide",
+      messageShort:
+        "Dites-nous brièvement ce dont vous avez besoin (20 caractères minimum)",
+      messageInvalid:
+        "Ce message ne semble pas valide. Expliquez-nous vos besoins",
+      success: "Merci ! Nous vous répondrons sous 24 heures.",
+      failure: "L'envoi a échoué. Veuillez réessayer.",
     },
     directContact: {
       title: "Contact direct",
@@ -226,6 +273,8 @@ const contactT: Record<
       name: "Nom",
       namePlaceholder: "Joan Garcia",
       phone: "Telèfon",
+      phonePrefix: "+34",
+      phonePlaceholder: "612 345 678",
       email: "Email",
       interest: "Interès principal",
       interestOptions: [
@@ -246,6 +295,16 @@ const contactT: Record<
         "Explica'ns sobre la teva joieria i què necessites...",
       submit: "Enviar missatge",
       sending: "Enviant...",
+    },
+    validation: {
+      company: "Aquest nom d'empresa no sembla vàlid",
+      name: "Aquest nom no sembla vàlid",
+      email: "Revisa el teu email, no sembla una adreça vàlida",
+      messageShort: "Explica'ns breument què necessites (mínim 20 caràcters)",
+      messageInvalid:
+        "Aquest missatge no sembla vàlid. Explica'ns què necessites",
+      success: "Gràcies! Et respondrem en menys de 24 hores.",
+      failure: "No s'ha pogut enviar. Torna-ho a provar.",
     },
     directContact: {
       title: "Contacte directe",
@@ -277,6 +336,8 @@ const contactT: Record<
       name: "Nome",
       namePlaceholder: "João Silva",
       phone: "Telefone",
+      phonePrefix: "+55",
+      phonePlaceholder: "11 98765 4321",
       email: "Email",
       interest: "Interesse principal",
       interestOptions: [
@@ -298,6 +359,17 @@ const contactT: Record<
       submit: "Enviar mensagem",
       sending: "Enviando...",
     },
+    validation: {
+      company: "Este nome de empresa não parece válido",
+      name: "Este nome não parece válido",
+      email: "Verifique seu email, não parece um endereço válido",
+      messageShort:
+        "Conte-nos brevemente o que você precisa (mínimo 20 caracteres)",
+      messageInvalid:
+        "Esta mensagem não parece válida. Conte-nos o que você precisa",
+      success: "Obrigado! Responderemos em menos de 24 horas.",
+      failure: "Não foi possível enviar. Tente novamente.",
+    },
     directContact: {
       title: "Contato direto",
       subtitle: "Fale conosco pelo seu canal preferido",
@@ -313,6 +385,9 @@ const contactT: Record<
 };
 
 const t = contactT[lang] || contactT.es;
+
+// Textos de validacion que necesita el script del navegador
+const V = { ...t.validation, sending: t.form.sending };
 
 // API URL del formulario de contacto
 const CONTACT_API_URL =
@@ -408,12 +483,21 @@ const CONTACT_API_URL =
                 <div class="form-group">
                   <label for="telefono">{t.form.phone}</label>
                   <div class="input-prefix">
-                    <span>+34</span>
+                    <input
+                      type="text"
+                      id="prefijo"
+                      name="prefijo"
+                      class="prefijo"
+                      inputmode="tel"
+                      maxlength="5"
+                      aria-label="Prefijo"
+                      value={t.form.phonePrefix}
+                    />
                     <input
                       type="tel"
                       id="telefono"
                       name="telefono"
-                      placeholder="612 345 678"
+                      placeholder={t.form.phonePlaceholder}
                     />
                   </div>
                 </div>
@@ -458,6 +542,7 @@ const CONTACT_API_URL =
                   id="mensaje"
                   name="mensaje"
                   rows="4"
+                  required
                   placeholder={t.form.messagePlaceholder}></textarea>
               </div>
 
@@ -850,12 +935,22 @@ const CONTACT_API_URL =
     box-sizing: border-box;
   }
 
-  .input-prefix span {
-    padding: 8px 10px;
+  .input-prefix input.prefijo {
+    flex: 0 0 auto;
+    width: 3.4rem;
+    padding: 12px 8px;
     background: rgba(255, 255, 255, 0.05);
-    color: var(--text-muted);
+    color: var(--text-secondary);
     font-size: 0.9rem;
+    text-align: center;
+    border: none;
     border-right: 1px solid var(--border-subtle);
+    border-radius: 0;
+  }
+
+  .input-prefix input.prefijo:focus {
+    outline: none;
+    color: var(--text-primary);
   }
 
   .input-prefix input {
@@ -1126,9 +1221,9 @@ const CONTACT_API_URL =
       border: 1px solid #e2e8f0 !important;
     }
 
-    .input-prefix span {
+    .input-prefix input.prefijo {
       background: #f8fafc !important;
-      color: #64748b !important;
+      color: #475569 !important;
       border-right: 1px solid #e2e8f0 !important;
     }
 
@@ -1163,6 +1258,26 @@ const CONTACT_API_URL =
     .info-value {
       color: #1e293b !important;
     }
+
+    :global(.field-error) {
+      color: #dc2626 !important;
+    }
+  }
+
+  /* Aviso de validacion bajo el campo.
+     :global es obligatorio: el span lo crea el script con createElement,
+     asi que no lleva el atributo data-astro-* y el scope no lo alcanza. */
+  :global(.field-error) {
+    font-size: 0.78rem;
+    line-height: 1.3;
+    color: #f87171;
+    margin-top: 2px;
+  }
+
+  .form-group input[aria-invalid="true"],
+  .form-group textarea[aria-invalid="true"],
+  .input-prefix:has(input[aria-invalid="true"]) {
+    border-color: #f87171;
   }
 
   /* Campo trampa antispam: fuera de la pantalla, no oculto */
@@ -1176,15 +1291,12 @@ const CONTACT_API_URL =
   }
 </style>
 
-<script define:vars={{ CONTACT_API_URL }}>
+<script define:vars={{ CONTACT_API_URL, V }}>
   document.addEventListener("DOMContentLoaded", () => {
     const contactForm = document.getElementById("contactForm");
 
     // Momento de carga: sirve para descartar envíos instantáneos
     const cargadoEn = Date.now();
-
-    // TODO i18n: este mensaje sigue en español en los cinco idiomas
-    const MSG_OK = "¡Gracias! Te responderemos en menos de 24 horas.";
 
     // Puntua de 0 a 4 la probabilidad de que un texto sea generado por un bot.
     // Exigimos 2 reglas y no 1 para no penalizar apellidos eslavos o alemanes.
@@ -1241,15 +1353,27 @@ const CONTACT_API_URL =
     };
 
     // Email valido de verdad. El type="email" del navegador acepta
-    // barbaridades como "B..GFG.@GMAIL.COM": puntos seguidos y punto final.
-    const emailValido = (e) =>
-      /^[^\s@.]+(\.[^\s@.]+)*@[^\s@.]+(\.[^\s@.]+)+$/.test((e || "").trim());
+    // barbaridades como "B..GFG.@GMAIL.COM" o "m,j,k@gmail.com".
+    const emailValido = (e) => {
+      const local = "[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+";
+      const etiqueta = "[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?";
+      const re = new RegExp(
+        `^${local}(?:\\.${local})*@${etiqueta}(?:\\.${etiqueta})+$`
+      );
+      return re.test((e || "").trim());
+    };
 
     // Un unico caracter repetido: "RRR", "FF", "444444"
     const esRepeticion = (t) => {
       const s = (t || "").trim().replace(/\s/g, "");
       return s.length >= 2 && new Set(s).size === 1;
     };
+
+    // Ocho o mas caracteres alfanumericos identicos seguidos:
+    // "Llamame 5555555555555555555555". Ignora la puntuacion para no
+    // marcar separadores tipo "________" de un correo pegado.
+    const rachaLarga = (t) =>
+      /([A-Za-z0-9\u00c0-\u024f])\1{7,}/.test((t || "").trim());
 
     // Texto de cierta longitud sin una sola letra: "4444444444444"
     const sinLetras = (t) => {
@@ -1260,7 +1384,32 @@ const CONTACT_API_URL =
     // Un campo es relleno si repite un caracter, no tiene letras,
     // o parece texto generado por un bot
     const esRelleno = (v) =>
-      esRepeticion(v) || sinLetras(v) || puntuarBasura(v) >= 2;
+      esRepeticion(v) ||
+      sinLetras(v) ||
+      rachaLarga(v) ||
+      puntuarBasura(v) >= 2;
+
+    // Pinta un aviso bajo el campo y lo marca como invalido
+    const marcarError = (id, texto) => {
+      const campo = document.getElementById(id);
+      if (!campo) return;
+      campo.setAttribute("aria-invalid", "true");
+      const grupo = campo.closest(".form-group");
+      if (!grupo || grupo.querySelector(".field-error")) return;
+      const aviso = document.createElement("span");
+      aviso.className = "field-error";
+      aviso.textContent = texto;
+      grupo.appendChild(aviso);
+    };
+
+    const limpiarErrores = () => {
+      contactForm
+        ?.querySelectorAll(".field-error")
+        .forEach((el) => el.remove());
+      contactForm
+        ?.querySelectorAll("[aria-invalid]")
+        .forEach((el) => el.removeAttribute("aria-invalid"));
+    };
 
     // Envío seguro: si analytics falla, el formulario sigue funcionando
     const ga = (name, params) => {
@@ -1280,6 +1429,13 @@ const CONTACT_API_URL =
     })();
 
     if (contactForm) {
+      contactForm.addEventListener("input", (e) => {
+        const grupo = e.target.closest?.(".form-group");
+        if (!grupo) return;
+        e.target.removeAttribute("aria-invalid");
+        grupo.querySelector(".field-error")?.remove();
+      });
+
       contactForm.addEventListener("submit", async function (e) {
         e.preventDefault();
 
@@ -1287,7 +1443,14 @@ const CONTACT_API_URL =
         const data = {
           empresa: formData.get("empresa") || "",
           nombre: formData.get("nombre") || "",
-          telefono: formData.get("telefono") || "",
+          telefono: (() => {
+            const num = (formData.get("telefono") || "").trim();
+            if (!num) return "";
+            const pre = (formData.get("prefijo") || "")
+              .replace(/[^\d+]/g, "")
+              .trim();
+            return pre ? `${pre} ${num}` : num;
+          })(),
           email: formData.get("email") || "",
           interes: formData.get("interes") || "informacion",
           tamano: formData.get("tamano") || "1-5",
@@ -1297,40 +1460,44 @@ const CONTACT_API_URL =
           elapsed: Date.now() - cargadoEn,
         };
 
-        // Email mal formado: aqui SI avisamos, porque una persona real
-        // que se equivoca escribiendo su email merece saberlo.
-        if (data.email.trim() && !emailValido(data.email)) {
-          ga("form_error", { elemento: "email_invalido" });
-          alert("Revisa tu email, no parece una direccion valida");
-          return;
-        }
+        limpiarErrores();
 
-        // Filtro antispam. Si salta, fingimos exito y no enviamos nada:
-        // si devolvieramos un error, el bot aprenderia que campo le delata.
-        const motivo = data.website
-          ? "honeypot"
-          : data.elapsed < 3000
-            ? "demasiado_rapido"
-            : [data.empresa, data.nombre, data.mensaje].some(esRelleno)
-              ? "relleno"
-              : null;
-
-        if (motivo) {
-          ga("form_spam", { elemento: motivo });
-          alert(MSG_OK);
+        // Señales donde no puede haber una persona al otro lado:
+        // nadie rellena un campo que no ve, ni completa el formulario
+        // en menos de tres segundos. Aqui si fingimos exito, para que
+        // el bot no aprenda que campo le delata.
+        if (data.website || data.elapsed < 3000) {
+          ga("form_spam", {
+            elemento: data.website ? "honeypot" : "demasiado_rapido",
+          });
+          alert(V.success);
           contactForm.reset();
           return;
         }
 
-        if (!data.nombre.trim()) {
-          ga("form_error", { elemento: "nombre_vacio" });
-          alert("Por favor, introduce tu nombre");
-          return;
-        }
+        // A partir de aqui puede haber una persona real escribiendo
+        // raro, asi que le decimos la verdad y le dejamos corregir.
+        const problemas = [];
 
-        if (!data.email.trim()) {
-          ga("form_error", { elemento: "email_vacio" });
-          alert("Por favor, introduce tu email");
+        if (!data.empresa.trim() || esRelleno(data.empresa))
+          problemas.push(["empresa", V.company]);
+
+        if (!data.nombre.trim() || esRelleno(data.nombre))
+          problemas.push(["nombre", V.name]);
+
+        if (!emailValido(data.email)) problemas.push(["email", V.email]);
+
+        if (data.mensaje.trim().length < 20)
+          problemas.push(["mensaje", V.messageShort]);
+        else if (esRelleno(data.mensaje))
+          problemas.push(["mensaje", V.messageInvalid]);
+
+        if (problemas.length) {
+          ga("form_error", {
+            elemento: problemas.map(([campo]) => campo).join(","),
+          });
+          problemas.forEach(([campo, texto]) => marcarError(campo, texto));
+          document.getElementById(problemas[0][0])?.focus();
           return;
         }
 
@@ -1338,7 +1505,7 @@ const CONTACT_API_URL =
         if (!btn) return;
 
         const originalText = btn.innerHTML;
-        btn.innerHTML = "<span>Enviando...</span>";
+        btn.innerHTML = `<span>${V.sending}</span>`;
         btn.disabled = true;
 
         try {
@@ -1365,12 +1532,12 @@ const CONTACT_API_URL =
             elemento: data.interes,
           });
 
-          alert(result.message || MSG_OK);
+          alert(V.success);
           contactForm.reset();
         } catch (error) {
           ga("form_error", { elemento: "envio_api" });
           console.error("Error contacto:", error);
-          alert(error.message || "Error al enviar. Inténtalo de nuevo.");
+          alert(V.failure);
         } finally {
           btn.innerHTML = originalText;
           btn.disabled = false;
