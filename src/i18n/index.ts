@@ -84,9 +84,9 @@ const translations: Record<Lang, Translations> = {
     },
     modules: {
       metaTitle: "Módulos | RayGold ERP para Joyería",
-      metaDescription: "Descubre los 8 módulos integrados de RayGold ERP: Maestros, Comercial, Fabricación, Finanzas y más",
+      metaDescription: "Descubre los 12 módulos integrados de RayGold ERP: Maestros, Comercial, Fabricación, Finanzas y más",
       title: "Módulos",
-      subtitle: "8 módulos integrados para tu joyería",
+      subtitle: "12 módulos integrados para tu joyería",
       list: {
         maestros: { title: "Maestros", description: "Artículos, proveedores, clientes y familias" },
         comercial: { title: "Comercial", description: "Ventas, pedidos y facturación" },
@@ -328,9 +328,9 @@ const translations: Record<Lang, Translations> = {
     },
     modules: {
       metaTitle: "Módulos | RayGold ERP para Joalheria",
-      metaDescription: "Descubra os 8 módulos integrados do RayGold ERP",
+      metaDescription: "Descubra os 12 módulos integrados do RayGold ERP",
       title: "Módulos",
-      subtitle: "8 módulos integrados para sua joalheria",
+      subtitle: "12 módulos integrados para sua joalheria",
       list: {
         maestros: { title: "Mestres", description: "Artigos, fornecedores, clientes e famílias" },
         comercial: { title: "Comercial", description: "Vendas, pedidos e faturamento" },

@@ -32,6 +32,13 @@ export const pageSlugs: Record<string, Record<Lang, string>> = {
   tecnologia: { es: 'tecnologia', en: 'technology', fr: 'technologie', ca: 'tecnologia', 'pt-br': 'tecnologia' },
   contacto: { es: 'contacto', en: 'contact', fr: 'contact', ca: 'contacte', 'pt-br': 'contato' },
   nosotros: { es: 'nosotros', en: 'about', fr: 'a-propos', ca: 'nosaltres', 'pt-br': 'sobre' },
+    queEsRayGold: {
+    es: 'que-es-raygold',
+    en: 'what-is-raygold',
+    fr: 'qu-est-ce-que-raygold',
+    ca: 'que-es-raygold',
+    'pt-br': 'o-que-e-raygold'
+  },
 };
 
 // Slugs de la carpeta de herramientas por idioma

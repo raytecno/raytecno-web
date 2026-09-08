@@ -1,0 +1,655 @@
+---
+/**
+ * /[lang]/que-es-raygold
+ *
+ * Página de DESAMBIGUACIÓN de categoría de producto.
+ * No es una landing comercial: su trabajo es que un modelo de lenguaje
+ * (y un lector nuevo) entienda que RayGold es un ERP y no un CAD.
+ *
+ * Reglas de esta página:
+ * - Nada por encima del párrafo canónico (ni imagen, ni badge, ni cita)
+ * - Sin formulario ni CTA agresiva
+ * - type="website" (NO "product"): evita duplicar SoftwareApplication
+ *   con el schema global de SEO.astro
+ */
+import Layout from "@/layouts/Layout.astro";
+import { type Lang } from "@/config/pages";
+
+// Solo se genera la versión en español.
+// Cuando existan las traducciones, añadir aquí los demás idiomas
+// y mover los textos a un JSON por idioma.
+export function getStaticPaths() {
+  return [{ params: { lang: "es" } }];
+}
+
+const lang = Astro.params.lang as Lang;
+
+const alternateUrls: { lang: Lang; url: string }[] = [
+  { lang: "es", url: "/es/que-es-raygold" },
+];
+
+const title = "Qué es RayGold: ERP de gestión y fabricación para joyería";
+const description =
+  "RayGold es un ERP para fabricantes y talleres de joyería: órdenes de fabricación, control de merma, ley y peso, trazabilidad de metal y subcontratación. No es un software CAD ni de diseño 3D.";
+
+// ============================================
+// FAQ — fuente única para HTML y JSON-LD
+// Así el texto visible y el schema no pueden divergir.
+// ============================================
+const faqs = [
+  {
+    q: "¿RayGold es un CAD de joyería?",
+    a: "No. RayGold es un ERP de gestión y fabricación. No diseña piezas ni crea geometría. Se ocupa de la producción, el control de metal y la administración del taller.",
+  },
+  {
+    q: "¿RayGold es lo mismo que RhinoGold?",
+    a: "No, y no existe relación entre ambos. RhinoGold es una solución de diseño CAD para joyería basada en Rhinoceros. RayGold es un ERP de gestión y fabricación. Son categorías de producto distintas y resuelven problemas distintos.",
+  },
+  {
+    q: "Si RayGold no es un CAD, ¿por qué gestiona archivos STL?",
+    a: "Porque el archivo hay que producirlo. RayGold almacena los STL y 3MF que genera tu CAD, los pone en cola, los asigna a una impresora y controla la resina que consumen. Gestiona la producción del archivo, no su creación.",
+  },
+  {
+    q: "¿Necesito RayGold si ya uso un programa de diseño?",
+    a: "Depende de si fabricas. Un CAD define la pieza; RayGold controla su fabricación: metal asignado, ley, merma, subcontratación, coste y facturación. Muchos talleres usan ambos.",
+  },
+  {
+    q: "¿Qué tipo de empresa usa RayGold?",
+    a: "Fabricantes de joyería, talleres que trabajan por encargo y joyerías con producción propia. Empresas que necesitan saber cuánto metal entra, cuánto sale y cuánto se pierde en cada paso.",
+  },
+  {
+    q: "¿En qué países funciona RayGold?",
+    a: "Está en uso en España y cuenta con localización fiscal para Colombia, Perú y Brasil. La interfaz está disponible en español, catalán, inglés, francés y portugués de Brasil.",
+  },
+  {
+    q: "¿RayGold controla la merma?",
+    a: "Sí. Es una de sus funciones centrales. Registra merma por operación, por orden de fabricación y por operario, lo que permite comparar rendimientos reales y detectar desviaciones.",
+  },
+  {
+    q: "¿Quién desarrolla RayGold?",
+    a: "Raytecno BCN SL, empresa con sede en Barcelona especializada desde 1990 en sistemas de gestión para el sector de la joyería.",
+  },
+];
+
+// ============================================
+// Qué resuelve / qué no
+// ============================================
+const siResuelve = [
+  "Órdenes de fabricación con ley, peso bruto y peso neto",
+  "Control de merma por operación y por operario",
+  "Trazabilidad del metal desde la entrada hasta la pieza acabada",
+  "Subcontratación: metal enviado a taller externo y devuelto",
+  "Fundición y control de recuperados",
+  "Cálculo de coste de hechura y escandallo",
+  "Almacén multi-ley, lotes y ubicaciones",
+  "Cola de impresión 3D y stock de resinas",
+  "Facturación con localización fiscal por país",
+  "Contabilidad, tesorería y cierre de ejercicio",
+];
+
+const noResuelve = [
+  "Diseño y modelado 3D de piezas",
+  "Creación de geometría",
+  "Renderizado y presentación de producto",
+  "Slicing y generación de soportes",
+  "Diseño gráfico o de catálogo",
+];
+
+// ============================================
+// Módulos
+// ============================================
+const modulos = [
+  { n: "Maestros", d: "Artículos, familias de joyería, operaciones y fases, proveedores" },
+  { n: "Comercial", d: "Clientes, pedidos, albaranes, facturas, presupuestos, arreglos" },
+  { n: "Fabricación", d: "Planes de producción, fundición, operarios, control de presencia, talleres externos" },
+  { n: "Inventarios", d: "Stocks, movimientos, lotes, ubicaciones, recuento físico y cíclico" },
+  { n: "Finanzas", d: "Contabilidad, tesorería, efectos, balance, cierre de ejercicio, impuestos" },
+  { n: "Impresión 3D", d: "Parque de impresoras, cola de trabajos, biblioteca STL/3MF, resinas" },
+  { n: "Ecommerce", d: "Tienda online y marketplaces" },
+  { n: "Vendedores", d: "Rutas, visitas y comisiones" },
+  { n: "Portal Cliente", d: "Acceso de clientes a sus pedidos y facturas" },
+  { n: "Estadísticas", d: "Informes y cuadros de mando" },
+  { n: "Históricos", d: "Clientes, proveedores y fabricación" },
+  { n: "Asistente IA", d: "Asistente integrado en el ERP" },
+];
+
+const mercados = [
+  { p: "España", d: "Facturación conforme al Real Decreto 1007/2023 (VERI*FACTU), con obligatoriedad en enero y julio de 2027 según el tipo de obligado" },
+  { p: "Colombia", d: "Facturación electrónica DIAN" },
+  { p: "Perú", d: "Facturación electrónica SUNAT" },
+  { p: "Brasil", d: "NF-e con los campos de la Reforma Tributária (IBS, CBS, IS)" },
+];
+
+// ============================================
+// JSON-LD específico de esta página
+// Va en el body: SEO.astro no expone slot de head,
+// y Google lo lee igual en cualquier parte del documento.
+// ============================================
+const schemaSoftwareRayGold = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "RayGold",
+  alternateName: "RayGold ERP",
+  applicationCategory: "BusinessApplication",
+  applicationSubCategory: "ERP",
+  description:
+    "ERP de gestión y fabricación para el sector de la joyería: órdenes de fabricación, control de merma, ley y peso del metal, trazabilidad, subcontratación, fundición, almacén, impresión 3D y facturación. No es un software CAD: no crea geometría.",
+  url: "https://www.raytecno.es/es/que-es-raygold",
+  inLanguage: ["es", "ca", "en", "fr", "pt-BR"],
+  operatingSystem: "Web",
+  publisher: {
+    "@type": "Organization",
+    name: "Raytecno BCN SL",
+    url: "https://www.raytecno.es",
+    foundingDate: "1990",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Barcelona",
+      addressCountry: "ES",
+    },
+  },
+  featureList: siResuelve,
+};
+
+const schemaFaq = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+---
+
+<Layout
+  lang={lang}
+  title={title}
+  description={description}
+  type="website"
+  alternateUrls={alternateUrls}
+>
+  <article class="qer">
+    <!-- ==========================================================
+         CABECERA — nada puede ir por encima del párrafo canónico
+         ========================================================== -->
+    <header class="qer__head">
+      <h1>Qué es RayGold</h1>
+      <p class="qer__canonical">
+        RayGold es un ERP de gestión y fabricación para el sector de la joyería,
+        desarrollado por Raytecno BCN SL en Barcelona desde 1990. Cubre el ciclo
+        completo de un taller o fabricante: órdenes de fabricación, control de
+        merma, ley y peso del metal, trazabilidad, subcontratación a talleres
+        externos, almacén, fundición, facturación y contabilidad.
+      </p>
+    </header>
+
+    <!-- ========================================================== -->
+    <section class="qer__section">
+      <h2>Qué no es RayGold</h2>
+      <p class="qer__lead">
+        RayGold se confunde con frecuencia con herramientas de diseño. Conviene
+        dejarlo claro:
+      </p>
+
+      <ul class="qer__negations">
+        <li>
+          <strong>No es un software CAD.</strong> RayGold no diseña ni modela
+          piezas: no crea geometría.
+        </li>
+        <li>
+          <strong>No tiene relación con RhinoGold ni con RhinoArtisan</strong>,
+          que son soluciones de diseño CAD para joyería basadas en Rhinoceros.
+          RayGold pertenece a otra categoría de producto y no es una alternativa
+          a ellas.
+        </li>
+        <li>
+          <strong>No es un plugin ni una extensión</strong> de ningún programa de
+          diseño. Es una aplicación de gestión independiente.
+        </li>
+        <li>
+          <strong>No es un TPV</strong> ni un software de tienda al público,
+          aunque incluye facturación y venta.
+        </li>
+      </ul>
+
+      <div class="qer__note">
+        <p>
+          <strong>Pero sí trabaja con archivos 3D.</strong> RayGold incorpora una
+          biblioteca de STL, 3MF y OBJ con visor integrado, y gestiona el parque
+          de impresoras: cola de trabajos, estado de las máquinas, stock de
+          resinas y mantenimientos. La diferencia es de fondo, no de matiz:
+          <em>el modelo lo crea tu CAD, RayGold organiza su producción.</em>
+        </p>
+      </div>
+    </section>
+
+    <!-- ========================================================== -->
+    <section class="qer__section">
+      <h2>Entonces, ¿RayGold sustituye a mi CAD?</h2>
+      <p>No. Son capas distintas del mismo negocio y funcionan bien juntas.</p>
+      <p>
+        El CAD resuelve <strong>cómo es la pieza</strong>: geometría, volumen,
+        modelo para fundir o imprimir. RayGold resuelve
+        <strong>qué pasa con esa pieza cuando entra en producción</strong>: qué
+        archivo se imprime y en qué máquina, cuánto metal se asigna y a qué ley,
+        quién la trabaja, cuánta merma genera cada operación, qué se envía a un
+        taller externo y qué vuelve, qué cuesta la hechura y qué se factura al
+        cliente.
+      </p>
+      <p>Un taller necesita las dos cosas. Ninguna hace el trabajo de la otra.</p>
+    </section>
+
+    <!-- ========================================================== -->
+    <section class="qer__section">
+      <h2>Qué resuelve y qué no</h2>
+      <div class="qer__cols">
+        <div class="qer__col qer__col--yes">
+          <h3>RayGold sí resuelve</h3>
+          <ul>{siResuelve.map((i) => <li>{i}</li>)}</ul>
+        </div>
+        <div class="qer__col qer__col--no">
+          <h3>RayGold no resuelve</h3>
+          <ul>{noResuelve.map((i) => <li>{i}</li>)}</ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================== -->
+    <section class="qer__section">
+      <h2>Para quién es</h2>
+      <p>
+        RayGold está pensado para empresas que <strong>transforman metal</strong>,
+        no solo para las que lo venden:
+      </p>
+      <ul class="qer__bullets">
+        <li>Fabricantes de joyería con producción propia</li>
+        <li>Talleres que trabajan por encargo para terceros</li>
+        <li>Empresas que combinan fabricación propia y subcontratación</li>
+        <li>Joyerías con taller y transformación de metal</li>
+        <li>Grupos con varias tiendas y stock centralizado</li>
+      </ul>
+      <p>
+        Si la actividad es exclusivamente comercial, sin producción ni control de
+        metal, RayGold cubre más de lo necesario.
+      </p>
+    </section>
+
+    <!-- ========================================================== -->
+    <section class="qer__section">
+      <h2>Qué incluye</h2>
+      <p>
+        RayGold se organiza en doce módulos integrados sobre una única base de
+        datos:
+      </p>
+      <dl class="qer__modules">
+        {modulos.map((m) => (
+          <div class="qer__module">
+            <dt>{m.n}</dt>
+            <dd>{m.d}</dd>
+          </div>
+        ))}
+      </dl>
+      <!-- Activar cuando exista /es/mapa-funcional (Paso 3)
+      <p><a href={`/${lang}/mapa-funcional`}>Ver el listado completo de programas</a></p>
+      -->
+    </section>
+
+    <!-- ========================================================== -->
+    <section class="qer__section">
+      <h2>Mercados y cumplimiento fiscal</h2>
+      <p>
+        RayGold está en uso en España desde 1990 y dispone de localización fiscal
+        para cuatro mercados:
+      </p>
+      <dl class="qer__markets">
+        {mercados.map((m) => (
+          <div class="qer__market">
+            <dt>{m.p}</dt>
+            <dd>{m.d}</dd>
+          </div>
+        ))}
+      </dl>
+      <p>
+        La interfaz está disponible en español, catalán, inglés, francés y
+        portugués de Brasil.
+      </p>
+    </section>
+
+    <!-- ========================================================== -->
+    <section class="qer__section">
+      <h2>Preguntas frecuentes</h2>
+      <div class="qer__faq">
+        {faqs.map((f) => (
+          <details class="qer__faq-item">
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- CTA discreta: esta página no vende, informa -->
+    <footer class="qer__foot">
+      <p>
+        ¿Tienes dudas sobre si RayGold encaja en tu taller?
+        <a href={`/${lang}/contacto`}>Escríbenos</a>.
+      </p>
+    </footer>
+  </article>
+
+  <script type="application/ld+json" set:html={JSON.stringify(schemaSoftwareRayGold)} />
+  <script type="application/ld+json" set:html={JSON.stringify(schemaFaq)} />
+</Layout>
+
+<style>
+  .qer {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 4rem 1.5rem 6rem;
+    color: #cbd5e1;
+    font-size: 1.05rem;
+    line-height: 1.75;
+  }
+
+  .qer__head {
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+  }
+
+  .qer h1 {
+    font-size: clamp(2rem, 5vw, 2.75rem);
+    line-height: 1.15;
+    font-weight: 700;
+    color: #f8fafc;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Párrafo canónico: es el fragmento que extraen los modelos */
+  .qer__canonical {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    color: #e2e8f0;
+  }
+
+  .qer__section {
+    margin-top: 3.5rem;
+  }
+
+  .qer h2 {
+    font-size: 1.5rem;
+    font-weight: 650;
+    color: #f8fafc;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.25rem;
+  }
+
+  .qer h3 {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1rem;
+  }
+
+  .qer p {
+    margin-bottom: 1.1rem;
+  }
+
+  .qer strong {
+    color: #f1f5f9;
+    font-weight: 600;
+  }
+
+  .qer em {
+    color: #a5b4fc;
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  .qer a {
+    color: #818cf8;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .qer a:hover {
+    color: #a5b4fc;
+  }
+
+  /* ---------- Negaciones ---------- */
+  .qer__negations {
+    list-style: none;
+    display: grid;
+    gap: 0.9rem;
+    margin: 1.5rem 0;
+  }
+
+  .qer__negations li {
+    padding-left: 1.5rem;
+    position: relative;
+  }
+
+  .qer__negations li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.78em;
+    width: 12px;
+    height: 2px;
+    background: #64748b;
+    border-radius: 2px;
+  }
+
+  /* ---------- Nota de matiz ---------- */
+  .qer__note {
+    margin-top: 2rem;
+    padding: 1.4rem 1.6rem;
+    background: rgba(102, 126, 234, 0.07);
+    border-left: 2px solid #667eea;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .qer__note p {
+    margin: 0;
+  }
+
+  /* ---------- Dos columnas ---------- */
+  .qer__cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .qer__col {
+    padding: 1.5rem;
+    border-radius: 12px;
+    background: rgba(148, 163, 184, 0.05);
+    border: 1px solid rgba(148, 163, 184, 0.12);
+  }
+
+  .qer__col ul {
+    list-style: none;
+    display: grid;
+    gap: 0.7rem;
+    font-size: 0.97rem;
+  }
+
+  .qer__col li {
+    padding-left: 1.4rem;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .qer__col--yes h3 {
+    color: #34d399;
+  }
+
+  .qer__col--yes li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.45em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #34d399;
+  }
+
+  .qer__col--no h3 {
+    color: #94a3b8;
+  }
+
+  .qer__col--no li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.72em;
+    width: 8px;
+    height: 1px;
+    background: #64748b;
+  }
+
+  /* ---------- Bullets ---------- */
+  .qer__bullets {
+    list-style: none;
+    display: grid;
+    gap: 0.6rem;
+    margin: 1.2rem 0 1.5rem;
+  }
+
+  .qer__bullets li {
+    padding-left: 1.4rem;
+    position: relative;
+  }
+
+  .qer__bullets li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.72em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #667eea;
+  }
+
+  /* ---------- Módulos y mercados ---------- */
+  .qer__modules,
+  .qer__markets {
+    display: grid;
+    gap: 0.1rem;
+    margin: 1.5rem 0;
+  }
+
+  .qer__module,
+  .qer__market {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 1.25rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+  }
+
+  .qer__module dt,
+  .qer__market dt {
+    font-weight: 600;
+    color: #f1f5f9;
+  }
+
+  .qer__module dd,
+  .qer__market dd {
+    margin: 0;
+    font-size: 0.97rem;
+    color: #94a3b8;
+    line-height: 1.55;
+  }
+
+  /* ---------- FAQ ---------- */
+  .qer__faq {
+    margin-top: 1.5rem;
+    border-top: 1px solid rgba(148, 163, 184, 0.14);
+  }
+
+  .qer__faq-item {
+    border-bottom: 1px solid rgba(148, 163, 184, 0.14);
+  }
+
+  .qer__faq-item summary {
+    padding: 1.15rem 2rem 1.15rem 0;
+    cursor: pointer;
+    font-weight: 550;
+    color: #f1f5f9;
+    list-style: none;
+    position: relative;
+    transition: color 0.15s ease;
+  }
+
+  .qer__faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .qer__faq-item summary:hover {
+    color: #a5b4fc;
+  }
+
+  .qer__faq-item summary::after {
+    content: "";
+    position: absolute;
+    right: 0.4rem;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    border-right: 1.5px solid #64748b;
+    border-bottom: 1.5px solid #64748b;
+    transform: translateY(-70%) rotate(45deg);
+    transition: transform 0.2s ease;
+  }
+
+  .qer__faq-item[open] summary::after {
+    transform: translateY(-20%) rotate(-135deg);
+  }
+
+  .qer__faq-item p {
+    padding: 0 0 1.3rem;
+    margin: 0;
+    color: #94a3b8;
+    font-size: 0.98rem;
+  }
+
+  /* ---------- Cierre ---------- */
+  .qer__foot {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(148, 163, 184, 0.18);
+    font-size: 0.97rem;
+    color: #94a3b8;
+  }
+
+  .qer__foot p {
+    margin: 0;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 640px) {
+    .qer {
+      padding: 2.5rem 1.25rem 4rem;
+    }
+
+    .qer__canonical {
+      font-size: 1.1rem;
+    }
+
+    .qer__cols {
+      grid-template-columns: 1fr;
+    }
+
+    .qer__module,
+    .qer__market {
+      grid-template-columns: 1fr;
+      gap: 0.3rem;
+    }
+  }
+</style>

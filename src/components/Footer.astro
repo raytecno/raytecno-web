@@ -33,10 +33,11 @@ const footerT = {
     privacy: "Privacidad",
     terms: "Términos",
     cookies: "Cookies",
-    verifactu: "Certificación VERI*FACTU",
+    verifactu: "Declaración VERI*FACTU",
     copyright: "Raytecno BCN SL. Todos los derechos reservados.",
     madeWith: "Hecho con",
     forJewelers: "para joyeros",
+    whatIs: "Qué es RayGold",
   },
   en: {
     tagline: "Specialized ERP software for the jewelry industry",
@@ -54,10 +55,11 @@ const footerT = {
     privacy: "Privacy",
     terms: "Terms",
     cookies: "Cookies",
-    verifactu: "VERI*FACTU Certification",
+    verifactu: "VERI*FACTU Declaration",
     copyright: "Raytecno BCN SL. All rights reserved.",
     madeWith: "Made with",
     forJewelers: "for jewelers",
+    whatIs: "What is RayGold",
   },
   fr: {
     tagline: "Logiciel ERP spécialisé pour l'industrie joaillière",
@@ -75,10 +77,11 @@ const footerT = {
     privacy: "Confidentialité",
     terms: "Conditions",
     cookies: "Cookies",
-    verifactu: "Certification VERI*FACTU",
+    verifactu: "Déclaration VERI*FACTU",
     copyright: "Raytecno BCN SL. Tous droits réservés.",
     madeWith: "Fait avec",
     forJewelers: "pour les bijoutiers",
+    whatIs: "Qu'est-ce que RayGold",
   },
   ca: {
     tagline: "Programari ERP especialitzat per a la indústria joiera",
@@ -96,10 +99,11 @@ const footerT = {
     privacy: "Privacitat",
     terms: "Termes",
     cookies: "Cookies",
-    verifactu: "Certificació VERI*FACTU",
+    verifactu: "Declaració VERI*FACTU",
     copyright: "Raytecno BCN SL. Tots els drets reservats.",
     madeWith: "Fet amb",
     forJewelers: "per a joiers",
+    whatIs: "Què és RayGold",
   },
   "pt-br": {
     tagline: "Software ERP especializado para a indústria joalheira",
@@ -117,10 +121,11 @@ const footerT = {
     privacy: "Privacidade",
     terms: "Termos",
     cookies: "Cookies",
-    verifactu: "Certificação VERI*FACTU",
+    verifactu: "Declaração VERI*FACTU",
     copyright: "Raytecno BCN SL. Todos os direitos reservados.",
     madeWith: "Feito com",
     forJewelers: "para joalheiros",
+    whatIs: "O que é RayGold",
   },
 };
 
@@ -172,6 +177,9 @@ const currentYear = new Date().getFullYear();
     <!-- Columna 3: Empresa - URLs sin trailing slash -->
     <div class="footer-col">
       <h5>{ft.company}</h5>
+       {lang === "es" && (
+        <a href={getPageUrl("queEsRayGold", lang)} data-ga="cta_click" data-ga-elemento="que_es_raygold" data-ga-ubicacion="footer">{ft.whatIs}</a>
+      )}
       <a href={`/${lang}/#porque`} data-ga="cta_click" data-ga-elemento="sobre_nosotros" data-ga-ubicacion="footer">{ft.about}</a>
       <a href={getPageUrl("tecnologia", lang)} data-ga="cta_click" data-ga-elemento="tecnologia" data-ga-ubicacion="footer">{ft.technology}</a>
       <a href={getPageUrl("precios", lang)} data-ga="cta_click" data-ga-elemento="precios" data-ga-ubicacion="footer">{ft.pricing}</a>
