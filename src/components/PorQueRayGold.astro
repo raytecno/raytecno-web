@@ -1,7 +1,20 @@
 ---
 /**
  * PorQueRayGold.astro - Sección de diferenciadores
- * Con soporte multiidioma y tema adaptativo móvil
+ *
+ * TEMA CLARO/OSCURO (Septiembre 2026):
+ * - La sección es una SUPERFICIE INVERTIDA (class="rg-inv"): oscura cuando la
+ *   página es clara y clara cuando la página es oscura. Es el mismo color del
+ *   menú, así que la banda deja de parecer "otra web" y rima con la cabecera.
+ * - Dentro de .rg-inv, --rg-ink, --rg-soft, --rg-line y --rg-accent ya vienen
+ *   invertidos: este CSS no necesita saber en qué tema está.
+ * - Eliminado el bloque de "tema blanco en móvil". Era la causa del salto
+ *   escritorio/móvil. El móvil ahora solo cambia tamaños y columnas.
+ * - Fuera los literales: rgba(102,126,234,.x), #764ba2, #818cf8, #a5b4fc,
+ *   #fbbf24, #f59e0b, #d97706, #334155, rgba(30,41,59,.5).
+ *
+ * CONTENIDO: los años estaban descuadrados (35 en español, 34 en el resto).
+ * Desde 1990 son 36. Unificado en los cinco idiomas.
  */
 import { type Lang, getPageUrl } from "@/config/pages";
 
@@ -39,7 +52,7 @@ const translations: Record<Lang, {
     title: "No somos un ERP genérico",
     subtitle: "Somos joyeros desarrollando software para joyeros",
     card1Title: "Especialistas en joyería",
-    card1Text: "35 años trabajando exclusivamente con el sector joyero. Conocemos tus procesos porque los vivimos cada día.",
+    card1Text: "36 años trabajando exclusivamente con el sector joyero. Conocemos tus procesos porque los vivimos cada día.",
     card1Stat: "Desde 1990",
     card2Title: "Control total de metales",
     card2Text: "Gestión de oro, plata, platino y piedras preciosas con trazabilidad completa y control de mermas integrado.",
@@ -61,7 +74,7 @@ const translations: Record<Lang, {
     title: "We're not a generic ERP",
     subtitle: "We are jewelers developing software for jewelers",
     card1Title: "Jewelry specialists",
-    card1Text: "34 years working exclusively with the jewelry sector. We know your processes because we live them every day.",
+    card1Text: "36 years working exclusively with the jewelry sector. We know your processes because we live them every day.",
     card1Stat: "Since 1990",
     card2Title: "Total metal control",
     card2Text: "Gold, silver, platinum and precious stone management with complete traceability and integrated waste control.",
@@ -83,7 +96,7 @@ const translations: Record<Lang, {
     title: "Nous ne sommes pas un ERP générique",
     subtitle: "Nous sommes des bijoutiers développant des logiciels pour les bijoutiers",
     card1Title: "Spécialistes en bijouterie",
-    card1Text: "34 ans de travail exclusif avec le secteur joaillier. Nous connaissons vos processus car nous les vivons chaque jour.",
+    card1Text: "36 ans de travail exclusif avec le secteur joaillier. Nous connaissons vos processus car nous les vivons chaque jour.",
     card1Stat: "Depuis 1990",
     card2Title: "Contrôle total des métaux",
     card2Text: "Gestion de l'or, l'argent, le platine et les pierres précieuses avec traçabilité complète et contrôle des pertes intégré.",
@@ -105,7 +118,7 @@ const translations: Record<Lang, {
     title: "No som un ERP genèric",
     subtitle: "Som joiers desenvolupant programari per a joiers",
     card1Title: "Especialistes en joieria",
-    card1Text: "34 anys treballant exclusivament amb el sector joier. Coneixem els teus processos perquè els vivim cada dia.",
+    card1Text: "36 anys treballant exclusivament amb el sector joier. Coneixem els teus processos perquè els vivim cada dia.",
     card1Stat: "Des de 1990",
     card2Title: "Control total de metalls",
     card2Text: "Gestió d'or, plata, platí i pedres precioses amb traçabilitat completa i control de pèrdues integrat.",
@@ -127,7 +140,7 @@ const translations: Record<Lang, {
     title: "Não somos um ERP genérico",
     subtitle: "Somos joalheiros desenvolvendo software para joalheiros",
     card1Title: "Especialistas em joalheria",
-    card1Text: "34 anos trabalhando exclusivamente com o setor joalheiro. Conhecemos seus processos porque os vivemos todos os dias.",
+    card1Text: "36 anos trabalhando exclusivamente com o setor joalheiro. Conhecemos seus processos porque os vivemos todos os dias.",
     card1Stat: "Desde 1990",
     card2Title: "Controle total de metais",
     card2Text: "Gestão de ouro, prata, platina e pedras preciosas com rastreabilidade completa e controle de perdas integrado.",
@@ -150,30 +163,28 @@ const t = translations[lang] || translations.es;
 const contactUrl = getPageUrl('contacto', lang);
 ---
 
-<section class="porque-section" id="porque">
+<section class="porque-section rg-inv" id="porque">
   <div class="container">
     <div class="section-header">
       <span class="section-badge">{t.badge}</span>
       <h2>{t.title}</h2>
       <p>{t.subtitle}</p>
-       {lang === "es" && (
-  <p class="porque-link">
-    <a href={getPageUrl("queEsRayGold", lang)}
-       data-ga="cta_click"
-       data-ga-elemento="que_es_raygold"
-       data-ga-ubicacion="home_porque">
-      Qué es exactamente RayGold, y qué no es
-    </a>
-  </p>
-)}
+      {lang === "es" && (
+        <p class="porque-link">
+          <a href={getPageUrl("queEsRayGold", lang)}
+             data-ga="cta_click"
+             data-ga-elemento="que_es_raygold"
+             data-ga-ubicacion="home_porque">
+            Qué es exactamente RayGold, y qué no es
+          </a>
+        </p>
+      )}
     </div>
-
-   
 
     <div class="diferenciadores-grid">
       <!-- Especialistas (featured) -->
       <div class="diferenciador-card featured">
-        <div class="diferenciador-icon diamond">
+        <div class="diferenciador-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M2.5 9l9.5 12 9.5-12-3-6H5.5l-3 6z"/>
             <path d="M2.5 9h19M12 21V9M5.5 3l6.5 6 6.5-6"/>
@@ -260,11 +271,11 @@ const contactUrl = getPageUrl('contacto', lang);
 
 <style>
   /* ============================================
-     DESKTOP: Tema azul oscuro (default)
+     Superficie invertida: el mismo color del menú
      ============================================ */
   .porque-section {
     padding: 5rem 1.5rem;
-    background: var(--ink);
+    /* el fondo lo pone .rg-inv */
   }
 
   .container {
@@ -283,7 +294,7 @@ const contactUrl = getPageUrl('contacto', lang);
   }
 
   .porque-link a {
-    color: #818cf8;
+    color: var(--rg-accent);
     text-decoration: underline;
     text-underline-offset: 4px;
     text-decoration-thickness: 1px;
@@ -291,36 +302,35 @@ const contactUrl = getPageUrl('contacto', lang);
   }
 
   .porque-link a:hover {
-    color: #a5b4fc;
+    color: var(--rg-ink);
   }
 
   .section-badge {
     display: inline-block;
     padding: 0.5rem 1rem;
-    background: rgba(245, 158, 11, 0.2);
-    color: #fbbf24;
+    background: var(--rg-accent-soft);
+    color: var(--rg-accent);
     font-size: 0.75rem;
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.06em;
     border-radius: 50px;
     margin-bottom: 1rem;
   }
 
   .section-header h2 {
+    font-family: var(--rg-display);
     font-size: 2rem;
-    font-weight: 700;
-    color: white;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    color: var(--rg-ink);
     margin: 0 0 0.75rem;
   }
 
   .section-header p {
-    color: var(--soft);
+    color: var(--rg-soft);
     font-size: 1.1rem;
-    margin: 0;
+    margin: 0 auto;
     max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
   }
 
   .diferenciadores-grid {
@@ -330,24 +340,28 @@ const contactUrl = getPageUrl('contacto', lang);
   }
 
   .diferenciador-card {
-    background: rgba(30, 41, 59, 0.5);
-    border: 1px solid #334155;
+    background: color-mix(in srgb, var(--rg-ink) 6%, transparent);
+    border: 1px solid var(--rg-line);
     border-radius: 16px;
     padding: 1.5rem;
     display: flex;
     gap: 1rem;
-    transition: all 0.3s ease;
+    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
   }
 
   .diferenciador-card:hover {
-    border-color: var(--accent);
+    border-color: var(--rg-accent);
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 24px var(--rg-sombra);
   }
 
   .diferenciador-card.featured {
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(30, 41, 59, 0.5) 100%);
-    border-color: rgba(102, 126, 234, 0.5);
+    background: linear-gradient(
+      135deg,
+      var(--rg-accent-soft) 0%,
+      color-mix(in srgb, var(--rg-ink) 6%, transparent) 100%
+    );
+    border-color: color-mix(in srgb, var(--rg-accent) 45%, transparent);
     grid-column: span 2;
   }
 
@@ -355,16 +369,16 @@ const contactUrl = getPageUrl('contacto', lang);
     width: 48px;
     height: 48px;
     min-width: 48px;
-    background: linear-gradient(135deg, var(--accent), #764ba2);
+    background: linear-gradient(
+      135deg,
+      var(--rg-accent),
+      color-mix(in srgb, var(--rg-accent) 55%, var(--rg-ink))
+    );
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
-  }
-
-  .diferenciador-icon.diamond {
-    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: var(--rg-on-ink);
   }
 
   .diferenciador-icon svg {
@@ -379,13 +393,13 @@ const contactUrl = getPageUrl('contacto', lang);
   .diferenciador-content h3 {
     font-size: 1.1rem;
     font-weight: 600;
-    color: white;
+    color: var(--rg-ink);
     margin: 0 0 0.5rem;
   }
 
   .diferenciador-content p {
     font-size: 0.9rem;
-    color: var(--soft);
+    color: var(--rg-soft);
     line-height: 1.6;
     margin: 0 0 0.75rem;
   }
@@ -393,8 +407,8 @@ const contactUrl = getPageUrl('contacto', lang);
   .diferenciador-stat {
     display: inline-block;
     padding: 0.25rem 0.75rem;
-    background: rgba(102, 126, 234, 0.15);
-    color: #818cf8;
+    background: var(--rg-accent-soft);
+    color: var(--rg-accent);
     font-size: 0.75rem;
     font-weight: 600;
     border-radius: 50px;
@@ -404,13 +418,13 @@ const contactUrl = getPageUrl('contacto', lang);
     text-align: center;
     margin-top: 3rem;
     padding: 2rem;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-    border: 1px solid rgba(102, 126, 234, 0.3);
+    background: color-mix(in srgb, var(--rg-ink) 5%, transparent);
+    border: 1px solid var(--rg-line);
     border-radius: 16px;
   }
 
   .porque-cta p {
-    color: var(--line);
+    color: var(--rg-ink);
     font-size: 1.1rem;
     margin: 0 0 1rem;
   }
@@ -418,90 +432,38 @@ const contactUrl = getPageUrl('contacto', lang);
   .cta-button {
     display: inline-flex;
     padding: 0.875rem 1.75rem;
-    background: linear-gradient(135deg, var(--accent), #764ba2);
-    color: white;
+    background: var(--rg-accent);
+    color: var(--rg-on-ink);
     text-decoration: none;
-    border-radius: 10px;
+    border-radius: 999px;
     font-weight: 600;
-    transition: all 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
   .cta-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 8px 24px var(--rg-sombra);
   }
 
   /* ============================================
-     MÓVIL: Tema blanco claro
+     Móvil: solo tamaños y columnas.
+     El color NO cambia (antes se volvía blanco).
      ============================================ */
   @media (max-width: 768px) {
     .porque-section {
       padding: 3rem 1rem;
-      background: var(--panel);
-    }
-
-        .porque-link a {
-      color: var(--accent);
-    }
-
-    .porque-link a:hover {
-      color: #4f46e5;
-    }
-
-    .section-badge {
-      background: rgba(245, 158, 11, 0.1);
-      color: #d97706;
     }
 
     .section-header h2 {
       font-size: 1.5rem;
-      color: var(--ink);
-    }
-
-    .section-header p {
-      color: var(--soft);
     }
 
     .diferenciadores-grid {
       grid-template-columns: 1fr;
     }
 
-    .diferenciador-card {
-      background: var(--sup-2);
-      border: 1px solid var(--line);
-    }
-
-    .diferenciador-card:hover {
-      background: var(--line);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-    }
-
     .diferenciador-card.featured {
       grid-column: span 1;
-      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, var(--sup-2) 100%);
-      border-color: rgba(245, 158, 11, 0.3);
-    }
-
-    .diferenciador-content h3 {
-      color: var(--ink);
-    }
-
-    .diferenciador-content p {
-      color: var(--soft);
-    }
-
-    .diferenciador-stat {
-      background: rgba(102, 126, 234, 0.1);
-      color: var(--accent);
-    }
-
-    .porque-cta {
-      background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
-      border: 1px solid var(--line);
-    }
-
-    .porque-cta p {
-      color: #334155;
     }
   }
 </style>

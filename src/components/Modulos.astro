@@ -1,7 +1,16 @@
 ---
 /**
  * Modulos.astro - Sección de módulos del ERP
- * Con soporte multiidioma y tema adaptativo móvil
+ *
+ * TEMA CLARO/OSCURO (Septiembre 2026):
+ * - Sección clara: contrasta con la banda invertida de PorQueRayGold que va
+ *   justo debajo. Usa --rg-bg → --rg-sup2, así que se oscurece con el tema.
+ * - Los colores propios de cada módulo (el turquesa de Comercial, el ámbar de
+ *   Fabricación...) se mantienen: son identidad de módulo, no del tema, y
+ *   funcionan sobre fondo claro y oscuro. Solo "maestros" pasa al acento.
+ * - Eliminados los literales del bloque móvil: rgba(248,250,252,.67) y
+ *   rgba(241,245,249,.69) dejaban la tarjeta blanca aunque el tema fuera
+ *   oscuro. Ahora hereda.
  */
 import { type Lang, getModuloUrl } from "@/config/pages";
 
@@ -39,7 +48,6 @@ const translations: Record<Lang, {
       { key: "impresoras3d", title: "Impresoras 3D", description: "Control y gestión de producción con impresoras 3D" },
       { key: "portal", title: "Portal Cliente", description: "Acceso de clientes a pedidos y facturas" },
       { key: "asistenteia", title: "Asistente IA", description: "Asistente inteligente integrado en el ERP" },
-
     ],
   },
   en: {
@@ -97,7 +105,6 @@ const translations: Record<Lang, {
       { key: "impresoras3d", title: "Impressores 3D", description: "Control i gestió de producció amb impressores 3D" },
       { key: "portal", title: "Portal Client", description: "Accés dels clients a comandes i factures" },
       { key: "asistenteia", title: "Assistent IA", description: "Assistent intel·ligent integrat en l'ERP" },
-
     ],
   },
   'pt-br': {
@@ -139,9 +146,9 @@ const iconos: Record<string, string> = {
   asistenteia: `<svg viewBox="0 0 48 48" fill="none"><rect x="10" y="15" width="28" height="22" rx="5" fill="currentColor" opacity="0.15"/><rect x="10" y="15" width="28" height="22" rx="5" stroke="currentColor" stroke-width="2"/><circle cx="19" cy="26" r="2.5" fill="currentColor"/><circle cx="29" cy="26" r="2.5" fill="currentColor"/><path d="M20 32h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M24 9v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="24" cy="8" r="2.5" fill="currentColor"/><path d="M6 22v6M42 22v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`,
 };
 
-// Colores por módulo
+// Colores por módulo (identidad de cada módulo, no del tema)
 const colores: Record<string, string> = {
-  maestros: "var(--accent)",
+  maestros: "var(--rg-accent)",
   comercial: "#06b6d4",
   fabricacion: "#f59e0b",
   finanzas: "#10b981",
@@ -150,7 +157,7 @@ const colores: Record<string, string> = {
   estadisticas: "#ec4899",
   vendedores: "#3b82f6",
   ecommerce: "#6366f1",
-  impresoras3d : "#14b8a6",
+  impresoras3d: "#14b8a6",
   portal: "#0ea5e9",
   asistenteia: "#a855f7",
 };
@@ -182,11 +189,11 @@ const colores: Record<string, string> = {
 
 <style>
   /* ============================================
-     SECCIÓN CLARA (intercalada con las oscuras)
+     SECCIÓN CLARA (contrasta con la banda invertida)
      ============================================ */
   .modulos-section {
     padding: 5rem 1.5rem;
-    background: linear-gradient(180deg, var(--panel) 0%, var(--sup-2) 100%);
+    background: linear-gradient(180deg, var(--rg-bg) 0%, var(--rg-sup2) 100%);
   }
 
   .modulos-container {
@@ -202,25 +209,26 @@ const colores: Record<string, string> = {
   .section-badge {
     display: inline-block;
     padding: 0.5rem 1rem;
-    background: rgba(102, 126, 234, 0.1);
-    color: var(--accent);
+    background: var(--rg-accent-soft);
+    color: var(--rg-accent);
     font-size: 0.75rem;
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.06em;
     border-radius: 50px;
     margin-bottom: 1rem;
   }
 
   .modulos-header h2 {
+    font-family: var(--rg-display);
     font-size: 2rem;
-    font-weight: 700;
-    color: var(--ink);
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    color: var(--rg-ink);
     margin: 0 0 0.5rem;
   }
 
   .modulos-header p {
-    color: var(--soft);
+    color: var(--rg-soft);
     font-size: 1.1rem;
     margin: 0;
   }
@@ -232,13 +240,13 @@ const colores: Record<string, string> = {
   }
 
   .modulo-card {
-    background: var(--panel);
-    border: 1px solid var(--line);
+    background: var(--rg-panel);
+    border: 1px solid var(--rg-line);
     border-radius: 16px;
     padding: 1.5rem;
     text-align: center;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     position: relative;
     overflow: hidden;
   }
@@ -260,9 +268,9 @@ const colores: Record<string, string> = {
   }
 
   .modulo-card:hover {
-    background: var(--sup-2);
+    background: var(--rg-sup2);
     transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+    box-shadow: 0 12px 32px var(--rg-sombra);
     border-color: var(--card-color);
   }
 
@@ -285,13 +293,13 @@ const colores: Record<string, string> = {
   .modulo-card h4 {
     font-size: 1.1rem;
     font-weight: 600;
-    color: var(--ink);
+    color: var(--rg-ink);
     margin: 0 0 8px;
   }
 
   .modulo-card p {
     font-size: 0.85rem;
-    color: var(--soft);
+    color: var(--rg-soft);
     line-height: 1.5;
     margin: 0;
   }
@@ -303,7 +311,7 @@ const colores: Record<string, string> = {
   }
 
   /* ============================================
-     MÓVIL: ya era claro, se mantiene
+     Móvil: solo tamaños y columnas
      ============================================ */
   @media (max-width: 768px) {
     .modulos-section {
@@ -320,13 +328,7 @@ const colores: Record<string, string> = {
     }
 
     .modulo-card {
-      background:rgba(248, 250, 252, 0.67);
       padding: 1.25rem 1rem;
-    }
-
-    .modulo-card:hover {
-      background:rgba(241, 245, 249, 0.69);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
     }
 
     .modulo-icon {
