@@ -1,0 +1,584 @@
+---
+/**
+ * Fugas.astro — Las dos frases, el medidor de 15 × 2 % y las 15 fugas
+ *
+ * @file src/components/Fugas.astro
+ *
+ * Las 15 fugas se renderizan en el build, no por JavaScript: esta página
+ * existe para que la lean buscadores y modelos de IA, así que el contenido
+ * tiene que estar en el HTML.
+ *
+ * PENDIENTE PASO 2 (tema global): sustituir el bloque de variables de
+ * .fugas-sec por los tokens globales del Layout y borrarlo de aquí.
+ */
+import { getPageUrl, type Lang } from '@/config/pages';
+import { getFugasTranslations, contarPorArea, type AreaId } from '@/i18n/fugas';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'es' } = Astro.props;
+const t = getFugasTranslations(lang);
+const cuenta = contarPorArea(t);
+const areasOrden: AreaId[] = ['fab', 'prov', 'cli', 'info', 'it'];
+const total = t.fugas.length;
+const urlContacto = getPageUrl('contacto', lang);
+---
+
+<div class="fugas-sec" data-plantilla-area={t.frases.medidorPieArea}>
+  <!-- ═══════════ Las dos frases + medidor ═══════════ -->
+  <section class="par">
+    <div class="par__grid">
+      <blockquote class="par__q">
+        {t.frases.propia} <em>{t.frases.propiaEnfasis}</em>
+        <p class="par__src">{t.frases.propiaFuente}</p>
+      </blockquote>
+
+      <div class="par__rule" aria-hidden="true"></div>
+
+      <blockquote class="par__q">
+        {t.frases.fugas} <em>{t.frases.fugasEnfasis}</em>
+        <p class="par__src">{t.frases.fugasFuente}</p>
+      </blockquote>
+    </div>
+
+    <div class="medidor">
+      <div class="medidor__row">
+        <div class="medidor__bars">
+          {t.fugas.map((f) => <div class="barra is-on" data-area={f.area}></div>)}
+        </div>
+        <div class="medidor__sum">
+          <span class="medidor__cifra" data-cifra>{total * 2} %</span>
+          <span class="medidor__pie" data-pie>{t.frases.medidorPie}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ Las 15 fugas ═══════════ -->
+  <section class="fugas" id="fugas">
+    <div class="fugas__head">
+      <div>
+        <h2>{t.seccion.titulo}</h2>
+        <p>{t.seccion.entradilla}</p>
+      </div>
+
+      <div class="pastillas" data-pastillas>
+        <button class="pastilla is-on" data-area="all">
+          {t.seccion.filtroTodas}<b>{total}</b>
+        </button>
+        {areasOrden.map((a) => (
+          <button class="pastilla" data-area={a}>
+            {t.areas[a]}<b>{cuenta[a]}</b>
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <div class="lista">
+      {t.fugas.map((f, i) => (
+        <article class="fuga" data-area={f.area}>
+          <div class="fuga__n">
+            {String(i + 1).padStart(2, '0')}
+            <i>{t.areas[f.area]}</i>
+          </div>
+
+          <div>
+            <h3 class="fuga__t">{f.titulo}</h3>
+            <p class="fuga__s">{f.problema}</p>
+
+            <div class="fuga__fix">
+              <span class="k">{t.seccion.etiquetaCierre}</span>
+              <p>{f.cierre}</p>
+              <p class="mod">{t.seccion.dentroDelPrograma} <b>{f.modulo}</b></p>
+            </div>
+          </div>
+
+          <button
+            class="ibtn"
+            data-abrir
+            data-tip-abrir={t.seccion.verComoSeCierra}
+            data-tip-cerrar={t.seccion.cerrar}
+            data-tip={t.seccion.verComoSeCierra}
+            aria-expanded="false"
+            aria-label={t.seccion.verComoSeCierra}
+          >
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+              <path d="M8 3v10M3 8h10"></path>
+            </svg>
+          </button>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- ═══════════ Cierre ═══════════ -->
+  <section class="cierre">
+    <p class="cierre__q">
+      {t.cierre.frase} <em>{t.cierre.fraseEnfasis}</em>
+    </p>
+    <p class="cierre__t">{t.cierre.texto}</p>
+    <a class="btn btn--solid" href={urlContacto}>{t.cierre.cta}</a>
+  </section>
+</div>
+
+<style>
+  /* ── Variables locales · PASO 2: mover al Layout como tokens globales ── */
+  .fugas-sec {
+    --bg: #fafaf8;
+    --ink: #1c1b19;
+    --on-ink: #ffffff;
+    --soft: #5e5b55;
+    --faint: #9a968e;
+    --line: #e4e1da;
+    --accent: #a8862b;
+    --accent-ink: #5e4a12;
+    --accent-soft: rgba(168, 134, 43, 0.1);
+    --display: 'Fraunces', Georgia, serif;
+    --sans: 'Inter', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+  }
+
+  .fugas-sec section {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  /* ── Las dos frases ── */
+  .par {
+    padding-top: 66px;
+    padding-bottom: 8px;
+  }
+  .par__grid {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    gap: 0 40px;
+  }
+  .par__rule {
+    background: var(--line);
+  }
+  .par__q {
+    margin: 0;
+    font-family: var(--display);
+    font-weight: 380;
+    font-size: clamp(1.3rem, 2.5vw, 1.85rem);
+    line-height: 1.26;
+    letter-spacing: -0.012em;
+    text-wrap: balance;
+  }
+  .par__q em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .par__src {
+    margin: 14px 0 0;
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--faint);
+    line-height: 1.5;
+  }
+
+  /* ── Medidor ── */
+  .medidor {
+    margin-top: 44px;
+    padding-top: 26px;
+    border-top: 1px solid var(--line);
+  }
+  .medidor__row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .medidor__bars {
+    display: grid;
+    grid-template-columns: repeat(15, 1fr);
+    gap: 5px;
+    flex: 1;
+    min-width: 260px;
+    height: 38px;
+    align-items: end;
+  }
+  .barra {
+    height: 100%;
+    background: var(--line);
+    border-radius: 2px;
+    position: relative;
+    transition: background 0.18s, opacity 0.18s;
+  }
+  .barra.is-on {
+    background: var(--accent);
+  }
+  .barra.is-dim {
+    opacity: 0.28;
+  }
+  .barra::after {
+    content: '2 %';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -20px;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 9.5px;
+    color: var(--faint);
+  }
+  .medidor__sum {
+    white-space: nowrap;
+  }
+  .medidor__cifra {
+    display: block;
+    font-family: var(--display);
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+  .medidor__pie {
+    display: block;
+    font-size: 13px;
+    color: var(--soft);
+    margin-top: 6px;
+  }
+
+  /* ── Cabecera de la sección ── */
+  .fugas {
+    padding-top: 74px;
+    padding-bottom: 88px;
+  }
+  .fugas__head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .fugas__head h2 {
+    margin: 0;
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(1.6rem, 3.4vw, 2.3rem);
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+    max-width: 22ch;
+    text-wrap: balance;
+  }
+  .fugas__head p {
+    margin: 10px 0 0;
+    color: var(--soft);
+    max-width: 52ch;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .pastillas {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .pastilla {
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 13.5px;
+    font-family: inherit;
+    color: var(--soft);
+    border: 1px solid transparent;
+    background: var(--accent-soft);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .pastilla:hover {
+    border-color: var(--accent);
+  }
+  .pastilla.is-on {
+    background: var(--ink);
+    color: var(--on-ink);
+  }
+  .pastilla b {
+    font-weight: 500;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    margin-left: 6px;
+    opacity: 0.7;
+  }
+
+  /* ── Lista ── */
+  .lista {
+    border-top: 1px solid var(--line);
+  }
+  .fuga {
+    border-bottom: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 56px 1fr 44px;
+    gap: 0 18px;
+    align-items: start;
+    padding: 20px 0;
+  }
+  .fuga[hidden] {
+    display: none;
+  }
+  .fuga__n {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--faint);
+    padding-top: 5px;
+    font-variant-numeric: tabular-nums;
+  }
+  .fuga__n i {
+    display: block;
+    font-style: normal;
+    font-size: 10px;
+    margin-top: 4px;
+    color: var(--accent);
+  }
+  .fuga__t {
+    margin: 0;
+    font-family: var(--display);
+    font-weight: 450;
+    font-size: 1.22rem;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+  }
+  .fuga__s {
+    margin: 6px 0 0;
+    color: var(--soft);
+    font-size: 15px;
+    max-width: 64ch;
+    line-height: 1.55;
+  }
+  .fuga__fix {
+    margin-top: 14px;
+    display: none;
+    grid-template-columns: auto 1fr;
+    gap: 10px 14px;
+    max-width: 64ch;
+    font-size: 15px;
+  }
+  .fuga.is-open .fuga__fix {
+    display: grid;
+  }
+  .fuga__fix p {
+    margin: 0;
+    line-height: 1.55;
+  }
+  .fuga__fix .k {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    padding-top: 4px;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+  .fuga__fix .mod {
+    font-size: 13px;
+    color: var(--faint);
+    grid-column: 2;
+  }
+  .fuga__fix .mod b {
+    font-weight: 500;
+    color: var(--soft);
+  }
+
+  /* ── Botón solo icono ── */
+  .ibtn {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border: 0;
+    background: none;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: var(--soft);
+    cursor: pointer;
+    position: relative;
+    justify-self: end;
+    margin-top: 2px;
+    transition: background 0.15s, color 0.15s;
+  }
+  .ibtn:hover {
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+  }
+  .ibtn svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.2s;
+  }
+  .fuga.is-open .ibtn svg {
+    transform: rotate(45deg);
+  }
+  .ibtn[data-tip]::after {
+    content: attr(data-tip);
+    position: absolute;
+    right: calc(100% + 8px);
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--ink);
+    color: var(--on-ink);
+    font-size: 11.5px;
+    padding: 5px 9px;
+    border-radius: 6px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.12s;
+  }
+  .ibtn:hover::after,
+  .ibtn:focus-visible::after {
+    opacity: 1;
+  }
+
+  /* ── Cierre ── */
+  .cierre {
+    padding-top: 64px;
+    padding-bottom: 80px;
+    border-top: 1px solid var(--line);
+  }
+  .cierre__q {
+    margin: 0;
+    font-family: var(--display);
+    font-weight: 380;
+    font-size: clamp(1.5rem, 3.4vw, 2.4rem);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    max-width: 26ch;
+    text-wrap: balance;
+  }
+  .cierre__q em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .cierre__t {
+    margin: 18px 0 0;
+    color: var(--soft);
+    max-width: 56ch;
+    line-height: 1.55;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 28px;
+    padding: 12px 21px;
+    border-radius: 999px;
+    font-size: 14.5px;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1px solid var(--ink);
+    transition: background 0.18s, border-color 0.18s;
+  }
+  .btn--solid {
+    background: var(--ink);
+    color: var(--on-ink);
+  }
+  .btn--solid:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 860px) {
+    .par__grid {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+    .par__rule {
+      height: 1px;
+    }
+    .barra::after {
+      display: none;
+    }
+    .barra:nth-child(5n)::after {
+      display: block;
+    }
+    .fuga {
+      grid-template-columns: 36px 1fr 36px;
+      gap: 0 12px;
+    }
+    .fuga__n i {
+      display: none;
+    }
+    .ibtn[data-tip]::after {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .barra,
+    .ibtn svg {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  function initFugas() {
+    const sec = document.querySelector<HTMLElement>('.fugas-sec');
+    if (!sec || sec.dataset.listo === '1') return;
+    sec.dataset.listo = '1';
+
+    // Abrir / cerrar cada fuga
+    sec.querySelectorAll<HTMLButtonElement>('[data-abrir]').forEach((b) => {
+      b.addEventListener('click', () => {
+        const art = b.closest('.fuga');
+        if (!art) return;
+        const abierta = art.classList.toggle('is-open');
+        const txt = abierta
+          ? b.dataset.tipCerrar || ''
+          : b.dataset.tipAbrir || '';
+        b.setAttribute('aria-expanded', String(abierta));
+        b.setAttribute('aria-label', txt);
+        b.dataset.tip = txt;
+      });
+    });
+
+    // Filtro por área
+    const pastillas = sec.querySelectorAll<HTMLButtonElement>('[data-pastillas] .pastilla');
+    const fugas = sec.querySelectorAll<HTMLElement>('.fuga');
+    const barras = sec.querySelectorAll<HTMLElement>('.barra');
+    const cifra = sec.querySelector<HTMLElement>('[data-cifra]');
+    const pie = sec.querySelector<HTMLElement>('[data-pie]');
+    const pieTodas = pie?.textContent || '';
+    const plantillaArea = sec.dataset.plantillaArea || '';
+
+    pastillas.forEach((p) => {
+      p.addEventListener('click', () => {
+        pastillas.forEach((x) => x.classList.remove('is-on'));
+        p.classList.add('is-on');
+
+        const area = p.dataset.area || 'all';
+        let n = 0;
+
+        fugas.forEach((f) => {
+          const visible = area === 'all' || f.dataset.area === area;
+          f.hidden = !visible;
+          if (visible) n++;
+        });
+
+        barras.forEach((b) => {
+          b.classList.toggle('is-dim', !(area === 'all' || b.dataset.area === area));
+        });
+
+        if (cifra) cifra.textContent = `${n * 2} %`;
+        if (pie) {
+          if (area === 'all') {
+            pie.textContent = pieTodas;
+          } else {
+            const nombre = (p.childNodes[0]?.textContent || '').trim().toLowerCase();
+            pie.textContent = plantillaArea.replace('{area}', nombre);
+          }
+        }
+      });
+    });
+  }
+
+  document.addEventListener('astro:page-load', initFugas);
+  initFugas();
+</script>

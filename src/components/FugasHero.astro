@@ -1,0 +1,508 @@
+---
+/**
+ * FugasHero.astro — Portada: la frase sobre las capturas reales del ERP
+ *
+ * @file src/components/FugasHero.astro
+ *
+ * El fondo va cambiando entre las capturas de Azure Blob con un velo en
+ * degradado: opaco donde va el texto, transparente hacia la derecha.
+ * La barra inferior dice qué pantalla se está viendo y la lupa la abre
+ * nítida a pantalla completa.
+ *
+ * Las imágenes se pintan en el build (no por JS) para que carguen antes
+ * y para que la primera esté disponible como LCP.
+ *
+ * PENDIENTE PASO 2 (tema global): sustituir el bloque de variables de
+ * .fugas-hero por los tokens globales del Layout y borrarlo de aquí.
+ */
+import { getPageUrl, type Lang } from '@/config/pages';
+import { getFugasTranslations } from '@/i18n/fugas';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'es' } = Astro.props;
+const t = getFugasTranslations(lang);
+const h = t.hero;
+
+const BLOB = 'https://raygoldstorage.blob.core.windows.net/web';
+const pantallas = t.pantallas.map((p) => ({ ...p, url: `${BLOB}/${p.archivo}` }));
+
+const urlContacto = getPageUrl('contacto', lang);
+---
+
+<section class="fugas-hero">
+  <!-- Fondo: capturas + velo -->
+  <div class="tela" aria-hidden="true">
+    {pantallas.map((p, i) => (
+      <img
+        src={p.url}
+        alt=""
+        class:list={['tela__img', { 'is-on': i === 0 }]}
+        loading={i === 0 ? 'eager' : 'lazy'}
+        fetchpriority={i === 0 ? 'high' : 'auto'}
+        decoding="async"
+        data-nombre={p.nombre}
+        data-alt={p.alt}
+      />
+    ))}
+    <div class="tela__velo"></div>
+  </div>
+
+  <!-- Contenido -->
+  <div class="hero-in">
+    <span class="sello"><i aria-hidden="true"></i>{h.sello}</span>
+
+    <h1>
+      {h.titulo}
+      <em>{h.tituloEnfasis}</em>
+    </h1>
+
+    <p class="lead">
+      {h.lead} <strong>{h.leadFuerte}</strong> que los saca a la luz uno a uno y te da con qué
+      cerrarlos: gramo a gramo, del lingote al escaparate.
+    </p>
+
+    <div class="ctas">
+      <a class="btn btn--solid" href="#fugas">{h.ctaPrimario}</a>
+      <a class="btn btn--ghost" href={urlContacto}>{h.ctaSecundario}</a>
+    </div>
+  </div>
+
+  <!-- Pie: qué pantalla estás viendo -->
+  <div class="pie">
+    <div class="pie-in">
+      <span class="pie__et">{h.etiquetaDetras}</span>
+      <span class="pie__n" data-pie-nombre>{pantallas[0].nombre}</span>
+
+      <button class="ibtn" data-lupa data-tip={h.verPantalla} aria-label={h.verPantalla}>
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+          <circle cx="8.8" cy="8.8" r="5.6"></circle>
+          <path d="M13 13l4 4M8.8 6.6v4.4M6.6 8.8h4.4"></path>
+        </svg>
+      </button>
+
+      <div class="puntos">
+        {pantallas.map((p, i) => (
+          <button
+            class:list={['punto', { 'is-on': i === 0 }]}
+            data-punto={i}
+            aria-label={p.nombre}
+          ></button>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lb" data-lb role="dialog" aria-modal="true" aria-label={h.verPantalla}>
+    <button class="ibtn lb__x" data-lb-x aria-label={h.cerrar}>
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+        <path d="M5 5l10 10M15 5L5 15"></path>
+      </svg>
+    </button>
+    <img data-lb-img src="" alt="" />
+  </div>
+</section>
+
+<style>
+  /* ── Variables locales · PASO 2: mover al Layout como tokens globales ── */
+  .fugas-hero {
+    --bg: #fafaf8;
+    --ink: #1c1b19;
+    --on-ink: #ffffff;
+    --soft: #5e5b55;
+    --faint: #9a968e;
+    --line: #e4e1da;
+    --panel: #ffffff;
+    --accent: #a8862b;
+    --accent-ink: #5e4a12;
+    --accent-soft: rgba(168, 134, 43, 0.1);
+    --velo-fuerte: rgba(250, 250, 248, 0.955);
+    --velo-suave: rgba(250, 250, 248, 0.6);
+    --filtro-img: saturate(0.88) contrast(1.02);
+    --barra: rgba(250, 250, 248, 0.86);
+    --display: 'Fraunces', Georgia, serif;
+    --sans: 'Inter', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+
+    position: relative;
+    overflow: hidden;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    border-bottom: 1px solid var(--line);
+    min-height: clamp(540px, 76vh, 740px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 64px;
+  }
+
+  /* ── Fondo ── */
+  .tela {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .tela__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 78% 50%;
+    opacity: 0;
+    transition: opacity 1.1s ease;
+    filter: var(--filtro-img);
+  }
+  .tela__img.is-on {
+    opacity: 1;
+  }
+  .tela__velo {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      100deg,
+      var(--velo-fuerte) 0%,
+      var(--velo-fuerte) 34%,
+      var(--velo-suave) 72%,
+      var(--velo-suave) 100%
+    );
+  }
+
+  /* ── Contenido ── */
+  .hero-in {
+    position: relative;
+    z-index: 1;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+    width: 100%;
+  }
+
+  .sello {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 12.5px;
+    color: var(--soft);
+    border: 1px solid var(--line);
+    background: var(--panel);
+    padding: 6px 13px;
+    border-radius: 999px;
+  }
+  .sello i {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  h1 {
+    margin: 22px 0 0;
+    font-family: var(--display);
+    font-weight: 380;
+    font-size: clamp(2.15rem, 5.4vw, 3.7rem);
+    line-height: 1.06;
+    letter-spacing: -0.022em;
+    max-width: 17ch;
+    text-wrap: balance;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .lead {
+    margin: 24px 0 0;
+    max-width: 54ch;
+    font-size: 1.06rem;
+    line-height: 1.55;
+    color: var(--soft);
+  }
+  .lead strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .ctas {
+    margin-top: 32px;
+    display: flex;
+    gap: 13px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 21px;
+    border-radius: 999px;
+    font-size: 14.5px;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1px solid var(--ink);
+    transition: background 0.18s, color 0.18s, border-color 0.18s;
+  }
+  .btn--solid {
+    background: var(--ink);
+    color: var(--on-ink);
+  }
+  .btn--solid:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .btn--ghost {
+    background: var(--panel);
+    color: var(--ink);
+  }
+  .btn--ghost:hover {
+    background: var(--accent-soft);
+  }
+
+  /* ── Pie ── */
+  .pie {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid var(--line);
+    background: var(--barra);
+    backdrop-filter: blur(8px);
+  }
+  .pie-in {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 13px;
+    color: var(--soft);
+  }
+  .pie__et {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--faint);
+    letter-spacing: 0.05em;
+  }
+  .pie__n {
+    color: var(--ink);
+  }
+  .puntos {
+    display: flex;
+    gap: 7px;
+    margin-left: auto;
+  }
+  .punto {
+    width: 7px;
+    height: 7px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: var(--line);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .punto.is-on {
+    background: var(--accent);
+    transform: scale(1.25);
+  }
+
+  /* ── Botón solo icono ── */
+  .ibtn {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: 0;
+    background: none;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: var(--soft);
+    cursor: pointer;
+    position: relative;
+    flex: 0 0 auto;
+    transition: background 0.15s, color 0.15s;
+  }
+  .ibtn:hover {
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+  }
+  .ibtn svg {
+    width: 17px;
+    height: 17px;
+  }
+  .ibtn[data-tip]::after {
+    content: attr(data-tip);
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--ink);
+    color: var(--on-ink);
+    font-size: 11.5px;
+    padding: 5px 9px;
+    border-radius: 6px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.12s;
+    z-index: 5;
+  }
+  .ibtn:hover::after,
+  .ibtn:focus-visible::after {
+    opacity: 1;
+  }
+
+  /* ── Lightbox ── */
+  .lb {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(12, 11, 10, 0.9);
+    display: none;
+    place-items: center;
+    padding: 28px;
+  }
+  .lb.is-on {
+    display: grid;
+  }
+  .lb img {
+    max-width: min(1300px, 94vw);
+    max-height: 88vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.5);
+  }
+  .lb__x {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    color: #fff;
+  }
+  .lb__x:hover {
+    background: rgba(255, 255, 255, 0.14);
+    color: #fff;
+  }
+
+  :global(:focus-visible) {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 860px) {
+    .fugas-hero {
+      min-height: 0;
+      padding-top: 48px;
+    }
+    .tela__velo {
+      background: linear-gradient(
+        180deg,
+        var(--velo-fuerte) 0%,
+        var(--velo-fuerte) 62%,
+        var(--velo-suave) 100%
+      );
+    }
+    .hero-in {
+      padding-bottom: 32px;
+    }
+    .ibtn[data-tip]::after {
+      display: none;
+    }
+    .btn {
+      flex: 1 1 auto;
+      justify-content: center;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tela__img {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  function initFugasHero() {
+    const hero = document.querySelector<HTMLElement>('.fugas-hero');
+    if (!hero || hero.dataset.listo === '1') return;
+    hero.dataset.listo = '1';
+
+    const imgs = Array.from(hero.querySelectorAll<HTMLImageElement>('.tela__img'));
+    const puntos = Array.from(hero.querySelectorAll<HTMLButtonElement>('[data-punto]'));
+    const pieNombre = hero.querySelector<HTMLElement>('[data-pie-nombre]');
+    const lb = hero.querySelector<HTMLElement>('[data-lb]');
+    const lbImg = hero.querySelector<HTMLImageElement>('[data-lb-img]');
+    const lupa = hero.querySelector<HTMLButtonElement>('[data-lupa]');
+    const lbX = hero.querySelector<HTMLButtonElement>('[data-lb-x]');
+    if (imgs.length === 0) return;
+
+    const lento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let actual = 0;
+    let reloj: ReturnType<typeof setInterval> | null = null;
+
+    function mostrar(i: number) {
+      imgs[actual].classList.remove('is-on');
+      puntos[actual]?.classList.remove('is-on');
+      actual = (i + imgs.length) % imgs.length;
+      imgs[actual].classList.add('is-on');
+      puntos[actual]?.classList.add('is-on');
+      if (pieNombre) pieNombre.textContent = imgs[actual].dataset.nombre || '';
+    }
+
+    function arrancar() {
+      if (lento || imgs.length < 2) return;
+      reloj = setInterval(() => mostrar(actual + 1), 6500);
+    }
+    function parar() {
+      if (reloj) clearInterval(reloj);
+      reloj = null;
+    }
+
+    puntos.forEach((p, i) =>
+      p.addEventListener('click', () => {
+        parar();
+        mostrar(i);
+        arrancar();
+      })
+    );
+
+    // Lightbox
+    function abrir() {
+      if (!lb || !lbImg) return;
+      lbImg.src = imgs[actual].src;
+      lbImg.alt = imgs[actual].dataset.alt || '';
+      lb.classList.add('is-on');
+      document.body.style.overflow = 'hidden';
+      parar();
+    }
+    function cerrar() {
+      if (!lb) return;
+      lb.classList.remove('is-on');
+      document.body.style.overflow = '';
+      arrancar();
+    }
+    lupa?.addEventListener('click', abrir);
+    lbX?.addEventListener('click', cerrar);
+    lb?.addEventListener('click', (e) => {
+      if (e.target === lb) cerrar();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lb?.classList.contains('is-on')) cerrar();
+    });
+
+    // Pausa cuando el hero no está en pantalla
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(
+        ([e]) => (e.isIntersecting ? arrancar() : parar()),
+        { threshold: 0.15 }
+      ).observe(hero);
+    } else {
+      arrancar();
+    }
+  }
+
+  document.addEventListener('astro:page-load', initFugasHero);
+  initFugasHero();
+</script>

@@ -14,6 +14,8 @@ import VideoDemo from "@/components/VideoDemo.astro";
 import Testimonios from "@/components/Testimonios.astro";
 import WhatsAppButton from "@/components/WhatsAppButton.astro";
 import { getAlternateUrls, type Lang } from "@/config/pages";
+import FugasHero from "@/components/FugasHero.astro";
+import Fugas from "@/components/Fugas.astro";
 
 interface Props {
   lang: Lang;
@@ -61,8 +63,10 @@ const meta = metaInfo[lang] || metaInfo.es;
   type="product"
   alternateUrls={alternateUrls}
 >
-  <!-- Hero Section - Banner principal (fondo oscuro propio) -->
-  <Hero lang={lang} />
+  <!-- Hero Section - Banner principal (fondo oscuro propio)    <Hero lang={lang} />-->
+  
+  <FugasHero lang={lang} />
+<Fugas lang={lang} />
 
   <!-- Módulos - fondo CLARO -->
   <div class="section-bg section-bg--light">
