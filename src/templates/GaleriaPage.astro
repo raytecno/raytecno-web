@@ -233,14 +233,14 @@ try {
 <style>
   /* Variables */
   :root {
-    --bg-dark: #0f172a;
-    --bg-darker: #1e293b;
+    --bg-dark: var(--ink);
+    --bg-darker: var(--ink);
     --bg-card: rgba(30, 41, 59, 0.5);
     --border-subtle: rgba(255, 255, 255, 0.1);
-    --text-primary: #ffffff;
-    --text-secondary: #94a3b8;
-    --text-muted: #64748b;
-    --accent-purple: #667eea;
+    --text-primary: var(--panel);
+    --text-secondary: var(--soft);
+    --text-muted: var(--soft);
+    --accent-purple: var(--accent);
     --accent-green: #10b981;
   }
 
@@ -315,7 +315,7 @@ try {
   }
 
   .gradient-text {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--accent) 0%, #764ba2 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -381,7 +381,7 @@ try {
   }
 
   .item-image {
-    background: #f8fafc;
+    background: var(--sup-2);
     padding: 12px;
   }
 
@@ -522,46 +522,46 @@ try {
    ============================================ */
   @media (max-width: 768px) {
     .galeria-page {
-      background: #ffffff !important;
+      background: var(--panel) !important;
     }
 
     .galeria-hero {
-      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%) !important;
+      background: linear-gradient(135deg, var(--panel) 0%, var(--sup-2) 100%) !important;
     }
 
     .galeria-hero h1 {
-      background: linear-gradient(135deg, #1e293b 0%, #475569 100%) !important;
+      background: linear-gradient(135deg, var(--ink) 0%, #475569 100%) !important;
       -webkit-background-clip: text !important;
       -webkit-text-fill-color: transparent !important;
     }
 
     .galeria-hero p {
-      color: #64748b !important;
+      color: var(--soft) !important;
     }
 
     .filter-btn {
       background: rgba(0, 0, 0, 0.04) !important;
-      color: #64748b !important;
-      border: 1px solid #e2e8f0 !important;
+      color: var(--soft) !important;
+      border: 1px solid var(--line) !important;
     }
 
     .filter-btn.active {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+      background: linear-gradient(135deg, var(--accent) 0%, #764ba2 100%) !important;
       color: white !important;
       border-color: transparent !important;
     }
 
     .gallery-card {
-      background: #f8fafc !important;
-      border: 1px solid #e2e8f0 !important;
+      background: var(--sup-2) !important;
+      border: 1px solid var(--line) !important;
     }
 
     .gallery-card h3 {
-      color: #1e293b !important;
+      color: var(--ink) !important;
     }
 
     .gallery-card p {
-      color: #64748b !important;
+      color: var(--soft) !important;
     }
   }
 </style>

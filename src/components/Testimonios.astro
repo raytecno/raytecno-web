@@ -271,7 +271,7 @@ const t = translations[lang] || translations.es;
      ============================================ */
   .testimonios-section {
     padding: 5rem 1.5rem;
-    background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+    background: linear-gradient(180deg, var(--ink) 0%, var(--ink) 100%);
   }
 
   .container {
@@ -305,7 +305,7 @@ const t = translations[lang] || translations.es;
   }
 
   .section-header p {
-    color: #94a3b8;
+    color: var(--soft);
     font-size: 1.1rem;
     margin: 0;
   }
@@ -328,13 +328,13 @@ const t = translations[lang] || translations.es;
   }
 
   .testimonio-card:hover {
-    border-color: #667eea;
+    border-color: var(--accent);
     transform: translateY(-4px);
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
   }
 
   .testimonio-card.featured {
-    border-color: #667eea;
+    border-color: var(--accent);
     background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(30, 41, 59, 0.6) 100%);
   }
 
@@ -345,13 +345,13 @@ const t = translations[lang] || translations.es;
   .quote-icon {
     width: 32px;
     height: 32px;
-    color: #667eea;
+    color: var(--accent);
     opacity: 0.5;
     margin-bottom: 0.5rem;
   }
 
   .testimonio-quote p {
-    color: #e2e8f0;
+    color: var(--line);
     font-size: 0.95rem;
     line-height: 1.7;
     margin: 0;
@@ -379,7 +379,7 @@ const t = translations[lang] || translations.es;
 
   .result-text {
     font-size: 0.85rem;
-    color: #94a3b8;
+    color: var(--soft);
   }
 
   .testimonio-author {
@@ -393,7 +393,7 @@ const t = translations[lang] || translations.es;
   .author-avatar {
     width: 48px;
     height: 48px;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, var(--accent), #764ba2);
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -415,12 +415,12 @@ const t = translations[lang] || translations.es;
   }
 
   .author-info span {
-    color: #94a3b8;
+    color: var(--soft);
     font-size: 0.8rem;
   }
 
   .author-years {
-    color: #667eea !important;
+    color: var(--accent) !important;
     font-size: 0.75rem !important;
   }
 
@@ -430,7 +430,7 @@ const t = translations[lang] || translations.es;
   @media (max-width: 768px) {
     .testimonios-section {
       padding: 3rem 1rem;
-      background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+      background: linear-gradient(180deg, var(--sup-2) 0%, var(--panel) 100%);
     }
 
     .section-badge {
@@ -440,11 +440,11 @@ const t = translations[lang] || translations.es;
 
     .section-header h2 {
       font-size: 1.5rem;
-      color: #1e293b;
+      color: var(--ink);
     }
 
     .section-header p {
-      color: #64748b;
+      color: var(--soft);
     }
 
     .testimonios-grid {
@@ -452,8 +452,8 @@ const t = translations[lang] || translations.es;
     }
 
     .testimonio-card {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
+      background: var(--sup-2);
+      border: 1px solid var(--line);
     }
 
     .testimonio-card:hover {
@@ -461,7 +461,7 @@ const t = translations[lang] || translations.es;
     }
 
     .testimonio-card.featured {
-      background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, #f8fafc 100%);
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, var(--sup-2) 100%);
       border-color: rgba(102, 126, 234, 0.3);
     }
 
@@ -470,23 +470,23 @@ const t = translations[lang] || translations.es;
     }
 
     .testimonio-quote strong {
-      color: #1e293b;
+      color: var(--ink);
     }
 
     .result-text {
-      color: #64748b;
+      color: var(--soft);
     }
 
     .testimonio-author {
-      border-top: 1px solid #e2e8f0;
+      border-top: 1px solid var(--line);
     }
 
     .author-info strong {
-      color: #1e293b;
+      color: var(--ink);
     }
 
     .author-info span {
-      color: #64748b;
+      color: var(--soft);
     }
   }
 </style>

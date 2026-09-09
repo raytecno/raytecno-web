@@ -212,7 +212,7 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
      DESKTOP: Tema azul oscuro (default)
      ============================================ */
   .modulo-page {
-    background: #0f172a;
+    background: var(--ink);
     min-height: 100vh;
     color: white;
   }
@@ -225,7 +225,7 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
 
   /* Header del módulo */
   .modulo-header {
-    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    background: linear-gradient(135deg, var(--ink) 0%, var(--ink) 100%);
     padding: 2rem 1.5rem;
     display: flex;
     justify-content: space-between;
@@ -254,20 +254,20 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
     font-size: 1.75rem;
     font-weight: 700;
     margin: 0 0 0.25rem;
-    background: linear-gradient(135deg, #fff, #94a3b8);
+    background: linear-gradient(135deg, #fff, var(--soft));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .header-text p {
-    color: #94a3b8;
+    color: var(--soft);
     margin: 0;
     font-size: 1rem;
   }
 
   .back-link {
-    color: #94a3b8;
+    color: var(--soft);
     text-decoration: none;
     font-size: 0.9rem;
     transition: color 0.2s;
@@ -308,7 +308,7 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
     background: transparent;
     border: 1px solid transparent;
     border-radius: 12px;
-    color: #94a3b8;
+    color: var(--soft);
     cursor: pointer;
     transition: all 0.2s ease;
     min-width: 100px;
@@ -373,7 +373,7 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
   }
 
   .seccion-descripcion {
-    color: #94a3b8;
+    color: var(--soft);
     font-size: 1rem;
     margin: 0;
   }
@@ -386,7 +386,7 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
   }
 
   .galeria-item {
-    background: #1e293b;
+    background: var(--ink);
     border-radius: 16px;
     overflow: hidden;
     border: 1px solid #334155;
@@ -411,7 +411,7 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
     position: relative;
     aspect-ratio: 16/10;
     overflow: hidden;
-    background: #0f172a;
+    background: var(--ink);
   }
 
   .imagen-wrapper img {
@@ -477,7 +477,7 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
 
   .imagen-info p {
     font-size: 0.875rem;
-    color: #94a3b8;
+    color: var(--soft);
     margin: 0;
     line-height: 1.5;
   }
@@ -527,12 +527,12 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
   .cta-section {
     padding: 3rem 1.5rem;
     text-align: center;
-    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    background: linear-gradient(135deg, var(--ink) 0%, var(--ink) 100%);
     border-top: 1px solid #334155;
   }
 
   .cta-section p {
-    color: #94a3b8;
+    color: var(--soft);
     margin: 0 0 1rem;
   }
 
@@ -557,14 +557,14 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
      ============================================ */
   @media (max-width: 768px) {
     .modulo-page {
-      background: #ffffff;
-      color: #1e293b;
+      background: var(--panel);
+      color: var(--ink);
     }
 
     /* Header */
     .modulo-header {
-      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-      border-bottom: 1px solid #e2e8f0;
+      background: linear-gradient(135deg, var(--panel) 0%, var(--sup-2) 100%);
+      border-bottom: 1px solid var(--line);
       flex-direction: column;
       align-items: flex-start;
       gap: 1rem;
@@ -577,18 +577,18 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
 
     .header-text h1 {
       font-size: 1.5rem;
-      background: linear-gradient(135deg, #1e293b, #475569);
+      background: linear-gradient(135deg, var(--ink), #475569);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
     .header-text p {
-      color: #64748b;
+      color: var(--soft);
     }
 
     .back-link {
-      color: #64748b;
+      color: var(--soft);
     }
 
     .back-link:hover {
@@ -598,25 +598,25 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
     /* Navegación de secciones */
     .secciones-nav {
       background: rgba(255, 255, 255, 0.95);
-      border-bottom: 1px solid #e2e8f0;
+      border-bottom: 1px solid var(--line);
       top: 72px;
     }
 
     .seccion-tab {
       padding: 0.5rem 1rem;
       min-width: 80px;
-      color: #64748b;
+      color: var(--soft);
     }
 
     .seccion-tab:hover {
       background: rgba(102, 126, 234, 0.08);
-      color: #1e293b;
+      color: var(--ink);
     }
 
     .seccion-tab.active {
       background: rgba(102, 126, 234, 0.1);
       border-color: var(--modulo-color);
-      color: #1e293b;
+      color: var(--ink);
     }
 
     .tab-icon {
@@ -630,11 +630,11 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
 
     /* Contenido */
     .seccion-intro h2 {
-      color: #1e293b;
+      color: var(--ink);
     }
 
     .seccion-descripcion {
-      color: #64748b;
+      color: var(--soft);
     }
 
     /* Galería */
@@ -643,8 +643,8 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
     }
 
     .galeria-item {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
+      background: var(--sup-2);
+      border: 1px solid var(--line);
     }
 
     .galeria-item:hover {
@@ -652,25 +652,25 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
     }
 
     .imagen-wrapper {
-      background: #e2e8f0;
+      background: var(--line);
     }
 
     .imagen-info h4 {
-      color: #1e293b;
+      color: var(--ink);
     }
 
     .imagen-info p {
-      color: #64748b;
+      color: var(--soft);
     }
 
     /* CTA */
     .cta-section {
       background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
-      border-top: 1px solid #e2e8f0;
+      border-top: 1px solid var(--line);
     }
 
     .cta-section p {
-      color: #64748b;
+      color: var(--soft);
     }
   }
 </style>

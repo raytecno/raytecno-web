@@ -27,10 +27,10 @@
 
   /* ── Superficies y texto · TEMA CLARO ────────────────────────────────── */
   --bg: #fafaf8;        /* fondo de página */
-  --panel: #ffffff;     /* tarjetas, desplegables, elementos elevados */
+  --panel: var(--panel);     /* tarjetas, desplegables, elementos elevados */
   --sup-2: #f2f0eb;     /* banda alterna suave, sin llegar a invertir */
   --ink: #1c1b19;       /* texto principal */
-  --on-ink: #ffffff;    /* texto SOBRE un fondo de color --ink */
+  --on-ink: var(--panel);    /* texto SOBRE un fondo de color --ink */
   --soft: #5e5b55;      /* texto secundario */
   --faint: #9a968e;     /* etiquetas, metadatos */
   --line: #e4e1da;      /* filetes y bordes */

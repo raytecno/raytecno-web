@@ -509,7 +509,7 @@ const contactUrl = getPageUrl('contacto', lang);
                     x2="56"
                     y2="56"
                   >
-                    <stop stop-color="#667eea"></stop>
+                    <stop stop-color="var(--accent)"></stop>
                     <stop offset="1" stop-color="#764ba2"></stop>
                   </linearGradient>
                 </defs>
@@ -807,15 +807,15 @@ const contactUrl = getPageUrl('contacto', lang);
 <style>
   /* Variables */
   :root {
-    --primary: #667eea;
+    --primary: var(--accent);
     --primary-dark: #5a67d8;
     --secondary: #764ba2;
     --success: #10b981;
-    --bg-dark: #0f172a;
+    --bg-dark: var(--ink);
     --bg-card: rgba(255, 255, 255, 0.03);
     --border: rgba(255, 255, 255, 0.1);
-    --text: #e2e8f0;
-    --text-muted: #94a3b8;
+    --text: var(--line);
+    --text-muted: var(--soft);
   }
 
   .legal-page {
@@ -1348,16 +1348,16 @@ const contactUrl = getPageUrl('contacto', lang);
   /* Responsive - MÓVIL TEMA BLANCO */
   @media (max-width: 768px) {
     :root {
-      --bg-dark: #ffffff;
+      --bg-dark: var(--panel);
       --bg-card: rgba(0, 0, 0, 0.02);
       --border: rgba(0, 0, 0, 0.1);
-      --text: #1e293b;
-      --text-muted: #64748b;
+      --text: var(--ink);
+      --text-muted: var(--soft);
     }
 
     .legal-page {
-      background: #ffffff;
-      color: #1e293b;
+      background: var(--panel);
+      color: var(--ink);
     }
 
     .hero {
@@ -1367,7 +1367,7 @@ const contactUrl = getPageUrl('contacto', lang);
         rgba(102, 126, 234, 0.05) 0%,
         rgba(118, 75, 162, 0.05) 100%
       );
-      border-bottom-color: #e2e8f0;
+      border-bottom-color: var(--line);
     }
 
     .badge {
@@ -1375,38 +1375,38 @@ const contactUrl = getPageUrl('contacto', lang);
     }
 
     .hero h1 {
-      background: linear-gradient(135deg, #1e293b, #334155);
+      background: linear-gradient(135deg, var(--ink), #334155);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
     .subtitle {
-      color: #64748b;
+      color: var(--soft);
     }
 
     .last-update {
-      color: #94a3b8;
+      color: var(--soft);
     }
 
     .section-card {
       padding: 1.5rem;
-      background: #ffffff;
-      border-color: #e2e8f0;
+      background: var(--panel);
+      border-color: var(--line);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     }
 
     .section-card h2 {
-      color: #1e293b;
-      border-bottom-color: #e2e8f0;
+      color: var(--ink);
+      border-bottom-color: var(--line);
     }
 
     .data-item .label {
-      color: #64748b;
+      color: var(--soft);
     }
 
     .data-item .value {
-      color: #1e293b;
+      color: var(--ink);
     }
 
     .data-item .value.highlight {
@@ -1414,24 +1414,24 @@ const contactUrl = getPageUrl('contacto', lang);
     }
 
     .subsection h3 {
-      color: #1e293b;
+      color: var(--ink);
     }
 
     .subsection {
-      border-top-color: #e2e8f0;
+      border-top-color: var(--line);
     }
 
     .tech-item {
-      background: #f8fafc;
-      border-color: #e2e8f0;
+      background: var(--sup-2);
+      border-color: var(--line);
     }
 
     .tech-label {
-      color: #64748b;
+      color: var(--soft);
     }
 
     .tech-value {
-      color: #1e293b;
+      color: var(--ink);
     }
 
     .feature-list li {
@@ -1447,19 +1447,19 @@ const contactUrl = getPageUrl('contacto', lang);
     }
 
     .yes-no-grid {
-      border-top-color: #e2e8f0;
+      border-top-color: var(--line);
     }
 
     .yes-no-item {
       flex-direction: column;
       gap: 0.75rem;
       text-align: center;
-      background: #f8fafc;
-      border-color: #e2e8f0;
+      background: var(--sup-2);
+      border-color: var(--line);
     }
 
     .yes-no-item .question {
-      color: #64748b;
+      color: var(--soft);
     }
 
     .company-info {
@@ -1469,15 +1469,15 @@ const contactUrl = getPageUrl('contacto', lang);
     }
 
     .company-details h3 {
-      color: #1e293b;
+      color: var(--ink);
     }
 
     .detail-row .label {
-      color: #64748b;
+      color: var(--soft);
     }
 
     .detail-row .value {
-      color: #1e293b;
+      color: var(--ink);
     }
 
     .conformity-box {
@@ -1486,7 +1486,7 @@ const contactUrl = getPageUrl('contacto', lang);
     }
 
     .conformity-box p {
-      color: #1e293b;
+      color: var(--ink);
     }
 
     .conformity-box li {
@@ -1496,45 +1496,45 @@ const contactUrl = getPageUrl('contacto', lang);
     .signature-info {
       flex-direction: column;
       gap: 1rem;
-      border-top-color: #e2e8f0;
+      border-top-color: var(--line);
     }
 
     .signature-item .label {
-      color: #64748b;
+      color: var(--soft);
     }
 
     .signature-item .value {
-      color: #1e293b;
+      color: var(--ink);
     }
 
     .contact-item {
-      background: #f8fafc;
-      border-color: #e2e8f0;
+      background: var(--sup-2);
+      border-color: var(--line);
     }
 
     .contact-label {
-      color: #64748b;
+      color: var(--soft);
     }
 
     .contact-value {
-      color: #1e293b;
+      color: var(--ink);
     }
 
     .compliance-intro {
-      color: #64748b;
+      color: var(--soft);
     }
 
     .compliance-item {
-      background: #f8fafc;
-      border-color: #e2e8f0;
+      background: var(--sup-2);
+      border-color: var(--line);
     }
 
     .compliance-item h4 {
-      color: #1e293b;
+      color: var(--ink);
     }
 
     .compliance-item p {
-      color: #64748b;
+      color: var(--soft);
     }
 
     .compliance-icon {
@@ -1551,13 +1551,13 @@ const contactUrl = getPageUrl('contacto', lang);
         rgba(102, 126, 234, 0.05) 0%,
         rgba(118, 75, 162, 0.05) 100%
       );
-      border-color: #e2e8f0;
+      border-color: var(--line);
     }
     .cta-section h2 {
-      color: #1e293b;
+      color: var(--ink);
     }
     .cta-section p {
-      color: #64748b;
+      color: var(--soft);
     }
   }
 </style>

@@ -60,7 +60,7 @@ currencies.forEach(c => {
 
   .currency-label {
     font-size: 0.9rem;
-    color: var(--text-secondary, #94a3b8);
+    color: var(--text-secondary, var(--soft));
     font-weight: 500;
   }
 
@@ -81,7 +81,7 @@ currencies.forEach(c => {
     background: transparent;
     border: none;
     border-radius: 8px;
-    color: var(--text-secondary, #94a3b8);
+    color: var(--text-secondary, var(--soft));
     font-size: 0.9rem;
     font-weight: 500;
     cursor: pointer;
@@ -90,11 +90,11 @@ currencies.forEach(c => {
 
   .currency-btn:hover {
     background: rgba(255, 255, 255, 0.08);
-    color: var(--text-primary, #ffffff);
+    color: var(--text-primary, var(--panel));
   }
 
   .currency-btn.active {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--accent) 0%, #764ba2 100%);
     color: white;
     box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
   }
@@ -115,16 +115,16 @@ currencies.forEach(c => {
     }
 
     .currency-btn {
-      color: #64748b;
+      color: var(--soft);
     }
 
     .currency-btn:hover {
       background: rgba(0, 0, 0, 0.06);
-      color: #1e293b;
+      color: var(--ink);
     }
 
     .currency-label {
-      color: #64748b;
+      color: var(--soft);
     }
   }
 </style>

@@ -88,7 +88,7 @@ export interface ModuloConfig {
  */
 export const modulosConfig: Record<ModuloId, ModuloConfig> = {
   maestros: {
-    color: '#667eea',
+    color: 'var(--accent)',
     icon: `<svg viewBox="0 0 64 64" fill="none"><rect x="8" y="12" width="48" height="40" rx="4" fill="currentColor" opacity="0.2"/><rect x="14" y="18" width="36" height="6" rx="2" fill="currentColor"/><rect x="14" y="28" width="24" height="4" rx="1" fill="currentColor" opacity="0.6"/><rect x="14" y="36" width="30" height="4" rx="1" fill="currentColor" opacity="0.6"/><rect x="14" y="44" width="20" height="4" rx="1" fill="currentColor" opacity="0.6"/><circle cx="46" cy="44" r="6" fill="#10b981"/><path d="M44 44l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>`,
     secciones: [
       { id: 'articulos', prefix: 'A' },

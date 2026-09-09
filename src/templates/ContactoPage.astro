@@ -647,18 +647,18 @@ const CONTACT_API_URL =
 <style>
   /* Variables */
   :root {
-    --bg-dark: #0f172a;
+    --bg-dark: var(--ink);
     --bg-card: rgba(30, 41, 59, 0.5);
     --border-subtle: rgba(255, 255, 255, 0.1);
-    --text-primary: #ffffff;
-    --text-secondary: #94a3b8;
-    --text-muted: #64748b;
-    --accent-purple: #667eea;
+    --text-primary: var(--panel);
+    --text-secondary: var(--soft);
+    --text-muted: var(--soft);
+    --accent-purple: var(--accent);
     --accent-green: #10b981;
   }
 
   .contacto-page {
-    background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+    background: linear-gradient(180deg, var(--ink) 0%, var(--ink) 100%);
     min-height: 100vh;
   }
 
@@ -684,14 +684,14 @@ const CONTACT_API_URL =
     font-weight: 700;
     margin: 0 0 1rem;
     line-height: 1.1;
-    background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+    background: linear-gradient(135deg, #fff 0%, var(--soft) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .gradient-text {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--accent) 0%, #764ba2 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -817,13 +817,13 @@ const CONTACT_API_URL =
   }
 
   .form-group select {
-    background-color: #1e293b;
-    color: #ffffff;
+    background-color: var(--ink);
+    color: var(--panel);
   }
 
   .form-group select option {
-    background-color: #1e293b;
-    color: #ffffff;
+    background-color: var(--ink);
+    color: var(--panel);
   }
 
   .input-prefix {
@@ -915,7 +915,7 @@ const CONTACT_API_URL =
   }
 
   .channel-icon.phone-bg {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--accent) 0%, #764ba2 100%);
   }
 
   .channel-icon.whatsapp-bg {
@@ -1045,40 +1045,40 @@ const CONTACT_API_URL =
      ============================================ */
   @media (max-width: 768px) {
     :root {
-      --bg-dark: #ffffff;
+      --bg-dark: var(--panel);
       --bg-card: rgba(248, 250, 252, 0.95);
-      --text-primary: #1e293b;
+      --text-primary: var(--ink);
       --text-secondary: #475569;
-      --text-muted: #64748b;
+      --text-muted: var(--soft);
       --border-subtle: rgba(0, 0, 0, 0.08);
-      --accent-purple: #667eea;
+      --accent-purple: var(--accent);
     }
 
     .contacto-page {
-      background: #ffffff !important;
+      background: var(--panel) !important;
     }
 
     .contacto-hero h1 {
-      background: linear-gradient(135deg, #1e293b 0%, #475569 100%) !important;
+      background: linear-gradient(135deg, var(--ink) 0%, #475569 100%) !important;
       -webkit-background-clip: text !important;
       -webkit-text-fill-color: transparent !important;
     }
 
     .contacto-hero p {
-      color: #64748b !important;
+      color: var(--soft) !important;
     }
 
     .contact-card {
-      background: #f8fafc !important;
-      border: 1px solid #e2e8f0 !important;
+      background: var(--sup-2) !important;
+      border: 1px solid var(--line) !important;
     }
 
     .card-header h3 {
-      color: #1e293b !important;
+      color: var(--ink) !important;
     }
 
     .card-header p {
-      color: #64748b !important;
+      color: var(--soft) !important;
     }
 
     .form-group label {
@@ -1088,41 +1088,41 @@ const CONTACT_API_URL =
     .form-group input,
     .form-group select,
     .form-group textarea {
-      background: #ffffff !important;
-      border: 1px solid #e2e8f0 !important;
-      color: #1e293b !important;
+      background: var(--panel) !important;
+      border: 1px solid var(--line) !important;
+      color: var(--ink) !important;
     }
 
     .form-group select {
-      background-color: #ffffff !important;
-      color: #1e293b !important;
+      background-color: var(--panel) !important;
+      color: var(--ink) !important;
     }
 
     .form-group select option {
-      background: #ffffff !important;
-      color: #1e293b !important;
+      background: var(--panel) !important;
+      color: var(--ink) !important;
     }
 
     .form-group input::placeholder,
     .form-group textarea::placeholder {
-      color: #94a3b8 !important;
+      color: var(--soft) !important;
     }
 
     .input-prefix {
-      background: #ffffff !important;
-      border: 1px solid #e2e8f0 !important;
+      background: var(--panel) !important;
+      border: 1px solid var(--line) !important;
     }
 
     .input-prefix span {
-      background: #f8fafc !important;
-      color: #64748b !important;
-      border-right: 1px solid #e2e8f0 !important;
+      background: var(--sup-2) !important;
+      color: var(--soft) !important;
+      border-right: 1px solid var(--line) !important;
     }
 
     /* Canales de contacto */
     .contact-channel {
-      background: #ffffff !important;
-      border: 1px solid #e2e8f0 !important;
+      background: var(--panel) !important;
+      border: 1px solid var(--line) !important;
     }
 
     .contact-channel:hover {
@@ -1130,25 +1130,25 @@ const CONTACT_API_URL =
     }
 
     .channel-value {
-      color: #1e293b !important;
+      color: var(--ink) !important;
     }
 
     .channel-label {
-      color: #64748b !important;
+      color: var(--soft) !important;
     }
 
     /* Información adicional */
     .contact-info-grid {
-      border-top: 1px solid #e2e8f0 !important;
+      border-top: 1px solid var(--line) !important;
     }
 
     .info-block {
-      background: #ffffff !important;
-      border: 1px solid #e2e8f0 !important;
+      background: var(--panel) !important;
+      border: 1px solid var(--line) !important;
     }
 
     .info-value {
-      color: #1e293b !important;
+      color: var(--ink) !important;
     }
   }
 </style>

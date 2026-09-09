@@ -514,11 +514,11 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
   :root {
     --bg-dark: #0a0a0f;
     --bg-card: rgba(20, 20, 30, 0.6);
-    --text-primary: #ffffff;
-    --text-secondary: #94a3b8;
-    --text-muted: #64748b;
+    --text-primary: var(--panel);
+    --text-secondary: var(--soft);
+    --text-muted: var(--soft);
     --border-subtle: rgba(255, 255, 255, 0.1);
-    --accent-purple: #667eea;
+    --accent-purple: var(--accent);
     --accent-green: #10b981;
     --accent-amber: #f59e0b;
     --accent-cyan: #06b6d4;
@@ -594,7 +594,7 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
     font-size: 2.5rem;
     font-weight: 700;
     margin: 0 0 1rem;
-    background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+    background: linear-gradient(135deg, #fff 0%, var(--soft) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -690,7 +690,7 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
     background: rgba(255, 255, 255, 0.1);
     border-radius: 6px;
     font-size: 0.75rem;
-    color: #ffffff;
+    color: var(--panel);
     font-weight: 500;
   }
 
@@ -759,7 +759,7 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
     border: 1px solid rgba(217, 119, 87, 0.3);
     border-radius: 10px;
     font-size: 0.85rem;
-    color: #ffffff;
+    color: var(--panel);
     font-weight: 500;
   }
 
@@ -808,7 +808,7 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
   .service-name {
     font-size: 0.8rem;
     font-weight: 500;
-    color: #ffffff;
+    color: var(--panel);
   }
 
   /* Data & Storage */
@@ -879,7 +879,7 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
   }
 
   .node-result:hover {
-    border-color: #667eea;
+    border-color: var(--accent);
     box-shadow: 0 16px 48px rgba(102, 126, 234, 0.3);
   }
 
@@ -889,7 +889,7 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
 
   .node-result .node-title {
     font-size: 1.5rem;
-    background: linear-gradient(135deg, #667eea, #a78bfa);
+    background: linear-gradient(135deg, var(--accent), #a78bfa);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -917,7 +917,7 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
     border: 1px solid rgba(102, 126, 234, 0.3);
     border-radius: 8px;
     font-size: 0.8rem;
-    color: #ffffff;
+    color: var(--panel);
     font-weight: 500;
   }
 
@@ -979,7 +979,7 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
   .tech-name {
     font-size: 0.7rem;
     font-weight: 500;
-    color: #ffffff;
+    color: var(--panel);
   }
 
   /* CTA Section */
@@ -1012,7 +1012,7 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
     align-items: center;
     gap: 10px;
     padding: 14px 28px;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, var(--accent), #764ba2);
     color: white;
     text-decoration: none;
     border-radius: 12px;
@@ -1089,51 +1089,51 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
    ============================================ */
   @media (max-width: 768px) {
     :root {
-      --bg-dark: #ffffff;
+      --bg-dark: var(--panel);
       --bg-card: rgba(248, 250, 252, 0.95);
-      --text-primary: #1e293b;
+      --text-primary: var(--ink);
       --text-secondary: #475569;
-      --text-muted: #64748b;
+      --text-muted: var(--soft);
       --border-subtle: rgba(0, 0, 0, 0.08);
     }
 
     .tech-page {
-      background: #ffffff !important;
+      background: var(--panel) !important;
     }
 
     .tech-hero {
-      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%) !important;
+      background: linear-gradient(135deg, var(--panel) 0%, var(--sup-2) 100%) !important;
     }
 
     .hero-title {
-      background: linear-gradient(135deg, #1e293b 0%, #475569 100%) !important;
+      background: linear-gradient(135deg, var(--ink) 0%, #475569 100%) !important;
       -webkit-background-clip: text !important;
       -webkit-text-fill-color: transparent !important;
     }
 
     .hero-subtitle {
-      color: #64748b !important;
+      color: var(--soft) !important;
     }
 
     .node {
-      background: #f8fafc !important;
-      border: 1px solid #e2e8f0 !important;
+      background: var(--sup-2) !important;
+      border: 1px solid var(--line) !important;
     }
 
     .node-subtitle {
-      color: #64748b !important;
+      color: var(--soft) !important;
     }
 
     .tag {
       background: rgba(102, 126, 234, 0.1) !important;
-      color: #667eea !important;
+      color: var(--accent) !important;
     }
 
     .ai-feature,
     .service {
       background: rgba(0, 0, 0, 0.04) !important;
       color: #334155 !important;
-      border: 1px solid #e2e8f0 !important;
+      border: 1px solid var(--line) !important;
     }
 
     .node-ai,
@@ -1150,13 +1150,13 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
     }
 
     .result-box {
-      background: #f8fafc !important;
-      border: 1px solid #e2e8f0 !important;
+      background: var(--sup-2) !important;
+      border: 1px solid var(--line) !important;
     }
 
     .module-tag {
       background: rgba(102, 126, 234, 0.1) !important;
-      color: #667eea !important;
+      color: var(--accent) !important;
     }
 
     .cta-section {
@@ -1165,22 +1165,22 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
         rgba(102, 126, 234, 0.05) 0%,
         rgba(118, 75, 162, 0.05) 100%
       ) !important;
-      border-top: 1px solid #e2e8f0 !important;
+      border-top: 1px solid var(--line) !important;
     }
 
     .cta-section h2 {
-      color: #1e293b !important;
+      color: var(--ink) !important;
     }
 
     .cta-section p {
-      color: #64748b !important;
+      color: var(--soft) !important;
     }
 
     /* Títulos de nodos - NEGRO BOLD en móvil */
     .node-title {
-      color: #1e293b !important;
+      color: var(--ink) !important;
       font-weight: 700 !important;
-      -webkit-text-fill-color: #1e293b !important;
+      -webkit-text-fill-color: var(--ink) !important;
       background: none !important;
     }
 
@@ -1192,9 +1192,9 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
     .node-data .node-title,
     .node-storage .node-title,
     .node-result .node-title {
-      color: #1e293b !important;
+      color: var(--ink) !important;
       font-weight: 700 !important;
-      -webkit-text-fill-color: #1e293b !important;
+      -webkit-text-fill-color: var(--ink) !important;
       background: none !important;
     }
 
@@ -1208,13 +1208,13 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
     .service-name,
     .ai-feature,
     .result-feature {
-      color: #1e293b !important;
+      color: var(--ink) !important;
       font-weight: 600 !important;
     }
 
     /* Tags de base de datos */
     .tag {
-      color: #1e293b !important;
+      color: var(--ink) !important;
       font-weight: 600 !important;
       background: rgba(102, 126, 234, 0.15) !important;
       border: 1px solid rgba(102, 126, 234, 0.3) !important;
@@ -1222,7 +1222,7 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
 
     /* Tech names en el footer */
     .tech-name {
-      color: #1e293b !important;
+      color: var(--ink) !important;
       font-weight: 600 !important;
     }
 

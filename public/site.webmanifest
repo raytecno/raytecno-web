@@ -4,8 +4,8 @@
   "description": "Software ERP especializado para la industria joyera",
   "start_url": "/es/",
   "display": "standalone",
-  "background_color": "#0f172a",
-  "theme_color": "#667eea",
+  "background_color": "var(--ink)",
+  "theme_color": "var(--accent)",
   "icons": [
     {
       "src": "/favicon-192.png",

@@ -155,7 +155,7 @@ const currentYear = new Date().getFullYear();
               x2="100%"
               y2="100%"
             >
-              <stop offset="0%" style="stop-color:#667eea"></stop>
+              <stop offset="0%" style="stop-color:var(--accent)"></stop>
               <stop offset="100%" style="stop-color:#764ba2"></stop>
             </linearGradient>
           </defs>
@@ -337,7 +337,7 @@ const currentYear = new Date().getFullYear();
   }
 
   .footer-col p {
-    color: #94a3b8;
+    color: var(--soft);
     font-size: 0.9rem;
     margin-bottom: 8px;
     line-height: 1.6;
@@ -352,7 +352,7 @@ const currentYear = new Date().getFullYear();
 
   .footer-col a {
     display: block;
-    color: #94a3b8;
+    color: var(--soft);
     font-size: 0.9rem;
     margin-bottom: 10px;
     transition: all 0.2s;
@@ -389,9 +389,9 @@ const currentYear = new Date().getFullYear();
   .footer-bottom {
     text-align: center;
     padding: 20px;
-    border-top: 1px solid #1e293b;
+    border-top: 1px solid var(--ink);
     font-size: 0.85rem;
-    color: #64748b;
+    color: var(--soft);
   }
 
   /* Redes sociales - minimalista */
@@ -403,7 +403,7 @@ const currentYear = new Date().getFullYear();
   }
 
   .social-row a {
-    color: #64748b;
+    color: var(--soft);
     transition: color 0.2s;
   }
 
@@ -429,9 +429,9 @@ const currentYear = new Date().getFullYear();
 
   @media (max-width: 768px) {
     .footer {
-      background: #f8fafc;
-      color: #1e293b;
-      border-top: 1px solid #e2e8f0;
+      background: var(--sup-2);
+      color: var(--ink);
+      border-top: 1px solid var(--line);
     }
     .footer-grid {
       grid-template-columns: 1fr;
@@ -443,19 +443,19 @@ const currentYear = new Date().getFullYear();
       justify-content: center;
     }
     .footer-logo h4 {
-      color: #1e293b;
+      color: var(--ink);
     }
     .footer-col p {
-      color: #64748b;
+      color: var(--soft);
     }
     .footer-col h5 {
-      color: #1e293b;
+      color: var(--ink);
     }
     .footer-col a {
-      color: #64748b;
+      color: var(--soft);
     }
     .footer-col a:hover {
-      color: #1e293b;
+      color: var(--ink);
       transform: none;
     }
     .verifactu-link {
@@ -463,14 +463,14 @@ const currentYear = new Date().getFullYear();
       border-top: 1px solid rgba(0,0,0,0.1);
     }
     .footer-bottom {
-      border-top: 1px solid #e2e8f0;
-      color: #94a3b8;
+      border-top: 1px solid var(--line);
+      color: var(--soft);
     }
     .social-row a {
-      color: #94a3b8;
+      color: var(--soft);
     }
     .social-row a:hover {
-      color: #667eea;
+      color: var(--accent);
     }
   }
 </style>

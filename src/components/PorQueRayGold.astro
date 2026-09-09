@@ -264,7 +264,7 @@ const contactUrl = getPageUrl('contacto', lang);
      ============================================ */
   .porque-section {
     padding: 5rem 1.5rem;
-    background: #0f172a;
+    background: var(--ink);
   }
 
   .container {
@@ -315,7 +315,7 @@ const contactUrl = getPageUrl('contacto', lang);
   }
 
   .section-header p {
-    color: #94a3b8;
+    color: var(--soft);
     font-size: 1.1rem;
     margin: 0;
     max-width: 600px;
@@ -340,7 +340,7 @@ const contactUrl = getPageUrl('contacto', lang);
   }
 
   .diferenciador-card:hover {
-    border-color: #667eea;
+    border-color: var(--accent);
     transform: translateY(-2px);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   }
@@ -355,7 +355,7 @@ const contactUrl = getPageUrl('contacto', lang);
     width: 48px;
     height: 48px;
     min-width: 48px;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, var(--accent), #764ba2);
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -385,7 +385,7 @@ const contactUrl = getPageUrl('contacto', lang);
 
   .diferenciador-content p {
     font-size: 0.9rem;
-    color: #94a3b8;
+    color: var(--soft);
     line-height: 1.6;
     margin: 0 0 0.75rem;
   }
@@ -410,7 +410,7 @@ const contactUrl = getPageUrl('contacto', lang);
   }
 
   .porque-cta p {
-    color: #e2e8f0;
+    color: var(--line);
     font-size: 1.1rem;
     margin: 0 0 1rem;
   }
@@ -418,7 +418,7 @@ const contactUrl = getPageUrl('contacto', lang);
   .cta-button {
     display: inline-flex;
     padding: 0.875rem 1.75rem;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, var(--accent), #764ba2);
     color: white;
     text-decoration: none;
     border-radius: 10px;
@@ -437,11 +437,11 @@ const contactUrl = getPageUrl('contacto', lang);
   @media (max-width: 768px) {
     .porque-section {
       padding: 3rem 1rem;
-      background: #ffffff;
+      background: var(--panel);
     }
 
         .porque-link a {
-      color: #667eea;
+      color: var(--accent);
     }
 
     .porque-link a:hover {
@@ -455,11 +455,11 @@ const contactUrl = getPageUrl('contacto', lang);
 
     .section-header h2 {
       font-size: 1.5rem;
-      color: #1e293b;
+      color: var(--ink);
     }
 
     .section-header p {
-      color: #64748b;
+      color: var(--soft);
     }
 
     .diferenciadores-grid {
@@ -467,37 +467,37 @@ const contactUrl = getPageUrl('contacto', lang);
     }
 
     .diferenciador-card {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
+      background: var(--sup-2);
+      border: 1px solid var(--line);
     }
 
     .diferenciador-card:hover {
-      background: #f1f5f9;
+      background: var(--line);
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
     }
 
     .diferenciador-card.featured {
       grid-column: span 1;
-      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, #f8fafc 100%);
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, var(--sup-2) 100%);
       border-color: rgba(245, 158, 11, 0.3);
     }
 
     .diferenciador-content h3 {
-      color: #1e293b;
+      color: var(--ink);
     }
 
     .diferenciador-content p {
-      color: #64748b;
+      color: var(--soft);
     }
 
     .diferenciador-stat {
       background: rgba(102, 126, 234, 0.1);
-      color: #667eea;
+      color: var(--accent);
     }
 
     .porque-cta {
       background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
-      border: 1px solid #e2e8f0;
+      border: 1px solid var(--line);
     }
 
     .porque-cta p {

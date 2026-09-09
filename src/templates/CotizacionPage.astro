@@ -499,15 +499,15 @@ const currency = currencyInfo[lang];
 
 <style>
   :root {
-    --bg-dark: #0f172a;
+    --bg-dark: var(--ink);
     --bg-card: rgba(30, 41, 59, 0.8);
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --text-muted: #64748b;
-    --accent: #667eea;
+    --text-primary: var(--sup-2);
+    --text-secondary: var(--soft);
+    --text-muted: var(--soft);
+    --accent: var(--accent);
     --accent-light: #a5b4fc;
     --gold-color: #fbbf24;
-    --silver-color: #94a3b8;
+    --silver-color: var(--soft);
     --positive: #10b981;
     --negative: #ef4444;
     --border: rgba(255, 255, 255, 0.1);
@@ -635,7 +635,7 @@ const currency = currencyInfo[lang];
   }
 
   .metal-icon.silver {
-    background: linear-gradient(135deg, #e2e8f0 0%, #94a3b8 100%);
+    background: linear-gradient(135deg, var(--line) 0%, var(--soft) 100%);
     color: #334155;
   }
 
@@ -943,16 +943,16 @@ const currency = currencyInfo[lang];
     }
 
     :root {
-      --bg-dark: #ffffff;
-      --bg-card: #f8fafc;
-      --text-primary: #1e293b;
+      --bg-dark: var(--panel);
+      --bg-card: var(--sup-2);
+      --text-primary: var(--ink);
       --text-secondary: #475569;
-      --text-muted: #64748b;
+      --text-muted: var(--soft);
       --border: rgba(0, 0, 0, 0.1);
     }
 
     .prices-page {
-      background: #ffffff;
+      background: var(--panel);
     }
 
     .prices-hero {
@@ -960,30 +960,30 @@ const currency = currencyInfo[lang];
     }
 
     .hero-title {
-      color: #1e293b;
+      color: var(--ink);
     }
 
     .price-card,
     .quick-calc,
     .secondary-card {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
+      background: var(--sup-2);
+      border: 1px solid var(--line);
     }
 
     .calc-input-group input,
     .calc-input-group select {
       background: white;
-      border: 1px solid #e2e8f0;
-      color: #1e293b;
+      border: 1px solid var(--line);
+      color: var(--ink);
     }
 
     .cta-section {
       background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
-      border-top: 1px solid #e2e8f0;
+      border-top: 1px solid var(--line);
     }
 
     .cta-section h2 {
-      color: #1e293b;
+      color: var(--ink);
     }
   }
 </style>

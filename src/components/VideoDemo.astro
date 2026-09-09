@@ -306,7 +306,7 @@ const contactUrl = getPageUrl('contacto', lang);
 
   .section-subtitle {
     font-size: 1.1rem;
-    color: #94a3b8;
+    color: var(--soft);
     margin: 0;
     max-width: 500px;
     margin: 0 auto;
@@ -489,12 +489,12 @@ const contactUrl = getPageUrl('contacto', lang);
   .feature-value {
     font-size: 1rem;
     font-weight: 600;
-    color: #ffffff;
+    color: var(--panel);
   }
 
   .feature-label {
     font-size: 0.75rem;
-    color: #64748b;
+    color: var(--soft);
   }
 
   .feature-divider {
@@ -509,7 +509,7 @@ const contactUrl = getPageUrl('contacto', lang);
   }
 
   .cta-text {
-    color: #94a3b8;
+    color: var(--soft);
     margin: 0 0 20px 0;
     font-size: 1rem;
   }
@@ -550,7 +550,7 @@ const contactUrl = getPageUrl('contacto', lang);
   @media (max-width: 768px) {
     .video-section {
       padding: 60px 0;
-      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%);
+      background: linear-gradient(180deg, var(--panel) 0%, var(--sup-2) 50%, var(--panel) 100%);
     }
 
     .video-section::before {
@@ -568,15 +568,15 @@ const contactUrl = getPageUrl('contacto', lang);
     }
 
     .section-title {
-      color: #1e293b;
+      color: var(--ink);
     }
 
     .section-subtitle {
-      color: #64748b;
+      color: var(--soft);
     }
 
     .video-frame {
-      background: #f1f5f9;
+      background: var(--line);
       box-shadow: 
         0 0 0 1px rgba(139, 92, 246, 0.1),
         0 15px 30px -12px rgba(0, 0, 0, 0.15);
@@ -590,7 +590,7 @@ const contactUrl = getPageUrl('contacto', lang);
       flex-direction: column;
       gap: 16px;
       background: rgba(0, 0, 0, 0.02);
-      border-top: 1px solid #e2e8f0;
+      border-top: 1px solid var(--line);
     }
 
     .feature-icon {
@@ -598,17 +598,17 @@ const contactUrl = getPageUrl('contacto', lang);
     }
 
     .feature-value {
-      color: #1e293b;
+      color: var(--ink);
     }
 
     .feature-label {
-      color: #64748b;
+      color: var(--soft);
     }
 
     .feature-divider {
       width: 60px;
       height: 1px;
-      background: #e2e8f0;
+      background: var(--line);
     }
 
     .play-button {
@@ -622,7 +622,7 @@ const contactUrl = getPageUrl('contacto', lang);
     }
 
     .cta-text {
-      color: #64748b;
+      color: var(--soft);
     }
 
     .cta-button {

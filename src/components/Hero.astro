@@ -285,7 +285,7 @@ const carouselImages = [
   .hero-gradient {
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+    background: linear-gradient(135deg, var(--ink) 0%, var(--ink) 50%, var(--ink) 100%);
   }
 
   .hero-pattern {
@@ -388,13 +388,13 @@ const carouselImages = [
 
   .hero-subtitle {
     font-size: 1.15rem;
-    color: #94a3b8;
+    color: var(--soft);
     line-height: 1.7;
     margin: 0 0 2rem;
   }
 
   .hero-subtitle strong {
-    color: #e2e8f0;
+    color: var(--line);
   }
 
   .hero-stats {
@@ -420,7 +420,7 @@ const carouselImages = [
 
   .stat-label {
     font-size: 0.8rem;
-    color: #64748b;
+    color: var(--soft);
   }
 
   .stat-divider {
@@ -440,7 +440,7 @@ const carouselImages = [
     align-items: center;
     gap: 0.5rem;
     padding: 1rem 1.75rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--accent) 0%, #764ba2 100%);
     color: white;
     text-decoration: none;
     border-radius: 12px;
@@ -470,7 +470,7 @@ const carouselImages = [
     align-items: center;
     padding: 1rem 1.75rem;
     background: transparent;
-    color: #94a3b8;
+    color: var(--soft);
     text-decoration: none;
     border: 1px solid #334155;
     border-radius: 12px;
@@ -481,7 +481,7 @@ const carouselImages = [
 
   .cta-secondary:hover {
     color: white;
-    border-color: #94a3b8;
+    border-color: var(--soft);
     background: rgba(255, 255, 255, 0.05);
   }
 
@@ -604,7 +604,7 @@ const carouselImages = [
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
-    color: #64748b;
+    color: var(--soft);
     font-size: 0.75rem;
     animation: bounce 2s ease-in-out infinite;
   }
@@ -665,7 +665,7 @@ const carouselImages = [
 
     /* Fondo blanco */
     .hero-gradient {
-      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%);
+      background: linear-gradient(135deg, var(--panel) 0%, var(--sup-2) 50%, var(--panel) 100%);
     }
 
     .hero-pattern {
@@ -676,12 +676,12 @@ const carouselImages = [
     /* Textos oscuros */
     h1 {
       font-size: 1.75rem;
-      color: #1e293b;
+      color: var(--ink);
     }
 
     .hero-subtitle {
       font-size: 1rem;
-      color: #64748b;
+      color: var(--soft);
     }
 
     .hero-subtitle strong {
@@ -700,7 +700,7 @@ const carouselImages = [
     }
 
     .hero-badge span:last-child {
-      color: #667eea;
+      color: var(--accent);
     }
 
     .verifactu-badge {
@@ -720,21 +720,21 @@ const carouselImages = [
     .hero-stats {
       flex-direction: column;
       gap: 1rem;
-      border-color: #e2e8f0;
+      border-color: var(--line);
     }
 
     .stat-number {
-      color: #1e293b;
+      color: var(--ink);
     }
 
     .stat-label {
-      color: #64748b;
+      color: var(--soft);
     }
 
     .stat-divider {
       width: 40px;
       height: 1px;
-      background: #e2e8f0;
+      background: var(--line);
     }
 
     /* CTAs */
@@ -749,26 +749,26 @@ const carouselImages = [
     }
 
     .cta-secondary {
-      color: #64748b;
-      border-color: #e2e8f0;
+      color: var(--soft);
+      border-color: var(--line);
     }
 
     .cta-secondary:hover {
-      color: #1e293b;
-      border-color: #94a3b8;
+      color: var(--ink);
+      border-color: var(--soft);
       background: rgba(0, 0, 0, 0.02);
     }
 
     /* Carrusel */
     .carousel {
-      border-color: #e2e8f0;
+      border-color: var(--line);
       box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
     }
 
     .visual-label {
       background: rgba(255, 255, 255, 0.95);
-      color: #1e293b;
-      border: 1px solid #e2e8f0;
+      color: var(--ink);
+      border: 1px solid var(--line);
     }
 
     .scroll-indicator {
