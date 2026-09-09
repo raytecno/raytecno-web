@@ -158,6 +158,17 @@ const contactUrl = getPageUrl('contacto', lang);
       <p>{t.subtitle}</p>
     </div>
 
+    {lang === "es" && (
+  <p class="porque-link">
+    <a href={getPageUrl("queEsRayGold", lang)}
+       data-ga="cta_click"
+       data-ga-elemento="que_es_raygold"
+       data-ga-ubicacion="home_porque">
+      Qué es exactamente RayGold, y qué no es
+    </a>
+  </p>
+)}
+
     <div class="diferenciadores-grid">
       <!-- Especialistas (featured) -->
       <div class="diferenciador-card featured">
