@@ -156,9 +156,7 @@ const contactUrl = getPageUrl('contacto', lang);
       <span class="section-badge">{t.badge}</span>
       <h2>{t.title}</h2>
       <p>{t.subtitle}</p>
-    </div>
-
-    {lang === "es" && (
+       {lang === "es" && (
   <p class="porque-link">
     <a href={getPageUrl("queEsRayGold", lang)}
        data-ga="cta_click"
@@ -168,6 +166,9 @@ const contactUrl = getPageUrl('contacto', lang);
     </a>
   </p>
 )}
+    </div>
+
+   
 
     <div class="diferenciadores-grid">
       <!-- Especialistas (featured) -->
@@ -274,6 +275,23 @@ const contactUrl = getPageUrl('contacto', lang);
   .section-header {
     text-align: center;
     margin-bottom: 3rem;
+  }
+
+  .porque-link {
+    margin-top: 1rem !important;
+    font-size: 0.95rem !important;
+  }
+
+  .porque-link a {
+    color: #818cf8;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+    transition: color 0.2s ease;
+  }
+
+  .porque-link a:hover {
+    color: #a5b4fc;
   }
 
   .section-badge {
@@ -420,6 +438,14 @@ const contactUrl = getPageUrl('contacto', lang);
     .porque-section {
       padding: 3rem 1rem;
       background: #ffffff;
+    }
+
+        .porque-link a {
+      color: #667eea;
+    }
+
+    .porque-link a:hover {
+      color: #4f46e5;
     }
 
     .section-badge {
