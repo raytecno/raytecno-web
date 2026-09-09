@@ -8,6 +8,14 @@
  * - Header responsive
  * - Footer con redes sociales
  * - WhatsApp flotante
+ *
+ * TEMA CLARO/OSCURO (Septiembre 2026):
+ * - ThemeScript va lo primero del <head>, antes de fuentes y estilos, para
+ *   que no haya destello blanco al cargar en modo oscuro.
+ * - tokens.css define todo el color. Ningún componente escribe ya un #hex.
+ * - CORREGIDO: body tenía  background: var(--ink)  — el color del TEXTO como
+ *   fondo. Ahora usa var(--bg), que es lo que provocaba las bandas de color
+ *   raro en las juntas entre secciones.
  */
 import SEO from "@/components/SEO.astro";
 import Analytics from "@/components/Analytics.astro";
@@ -50,14 +58,13 @@ const {
 <!doctype html>
 <html lang={lang}>
   <head>
-   <ThemeScript /> 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- REDIRECCIÓN .COM → .ES (debe ir PRIMERO) -->
+    <!-- TEMA: lo primero que se ejecuta, antes de pintar nada -->
+    <ThemeScript />
+
+    <!-- REDIRECCIÓN .COM → .ES -->
     <script is:inline>
       (function () {
         var host = window.location.hostname;
@@ -71,6 +78,13 @@ const {
         }
       })();
     </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- SEO Completo (meta, OG, Twitter, Schema JSON-LD) -->
     <SEO
@@ -112,22 +126,13 @@ const {
     padding: 0;
   }
 
-  html {
-    scroll-behavior: smooth;
-  }
-
+  /* Color, fondo y tipografía salen de tokens.css.
+     Aquí solo lo que no es color. */
   body {
-    font-family:
-      "Inter",
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      Roboto,
-      sans-serif;
     line-height: 1.6;
-    color: var(--ink);
-    background: var(--ink);
     min-height: 100vh;
+    background: var(--bg);
+    color: var(--ink);
   }
 
   img {
