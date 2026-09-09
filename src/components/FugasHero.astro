@@ -109,23 +109,19 @@ const urlContacto = getPageUrl('contacto', lang);
 <style>
   /* ── Variables locales · PASO 2: mover al Layout como tokens globales ── */
   .fugas-hero {
-    --bg: #fafaf8;
-    --ink: #1c1b19;
-    --on-ink: var(--panel);
-    --soft: #5e5b55;
-    --faint: #9a968e;
-    --line: #e4e1da;
-    --panel: var(--panel);
-    --accent: #a8862b;
-    --accent-ink: #5e4a12;
-    --accent-soft: rgba(168, 134, 43, 0.1);
-    --velo-fuerte: rgba(250, 250, 248, 0.955);
-    --velo-suave: rgba(250, 250, 248, 0.6);
-    --filtro-img: saturate(0.88) contrast(1.02);
-    --barra: rgba(250, 250, 248, 0.86);
-    --display: 'Fraunces', Georgia, serif;
-    --sans: 'Inter', system-ui, sans-serif;
-    --mono: 'JetBrains Mono', ui-monospace, monospace;
+      --bg: var(--rg-bg);
+  --ink: var(--rg-ink);
+  --on-ink: var(--rg-on-ink);
+  --soft: var(--rg-soft);
+  --faint: var(--rg-faint);
+  --line: var(--rg-line);
+  --panel: var(--rg-panel);
+  --accent: var(--rg-accent);
+  --accent-ink: var(--rg-accent-ink);
+  --accent-soft: var(--rg-accent-soft);
+  --display: var(--rg-display);
+  --sans: var(--rg-sans);
+  --mono: var(--rg-mono);
 
     position: relative;
     overflow: hidden;

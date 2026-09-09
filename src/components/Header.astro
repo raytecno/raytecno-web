@@ -12,13 +12,12 @@
  * - El parámetro idioma lo añade AnalyticsEvents.astro automáticamente
  *
  * TEMA CLARO/OSCURO (Septiembre 2026):
- * - El <header> lleva class="inv inv--barra": superficie invertida.
- *   En tema claro es oscuro, en tema oscuro es claro. Siempre contrasta
- *   con el fondo de la página.
- * - Dentro de .inv, las variables --ink, --soft, --line y --accent ya vienen
- *   invertidas, así que este CSS no necesita saber en qué tema está.
- * - Se han eliminado los colores literales: el azul marino rgba(15,23,42),
- *   los rgba(255,255,255,.x) y el violeta rgba(102,126,234,.x).
+ * - class="rg-inv rg-inv--barra": superficie invertida. En tema claro el menú
+ *   es oscuro, en tema oscuro es claro. Siempre contrasta con el fondo.
+ * - Usa SOLO variables con prefijo --rg-. Las antiguas (--ink, --soft,
+ *   --accent) tienen otro significado en el resto del proyecto y no se tocan.
+ * - Se han eliminado los colores literales: el marino rgba(15,23,42,.95), los
+ *   rgba(255,255,255,.x), el violeta rgba(102,126,234,.x) y el #764ba2.
  * - El header ya NO se vuelve blanco en móvil: mismo color en todos los anchos.
  */
 import { getPageUrl, getToolUrl, type Lang } from "@/config/pages";
@@ -54,9 +53,6 @@ const languages: { code: Lang; name: string; flag: string }[] = [
 const currentLang = languages.find((l) => l.code === lang) || languages[0];
 
 // URLs de navegación - SIN trailing slash
-// getPageUrl ya devuelve sin / (ej: /es/modulos)
-// Azure SWA elimina el trailing slash, así que los links
-// deben coincidir con la URL real y la canonical
 const homeUrl = `/${lang}`;
 const modulosUrl = getPageUrl("modulos", lang);
 const preciosUrl = getPageUrl("precios", lang);
@@ -69,7 +65,6 @@ const queEsUrl = getPageUrl("queEsRayGold", lang);
 const calculadoraUrl = getToolUrl("calculadora", lang);
 const cotizacionUrl = getToolUrl("cotizacion", lang);
 
-// Traducciones del menú
 const navLabels: Record<Lang, { tools: string; calculator: string; prices: string }> = {
   es: { tools: "Herramientas", calculator: "Calculadora Rentabilidad", prices: "Cotización Oro/Plata" },
   en: { tools: "Tools", calculator: "Profitability Calculator", prices: "Gold/Silver Prices" },
@@ -94,7 +89,7 @@ const nl = navLabels[lang];
 const isToolsActive = currentPath.includes('/herramientas') || currentPath.includes('/tools') || currentPath.includes('/outils') || currentPath.includes('/eines') || currentPath.includes('/ferramentas');
 ---
 
-<header class="header inv inv--barra">
+<header class="header rg-inv rg-inv--barra">
   <div class="header-container">
     <a
       href={`/${lang}`}
@@ -108,7 +103,7 @@ const isToolsActive = currentPath.includes('/herramientas') || currentPath.inclu
         <path d="M20 8L30 14V26L20 32L10 26V14L20 8Z" fill="var(--logo-cara)"></path>
         <defs>
           <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style="stop-color:var(--accent)"></stop>
+            <stop offset="0%" style="stop-color:var(--rg-accent)"></stop>
             <stop offset="100%" style="stop-color:var(--logo-fin)"></stop>
           </linearGradient>
         </defs>
@@ -207,7 +202,6 @@ const isToolsActive = currentPath.includes('/herramientas') || currentPath.inclu
 
     <!-- Herramientas de cabecera: idioma + tema -->
     <div class="header-tools">
-      <!-- Selector de idioma - URLs SIN trailing slash -->
       <div class="lang-selector">
         <button class="lang-trigger" aria-label="Seleccionar idioma" aria-expanded="false">
           <span class="lang-flag">{currentLang.flag}</span>
@@ -248,41 +242,41 @@ const isToolsActive = currentPath.includes('/herramientas') || currentPath.inclu
 </header>
 
 <style>
-  /* Variables propias del logo, derivadas del acento invertido */
+  /* Variables propias del logo, derivadas del acento ya invertido */
   .header {
-    --logo-fin: color-mix(in srgb, var(--accent) 45%, var(--ink));
-    --logo-cara: color-mix(in srgb, var(--ink) 22%, transparent);
+    --logo-fin: color-mix(in srgb, var(--rg-accent) 45%, var(--rg-ink));
+    --logo-cara: color-mix(in srgb, var(--rg-ink) 22%, transparent);
 
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 1000;
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px solid var(--rg-line);
   }
 
   .header-container { max-width:1280px; margin:0 auto; padding:0 24px; height:72px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
 
   .logo { display:flex; align-items:center; gap:12px; text-decoration:none; }
-  .logo-icon { width:40px; height:40px; color:var(--ink); }
+  .logo-icon { width:40px; height:40px; color:var(--rg-ink); }
   .logo-text { display:flex; flex-direction:column; }
-  .logo-name { font-family:var(--display); font-size:1.1rem; font-weight:600; color:var(--ink); letter-spacing:2px; }
-  .logo-tagline { font-size:0.65rem; color:var(--soft); letter-spacing:0.5px; }
+  .logo-name { font-family:var(--rg-display); font-size:1.1rem; font-weight:600; color:var(--rg-ink); letter-spacing:2px; }
+  .logo-tagline { font-size:0.65rem; color:var(--rg-soft); letter-spacing:0.5px; }
 
   .nav-main { display:flex; align-items:center; gap:4px; margin-left:auto; }
-  .nav-link { padding:8px 14px; color:var(--soft); text-decoration:none; font-size:0.9rem; font-weight:500; border-radius:999px; border:1px solid transparent; transition:color .2s, background .2s, border-color .2s; }
-  .nav-link:hover { color:var(--ink); background:var(--accent-soft); }
-  .nav-link.active { color:var(--ink); background:var(--accent-soft); border-color:var(--accent); }
+  .nav-link { padding:8px 14px; color:var(--rg-soft); text-decoration:none; font-size:0.9rem; font-weight:500; border-radius:999px; border:1px solid transparent; transition:color .2s, background .2s, border-color .2s; }
+  .nav-link:hover { color:var(--rg-ink); background:var(--rg-accent-soft); }
+  .nav-link.active { color:var(--rg-ink); background:var(--rg-accent-soft); border-color:var(--rg-accent); }
 
   /* Dropdown de herramientas (hoy comentado en el marcado) */
   .nav-dropdown { position:relative; }
   .dropdown-trigger { display:flex; align-items:center; gap:4px; background:none; border:none; cursor:pointer; font-family:inherit; }
   .dropdown-chevron { transition:transform 0.2s; }
   .nav-dropdown:hover .dropdown-chevron { transform:rotate(180deg); }
-  .dropdown-menu { position:absolute; top:calc(100% + 8px); left:50%; min-width:220px; background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:8px; opacity:0; visibility:hidden; transform:translateX(-50%) translateY(-10px); transition:all 0.2s; z-index:100; box-shadow:0 10px 40px var(--sombra); }
+  .dropdown-menu { position:absolute; top:calc(100% + 8px); left:50%; min-width:220px; background:var(--rg-panel); border:1px solid var(--rg-line); border-radius:12px; padding:8px; opacity:0; visibility:hidden; transform:translateX(-50%) translateY(-10px); transition:all 0.2s; z-index:100; box-shadow:0 10px 40px var(--rg-sombra); }
   .nav-dropdown:hover .dropdown-menu { opacity:1; visibility:visible; transform:translateX(-50%) translateY(0); }
-  .dropdown-item { display:flex; align-items:center; gap:12px; padding:12px 16px; color:var(--soft); text-decoration:none; border-radius:8px; transition:all 0.15s; font-size:0.9rem; }
-  .dropdown-item:hover { background:var(--accent-soft); color:var(--ink); }
+  .dropdown-item { display:flex; align-items:center; gap:12px; padding:12px 16px; color:var(--rg-soft); text-decoration:none; border-radius:8px; transition:all 0.15s; font-size:0.9rem; }
+  .dropdown-item:hover { background:var(--rg-accent-soft); color:var(--rg-ink); }
   .dropdown-item svg { width:18px; height:18px; opacity:0.7; }
 
   /* Herramientas de cabecera */
@@ -290,30 +284,30 @@ const isToolsActive = currentPath.includes('/herramientas') || currentPath.inclu
 
   /* Selector de idioma */
   .lang-selector { position:relative; }
-  .lang-trigger { display:flex; align-items:center; gap:8px; padding:8px 14px; background:var(--accent-soft); border:1px solid var(--line); border-radius:999px; color:var(--ink); font-family:inherit; font-size:0.85rem; font-weight:500; cursor:pointer; transition:background .2s, border-color .2s; min-width:130px; }
-  .lang-trigger:hover { border-color:var(--accent); }
+  .lang-trigger { display:flex; align-items:center; gap:8px; padding:8px 14px; background:var(--rg-accent-soft); border:1px solid var(--rg-line); border-radius:999px; color:var(--rg-ink); font-family:inherit; font-size:0.85rem; font-weight:500; cursor:pointer; transition:background .2s, border-color .2s; min-width:130px; }
+  .lang-trigger:hover { border-color:var(--rg-accent); }
   .lang-flag { font-size:1.1rem; }
   .lang-name { font-weight:500; flex:1; text-align:left; }
   .lang-chevron { transition:transform 0.2s; }
   .lang-selector:hover .lang-chevron { transform:rotate(180deg); }
-  .lang-dropdown { position:absolute; top:calc(100% + 8px); right:0; min-width:180px; background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:8px; opacity:0; visibility:hidden; transform:translateY(-10px); transition:all 0.2s; z-index:100; box-shadow:0 10px 40px var(--sombra); }
+  .lang-dropdown { position:absolute; top:calc(100% + 8px); right:0; min-width:180px; background:var(--rg-panel); border:1px solid var(--rg-line); border-radius:12px; padding:8px; opacity:0; visibility:hidden; transform:translateY(-10px); transition:all 0.2s; z-index:100; box-shadow:0 10px 40px var(--rg-sombra); }
   .lang-selector:hover .lang-dropdown { opacity:1; visibility:visible; transform:translateY(0); }
-  .lang-option { display:flex; align-items:center; gap:10px; padding:10px 12px; color:var(--soft); text-decoration:none; border-radius:8px; transition:all 0.15s; }
-  .lang-option:hover { background:var(--accent-soft); color:var(--ink); }
-  .lang-option.active { background:var(--accent-soft); color:var(--accent); }
+  .lang-option { display:flex; align-items:center; gap:10px; padding:10px 12px; color:var(--rg-soft); text-decoration:none; border-radius:8px; transition:all 0.15s; }
+  .lang-option:hover { background:var(--rg-accent-soft); color:var(--rg-ink); }
+  .lang-option.active { background:var(--rg-accent-soft); color:var(--rg-accent); }
   .lang-option-flag { font-size:1.25rem; }
   .lang-option-name { flex:1; font-size:0.9rem; }
-  .lang-check { color:var(--accent); }
+  .lang-check { color:var(--rg-accent); }
 
-  .mobile-toggle { display:none; padding:8px; background:transparent; border:none; color:var(--soft); cursor:pointer; }
-  .mobile-toggle:hover { color:var(--ink); }
+  .mobile-toggle { display:none; padding:8px; background:transparent; border:none; color:var(--rg-soft); cursor:pointer; }
+  .mobile-toggle:hover { color:var(--rg-ink); }
 
   @media (max-width:900px) {
     /* El header mantiene la superficie invertida también en móvil */
     .header-container { gap:8px; }
     .logo-tagline { display:none; }
 
-    .nav-main { display:none; position:absolute; top:72px; left:0; right:0; background:var(--bg); flex-direction:column; align-items:stretch; padding:16px; border-bottom:1px solid var(--line); box-shadow:0 4px 20px var(--sombra); }
+    .nav-main { display:none; position:absolute; top:72px; left:0; right:0; background:var(--rg-inv-bg); flex-direction:column; align-items:stretch; padding:16px; border-bottom:1px solid var(--rg-line); box-shadow:0 4px 20px var(--rg-sombra); }
     .nav-main.mobile-open { display:flex; }
     .nav-link { padding:12px 16px; width:100%; text-align:center; }
 

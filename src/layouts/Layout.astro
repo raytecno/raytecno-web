@@ -129,11 +129,12 @@ const {
   /* Color, fondo y tipografía salen de tokens.css.
      Aquí solo lo que no es color. */
   body {
-    line-height: 1.6;
-    min-height: 100vh;
-    background: var(--bg);
-    color: var(--ink);
-  }
+  line-height: 1.6;
+  min-height: 100vh;
+  background: var(--rg-bg);
+  color: var(--rg-ink);
+  transition: background .25s ease, color .25s ease;
+}
 
   img {
     max-width: 100%;

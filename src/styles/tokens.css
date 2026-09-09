@@ -2,184 +2,218 @@
    tokens.css — Sistema de color de raytecno.es
    @file src/styles/tokens.css
 
-   Se importa una sola vez, desde Layout.astro:
-       import "@/styles/tokens.css";
+   PREFIJO --rg-
+   -------------
+   El proyecto ya tenía variables --ink, --soft y --accent con OTRO significado
+   (--ink era el fondo azul marino, --accent el violeta #667eea). Todo lo nuevo
+   lleva prefijo --rg- para que los dos sistemas convivan y se pueda migrar
+   componente a componente sin romper nada por el camino.
+
+   Cuando no quede ningún componente usando las variables antiguas, se puede
+   quitar el prefijo de golpe con un buscar/reemplazar.
 
    TRES IDEAS
    ----------
-   1. Todo el color sale de aquí. Ningún componente vuelve a escribir un #hex.
+   1. Todo el color sale de aquí. Ningún componente migrado escribe un #hex.
    2. El tema se cambia con  document.documentElement.dataset.theme = "oscuro"
       y el acento con  ...dataset.accent = "oro".
-   3. SUPERFICIE INVERTIDA: cualquier bloque con class="inv" (el menú, la banda
-      de "No somos un ERP genérico") redefine --ink, --soft, --line y --accent
-      con sus versiones contrarias. Los componentes de dentro no se enteran:
-      siguen usando los mismos nombres de variable y se invierten solos.
-      En claro la banda es oscura; en oscuro, clara. Siempre contrasta.
+   3. SUPERFICIE INVERTIDA: un bloque con class="rg-inv" (el menú, la banda de
+      "No somos un ERP genérico") redefine --rg-ink, --rg-soft, --rg-line y
+      --rg-accent con sus versiones contrarias. En tema claro esa banda es
+      oscura; en tema oscuro, clara. Siempre contrasta con el fondo.
    ========================================================================== */
 
 :root {
   color-scheme: light;
 
   /* ── Tipografías ─────────────────────────────────────────────────────── */
-  --display: "Fraunces", Georgia, serif;
-  --sans: "Inter", system-ui, -apple-system, sans-serif;
-  --mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
+  --rg-display: "Fraunces", Georgia, serif;
+  --rg-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --rg-mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
 
   /* ── Superficies y texto · TEMA CLARO ────────────────────────────────── */
-  --bg: #fafaf8;        /* fondo de página */
-  --panel: var(--panel);     /* tarjetas, desplegables, elementos elevados */
-  --sup-2: #f2f0eb;     /* banda alterna suave, sin llegar a invertir */
-  --ink: #1c1b19;       /* texto principal */
-  --on-ink: var(--panel);    /* texto SOBRE un fondo de color --ink */
-  --soft: #5e5b55;      /* texto secundario */
-  --faint: #9a968e;     /* etiquetas, metadatos */
-  --line: #e4e1da;      /* filetes y bordes */
-  --sombra: rgba(28, 27, 25, 0.08);
+  --rg-bg: #fafaf8;      /* fondo de página */
+  --rg-panel: #ffffff;   /* tarjetas, desplegables, elementos elevados */
+  --rg-sup2: #f2f0eb;    /* banda alterna suave, sin llegar a invertir */
+  --rg-ink: #1c1b19;     /* texto principal */
+  --rg-on-ink: #ffffff;  /* texto SOBRE un fondo de color --rg-ink */
+  --rg-soft: #5e5b55;    /* texto secundario */
+  --rg-faint: #9a968e;   /* etiquetas, metadatos */
+  --rg-line: #e4e1da;    /* filetes y bordes */
+  --rg-sombra: rgba(28, 27, 25, 0.08);
 
   /* ── Superficie invertida (menú, bandas de contraste) ─────────────────── */
-  --inv-bg: #1c1b19;
-  --inv-ink: #edeae2;
-  --inv-soft: #a29c91;
-  --inv-faint: #6e695f;
-  --inv-line: rgba(237, 234, 226, 0.14);
+  --rg-inv-bg: #1c1b19;
+  --rg-inv-ink: #edeae2;
+  --rg-inv-soft: #a29c91;
+  --rg-inv-faint: #6e695f;
+  --rg-inv-line: rgba(237, 234, 226, 0.14);
 
   /* ── Hero: velo sobre las capturas del ERP ───────────────────────────── */
-  --velo-fuerte: rgba(250, 250, 248, 0.955);
-  --velo-suave: rgba(250, 250, 248, 0.6);
-  --filtro-img: saturate(0.88) contrast(1.02);
-  --barra: rgba(250, 250, 248, 0.86);
+  --rg-velo-fuerte: rgba(250, 250, 248, 0.955);
+  --rg-velo-suave: rgba(250, 250, 248, 0.6);
+  --rg-filtro-img: saturate(0.88) contrast(1.02);
+  --rg-barra: rgba(250, 250, 248, 0.86);
 }
 
 /* ── Acentos · TEMA CLARO ──────────────────────────────────────────────
-   --accent      sobre fondo normal
-   --accent-inv  el mismo acento, aclarado, para usar sobre la banda invertida
+   --rg-accent      sobre fondo normal
+   --rg-accent-inv  el mismo acento aclarado, para la banda invertida
    -------------------------------------------------------------------- */
 :root,
 [data-accent="oro"] {
-  --accent: #a8862b;
-  --accent-ink: #5e4a12;
-  --accent-soft: rgba(168, 134, 43, 0.1);
-  --accent-inv: #cba553;
+  --rg-accent: #a8862b;
+  --rg-accent-ink: #5e4a12;
+  --rg-accent-soft: rgba(168, 134, 43, 0.1);
+  --rg-accent-inv: #cba553;
 }
 [data-accent="grafito"] {
-  --accent: #3a3936;
-  --accent-ink: #1c1b19;
-  --accent-soft: rgba(58, 57, 54, 0.08);
-  --accent-inv: #9c9890;
+  --rg-accent: #3a3936;
+  --rg-accent-ink: #1c1b19;
+  --rg-accent-soft: rgba(58, 57, 54, 0.08);
+  --rg-accent-inv: #9c9890;
 }
 [data-accent="granate"] {
-  --accent: #8b2c3a;
-  --accent-ink: #5a1520;
-  --accent-soft: rgba(139, 44, 58, 0.09);
-  --accent-inv: #c9647a;
+  --rg-accent: #8b2c3a;
+  --rg-accent-ink: #5a1520;
+  --rg-accent-soft: rgba(139, 44, 58, 0.09);
+  --rg-accent-inv: #c9647a;
 }
 [data-accent="esmeralda"] {
-  --accent: #1f6b4e;
-  --accent-ink: #0f3f2d;
-  --accent-soft: rgba(31, 107, 78, 0.09);
-  --accent-inv: #57a886;
+  --rg-accent: #1f6b4e;
+  --rg-accent-ink: #0f3f2d;
+  --rg-accent-soft: rgba(31, 107, 78, 0.09);
+  --rg-accent-inv: #57a886;
 }
 [data-accent="zafiro"] {
-  --accent: #24457a;
-  --accent-ink: #132548;
-  --accent-soft: rgba(36, 69, 122, 0.09);
-  --accent-inv: #7699dc;
+  --rg-accent: #24457a;
+  --rg-accent-ink: #132548;
+  --rg-accent-soft: rgba(36, 69, 122, 0.09);
+  --rg-accent-inv: #7699dc;
 }
 
 /* ============================================================================
    TEMA OSCURO
-   Base: acero pavonado con un punto cálido. Ni negro puro ni azulado.
-   La superficie invertida se vuelve clara, así el menú sigue contrastando.
+
+   Van los dos. El activo es el FRÍO (pizarra), la familia del azul marino que
+   ya tiene la web. Si prefieres el cálido, comenta este bloque y descomenta
+   el siguiente: son las mismas variables, solo cambian los valores.
    ========================================================================== */
+
+/* ── OSCURO FRÍO · pizarra ─────────────────────────────────────────────── */
 [data-theme="oscuro"] {
   color-scheme: dark;
 
-  --bg: #161512;
-  --panel: #1e1d19;
-  --sup-2: #1b1a16;
-  --ink: #edeae2;
-  --on-ink: #161512;
-  --soft: #a29c91;
-  --faint: #6e695f;
-  --line: #2c2a25;
-  --sombra: rgba(0, 0, 0, 0.45);
+  --rg-bg: #0f172a;
+  --rg-panel: #1a2436;
+  --rg-sup2: #141d2f;
+  --rg-ink: #e8ecf3;
+  --rg-on-ink: #0f172a;
+  --rg-soft: #94a3b8;
+  --rg-faint: #64748b;
+  --rg-line: #26324a;
+  --rg-sombra: rgba(0, 0, 0, 0.5);
 
-  --inv-bg: #edeae2;
-  --inv-ink: #1c1b19;
-  --inv-soft: #5e5b55;
-  --inv-faint: #9a968e;
-  --inv-line: rgba(28, 27, 25, 0.12);
+  --rg-inv-bg: #e8ecf3;
+  --rg-inv-ink: #0f172a;
+  --rg-inv-soft: #475569;
+  --rg-inv-faint: #94a3b8;
+  --rg-inv-line: rgba(15, 23, 42, 0.12);
 
-  --velo-fuerte: rgba(22, 21, 18, 0.94);
-  --velo-suave: rgba(22, 21, 18, 0.52);
-  --filtro-img: brightness(0.52) saturate(0.75) contrast(1.05);
-  --barra: rgba(22, 21, 18, 0.85);
+  --rg-velo-fuerte: rgba(15, 23, 42, 0.94);
+  --rg-velo-suave: rgba(15, 23, 42, 0.52);
+  --rg-filtro-img: brightness(0.5) saturate(0.7) contrast(1.05);
+  --rg-barra: rgba(15, 23, 42, 0.85);
 }
 
+/* ── OSCURO CÁLIDO · acero pavonado (alternativa) ────────────────────────
+[data-theme="oscuro"] {
+  color-scheme: dark;
+
+  --rg-bg: #161512;
+  --rg-panel: #1e1d19;
+  --rg-sup2: #1b1a16;
+  --rg-ink: #edeae2;
+  --rg-on-ink: #161512;
+  --rg-soft: #a29c91;
+  --rg-faint: #6e695f;
+  --rg-line: #2c2a25;
+  --rg-sombra: rgba(0, 0, 0, 0.45);
+
+  --rg-inv-bg: #edeae2;
+  --rg-inv-ink: #1c1b19;
+  --rg-inv-soft: #5e5b55;
+  --rg-inv-faint: #9a968e;
+  --rg-inv-line: rgba(28, 27, 25, 0.12);
+
+  --rg-velo-fuerte: rgba(22, 21, 18, 0.94);
+  --rg-velo-suave: rgba(22, 21, 18, 0.52);
+  --rg-filtro-img: brightness(0.52) saturate(0.75) contrast(1.05);
+  --rg-barra: rgba(22, 21, 18, 0.85);
+}
+   ────────────────────────────────────────────────────────────────────── */
+
 /* ── Acentos · TEMA OSCURO ─────────────────────────────────────────────
-   Se invierten respecto al claro: el acento normal sube de luminosidad
-   (el oro viejo se apaga sobre fondo oscuro) y --accent-inv baja, porque
-   ahora la banda invertida es clara.
+   Se invierten respecto al claro: el acento sube de luminosidad (el oro
+   viejo se apaga sobre fondo oscuro) y --rg-accent-inv baja, porque ahora
+   la banda invertida es clara.
    -------------------------------------------------------------------- */
 [data-theme="oscuro"],
 [data-theme="oscuro"][data-accent="oro"] {
-  --accent: #cba553;
-  --accent-ink: #e8d9a8;
-  --accent-soft: rgba(203, 165, 83, 0.14);
-  --accent-inv: #a8862b;
+  --rg-accent: #cba553;
+  --rg-accent-ink: #e8d9a8;
+  --rg-accent-soft: rgba(203, 165, 83, 0.16);
+  --rg-accent-inv: #a8862b;
 }
 [data-theme="oscuro"][data-accent="grafito"] {
-  --accent: #9c9890;
-  --accent-ink: #d6d2c9;
-  --accent-soft: rgba(156, 152, 144, 0.13);
-  --accent-inv: #3a3936;
+  --rg-accent: #9ca6b8;
+  --rg-accent-ink: #d6dce6;
+  --rg-accent-soft: rgba(156, 166, 184, 0.15);
+  --rg-accent-inv: #3a3936;
 }
 [data-theme="oscuro"][data-accent="granate"] {
-  --accent: #c9647a;
-  --accent-ink: #eec3cc;
-  --accent-soft: rgba(201, 100, 122, 0.14);
-  --accent-inv: #8b2c3a;
+  --rg-accent: #c9647a;
+  --rg-accent-ink: #eec3cc;
+  --rg-accent-soft: rgba(201, 100, 122, 0.16);
+  --rg-accent-inv: #8b2c3a;
 }
 [data-theme="oscuro"][data-accent="esmeralda"] {
-  --accent: #57a886;
-  --accent-ink: #b7e0ce;
-  --accent-soft: rgba(87, 168, 134, 0.14);
-  --accent-inv: #1f6b4e;
+  --rg-accent: #57a886;
+  --rg-accent-ink: #b7e0ce;
+  --rg-accent-soft: rgba(87, 168, 134, 0.16);
+  --rg-accent-inv: #1f6b4e;
 }
 [data-theme="oscuro"][data-accent="zafiro"] {
-  --accent: #7699dc;
-  --accent-ink: #c4d4f2;
-  --accent-soft: rgba(118, 153, 220, 0.15);
-  --accent-inv: #24457a;
+  --rg-accent: #7699dc;
+  --rg-accent-ink: #c4d4f2;
+  --rg-accent-soft: rgba(118, 153, 220, 0.17);
+  --rg-accent-inv: #24457a;
 }
 
 /* ============================================================================
-   .inv — SUPERFICIE INVERTIDA
-   Ponlo en el <header> y en las bandas de contraste. Dentro de un .inv,
-   un componente que use var(--ink) / var(--soft) / var(--line) / var(--accent)
-   se invierte sin tocar una línea de su CSS.
+   .rg-inv — SUPERFICIE INVERTIDA
    ========================================================================== */
-.inv {
-  background: var(--inv-bg);
-  color: var(--inv-ink);
+.rg-inv {
+  background: var(--rg-inv-bg);
+  color: var(--rg-inv-ink);
 
-  --ink: var(--inv-ink);
-  --on-ink: var(--inv-bg);
-  --soft: var(--inv-soft);
-  --faint: var(--inv-faint);
-  --line: var(--inv-line);
-  --panel: color-mix(in srgb, var(--inv-bg) 88%, var(--inv-ink));
-  --bg: var(--inv-bg);
+  --rg-ink: var(--rg-inv-ink);
+  --rg-on-ink: var(--rg-inv-bg);
+  --rg-soft: var(--rg-inv-soft);
+  --rg-faint: var(--rg-inv-faint);
+  --rg-line: var(--rg-inv-line);
+  --rg-panel: color-mix(in srgb, var(--rg-inv-bg) 88%, var(--rg-inv-ink));
+  --rg-bg: var(--rg-inv-bg);
 
-  --accent: var(--accent-inv);
-  --accent-ink: var(--inv-ink);
-  --accent-soft: color-mix(in srgb, var(--accent-inv) 20%, transparent);
-  --sombra: rgba(0, 0, 0, 0.35);
+  --rg-accent: var(--rg-accent-inv);
+  --rg-accent-ink: var(--rg-inv-ink);
+  --rg-accent-soft: color-mix(in srgb, var(--rg-accent-inv) 20%, transparent);
+  --rg-sombra: rgba(0, 0, 0, 0.35);
 }
 
-/* Menú translúcido: mismo color invertido, con desenfoque al hacer scroll */
-.inv--barra {
-  background: color-mix(in srgb, var(--inv-bg) 88%, transparent);
+/* Menú translúcido con desenfoque, del mismo color invertido */
+.rg-inv--barra {
+  background: color-mix(in srgb, var(--rg-inv-bg) 90%, transparent);
   backdrop-filter: saturate(180%) blur(14px);
   -webkit-backdrop-filter: saturate(180%) blur(14px);
 }
@@ -191,22 +225,15 @@ html {
   scroll-behavior: smooth;
 }
 
-body {
-  background: var(--bg);
-  color: var(--ink);
-  font-family: var(--sans);
-  transition: background 0.25s ease, color 0.25s ease;
-}
-
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--rg-accent);
   outline-offset: 3px;
   border-radius: 2px;
 }
 
 ::selection {
-  background: var(--accent-soft);
-  color: var(--ink);
+  background: var(--rg-accent-soft);
+  color: var(--rg-ink);
 }
 
 @media (prefers-reduced-motion: reduce) {
