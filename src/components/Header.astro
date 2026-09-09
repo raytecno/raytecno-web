@@ -52,6 +52,7 @@ const preciosUrl = getPageUrl("precios", lang);
 const tecnologiaUrl = getPageUrl("tecnologia", lang);
 const blogUrl = `/${lang}/blog`;
 const contactoUrl = getPageUrl("contacto", lang);
+const queEsUrl = getPageUrl("queEsRayGold", lang);
 
 // URLs de herramientas - SIN trailing slash
 const calculadoraUrl = getToolUrl("calculadora", lang);
@@ -68,6 +69,14 @@ const navLabels: Record<Lang, { tools: string; calculator: string; prices: strin
 
 const blogLabel: Record<Lang, string> = {
   es: "Blog", en: "Blog", fr: "Blog", ca: "Blog", "pt-br": "Blog",
+};
+
+const queEsLabel: Record<Lang, string> = {
+  es: "Qué es RayGold",
+  en: "What is RayGold",
+  fr: "Qu'est-ce que RayGold",
+  ca: "Què és RayGold",
+  "pt-br": "O que é RayGold",
 };
 
 const nl = navLabels[lang];
@@ -107,6 +116,15 @@ const isToolsActive = currentPath.includes('/herramientas') || currentPath.inclu
         data-ga-elemento="inicio"
         data-ga-ubicacion="header"
       >{t.nav?.home || "Inicio"}</a>
+            {lang === "es" && (
+        
+          href={queEsUrl}
+          class:list={["nav-link", { active: isActive(queEsUrl) }]}
+          data-ga="cta_click"
+          data-ga-elemento="que_es_raygold"
+          data-ga-ubicacion="header"
+        >{queEsLabel[lang]}</a>
+      )}
       <a
         href={modulosUrl}
         class:list={["nav-link", { active: isActive(modulosUrl) }]}
