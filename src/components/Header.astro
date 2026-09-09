@@ -118,7 +118,7 @@ const isToolsActive = currentPath.includes('/herramientas') || currentPath.inclu
       >{t.nav?.home || "Inicio"}</a>
             {lang === "es" && (
         
-          href={queEsUrl}
+         <a href={queEsUrl}
           class:list={["nav-link", { active: isActive(queEsUrl) }]}
           data-ga="cta_click"
           data-ga-elemento="que_es_raygold"
