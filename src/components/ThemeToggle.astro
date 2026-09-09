@@ -1,0 +1,158 @@
+---
+/**
+ * ThemeToggle.astro — Interruptor claro / oscuro
+ *
+ * @file src/components/ThemeToggle.astro
+ *
+ * Botón solo icono con tooltip. Pensado para ir dentro del <header class="inv">,
+ * junto al selector de idioma: hereda los colores invertidos y no hay que
+ * darle estilos aparte.
+ *
+ * Guarda la elección en localStorage con la clave "rg-tema", la misma que lee
+ * ThemeScript.astro. La primera visita respeta el tema del sistema operativo.
+ *
+ * Uso:  <ThemeToggle lang={lang} />
+ */
+import type { Lang } from '@/config/pages';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'es' } = Astro.props;
+
+const textos: Record<string, { aOscuro: string; aClaro: string }> = {
+  es: { aOscuro: 'Cambiar a modo oscuro', aClaro: 'Cambiar a modo claro' },
+  ca: { aOscuro: 'Canviar a mode fosc', aClaro: 'Canviar a mode clar' },
+  en: { aOscuro: 'Switch to dark mode', aClaro: 'Switch to light mode' },
+  fr: { aOscuro: 'Passer en mode sombre', aClaro: 'Passer en mode clair' },
+  'pt-br': { aOscuro: 'Mudar para o modo escuro', aClaro: 'Mudar para o modo claro' },
+};
+
+const t = textos[lang] || textos.es;
+---
+
+<button
+  class="tema"
+  data-tema
+  data-a-oscuro={t.aOscuro}
+  data-a-claro={t.aClaro}
+  data-tip={t.aOscuro}
+  aria-label={t.aOscuro}
+  aria-pressed="false"
+  type="button"
+>
+  <svg class="tema__luna" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M16.5 11.8A7 7 0 1 1 8.2 3.5a5.6 5.6 0 0 0 8.3 8.3Z"></path>
+  </svg>
+  <svg class="tema__sol" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+    <circle cx="10" cy="10" r="3.6"></circle>
+    <path d="M10 1.6v1.9M10 16.5v1.9M18.4 10h-1.9M3.5 10H1.6M15.9 4.1l-1.3 1.3M5.4 14.6l-1.3 1.3M15.9 15.9l-1.3-1.3M5.4 5.4 4.1 4.1"></path>
+  </svg>
+</button>
+
+<style>
+  .tema {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: 0;
+    background: none;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: var(--soft);
+    cursor: pointer;
+    position: relative;
+    flex: 0 0 auto;
+    transition: background 0.15s, color 0.15s;
+  }
+  .tema:hover {
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+  .tema svg {
+    width: 17px;
+    height: 17px;
+    grid-area: 1 / 1;
+    transition: opacity 0.18s, transform 0.25s;
+  }
+
+  /* El sol aparece solo en oscuro. Se controla desde el atributo del <html>,
+     no con una clase en el botón, para que el estado sea correcto ya en el
+     primer pintado y no haga falta esperar al JavaScript. */
+  .tema__sol {
+    opacity: 0;
+    transform: rotate(-45deg) scale(0.7);
+  }
+  :global([data-theme='oscuro']) .tema__luna {
+    opacity: 0;
+    transform: rotate(45deg) scale(0.7);
+  }
+  :global([data-theme='oscuro']) .tema__sol {
+    opacity: 1;
+    transform: none;
+  }
+
+  .tema::after {
+    content: attr(data-tip);
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: var(--ink);
+    color: var(--on-ink);
+    font-family: var(--sans);
+    font-size: 11.5px;
+    padding: 5px 9px;
+    border-radius: 6px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.12s;
+    z-index: 90;
+  }
+  .tema:hover::after,
+  .tema:focus-visible::after {
+    opacity: 1;
+  }
+
+  @media (max-width: 860px) {
+    .tema::after {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  function initTema() {
+    const btn = document.querySelector<HTMLButtonElement>('[data-tema]');
+    if (!btn || btn.dataset.listo === '1') return;
+    btn.dataset.listo = '1';
+
+    const raiz = document.documentElement;
+
+    function pintar() {
+      const oscuro = raiz.dataset.theme === 'oscuro';
+      const txt = oscuro ? btn!.dataset.aClaro || '' : btn!.dataset.aOscuro || '';
+      btn!.dataset.tip = txt;
+      btn!.setAttribute('aria-label', txt);
+      btn!.setAttribute('aria-pressed', String(oscuro));
+    }
+
+    pintar();
+
+    btn.addEventListener('click', () => {
+      const nuevo = raiz.dataset.theme === 'oscuro' ? 'claro' : 'oscuro';
+      raiz.dataset.theme = nuevo;
+      try {
+        localStorage.setItem('rg-tema', nuevo);
+      } catch (e) {
+        /* sin almacenamiento: el cambio dura lo que dure la página */
+      }
+      pintar();
+    });
+  }
+
+  document.addEventListener('astro:page-load', initTema);
+  initTema();
+</script>

@@ -17,6 +17,8 @@ import Footer from "@/components/Footer.astro";
 import CookieBanner from "@/components/Cookiebanner.astro";
 import WhatsAppButton from "@/components/WhatsAppButton.astro";
 import { type Lang } from "@/config/pages";
+import ThemeScript from "@/components/ThemeScript.astro";
+import "@/styles/tokens.css";
 
 interface Props {
   title?: string;
@@ -48,6 +50,7 @@ const {
 <!doctype html>
 <html lang={lang}>
   <head>
+   <ThemeScript /> 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />

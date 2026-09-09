@@ -1,0 +1,45 @@
+---
+/**
+ * ThemeScript.astro — Fija el tema antes de que el navegador pinte
+ *
+ * @file src/components/ThemeScript.astro
+ *
+ * Va en el <head> del Layout, LO MÁS ARRIBA POSIBLE y siempre antes de que
+ * se cargue la hoja de estilos. Si se pone abajo o se difiere, el usuario
+ * en modo oscuro ve un destello blanco en cada carga de página.
+ *
+ * Es <script is:inline>: Astro no lo procesa ni lo mueve a un bundle
+ * externo, se queda tal cual en el HTML y se ejecuta de forma síncrona.
+ * Sin is:inline esto NO funciona.
+ *
+ * Uso:
+ *   <head>
+ *     <ThemeScript />
+ *     ... resto del head
+ *   </head>
+ */
+---
+
+<script is:inline>
+  (function () {
+    var raiz = document.documentElement;
+    var tema = null;
+    var acento = null;
+
+    try {
+      tema = localStorage.getItem("rg-tema");
+      acento = localStorage.getItem("rg-acento");
+    } catch (e) {
+      /* navegación privada o cookies bloqueadas: seguimos con el sistema */
+    }
+
+    if (tema !== "claro" && tema !== "oscuro") {
+      tema = window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "oscuro"
+        : "claro";
+    }
+
+    raiz.dataset.theme = tema;
+    if (acento) raiz.dataset.accent = acento;
+  })();
+</script>
