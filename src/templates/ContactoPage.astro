@@ -6,6 +6,16 @@
  *
  * Cambios: eliminada la card de acceso demo (login/registro).
  * Los contactos directos se han movido a su propia card.
+ *
+ * TEMA CLARO/OSCURO (Septiembre 2026):
+ * - IMPORTANTE: el bloque `:root { ... }` que había dentro de este <style>
+ *   estaba redefiniendo --ink, --panel y --accent para TODA la web, no solo
+ *   para esta página. Astro no puede acotar :root a un componente. Las
+ *   variables locales viven ahora en .contacto-page, que sí queda acotada.
+ * - Eliminado el bloque de "tema blanco en móvil" y sus ~30 !important.
+ * - El titular ya no usa gradiente con -webkit-text-fill-color: transparent,
+ *   que en algunos navegadores dejaba el texto invisible al cambiar de tema.
+ *   El énfasis va en color de acento, que es más legible y más sobrio.
  */
 import Layout from "@/layouts/Layout.astro";
 import { getAlternateUrls, type Lang } from "@/config/pages";
@@ -332,7 +342,7 @@ const CONTACT_API_URL =
         <div class="hero-content">
           <h1>
             {t.title}
-            <span class="gradient-text">{t.titleHighlight}</span>
+            <span class="titulo-enfasis">{t.titleHighlight}</span>
           </h1>
           <p>{t.subtitle}</p>
         </div>
@@ -528,8 +538,8 @@ const CONTACT_API_URL =
                 target="_blank"
                 rel="noopener"
                 class="contact-channel"
-                data-ga="contacto_click" 
-                data-ga-canal="whatsapp" 
+                data-ga="contacto_click"
+                data-ga-canal="whatsapp"
                 data-ga-ubicacion="pagina_contacto"
               >
                 <div class="channel-icon whatsapp-bg">
@@ -645,20 +655,15 @@ const CONTACT_API_URL =
 </Layout>
 
 <style>
-  /* Variables */
-  :root {
-    --bg-dark: var(--ink);
-    --bg-card: rgba(30, 41, 59, 0.5);
-    --border-subtle: rgba(255, 255, 255, 0.1);
-    --text-primary: var(--panel);
-    --text-secondary: var(--soft);
-    --text-muted: var(--soft);
-    --accent-purple: var(--accent);
-    --accent-green: #10b981;
-  }
-
+  /* Variables locales de la página.
+     ANTES estaban en :root, que en un <style> de Astro NO queda acotado y
+     redefinía los colores de toda la web. */
   .contacto-page {
-    background: linear-gradient(180deg, var(--ink) 0%, var(--ink) 100%);
+    --borde: var(--rg-line);
+    --verde: #10b981;
+
+    background: var(--rg-bg);
+    color: var(--rg-ink);
     min-height: 100vh;
   }
 
@@ -680,26 +685,24 @@ const CONTACT_API_URL =
   }
 
   .contacto-hero h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
+    font-family: var(--rg-display);
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: var(--rg-ink);
     margin: 0 0 1rem;
-    line-height: 1.1;
-    background: linear-gradient(135deg, #fff 0%, var(--soft) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    line-height: 1.12;
+    text-wrap: balance;
   }
 
-  .gradient-text {
-    background: linear-gradient(135deg, var(--accent) 0%, #764ba2 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  .titulo-enfasis {
+    font-style: italic;
+    color: var(--rg-accent);
   }
 
   .contacto-hero p {
     font-size: 1.1rem;
-    color: var(--text-secondary);
+    color: var(--rg-soft);
     margin: 0;
   }
 
@@ -717,11 +720,10 @@ const CONTACT_API_URL =
 
   /* Contact Card */
   .contact-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border-subtle);
+    background: var(--rg-panel);
+    border: 1px solid var(--borde);
     border-radius: 20px;
     padding: 32px;
-    backdrop-filter: blur(10px);
   }
 
   .card-header {
@@ -730,35 +732,36 @@ const CONTACT_API_URL =
     gap: 16px;
     margin-bottom: 24px;
     padding-bottom: 20px;
-    border-bottom: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--borde);
   }
 
   .card-icon {
     width: 48px;
     height: 48px;
-    background: linear-gradient(135deg, var(--accent-purple) 0%, #764ba2 100%);
+    background: var(--rg-accent);
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: var(--rg-on-ink);
     flex-shrink: 0;
   }
 
   .card-icon.contact {
-    background: linear-gradient(135deg, var(--accent-green) 0%, #059669 100%);
+    background: var(--verde);
+    color: #fff;
   }
 
   .card-header h3 {
     font-size: 1.25rem;
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--rg-ink);
     margin: 0 0 4px 0;
   }
 
   .card-header p {
     font-size: 0.875rem;
-    color: var(--text-muted);
+    color: var(--rg-faint);
     margin: 0;
   }
 
@@ -788,49 +791,45 @@ const CONTACT_API_URL =
   .form-group label {
     font-size: 0.8rem;
     font-weight: 500;
-    color: var(--text-secondary);
+    color: var(--rg-soft);
   }
 
   .form-group input,
   .form-group select,
   .form-group textarea {
     padding: 12px 14px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--border-subtle);
+    background: var(--rg-bg);
+    border: 1px solid var(--borde);
     border-radius: 10px;
-    color: var(--text-primary);
+    color: var(--rg-ink);
+    font-family: inherit;
     font-size: 0.95rem;
-    transition: all 0.2s ease;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
   }
 
   .form-group input:focus,
   .form-group select:focus,
   .form-group textarea:focus {
     outline: none;
-    border-color: var(--accent-purple);
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+    border-color: var(--rg-accent);
+    box-shadow: 0 0 0 3px var(--rg-accent-soft);
   }
 
   .form-group input::placeholder,
   .form-group textarea::placeholder {
-    color: var(--text-muted);
-  }
-
-  .form-group select {
-    background-color: var(--ink);
-    color: var(--panel);
+    color: var(--rg-faint);
   }
 
   .form-group select option {
-    background-color: var(--ink);
-    color: var(--panel);
+    background-color: var(--rg-panel);
+    color: var(--rg-ink);
   }
 
   .input-prefix {
     display: flex;
     align-items: center;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--border-subtle);
+    background: var(--rg-bg);
+    border: 1px solid var(--borde);
     border-radius: 10px;
     overflow: hidden;
     width: 100%;
@@ -839,10 +838,10 @@ const CONTACT_API_URL =
 
   .input-prefix span {
     padding: 8px 10px;
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--text-muted);
+    background: var(--rg-sup2);
+    color: var(--rg-soft);
     font-size: 0.9rem;
-    border-right: 1px solid var(--border-subtle);
+    border-right: 1px solid var(--borde);
   }
 
   .input-prefix input {
@@ -859,20 +858,27 @@ const CONTACT_API_URL =
     justify-content: center;
     gap: 10px;
     padding: 14px 24px;
-    background: linear-gradient(135deg, var(--accent-purple) 0%, #764ba2 100%);
-    color: white;
-    border: none;
-    border-radius: 10px;
+    background: var(--rg-ink);
+    color: var(--rg-on-ink);
+    border: 1px solid var(--rg-ink);
+    border-radius: 999px;
+    font-family: inherit;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
   }
 
   .btn-submit:hover {
+    background: var(--rg-accent);
+    border-color: var(--rg-accent);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  }
+
+  .btn-submit:disabled {
+    opacity: 0.6;
+    cursor: default;
+    transform: none;
   }
 
   /* ============================================
@@ -889,18 +895,18 @@ const CONTACT_API_URL =
     align-items: center;
     gap: 16px;
     padding: 16px 18px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid var(--border-subtle);
+    background: var(--rg-bg);
+    border: 1px solid var(--borde);
     border-radius: 14px;
     text-decoration: none;
-    color: var(--text-primary);
-    transition: all 0.25s ease;
+    color: var(--rg-ink);
+    transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
   }
 
   .contact-channel:hover {
     transform: translateY(-2px);
-    border-color: var(--accent-purple);
-    background: rgba(102, 126, 234, 0.08);
+    border-color: var(--rg-accent);
+    background: var(--rg-accent-soft);
   }
 
   .channel-icon {
@@ -910,20 +916,21 @@ const CONTACT_API_URL =
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: #fff;
     flex-shrink: 0;
   }
 
   .channel-icon.phone-bg {
-    background: linear-gradient(135deg, var(--accent) 0%, #764ba2 100%);
+    background: var(--rg-accent);
+    color: var(--rg-on-ink);
   }
 
   .channel-icon.whatsapp-bg {
-    background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+    background: #25d366;
   }
 
   .channel-icon.email-bg {
-    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    background: #f59e0b;
   }
 
   .channel-info {
@@ -936,27 +943,26 @@ const CONTACT_API_URL =
 
   .channel-label {
     font-size: 0.75rem;
-    color: var(--text-muted);
+    color: var(--rg-faint);
     font-weight: 500;
-    text-transform: uppercase;
     letter-spacing: 0.4px;
   }
 
   .channel-value {
     font-size: 1rem;
-    color: var(--text-primary);
+    color: var(--rg-ink);
     font-weight: 600;
   }
 
   .channel-arrow {
-    color: var(--text-muted);
-    transition: transform 0.25s ease;
+    color: var(--rg-faint);
+    transition: transform 0.25s ease, color 0.25s ease;
     flex-shrink: 0;
   }
 
   .contact-channel:hover .channel-arrow {
     transform: translateX(3px);
-    color: var(--accent-purple);
+    color: var(--rg-accent);
   }
 
   /* Bloques de información adicional */
@@ -966,7 +972,7 @@ const CONTACT_API_URL =
     gap: 12px;
     margin-top: 24px;
     padding-top: 24px;
-    border-top: 1px solid var(--border-subtle);
+    border-top: 1px solid var(--borde);
   }
 
   .info-block {
@@ -974,7 +980,8 @@ const CONTACT_API_URL =
     align-items: center;
     gap: 12px;
     padding: 14px;
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--rg-bg);
+    border: 1px solid var(--borde);
     border-radius: 10px;
   }
 
@@ -982,8 +989,8 @@ const CONTACT_API_URL =
     width: 36px;
     height: 36px;
     border-radius: 9px;
-    background: rgba(102, 126, 234, 0.15);
-    color: var(--accent-purple);
+    background: var(--rg-accent-soft);
+    color: var(--rg-accent);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -999,19 +1006,18 @@ const CONTACT_API_URL =
 
   .info-label {
     font-size: 0.7rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
+    color: var(--rg-faint);
     letter-spacing: 0.4px;
     font-weight: 500;
   }
 
   .info-value {
     font-size: 0.85rem;
-    color: var(--text-primary);
+    color: var(--rg-ink);
     font-weight: 500;
   }
 
-  /* Responsive */
+  /* Responsive: solo estructura, el color no cambia */
   @media (max-width: 900px) {
     .contact-grid {
       grid-template-columns: 1fr;
@@ -1037,118 +1043,6 @@ const CONTACT_API_URL =
 
     .contact-info-grid {
       grid-template-columns: 1fr;
-    }
-  }
-
-  /* ============================================
-     MÓVIL: Tema blanco claro
-     ============================================ */
-  @media (max-width: 768px) {
-    :root {
-      --bg-dark: var(--panel);
-      --bg-card: rgba(248, 250, 252, 0.95);
-      --text-primary: var(--ink);
-      --text-secondary: #475569;
-      --text-muted: var(--soft);
-      --border-subtle: rgba(0, 0, 0, 0.08);
-      --accent-purple: var(--accent);
-    }
-
-    .contacto-page {
-      background: var(--panel) !important;
-    }
-
-    .contacto-hero h1 {
-      background: linear-gradient(135deg, var(--ink) 0%, #475569 100%) !important;
-      -webkit-background-clip: text !important;
-      -webkit-text-fill-color: transparent !important;
-    }
-
-    .contacto-hero p {
-      color: var(--soft) !important;
-    }
-
-    .contact-card {
-      background: var(--sup-2) !important;
-      border: 1px solid var(--line) !important;
-    }
-
-    .card-header h3 {
-      color: var(--ink) !important;
-    }
-
-    .card-header p {
-      color: var(--soft) !important;
-    }
-
-    .form-group label {
-      color: #334155 !important;
-    }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      background: var(--panel) !important;
-      border: 1px solid var(--line) !important;
-      color: var(--ink) !important;
-    }
-
-    .form-group select {
-      background-color: var(--panel) !important;
-      color: var(--ink) !important;
-    }
-
-    .form-group select option {
-      background: var(--panel) !important;
-      color: var(--ink) !important;
-    }
-
-    .form-group input::placeholder,
-    .form-group textarea::placeholder {
-      color: var(--soft) !important;
-    }
-
-    .input-prefix {
-      background: var(--panel) !important;
-      border: 1px solid var(--line) !important;
-    }
-
-    .input-prefix span {
-      background: var(--sup-2) !important;
-      color: var(--soft) !important;
-      border-right: 1px solid var(--line) !important;
-    }
-
-    /* Canales de contacto */
-    .contact-channel {
-      background: var(--panel) !important;
-      border: 1px solid var(--line) !important;
-    }
-
-    .contact-channel:hover {
-      background: rgba(102, 126, 234, 0.05) !important;
-    }
-
-    .channel-value {
-      color: var(--ink) !important;
-    }
-
-    .channel-label {
-      color: var(--soft) !important;
-    }
-
-    /* Información adicional */
-    .contact-info-grid {
-      border-top: 1px solid var(--line) !important;
-    }
-
-    .info-block {
-      background: var(--panel) !important;
-      border: 1px solid var(--line) !important;
-    }
-
-    .info-value {
-      color: var(--ink) !important;
     }
   }
 </style>
