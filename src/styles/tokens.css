@@ -9,18 +9,23 @@
    lleva prefijo --rg- para que los dos sistemas convivan y se pueda migrar
    componente a componente sin romper nada por el camino.
 
-   Cuando no quede ningún componente usando las variables antiguas, se puede
-   quitar el prefijo de golpe con un buscar/reemplazar.
+   UN SOLO OSCURO (Septiembre 2026)
+   --------------------------------
+   Antes había dos negros distintos: uno cálido (#1c1b19) para el texto y las
+   bandas invertidas del modo claro, y uno frío (#0f172a) para el fondo del
+   modo oscuro. El cálido tiraba a marrón y chocaba con el otro.
+   Ahora todo el oscuro de la web es #0f172a, azul pizarra, en los dos temas:
+   el menú, el footer, la banda de "No somos un ERP genérico", los botones
+   sólidos y el fondo del modo oscuro. Un único negro de marca.
 
    TRES IDEAS
    ----------
    1. Todo el color sale de aquí. Ningún componente migrado escribe un #hex.
    2. El tema se cambia con  document.documentElement.dataset.theme = "oscuro"
       y el acento con  ...dataset.accent = "oro".
-   3. SUPERFICIE INVERTIDA: un bloque con class="rg-inv" (el menú, la banda de
-      "No somos un ERP genérico") redefine --rg-ink, --rg-soft, --rg-line y
-      --rg-accent con sus versiones contrarias. En tema claro esa banda es
-      oscura; en tema oscuro, clara. Siempre contrasta con el fondo.
+   3. SUPERFICIE INVERTIDA: un bloque con class="rg-inv" redefine --rg-ink,
+      --rg-soft, --rg-line y --rg-accent con sus versiones contrarias. En tema
+      claro esa banda es oscura; en tema oscuro, clara. Siempre contrasta.
    ========================================================================== */
 
 :root {
@@ -32,28 +37,22 @@
   --rg-mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
 
   /* ── Superficies y texto · TEMA CLARO ────────────────────────────────── */
-  --rg-bg: #fafaf8;      /* fondo de página */
+  --rg-bg: #fafaf8;      /* fondo de página: papel cálido */
   --rg-panel: #ffffff;   /* tarjetas, desplegables, elementos elevados */
   --rg-sup2: #f2f0eb;    /* banda alterna suave, sin llegar a invertir */
-  --rg-ink: #1c1b19;     /* texto principal */
+  --rg-ink: #0f172a;     /* texto principal Y relleno de botones sólidos */
   --rg-on-ink: #ffffff;  /* texto SOBRE un fondo de color --rg-ink */
   --rg-soft: #5e5b55;    /* texto secundario */
   --rg-faint: #9a968e;   /* etiquetas, metadatos */
   --rg-line: #e4e1da;    /* filetes y bordes */
-  --rg-sombra: rgba(28, 27, 25, 0.08);
+  --rg-sombra: rgba(15, 23, 42, 0.08);
 
-  /* ── Superficie invertida (menú, bandas de contraste) ─────────────────── */
-  --rg-inv-bg: #1c1b19;
-  --rg-inv-ink: #edeae2;
-  --rg-inv-soft: #a29c91;
-  --rg-inv-faint: #6e695f;
-  --rg-inv-line: rgba(237, 234, 226, 0.14);
-
-  /* ── Hero: velo sobre las capturas del ERP ───────────────────────────── */
-  --rg-velo-fuerte: rgba(250, 250, 248, 0.955);
-  --rg-velo-suave: rgba(250, 250, 248, 0.6);
-  --rg-filtro-img: saturate(0.88) contrast(1.02);
-  --rg-barra: rgba(250, 250, 248, 0.86);
+  /* ── Superficie invertida (menú, footer, bandas de contraste) ─────────── */
+  --rg-inv-bg: #0f172a;
+  --rg-inv-ink: #e8ecf3;
+  --rg-inv-soft: #94a3b8;
+  --rg-inv-faint: #64748b;
+  --rg-inv-line: rgba(232, 236, 243, 0.14);
 }
 
 /* ── Acentos · TEMA CLARO ──────────────────────────────────────────────
@@ -71,7 +70,7 @@
   --rg-accent: #3a3936;
   --rg-accent-ink: #1c1b19;
   --rg-accent-soft: rgba(58, 57, 54, 0.08);
-  --rg-accent-inv: #9c9890;
+  --rg-accent-inv: #9ca6b8;
 }
 [data-accent="granate"] {
   --rg-accent: #8b2c3a;
@@ -93,14 +92,8 @@
 }
 
 /* ============================================================================
-   TEMA OSCURO
-
-   Van los dos. El activo es el FRÍO (pizarra), la familia del azul marino que
-   ya tiene la web. Si prefieres el cálido, comenta este bloque y descomenta
-   el siguiente: son las mismas variables, solo cambian los valores.
+   TEMA OSCURO · azul pizarra, el mismo #0f172a
    ========================================================================== */
-
-/* ── OSCURO FRÍO · pizarra ─────────────────────────────────────────────── */
 [data-theme="oscuro"] {
   color-scheme: dark;
 
@@ -119,39 +112,7 @@
   --rg-inv-soft: #475569;
   --rg-inv-faint: #94a3b8;
   --rg-inv-line: rgba(15, 23, 42, 0.12);
-
-  --rg-velo-fuerte: rgba(15, 23, 42, 0.94);
-  --rg-velo-suave: rgba(15, 23, 42, 0.52);
-  --rg-filtro-img: brightness(0.5) saturate(0.7) contrast(1.05);
-  --rg-barra: rgba(15, 23, 42, 0.85);
 }
-
-/* ── OSCURO CÁLIDO · acero pavonado (alternativa) ────────────────────────
-[data-theme="oscuro"] {
-  color-scheme: dark;
-
-  --rg-bg: #161512;
-  --rg-panel: #1e1d19;
-  --rg-sup2: #1b1a16;
-  --rg-ink: #edeae2;
-  --rg-on-ink: #161512;
-  --rg-soft: #a29c91;
-  --rg-faint: #6e695f;
-  --rg-line: #2c2a25;
-  --rg-sombra: rgba(0, 0, 0, 0.45);
-
-  --rg-inv-bg: #edeae2;
-  --rg-inv-ink: #1c1b19;
-  --rg-inv-soft: #5e5b55;
-  --rg-inv-faint: #9a968e;
-  --rg-inv-line: rgba(28, 27, 25, 0.12);
-
-  --rg-velo-fuerte: rgba(22, 21, 18, 0.94);
-  --rg-velo-suave: rgba(22, 21, 18, 0.52);
-  --rg-filtro-img: brightness(0.52) saturate(0.75) contrast(1.05);
-  --rg-barra: rgba(22, 21, 18, 0.85);
-}
-   ────────────────────────────────────────────────────────────────────── */
 
 /* ── Acentos · TEMA OSCURO ─────────────────────────────────────────────
    Se invierten respecto al claro: el acento sube de luminosidad (el oro
@@ -204,6 +165,7 @@
   --rg-line: var(--rg-inv-line);
   --rg-panel: color-mix(in srgb, var(--rg-inv-bg) 88%, var(--rg-inv-ink));
   --rg-bg: var(--rg-inv-bg);
+  --rg-sup2: color-mix(in srgb, var(--rg-inv-bg) 94%, var(--rg-inv-ink));
 
   --rg-accent: var(--rg-accent-inv);
   --rg-accent-ink: var(--rg-inv-ink);
@@ -223,6 +185,13 @@
    ========================================================================== */
 html {
   scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--rg-sans);
+  background: var(--rg-bg);
+  color: var(--rg-ink);
+  transition: background 0.25s ease, color 0.25s ease;
 }
 
 :focus-visible {
