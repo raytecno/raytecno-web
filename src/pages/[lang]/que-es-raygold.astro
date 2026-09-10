@@ -11,6 +11,15 @@
  * - Sin formulario ni CTA agresiva
  * - type="website" (NO "product"): evita duplicar SoftwareApplication
  *   con el schema global de SEO.astro
+ *
+ * TEMA CLARO/OSCURO (Septiembre 2026):
+ * - Los títulos usaban var(--sup-2) y el texto destacado var(--line): son
+ *   tokens de SUPERFICIE y de FILETE, colores casi blancos pensados para
+ *   fondos. Usados como color de letra, invisibles sobre fondo claro.
+ *   Ahora usan --rg-ink y --rg-soft, que sí son tokens de texto.
+ * - Fuera los literales #cbd5e1, #a5b4fc, #818cf8, #34d399 y los
+ *   rgba(148,163,184,.x) de los filetes.
+ * - Tipografía: titulares en Fraunces, como el resto de la web nueva.
  */
 import Layout from "@/layouts/Layout.astro";
 import { type Lang } from "@/config/pages";
@@ -347,21 +356,24 @@ const schemaFaq = {
     max-width: 780px;
     margin: 0 auto;
     padding: 4rem 1.5rem 6rem;
-    color: #cbd5e1;
+    background: var(--rg-bg);
+    color: var(--rg-soft);
+    font-family: var(--rg-sans);
     font-size: 1.05rem;
     line-height: 1.75;
   }
 
   .qer__head {
     padding-bottom: 2.5rem;
-    border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+    border-bottom: 1px solid var(--rg-line);
   }
 
   .qer h1 {
+    font-family: var(--rg-display);
     font-size: clamp(2rem, 5vw, 2.75rem);
-    line-height: 1.15;
-    font-weight: 700;
-    color: var(--sup-2);
+    line-height: 1.12;
+    font-weight: 400;
+    color: var(--rg-ink);
     letter-spacing: -0.02em;
     margin-bottom: 1.5rem;
   }
@@ -370,7 +382,7 @@ const schemaFaq = {
   .qer__canonical {
     font-size: 1.2rem;
     line-height: 1.7;
-    color: var(--line);
+    color: var(--rg-ink);
   }
 
   .qer__section {
@@ -378,10 +390,11 @@ const schemaFaq = {
   }
 
   .qer h2 {
-    font-size: 1.5rem;
-    font-weight: 650;
-    color: var(--sup-2);
-    letter-spacing: -0.01em;
+    font-family: var(--rg-display);
+    font-size: 1.55rem;
+    font-weight: 450;
+    color: var(--rg-ink);
+    letter-spacing: -0.015em;
     margin-bottom: 1.25rem;
   }
 
@@ -398,24 +411,24 @@ const schemaFaq = {
   }
 
   .qer strong {
-    color: var(--line);
+    color: var(--rg-ink);
     font-weight: 600;
   }
 
   .qer em {
-    color: #a5b4fc;
+    color: var(--rg-accent);
     font-style: normal;
     font-weight: 500;
   }
 
   .qer a {
-    color: #818cf8;
+    color: var(--rg-accent);
     text-decoration: underline;
     text-underline-offset: 3px;
   }
 
   .qer a:hover {
-    color: #a5b4fc;
+    color: var(--rg-ink);
   }
 
   /* ---------- Negaciones ---------- */
@@ -424,6 +437,7 @@ const schemaFaq = {
     display: grid;
     gap: 0.9rem;
     margin: 1.5rem 0;
+    padding: 0;
   }
 
   .qer__negations li {
@@ -438,7 +452,7 @@ const schemaFaq = {
     top: 0.78em;
     width: 12px;
     height: 2px;
-    background: var(--soft);
+    background: var(--rg-faint);
     border-radius: 2px;
   }
 
@@ -446,8 +460,8 @@ const schemaFaq = {
   .qer__note {
     margin-top: 2rem;
     padding: 1.4rem 1.6rem;
-    background: rgba(102, 126, 234, 0.07);
-    border-left: 2px solid var(--accent);
+    background: var(--rg-accent-soft);
+    border-left: 2px solid var(--rg-accent);
     border-radius: 0 8px 8px 0;
   }
 
@@ -466,8 +480,8 @@ const schemaFaq = {
   .qer__col {
     padding: 1.5rem;
     border-radius: 12px;
-    background: rgba(148, 163, 184, 0.05);
-    border: 1px solid rgba(148, 163, 184, 0.12);
+    background: var(--rg-panel);
+    border: 1px solid var(--rg-line);
   }
 
   .qer__col ul {
@@ -475,6 +489,8 @@ const schemaFaq = {
     display: grid;
     gap: 0.7rem;
     font-size: 0.97rem;
+    padding: 0;
+    margin: 0;
   }
 
   .qer__col li {
@@ -484,7 +500,7 @@ const schemaFaq = {
   }
 
   .qer__col--yes h3 {
-    color: #34d399;
+    color: var(--rg-accent);
   }
 
   .qer__col--yes li::before {
@@ -495,11 +511,15 @@ const schemaFaq = {
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: #34d399;
+    background: var(--rg-accent);
   }
 
   .qer__col--no h3 {
-    color: var(--soft);
+    color: var(--rg-faint);
+  }
+
+  .qer__col--no li {
+    color: var(--rg-faint);
   }
 
   .qer__col--no li::before {
@@ -509,7 +529,7 @@ const schemaFaq = {
     top: 0.72em;
     width: 8px;
     height: 1px;
-    background: var(--soft);
+    background: var(--rg-faint);
   }
 
   /* ---------- Bullets ---------- */
@@ -518,6 +538,7 @@ const schemaFaq = {
     display: grid;
     gap: 0.6rem;
     margin: 1.2rem 0 1.5rem;
+    padding: 0;
   }
 
   .qer__bullets li {
@@ -533,7 +554,7 @@ const schemaFaq = {
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: var(--accent);
+    background: var(--rg-accent);
   }
 
   /* ---------- Módulos y mercados ---------- */
@@ -550,38 +571,38 @@ const schemaFaq = {
     grid-template-columns: 160px 1fr;
     gap: 1.25rem;
     padding: 0.85rem 0;
-    border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+    border-bottom: 1px solid var(--rg-line);
   }
 
   .qer__module dt,
   .qer__market dt {
     font-weight: 600;
-    color: var(--line);
+    color: var(--rg-ink);
   }
 
   .qer__module dd,
   .qer__market dd {
     margin: 0;
     font-size: 0.97rem;
-    color: var(--soft);
+    color: var(--rg-soft);
     line-height: 1.55;
   }
 
   /* ---------- FAQ ---------- */
   .qer__faq {
     margin-top: 1.5rem;
-    border-top: 1px solid rgba(148, 163, 184, 0.14);
+    border-top: 1px solid var(--rg-line);
   }
 
   .qer__faq-item {
-    border-bottom: 1px solid rgba(148, 163, 184, 0.14);
+    border-bottom: 1px solid var(--rg-line);
   }
 
   .qer__faq-item summary {
     padding: 1.15rem 2rem 1.15rem 0;
     cursor: pointer;
     font-weight: 550;
-    color: var(--line);
+    color: var(--rg-ink);
     list-style: none;
     position: relative;
     transition: color 0.15s ease;
@@ -592,7 +613,7 @@ const schemaFaq = {
   }
 
   .qer__faq-item summary:hover {
-    color: #a5b4fc;
+    color: var(--rg-accent);
   }
 
   .qer__faq-item summary::after {
@@ -602,8 +623,8 @@ const schemaFaq = {
     top: 50%;
     width: 8px;
     height: 8px;
-    border-right: 1.5px solid var(--soft);
-    border-bottom: 1.5px solid var(--soft);
+    border-right: 1.5px solid var(--rg-faint);
+    border-bottom: 1.5px solid var(--rg-faint);
     transform: translateY(-70%) rotate(45deg);
     transition: transform 0.2s ease;
   }
@@ -615,7 +636,7 @@ const schemaFaq = {
   .qer__faq-item p {
     padding: 0 0 1.3rem;
     margin: 0;
-    color: var(--soft);
+    color: var(--rg-soft);
     font-size: 0.98rem;
   }
 
@@ -623,9 +644,9 @@ const schemaFaq = {
   .qer__foot {
     margin-top: 4rem;
     padding-top: 2rem;
-    border-top: 1px solid rgba(148, 163, 184, 0.18);
+    border-top: 1px solid var(--rg-line);
     font-size: 0.97rem;
-    color: var(--soft);
+    color: var(--rg-soft);
   }
 
   .qer__foot p {

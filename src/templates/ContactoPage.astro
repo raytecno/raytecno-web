@@ -15,7 +15,12 @@
  * - Eliminado el bloque de "tema blanco en móvil" y sus ~30 !important.
  * - El titular ya no usa gradiente con -webkit-text-fill-color: transparent,
  *   que en algunos navegadores dejaba el texto invisible al cambiar de tema.
- *   El énfasis va en color de acento, que es más legible y más sobrio.
+ *
+ * CORRECCIÓN HTML (Septiembre 2026):
+ * - <main class="contacto-page"> pasa a ser <div>. El Layout ya envuelve el
+ *   <slot /> en <main class="main-content">, así que había un <main> dentro
+ *   de otro <main>: HTML inválido, y los lectores de pantalla se pierden con
+ *   dos regiones principales. El estilo no cambia, .contacto-page sigue igual.
  */
 import Layout from "@/layouts/Layout.astro";
 import { getAlternateUrls, type Lang } from "@/config/pages";
@@ -335,7 +340,7 @@ const CONTACT_API_URL =
   lang={lang}
   alternateUrls={alternateUrls}
 >
-  <main class="contacto-page">
+  <div class="contacto-page">
     <!-- Hero Section -->
     <section class="contacto-hero">
       <div class="container">
@@ -651,7 +656,7 @@ const CONTACT_API_URL =
         </div>
       </div>
     </section>
-  </main>
+  </div>
 </Layout>
 
 <style>
