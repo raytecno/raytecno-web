@@ -3,6 +3,22 @@
  * Template: Tecnología
  * Página de arquitectura tecnológica de RayGold
  * Con soporte multiidioma
+ *
+ * TEMA CLARO/OSCURO (Septiembre 2026):
+ * - IMPORTANTE: había un bloque `:root { ... }` dentro de este <style> que
+ *   redefinía --panel, --soft y --accent para TODA la web. Astro no puede
+ *   acotar :root. Las variables locales viven ahora en .tech-page.
+ * - Los títulos de nodo ya no van en color de marca (#a78bfa, #ff8a4c...):
+ *   eran colores para fondo negro, ilegibles sobre claro. Por eso el bloque
+ *   móvil los forzaba a negro con ~20 !important. El color de marca se queda
+ *   en el borde del nodo y en los logos del pie, donde funciona en los dos
+ *   temas.
+ * - El h1 ya no usa gradiente recortado a texto: si el gradiente no se
+ *   aplica, el titular queda invisible.
+ * - Eliminado el bloque de "tema blanco en móvil" completo.
+ * - Eliminado CSS muerto: .badge, .connection-arrow, .arrow-line, .arrow-head,
+ *   .tech-hero, .hero-title, .hero-subtitle, .result-section, .result-box y
+ *   .module-tag no existen en el marcado de esta página.
  */
 import Layout from "@/layouts/Layout.astro";
 import { getAlternateUrls, getPageUrl, type Lang } from "@/config/pages";
@@ -292,7 +308,7 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
   lang={lang}
   alternateUrls={alternateUrls}
 >
-  <main class="tech-page">
+  <div class="tech-page">
     <!-- Header de página -->
     <section class="page-header">
       <div class="container">
@@ -506,27 +522,23 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
         </a>
       </div>
     </section>
-  </main>
+  </div>
 </Layout>
 
 <style>
-  /* Variables */
-  :root {
-    --bg-dark: #0a0a0f;
-    --bg-card: rgba(20, 20, 30, 0.6);
-    --text-primary: var(--panel);
-    --text-secondary: var(--soft);
-    --text-muted: var(--soft);
-    --border-subtle: rgba(255, 255, 255, 0.1);
-    --accent-purple: var(--accent);
-    --accent-green: #10b981;
-    --accent-amber: #f59e0b;
-    --accent-cyan: #06b6d4;
-  }
-
+  /* Variables locales de la página.
+     ANTES estaban en :root, que en un <style> de Astro NO queda acotado. */
   .tech-page {
-    background: var(--bg-dark);
-    color: var(--text-primary);
+    /* Colores de marca de cada tecnología. Se usan en bordes y logos,
+       nunca como color de texto: no funcionarían en los dos temas. */
+    --vue: #42b883;
+    --dotnet: #7c4dff;
+    --astro: #ff5d01;
+    --claude: #d97757;
+    --azure: #0078d4;
+
+    background: var(--rg-bg);
+    color: var(--rg-ink);
   }
 
   .container {
@@ -539,11 +551,6 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
   .page-header {
     padding: 60px 0 40px;
     text-align: center;
-    background: linear-gradient(
-      180deg,
-      rgba(102, 126, 234, 0.1) 0%,
-      transparent 100%
-    );
   }
 
   .header-content {
@@ -551,86 +558,48 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
     margin: 0 auto;
   }
 
-  .badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    background: rgba(102, 126, 234, 0.15);
-    border: 1px solid rgba(102, 126, 234, 0.3);
-    border-radius: 50px;
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: #a5b4fc;
-    margin-bottom: 1.5rem;
-  }
-
-  .badge-dot {
-    width: 8px;
-    height: 8px;
-    background: var(--accent-green);
-    border-radius: 50%;
-    animation: pulse 2s ease-in-out infinite;
-  }
-
-  @keyframes pulse {
-    0%,
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.5;
-    }
-  }
-
-  /* .page-header h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    margin: 0 0 1rem;
-    letter-spacing: -1px;
-  } */
-
   .page-header h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
+    font-family: var(--rg-display);
+    font-size: clamp(1.9rem, 4.2vw, 2.5rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.14;
+    color: var(--rg-ink);
     margin: 0 0 1rem;
-    background: linear-gradient(135deg, #fff 0%, var(--soft) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
   }
+
   .page-header h1 span {
-    background: linear-gradient(135deg, var(--accent-purple) 0%, #a78bfa 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    font-style: italic;
+    color: var(--rg-accent);
   }
 
   .page-header p {
     font-size: 1.1rem;
-    color: var(--text-secondary);
+    color: var(--rg-soft);
     line-height: 1.6;
     margin: 0;
   }
 
   /* Diagram Section */
   .diagram-section {
-    padding: 40px 0 60px;
+    padding: 20px 0 60px;
   }
 
   .diagram {
-    background: var(--bg-card);
-    border: 1px solid var(--border-subtle);
+    background: var(--rg-sup2);
+    border: 1px solid var(--rg-line);
     border-radius: 24px;
     padding: 2rem;
   }
 
   .diagram-title {
     text-align: center;
-    font-size: 1.25rem;
-    font-weight: 600;
+    font-family: var(--rg-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
     margin-bottom: 2rem;
-    color: var(--text-secondary);
+    color: var(--rg-faint);
   }
 
   .arch-grid {
@@ -639,21 +608,26 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
     gap: 1.25rem;
   }
 
-  /* Nodes */
+  /* Nodes.
+     Cada nodo define --nodo con su color de marca; el resto del estilo
+     se deriva de ahí con color-mix, así funciona en claro y en oscuro. */
   .node {
-    background: rgba(30, 30, 45, 0.8);
-    border: 1px solid var(--border-subtle);
+    --nodo: var(--rg-faint);
+
+    background: var(--rg-panel);
+    border: 1px solid var(--rg-line);
     border-radius: 16px;
     padding: 1.25rem;
-    transition: all 0.3s ease;
+    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     min-height: 140px;
     display: flex;
     flex-direction: column;
   }
 
   .node:hover {
+    border-color: var(--nodo);
     transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 12px 32px var(--rg-sombra);
   }
 
   .node-header {
@@ -665,17 +639,18 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
 
   .node-icon {
     font-size: 1.5rem;
+    line-height: 1;
   }
 
   .node-title {
     font-size: 1rem;
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--rg-ink);
   }
 
   .node-subtitle {
     font-size: 0.8rem;
-    color: var(--text-muted);
+    color: var(--rg-soft);
   }
 
   .node-tags {
@@ -687,59 +662,36 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
 
   .tag {
     padding: 4px 10px;
-    background: rgba(255, 255, 255, 0.1);
+    background: color-mix(in srgb, var(--nodo) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--nodo) 25%, transparent);
     border-radius: 6px;
     font-size: 0.75rem;
-    color: var(--panel);
+    color: var(--rg-ink);
     font-weight: 500;
   }
 
-  /* Node variants */
-  .node-frontend {
-    border-color: rgba(66, 184, 131, 0.4);
-  }
-  .node-frontend:hover {
-    border-color: #42b883;
-  }
-  .node-frontend .node-title {
-    color: #42b883;
-  }
+  /* Node variants: solo cambian --nodo y el filete superior */
+  .node-frontend { --nodo: var(--vue); }
+  .node-backend  { --nodo: var(--dotnet); }
+  .node-web      { --nodo: var(--astro); }
+  .node-data,
+  .node-storage  { --nodo: var(--rg-faint); }
 
-  .node-backend {
-    border-color: rgba(81, 43, 212, 0.4);
-  }
-  .node-backend:hover {
-    border-color: #512bd4;
-  }
-  .node-backend .node-title {
-    color: #a78bfa;
-  }
-
+  .node-frontend,
+  .node-backend,
   .node-web {
-    border-color: rgba(255, 93, 1, 0.4);
-  }
-  .node-web:hover {
-    border-color: #ff5d01;
-  }
-  .node-web .node-title {
-    color: #ff8a4c;
+    border-color: color-mix(in srgb, var(--nodo) 35%, var(--rg-line));
   }
 
   /* AI Node */
   .node-ai {
+    --nodo: var(--claude);
     grid-column: span 3;
-    background: linear-gradient(
-      135deg,
-      rgba(217, 119, 87, 0.1) 0%,
-      rgba(191, 90, 60, 0.05) 100%
-    );
-    border-color: rgba(217, 119, 87, 0.4);
+    background: color-mix(in srgb, var(--claude) 7%, var(--rg-panel));
+    border-color: color-mix(in srgb, var(--claude) 35%, var(--rg-line));
   }
-  .node-ai:hover {
-    border-color: #d97757;
-  }
+
   .node-ai .node-title {
-    color: #d97757;
     font-size: 1.1rem;
   }
 
@@ -755,11 +707,11 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
     align-items: center;
     gap: 8px;
     padding: 10px 16px;
-    background: rgba(217, 119, 87, 0.15);
-    border: 1px solid rgba(217, 119, 87, 0.3);
+    background: color-mix(in srgb, var(--claude) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--claude) 28%, transparent);
     border-radius: 10px;
     font-size: 0.85rem;
-    color: var(--panel);
+    color: var(--rg-ink);
     font-weight: 500;
   }
 
@@ -769,19 +721,13 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
 
   /* Cloud Node */
   .node-cloud {
+    --nodo: var(--azure);
     grid-column: span 3;
-    background: linear-gradient(
-      135deg,
-      rgba(0, 120, 212, 0.1) 0%,
-      rgba(0, 188, 242, 0.05) 100%
-    );
-    border-color: rgba(0, 120, 212, 0.4);
+    background: color-mix(in srgb, var(--azure) 7%, var(--rg-panel));
+    border-color: color-mix(in srgb, var(--azure) 35%, var(--rg-line));
   }
-  .node-cloud:hover {
-    border-color: #0078d4;
-  }
+
   .node-cloud .node-title {
-    color: #00bcf2;
     font-size: 1.1rem;
   }
 
@@ -797,24 +743,20 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
     align-items: center;
     gap: 8px;
     padding: 10px 16px;
-    background: rgba(0, 120, 212, 0.15);
-    border: 1px solid rgba(0, 120, 212, 0.3);
+    background: color-mix(in srgb, var(--azure) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--azure) 28%, transparent);
     border-radius: 10px;
   }
 
   .service-icon {
     font-size: 1.25rem;
+    line-height: 1;
   }
+
   .service-name {
     font-size: 0.8rem;
     font-weight: 500;
-    color: var(--panel);
-  }
-
-  /* Data & Storage */
-  .node-data,
-  .node-storage {
-    border-color: rgba(148, 163, 184, 0.3);
+    color: var(--rg-ink);
   }
 
   /* Fila simétrica de 2 columnas */
@@ -825,62 +767,18 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
     gap: 1.25rem;
   }
 
-  /* Connection Arrow */
-  .connection-arrow {
-    grid-column: span 3;
-    display: flex;
-    justify-content: center;
-    padding: 1rem 0;
-  }
-
-  .arrow-down {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .arrow-line {
-    width: 2px;
-    height: 40px;
-    background: linear-gradient(
-      180deg,
-      rgba(102, 126, 234, 0.6) 0%,
-      rgba(102, 126, 234, 0.2) 100%
-    );
-  }
-
-  .arrow-head {
-    color: var(--accent-purple);
-    font-size: 1.25rem;
-    animation: bounce 2s ease-in-out infinite;
-  }
-
-  @keyframes bounce {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(6px);
-    }
-  }
-
   /* Result Node */
   .node-result {
+    --nodo: var(--rg-accent);
     grid-column: span 3;
-    background: linear-gradient(
-      135deg,
-      rgba(102, 126, 234, 0.15) 0%,
-      rgba(167, 139, 250, 0.1) 100%
-    );
-    border: 2px solid rgba(102, 126, 234, 0.4);
+    background: var(--rg-accent-soft);
+    border: 2px solid color-mix(in srgb, var(--rg-accent) 40%, transparent);
     text-align: center;
     padding: 1.5rem;
   }
 
   .node-result:hover {
-    border-color: var(--accent);
-    box-shadow: 0 16px 48px rgba(102, 126, 234, 0.3);
+    border-color: var(--rg-accent);
   }
 
   .node-result .node-header {
@@ -888,16 +786,15 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
   }
 
   .node-result .node-title {
+    font-family: var(--rg-display);
     font-size: 1.5rem;
-    background: linear-gradient(135deg, var(--accent), #a78bfa);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    font-weight: 450;
+    letter-spacing: -0.01em;
+    color: var(--rg-ink);
   }
 
   .node-result .node-subtitle {
     font-size: 0.9rem;
-    color: #c4b5fd;
   }
 
   .result-features {
@@ -913,11 +810,11 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
     align-items: center;
     gap: 0.5rem;
     padding: 0.5rem 1rem;
-    background: rgba(102, 126, 234, 0.2);
-    border: 1px solid rgba(102, 126, 234, 0.3);
+    background: var(--rg-panel);
+    border: 1px solid color-mix(in srgb, var(--rg-accent) 28%, transparent);
     border-radius: 8px;
     font-size: 0.8rem;
-    color: var(--panel);
+    color: var(--rg-ink);
     font-weight: 500;
   }
 
@@ -929,7 +826,7 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
     flex-wrap: wrap;
     margin-top: 2rem;
     padding-top: 1.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid var(--rg-line);
   }
 
   .tech-item {
@@ -948,8 +845,8 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
     justify-content: center;
     font-size: 1.1rem;
     font-weight: 700;
-    color: white;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    color: #fff;
+    box-shadow: 0 4px 16px var(--rg-sombra);
     transition: transform 0.3s ease;
   }
 
@@ -979,31 +876,30 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
   .tech-name {
     font-size: 0.7rem;
     font-weight: 500;
-    color: var(--panel);
+    color: var(--rg-soft);
   }
 
-  /* CTA Section */
+  /* CTA Section
+     Banda suave, no invertida: debajo va el footer, que sí lo está. */
   .cta-section {
     padding: 60px 1.5rem;
     text-align: center;
-    background: linear-gradient(
-      135deg,
-      rgba(102, 126, 234, 0.1) 0%,
-      rgba(118, 75, 162, 0.1) 100%
-    );
-    border-top: 1px solid rgba(102, 126, 234, 0.2);
+    background: var(--rg-sup2);
+    border-top: 1px solid var(--rg-line);
   }
 
   .cta-section h2 {
+    font-family: var(--rg-display);
     font-size: 1.75rem;
-    font-weight: 700;
-    color: var(--text-primary);
+    font-weight: 450;
+    letter-spacing: -0.015em;
+    color: var(--rg-ink);
     margin: 0 0 12px 0;
   }
 
   .cta-section p {
     font-size: 1.1rem;
-    color: var(--text-secondary);
+    color: var(--rg-soft);
     margin: 0 0 32px 0;
   }
 
@@ -1012,22 +908,23 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
     align-items: center;
     gap: 10px;
     padding: 14px 28px;
-    background: linear-gradient(135deg, var(--accent), #764ba2);
-    color: white;
+    background: var(--rg-ink);
+    color: var(--rg-on-ink);
+    border: 1px solid var(--rg-ink);
     text-decoration: none;
-    border-radius: 12px;
+    border-radius: 999px;
     font-weight: 600;
     font-size: 1rem;
-    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
-    transition: all 0.3s ease;
+    transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
   }
 
   .cta-button:hover {
+    background: var(--rg-accent);
+    border-color: var(--rg-accent);
     transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(102, 126, 234, 0.5);
   }
 
-  /* Responsive */
+  /* Responsive: solo estructura, el color no cambia */
   @media (max-width: 900px) {
     .arch-grid {
       grid-template-columns: 1fr;
@@ -1038,7 +935,6 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
     .node-data,
     .node-storage,
     .node-result,
-    .connection-arrow,
     .row-two {
       grid-column: 1;
     }
@@ -1047,19 +943,22 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
       grid-template-columns: 1fr;
     }
 
-    .page-header h1 {
-      font-size: 2.25rem;
-    }
-
     .ai-features,
     .result-features {
       flex-direction: column;
-      align-items: center;
+      align-items: stretch;
+    }
+
+    .ai-feature,
+    .result-feature,
+    .service {
+      justify-content: center;
     }
 
     .services {
       gap: 0.75rem;
     }
+
     .tech-footer {
       gap: 1rem;
     }
@@ -1069,181 +968,18 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
     .page-header {
       padding: 40px 0 30px;
     }
-    .page-header h1 {
-      font-size: 2rem;
-    }
+
     .diagram {
       padding: 1.5rem 1rem;
     }
+
     .cta-section {
       padding: 40px 1.5rem;
     }
+
     .cta-button {
       width: 100%;
       justify-content: center;
-    }
-  }
-
-  /* ============================================
-   MÓVIL: Tema blanco claro
-   ============================================ */
-  @media (max-width: 768px) {
-    :root {
-      --bg-dark: var(--panel);
-      --bg-card: rgba(248, 250, 252, 0.95);
-      --text-primary: var(--ink);
-      --text-secondary: #475569;
-      --text-muted: var(--soft);
-      --border-subtle: rgba(0, 0, 0, 0.08);
-    }
-
-    .tech-page {
-      background: var(--panel) !important;
-    }
-
-    .tech-hero {
-      background: linear-gradient(135deg, var(--panel) 0%, var(--sup-2) 100%) !important;
-    }
-
-    .hero-title {
-      background: linear-gradient(135deg, var(--ink) 0%, #475569 100%) !important;
-      -webkit-background-clip: text !important;
-      -webkit-text-fill-color: transparent !important;
-    }
-
-    .hero-subtitle {
-      color: var(--soft) !important;
-    }
-
-    .node {
-      background: var(--sup-2) !important;
-      border: 1px solid var(--line) !important;
-    }
-
-    .node-subtitle {
-      color: var(--soft) !important;
-    }
-
-    .tag {
-      background: rgba(102, 126, 234, 0.1) !important;
-      color: var(--accent) !important;
-    }
-
-    .ai-feature,
-    .service {
-      background: rgba(0, 0, 0, 0.04) !important;
-      color: #334155 !important;
-      border: 1px solid var(--line) !important;
-    }
-
-    .node-ai,
-    .node-cloud {
-      grid-column: span 1 !important;
-    }
-
-    .result-section {
-      background: linear-gradient(
-        135deg,
-        rgba(102, 126, 234, 0.05) 0%,
-        rgba(118, 75, 162, 0.05) 100%
-      ) !important;
-    }
-
-    .result-box {
-      background: var(--sup-2) !important;
-      border: 1px solid var(--line) !important;
-    }
-
-    .module-tag {
-      background: rgba(102, 126, 234, 0.1) !important;
-      color: var(--accent) !important;
-    }
-
-    .cta-section {
-      background: linear-gradient(
-        135deg,
-        rgba(102, 126, 234, 0.05) 0%,
-        rgba(118, 75, 162, 0.05) 100%
-      ) !important;
-      border-top: 1px solid var(--line) !important;
-    }
-
-    .cta-section h2 {
-      color: var(--ink) !important;
-    }
-
-    .cta-section p {
-      color: var(--soft) !important;
-    }
-
-    /* Títulos de nodos - NEGRO BOLD en móvil */
-    .node-title {
-      color: var(--ink) !important;
-      font-weight: 700 !important;
-      -webkit-text-fill-color: var(--ink) !important;
-      background: none !important;
-    }
-
-    .node-ai .node-title,
-    .node-cloud .node-title,
-    .node-frontend .node-title,
-    .node-backend .node-title,
-    .node-web .node-title,
-    .node-data .node-title,
-    .node-storage .node-title,
-    .node-result .node-title {
-      color: var(--ink) !important;
-      font-weight: 700 !important;
-      -webkit-text-fill-color: var(--ink) !important;
-      background: none !important;
-    }
-
-    /* Subtítulos */
-    .node-subtitle {
-      color: #475569 !important;
-      font-weight: 500 !important;
-    }
-
-    /* Textos dentro de servicios y features */
-    .service-name,
-    .ai-feature,
-    .result-feature {
-      color: var(--ink) !important;
-      font-weight: 600 !important;
-    }
-
-    /* Tags de base de datos */
-    .tag {
-      color: var(--ink) !important;
-      font-weight: 600 !important;
-      background: rgba(102, 126, 234, 0.15) !important;
-      border: 1px solid rgba(102, 126, 234, 0.3) !important;
-    }
-
-    /* Tech names en el footer */
-    .tech-name {
-      color: var(--ink) !important;
-      font-weight: 600 !important;
-    }
-
-    /* Módulos con ancho fijo */
-    .result-feature {
-      width: 150px;
-      justify-content: center;
-      text-align: center;
-    }
-
-    .service,
-    .ai-feature {
-      min-width: 130px;
-      justify-content: center;
-      text-align: center;
-    }
-
-    .tag {
-      min-width: 120px;
-      justify-content: center;
-      text-align: center;
     }
   }
 </style>
