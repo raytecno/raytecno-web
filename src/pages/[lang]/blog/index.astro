@@ -9,16 +9,22 @@
  *
  * CORRECCIÓN (Julio 2026 - Post Screaming Frog):
  * - Los enlaces de filtro usaban el nombre crudo de la categoría como slug,
- *   generando URLs con espacios y "&" sin escapar:
- *      /es/blog?cat=Fabricación%20&%20ERP
- *   El "&" sin codificar partía la query string en dos parámetros.
- * - Se slugifica localmente con slugify() en lugar de confiar en cat.slug,
- *   para no tocar getBlogCategories() ni sus otros consumidores.
- * - El filtro NO existía: no había script que leyera ?cat=. Los botones
- *   cambiaban la URL pero el listado seguía mostrando todos los posts.
- *   Ahora se filtra en cliente vía data-cat.
- * - rel="nofollow" en los filtros: estas URLs canonicalizan a /[lang]/blog,
- *   no aportan indexación y consumían presupuesto de rastreo.
+ *   generando URLs con espacios y "&" sin escapar.
+ * - Se slugifica localmente con slugify().
+ * - El filtro se aplica en cliente vía data-cat.
+ * - rel="nofollow" en los filtros.
+ *
+ * TEMA CLARO/OSCURO (Septiembre 2026):
+ * - CAUSA DE LOS TÍTULOS INVISIBLES: la página definía --dark: var(--ink) y
+ *   pintaba la cabecera con ese degradado, más color: var(--white). Al
+ *   renombrarse los tokens, --ink dejó de existir: el degradado no se
+ *   aplicaba y quedaba texto blanco sobre fondo blanco.
+ * - La cabecera deja de ser banda oscura. Va pegada al menú, que ya es
+ *   superficie invertida: dos bandas oscuras seguidas se funden y el titular
+ *   del blog parecía parte de la navegación. Ahora es clara con filete.
+ * - El oscuro se reserva para el CTA del final, que es una caja suelta y ahí
+ *   sí destaca (class="rg-inv").
+ * - CORREGIDO: <main> anidado dentro del <main> del Layout.
  */
 
 import type { GetStaticPaths } from 'astro';
@@ -43,14 +49,6 @@ const t = getTranslations(lang);
 
 // ============================================
 // SLUGIFY - Normaliza nombres de categoría a slug seguro para URL
-//
-// "Fabricación & ERP"  -> "fabricacion-erp"
-// "Estratègia & ERP"   -> "estrategia-erp"
-// "Fabricação & IA"    -> "fabricacao-ia"
-// "Hub editorial"      -> "hub-editorial"
-//
-// NFD separa el carácter base de su diacrítico; el rango \u0300-\u036f
-// elimina los diacríticos combinantes resultantes.
 // ============================================
 function slugify(value: string): string {
   return (value || '')
@@ -62,7 +60,7 @@ function slugify(value: string): string {
 }
 
 // ============================================
-// OBTENER DATOS (antes: GraphQL → ahora: Content Collections)
+// OBTENER DATOS (Content Collections)
 // ============================================
 const posts = await getBlogPosts(lang);
 const categories = await getBlogCategories(lang);
@@ -129,10 +127,8 @@ const alternateUrls = supportedLangs.map(l => ({
 
 // ============================================
 // SCRIPT DE FILTRADO EN CLIENTE
-//
-// Se guarda como string en frontmatter y se inyecta con set:html.
-// El JS evita deliberadamente el carácter "<" (se usa forEach y !==)
-// para no confundir al parser de Astro.
+// El JS evita deliberadamente el carácter "<" para no confundir
+// al parser de Astro.
 // ============================================
 const filterScript = `
 (function () {
@@ -164,109 +160,100 @@ const filterScript = `
 `;
 ---
 
-<Layout 
+<Layout
   title={`${bt.title} | RayGold`}
   description={bt.subtitle}
   lang={lang}
   alternateUrls={alternateUrls}
 >
-  <main>
-    <section class="blog-page">
-      <!-- Header -->
-      <div class="blog-header">
-        <div class="container">
-          <div class="header-top">
-            <div class="title-area">
-              <h1>{bt.title}</h1>
-              <p>{bt.subtitle}</p>
-            </div>
+  <section class="blog-page">
+    <!-- Header -->
+    <div class="blog-header">
+      <div class="container">
+        <div class="header-top">
+          <div class="title-area">
+            <h1>{bt.title}</h1>
+            <p>{bt.subtitle}</p>
           </div>
+        </div>
 
-          {/* Filtro de categorías */}
-          {categories.length > 0 && (
-            <div class="category-filters">
+        {/* Filtro de categorías */}
+        {categories.length > 0 && (
+          <div class="category-filters">
+            <a
+              href={`/${lang}/blog`}
+              class="filter-btn active"
+              data-cat-slug=""
+            >{bt.allCategories}</a>
+            {categories.map(cat => (
               <a
-                href={`/${lang}/blog`}
-                class="filter-btn active"
-                data-cat-slug=""
-              >{bt.allCategories}</a>
-              {categories.map(cat => (
-                <a
-                  href={`/${lang}/blog?cat=${slugify(cat.name)}`}
-                  class="filter-btn"
-                  data-cat-slug={slugify(cat.name)}
-                  rel="nofollow"
-                >
-                  {cat.name} <span class="count">({cat.count})</span>
-                </a>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-
-      <!-- Listado de posts -->
-      <div class="container blog-content">
-        {posts.length > 0 ? (
-          <Fragment>
-            <div class="posts-grid">
-              {posts.map(post => (
-                <article class="post-card" data-cat={slugify(post.category)}>
-                  <a href={`/${lang}/blog/${post.slug}`}>
-                    {post.featuredImage && (
-                      <div class="post-image">
-                        <img 
-                          src={post.featuredImage} 
-                          alt={post.title}
-                          loading="lazy"
-                          width="400"
-                          height="225"
-                        />
-                      </div>
-                    )}
-                    <div class="post-info">
-                      <span class="post-category">{post.category}</span>
-                      <h3>{post.title}</h3>
-                      <p class="post-excerpt">{cleanExcerpt(post.excerpt, 100)}</p>
-                      <div class="post-meta">
-                        <time>{formatDate(post.date)}</time>
-                        <span>·</span>
-                        <span>{post.readingTime} {bt.minRead}</span>
-                      </div>
-                    </div>
-                  </a>
-                </article>
-              ))}
-            </div>
-            <p class="no-posts" id="no-results" hidden>{bt.noResults}</p>
-          </Fragment>
-        ) : (
-          <p class="no-posts">{bt.noPosts}</p>
+                href={`/${lang}/blog?cat=${slugify(cat.name)}`}
+                class="filter-btn"
+                data-cat-slug={slugify(cat.name)}
+                rel="nofollow"
+              >
+                {cat.name} <span class="count">({cat.count})</span>
+              </a>
+            ))}
+          </div>
         )}
-
-        <!-- CTA -->
-        <div class="cta-banner">
-          <span>{bt.ctaTitle}</span>
-          <a href={getPageUrl("contacto", lang)}>{bt.ctaButton}</a>
-        </div>
       </div>
-    </section>
-  </main>
+    </div>
+
+    <!-- Listado de posts -->
+    <div class="container blog-content">
+      {posts.length > 0 ? (
+        <Fragment>
+          <div class="posts-grid">
+            {posts.map(post => (
+              <article class="post-card" data-cat={slugify(post.category)}>
+                <a href={`/${lang}/blog/${post.slug}`}>
+                  {post.featuredImage && (
+                    <div class="post-image">
+                      <img
+                        src={post.featuredImage}
+                        alt={post.title}
+                        loading="lazy"
+                        width="400"
+                        height="225"
+                      />
+                    </div>
+                  )}
+                  <div class="post-info">
+                    <span class="post-category">{post.category}</span>
+                    <h3>{post.title}</h3>
+                    <p class="post-excerpt">{cleanExcerpt(post.excerpt, 100)}</p>
+                    <div class="post-meta">
+                      <time>{formatDate(post.date)}</time>
+                      <span>·</span>
+                      <span>{post.readingTime} {bt.minRead}</span>
+                    </div>
+                  </div>
+                </a>
+              </article>
+            ))}
+          </div>
+          <p class="no-posts" id="no-results" hidden>{bt.noResults}</p>
+        </Fragment>
+      ) : (
+        <p class="no-posts">{bt.noPosts}</p>
+      )}
+
+      <!-- CTA -->
+      <div class="cta-banner rg-inv">
+        <span>{bt.ctaTitle}</span>
+        <a href={getPageUrl("contacto", lang)}>{bt.ctaButton}</a>
+      </div>
+    </div>
+  </section>
 
   <script is:inline set:html={filterScript}></script>
 </Layout>
 
 <style>
   .blog-page {
-    --gold: #c9a227;
-    --gold-dark: #a8861e;
-    --dark: var(--ink);
-    --dark-medium: var(--ink);
-    --gray-400: #9ca3af;
-    --gray-200: #e5e7eb;
-    --gray-100: #f3f4f6;
-    --white: #fff;
-    background: var(--white);
+    background: var(--rg-bg);
+    color: var(--rg-ink);
   }
 
   .container {
@@ -275,31 +262,70 @@ const filterScript = `
     padding: 0 1.5rem;
   }
 
+  /* ---------- Cabecera ---------- */
   .blog-header {
-    background: linear-gradient(135deg, var(--dark) 0%, var(--dark-medium) 100%);
-    color: var(--white);
-    padding: 2.5rem 0 2rem;
+    padding: 3rem 0 2rem;
+    border-bottom: 1px solid var(--rg-line);
   }
 
-  .header-top { margin-bottom: 1.5rem; }
-  .title-area h1 { font-size: 2rem; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 0.375rem 0; }
-  .title-area p { font-size: 0.9rem; color: var(--gray-400); }
+  .header-top {
+    margin-bottom: 1.5rem;
+  }
 
-  .category-filters { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .title-area h1 {
+    font-family: var(--rg-display);
+    font-size: clamp(1.9rem, 4vw, 2.4rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: var(--rg-ink);
+    margin: 0 0 0.5rem 0;
+    line-height: 1.12;
+  }
+
+  .title-area p {
+    font-size: 0.95rem;
+    color: var(--rg-soft);
+    margin: 0;
+  }
+
+  /* ---------- Filtros ---------- */
+  .category-filters {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
   .filter-btn {
-    padding: 0.4rem 0.9rem;
+    padding: 0.45rem 0.95rem;
     border-radius: 999px;
     font-size: 0.8rem;
-    color: var(--gray-400);
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--rg-soft);
+    background: var(--rg-accent-soft);
+    border: 1px solid transparent;
     text-decoration: none;
-    transition: all 0.2s;
+    transition: color 0.2s, background 0.2s, border-color 0.2s;
   }
-  .filter-btn:hover, .filter-btn.active { color: var(--gold); border-color: var(--gold); background: rgba(201,162,39,0.1); }
-  .filter-btn .count { font-size: 0.7rem; opacity: 0.7; }
 
-  .blog-content { padding: 2rem 0 3rem; }
+  .filter-btn:hover {
+    border-color: var(--rg-accent);
+    color: var(--rg-ink);
+  }
+
+  .filter-btn.active {
+    background: var(--rg-ink);
+    color: var(--rg-on-ink);
+    border-color: var(--rg-ink);
+  }
+
+  .filter-btn .count {
+    font-size: 0.7rem;
+    opacity: 0.7;
+  }
+
+  /* ---------- Listado ---------- */
+  .blog-content {
+    padding: 2.5rem 0 3rem;
+  }
 
   .posts-grid {
     display: grid;
@@ -308,60 +334,136 @@ const filterScript = `
   }
 
   .post-card {
-    border: 1px solid var(--gray-200);
+    background: var(--rg-panel);
+    border: 1px solid var(--rg-line);
     border-radius: 12px;
     overflow: hidden;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
   }
-  .post-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
-  .post-card a { text-decoration: none; color: inherit; }
-  .post-card[hidden] { display: none; }
 
-  .post-image { aspect-ratio: 16/9; overflow: hidden; }
-  .post-image img { width: 100%; height: 100%; object-fit: cover; }
+  .post-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--rg-accent);
+    box-shadow: 0 8px 24px var(--rg-sombra);
+  }
 
-  .post-info { padding: 1.25rem; }
+  .post-card a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .post-card[hidden] {
+    display: none;
+  }
+
+  .post-image {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--rg-sup2);
+  }
+
+  .post-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .post-info {
+    padding: 1.25rem;
+  }
+
   .post-category {
     display: inline-block;
-    font-size: 0.7rem;
-    font-weight: 600;
+    font-family: var(--rg-mono);
+    font-size: 0.65rem;
+    font-weight: 500;
     text-transform: uppercase;
-    color: var(--gold);
-    letter-spacing: 0.05em;
+    color: var(--rg-accent);
+    letter-spacing: 0.08em;
     margin-bottom: 0.5rem;
   }
-  .post-info h3 { font-size: 1.1rem; margin: 0 0 0.5rem 0; line-height: 1.4; }
-  .post-excerpt { font-size: 0.85rem; color: #666; margin: 0 0 0.75rem 0; line-height: 1.5; }
-  .post-meta { display: flex; gap: 0.5rem; font-size: 0.75rem; color: var(--gray-400); }
 
-  .no-posts { text-align: center; padding: 3rem; color: #666; }
-  .no-posts[hidden] { display: none; }
+  .post-info h3 {
+    font-family: var(--rg-display);
+    font-size: 1.15rem;
+    font-weight: 450;
+    letter-spacing: -0.01em;
+    color: var(--rg-ink);
+    margin: 0 0 0.5rem 0;
+    line-height: 1.32;
+  }
 
+  .post-excerpt {
+    font-size: 0.85rem;
+    color: var(--rg-soft);
+    margin: 0 0 0.75rem 0;
+    line-height: 1.55;
+  }
+
+  .post-meta {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--rg-faint);
+  }
+
+  .no-posts {
+    text-align: center;
+    padding: 3rem;
+    color: var(--rg-soft);
+  }
+
+  .no-posts[hidden] {
+    display: none;
+  }
+
+  /* ---------- CTA ---------- */
   .cta-banner {
     margin-top: 3rem;
     padding: 2rem;
-    background: linear-gradient(135deg, var(--dark) 0%, var(--dark-medium) 100%);
     border-radius: 12px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: var(--white);
+    gap: 1.5rem;
   }
-  .cta-banner span { font-size: 1.1rem; font-weight: 500; }
+
+  .cta-banner span {
+    font-family: var(--rg-display);
+    font-size: 1.2rem;
+    font-weight: 450;
+    color: var(--rg-ink);
+  }
+
   .cta-banner a {
-    padding: 0.6rem 1.5rem;
-    background: var(--gold);
-    color: var(--dark);
-    border-radius: 8px;
+    padding: 0.7rem 1.6rem;
+    background: var(--rg-accent);
+    color: var(--rg-on-ink);
+    border-radius: 999px;
     font-weight: 600;
     font-size: 0.9rem;
     text-decoration: none;
+    white-space: nowrap;
     transition: background 0.2s;
   }
-  .cta-banner a:hover { background: var(--gold-dark); }
+
+  .cta-banner a:hover {
+    background: var(--rg-ink);
+    color: var(--rg-bg);
+  }
 
   @media (max-width: 640px) {
-    .posts-grid { grid-template-columns: 1fr; }
-    .cta-banner { flex-direction: column; gap: 1rem; text-align: center; }
+    .blog-header {
+      padding: 2rem 0 1.5rem;
+    }
+    .posts-grid {
+      grid-template-columns: 1fr;
+    }
+    .cta-banner {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+    }
   }
 </style>
