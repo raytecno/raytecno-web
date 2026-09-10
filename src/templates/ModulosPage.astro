@@ -1,7 +1,20 @@
 ---
 /**
  * Template: Módulos (índice)
- * Tema adaptativo: azul oscuro desktop, blanco móvil
+ *
+ * TEMA CLARO/OSCURO (Septiembre 2026):
+ * - La página usaba background: var(--ink) (token de TEXTO como fondo) y las
+ *   tarjetas rgba(30,41,59,.5) fijo. Sobre fondo claro salía gris barro.
+ * - El h1 usaba gradiente recortado a texto (-webkit-text-fill-color:
+ *   transparent). Si el gradiente no se aplica, el titular queda invisible,
+ *   que es justo lo que pasaba. Ahora es color sólido.
+ * - Eliminado el bloque de "tema blanco en móvil": con tema oscuro dejaba
+ *   texto claro sobre fondo blanco.
+ * - Los colores propios de cada módulo se mantienen: son identidad de módulo,
+ *   no del tema, y funcionan sobre claro y sobre oscuro.
+ *
+ * CONTENIDO: el subtítulo decía "11 módulos" en los cinco idiomas y la
+ * rejilla tiene 12. Corregido también en las meta-descripciones.
  */
 import Layout from "@/layouts/Layout.astro";
 import { getAlternateUrls, getPageUrl, type Lang } from "@/config/pages";
@@ -46,11 +59,11 @@ function getModuloUrl(moduloId: string, currentLang: Lang): string {
   return `/${currentLang}/${folder}/${slug}`;
 }
 
-// Definición de los 11 módulos con iconos originales
+// Definición de los 12 módulos con iconos originales
 const modulos = [
   {
     id: "maestros",
-    color: "var(--accent)",
+    color: "var(--rg-accent)",
     icono: `<svg viewBox="0 0 64 64" fill="none">
       <rect x="8" y="12" width="48" height="40" rx="4" fill="currentColor" opacity="0.15"/>
       <rect x="14" y="18" width="36" height="6" rx="2" fill="currentColor"/>
@@ -107,7 +120,7 @@ const modulos = [
       <circle cx="32" cy="38" r="2" fill="currentColor"/>
     </svg>`,
   },
-   {
+  {
     id: "inventario",
     color: "#8b5cf6",
     icono: `<svg viewBox="0 0 64 64" fill="none">
@@ -217,7 +230,7 @@ const modulosT: Record<
     vendedores: { nombre: "Vendedores", descripcion: "Gestión de rutas y visitas" },
     ecommerce: { nombre: "Ecommerce", descripcion: "Tiendas online y marketplaces" },
     impresoras3d: { nombre: "Impresoras 3D", descripcion: "Control y gestión de producción con impresoras 3D" },
-     portal: { nombre: "Portal Cliente", descripcion: "Acceso de clientes a pedidos y facturas" },
+    portal: { nombre: "Portal Cliente", descripcion: "Acceso de clientes a pedidos y facturas" },
     asistenteia: { nombre: "Asistente IA", descripcion: "Asistente inteligente integrado en el ERP" },
   },
   en: {
@@ -261,7 +274,6 @@ const modulosT: Record<
     impresoras3d: { nombre: "Impressores 3D", descripcion: "Control i gestió de producció amb impressores 3D" },
     portal: { nombre: "Portal Client", descripcion: "Accés dels clients a comandes i factures" },
     asistenteia: { nombre: "Assistent IA", descripcion: "Assistent intel·ligent integrat en l'ERP" },
-
   },
   "pt-br": {
     maestros: { nombre: "Mestres", descripcion: "Artigos, fornecedores, clientes e famílias" },
@@ -292,9 +304,9 @@ const pageTranslations: Record<Lang, {
 }> = {
   es: {
     metaTitle: "Módulos | RayGold ERP",
-    metaDescription: "Descubre los 11 módulos del ERP RayGold para joyerías.",
+    metaDescription: "Descubre los 12 módulos del ERP RayGold para joyerías.",
     title: "Módulos del ERP",
-    subtitle: "11 módulos especializados para cubrir todas las necesidades de tu joyería",
+    subtitle: "12 módulos especializados para cubrir todas las necesidades de tu joyería",
     ctaTitle: "¿Listo para empezar?",
     ctaDesc: "Solicita una demo y descubre todo lo que RayGold puede hacer por tu joyería",
     ctaDemo: "Solicitar demo",
@@ -302,9 +314,9 @@ const pageTranslations: Record<Lang, {
   },
   en: {
     metaTitle: "Modules | RayGold ERP",
-    metaDescription: "Discover the 11 modules of RayGold ERP for jewelry businesses.",
+    metaDescription: "Discover the 12 modules of RayGold ERP for jewelry businesses.",
     title: "ERP Modules",
-    subtitle: "11 specialized modules to cover all your jewelry business needs",
+    subtitle: "12 specialized modules to cover all your jewelry business needs",
     ctaTitle: "Ready to get started?",
     ctaDesc: "Request a demo and discover everything RayGold can do for your jewelry business",
     ctaDemo: "Request demo",
@@ -312,9 +324,9 @@ const pageTranslations: Record<Lang, {
   },
   fr: {
     metaTitle: "Modules | RayGold ERP",
-    metaDescription: "Découvrez les 11 modules de l'ERP RayGold pour bijouteries.",
+    metaDescription: "Découvrez les 12 modules de l'ERP RayGold pour bijouteries.",
     title: "Modules ERP",
-    subtitle: "11 modules spécialisés pour répondre à tous les besoins de votre bijouterie",
+    subtitle: "12 modules spécialisés pour répondre à tous les besoins de votre bijouterie",
     ctaTitle: "Prêt à commencer?",
     ctaDesc: "Demandez une démo et découvrez tout ce que RayGold peut faire pour votre bijouterie",
     ctaDemo: "Demander une démo",
@@ -322,9 +334,9 @@ const pageTranslations: Record<Lang, {
   },
   ca: {
     metaTitle: "Mòduls | RayGold ERP",
-    metaDescription: "Descobreix els 11 mòduls de l'ERP RayGold per a joieries.",
+    metaDescription: "Descobreix els 12 mòduls de l'ERP RayGold per a joieries.",
     title: "Mòduls de l'ERP",
-    subtitle: "11 mòduls especialitzats per cobrir totes les necessitats de la teva joieria",
+    subtitle: "12 mòduls especialitzats per cobrir totes les necessitats de la teva joieria",
     ctaTitle: "Preparat per començar?",
     ctaDesc: "Sol·licita una demo i descobreix tot el que RayGold pot fer per la teva joieria",
     ctaDemo: "Sol·licitar demo",
@@ -332,9 +344,9 @@ const pageTranslations: Record<Lang, {
   },
   "pt-br": {
     metaTitle: "Módulos | RayGold ERP",
-    metaDescription: "Descubra os 11 módulos do ERP RayGold para joalherias.",
+    metaDescription: "Descubra os 12 módulos do ERP RayGold para joalherias.",
     title: "Módulos do ERP",
-    subtitle: "11 módulos especializados para cobrir todas as necessidades da sua joalheria",
+    subtitle: "12 módulos especializados para cobrir todas as necessidades da sua joalheria",
     ctaTitle: "Pronto para começar?",
     ctaDesc: "Solicite uma demonstração e descubra tudo o que o RayGold pode fazer pela sua joalheria",
     ctaDemo: "Solicitar demo",
@@ -352,7 +364,7 @@ const mt = modulosT[lang] || modulosT.es;
   lang={lang}
   alternateUrls={alternateUrls}
 >
-  <main class="modulos-page">
+  <div class="modulos-page">
     <!-- Hero -->
     <section class="hero-section">
       <div class="container">
@@ -403,16 +415,13 @@ const mt = modulosT[lang] || modulosT.es;
         </div>
       </div>
     </section>
-  </main>
+  </div>
 </Layout>
 
 <style>
-  /* ============================================
-     DESKTOP: Tema azul oscuro (default)
-     ============================================ */
   .modulos-page {
-    background: var(--ink);
-    color: white;
+    background: var(--rg-bg);
+    color: var(--rg-ink);
   }
 
   .container {
@@ -428,18 +437,18 @@ const mt = modulosT[lang] || modulosT.es;
   }
 
   .hero-section h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
+    font-family: var(--rg-display);
+    font-size: clamp(2rem, 4.5vw, 2.6rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: var(--rg-ink);
     margin: 0 0 1rem;
-    background: linear-gradient(135deg, #fff 0%, var(--soft) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    line-height: 1.12;
   }
 
   .hero-subtitle {
     font-size: 1.1rem;
-    color: var(--soft);
+    color: var(--rg-soft);
     max-width: 600px;
     margin: 0 auto;
     line-height: 1.6;
@@ -457,15 +466,15 @@ const mt = modulosT[lang] || modulosT.es;
   }
 
   .modulo-card {
-    background: rgba(30, 41, 59, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--rg-panel);
+    border: 1px solid var(--rg-line);
     border-radius: 16px;
     padding: 1.5rem;
     text-decoration: none;
     display: flex;
     align-items: center;
     gap: 1rem;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
     overflow: hidden;
   }
@@ -483,10 +492,10 @@ const mt = modulosT[lang] || modulosT.es;
   }
 
   .modulo-card:hover {
-    background: rgba(30, 41, 59, 0.8);
+    background: var(--rg-sup2);
     border-color: var(--modulo-color);
     transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 12px 40px var(--rg-sombra);
   }
 
   .modulo-card:hover::before {
@@ -497,16 +506,16 @@ const mt = modulosT[lang] || modulosT.es;
     width: 56px;
     height: 56px;
     min-width: 56px;
-    background: rgba(255, 255, 255, 0.05);
+    background: color-mix(in srgb, var(--modulo-color) 12%, transparent);
     border-radius: 12px;
     padding: 10px;
     color: var(--modulo-color);
-    transition: all 0.3s ease;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
   }
 
   .modulo-card:hover .modulo-icon {
     background: var(--modulo-color);
-    color: white;
+    color: #fff;
     transform: scale(1.05);
   }
 
@@ -517,18 +526,19 @@ const mt = modulosT[lang] || modulosT.es;
 
   .modulo-content {
     flex: 1;
+    min-width: 0;
   }
 
   .modulo-content h3 {
     font-size: 1.1rem;
     font-weight: 600;
-    color: white;
+    color: var(--rg-ink);
     margin: 0 0 0.25rem;
   }
 
   .modulo-content p {
     font-size: 0.85rem;
-    color: var(--soft);
+    color: var(--rg-soft);
     margin: 0;
     line-height: 1.4;
   }
@@ -536,8 +546,8 @@ const mt = modulosT[lang] || modulosT.es;
   .modulo-arrow {
     width: 24px;
     height: 24px;
-    color: var(--soft);
-    transition: all 0.3s ease;
+    color: var(--rg-faint);
+    transition: color 0.3s ease, transform 0.3s ease;
   }
 
   .modulo-card:hover .modulo-arrow {
@@ -545,26 +555,29 @@ const mt = modulosT[lang] || modulosT.es;
     transform: translateX(4px);
   }
 
-  /* CTA */
+  /* CTA
+     Banda suave, no invertida: justo debajo va el footer, que sí lo está.
+     Dos superficies invertidas seguidas se fundirían en una sola. */
   .cta-section {
     padding: 4rem 0;
     text-align: center;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    background: var(--rg-sup2);
+    border-top: 1px solid var(--rg-line);
   }
 
   .cta-section h2 {
+    font-family: var(--rg-display);
     font-size: 1.75rem;
-    font-weight: 600;
+    font-weight: 450;
+    letter-spacing: -0.015em;
+    color: var(--rg-ink);
     margin: 0 0 0.75rem;
   }
 
   .cta-section p {
-    color: var(--soft);
-    margin: 0 0 2rem;
+    color: var(--rg-soft);
+    margin: 0 auto 2rem;
     max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
   }
 
   .cta-buttons {
@@ -574,61 +587,45 @@ const mt = modulosT[lang] || modulosT.es;
     flex-wrap: wrap;
   }
 
-  .btn-primary {
-    background: linear-gradient(135deg, var(--accent) 0%, #764ba2 100%);
-    color: white;
+  .btn-primary,
+  .btn-secondary {
     padding: 0.875rem 2rem;
-    border-radius: 10px;
+    border-radius: 999px;
     text-decoration: none;
     font-weight: 500;
-    transition: all 0.2s ease;
+    border: 1px solid var(--rg-ink);
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .btn-primary {
+    background: var(--rg-ink);
+    color: var(--rg-on-ink);
   }
 
   .btn-primary:hover {
+    background: var(--rg-accent);
+    border-color: var(--rg-accent);
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
   }
 
   .btn-secondary {
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    padding: 0.875rem 2rem;
-    border-radius: 10px;
-    text-decoration: none;
-    font-weight: 500;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: all 0.2s ease;
+    background: var(--rg-panel);
+    color: var(--rg-ink);
   }
 
   .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.3);
+    background: var(--rg-accent-soft);
+    border-color: var(--rg-accent);
   }
 
-  /* ============================================
-     MÓVIL: Tema blanco claro
-     ============================================ */
+  /* Móvil: solo tamaños y columnas. El color NO cambia. */
   @media (max-width: 768px) {
-    .modulos-page {
-      background: var(--panel);
-      color: var(--ink);
-    }
-
     .hero-section {
       padding: 3rem 0 2rem;
     }
 
-    .hero-section h1 {
-      font-size: 1.75rem;
-      background: linear-gradient(135deg, var(--ink) 0%, #475569 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
     .hero-subtitle {
       font-size: 1rem;
-      color: var(--soft);
     }
 
     .modulos-grid {
@@ -637,47 +634,16 @@ const mt = modulosT[lang] || modulosT.es;
 
     .modulo-card {
       padding: 1.25rem;
-      background: var(--sup-2);
-      border: 1px solid var(--line);
-    }
-
-    .modulo-card:hover {
-      background: var(--line);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
     }
 
     .modulo-icon {
       width: 48px;
       height: 48px;
       min-width: 48px;
-      background: rgba(102, 126, 234, 0.1);
     }
 
-    .modulo-content h3 {
-      color: var(--ink);
-    }
-
-    .modulo-content p {
-      color: var(--soft);
-    }
-
-    .modulo-arrow {
-      color: var(--soft);
-    }
-
-    /* CTA móvil */
     .cta-section {
       padding: 3rem 0;
-      background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
-      border-top: 1px solid var(--line);
-    }
-
-    .cta-section h2 {
-      color: var(--ink);
-    }
-
-    .cta-section p {
-      color: var(--soft);
     }
 
     .cta-buttons {
@@ -690,17 +656,6 @@ const mt = modulosT[lang] || modulosT.es;
       width: 100%;
       max-width: 280px;
       text-align: center;
-    }
-
-    .btn-secondary {
-      background: rgba(0, 0, 0, 0.04);
-      color: #334155;
-      border: 1px solid var(--line);
-    }
-
-    .btn-secondary:hover {
-      background: rgba(0, 0, 0, 0.08);
-      border-color: #cbd5e1;
     }
   }
 </style>
