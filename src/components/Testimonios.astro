@@ -1,7 +1,17 @@
 ---
 /**
  * Testimonios.astro - Sección de testimonios / casos de éxito
- * Con soporte multiidioma y tema adaptativo móvil
+ *
+ * TEMA CLARO/OSCURO (Septiembre 2026):
+ * - Sección clara. Va entre PorQueRayGold (superficie invertida) y el footer
+ *   (también invertido): si esta fuera oscura, las tres se fundirían en un
+ *   único bloque y se perdería el ritmo de la página.
+ * - Eliminado el bloque de "tema blanco en móvil".
+ * - Fuera los literales #334155, #34d399, #cbd5e1, #764ba2 y los
+ *   rgba(102,126,234,.x) / rgba(30,41,59,.x).
+ * - El acento de "resultado" pasa de verde a color de marca. El verde era
+ *   el único de la web y no significaba nada; si lo prefieres verde, cambia
+ *   --dato por un color fijo: es una sola línea.
  */
 import { type Lang } from "@/config/pages";
 
@@ -235,7 +245,7 @@ const t = translations[lang] || translations.es;
       {t.testimonials.map((testimonio, index) => (
         <article class={`testimonio-card ${index === 0 ? 'featured' : ''}`}>
           <div class="testimonio-quote">
-            <svg class="quote-icon" viewBox="0 0 24 24" fill="currentColor">
+            <svg class="quote-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
             </svg>
             <p>
@@ -266,12 +276,13 @@ const t = translations[lang] || translations.es;
 </section>
 
 <style>
-  /* ============================================
-     DESKTOP: Tema azul oscuro (default)
-     ============================================ */
   .testimonios-section {
+    /* Color del dato destacado. Cámbialo aquí si lo prefieres verde. */
+    --dato: var(--rg-accent);
+
     padding: 5rem 1.5rem;
-    background: linear-gradient(180deg, var(--ink) 0%, var(--ink) 100%);
+    background: var(--rg-bg);
+    color: var(--rg-ink);
   }
 
   .container {
@@ -287,25 +298,26 @@ const t = translations[lang] || translations.es;
   .section-badge {
     display: inline-block;
     padding: 0.5rem 1rem;
-    background: rgba(16, 185, 129, 0.2);
-    color: #34d399;
+    background: var(--rg-accent-soft);
+    color: var(--rg-accent);
     font-size: 0.75rem;
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.06em;
     border-radius: 50px;
     margin-bottom: 1rem;
   }
 
   .section-header h2 {
+    font-family: var(--rg-display);
     font-size: 2rem;
-    font-weight: 700;
-    color: white;
+    font-weight: 450;
+    letter-spacing: -0.015em;
+    color: var(--rg-ink);
     margin: 0 0 0.5rem;
   }
 
   .section-header p {
-    color: var(--soft);
+    color: var(--rg-soft);
     font-size: 1.1rem;
     margin: 0;
   }
@@ -317,25 +329,25 @@ const t = translations[lang] || translations.es;
   }
 
   .testimonio-card {
-    background: rgba(30, 41, 59, 0.6);
-    border: 1px solid #334155;
+    background: var(--rg-panel);
+    border: 1px solid var(--rg-line);
     border-radius: 16px;
     padding: 1.75rem;
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
-    transition: all 0.3s ease;
+    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
   }
 
   .testimonio-card:hover {
-    border-color: var(--accent);
+    border-color: var(--rg-accent);
     transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 12px 32px var(--rg-sombra);
   }
 
   .testimonio-card.featured {
-    border-color: var(--accent);
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(30, 41, 59, 0.6) 100%);
+    border-color: color-mix(in srgb, var(--rg-accent) 45%, var(--rg-line));
+    background: linear-gradient(135deg, var(--rg-accent-soft) 0%, var(--rg-panel) 100%);
   }
 
   .testimonio-quote {
@@ -343,22 +355,22 @@ const t = translations[lang] || translations.es;
   }
 
   .quote-icon {
-    width: 32px;
-    height: 32px;
-    color: var(--accent);
-    opacity: 0.5;
+    width: 28px;
+    height: 28px;
+    color: var(--rg-accent);
+    opacity: 0.45;
     margin-bottom: 0.5rem;
   }
 
   .testimonio-quote p {
-    color: var(--line);
+    color: var(--rg-soft);
     font-size: 0.95rem;
     line-height: 1.7;
     margin: 0;
   }
 
   .testimonio-quote strong {
-    color: white;
+    color: var(--rg-ink);
   }
 
   .testimonio-result {
@@ -366,20 +378,22 @@ const t = translations[lang] || translations.es;
     align-items: baseline;
     gap: 0.5rem;
     padding: 1rem;
-    background: rgba(16, 185, 129, 0.1);
-    border: 1px solid rgba(16, 185, 129, 0.3);
+    background: color-mix(in srgb, var(--dato) 10%, transparent);
+    border: 1px solid color-mix(in srgb, var(--dato) 28%, transparent);
     border-radius: 10px;
   }
 
   .result-number {
+    font-family: var(--rg-display);
     font-size: 1.5rem;
-    font-weight: 700;
-    color: #10b981;
+    font-weight: 500;
+    color: var(--dato);
+    font-variant-numeric: tabular-nums;
   }
 
   .result-text {
     font-size: 0.85rem;
-    color: var(--soft);
+    color: var(--rg-soft);
   }
 
   .testimonio-author {
@@ -387,106 +401,59 @@ const t = translations[lang] || translations.es;
     align-items: center;
     gap: 1rem;
     padding-top: 1rem;
-    border-top: 1px solid #334155;
+    border-top: 1px solid var(--rg-line);
+    margin-top: auto;
   }
 
   .author-avatar {
     width: 48px;
     height: 48px;
-    background: linear-gradient(135deg, var(--accent), #764ba2);
+    min-width: 48px;
+    background: var(--rg-accent);
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: var(--rg-on-ink);
     font-weight: 700;
     font-size: 0.9rem;
+    letter-spacing: 0.03em;
   }
 
   .author-info {
     display: flex;
     flex-direction: column;
     gap: 0.125rem;
+    min-width: 0;
   }
 
   .author-info strong {
-    color: white;
+    color: var(--rg-ink);
     font-size: 0.95rem;
   }
 
   .author-info span {
-    color: var(--soft);
+    color: var(--rg-soft);
     font-size: 0.8rem;
   }
 
   .author-years {
-    color: var(--accent) !important;
-    font-size: 0.75rem !important;
+    color: var(--rg-faint);
+    font-size: 0.75rem;
   }
 
-  /* ============================================
-     MÓVIL: Tema blanco claro
-     ============================================ */
+  /* Móvil: solo tamaños y columnas. El color NO cambia. */
   @media (max-width: 768px) {
     .testimonios-section {
       padding: 3rem 1rem;
-      background: linear-gradient(180deg, var(--sup-2) 0%, var(--panel) 100%);
-    }
-
-    .section-badge {
-      background: rgba(16, 185, 129, 0.1);
-      color: #059669;
     }
 
     .section-header h2 {
       font-size: 1.5rem;
-      color: var(--ink);
-    }
-
-    .section-header p {
-      color: var(--soft);
     }
 
     .testimonios-grid {
       grid-template-columns: 1fr;
-    }
-
-    .testimonio-card {
-      background: var(--sup-2);
-      border: 1px solid var(--line);
-    }
-
-    .testimonio-card:hover {
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-    }
-
-    .testimonio-card.featured {
-      background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, var(--sup-2) 100%);
-      border-color: rgba(102, 126, 234, 0.3);
-    }
-
-    .testimonio-quote p {
-      color: #334155;
-    }
-
-    .testimonio-quote strong {
-      color: var(--ink);
-    }
-
-    .result-text {
-      color: var(--soft);
-    }
-
-    .testimonio-author {
-      border-top: 1px solid var(--line);
-    }
-
-    .author-info strong {
-      color: var(--ink);
-    }
-
-    .author-info span {
-      color: var(--soft);
     }
   }
 </style>

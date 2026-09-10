@@ -2,7 +2,21 @@
 /**
  * Template: Precios
  * Página de precios de RayGold ERP
- * Diseño minimalista basado en el original
+ *
+ * TEMA CLARO/OSCURO (Septiembre 2026):
+ * - IMPORTANTE: había un `:root { ... }` dentro del <style> que redefinía
+ *   --ink, --panel, --soft y --accent para TODA la web, y otro dentro de un
+ *   @media que lo volvía a cambiar. Astro no puede acotar :root. Las
+ *   variables locales viven ahora en .precios-page.
+ * - CORREGIDO: el <main> de esta página usaba class="main-content", la misma
+ *   que el <main> del Layout. Eran dos <main> anidados con la misma clase, y
+ *   el padding-top:72px del header fijo se aplicaba DOS VECES. Ahora es un
+ *   <div class="precios-page">.
+ * - CORREGIDO: .container tenía padding: 0 124px (124, no 24). En pantallas
+ *   medianas dejaba el contenido en una columna estrechísima.
+ * - Eliminado el bloque de "tema blanco en móvil" y sus !important.
+ * - Verde y ámbar se mantienen, pero como variables locales: distinguen SaaS
+ *   de Licencia perpetua, que es una diferencia real de producto.
  */
 
 import Layout from "@/layouts/Layout.astro";
@@ -29,43 +43,14 @@ const translations: Record<
     subtitle: string;
     toggleSaas: string;
     togglePerpetual: string;
-    starter: {
-      name: string;
-      desc: string;
-      price: string;
-      period: string;
-      note: string;
-      cta: string;
-    };
-    professional: {
-      name: string;
-      desc: string;
-      price: string;
-      period: string;
-      note: string;
-      cta: string;
-      badge: string;
-    };
-    enterprise: {
-      name: string;
-      desc: string;
-      price: string;
-      period: string;
-      note: string;
-      cta: string;
-    };
+    starter: { name: string; desc: string; price: string; period: string; note: string; cta: string };
+    professional: { name: string; desc: string; price: string; period: string; note: string; cta: string; badge: string };
+    enterprise: { name: string; desc: string; price: string; period: string; note: string; cta: string };
     starterFeatures: string[];
     professionalFeatures: string[];
     enterpriseFeatures: string[];
     plansNote: string;
-    perpetual: {
-      title: string;
-      desc: string;
-      from: string;
-      price: string;
-      detail: string;
-      cta: string;
-    };
+    perpetual: { title: string; desc: string; from: string; price: string; detail: string; cta: string };
     perpetualIncludes: string;
     perpetualIncludesList: string[];
     perpetualMaintenance: string;
@@ -175,30 +160,12 @@ const translations: Record<
       "Para empresas establecidas que prefieren control total. Mayor inversión inicial pero sin costes recurrentes obligatorios.",
     faqTitle: "Preguntas frecuentes",
     faq: [
-      {
-        q: "¿Puedo cambiar de plan más adelante?",
-        a: "Sí, puedes cambiar de plan en cualquier momento.",
-      },
-      {
-        q: "¿Hay compromiso de permanencia?",
-        a: "No, todos nuestros planes son sin permanencia.",
-      },
-      {
-        q: "¿Qué métodos de pago aceptan?",
-        a: "Tarjeta de crédito, transferencia bancaria y domiciliación SEPA.",
-      },
-      {
-        q: "¿Ofrecen descuentos por volumen?",
-        a: "Sí, contacta con ventas para descuentos a partir de 10 usuarios.",
-      },
-      {
-        q: "¿Incluye formación?",
-        a: "Todos los planes incluyen acceso a videotutoriales.",
-      },
-      {
-        q: "¿Puedo probar antes de comprar?",
-        a: "Ofrecemos una demo personalizada gratuita.",
-      },
+      { q: "¿Puedo cambiar de plan más adelante?", a: "Sí, puedes cambiar de plan en cualquier momento." },
+      { q: "¿Hay compromiso de permanencia?", a: "No, todos nuestros planes son sin permanencia." },
+      { q: "¿Qué métodos de pago aceptan?", a: "Tarjeta de crédito, transferencia bancaria y domiciliación SEPA." },
+      { q: "¿Ofrecen descuentos por volumen?", a: "Sí, contacta con ventas para descuentos a partir de 10 usuarios." },
+      { q: "¿Incluye formación?", a: "Todos los planes incluyen acceso a videotutoriales." },
+      { q: "¿Puedo probar antes de comprar?", a: "Ofrecemos una demo personalizada gratuita." },
     ],
     ctaTitle: "¿Listo para transformar tu joyería?",
     ctaSubtitle:
@@ -297,30 +264,12 @@ const translations: Record<
       "For established companies that prefer full control. Higher initial investment but no mandatory recurring costs.",
     faqTitle: "Frequently asked questions",
     faq: [
-      {
-        q: "Can I change plans later?",
-        a: "Yes, you can change plans at any time.",
-      },
-      {
-        q: "Is there a commitment period?",
-        a: "No, all our plans are without commitment.",
-      },
-      {
-        q: "What payment methods do you accept?",
-        a: "Credit card, bank transfer and SEPA direct debit.",
-      },
-      {
-        q: "Do you offer volume discounts?",
-        a: "Yes, contact sales for discounts from 10 users.",
-      },
-      {
-        q: "Does it include training?",
-        a: "All plans include access to video tutorials.",
-      },
-      {
-        q: "Can I try before buying?",
-        a: "We offer a free personalized demo.",
-      },
+      { q: "Can I change plans later?", a: "Yes, you can change plans at any time." },
+      { q: "Is there a commitment period?", a: "No, all our plans are without commitment." },
+      { q: "What payment methods do you accept?", a: "Credit card, bank transfer and SEPA direct debit." },
+      { q: "Do you offer volume discounts?", a: "Yes, contact sales for discounts from 10 users." },
+      { q: "Does it include training?", a: "All plans include access to video tutorials." },
+      { q: "Can I try before buying?", a: "We offer a free personalized demo." },
     ],
     ctaTitle: "Ready to transform your jewelry business?",
     ctaSubtitle:
@@ -419,18 +368,9 @@ const translations: Record<
     faq: [
       { q: "Puis-je changer de plan plus tard?", a: "Oui, à tout moment." },
       { q: "Y a-t-il un engagement?", a: "Non, sans engagement." },
-      {
-        q: "Quels moyens de paiement?",
-        a: "Carte, virement, prélèvement SEPA.",
-      },
-      {
-        q: "Offrez-vous des remises volume?",
-        a: "Oui, à partir de 10 utilisateurs.",
-      },
-      {
-        q: "La formation est-elle incluse?",
-        a: "Accès aux tutoriels vidéo inclus.",
-      },
+      { q: "Quels moyens de paiement?", a: "Carte, virement, prélèvement SEPA." },
+      { q: "Offrez-vous des remises volume?", a: "Oui, à partir de 10 utilisateurs." },
+      { q: "La formation est-elle incluse?", a: "Accès aux tutoriels vidéo inclus." },
       { q: "Puis-je essayer avant?", a: "Démo personnalisée gratuite." },
     ],
     ctaTitle: "Prêt à transformer votre bijouterie?",
@@ -626,14 +566,11 @@ const translations: Record<
     saasDesc: "Ideal para começar rápido.",
     perpetualLabel: "Licença Perpétua",
     perpetualDesc: "Para empresas que preferem controle total.",
-    faqTitle: "Preguntas frequentes",
+    faqTitle: "Perguntas frequentes",
     faq: [
       { q: "Posso mudar de plano?", a: "Sim, a qualquer momento." },
       { q: "Há compromisso?", a: "Não, sem compromisso." },
-      {
-        q: "Métodos de pagamento?",
-        a: "Cartão, transferência, débito direto.",
-      },
+      { q: "Métodos de pagamento?", a: "Cartão, transferência, débito direto." },
       { q: "Descontos por volume?", a: "Sim, a partir de 10 usuários." },
       { q: "Inclui treinamento?", a: "Acesso a tutoriais em vídeo." },
       { q: "Posso testar antes?", a: "Demo gratuita personalizada." },
@@ -656,13 +593,13 @@ const prices = getPrices(currency);
   type="product"
   alternateUrls={alternateUrls}
 >
-  <main class="main-content">
+  <div class="precios-page">
     <!-- Hero -->
     <section class="pricing-hero">
       <div class="container">
         <h1 class="hero-title">
           {t.title}
-          <span class="gradient-text">{t.titleHighlight}</span>
+          <span class="titulo-enfasis">{t.titleHighlight}</span>
         </h1>
         <p class="hero-subtitle">{t.subtitle}</p>
       </div>
@@ -676,28 +613,13 @@ const prices = getPrices(currency);
       <div class="container">
         <div class="pricing-toggle">
           <button class="toggle-btn active" data-plan="saas">
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"
-              ></path>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path>
             </svg>
             {t.toggleSaas}
           </button>
           <button class="toggle-btn" data-plan="perpetual">
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
               <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
             </svg>
@@ -715,14 +637,7 @@ const prices = getPrices(currency);
           <div class="plan-card">
             <div class="plan-header">
               <div class="plan-icon starter">
-                <svg
-                  width="28"
-                  height="28"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
                   <path d="M2 17l10 5 10-5"></path>
                   <path d="M2 12l10 5 10-5"></path>
@@ -732,10 +647,7 @@ const prices = getPrices(currency);
               <p class="plan-description">{t.starter.desc}</p>
             </div>
             <div class="plan-pricing">
-              <!-- <span class="price-amount">{t.starter.price}</span> -->
-              <span class="price-amount" data-price="starter"
-                >{prices.starter}</span
-              >
+              <span class="price-amount" data-price="starter">{prices.starter}</span>
               <span class="price-period">{t.starter.period}</span>
             </div>
             <p class="price-note">{t.starter.note}</p>
@@ -744,12 +656,7 @@ const prices = getPrices(currency);
                 t.starterFeatures.map((f) => (
                   <li>
                     <>
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                      >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
                       </svg>
                       <span>{f}</span>
@@ -766,27 +673,15 @@ const prices = getPrices(currency);
             <div class="featured-badge">{t.professional.badge}</div>
             <div class="plan-header">
               <div class="plan-icon professional">
-                <svg
-                  width="28"
-                  height="28"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <polygon
-                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
-                  ></polygon>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
                 </svg>
               </div>
               <h3 class="plan-name">{t.professional.name}</h3>
               <p class="plan-description">{t.professional.desc}</p>
             </div>
             <div class="plan-pricing">
-              <!-- <span class="price-amount">{t.professional.price}</span> -->
-              <span class="price-amount" data-price="professional"
-                >{prices.professional}</span
-              >
+              <span class="price-amount" data-price="professional">{prices.professional}</span>
               <span class="price-period">{t.professional.period}</span>
             </div>
             <p class="price-note">{t.professional.note}</p>
@@ -795,12 +690,7 @@ const prices = getPrices(currency);
                 t.professionalFeatures.map((f, i) => (
                   <li>
                     <>
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                      >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
                       </svg>
                       <span class={i === 0 ? "highlight" : ""}>{f}</span>
@@ -809,35 +699,22 @@ const prices = getPrices(currency);
                 ))
               }
             </ul>
-            <a href={contactUrl} class="plan-cta featured"
-              >{t.professional.cta}</a
-            >
+            <a href={contactUrl} class="plan-cta featured">{t.professional.cta}</a>
           </div>
 
           <!-- ENTERPRISE -->
           <div class="plan-card">
             <div class="plan-header">
               <div class="plan-icon enterprise">
-                <svg
-                  width="28"
-                  height="28"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"
-                  ></path>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
                 </svg>
               </div>
               <h3 class="plan-name">{t.enterprise.name}</h3>
               <p class="plan-description">{t.enterprise.desc}</p>
             </div>
             <div class="plan-pricing">
-              <!-- <span class="price-amount">{t.enterprise.price}</span> -->
-              <span class="price-amount" data-price="enterprise"
-                >{prices.enterprise}</span
-              >
+              <span class="price-amount" data-price="enterprise">{prices.enterprise}</span>
               <span class="price-period">{t.enterprise.period}</span>
             </div>
             <p class="price-note">{t.enterprise.note}</p>
@@ -846,12 +723,7 @@ const prices = getPrices(currency);
                 t.enterpriseFeatures.map((f, i) => (
                   <li>
                     <>
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                      >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
                       </svg>
                       <span class={i === 0 ? "highlight" : ""}>{f}</span>
@@ -865,14 +737,7 @@ const prices = getPrices(currency);
         </div>
 
         <div class="pricing-note">
-          <svg
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="10"></circle>
             <line x1="12" y1="16" x2="12" y2="12"></line>
             <line x1="12" y1="8" x2="12.01" y2="8"></line>
@@ -889,14 +754,7 @@ const prices = getPrices(currency);
           <div class="perpetual-content">
             <div class="perpetual-left">
               <div class="perpetual-icon">
-                <svg
-                  width="32"
-                  height="32"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
                   <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
                 </svg>
@@ -909,10 +767,7 @@ const prices = getPrices(currency);
             <div class="perpetual-right">
               <div class="perpetual-price">
                 <span class="price-from">{t.perpetual.from}</span>
-                <!-- <span class="price-amount">{t.perpetual.price}</span> -->
-                <span class="price-amount" data-price="perpetual"
-                  >{prices.perpetual}</span
-                >
+                <span class="price-amount" data-price="perpetual">{prices.perpetual}</span>
               </div>
               <p class="price-detail">{t.perpetual.detail}</p>
             </div>
@@ -926,12 +781,7 @@ const prices = getPrices(currency);
                   t.perpetualIncludesList.map((f) => (
                     <li>
                       <>
-                        <svg
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          fill="currentColor"
-                        >
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                           <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
                         </svg>
                         <span>{f}</span>
@@ -948,12 +798,7 @@ const prices = getPrices(currency);
                   t.perpetualMaintenanceList.map((f) => (
                     <li>
                       <>
-                        <svg
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          fill="currentColor"
-                        >
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                           <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
                         </svg>
                         <span>{f}</span>
@@ -967,14 +812,7 @@ const prices = getPrices(currency);
 
           <a href={contactUrl} class="perpetual-cta">
             {t.perpetual.cta}
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <line x1="5" y1="12" x2="19" y2="12"></line>
               <polyline points="12 5 19 12 12 19"></polyline>
             </svg>
@@ -985,20 +823,19 @@ const prices = getPrices(currency);
           <h4>{t.comparisonTitle}</h4>
           <div class="comparison-grid">
             <div class="comparison-item">
-              <span class="comparison-label saas">{t.saasLabel}</span><p>
-                {t.saasDesc}
-              </p>
+              <span class="comparison-label saas">{t.saasLabel}</span>
+              <p>{t.saasDesc}</p>
             </div>
             <div class="comparison-item">
-              <span class="comparison-label perpetual">{t.perpetualLabel}</span
-              ><p>{t.perpetualDesc}</p>
+              <span class="comparison-label perpetual">{t.perpetualLabel}</span>
+              <p>{t.perpetualDesc}</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Comparativa  -->
+    <!-- Comparativa -->
     <CostComparison lang={lang} />
 
     <!-- FAQ -->
@@ -1027,86 +864,58 @@ const prices = getPrices(currency);
         <p>{t.ctaSubtitle}</p>
         <a href={contactUrl} class="cta-button">
           {t.ctaButton}
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="5" y1="12" x2="19" y2="12"></line>
             <polyline points="12 5 19 12 12 19"></polyline>
           </svg>
         </a>
       </div>
     </section>
-  </main>
+  </div>
 </Layout>
 
 <style>
-  :root {
-    --bg-dark: var(--ink);
-    --bg-card: rgba(30, 41, 59, 0.5);
-    --border-subtle: rgba(255, 255, 255, 0.1);
-    --text-primary: var(--panel);
-    --text-secondary: var(--soft);
-    --text-muted: var(--soft);
-    --accent-green: #10b981;
-    --accent-amber: #f59e0b;
-  }
+  /* Variables locales. ANTES estaban en :root, que no queda acotado. */
+  .precios-page {
+    --saas: #10b981;      /* suscripción */
+    --perpetua: #f59e0b;  /* licencia perpetua */
 
-  .main-content {
-    background: linear-gradient(180deg, var(--ink) 0%, var(--ink) 100%);
+    background: var(--rg-bg);
+    color: var(--rg-ink);
     min-height: 100vh;
   }
 
   .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 124px;
+    padding: 0 24px;
   }
 
   /* Hero */
   .pricing-hero {
-    /* padding: 0px 0 40px; */
+    padding: 48px 0 8px;
     text-align: center;
   }
 
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(102, 126, 234, 0.1);
-    border: 1px solid rgba(102, 126, 234, 0.3);
-    color: #818cf8;
-    padding: 8px 16px;
-    border-radius: 100px;
-    font-size: 0.85rem;
-    font-weight: 500;
-    margin-bottom: 24px;
-  }
-
   .hero-title {
-    /* font-size: clamp(2rem, 5vw, 3rem); */
+    font-family: var(--rg-display);
     font-size: clamp(1.75rem, 4vw, 2.5rem);
-    /* font-weight: 800; */
-    font-weight: 600;
-    color: var(--text-primary);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: var(--rg-ink);
     margin: 0 0 16px 0;
-    line-height: 1.2;
+    line-height: 1.14;
+    text-wrap: balance;
   }
 
-  .gradient-text {
-    background: linear-gradient(135deg, var(--accent) 0%, #764ba2 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  .titulo-enfasis {
+    font-style: italic;
+    color: var(--rg-accent);
   }
 
   .hero-subtitle {
     font-size: 1.1rem;
-    color: var(--text-secondary);
+    color: var(--rg-soft);
     max-width: 500px;
     margin: 0 auto;
   }
@@ -1119,10 +928,11 @@ const prices = getPrices(currency);
   .pricing-toggle {
     display: flex;
     justify-content: center;
-    gap: 8px;
-    background: rgba(255, 255, 255, 0.05);
+    gap: 6px;
+    background: var(--rg-sup2);
+    border: 1px solid var(--rg-line);
     padding: 6px;
-    border-radius: 12px;
+    border-radius: 999px;
     width: fit-content;
     margin: 0 auto;
   }
@@ -1134,22 +944,22 @@ const prices = getPrices(currency);
     padding: 12px 24px;
     border: none;
     background: transparent;
-    color: var(--text-secondary);
+    color: var(--rg-soft);
+    font-family: inherit;
     font-size: 0.9rem;
     font-weight: 500;
-    border-radius: 8px;
+    border-radius: 999px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: background 0.3s ease, color 0.3s ease;
   }
 
   .toggle-btn:hover {
-    color: var(--text-primary);
+    color: var(--rg-ink);
   }
 
   .toggle-btn.active {
-    background: linear-gradient(135deg, var(--accent-green) 0%, #059669 100%);
-    color: white;
-    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    background: var(--rg-ink);
+    color: var(--rg-on-ink);
   }
 
   /* Pricing Section */
@@ -1166,36 +976,28 @@ const prices = getPrices(currency);
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
     margin-bottom: 32px;
+    align-items: start;
   }
 
   /* Plan Card */
   .plan-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border-subtle);
+    background: var(--rg-panel);
+    border: 1px solid var(--rg-line);
     border-radius: 20px;
     padding: 32px;
     position: relative;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
+    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
   }
 
   .plan-card:hover {
-    border-color: rgba(255, 255, 255, 0.15);
+    border-color: var(--rg-accent);
     transform: translateY(-4px);
+    box-shadow: 0 12px 32px var(--rg-sombra);
   }
 
   .plan-card.featured {
-    background: linear-gradient(
-      135deg,
-      rgba(16, 185, 129, 0.1) 0%,
-      rgba(16, 185, 129, 0.05) 100%
-    );
-    border-color: rgba(16, 185, 129, 0.3);
-    transform: scale(1.02);
-  }
-
-  .plan-card.featured:hover {
-    transform: scale(1.02) translateY(-4px);
+    background: linear-gradient(135deg, color-mix(in srgb, var(--saas) 10%, transparent) 0%, var(--rg-panel) 100%);
+    border-color: color-mix(in srgb, var(--saas) 40%, transparent);
   }
 
   .featured-badge {
@@ -1203,14 +1005,14 @@ const prices = getPrices(currency);
     top: -12px;
     left: 50%;
     transform: translateX(-50%);
-    background: linear-gradient(135deg, var(--accent-green) 0%, #059669 100%);
-    color: white;
+    background: var(--saas);
+    color: #fff;
     padding: 6px 16px;
     border-radius: 100px;
     font-size: 0.75rem;
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.4px;
+    white-space: nowrap;
   }
 
   .plan-header {
@@ -1226,28 +1028,30 @@ const prices = getPrices(currency);
     align-items: center;
     justify-content: center;
     margin: 0 auto 16px;
-    color: white;
+    color: #fff;
   }
 
   .plan-icon.starter {
-    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    background: #6366f1;
   }
   .plan-icon.professional {
-    background: linear-gradient(135deg, var(--accent-green) 0%, #059669 100%);
+    background: var(--saas);
   }
   .plan-icon.enterprise {
-    background: linear-gradient(135deg, var(--accent-amber) 0%, #d97706 100%);
+    background: var(--perpetua);
   }
 
   .plan-name {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--text-primary);
+    font-family: var(--rg-display);
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--rg-ink);
     margin: 0 0 4px 0;
   }
+
   .plan-description {
     font-size: 0.875rem;
-    color: var(--text-muted);
+    color: var(--rg-faint);
     margin: 0;
   }
 
@@ -1255,24 +1059,29 @@ const prices = getPrices(currency);
     text-align: center;
     margin-bottom: 8px;
   }
+
   .price-amount {
+    font-family: var(--rg-display);
     font-size: 2.5rem;
-    font-weight: 800;
-    color: var(--text-primary);
+    font-weight: 500;
+    color: var(--rg-ink);
     line-height: 1;
+    font-variant-numeric: tabular-nums;
   }
+
   .price-period {
     font-size: 0.9rem;
-    color: var(--text-muted);
+    color: var(--rg-faint);
   }
+
   .price-note {
     text-align: center;
     font-size: 0.8rem;
-    color: var(--text-muted);
+    color: var(--rg-faint);
     margin: 0 0 24px 0;
   }
 
-  /* Features - MINIMALISTA */
+  /* Features */
   .plan-features {
     list-style: none;
     padding: 0;
@@ -1285,22 +1094,25 @@ const prices = getPrices(currency);
     gap: 10px;
     padding: 8px 0;
     font-size: 0.85rem;
-    color: #cbd5e1;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--rg-soft);
+    border-bottom: 1px solid var(--rg-line);
   }
 
   .plan-features li:last-child {
     border-bottom: none;
   }
+
   .plan-features li svg {
-    color: var(--accent-green);
+    color: var(--saas);
     flex-shrink: 0;
   }
+
   .plan-features li span {
     flex: 1;
   }
+
   .plan-features li span.highlight {
-    color: var(--text-primary);
+    color: var(--rg-ink);
     font-weight: 600;
   }
 
@@ -1308,30 +1120,30 @@ const prices = getPrices(currency);
     display: block;
     text-align: center;
     padding: 12px 24px;
-    border-radius: 10px;
+    border-radius: 999px;
     font-weight: 600;
     font-size: 0.9rem;
     text-decoration: none;
-    transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--text-primary);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    background: var(--rg-panel);
+    color: var(--rg-ink);
+    border: 1px solid var(--rg-ink);
   }
 
   .plan-cta:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.2);
+    background: var(--rg-accent-soft);
+    border-color: var(--rg-accent);
   }
 
   .plan-cta.featured {
-    background: linear-gradient(135deg, var(--accent-green) 0%, #059669 100%);
-    border: none;
-    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    background: var(--saas);
+    color: #fff;
+    border-color: var(--saas);
   }
 
   .plan-cta.featured:hover {
-    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
     transform: translateY(-2px);
+    background: color-mix(in srgb, var(--saas) 85%, #000);
   }
 
   /* Pricing Note */
@@ -1341,28 +1153,26 @@ const prices = getPrices(currency);
     justify-content: center;
     gap: 12px;
     padding: 16px 24px;
-    background: var(--bg-card);
+    background: var(--rg-sup2);
+    border: 1px solid var(--rg-line);
     border-radius: 12px;
   }
 
   .pricing-note svg {
-    color: var(--text-muted);
+    color: var(--rg-faint);
     flex-shrink: 0;
   }
+
   .pricing-note p {
     margin: 0;
     font-size: 0.85rem;
-    color: var(--text-secondary);
+    color: var(--rg-soft);
   }
 
   /* Perpetual */
   .perpetual-card {
-    background: linear-gradient(
-      135deg,
-      rgba(245, 158, 11, 0.1) 0%,
-      rgba(245, 158, 11, 0.05) 100%
-    );
-    border: 1px solid rgba(245, 158, 11, 0.3);
+    background: linear-gradient(135deg, color-mix(in srgb, var(--perpetua) 10%, transparent) 0%, var(--rg-panel) 100%);
+    border: 1px solid color-mix(in srgb, var(--perpetua) 35%, transparent);
     border-radius: 20px;
     padding: 40px;
     margin-bottom: 32px;
@@ -1386,23 +1196,26 @@ const prices = getPrices(currency);
   .perpetual-icon {
     width: 64px;
     height: 64px;
-    background: linear-gradient(135deg, var(--accent-amber) 0%, #d97706 100%);
+    min-width: 64px;
+    background: var(--perpetua);
     border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: #fff;
   }
 
   .perpetual-info h3 {
+    font-family: var(--rg-display);
     font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--text-primary);
+    font-weight: 500;
+    color: var(--rg-ink);
     margin: 0 0 8px 0;
   }
+
   .perpetual-info p {
     font-size: 0.9rem;
-    color: var(--text-secondary);
+    color: var(--rg-soft);
     margin: 0;
     max-width: 400px;
   }
@@ -1410,28 +1223,27 @@ const prices = getPrices(currency);
   .perpetual-right {
     text-align: right;
   }
+
   .perpetual-price {
     display: flex;
     align-items: baseline;
     gap: 8px;
     justify-content: flex-end;
   }
+
   .price-from {
     font-size: 1rem;
-    color: var(--text-muted);
+    color: var(--rg-faint);
   }
 
   .perpetual-price .price-amount {
     font-size: 3rem;
-    background: linear-gradient(135deg, var(--accent-amber) 0%, #fbbf24 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--perpetua);
   }
 
   .price-detail {
     font-size: 0.85rem;
-    color: var(--text-muted);
+    color: var(--rg-faint);
     margin: 8px 0 0 0;
   }
 
@@ -1440,17 +1252,18 @@ const prices = getPrices(currency);
     grid-template-columns: repeat(2, 1fr);
     gap: 32px;
     padding: 24px 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid var(--rg-line);
+    border-bottom: 1px solid var(--rg-line);
     margin-bottom: 24px;
   }
 
   .feature-col h4 {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--accent-amber);
+    font-family: var(--rg-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--rg-faint);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.1em;
     margin: 0 0 16px 0;
   }
 
@@ -1459,16 +1272,18 @@ const prices = getPrices(currency);
     padding: 0;
     margin: 0;
   }
+
   .feature-col li {
     display: flex;
     align-items: center;
     gap: 10px;
     padding: 6px 0;
     font-size: 0.85rem;
-    color: #cbd5e1;
+    color: var(--rg-soft);
   }
+
   .feature-col li svg {
-    color: var(--accent-amber);
+    color: var(--perpetua);
     flex-shrink: 0;
   }
 
@@ -1479,33 +1294,33 @@ const prices = getPrices(currency);
     gap: 10px;
     width: 100%;
     padding: 14px 32px;
-    background: linear-gradient(135deg, var(--accent-amber) 0%, #d97706 100%);
-    color: white;
+    background: var(--perpetua);
+    color: #fff;
     font-weight: 600;
     font-size: 0.95rem;
     text-decoration: none;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+    border-radius: 999px;
+    transition: background 0.3s ease, transform 0.3s ease;
   }
 
   .perpetual-cta:hover {
-    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+    background: color-mix(in srgb, var(--perpetua) 85%, #000);
     transform: translateY(-2px);
   }
 
   /* Comparison */
   .comparison-box {
-    background: var(--bg-card);
-    border: 1px solid var(--border-subtle);
+    background: var(--rg-sup2);
+    border: 1px solid var(--rg-line);
     border-radius: 16px;
     padding: 32px;
   }
 
   .comparison-box h4 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--text-primary);
+    font-family: var(--rg-display);
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--rg-ink);
     margin: 0 0 20px 0;
     text-align: center;
   }
@@ -1515,26 +1330,32 @@ const prices = getPrices(currency);
     grid-template-columns: repeat(2, 1fr);
     gap: 24px;
   }
+
   .comparison-item {
     padding: 16px;
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--rg-panel);
+    border: 1px solid var(--rg-line);
     border-radius: 10px;
   }
+
   .comparison-label {
     font-size: 0.85rem;
     font-weight: 600;
     display: block;
     margin-bottom: 8px;
   }
+
   .comparison-label.saas {
-    color: var(--accent-green);
+    color: var(--saas);
   }
+
   .comparison-label.perpetual {
-    color: var(--accent-amber);
+    color: var(--perpetua);
   }
+
   .comparison-item p {
     font-size: 0.85rem;
-    color: var(--text-secondary);
+    color: var(--rg-soft);
     margin: 0;
     line-height: 1.5;
   }
@@ -1542,60 +1363,66 @@ const prices = getPrices(currency);
   /* FAQ */
   .faq-section {
     padding: 60px 0;
-    border-top: 1px solid var(--border-subtle);
+    border-top: 1px solid var(--rg-line);
   }
+
   .faq-title {
     text-align: center;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--text-primary);
+    font-family: var(--rg-display);
+    font-size: 1.6rem;
+    font-weight: 450;
+    color: var(--rg-ink);
     margin: 0 0 40px 0;
   }
+
   .faq-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
   }
+
   .faq-item {
     padding: 20px;
-    background: var(--bg-card);
+    background: var(--rg-panel);
     border-radius: 12px;
-    border: 1px solid var(--border-subtle);
+    border: 1px solid var(--rg-line);
   }
+
   .faq-item h4 {
     font-size: 0.95rem;
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--rg-ink);
     margin: 0 0 8px 0;
   }
+
   .faq-item p {
     font-size: 0.85rem;
-    color: var(--text-secondary);
+    color: var(--rg-soft);
     margin: 0;
     line-height: 1.5;
   }
 
-  /* CTA */
+  /* CTA
+     Banda suave, no invertida: debajo va el footer, que sí lo está. */
   .cta-section {
     padding: 80px 0;
     text-align: center;
-    background: linear-gradient(
-      135deg,
-      rgba(16, 185, 129, 0.1) 0%,
-      rgba(16, 185, 129, 0.05) 100%
-    );
-    border-top: 1px solid rgba(16, 185, 129, 0.2);
+    background: var(--rg-sup2);
+    border-top: 1px solid var(--rg-line);
   }
 
   .cta-section h2 {
+    font-family: var(--rg-display);
     font-size: 1.75rem;
-    font-weight: 700;
-    color: var(--text-primary);
+    font-weight: 450;
+    letter-spacing: -0.015em;
+    color: var(--rg-ink);
     margin: 0 0 12px 0;
   }
+
   .cta-section p {
     font-size: 1rem;
-    color: var(--text-secondary);
+    color: var(--rg-soft);
     margin: 0 0 32px 0;
   }
 
@@ -1603,23 +1430,24 @@ const prices = getPrices(currency);
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    background: linear-gradient(135deg, var(--accent-green) 0%, #059669 100%);
-    color: white;
+    background: var(--rg-ink);
+    color: var(--rg-on-ink);
+    border: 1px solid var(--rg-ink);
     padding: 14px 28px;
-    border-radius: 12px;
+    border-radius: 999px;
     font-weight: 600;
     font-size: 1rem;
     text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+    transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
   }
 
   .cta-button:hover {
+    background: var(--rg-accent);
+    border-color: var(--rg-accent);
     transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(16, 185, 129, 0.4);
   }
 
-  /* Responsive */
+  /* Responsive: solo estructura, el color no cambia */
   @media (max-width: 968px) {
     .plans-grid {
       grid-template-columns: 1fr;
@@ -1628,7 +1456,6 @@ const prices = getPrices(currency);
       margin-right: auto;
     }
     .plan-card.featured {
-      transform: none;
       order: -1;
     }
     .perpetual-content {
@@ -1653,11 +1480,12 @@ const prices = getPrices(currency);
 
   @media (max-width: 600px) {
     .pricing-hero {
-      padding: 40px 0 30px;
+      padding: 32px 0 8px;
     }
     .pricing-toggle {
       flex-direction: column;
       width: 100%;
+      border-radius: 16px;
     }
     .toggle-btn {
       justify-content: center;
@@ -1675,86 +1503,6 @@ const prices = getPrices(currency);
     .cta-button {
       width: 100%;
       justify-content: center;
-    }
-  }
-
-  /* ============================================
-   MÓVIL: Tema blanco claro
-   ============================================ */
-  @media (max-width: 768px) {
-    :root {
-      --bg-dark: var(--panel);
-      --bg-card: rgba(248, 250, 252, 0.95);
-      --text-primary: var(--ink);
-      --text-secondary: #475569;
-      --text-muted: var(--soft);
-      --border-subtle: rgba(0, 0, 0, 0.08);
-    }
-
-    .main-content {
-      background: linear-gradient(180deg, var(--panel) 0%, var(--sup-2) 100%) !important;
-    }
-
-    .hero-title {
-      background: linear-gradient(135deg, var(--ink) 0%, #475569 100%) !important;
-      -webkit-background-clip: text !important;
-      -webkit-text-fill-color: transparent !important;
-    }
-
-    .plan-card {
-      background: var(--sup-2) !important;
-      border: 1px solid var(--line) !important;
-    }
-
-    .plan-features li {
-      color: #475569 !important;
-      border-bottom-color: var(--line) !important;
-    }
-
-    .plan-cta {
-      background: rgba(0, 0, 0, 0.04) !important;
-      color: #334155 !important;
-      border: 1px solid var(--line) !important;
-    }
-
-    .pricing-toggle {
-      background: rgba(0, 0, 0, 0.04) !important;
-    }
-
-    .toggle-btn {
-      color: var(--soft) !important;
-    }
-
-    .perpetual-card {
-      background: linear-gradient(
-        135deg,
-        rgba(245, 158, 11, 0.08) 0%,
-        rgba(217, 119, 6, 0.04) 100%
-      ) !important;
-      border: 1px solid rgba(245, 158, 11, 0.2) !important;
-    }
-
-    .faq-item {
-      background: var(--sup-2) !important;
-      border: 1px solid var(--line) !important;
-    }
-
-    .comparison-box {
-      background: var(--sup-2) !important;
-      border: 1px solid var(--line) !important;
-    }
-
-    .comparison-item {
-      background: rgba(0, 0, 0, 0.02) !important;
-    }
-
-    .cta-section {
-      background: linear-gradient(
-        135deg,
-        rgba(16, 185, 129, 0.05) 0%,
-        rgba(16, 185, 129, 0.02) 100%
-      ) !important;
-      border-top: 1px solid var(--line) !important;
     }
   }
 </style>
