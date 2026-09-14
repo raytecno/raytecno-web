@@ -8,8 +8,12 @@
  * existe para que la lean buscadores y modelos de IA, así que el contenido
  * tiene que estar en el HTML.
  *
- * PENDIENTE PASO 2 (tema global): sustituir el bloque de variables de
- * .fugas-sec por los tokens globales del Layout y borrarlo de aquí.
+ * NUEVO (Septiembre 2026): al desplegar una fuga aparece una captura del ERP
+ * a la derecha del texto de cierre. Detalle importante: las imágenes NO se
+ * descargan al cargar la página. Van con data-src y solo se convierten en src
+ * la primera vez que se abre esa fuga. Con loading="lazy" no bastaría: el
+ * navegador puede descargar igualmente imágenes dentro de display:none, y
+ * serían quince capturas de ERP de golpe.
  */
 import { getPageUrl, type Lang } from '@/config/pages';
 import { getFugasTranslations, contarPorArea, type AreaId } from '@/i18n/fugas';
@@ -24,6 +28,8 @@ const cuenta = contarPorArea(t);
 const areasOrden: AreaId[] = ['fab', 'prov', 'cli', 'info', 'it'];
 const total = t.fugas.length;
 const urlContacto = getPageUrl('contacto', lang);
+
+const BLOB = 'https://raygoldstorage.blob.core.windows.net/web';
 ---
 
 <div class="fugas-sec" data-plantilla-area={t.frases.medidorPieArea}>
@@ -84,14 +90,31 @@ const urlContacto = getPageUrl('contacto', lang);
             <i>{t.areas[f.area]}</i>
           </div>
 
-          <div>
+          <div class="fuga__cuerpo">
             <h3 class="fuga__t">{f.titulo}</h3>
             <p class="fuga__s">{f.problema}</p>
 
             <div class="fuga__fix">
-              <span class="k">{t.seccion.etiquetaCierre}</span>
-              <p>{f.cierre}</p>
-              <p class="mod">{t.seccion.dentroDelPrograma} <b>{f.modulo}</b></p>
+              <div class="fuga__texto">
+                <p class="fuga__cierre">
+                  <span class="k">{t.seccion.etiquetaCierre}</span>
+                  <span>{f.cierre}</span>
+                </p>
+                <p class="mod">{t.seccion.dentroDelPrograma} <b>{f.modulo}</b></p>
+              </div>
+
+              {f.imagen && (
+                <figure class="fuga__shot">
+                  <img
+                    data-src={`${BLOB}/${f.imagen}`}
+                    alt={f.imagenAlt}
+                    width="640"
+                    height="400"
+                    decoding="async"
+                  />
+                  <figcaption>{t.seccion.etiquetaPantalla}</figcaption>
+                </figure>
+              )}
             </div>
           </div>
 
@@ -124,25 +147,10 @@ const urlContacto = getPageUrl('contacto', lang);
 </div>
 
 <style>
-  /* ── Variables locales · PASO 2: mover al Layout como tokens globales ── */
   .fugas-sec {
-    --bg: var(--rg-bg);
-  --ink: var(--rg-ink);
-  --on-ink: var(--rg-on-ink);
-  --soft: var(--rg-soft);
-  --faint: var(--rg-faint);
-  --line: var(--rg-line);
-  --panel: var(--rg-panel);
-  --accent: var(--rg-accent);
-  --accent-ink: var(--rg-accent-ink);
-  --accent-soft: var(--rg-accent-soft);
-  --display: var(--rg-display);
-  --sans: var(--rg-sans);
-  --mono: var(--rg-mono);
-
-    background: var(--bg);
-    color: var(--ink);
-    font-family: var(--sans);
+    background: var(--rg-bg);
+    color: var(--rg-ink);
+    font-family: var(--rg-sans);
   }
 
   .fugas-sec section {
@@ -163,11 +171,11 @@ const urlContacto = getPageUrl('contacto', lang);
     gap: 0 40px;
   }
   .par__rule {
-    background: var(--line);
+    background: var(--rg-line);
   }
   .par__q {
     margin: 0;
-    font-family: var(--display);
+    font-family: var(--rg-display);
     font-weight: 380;
     font-size: clamp(1.3rem, 2.5vw, 1.85rem);
     line-height: 1.26;
@@ -176,13 +184,13 @@ const urlContacto = getPageUrl('contacto', lang);
   }
   .par__q em {
     font-style: italic;
-    color: var(--accent);
+    color: var(--rg-accent);
   }
   .par__src {
     margin: 14px 0 0;
-    font-family: var(--sans);
+    font-family: var(--rg-sans);
     font-size: 13px;
-    color: var(--faint);
+    color: var(--rg-faint);
     line-height: 1.5;
   }
 
@@ -190,7 +198,7 @@ const urlContacto = getPageUrl('contacto', lang);
   .medidor {
     margin-top: 44px;
     padding-top: 26px;
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--rg-line);
   }
   .medidor__row {
     display: flex;
@@ -210,13 +218,13 @@ const urlContacto = getPageUrl('contacto', lang);
   }
   .barra {
     height: 100%;
-    background: var(--line);
+    background: var(--rg-line);
     border-radius: 2px;
     position: relative;
     transition: background 0.18s, opacity 0.18s;
   }
   .barra.is-on {
-    background: var(--accent);
+    background: var(--rg-accent);
   }
   .barra.is-dim {
     opacity: 0.28;
@@ -228,23 +236,23 @@ const urlContacto = getPageUrl('contacto', lang);
     right: 0;
     bottom: -20px;
     text-align: center;
-    font-family: var(--mono);
+    font-family: var(--rg-mono);
     font-size: 9.5px;
-    color: var(--faint);
+    color: var(--rg-faint);
   }
   .medidor__sum {
     white-space: nowrap;
   }
   .medidor__cifra {
     display: block;
-    font-family: var(--display);
+    font-family: var(--rg-display);
     font-size: 1.5rem;
     line-height: 1;
   }
   .medidor__pie {
     display: block;
     font-size: 13px;
-    color: var(--soft);
+    color: var(--rg-soft);
     margin-top: 6px;
   }
 
@@ -263,7 +271,7 @@ const urlContacto = getPageUrl('contacto', lang);
   }
   .fugas__head h2 {
     margin: 0;
-    font-family: var(--display);
+    font-family: var(--rg-display);
     font-weight: 400;
     font-size: clamp(1.6rem, 3.4vw, 2.3rem);
     letter-spacing: -0.015em;
@@ -273,7 +281,7 @@ const urlContacto = getPageUrl('contacto', lang);
   }
   .fugas__head p {
     margin: 10px 0 0;
-    color: var(--soft);
+    color: var(--rg-soft);
     max-width: 52ch;
     font-size: 15px;
     line-height: 1.55;
@@ -289,22 +297,22 @@ const urlContacto = getPageUrl('contacto', lang);
     border-radius: 999px;
     font-size: 13.5px;
     font-family: inherit;
-    color: var(--soft);
+    color: var(--rg-soft);
     border: 1px solid transparent;
-    background: var(--accent-soft);
+    background: var(--rg-accent-soft);
     cursor: pointer;
     transition: background 0.15s, color 0.15s, border-color 0.15s;
   }
   .pastilla:hover {
-    border-color: var(--accent);
+    border-color: var(--rg-accent);
   }
   .pastilla.is-on {
-    background: var(--ink);
-    color: var(--on-ink);
+    background: var(--rg-ink);
+    color: var(--rg-on-ink);
   }
   .pastilla b {
     font-weight: 500;
-    font-family: var(--mono);
+    font-family: var(--rg-mono);
     font-size: 11.5px;
     margin-left: 6px;
     opacity: 0.7;
@@ -312,12 +320,12 @@ const urlContacto = getPageUrl('contacto', lang);
 
   /* ── Lista ── */
   .lista {
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--rg-line);
   }
   .fuga {
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px solid var(--rg-line);
     display: grid;
-    grid-template-columns: 56px 1fr 44px;
+    grid-template-columns: 56px minmax(0, 1fr) 44px;
     gap: 0 18px;
     align-items: start;
     padding: 20px 0;
@@ -326,9 +334,9 @@ const urlContacto = getPageUrl('contacto', lang);
     display: none;
   }
   .fuga__n {
-    font-family: var(--mono);
+    font-family: var(--rg-mono);
     font-size: 12.5px;
-    color: var(--faint);
+    color: var(--rg-faint);
     padding-top: 5px;
     font-variant-numeric: tabular-nums;
   }
@@ -337,11 +345,14 @@ const urlContacto = getPageUrl('contacto', lang);
     font-style: normal;
     font-size: 10px;
     margin-top: 4px;
-    color: var(--accent);
+    color: var(--rg-accent);
+  }
+  .fuga__cuerpo {
+    min-width: 0;
   }
   .fuga__t {
     margin: 0;
-    font-family: var(--display);
+    font-family: var(--rg-display);
     font-weight: 450;
     font-size: 1.22rem;
     letter-spacing: -0.01em;
@@ -349,42 +360,78 @@ const urlContacto = getPageUrl('contacto', lang);
   }
   .fuga__s {
     margin: 6px 0 0;
-    color: var(--soft);
+    color: var(--rg-soft);
     font-size: 15px;
     max-width: 64ch;
     line-height: 1.55;
   }
+
+  /* ── Bloque desplegado: texto + captura ── */
   .fuga__fix {
-    margin-top: 14px;
+    margin-top: 16px;
     display: none;
-    grid-template-columns: auto 1fr;
-    gap: 10px 14px;
-    max-width: 64ch;
-    font-size: 15px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 340px);
+    gap: 24px 32px;
+    align-items: start;
   }
   .fuga.is-open .fuga__fix {
     display: grid;
   }
-  .fuga__fix p {
+
+  .fuga__texto {
+    min-width: 0;
+    max-width: 64ch;
+  }
+
+  .fuga__cierre {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 14px;
     margin: 0;
+    font-size: 15px;
     line-height: 1.55;
   }
-  .fuga__fix .k {
-    font-family: var(--mono);
+  .fuga__cierre .k {
+    font-family: var(--rg-mono);
     font-size: 11px;
-    color: var(--accent);
+    color: var(--rg-accent);
     padding-top: 4px;
     letter-spacing: 0.04em;
     white-space: nowrap;
   }
-  .fuga__fix .mod {
+  .mod {
+    margin: 12px 0 0;
     font-size: 13px;
-    color: var(--faint);
-    grid-column: 2;
+    color: var(--rg-faint);
   }
-  .fuga__fix .mod b {
+  .mod b {
     font-weight: 500;
-    color: var(--soft);
+    color: var(--rg-soft);
+  }
+
+  /* Captura del ERP: solo visible con la fuga abierta */
+  .fuga__shot {
+    margin: 0;
+  }
+  .fuga__shot img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: top left;
+    background: var(--rg-sup2);
+    border: 1px solid var(--rg-line);
+    border-radius: 10px;
+    box-shadow: 0 10px 28px var(--rg-sombra);
+  }
+  .fuga__shot figcaption {
+    margin-top: 8px;
+    font-family: var(--rg-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--rg-faint);
   }
 
   /* ── Botón solo icono ── */
@@ -397,7 +444,7 @@ const urlContacto = getPageUrl('contacto', lang);
     border-radius: 50%;
     display: grid;
     place-items: center;
-    color: var(--soft);
+    color: var(--rg-soft);
     cursor: pointer;
     position: relative;
     justify-self: end;
@@ -405,8 +452,8 @@ const urlContacto = getPageUrl('contacto', lang);
     transition: background 0.15s, color 0.15s;
   }
   .ibtn:hover {
-    background: var(--accent-soft);
-    color: var(--accent-ink);
+    background: var(--rg-accent-soft);
+    color: var(--rg-accent);
   }
   .ibtn svg {
     width: 16px;
@@ -422,8 +469,8 @@ const urlContacto = getPageUrl('contacto', lang);
     right: calc(100% + 8px);
     top: 50%;
     transform: translateY(-50%);
-    background: var(--ink);
-    color: var(--on-ink);
+    background: var(--rg-ink);
+    color: var(--rg-on-ink);
     font-size: 11.5px;
     padding: 5px 9px;
     border-radius: 6px;
@@ -441,11 +488,11 @@ const urlContacto = getPageUrl('contacto', lang);
   .cierre {
     padding-top: 64px;
     padding-bottom: 80px;
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--rg-line);
   }
   .cierre__q {
     margin: 0;
-    font-family: var(--display);
+    font-family: var(--rg-display);
     font-weight: 380;
     font-size: clamp(1.5rem, 3.4vw, 2.4rem);
     line-height: 1.15;
@@ -455,11 +502,11 @@ const urlContacto = getPageUrl('contacto', lang);
   }
   .cierre__q em {
     font-style: italic;
-    color: var(--accent);
+    color: var(--rg-accent);
   }
   .cierre__t {
     margin: 18px 0 0;
-    color: var(--soft);
+    color: var(--rg-soft);
     max-width: 56ch;
     line-height: 1.55;
   }
@@ -472,19 +519,29 @@ const urlContacto = getPageUrl('contacto', lang);
     font-size: 14.5px;
     font-weight: 500;
     text-decoration: none;
-    border: 1px solid var(--ink);
+    border: 1px solid var(--rg-ink);
     transition: background 0.18s, border-color 0.18s;
   }
   .btn--solid {
-    background: var(--ink);
-    color: var(--on-ink);
+    background: var(--rg-ink);
+    color: var(--rg-on-ink);
   }
   .btn--solid:hover {
-    background: var(--accent);
-    border-color: var(--accent);
+    background: var(--rg-accent);
+    border-color: var(--rg-accent);
   }
 
   /* ── Responsive ── */
+  @media (max-width: 980px) {
+    /* La captura pasa debajo del texto */
+    .fuga__fix {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .fuga__shot {
+      max-width: 420px;
+    }
+  }
+
   @media (max-width: 860px) {
     .par__grid {
       grid-template-columns: 1fr;
@@ -500,7 +557,7 @@ const urlContacto = getPageUrl('contacto', lang);
       display: block;
     }
     .fuga {
-      grid-template-columns: 36px 1fr 36px;
+      grid-template-columns: 36px minmax(0, 1fr) 36px;
       gap: 0 12px;
     }
     .fuga__n i {
@@ -530,13 +587,22 @@ const urlContacto = getPageUrl('contacto', lang);
       b.addEventListener('click', () => {
         const art = b.closest('.fuga');
         if (!art) return;
+
         const abierta = art.classList.toggle('is-open');
-        const txt = abierta
-          ? b.dataset.tipCerrar || ''
-          : b.dataset.tipAbrir || '';
+        const txt = abierta ? b.dataset.tipCerrar || '' : b.dataset.tipAbrir || '';
         b.setAttribute('aria-expanded', String(abierta));
         b.setAttribute('aria-label', txt);
         b.dataset.tip = txt;
+
+        // Carga diferida real: la captura se descarga la primera vez que
+        // se abre esta fuga, no al cargar la página.
+        if (abierta) {
+          const img = art.querySelector<HTMLImageElement>('.fuga__shot img[data-src]');
+          if (img) {
+            img.src = img.dataset.src || '';
+            img.removeAttribute('data-src');
+          }
+        }
       });
     });
 

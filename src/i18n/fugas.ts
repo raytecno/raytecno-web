@@ -5,10 +5,17 @@
  *
  * De momento solo está el español. Los demás idiomas caen a `es` mediante
  * getFugasTranslations(), así que el build no rompe aunque falten.
- * Cuando los textos estén cerrados, se duplica el bloque `es` y se traduce.
  *
- * Si más adelante prefieres sacarlo a JSON (patrón sharing.json), basta con
- * mover el objeto `es` a src/data/fugas.es.json e importarlo aquí.
+ * NUEVO (Septiembre 2026): cada fuga puede llevar una captura del ERP, que
+ * se muestra SOLO cuando la fuga se despliega.
+ *
+ *   ⚠️ Los valores de `imagen` de abajo son PROVISIONALES: reparten las tres
+ *   capturas que ya tenías en el blob (InicioFin4/5/6) por áreas. Sustituye
+ *   cada una por la pantalla que de verdad corresponda a esa fuga — es el
+ *   argumento más fuerte de toda la sección: "este problema, esta pantalla".
+ *
+ *   Si una fuga no tiene captura todavía, deja `imagen` como cadena vacía:
+ *   el bloque se despliega sin imagen y no se rompe nada.
  */
 
 export type AreaId = 'fab' | 'prov' | 'cli' | 'info' | 'it';
@@ -23,14 +30,15 @@ export interface Fuga {
   cierre: string;
   /** Dónde vive dentro del programa */
   modulo: string;
+  /** Nombre del fichero en el blob. Vacío = sin captura. */
+  imagen: string;
+  /** Texto alternativo de la captura */
+  imagenAlt: string;
 }
 
 export interface Pantalla {
-  /** Nombre del fichero en el blob, sin ruta */
   archivo: string;
-  /** Cómo se llama esa pantalla, visible bajo el hero */
   nombre: string;
-  /** alt de la imagen ampliada */
   alt: string;
 }
 
@@ -66,6 +74,8 @@ export interface FugasTranslations {
     cerrar: string;
     etiquetaCierre: string;
     dentroDelPrograma: string;
+    /** Etiqueta bajo la captura */
+    etiquetaPantalla: string;
   };
   areas: Record<AreaId, string>;
   fugas: Fuga[];
@@ -117,6 +127,7 @@ const es: FugasTranslations = {
     cerrar: 'Cerrar',
     etiquetaCierre: 'cierre',
     dentroDelPrograma: 'Dentro del programa:',
+    etiquetaPantalla: 'en pantalla',
   },
 
   areas: {
@@ -135,6 +146,8 @@ const es: FugasTranslations = {
         'Vendes pensando que ganas un 40 % y a fin de mes descubres que la merma sin control se ha comido la mitad.',
       cierre: 'Pesada de entrada y salida en cada fase y por operario. La diferencia aparece con nombre.',
       modulo: 'Fabricación · Control de metal',
+      imagen: 'InicioFin5.png',
+      imagenAlt: 'Control de merma por fase en RayGold',
     },
     {
       area: 'fab',
@@ -142,6 +155,8 @@ const es: FugasTranslations = {
       problema: 'Cera, fundición, engaste, pulido. Alguien pregunta por el encargo y se recorre el taller.',
       cierre: 'Orden de fabricación con secuencia de fases y estado al momento.',
       modulo: 'Fabricación · Órdenes',
+      imagen: 'InicioFin5.png',
+      imagenAlt: 'Mapa de fabricación con el estado de cada orden',
     },
     {
       area: 'fab',
@@ -150,15 +165,19 @@ const es: FugasTranslations = {
         'Hechura, metal, piedra y subcontratación se suman en cuatro papeles distintos, o en ninguno.',
       cierre: 'Escandallo automático por pieza, con el oro del día.',
       modulo: 'Fabricación · Escandallo',
+      imagen: 'InicioFin4.png',
+      imagenAlt: 'Escandallo de una pieza en RayGold',
     },
     {
-      // OJO: no publicar como capacidad hasta que exista el enlace Trabajo3D ↔ orden en código.
+      // OJO: no publicar como capacidad hasta que exista el enlace Trabajo3D ↔ orden.
       area: 'fab',
       titulo: 'El archivo se imprime y nadie sabe para qué orden',
       problema:
         'El STL sale de la impresora, la resina se funde, y el trabajo no está atado a ningún encargo.',
       cierre: 'Cola de impresión y biblioteca de archivos enlazadas a la orden de fabricación.',
       modulo: 'Print3D · Fabricación',
+      imagen: '',
+      imagenAlt: '',
     },
     {
       area: 'fab',
@@ -167,6 +186,8 @@ const es: FugasTranslations = {
         'Se recupera, se reincorpora, y la pureza de lo que entra otra vez en el crisol es una suposición.',
       cierre: 'Lotes de recuperación con análisis y merma de fundición controlada.',
       modulo: 'Fundición · Control de metal',
+      imagen: 'InicioFin5.png',
+      imagenAlt: 'Lotes de recuperación y fundición en RayGold',
     },
 
     {
@@ -175,6 +196,8 @@ const es: FugasTranslations = {
       problema: 'Diste precio con el oro de hace tres semanas. La factura sale con el de hoy.',
       cierre: 'Cotización del día integrada en presupuesto, orden y factura.',
       modulo: 'Comercial · Cotizaciones',
+      imagen: 'InicioFin4.png',
+      imagenAlt: 'Cotización del metal del día en RayGold',
     },
     {
       area: 'prov',
@@ -182,6 +205,8 @@ const es: FugasTranslations = {
       problema: 'Sale a engastar, a pulir, a grabar. Vuelve algo menos y nadie lleva la resta.',
       cierre: 'Cuenta de metal por taller externo: gramos que salen, gramos que vuelven, saldo.',
       modulo: 'Subcontratación',
+      imagen: 'InicioFin5.png',
+      imagenAlt: 'Cuenta de metal con talleres externos',
     },
     {
       area: 'prov',
@@ -189,6 +214,8 @@ const es: FugasTranslations = {
       problema: 'Un cliente pregunta de dónde salió la esmeralda y la respuesta está en un cajón.',
       cierre: 'Ficha de gema con lote, certificado y trazabilidad hasta la pieza vendida.',
       modulo: 'Inventarios · Gemas',
+      imagen: 'InicioFin4.png',
+      imagenAlt: 'Ficha de gema con lote y certificado',
     },
     {
       area: 'prov',
@@ -196,6 +223,8 @@ const es: FugasTranslations = {
       problema: 'Se acaba la aleación, el caucho o la resina el día que más se necesita.',
       cierre: 'Stock mínimo por material y aviso antes de que falte.',
       modulo: 'Inventarios · Alertas',
+      imagen: 'InicioFin4.png',
+      imagenAlt: 'Alertas de stock mínimo por material',
     },
 
     {
@@ -205,6 +234,8 @@ const es: FugasTranslations = {
         'El cliente manda un dibujo por WhatsApp. Alguien lo mira, estima peso, cuenta piedras, consulta el oro.',
       cierre: 'Del dibujo al presupuesto en segundos, comparando con tus propias piezas ya fabricadas.',
       modulo: 'Comercial · Presupuesto asistido',
+      imagen: 'InicioFin4.png',
+      imagenAlt: 'Presupuesto asistido a partir de piezas ya fabricadas',
     },
     {
       area: 'cli',
@@ -212,6 +243,8 @@ const es: FugasTranslations = {
       problema: 'Él puso el oro, tú el trabajo, y la factura no distingue una cosa de la otra.',
       cierre: 'Dos líneas: hechura y metal aportado, cada una con su valoración.',
       modulo: 'Comercial · Facturación',
+      imagen: '',
+      imagenAlt: '',
     },
     {
       area: 'cli',
@@ -219,6 +252,8 @@ const es: FugasTranslations = {
       problema: 'Cada llamada es alguien del taller buscando la pieza para responder.',
       cierre: 'Portal de cliente con el estado por fase, sin llamar.',
       modulo: 'Portal Cliente',
+      imagen: '',
+      imagenAlt: '',
     },
 
     {
@@ -227,6 +262,8 @@ const es: FugasTranslations = {
       problema: 'Compras, taller y tienda cuadran cada uno con sus números. Nunca con los de los demás.',
       cierre: 'Una sola base de datos. El mismo gramo en todos los sitios.',
       modulo: 'Todo RayGold',
+      imagen: 'InicioFin6.png',
+      imagenAlt: 'Cuadro de mando de RayGold con datos de todo el taller',
     },
     {
       area: 'info',
@@ -235,6 +272,8 @@ const es: FugasTranslations = {
         'VERI*FACTU, DIAN, SUNAT, NF-e. Requisitos que cambian y que no se resuelven con un parche.',
       cierre: 'Localización fiscal nativa para España, Colombia, Perú y Brasil.',
       modulo: 'Finanzas · Localización',
+      imagen: '',
+      imagenAlt: '',
     },
 
     {
@@ -244,6 +283,8 @@ const es: FugasTranslations = {
         'No entiende de peso fino, de aleaciones ni de merma. Cada cosa del oficio es una excepción.',
       cierre: 'Un sistema hecho para joyería desde el principio. Las excepciones son lo normal.',
       modulo: 'RayGold',
+      imagen: 'InicioFin6.png',
+      imagenAlt: 'Interfaz de RayGold con vocabulario de joyería',
     },
   ],
 
@@ -264,7 +305,7 @@ const fugasMap: Record<string, FugasTranslations> = {
   es,
   ca: es, // TODO traducir
   en: es, // TODO traducir
-  fr: es, // TODO traducir · recordar: en francés "façon" SÍ es el término correcto
+  fr: es, // TODO traducir
   'pt-br': es, // TODO traducir
 };
 
