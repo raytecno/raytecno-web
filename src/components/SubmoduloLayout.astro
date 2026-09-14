@@ -2,15 +2,30 @@
 /**
  * Layout Base para Submódulos
  * Reutilizable por todos los módulos: Maestros, Comercial, etc.
- * Con tema adaptativo: azul oscuro desktop, blanco móvil
- * 
+ *
  * @file src/components/SubmoduloLayout.astro
+ *
+ * TEMA CLARO/OSCURO (Septiembre 2026):
+ * - La página usaba background: var(--ink) (token de TEXTO como fondo) en
+ *   cuatro sitios distintos. Ahora usa --rg-bg / --rg-panel.
+ * - El h1 usaba gradiente recortado a texto: invisible si no se aplica.
+ * - Eliminado el bloque de "tema blanco en móvil".
+ * - CORREGIDO: .galeria-item arrancaba con opacity:0 y solo la animación la
+ *   hacía visible. Con prefers-reduced-motion (que tokens.css respeta) las
+ *   imágenes NO aparecían nunca. Ahora hay una regla que restituye la
+ *   opacidad en ese caso.
+ * - CORREGIDO: <main> anidado dentro del <main> del Layout.
+ *
+ * OJO con modulosConfig: si algún módulo tiene color "var(--accent)", esa
+ * variable ya no existe. Por eso todos los usos aquí llevan fallback:
+ * var(--modulo-color, var(--rg-accent)). Conviene revisar
+ * src/i18n/submodulos y cambiar esos valores por un hex o por var(--rg-accent).
  */
 import Layout from "@/layouts/Layout.astro";
 import { getAlternateUrls, getPageUrl, type Lang } from "@/config/pages";
-import { 
-  getSubmoduloTranslations, 
-  modulosConfig, 
+import {
+  getSubmoduloTranslations,
+  modulosConfig,
   type ModuloId,
   type ModuloTranslation,
   type CommonTranslation,
@@ -52,7 +67,7 @@ const secciones: SeccionConstruida[] = config.secciones
   .map((secConfig): SeccionConstruida | null => {
     const seccionData = modulo.sections[secConfig.id] as SectionTranslation | undefined;
     if (!seccionData) return null;
-    
+
     return {
       id: secConfig.id,
       nombre: seccionData.name,
@@ -74,13 +89,13 @@ const iconosSecciones: Record<string, string> = {
   estructuras: `<svg viewBox="0 0 48 48" fill="none"><rect x="8" y="6" width="14" height="10" rx="2" fill="currentColor"/><rect x="26" y="6" width="14" height="10" rx="2" fill="currentColor" opacity="0.6"/><rect x="17" y="34" width="14" height="10" rx="2" fill="currentColor" opacity="0.8"/><path d="M15 16v4M33 16v4M15 30v4h9M33 30v-4h-9" stroke="currentColor" stroke-width="2"/></svg>`,
   imagenes: `<svg viewBox="0 0 48 48" fill="none"><rect x="6" y="10" width="36" height="28" rx="3" fill="currentColor" opacity="0.15"/><circle cx="18" cy="22" r="4" fill="currentColor"/><path d="M10 30l8-6 6 4 8-8 6 6v4a2 2 0 01-2 2H12a2 2 0 01-2-2v-0z" fill="currentColor"/></svg>`,
   layout: `<svg viewBox="0 0 48 48" fill="none"><rect x="6" y="8" width="36" height="32" rx="3" fill="currentColor" opacity="0.15"/><rect x="10" y="12" width="12" height="24" rx="2" fill="currentColor" opacity="0.4"/><rect x="26" y="12" width="12" height="10" rx="2" fill="currentColor"/></svg>`,
-   gestion: `<svg viewBox="0 0 48 48" fill="none"><path d="M18 24l-8 8 4 4 8-8" fill="currentColor" opacity="0.6"/><path d="M30 24l8 8-4 4-8-8" fill="currentColor" opacity="0.6"/><rect x="14" y="8" width="8" height="20" rx="2" transform="rotate(-45 14 8)" fill="currentColor"/><rect x="26" y="8" width="8" height="20" rx="2" transform="rotate(45 34 8)" fill="currentColor"/><circle cx="24" cy="24" r="4" fill="currentColor"/></svg>`,
-   // Comercial
+  gestion: `<svg viewBox="0 0 48 48" fill="none"><path d="M18 24l-8 8 4 4 8-8" fill="currentColor" opacity="0.6"/><path d="M30 24l8 8-4 4-8-8" fill="currentColor" opacity="0.6"/><rect x="14" y="8" width="8" height="20" rx="2" transform="rotate(-45 14 8)" fill="currentColor"/><rect x="26" y="8" width="8" height="20" rx="2" transform="rotate(45 34 8)" fill="currentColor"/><circle cx="24" cy="24" r="4" fill="currentColor"/></svg>`,
+  // Comercial
   pedidos: `<svg viewBox="0 0 48 48" fill="none"><rect x="8" y="6" width="32" height="36" rx="3" fill="currentColor" opacity="0.15"/><rect x="12" y="10" width="24" height="4" rx="1" fill="currentColor"/><rect x="12" y="18" width="18" height="3" rx="1" fill="currentColor" opacity="0.6"/><rect x="12" y="24" width="20" height="3" rx="1" fill="currentColor" opacity="0.6"/><rect x="12" y="30" width="16" height="3" rx="1" fill="currentColor" opacity="0.6"/></svg>`,
   albaranes: `<svg viewBox="0 0 48 48" fill="none"><rect x="8" y="6" width="32" height="36" rx="3" fill="currentColor" opacity="0.15"/><path d="M16 16h16M16 22h12M16 28h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="34" cy="34" r="6" fill="currentColor"/><path d="M32 34l2 2 3-3" stroke="white" stroke-width="1.5"/></svg>`,
   facturas: `<svg viewBox="0 0 48 48" fill="none"><rect x="8" y="6" width="32" height="36" rx="3" fill="currentColor" opacity="0.15"/><rect x="12" y="10" width="24" height="6" rx="1" fill="currentColor"/><path d="M12 22h10M12 28h14M12 34h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.6"/></svg>`,
   libro: `<svg viewBox="0 0 48 48" fill="none"><rect x="8" y="6" width="32" height="36" rx="3" fill="currentColor" opacity="0.15"/><rect x="8" y="6" width="6" height="36" rx="1" fill="currentColor" opacity="0.4"/><rect x="16" y="12" width="18" height="3" rx="1" fill="currentColor" opacity="0.6"/><rect x="16" y="18" width="14" height="2" rx="1" fill="currentColor" opacity="0.4"/><rect x="16" y="23" width="16" height="2" rx="1" fill="currentColor" opacity="0.4"/><path d="M20 30h12l2 10H18l2-10z" fill="#f59e0b"/><rect x="22" y="32" width="8" height="2" rx="0.5" fill="#fbbf24" opacity="0.6"/></svg>`,
-   depositos: `<svg viewBox="0 0 48 48" fill="none"><path d="M24 4L4 16h40L24 4z" fill="currentColor"/><rect x="4" y="16" width="40" height="4" fill="currentColor" opacity="0.8"/><rect x="4" y="38" width="40" height="6" rx="1" fill="currentColor"/><rect x="8" y="20" width="6" height="18" fill="currentColor" opacity="0.6"/><rect x="21" y="20" width="6" height="18" fill="currentColor" opacity="0.6"/><rect x="34" y="20" width="6" height="18" fill="currentColor" opacity="0.6"/></svg>`,
+  depositos: `<svg viewBox="0 0 48 48" fill="none"><path d="M24 4L4 16h40L24 4z" fill="currentColor"/><rect x="4" y="16" width="40" height="4" fill="currentColor" opacity="0.8"/><rect x="4" y="38" width="40" height="6" rx="1" fill="currentColor"/><rect x="8" y="20" width="6" height="18" fill="currentColor" opacity="0.6"/><rect x="21" y="20" width="6" height="18" fill="currentColor" opacity="0.6"/><rect x="34" y="20" width="6" height="18" fill="currentColor" opacity="0.6"/></svg>`,
   // Fabricación
   ordenes: `<svg viewBox="0 0 48 48" fill="none"><rect x="8" y="8" width="32" height="32" rx="3" fill="currentColor" opacity="0.15"/><rect x="12" y="12" width="24" height="6" rx="1" fill="currentColor"/><path d="M12 24h20M12 30h16M12 36h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.6"/></svg>`,
   fases: `<svg viewBox="0 0 48 48" fill="none"><circle cx="12" cy="24" r="6" fill="currentColor"/><circle cx="24" cy="24" r="6" fill="currentColor" opacity="0.7"/><circle cx="36" cy="24" r="6" fill="currentColor" opacity="0.4"/><path d="M18 24h2M30 24h2" stroke="currentColor" stroke-width="2"/></svg>`,
@@ -100,10 +115,10 @@ const iconosSecciones: Record<string, string> = {
   // Vendedores
   equipo: `<svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="14" r="6" fill="currentColor"/><circle cx="12" cy="20" r="4" fill="currentColor" opacity="0.6"/><circle cx="36" cy="20" r="4" fill="currentColor" opacity="0.6"/><path d="M16 38c0-6 4-10 8-10s8 4 8 10" fill="currentColor" opacity="0.4"/></svg>`,
   comisiones: `<svg viewBox="0 0 48 48" fill="none"><rect x="8" y="12" width="32" height="24" rx="3" fill="currentColor" opacity="0.15"/><path d="M16 24h16M16 30h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><text x="34" y="22" fill="currentColor" font-size="10" font-weight="bold">%</text></svg>`,
- // E-commerce
+  // E-commerce
   catalogo: `<svg viewBox="0 0 48 48" fill="none"><rect x="6" y="6" width="16" height="16" rx="2" fill="currentColor"/><rect x="26" y="6" width="16" height="16" rx="2" fill="currentColor" opacity="0.7"/><rect x="6" y="26" width="16" height="16" rx="2" fill="currentColor" opacity="0.5"/><rect x="26" y="26" width="16" height="16" rx="2" fill="currentColor" opacity="0.3"/></svg>`,
- tienda: `<svg viewBox="0 0 48 48" fill="none"><path d="M8 14l2-6h28l2 6v2a5 5 0 01-10 0 5 5 0 01-10 0 5 5 0 01-10 0v-2z" fill="currentColor"/><rect x="10" y="20" width="28" height="20" rx="2" fill="currentColor" opacity="0.15"/><rect x="20" y="28" width="8" height="12" fill="currentColor" opacity="0.5"/></svg>`,
- // Impresoras 3D
+  tienda: `<svg viewBox="0 0 48 48" fill="none"><path d="M8 14l2-6h28l2 6v2a5 5 0 01-10 0 5 5 0 01-10 0 5 5 0 01-10 0v-2z" fill="currentColor"/><rect x="10" y="20" width="28" height="20" rx="2" fill="currentColor" opacity="0.15"/><rect x="20" y="28" width="8" height="12" fill="currentColor" opacity="0.5"/></svg>`,
+  // Impresoras 3D
   modelos: `<svg viewBox="0 0 48 48" fill="none"><rect x="8" y="8" width="32" height="32" rx="3" fill="currentColor" opacity="0.15"/><rect x="12" y="12" width="24" height="6" rx="1" fill="currentColor"/><path d="M24 22v16" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M18 30h12" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>`,
   impresion: `<svg viewBox="0 0 48 48" fill="none"><rect x="8" y="8" width="32" height="32" rx="3" fill="currentColor" opacity="0.15"/><rect x="12" y="12" width="24" height="8" rx="2" fill="currentColor"/><rect x="16" y="24" width="16" height="12" rx="2" fill="currentColor" opacity="0.4"/></svg>`,
   materiales: `<svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="14" fill="currentColor" opacity="0.15"/><circle cx="24" cy="24" r="8" fill="currentColor" opacity="0.4"/><circle cx="24" cy="24" r="4" fill="currentColor"/></svg>`,
@@ -119,7 +134,7 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
   lang={lang as Lang}
   alternateUrls={alternateUrls}
 >
-  <main class="modulo-page" style={`--modulo-color: ${config.color}`}>
+  <div class="modulo-page" style={`--modulo-color: ${config.color}`}>
     <!-- Header del módulo -->
     <header class="modulo-header">
       <div class="header-content">
@@ -170,7 +185,7 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
                   <div class="imagen-wrapper">
                     <img src={imagen.url} alt={imagen.titulo} loading="lazy" />
                     <div class="imagen-overlay">
-                      <button class="btn-ampliar" data-img={imagen.url}>
+                      <button class="btn-ampliar" data-img={imagen.url} aria-label={imagen.titulo}>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                           <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6M7 10h6" />
                         </svg>
@@ -191,7 +206,7 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
 
     <!-- Modal de imagen -->
     <div id="modalImagen" class="modal-imagen">
-      <button class="modal-close">×</button>
+      <button class="modal-close" aria-label="Cerrar">×</button>
       <img id="modalImg" src="" alt="Imagen ampliada" />
     </div>
 
@@ -204,17 +219,14 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
         </a>
       </div>
     </section>
-  </main>
+  </div>
 </Layout>
 
 <style>
-  /* ============================================
-     DESKTOP: Tema azul oscuro (default)
-     ============================================ */
   .modulo-page {
-    background: var(--ink);
+    background: var(--rg-bg);
+    color: var(--rg-ink);
     min-height: 100vh;
-    color: white;
   }
 
   .container {
@@ -223,14 +235,17 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
     padding: 0 1.5rem;
   }
 
-  /* Header del módulo */
+  /* ---------- Header del módulo ---------- */
   .modulo-header {
-    background: linear-gradient(135deg, var(--ink) 0%, var(--ink) 100%);
-    padding: 2rem 1.5rem;
+    padding: 2.5rem 1.5rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #334155;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--rg-line);
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
   .header-content {
@@ -242,7 +257,8 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
   .header-icon {
     width: 64px;
     height: 64px;
-    color: var(--modulo-color);
+    min-width: 64px;
+    color: var(--modulo-color, var(--rg-accent));
   }
 
   .header-icon :global(svg) {
@@ -251,40 +267,41 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
   }
 
   .header-text h1 {
-    font-size: 1.75rem;
-    font-weight: 700;
+    font-family: var(--rg-display);
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: var(--rg-ink);
     margin: 0 0 0.25rem;
-    background: linear-gradient(135deg, #fff, var(--soft));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    line-height: 1.15;
   }
 
   .header-text p {
-    color: var(--soft);
+    color: var(--rg-soft);
     margin: 0;
     font-size: 1rem;
   }
 
   .back-link {
-    color: var(--soft);
+    color: var(--rg-soft);
     text-decoration: none;
     font-size: 0.9rem;
     transition: color 0.2s;
   }
 
   .back-link:hover {
-    color: var(--modulo-color);
+    color: var(--modulo-color, var(--rg-accent));
   }
 
-  /* Navegación de secciones */
+  /* ---------- Navegación de secciones ---------- */
   .secciones-nav {
-    background: rgba(30, 41, 59, 0.8);
-    border-bottom: 1px solid #334155;
+    background: color-mix(in srgb, var(--rg-bg) 88%, transparent);
+    border-bottom: 1px solid var(--rg-line);
     position: sticky;
     top: 72px;
     z-index: 50;
-    backdrop-filter: blur(8px);
+    backdrop-filter: saturate(180%) blur(10px);
+    -webkit-backdrop-filter: saturate(180%) blur(10px);
   }
 
   .secciones-tabs {
@@ -308,27 +325,28 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
     background: transparent;
     border: 1px solid transparent;
     border-radius: 12px;
-    color: var(--soft);
+    color: var(--rg-soft);
+    font-family: inherit;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
     min-width: 100px;
   }
 
   .seccion-tab:hover {
-    background: rgba(102, 126, 234, 0.1);
-    color: white;
+    background: color-mix(in srgb, var(--modulo-color, var(--rg-accent)) 10%, transparent);
+    color: var(--rg-ink);
   }
 
   .seccion-tab.active {
-    background: rgba(102, 126, 234, 0.2);
-    border-color: var(--modulo-color);
-    color: white;
+    background: color-mix(in srgb, var(--modulo-color, var(--rg-accent)) 14%, transparent);
+    border-color: var(--modulo-color, var(--rg-accent));
+    color: var(--rg-ink);
   }
 
   .tab-icon {
     width: 40px;
     height: 40px;
-    color: var(--modulo-color);
+    color: var(--modulo-color, var(--rg-accent));
   }
 
   .tab-icon :global(svg) {
@@ -342,9 +360,9 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
     white-space: nowrap;
   }
 
-  /* Contenido de secciones */
+  /* ---------- Contenido de secciones ---------- */
   .secciones-content {
-    padding: 2rem 0;
+    padding: 2.5rem 0 3rem;
   }
 
   .seccion-panel {
@@ -367,18 +385,22 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
   }
 
   .seccion-intro h2 {
+    font-family: var(--rg-display);
     font-size: 1.5rem;
-    font-weight: 600;
+    font-weight: 450;
+    letter-spacing: -0.015em;
+    color: var(--rg-ink);
     margin: 0 0 0.5rem;
   }
 
   .seccion-descripcion {
-    color: var(--soft);
+    color: var(--rg-soft);
     font-size: 1rem;
-    margin: 0;
+    margin: 0 auto;
+    max-width: 60ch;
   }
 
-  /* Galería */
+  /* ---------- Galería ---------- */
   .galeria-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -386,11 +408,11 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
   }
 
   .galeria-item {
-    background: var(--ink);
+    background: var(--rg-panel);
+    border: 1px solid var(--rg-line);
     border-radius: 16px;
     overflow: hidden;
-    border: 1px solid #334155;
-    transition: all 0.3s ease;
+    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     animation: slideUp 0.5s ease forwards;
     animation-delay: var(--delay);
     opacity: 0;
@@ -402,16 +424,16 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
   }
 
   .galeria-item:hover {
-    border-color: var(--modulo-color);
+    border-color: var(--modulo-color, var(--rg-accent));
     transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 12px 32px var(--rg-sombra);
   }
 
   .imagen-wrapper {
     position: relative;
-    aspect-ratio: 16/10;
+    aspect-ratio: 16 / 10;
     overflow: hidden;
-    background: var(--ink);
+    background: var(--rg-sup2);
   }
 
   .imagen-wrapper img {
@@ -428,7 +450,7 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
   .imagen-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(15, 23, 42, 0.55);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -436,7 +458,8 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
     transition: opacity 0.3s ease;
   }
 
-  .galeria-item:hover .imagen-overlay {
+  .galeria-item:hover .imagen-overlay,
+  .galeria-item:focus-within .imagen-overlay {
     opacity: 1;
   }
 
@@ -446,17 +469,17 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
     background: rgba(255, 255, 255, 0.2);
     border: none;
     border-radius: 50%;
-    color: white;
+    color: #fff;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     backdrop-filter: blur(4px);
-    transition: all 0.2s ease;
+    transition: background 0.2s ease, transform 0.2s ease;
   }
 
   .btn-ampliar:hover {
-    background: var(--modulo-color);
+    background: var(--modulo-color, var(--rg-accent));
     transform: scale(1.1);
   }
 
@@ -472,25 +495,26 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
   .imagen-info h4 {
     font-size: 1rem;
     font-weight: 600;
+    color: var(--rg-ink);
     margin: 0 0 0.5rem;
   }
 
   .imagen-info p {
     font-size: 0.875rem;
-    color: var(--soft);
+    color: var(--rg-soft);
     margin: 0;
     line-height: 1.5;
   }
 
-  /* Modal */
+  /* ---------- Modal ---------- */
   .modal-imagen {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.95);
+    background: rgba(10, 12, 18, 0.95);
     display: none;
     align-items: center;
     justify-content: center;
-    z-index: 1000;
+    z-index: 2000;
     padding: 2rem;
   }
 
@@ -510,113 +534,70 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
     right: 1rem;
     width: 48px;
     height: 48px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.12);
     border: none;
     border-radius: 50%;
-    color: white;
+    color: #fff;
     font-size: 1.5rem;
+    line-height: 1;
     cursor: pointer;
     transition: background 0.2s ease;
   }
 
   .modal-close:hover {
-    background: #ef4444;
+    background: rgba(255, 255, 255, 0.24);
   }
 
-  /* CTA */
+  /* ---------- CTA
+     Banda suave, no invertida: debajo va el footer, que sí lo está. ---------- */
   .cta-section {
-    padding: 3rem 1.5rem;
+    padding: 3.5rem 1.5rem;
     text-align: center;
-    background: linear-gradient(135deg, var(--ink) 0%, var(--ink) 100%);
-    border-top: 1px solid #334155;
+    background: var(--rg-sup2);
+    border-top: 1px solid var(--rg-line);
   }
 
   .cta-section p {
-    color: var(--soft);
-    margin: 0 0 1rem;
+    color: var(--rg-soft);
+    margin: 0 0 1.25rem;
   }
 
   .cta-button {
     display: inline-flex;
     padding: 0.875rem 1.75rem;
-    background: linear-gradient(135deg, var(--modulo-color), #764ba2);
-    color: white;
+    background: var(--rg-ink);
+    color: var(--rg-on-ink);
+    border: 1px solid var(--rg-ink);
     text-decoration: none;
-    border-radius: 10px;
+    border-radius: 999px;
     font-weight: 500;
-    transition: all 0.2s ease;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
   }
 
   .cta-button:hover {
+    background: var(--modulo-color, var(--rg-accent));
+    border-color: var(--modulo-color, var(--rg-accent));
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
   }
 
-  /* ============================================
-     MÓVIL: Tema blanco claro
-     ============================================ */
+  /* ---------- Responsive: solo estructura ---------- */
   @media (max-width: 768px) {
-    .modulo-page {
-      background: var(--panel);
-      color: var(--ink);
-    }
-
-    /* Header */
     .modulo-header {
-      background: linear-gradient(135deg, var(--panel) 0%, var(--sup-2) 100%);
-      border-bottom: 1px solid var(--line);
       flex-direction: column;
       align-items: flex-start;
       gap: 1rem;
+      padding: 2rem 1.5rem 1.5rem;
     }
 
     .header-icon {
       width: 48px;
       height: 48px;
-    }
-
-    .header-text h1 {
-      font-size: 1.5rem;
-      background: linear-gradient(135deg, var(--ink), #475569);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .header-text p {
-      color: var(--soft);
-    }
-
-    .back-link {
-      color: var(--soft);
-    }
-
-    .back-link:hover {
-      color: var(--modulo-color);
-    }
-
-    /* Navegación de secciones */
-    .secciones-nav {
-      background: rgba(255, 255, 255, 0.95);
-      border-bottom: 1px solid var(--line);
-      top: 72px;
+      min-width: 48px;
     }
 
     .seccion-tab {
       padding: 0.5rem 1rem;
       min-width: 80px;
-      color: var(--soft);
-    }
-
-    .seccion-tab:hover {
-      background: rgba(102, 126, 234, 0.08);
-      color: var(--ink);
-    }
-
-    .seccion-tab.active {
-      background: rgba(102, 126, 234, 0.1);
-      border-color: var(--modulo-color);
-      color: var(--ink);
     }
 
     .tab-icon {
@@ -628,49 +609,20 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
       font-size: 0.7rem;
     }
 
-    /* Contenido */
-    .seccion-intro h2 {
-      color: var(--ink);
-    }
-
-    .seccion-descripcion {
-      color: var(--soft);
-    }
-
-    /* Galería */
     .galeria-grid {
       grid-template-columns: 1fr;
     }
+  }
 
+  /* IMPORTANTE: sin esto, con "reducir movimiento" activado las tarjetas
+     se quedan en opacity:0 para siempre y la galería no se ve. */
+  @media (prefers-reduced-motion: reduce) {
     .galeria-item {
-      background: var(--sup-2);
-      border: 1px solid var(--line);
+      opacity: 1;
+      animation: none;
     }
-
-    .galeria-item:hover {
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-    }
-
-    .imagen-wrapper {
-      background: var(--line);
-    }
-
-    .imagen-info h4 {
-      color: var(--ink);
-    }
-
-    .imagen-info p {
-      color: var(--soft);
-    }
-
-    /* CTA */
-    .cta-section {
-      background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
-      border-top: 1px solid var(--line);
-    }
-
-    .cta-section p {
-      color: var(--soft);
+    .seccion-panel {
+      animation: none;
     }
   }
 </style>
@@ -697,19 +649,23 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
       if (modalImg && imgSrc) {
         modalImg.src = imgSrc;
         modal?.classList.add("active");
+        document.body.style.overflow = "hidden";
       }
     });
   });
 
-  document.querySelector(".modal-close")?.addEventListener("click", () => {
+  function cerrarModal() {
     modal?.classList.remove("active");
-  });
+    document.body.style.overflow = "";
+  }
+
+  document.querySelector(".modal-close")?.addEventListener("click", cerrarModal);
 
   modal?.addEventListener("click", (e) => {
-    if (e.target === modal) modal.classList.remove("active");
+    if (e.target === modal) cerrarModal();
   });
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") modal?.classList.remove("active");
+    if (e.key === "Escape") cerrarModal();
   });
 </script>
