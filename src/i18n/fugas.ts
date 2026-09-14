@@ -146,7 +146,7 @@ const es: FugasTranslations = {
         'Vendes pensando que ganas un 40 % y a fin de mes descubres que la merma sin control se ha comido la mitad.',
       cierre: 'Pesada de entrada y salida en cada fase y por operario. La diferencia aparece con nombre.',
       modulo: 'Fabricación · Control de metal',
-      imagen: 'InicioFin5.png',
+      imagen: 'MermasFun.png',
       imagenAlt: 'Control de merma por fase en RayGold',
     },
     {
@@ -165,7 +165,7 @@ const es: FugasTranslations = {
         'Hechura, metal, piedra y subcontratación se suman en cuatro papeles distintos, o en ninguno.',
       cierre: 'Escandallo automático por pieza, con el oro del día.',
       modulo: 'Fabricación · Escandallo',
-      imagen: 'InicioFin4.png',
+      imagen: 'CosteArt.png',
       imagenAlt: 'Escandallo de una pieza en RayGold',
     },
     {
@@ -186,7 +186,7 @@ const es: FugasTranslations = {
         'Se recupera, se reincorpora, y la pureza de lo que entra otra vez en el crisol es una suposición.',
       cierre: 'Lotes de recuperación con análisis y merma de fundición controlada.',
       modulo: 'Fundición · Control de metal',
-      imagen: 'InicioFin5.png',
+      imagen: 'ResFun.png',
       imagenAlt: 'Lotes de recuperación y fundición en RayGold',
     },
 
@@ -196,7 +196,7 @@ const es: FugasTranslations = {
       problema: 'Diste precio con el oro de hace tres semanas. La factura sale con el de hoy.',
       cierre: 'Cotización del día integrada en presupuesto, orden y factura.',
       modulo: 'Comercial · Cotizaciones',
-      imagen: 'InicioFin4.png',
+      imagen: 'Cotizacion.png',
       imagenAlt: 'Cotización del metal del día en RayGold',
     },
     {
@@ -205,7 +205,7 @@ const es: FugasTranslations = {
       problema: 'Sale a engastar, a pulir, a grabar. Vuelve algo menos y nadie lleva la resta.',
       cierre: 'Cuenta de metal por taller externo: gramos que salen, gramos que vuelven, saldo.',
       modulo: 'Subcontratación',
-      imagen: 'InicioFin5.png',
+      imagen: 'Exteriores.png',
       imagenAlt: 'Cuenta de metal con talleres externos',
     },
     {
@@ -214,7 +214,7 @@ const es: FugasTranslations = {
       problema: 'Un cliente pregunta de dónde salió la esmeralda y la respuesta está en un cajón.',
       cierre: 'Ficha de gema con lote, certificado y trazabilidad hasta la pieza vendida.',
       modulo: 'Inventarios · Gemas',
-      imagen: 'InicioFin4.png',
+      imagen: 'ExtrucArt.png',
       imagenAlt: 'Ficha de gema con lote y certificado',
     },
     {
@@ -223,7 +223,7 @@ const es: FugasTranslations = {
       problema: 'Se acaba la aleación, el caucho o la resina el día que más se necesita.',
       cierre: 'Stock mínimo por material y aviso antes de que falte.',
       modulo: 'Inventarios · Alertas',
-      imagen: 'InicioFin4.png',
+      imagen: 'MovFabric.png',
       imagenAlt: 'Alertas de stock mínimo por material',
     },
 
@@ -234,7 +234,7 @@ const es: FugasTranslations = {
         'El cliente manda un dibujo por WhatsApp. Alguien lo mira, estima peso, cuenta piedras, consulta el oro.',
       cierre: 'Del dibujo al presupuesto en segundos, comparando con tus propias piezas ya fabricadas.',
       modulo: 'Comercial · Presupuesto asistido',
-      imagen: 'InicioFin4.png',
+      imagen: 'SimuladorPre.png',
       imagenAlt: 'Presupuesto asistido a partir de piezas ya fabricadas',
     },
     {
@@ -262,7 +262,7 @@ const es: FugasTranslations = {
       problema: 'Compras, taller y tienda cuadran cada uno con sus números. Nunca con los de los demás.',
       cierre: 'Una sola base de datos. El mismo gramo en todos los sitios.',
       modulo: 'Todo RayGold',
-      imagen: 'InicioFin6.png',
+      imagen: '',
       imagenAlt: 'Cuadro de mando de RayGold con datos de todo el taller',
     },
     {
@@ -272,7 +272,7 @@ const es: FugasTranslations = {
         'VERI*FACTU, DIAN, SUNAT, NF-e. Requisitos que cambian y que no se resuelven con un parche.',
       cierre: 'Localización fiscal nativa para España, Colombia, Perú y Brasil.',
       modulo: 'Finanzas · Localización',
-      imagen: '',
+      imagen: 'Verifac.png',
       imagenAlt: '',
     },
 
@@ -283,7 +283,7 @@ const es: FugasTranslations = {
         'No entiende de peso fino, de aleaciones ni de merma. Cada cosa del oficio es una excepción.',
       cierre: 'Un sistema hecho para joyería desde el principio. Las excepciones son lo normal.',
       modulo: 'RayGold',
-      imagen: 'InicioFin6.png',
+      imagen: 'MapAlmacenes.png',
       imagenAlt: 'Interfaz de RayGold con vocabulario de joyería',
     },
   ],
