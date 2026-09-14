@@ -176,7 +176,7 @@ const es: FugasTranslations = {
         'El STL sale de la impresora, la resina se funde, y el trabajo no está atado a ningún encargo.',
       cierre: 'Cola de impresión y biblioteca de archivos enlazadas a la orden de fabricación.',
       modulo: 'Print3D · Fabricación',
-      imagen: '',
+      imagen: 'Impresora.png',
       imagenAlt: '',
     },
     {

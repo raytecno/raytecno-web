@@ -5,15 +5,17 @@
  * @file src/components/Fugas.astro
  *
  * Las 15 fugas se renderizan en el build, no por JavaScript: esta página
- * existe para que la lean buscadores y modelos de IA, así que el contenido
- * tiene que estar en el HTML.
+ * existe para que la lean buscadores y modelos de IA.
  *
- * NUEVO (Septiembre 2026): al desplegar una fuga aparece una captura del ERP
- * a la derecha del texto de cierre. Detalle importante: las imágenes NO se
- * descargan al cargar la página. Van con data-src y solo se convierten en src
- * la primera vez que se abre esa fuga. Con loading="lazy" no bastaría: el
- * navegador puede descargar igualmente imágenes dentro de display:none, y
- * serían quince capturas de ERP de golpe.
+ * CAPTURAS (Septiembre 2026):
+ * - Al desplegar una fuga aparece una captura del ERP a la derecha.
+ * - Las imágenes NO se descargan al cargar la página: van con data-src y solo
+ *   se convierten en src la primera vez que se abre esa fuga. Con
+ *   loading="lazy" no bastaría: el navegador puede descargar igualmente
+ *   imágenes dentro de display:none, y serían quince capturas de golpe.
+ * - Al pulsar la captura se abre a pantalla completa. La miniatura va
+ *   recortada (object-fit: cover) porque en la fila hay poco alto; la versión
+ *   ampliada va entera (object-fit: contain), que es donde se lee de verdad.
  */
 import { getPageUrl, type Lang } from '@/config/pages';
 import { getFugasTranslations, contarPorArea, type AreaId } from '@/i18n/fugas';
@@ -105,13 +107,21 @@ const BLOB = 'https://raygoldstorage.blob.core.windows.net/web';
 
               {f.imagen && (
                 <figure class="fuga__shot">
-                  <img
-                    data-src={`${BLOB}/${f.imagen}`}
-                    alt={f.imagenAlt}
-                    width="640"
-                    height="400"
-                    decoding="async"
-                  />
+                  <button class="fuga__zoom" data-zoom aria-label={t.hero.verPantalla}>
+                    <img
+                      data-src={`${BLOB}/${f.imagen}`}
+                      alt={f.imagenAlt}
+                      width="640"
+                      height="400"
+                      decoding="async"
+                    />
+                    <span class="fuga__lupa" aria-hidden="true">
+                      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+                        <circle cx="8.8" cy="8.8" r="5.6"></circle>
+                        <path d="M13 13l4 4M8.8 6.6v4.4M6.6 8.8h4.4"></path>
+                      </svg>
+                    </span>
+                  </button>
                   <figcaption>{t.seccion.etiquetaPantalla}</figcaption>
                 </figure>
               )}
@@ -144,6 +154,19 @@ const BLOB = 'https://raygoldstorage.blob.core.windows.net/web';
     <p class="cierre__t">{t.cierre.texto}</p>
     <a class="btn btn--solid" href={urlContacto}>{t.cierre.cta}</a>
   </section>
+
+  <!-- Visor a pantalla completa -->
+  <div class="lb" data-lb role="dialog" aria-modal="true" aria-label={t.hero.verPantalla}>
+    <button class="lb__x" data-lb-x aria-label={t.hero.cerrar}>
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+        <path d="M5 5l10 10M15 5L5 15"></path>
+      </svg>
+    </button>
+    <figure class="lb__fig">
+      <img data-lb-img src="" alt="" />
+      <figcaption data-lb-pie></figcaption>
+    </figure>
+  </div>
 </div>
 
 <style>
@@ -370,7 +393,7 @@ const BLOB = 'https://raygoldstorage.blob.core.windows.net/web';
   .fuga__fix {
     margin-top: 16px;
     display: none;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 340px);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 420px);
     gap: 24px 32px;
     align-items: start;
   }
@@ -380,7 +403,7 @@ const BLOB = 'https://raygoldstorage.blob.core.windows.net/web';
 
   .fuga__texto {
     min-width: 0;
-    max-width: 64ch;
+    max-width: 60ch;
   }
 
   .fuga__cierre {
@@ -409,22 +432,65 @@ const BLOB = 'https://raygoldstorage.blob.core.windows.net/web';
     color: var(--rg-soft);
   }
 
-  /* Captura del ERP: solo visible con la fuga abierta */
+  /* ── Captura: miniatura pulsable ── */
   .fuga__shot {
     margin: 0;
   }
-  .fuga__shot img {
+
+  .fuga__zoom {
+    display: block;
+    position: relative;
+    width: 100%;
+    padding: 0;
+    border: 1px solid var(--rg-line);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--rg-sup2);
+    cursor: zoom-in;
+    box-shadow: 0 10px 28px var(--rg-sombra);
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .fuga__zoom:hover {
+    border-color: var(--rg-accent);
+    transform: translateY(-2px);
+  }
+
+  .fuga__zoom img {
     display: block;
     width: 100%;
     height: auto;
     aspect-ratio: 16 / 10;
     object-fit: cover;
     object-position: top left;
-    background: var(--rg-sup2);
-    border: 1px solid var(--rg-line);
-    border-radius: 10px;
-    box-shadow: 0 10px 28px var(--rg-sombra);
   }
+
+  .fuga__lupa {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: rgba(15, 23, 42, 0.72);
+    color: #fff;
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .fuga__zoom:hover .fuga__lupa,
+  .fuga__zoom:focus-visible .fuga__lupa {
+    opacity: 1;
+  }
+
+  .fuga__lupa svg {
+    width: 17px;
+    height: 17px;
+  }
+
   .fuga__shot figcaption {
     margin-top: 8px;
     font-family: var(--rg-mono);
@@ -432,6 +498,70 @@ const BLOB = 'https://raygoldstorage.blob.core.windows.net/web';
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--rg-faint);
+  }
+
+  /* ── Visor a pantalla completa ── */
+  .lb {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(10, 12, 18, 0.92);
+    display: none;
+    place-items: center;
+    padding: 40px 28px 28px;
+  }
+  .lb.is-on {
+    display: grid;
+  }
+
+  .lb__fig {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    max-width: 100%;
+  }
+
+  .lb img {
+    max-width: min(1500px, 96vw);
+    max-height: 84vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.5);
+  }
+
+  .lb figcaption {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 13px;
+    text-align: center;
+    max-width: 60ch;
+  }
+
+  .lb__x {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .lb__x:hover {
+    background: rgba(255, 255, 255, 0.24);
+  }
+  .lb__x svg {
+    width: 18px;
+    height: 18px;
   }
 
   /* ── Botón solo icono ── */
@@ -533,12 +663,14 @@ const BLOB = 'https://raygoldstorage.blob.core.windows.net/web';
 
   /* ── Responsive ── */
   @media (max-width: 980px) {
-    /* La captura pasa debajo del texto */
     .fuga__fix {
       grid-template-columns: minmax(0, 1fr);
     }
     .fuga__shot {
-      max-width: 420px;
+      max-width: 480px;
+    }
+    .fuga__lupa {
+      opacity: 1;
     }
   }
 
@@ -566,11 +698,15 @@ const BLOB = 'https://raygoldstorage.blob.core.windows.net/web';
     .ibtn[data-tip]::after {
       display: none;
     }
+    .lb {
+      padding: 56px 12px 12px;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .barra,
-    .ibtn svg {
+    .ibtn svg,
+    .fuga__zoom {
       transition: none;
     }
   }
@@ -582,7 +718,7 @@ const BLOB = 'https://raygoldstorage.blob.core.windows.net/web';
     if (!sec || sec.dataset.listo === '1') return;
     sec.dataset.listo = '1';
 
-    // Abrir / cerrar cada fuga
+    // ── Abrir / cerrar cada fuga ──
     sec.querySelectorAll<HTMLButtonElement>('[data-abrir]').forEach((b) => {
       b.addEventListener('click', () => {
         const art = b.closest('.fuga');
@@ -597,7 +733,7 @@ const BLOB = 'https://raygoldstorage.blob.core.windows.net/web';
         // Carga diferida real: la captura se descarga la primera vez que
         // se abre esta fuga, no al cargar la página.
         if (abierta) {
-          const img = art.querySelector<HTMLImageElement>('.fuga__shot img[data-src]');
+          const img = art.querySelector<HTMLImageElement>('.fuga__zoom img[data-src]');
           if (img) {
             img.src = img.dataset.src || '';
             img.removeAttribute('data-src');
@@ -606,7 +742,53 @@ const BLOB = 'https://raygoldstorage.blob.core.windows.net/web';
       });
     });
 
-    // Filtro por área
+    // ── Visor a pantalla completa ──
+    const lb = sec.querySelector<HTMLElement>('[data-lb]');
+    const lbImg = sec.querySelector<HTMLImageElement>('[data-lb-img]');
+    const lbPie = sec.querySelector<HTMLElement>('[data-lb-pie]');
+    const lbX = sec.querySelector<HTMLButtonElement>('[data-lb-x]');
+    let ultimoFoco: HTMLElement | null = null;
+
+    function abrirLb(origen: HTMLImageElement, disparador: HTMLElement) {
+      if (!lb || !lbImg) return;
+      ultimoFoco = disparador;
+      lbImg.src = origen.currentSrc || origen.src;
+      lbImg.alt = origen.alt;
+      if (lbPie) lbPie.textContent = origen.alt;
+      lb.classList.add('is-on');
+      document.body.style.overflow = 'hidden';
+      lbX?.focus();
+    }
+
+    function cerrarLb() {
+      if (!lb) return;
+      lb.classList.remove('is-on');
+      document.body.style.overflow = '';
+      ultimoFoco?.focus();
+      ultimoFoco = null;
+    }
+
+    sec.querySelectorAll<HTMLButtonElement>('[data-zoom]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const img = btn.querySelector('img');
+        // Si aún no se ha resuelto el data-src, resolverlo antes de ampliar
+        if (img?.dataset.src) {
+          img.src = img.dataset.src;
+          img.removeAttribute('data-src');
+        }
+        if (img) abrirLb(img, btn);
+      });
+    });
+
+    lbX?.addEventListener('click', cerrarLb);
+    lb?.addEventListener('click', (e) => {
+      if (e.target === lb) cerrarLb();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lb?.classList.contains('is-on')) cerrarLb();
+    });
+
+    // ── Filtro por área ──
     const pastillas = sec.querySelectorAll<HTMLButtonElement>('[data-pastillas] .pastilla');
     const fugas = sec.querySelectorAll<HTMLElement>('.fuga');
     const barras = sec.querySelectorAll<HTMLElement>('.barra');
