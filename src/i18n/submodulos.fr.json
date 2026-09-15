@@ -195,6 +195,10 @@
             {
               "title": "Détails",
               "description": "Contrôle des soldes"
+            },
+            {
+              "title": "Historiser",
+              "description": "Historisez facilement"
             }
           ]
         },
@@ -533,7 +537,7 @@
               "description": "Contrôle des ventes par vendeur"
             }
           ]
-        },  
+        },
         "pipeline": {
           "name": "Pipeline",
           "description": "Gestion des opportunités",
@@ -578,7 +582,7 @@
             }
           ]
         },
-         "tienda": {
+        "tienda": {
           "name": "Boutique en Ligne",
           "description": "Boutiques et TPV",
           "images": [

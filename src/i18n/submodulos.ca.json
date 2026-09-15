@@ -195,6 +195,10 @@
             {
               "title": "Detalls",
               "description": "Control de saldos"
+            },
+            {
+              "title": "Historificar",
+              "description": "Historifica fàcilment"
             }
           ]
         },
@@ -578,7 +582,7 @@
             }
           ]
         },
-          "tienda": {
+        "tienda": {
           "name": "Botiga Online",
           "description": "Botigues i TPV",
           "images": [

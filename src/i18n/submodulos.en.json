@@ -195,6 +195,10 @@
             {
               "title": "Details",
               "description": "Balance control"
+            },
+            {
+              "title": "Historize",
+              "description": "Historize easily"
             }
           ]
         },
@@ -578,7 +582,7 @@
             }
           ]
         },
-          "tienda": {
+        "tienda": {
           "name": "Online Store",
           "description": "Stores and POS",
           "images": [

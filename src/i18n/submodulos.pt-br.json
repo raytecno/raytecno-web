@@ -195,6 +195,10 @@
             {
               "title": "Detalhes",
               "description": "Controle de saldos"
+            },
+            {
+              "title": "Historificar",
+              "description": "Historifique facilmente"
             }
           ]
         },

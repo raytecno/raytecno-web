@@ -243,7 +243,7 @@ const es: FugasTranslations = {
       problema: 'Él puso el oro, tú el trabajo, y la factura no distingue una cosa de la otra.',
       cierre: 'Dos líneas: hechura y metal aportado, cada una con su valoración.',
       modulo: 'Comercial · Facturación',
-      imagen: '',
+      imagen: 'LO02.png',
       imagenAlt: '',
     },
     {
