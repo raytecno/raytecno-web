@@ -412,16 +412,8 @@
               "description": "Vista mensual del balance de situación con evolución ENE-DIC"
             },
             {
-              "title": "Vista Doble",
-              "description": "Balance en formato doble Activo/Pasivo con selector de informes"
-            },
-            {
               "title": "Vista Cuentas",
               "description": "Estructura de nodos con fórmulas y códigos de cuenta asignados"
-            },
-            {
-              "title": "Balances + Valores",
-              "description": "Detalle expandido con saldos por cuenta contable"
             },
             {
               "title": "Estructura Estados Financieros",
@@ -472,6 +464,10 @@
               "description": "Listado de Stocks"
             },
             {
+              "title": "Valoración",
+              "description": "Valoración de existencias"
+            },
+            {
               "title": "Cuentas corrientes",
               "description": "Control de la cuenta por stock"
             }
@@ -488,6 +484,10 @@
             {
               "title": "Inventarios",
               "description": "Información sobre inventarios"
+            },
+             {
+              "title": "Edicion",
+              "description": "Visualizacion y edicion de datos"
             }
           ]
         }

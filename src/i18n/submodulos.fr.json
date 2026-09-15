@@ -407,16 +407,8 @@
               "description": "Vue mensuelle du bilan avec évolution JAN-DÉC"
             },
             {
-              "title": "Vue Double",
-              "description": "Bilan au format double Actif/Passif avec sélecteur de rapports"
-            },
-            {
               "title": "Vue Comptes",
               "description": "Structure de nœuds avec formules et codes de compte assignés"
-            },
-            {
-              "title": "Bilans + Valeurs",
-              "description": "Détail étendu avec soldes par compte comptable"
             },
             {
               "title": "Structure États Financiers",
@@ -467,6 +459,10 @@
               "description": "Liste de distribution"
             },
             {
+              "title": "Valorisation",
+              "description": "Valorisation des stocks"
+            },
+            {
               "title": "Comptes courants",
               "description": "Contrôle du compte par stock"
             }
@@ -483,6 +479,10 @@
             {
               "title": "Inventaires",
               "description": "Informations sur les inventaires"
+            },
+            {
+              "title": "Édition",
+              "description": "Visualisation et édition des données"
             }
           ]
         }

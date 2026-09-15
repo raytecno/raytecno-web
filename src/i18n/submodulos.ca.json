@@ -407,16 +407,8 @@
               "description": "Vista mensual del balanç de situació amb evolució GEN-DES"
             },
             {
-              "title": "Vista Doble",
-              "description": "Balanç en format doble Actiu/Passiu amb selector d'informes"
-            },
-            {
               "title": "Vista Comptes",
               "description": "Estructura de nodes amb fórmules i codis de compte assignats"
-            },
-            {
-              "title": "Balanços + Valors",
-              "description": "Detall expandit amb saldos per compte comptable"
             },
             {
               "title": "Estructura Estats Financers",
@@ -467,6 +459,10 @@
               "description": "Llistat de distribució"
             },
             {
+              "title": "Valoració",
+              "description": "Valoració d'existències"
+            },
+            {
               "title": "Comptes corrents",
               "description": "Control del compte per estoc"
             }
@@ -483,6 +479,10 @@
             {
               "title": "Inventaris",
               "description": "Informació sobre inventaris"
+            },
+            {
+              "title": "Edició",
+              "description": "Visualització i edició de dades"
             }
           ]
         }

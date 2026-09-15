@@ -407,16 +407,8 @@
               "description": "Monthly view of the balance sheet with JAN-DEC evolution"
             },
             {
-              "title": "Double View",
-              "description": "Balance sheet in double format Assets/Liabilities with report selector"
-            },
-            {
               "title": "Accounts View",
               "description": "Node structure with formulas and assigned account codes"
-            },
-            {
-              "title": "Balances + Values",
-              "description": "Expanded detail with balances by accounting account"
             },
             {
               "title": "Financial Statements Structure",
@@ -467,6 +459,10 @@
               "description": "Distribution list"
             },
             {
+              "title": "Valuation",
+              "description": "Inventory valuation"
+            },
+            {
               "title": "Current accounts",
               "description": "Account control by stock"
             }
@@ -483,6 +479,10 @@
             {
               "title": "Inventories",
               "description": "Inventory information"
+            },
+            {
+              "title": "Editing",
+              "description": "Data viewing and editing"
             }
           ]
         }
