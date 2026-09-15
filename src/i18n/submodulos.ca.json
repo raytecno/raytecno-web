@@ -385,6 +385,10 @@
           "description": "Liquidació d'IVA i gestió de remeses bancàries",
           "images": [
             {
+              "title": "Panell fiscal",
+              "description": "Control de models"
+            },
+            {
               "title": "Llibres IVA",
               "description": "Registre i liquidació d'IVA"
             },

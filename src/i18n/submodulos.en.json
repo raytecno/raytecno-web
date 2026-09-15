@@ -385,6 +385,10 @@
           "description": "VAT settlement and bank batch management",
           "images": [
             {
+              "title": "Tax Dashboard",
+              "description": "Tax form control"
+            },
+            {
               "title": "VAT Books",
               "description": "VAT registration and settlement"
             },

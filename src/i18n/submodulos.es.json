@@ -389,6 +389,10 @@
           "name": "IVA y Remesas",
           "description": "Liquidación de IVA y gestión de remesas bancarias",
           "images": [
+             {
+              "title": "Panel fiscal",
+              "description": "Control de modelos"
+            },
             {
               "title": "Libros IVA",
               "description": "Registro y liquidación de IVA"

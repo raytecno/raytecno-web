@@ -385,6 +385,10 @@
           "description": "Liquidação de impostos e gestão de remessas bancárias",
           "images": [
             {
+              "title": "Painel fiscal",
+              "description": "Controle de declarações"
+            },
+            {
               "title": "Livros de Impostos",
               "description": "Registro e liquidação de impostos"
             },

@@ -385,6 +385,10 @@
           "description": "Liquidation de TVA et gestion des remises bancaires",
           "images": [
             {
+              "title": "Tableau de bord fiscal",
+              "description": "Contrôle des déclarations"
+            },
+            {
               "title": "Livres TVA",
               "description": "Enregistrement et liquidation de TVA"
             },
