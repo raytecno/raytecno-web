@@ -371,10 +371,6 @@
               "description": "Tableau de bord avec KPIs de trésorerie nette, ratio de liquidité, jours de couverture et position financière"
             },
             {
-              "title": "Échéances Encaissements vs Paiements",
-              "description": "Graphique comparatif des encaissements et paiements avec net cumulé par mois"
-            },
-            {
               "title": "Effets",
               "description": "Liste des effets émis et reçus avec statut En attente/Encaissé par facture"
             },

@@ -371,10 +371,6 @@
               "description": "Dashboard with KPIs of net treasury, liquidity ratio, days of coverage and financial position"
             },
             {
-              "title": "Due Dates Collections vs Payments",
-              "description": "Comparative chart of collections and payments with accumulated net by month"
-            },
-            {
               "title": "Bills",
               "description": "List of issued and received bills with Pending/Collected status by invoice"
             },

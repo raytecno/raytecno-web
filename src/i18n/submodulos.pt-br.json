@@ -371,10 +371,6 @@
               "description": "Dashboard com KPIs de tesouraria líquida, índice de liquidez, dias de cobertura e posição financeira"
             },
             {
-              "title": "Vencimentos Recebimentos vs Pagamentos",
-              "description": "Gráfico comparativo de recebimentos e pagamentos com líquido acumulado por mês"
-            },
-            {
               "title": "Títulos",
               "description": "Lista de títulos emitidos e recebidos com status Pendente/Recebido por fatura"
             },

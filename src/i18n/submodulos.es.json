@@ -376,10 +376,6 @@
               "description": "Dashboard con KPIs de tesorería neta, ratio liquidez, días de cobertura y posición financiera"
             },
             {
-              "title": "Vencimientos Cobros vs Pagos",
-              "description": "Gráfico comparativo de cobros y pagos con neto acumulado por mes"
-            },
-            {
               "title": "Efectos",
               "description": "Listado de efectos emitidos y recibidos con estado Pendiente/Cobrado por factura"
             },

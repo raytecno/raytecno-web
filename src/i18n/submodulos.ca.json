@@ -371,10 +371,6 @@
               "description": "Dashboard amb KPIs de tresoreria neta, ràtio liquiditat, dies de cobertura i posició financera"
             },
             {
-              "title": "Venciments Cobraments vs Pagaments",
-              "description": "Gràfic comparatiu de cobraments i pagaments amb net acumulat per mes"
-            },
-            {
               "title": "Efectes",
               "description": "Llistat d'efectes emesos i rebuts amb estat Pendent/Cobrat per factura"
             },
