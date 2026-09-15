@@ -213,6 +213,10 @@
             {
               "title": "Cuentas",
               "description": "Control de cuentas por deposito"
+            },
+            {
+              "title": "Ventas",
+              "description": "Control datos de ventas"
             }
           ]
         }

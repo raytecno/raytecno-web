@@ -213,6 +213,10 @@
             {
               "title": "Contas",
               "description": "Controle de contas por depósito"
+            },
+            {
+              "title": "Vendas",
+              "description": "Controle de dados de vendas"
             }
           ]
         }

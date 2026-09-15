@@ -213,6 +213,10 @@
             {
               "title": "Accounts",
               "description": "Account control by deposit"
+            },
+            {
+              "title": "Sales",
+              "description": "Sales data control"
             }
           ]
         }

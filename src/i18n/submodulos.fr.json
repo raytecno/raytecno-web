@@ -213,6 +213,10 @@
             {
               "title": "Comptes",
               "description": "Contrôle des comptes par dépôt"
+            },
+            {
+              "title": "Ventes",
+              "description": "Contrôle des données de ventes"
             }
           ]
         }
