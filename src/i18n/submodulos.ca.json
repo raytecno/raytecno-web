@@ -246,23 +246,21 @@
             }
           ]
         },
-        "mapa": {
-          "name": "Mapa de Fabricació",
-          "description": "Vista general de plans i rutes de producció",
+        "fabricacion2": {
+          "name": "Fabricació",
+          "description": "Gestió de processos de fabricació",
           "images": [
             {
-              "title": "Flux de Producció",
-              "description": "Control visual del flux per fases: modelatge, ceres i fosa, acabats, banys i expedició amb detall d'article i client"
-            }
-          ]
-        },
-        "materiales": {
-          "name": "Materials",
-          "description": "Gestió de necessitats i disponibilitat",
-          "images": [
+              "title": "Mapa de Fabricació",
+              "description": "Vista general de plans i rutes de producció"
+            },
             {
-              "title": "Manteniment Materials",
-              "description": "Control de components per pla amb necessàries, disponible, reserva, faltes, contínua i unitària per magatzem"
+              "title": "Marcatges",
+              "description": "Control dinàmic de marcatges"
+            },
+            {
+              "title": "Anàlisi",
+              "description": "Control de temps i més"
             }
           ]
         },
@@ -284,16 +282,7 @@
             }
           ]
         },
-        "expediciones": {
-          "name": "Expedicions",
-          "description": "Gestió d'expedicions i enviaments",
-          "images": [
-            {
-              "title": "Manteniment Expedicions",
-              "description": "Edició d'expedicions amb identificació, moviment i magatzem, estat, referències comercials i observacions"
-            }
-          ]
-        },
+
         "laboral": {
           "name": "Gestió Laboral",
           "description": "Operaris, presència i configuració laboral",

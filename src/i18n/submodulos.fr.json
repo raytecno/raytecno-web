@@ -246,23 +246,21 @@
             }
           ]
         },
-        "mapa": {
-          "name": "Carte de Fabrication",
-          "description": "Vue d'ensemble des plans et routes de production",
+        "fabricacion2": {
+          "name": "Fabrication",
+          "description": "Gestion des processus de fabrication",
           "images": [
             {
-              "title": "Flux de Production",
-              "description": "Contrôle visuel du flux par phases : modelage, cires et fonte, finitions, bains et expédition avec détail d'article et client"
-            }
-          ]
-        },
-        "materiales": {
-          "name": "Matériaux",
-          "description": "Gestion des besoins et disponibilité",
-          "images": [
+              "title": "Carte de Fabrication",
+              "description": "Vue d'ensemble des plans et des gammes de production"
+            },
             {
-              "title": "Maintenance Matériaux",
-              "description": "Contrôle des composants par plan avec nécessaires, disponible, réserve, manquants, continue et unitaire par entrepôt"
+              "title": "Pointages",
+              "description": "Contrôle dynamique des pointages"
+            },
+            {
+              "title": "Analyse",
+              "description": "Contrôle des temps et plus encore"
             }
           ]
         },
@@ -281,16 +279,6 @@
             {
               "title": "Arbre",
               "description": "Gestion de l'arbre de fonderie"
-            }
-          ]
-        },
-        "expediciones": {
-          "name": "Expéditions",
-          "description": "Gestion des expéditions et envois",
-          "images": [
-            {
-              "title": "Maintenance Expéditions",
-              "description": "Édition d'expéditions avec identification, mouvement et entrepôt, statut, références commerciales et observations"
             }
           ]
         },

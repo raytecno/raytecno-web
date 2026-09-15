@@ -246,23 +246,21 @@
             }
           ]
         },
-        "mapa": {
-          "name": "Manufacturing Map",
-          "description": "Overview of plans and production routes",
+        "fabricacion2": {
+          "name": "Manufacturing",
+          "description": "Manufacturing process management",
           "images": [
             {
-              "title": "Production Flow",
-              "description": "Visual control of the flow by phases: modeling, waxes and casting, finishing, plating and shipping with item and customer detail"
-            }
-          ]
-        },
-        "materiales": {
-          "name": "Materials",
-          "description": "Management of needs and availability",
-          "images": [
+              "title": "Manufacturing Map",
+              "description": "Overview of production plans and routings"
+            },
             {
-              "title": "Material Maintenance",
-              "description": "Control of components by plan with required, available, reserve, shortages, continuous and unit values by warehouse"
+              "title": "Time Clocking",
+              "description": "Dynamic clocking control"
+            },
+            {
+              "title": "Analysis",
+              "description": "Time control and more"
             }
           ]
         },
@@ -281,16 +279,6 @@
             {
               "title": "Tree",
               "description": "Casting tree management"
-            }
-          ]
-        },
-        "expediciones": {
-          "name": "Shipments",
-          "description": "Management of shipments and deliveries",
-          "images": [
-            {
-              "title": "Shipment Maintenance",
-              "description": "Shipment editing with identification, movement and warehouse, status, commercial references and observations"
             }
           ]
         },

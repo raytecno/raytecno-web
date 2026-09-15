@@ -256,8 +256,12 @@
               "description": "Vista general de planes y rutas de producción"
             },
             {
-              "title": "Materiales",
-              "description": "Gestión de necesidades y disponibilidad"
+              "title": "Marcajes",
+              "description": "Control dinamico de marcajes"
+            },
+            {
+              "title": "Analisis",
+              "description": "Control de tiempos y mas"
             }
           ]
         },

@@ -246,23 +246,21 @@
             }
           ]
         },
-        "mapa": {
-          "name": "Mapa de Fabricação",
-          "description": "Visão geral de planos e rotas de produção",
+        "fabricacion2": {
+          "name": "Fabricação",
+          "description": "Gestão de processos de fabricação",
           "images": [
             {
-              "title": "Fluxo de Produção",
-              "description": "Controle visual do fluxo por fases: modelagem, ceras e fundição, acabamentos, banhos e expedição com detalhe de item e cliente"
-            }
-          ]
-        },
-        "materiales": {
-          "name": "Materiais",
-          "description": "Gestão de necessidades e disponibilidade",
-          "images": [
+              "title": "Mapa de Fabricação",
+              "description": "Visão geral de planos e rotas de produção"
+            },
             {
-              "title": "Manutenção de Materiais",
-              "description": "Controle de componentes por plano com necessárias, disponível, reserva, faltas, contínua e unitária por armazém"
+              "title": "Apontamentos",
+              "description": "Controle dinâmico de apontamentos"
+            },
+            {
+              "title": "Análise",
+              "description": "Controle de tempos e mais"
             }
           ]
         },
@@ -281,16 +279,6 @@
             {
               "title": "Árvore",
               "description": "Gestão da árvore de fundição"
-            }
-          ]
-        },
-        "expediciones": {
-          "name": "Expedições",
-          "description": "Gestão de expedições e envios",
-          "images": [
-            {
-              "title": "Manutenção de Expedições",
-              "description": "Edição de expedições com identificação, movimento e armazém, status, referências comerciais e observações"
             }
           ]
         },
