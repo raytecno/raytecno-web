@@ -239,6 +239,10 @@
             {
               "title": "MRP i Llançament",
               "description": "Processament de plans amb opcions d'impressió: aliances, comandes de fosa, ceres, sobres de fabricació i estampació"
+            },
+            {
+              "title": "Historificar",
+              "description": "Control i avisos en historificar"
             }
           ]
         },

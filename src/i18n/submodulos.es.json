@@ -239,6 +239,10 @@
             {
               "title": "MRP y Lanzamiento",
               "description": "Procesamiento de planes con opciones de impresión: alianzas, pedidos de fundición, ceras, sobres de fabricación y estampación"
+            },
+            {
+              "title": "Historificar",
+              "description": "Control y avisos al historificar"
             }
           ]
         },

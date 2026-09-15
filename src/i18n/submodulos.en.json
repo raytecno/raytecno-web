@@ -239,6 +239,10 @@
             {
               "title": "MRP and Launch",
               "description": "Plan processing with printing options: rings, casting orders, waxes, manufacturing envelopes and stamping"
+            },
+            {
+              "title": "Historize",
+              "description": "Control and warnings when historizing"
             }
           ]
         },

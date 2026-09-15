@@ -239,6 +239,10 @@
             {
               "title": "MRP et Lancement",
               "description": "Traitement des plans avec options d'impression : alliances, commandes de fonte, cires, enveloppes de fabrication et estampage"
+            },
+            {
+              "title": "Historiser",
+              "description": "Contrôle et avertissements lors de l'historisation"
             }
           ]
         },
