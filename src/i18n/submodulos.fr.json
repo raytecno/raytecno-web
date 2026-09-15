@@ -649,8 +649,16 @@
           "description": "Gestion du parc d'imprimantes 3D",
           "images": [
             {
-              "title": "Bientôt Disponible",
-              "description": ""
+              "title": "Maintenance",
+              "description": "Maintenance générale des impressions"
+            },
+            {
+              "title": "Imprimantes",
+              "description": "Gestion des imprimantes"
+            },
+            {
+              "title": "Alertes",
+              "description": "Gestion des alertes"
             }
           ]
         }

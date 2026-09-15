@@ -649,8 +649,16 @@
           "description": "Gestão do parque de impressoras 3D",
           "images": [
             {
-              "title": "Em Breve",
-              "description": ""
+              "title": "Manutenção",
+              "description": "Manutenção geral de impressões"
+            },
+            {
+              "title": "Impressoras",
+              "description": "Controle de impressoras"
+            },
+            {
+              "title": "Alertas",
+              "description": "Controle de alertas"
             }
           ]
         }

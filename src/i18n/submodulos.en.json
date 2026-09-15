@@ -649,8 +649,16 @@
           "description": "Management of the 3D printer fleet",
           "images": [
             {
-              "title": "Coming Soon",
-              "description": ""
+              "title": "Maintenance",
+              "description": "General print maintenance"
+            },
+            {
+              "title": "Printers",
+              "description": "Printer management"
+            },
+            {
+              "title": "Alerts",
+              "description": "Alert management"
             }
           ]
         }

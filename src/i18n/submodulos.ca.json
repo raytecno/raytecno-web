@@ -649,8 +649,16 @@
           "description": "Gestió del parc d'impressores 3D",
           "images": [
             {
-              "title": "Pròximament",
-              "description": ""
+              "title": "Manteniment",
+              "description": "Manteniment general d'impressions"
+            },
+            {
+              "title": "Impressores",
+              "description": "Control d'impressores"
+            },
+            {
+              "title": "Alertes",
+              "description": "Control d'alertes"
             }
           ]
         }
