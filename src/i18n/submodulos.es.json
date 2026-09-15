@@ -303,6 +303,25 @@
             }
           ]
         },
+
+         "tiempos": {
+          "name": "Rutas y tiempos",
+          "description": "Gestión de rutas y sus tiempos",
+          "images": [
+            {
+              "title": "Tasas Horarias",
+              "description": "Control de costes por tiempo"
+            },
+            {
+              "title": "Ejercicio",
+              "description": "Ciclos completos de tarifas"
+            },
+            {
+              "title": "Configuracion",
+              "description": "configuracion de elementos y jerarquía"
+            }
+          ]
+        },
        
         "laboral": {
           "name": "Gestión Laboral",

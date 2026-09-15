@@ -121,6 +121,7 @@ export const modulosConfig: Record<ModuloId, ModuloConfig> = {
       // { id: 'mapa', prefix: 'MAP' },
       // { id: 'materiales', prefix: 'MAT' },
       { id: 'fundicion', prefix: 'FUN' },
+      { id: 'tiempos', prefix: 'TIM' },
       // { id: 'expediciones', prefix: 'EXP' },
       { id: 'laboral', prefix: 'LAB' },
     ],

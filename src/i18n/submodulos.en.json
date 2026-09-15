@@ -300,6 +300,24 @@
             }
           ]
         },
+        "tiempos": {
+          "name": "Routings and times",
+          "description": "Management of routings and their times",
+          "images": [
+            {
+              "title": "Hourly Rates",
+              "description": "Cost control by time"
+            },
+            {
+              "title": "Fiscal Year",
+              "description": "Complete rate cycles"
+            },
+            {
+              "title": "Configuration",
+              "description": "Element and hierarchy configuration"
+            }
+          ]
+        },
         "laboral": {
           "name": "Labor Management",
           "description": "Operators, attendance and labor configuration",

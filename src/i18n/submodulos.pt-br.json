@@ -300,6 +300,24 @@
             }
           ]
         },
+        "tiempos": {
+          "name": "Rotas e tempos",
+          "description": "Gestão de rotas e seus tempos",
+          "images": [
+            {
+              "title": "Taxas Horárias",
+              "description": "Controle de custos por tempo"
+            },
+            {
+              "title": "Exercício",
+              "description": "Ciclos completos de tarifas"
+            },
+            {
+              "title": "Configuração",
+              "description": "Configuração de elementos e hierarquia"
+            }
+          ]
+        },
         "laboral": {
           "name": "Gestão Trabalhista",
           "description": "Operários, presença e configuração trabalhista",

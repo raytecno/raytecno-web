@@ -300,6 +300,24 @@
             }
           ]
         },
+        "tiempos": {
+          "name": "Rutes i temps",
+          "description": "Gestió de rutes i els seus temps",
+          "images": [
+            {
+              "title": "Taxes Horàries",
+              "description": "Control de costos per temps"
+            },
+            {
+              "title": "Exercici",
+              "description": "Cicles complets de tarifes"
+            },
+            {
+              "title": "Configuració",
+              "description": "Configuració d'elements i jerarquia"
+            }
+          ]
+        },
         "laboral": {
           "name": "Gestió Laboral",
           "description": "Operaris, presència i configuració laboral",

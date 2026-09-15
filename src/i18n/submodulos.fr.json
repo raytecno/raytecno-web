@@ -300,6 +300,24 @@
             }
           ]
         },
+        "tiempos": {
+          "name": "Gammes et temps",
+          "description": "Gestion des gammes et de leurs temps",
+          "images": [
+            {
+              "title": "Taux Horaires",
+              "description": "Contrôle des coûts par temps"
+            },
+            {
+              "title": "Exercice",
+              "description": "Cycles complets de tarifs"
+            },
+            {
+              "title": "Configuration",
+              "description": "Configuration des éléments et de la hiérarchie"
+            }
+          ]
+        },
         "laboral": {
           "name": "Gestion du Travail",
           "description": "Opérateurs, présence et configuration du travail",
