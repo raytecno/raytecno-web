@@ -119,10 +119,6 @@
             {
               "title": "Menú",
               "description": "Creació de menú principal"
-            },
-            {
-              "title": "Personalització",
-              "description": "Selecció d'estils"
             }
           ]
         }
@@ -174,10 +170,6 @@
           "name": "Factures",
           "description": "Facturació electrònica i tradicional",
           "images": [
-            {
-              "title": "Factures",
-              "description": "Llistat de factures emeses"
-            },
             {
               "title": "Generació",
               "description": "Creació des de comandes o albarans"

@@ -119,10 +119,6 @@
             {
               "title": "Menu",
               "description": "Criação de menu principal"
-            },
-            {
-              "title": "Personalização",
-              "description": "Seleção de estilos"
             }
           ]
         }
@@ -174,10 +170,6 @@
           "name": "Faturas",
           "description": "Faturamento eletrônico e tradicional",
           "images": [
-            {
-              "title": "Faturas",
-              "description": "Lista de faturas emitidas"
-            },
             {
               "title": "Geração",
               "description": "Criação a partir de pedidos ou notas de entrega"

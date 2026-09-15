@@ -102,7 +102,7 @@ const es: FugasTranslations = {
   },
 
   pantallas: [
-    { archivo: 'InicioFin5.png', nombre: 'Mapa de fabricación', alt: 'Mapa de fabricación de RayGold con las fases de producción' },
+    { archivo: 'IniciFin5.png', nombre: 'Mapa de fabricación', alt: 'Mapa de fabricación de RayGold con las fases de producción' },
     { archivo: 'InicioFin4.png', nombre: 'Planes y artículos',  alt: 'Pantalla de planes y artículos de RayGold' },
     { archivo: 'InicioFin6.png', nombre: 'Cuadro de mando',     alt: 'Cuadro de mando de RayGold con indicadores del taller' },
   ],
@@ -155,7 +155,7 @@ const es: FugasTranslations = {
       problema: 'Cera, fundición, engaste, pulido. Alguien pregunta por el encargo y se recorre el taller.',
       cierre: 'Orden de fabricación con secuencia de fases y estado al momento.',
       modulo: 'Fabricación · Órdenes',
-      imagen: 'InicioFin5.png',
+      imagen: 'IniciFin5.png',
       imagenAlt: 'Mapa de fabricación con el estado de cada orden',
     },
     {

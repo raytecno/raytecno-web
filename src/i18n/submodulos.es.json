@@ -171,10 +171,6 @@
           "description": "Facturación electrónica y tradicional",
           "images": [
             {
-              "title": "Facturas",
-              "description": "Listado de facturas emitidas"
-            },
-            {
               "title": "Generación",
               "description": "Creacion desde pediodos o albaranes"
             },

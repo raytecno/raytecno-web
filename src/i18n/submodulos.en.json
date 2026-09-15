@@ -119,10 +119,6 @@
             {
               "title": "Menu",
               "description": "Main menu creation"
-            },
-            {
-              "title": "Customization",
-              "description": "Style selection"
             }
           ]
         }
@@ -174,10 +170,6 @@
           "name": "Invoices",
           "description": "Electronic and traditional invoicing",
           "images": [
-            {
-              "title": "Invoices",
-              "description": "List of issued invoices"
-            },
             {
               "title": "Generation",
               "description": "Creation from orders or delivery notes"

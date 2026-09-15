@@ -119,10 +119,6 @@
             {
               "title": "Menu",
               "description": "Création du menu principal"
-            },
-            {
-              "title": "Personnalisation",
-              "description": "Sélection de styles"
             }
           ]
         }
@@ -174,10 +170,6 @@
           "name": "Factures",
           "description": "Facturation électronique et traditionnelle",
           "images": [
-            {
-              "title": "Factures",
-              "description": "Liste des factures émises"
-            },
             {
               "title": "Génération",
               "description": "Création depuis les commandes ou bons de livraison"
