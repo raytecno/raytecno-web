@@ -119,10 +119,6 @@
             {
               "title": "Menu",
               "description": "Creacion de menu principal"
-            },
-            {
-              "title": "Personalizacion",
-              "description": "Selecion de estilos"
             }
           ]
         }
