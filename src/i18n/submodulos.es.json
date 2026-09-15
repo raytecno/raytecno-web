@@ -246,26 +246,22 @@
             }
           ]
         },
-        "mapa": {
-          "name": "Mapa de Fabricación",
-          "description": "Vista general de planes y rutas de producción",
+
+        "fabricacion2": {
+          "name": "Fabricacion",
+          "description": "Gestión de procesos de fabricacion",
           "images": [
             {
-              "title": "Flujo de Producción",
-              "description": "Control visual del flujo por fases: modelaje, ceras y fundición, acabados, baños y expedición con detalle de artículo y cliente"
+              "title": "Mapa de Fabricación",
+              "description": "Vista general de planes y rutas de producción"
+            },
+            {
+              "title": "Materiales",
+              "description": "Gestión de necesidades y disponibilidad"
             }
           ]
         },
-        "materiales": {
-          "name": "Materiales",
-          "description": "Gestión de necesidades y disponibilidad",
-          "images": [
-            {
-              "title": "Mantenimiento Materiales",
-              "description": "Control de componentes por plan con necesarias, disponible, reserva, faltas, continua y unitaria por almacén"
-            }
-          ]
-        },
+        
         "fundicion": {
           "name": "Fundición",
           "description": "Gestión de procesos de fundición",
@@ -284,16 +280,7 @@
             }
           ]
         },
-        "expediciones": {
-          "name": "Expediciones",
-          "description": "Gestión de expediciones y envíos",
-          "images": [
-            {
-              "title": "Mantenimiento Expediciones",
-              "description": "Edición de expediciones con identificación, movimiento y almacén, estado, referencias comerciales y observaciones"
-            }
-          ]
-        },
+       
         "laboral": {
           "name": "Gestión Laboral",
           "description": "Operarios, presencia y configuración laboral",
