@@ -511,24 +511,6 @@
               "description": "Graphiques par article"
             }
           ]
-        },
-        "informes": {
-          "name": "Rapports",
-          "description": "Rapports personnalisables",
-          "images": [
-            {
-              "title": "Catalogue",
-              "description": "Rapports prédéfinis"
-            },
-            {
-              "title": "Concepteur",
-              "description": "Créateur de rapports"
-            },
-            {
-              "title": "Programmation",
-              "description": "Envoi automatique"
-            }
-          ]
         }
       }
     },
@@ -567,6 +549,10 @@
             {
               "title": "Ventes",
               "description": "Contrôle des ventes par vendeur"
+            },
+            {
+              "title": "Boutiques",
+              "description": "Gestion des boutiques"
             }
           ]
         },
@@ -643,6 +629,10 @@
             {
               "title": "Importation",
               "description": "Récupération de données d'usine"
+            },
+            {
+              "title": "Édition",
+              "description": "Possibilité d'éditer de manière indépendante"
             }
           ]
         }

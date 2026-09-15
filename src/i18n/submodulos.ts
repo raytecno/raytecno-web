@@ -156,7 +156,7 @@ export const modulosConfig: Record<ModuloId, ModuloConfig> = {
     icon: `<svg viewBox="0 0 64 64" fill="none"><rect x="8" y="12" width="48" height="40" rx="4" fill="currentColor" opacity="0.2"/><rect x="14" y="36" width="8" height="12" rx="1" fill="currentColor"/><rect x="26" y="28" width="8" height="20" rx="1" fill="currentColor" opacity="0.7"/><rect x="38" y="20" width="8" height="28" rx="1" fill="currentColor" opacity="0.5"/></svg>`,
     secciones: [
       { id: 'dashboards', prefix: 'DAS' },
-      { id: 'informes', prefix: 'REP' },
+      // { id: 'informes', prefix: 'REP' },
     ],
   },
   vendedores: {

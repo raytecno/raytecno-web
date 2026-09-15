@@ -511,24 +511,6 @@
               "description": "Charts by item"
             }
           ]
-        },
-        "informes": {
-          "name": "Reports",
-          "description": "Customizable reports",
-          "images": [
-            {
-              "title": "Catalog",
-              "description": "Predefined reports"
-            },
-            {
-              "title": "Designer",
-              "description": "Report builder"
-            },
-            {
-              "title": "Scheduling",
-              "description": "Automatic delivery"
-            }
-          ]
         }
       }
     },
@@ -567,6 +549,10 @@
             {
               "title": "Sales",
               "description": "Sales control by rep"
+            },
+            {
+              "title": "Stores",
+              "description": "Store management"
             }
           ]
         },
@@ -643,6 +629,10 @@
             {
               "title": "Import",
               "description": "Data recovery from factory"
+            },
+            {
+              "title": "Editing",
+              "description": "Ability to edit independently"
             }
           ]
         }

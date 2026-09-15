@@ -511,24 +511,6 @@
               "description": "Gràfics per articles"
             }
           ]
-        },
-        "informes": {
-          "name": "Informes",
-          "description": "Informes personalitzables",
-          "images": [
-            {
-              "title": "Catàleg",
-              "description": "Informes predefinits"
-            },
-            {
-              "title": "Dissenyador",
-              "description": "Creador d'informes"
-            },
-            {
-              "title": "Programació",
-              "description": "Enviament automàtic"
-            }
-          ]
         }
       }
     },
@@ -567,6 +549,10 @@
             {
               "title": "Vendes",
               "description": "Control de vendes per venedor"
+            },
+            {
+              "title": "Botigues",
+              "description": "Control de botigues"
             }
           ]
         },
@@ -643,6 +629,10 @@
             {
               "title": "Importació",
               "description": "Recuperació de dades de fàbrica"
+            },
+            {
+              "title": "Edició",
+              "description": "Capacitat d'editar de manera independent"
             }
           ]
         }

@@ -511,24 +511,6 @@
               "description": "Gráficos por item"
             }
           ]
-        },
-        "informes": {
-          "name": "Relatórios",
-          "description": "Relatórios personalizáveis",
-          "images": [
-            {
-              "title": "Catálogo",
-              "description": "Relatórios predefinidos"
-            },
-            {
-              "title": "Designer",
-              "description": "Criador de relatórios"
-            },
-            {
-              "title": "Agendamento",
-              "description": "Envio automático"
-            }
-          ]
         }
       }
     },
@@ -567,6 +549,10 @@
             {
               "title": "Vendas",
               "description": "Controle de vendas por vendedor"
+            },
+            {
+              "title": "Lojas",
+              "description": "Controle de lojas"
             }
           ]
         },
@@ -643,6 +629,10 @@
             {
               "title": "Importação",
               "description": "Recuperação de dados de fábrica"
+            },
+            {
+              "title": "Edição",
+              "description": "Capacidade de editar de forma independente"
             }
           ]
         }
