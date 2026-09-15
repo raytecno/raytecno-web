@@ -117,6 +117,7 @@ export const modulosConfig: Record<ModuloId, ModuloConfig> = {
     secciones: [
       { id: 'planes', prefix: 'PLA' },
       { id: 'fabricacion2', prefix: 'FAB' },
+      { id: 'marcaje', prefix: 'MAR' },
       // { id: 'mapa', prefix: 'MAP' },
       // { id: 'materiales', prefix: 'MAT' },
       { id: 'fundicion', prefix: 'FUN' },

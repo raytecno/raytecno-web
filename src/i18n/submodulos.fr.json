@@ -264,6 +264,24 @@
             }
           ]
         },
+        "marcaje": {
+          "name": "Fabrication",
+          "description": "Gestion complète des pointages",
+          "images": [
+            {
+              "title": "Gestion des Pointages",
+              "description": "Vue d'ensemble des pointages"
+            },
+            {
+              "title": "Lecteur",
+              "description": "Lecteur de codes par caméra"
+            },
+            {
+              "title": "Détails",
+              "description": "Détails des pointages"
+            }
+          ]
+        },
         "fundicion": {
           "name": "Fonte",
           "description": "Gestion des processus de fonte",

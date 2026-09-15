@@ -264,6 +264,24 @@
             }
           ]
         },
+        "marcaje": {
+          "name": "Fabricació",
+          "description": "Gestió total de marcatges",
+          "images": [
+            {
+              "title": "Manteniment de Marcatges",
+              "description": "Vista general de marcatges"
+            },
+            {
+              "title": "Lector",
+              "description": "Lector de codis per càmera"
+            },
+            {
+              "title": "Detalls",
+              "description": "Detalls dels marcatges"
+            }
+          ]
+        },
         "fundicion": {
           "name": "Fosa",
           "description": "Gestió de processos de fosa",
@@ -282,7 +300,6 @@
             }
           ]
         },
-
         "laboral": {
           "name": "Gestió Laboral",
           "description": "Operaris, presència i configuració laboral",

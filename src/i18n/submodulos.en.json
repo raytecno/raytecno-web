@@ -264,6 +264,24 @@
             }
           ]
         },
+        "marcaje": {
+          "name": "Manufacturing",
+          "description": "Complete clocking management",
+          "images": [
+            {
+              "title": "Clocking Maintenance",
+              "description": "Overview of clocking records"
+            },
+            {
+              "title": "Scanner",
+              "description": "Camera-based code scanner"
+            },
+            {
+              "title": "Details",
+              "description": "Clocking details"
+            }
+          ]
+        },
         "fundicion": {
           "name": "Casting",
           "description": "Management of casting processes",

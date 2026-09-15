@@ -264,6 +264,24 @@
             }
           ]
         },
+        "marcaje": {
+          "name": "Fabricação",
+          "description": "Gestão total de apontamentos",
+          "images": [
+            {
+              "title": "Manutenção de Apontamentos",
+              "description": "Visão geral dos apontamentos"
+            },
+            {
+              "title": "Leitor",
+              "description": "Leitor de códigos por câmera"
+            },
+            {
+              "title": "Detalhes",
+              "description": "Detalhes dos apontamentos"
+            }
+          ]
+        },
         "fundicion": {
           "name": "Fundição",
           "description": "Gestão de processos de fundição",

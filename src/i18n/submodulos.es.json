@@ -265,6 +265,25 @@
             }
           ]
         },
+
+        "marcaje": {
+          "name": "Fabricacion",
+          "description": "Gestión total de marcajes",
+          "images": [
+            {
+              "title": "Mantenimiento Marcajes",
+              "description": "Vista general de marcajes"
+            },
+            {
+              "title": "Lector",
+              "description": "Lector por camara de codigos"
+            },
+            {
+              "title": "Detalles",
+              "description": "Detalles de los marcajes"
+            }
+          ]
+        },
         
         "fundicion": {
           "name": "Fundición",
