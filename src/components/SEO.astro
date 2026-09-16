@@ -10,19 +10,46 @@
  *
  * CORRECCIONES SEO (Agosto 2026):
  * - [1] Título: no se duplica la marca si el title ya contiene "RayGold"
- *       (causaba "Modules | RayGold ERP | RayGold ERP")
  * - [2] Eliminado <meta name="keywords"> (ignorado por Google desde 2009)
  * - [3] og:image:alt describe la imagen, ya no repite el título
- * - [4] x-default: fallback real a /en (antes devolvía canonicalUrl)
+ * - [4] x-default: fallback real a /en
  * - [5] sameAs completo y apuntando a la página de EMPRESA de LinkedIn
  *
- * Incluye:
- * - Meta tags básicos
- * - Open Graph (Facebook, WhatsApp, LinkedIn)
- * - Twitter Cards
- * - hreflang para multiidioma
- * - Schema.org JSON-LD
- * - Breadcrumbs dinámicos
+ * CORRECCIONES SEO (Septiembre 2026):
+ * - [6] theme-color / TileColor eran literalmente "var(--accent)". Una variable
+ *       CSS no se resuelve dentro de un <meta>: ahora son hex reales, con
+ *       variante clara y oscura vía media.
+ * - [7] JSON-LD unificado en UN SOLO @graph con @id estables. Antes se emitían
+ *       3-4 scripts sueltos y Google trataba Organization como una entidad nueva
+ *       en cada página. Ahora todas las páginas apuntan al MISMO
+ *       #organization y #website. Esto es lo que consolida la entidad
+ *       "Raytecno BCN SL / RayGold" en lugar de repetirla 300 veces.
+ * - [8] Organization: descripción de EMPRESA (antes reusaba la del producto),
+ *       + alternateName, + knowsAbout, + areaServed, + vatID opcional.
+ *       knowsAbout es la señal temática que usan buscadores y modelos para
+ *       entender de qué va la entidad: aquí se declara ERP joyero, no CAD.
+ * - [9] dateModified ya NO es la fecha del build. Se recalculaba en cada
+ *       despliegue y declaraba contenido fresco cuando no lo era. Ahora usa
+ *       modifiedTime de la página, o SITE_LAST_UPDATED como respaldo.
+ * - [10] og:locale:alternate se deriva de alternateUrls: solo se declaran los
+ *        idiomas que esa página realmente tiene traducidos.
+ * - [11] noindex pasa de "noindex, nofollow" a "noindex, follow": se sigue
+ *        repartiendo autoridad por los enlaces internos de esas páginas.
+ * - [12] Article incluye headline y publisher con logo (requisito de Google
+ *        para artículos; el blog no los tenía).
+ * - [13] Breadcrumbs: etiquetas legibles ("RayGold", "IA", "3D" bien escritos)
+ *        y prop opcional `breadcrumbs` para sobrescribirlas.
+ * - [14] Descripciones por defecto: "+35 años de experiencia" -> "Desde 1990".
+ *        El número quedaba desfasado cada enero y contradecía los "36 años"
+ *        del resto del sitio.
+ * - [15] Eliminados los preconnect duplicados: ya están en Layout.astro, antes
+ *        en el <head>, que es donde sirven de algo.
+ * - [16] Añadido <link rel="sitemap">.
+ *
+ * PENDIENTE DE VERIFICAR (no se puede arreglar desde aquí):
+ * - /images/og-default.jpg debe existir en el output del build.
+ * - /images/raygold-dashboard-screenshot.jpg idem, o quitar "screenshot".
+ * - offers.price "29" debe coincidir EXACTAMENTE con /[lang]/precios.
  */
 
 import { type Lang } from "@/config/pages";
@@ -67,11 +94,20 @@ const COMPANY = {
     youtube: "https://youtube.com/@raytecnobcn?si=TpJy90rEnuwgzMGT",
   },
 
-  // Colores
-  themeColor: "var(--accent)",
+  // [6] Colores reales. theme-color pinta la barra del navegador en móvil.
+  themeColorLight: "#fafaf8",
+  themeColorDark: "#0f172a",
+  tileColor: "#a8862b",
 
   // Datos de la empresa
   foundingDate: "1990",
+
+  // [8] CIF. Señal fuerte de identidad para una empresa española.
+  // Descomentar y rellenar cuando quieras publicarlo.
+  // vatID: "ESB********",
+
+  // Mercados activos
+  areaServed: ["ES", "CO", "PE", "BR"],
 
   // Reviews
   reviews: {
@@ -83,11 +119,47 @@ const COMPANY = {
   },
 };
 
+// [9] Fecha de última revisión editorial del sitio.
+// Súbela a mano cuando revises contenido de verdad, no en cada despliegue.
+const SITE_LAST_UPDATED = "2026-09-16";
+
 // Longitud máxima recomendada de título (solo aviso en desarrollo)
 const MAX_TITLE_LENGTH = 60;
 
 // Detecta si un título ya contiene la marca, para no duplicarla
 const BRAND_PATTERN = /raygold/i;
+
+// [8] Temas sobre los que la entidad tiene autoridad.
+// Es la lista que separa "ERP de fabricación joyera" de "software CAD de joyería".
+const KNOWS_ABOUT = [
+  "ERP para joyería",
+  "software de gestión para talleres de joyería",
+  "trazabilidad de oro, plata y platino",
+  "control de mermas en fundición",
+  "escandallo y coste de hechura",
+  "subcontratación de metal a talleres externos",
+  "gestión de órdenes de fabricación de joyas",
+  "gestión de flotas de impresoras 3D en joyería",
+  "facturación electrónica VERI*FACTU (España)",
+  "facturación electrónica DIAN (Colombia)",
+  "facturación electrónica SUNAT (Perú)",
+  "NF-e (Brasil)",
+];
+
+// [13] Slugs que no se escriben bien con una simple capitalización.
+const SEGMENT_FIXES: Record<string, string> = {
+  raygold: "RayGold",
+  ia: "IA",
+  "asistente-ia": "Asistente IA",
+  impresoras3d: "Impresoras 3D",
+  "3d": "3D",
+  erp: "ERP",
+  verifactu: "VERI*FACTU",
+  "declaracion-verifactu": "Declaración VERI*FACTU",
+  "que-es-raygold": "Qué es RayGold",
+  stl: "STL",
+  iva: "IVA",
+};
 
 // ============================================
 // CONFIGURACIÓN POR IDIOMA
@@ -98,6 +170,8 @@ const LANG_CONFIG: Record<Lang, {
   languageName: string;
   defaultTitle: string;
   defaultDescription: string;
+  /** [8] Descripción de la EMPRESA, no del producto. Va en Organization. */
+  orgDescription: string;
   defaultKeywords: string[];
   homeLabel: string;
   ogImageAlt: string;
@@ -107,7 +181,8 @@ const LANG_CONFIG: Record<Lang, {
     hreflang: "es",
     languageName: "Spanish",
     defaultTitle: "RayGold - Software ERP para Joyería",
-    defaultDescription: "Software de gestión integral para el sector joyero. ERP especializado con módulos de fabricación, trazabilidad de metales preciosos, control de mermas y más. +35 años de experiencia.",
+    defaultDescription: "Software de gestión integral para el sector joyero. ERP especializado con módulos de fabricación, trazabilidad de metales preciosos y control de mermas. Desde 1990.",
+    orgDescription: "Raytecno BCN SL desarrolla desde 1990 RayGold, el ERP especializado en fabricación de joyería: trazabilidad de metales preciosos, control de mermas y localización fiscal para España, Colombia, Perú y Brasil.",
     defaultKeywords: ["ERP joyería", "software joyería", "gestión joyería", "RayGold", "fabricación joyas", "control mermas oro", "trazabilidad metales preciosos", "Raytecno"],
     homeLabel: "Inicio",
     ogImageAlt: "Pantalla del ERP RayGold para joyería mostrando el control de fabricación",
@@ -117,8 +192,9 @@ const LANG_CONFIG: Record<Lang, {
     hreflang: "en",
     languageName: "English",
     defaultTitle: "RayGold - Jewelry ERP Software",
-    defaultDescription: "Comprehensive management software for the jewelry industry. Specialized ERP with manufacturing modules, precious metal traceability, waste control and more. +35 years of experience.",
-    defaultKeywords: ["jewelry ERP", "jewelry software", "jewelry management", "RayGold", "jewelry manufacturing", "gold waste control", "precious metal traceability", "Raytecno"],
+    defaultDescription: "Comprehensive management software for the jewelry industry. Specialized ERP with manufacturing modules, precious metal traceability and loss control. Since 1990.",
+    orgDescription: "Raytecno BCN SL has been building RayGold since 1990: the ERP specialized in jewelry manufacturing, with precious metal traceability, loss control and tax localization for Spain, Colombia, Peru and Brazil.",
+    defaultKeywords: ["jewelry ERP", "jewelry software", "jewelry management", "RayGold", "jewelry manufacturing", "gold loss control", "precious metal traceability", "Raytecno"],
     homeLabel: "Home",
     ogImageAlt: "RayGold jewelry ERP screen showing manufacturing control",
   },
@@ -127,7 +203,8 @@ const LANG_CONFIG: Record<Lang, {
     hreflang: "fr",
     languageName: "French",
     defaultTitle: "RayGold - Logiciel ERP pour Bijouterie",
-    defaultDescription: "Logiciel de gestion intégrale pour le secteur bijoutier. ERP spécialisé avec modules de fabrication, traçabilité des métaux précieux, contrôle des pertes et plus. +35 ans d'expérience.",
+    defaultDescription: "Logiciel de gestion intégrale pour le secteur bijoutier. ERP spécialisé avec modules de fabrication, traçabilité des métaux précieux et contrôle des pertes. Depuis 1990.",
+    orgDescription: "Raytecno BCN SL développe depuis 1990 RayGold, l'ERP spécialisé dans la fabrication de bijouterie : traçabilité des métaux précieux, contrôle des pertes et localisation fiscale pour l'Espagne, la Colombie, le Pérou et le Brésil.",
     defaultKeywords: ["ERP bijouterie", "logiciel bijouterie", "gestion bijouterie", "RayGold", "fabrication bijoux", "contrôle pertes or", "traçabilité métaux précieux", "Raytecno"],
     homeLabel: "Accueil",
     ogImageAlt: "Écran de l'ERP RayGold pour bijouterie montrant le contrôle de fabrication",
@@ -137,8 +214,9 @@ const LANG_CONFIG: Record<Lang, {
     hreflang: "ca",
     languageName: "Catalan",
     defaultTitle: "RayGold - Programari ERP per a Joieria",
-    defaultDescription: "Programari de gestió integral per al sector joier. ERP especialitzat amb mòduls de fabricació, traçabilitat de metalls preciosos, control de pèrdues i més. +35 anys d'experiència.",
-    defaultKeywords: ["ERP joieria", "programari joieria", "gestió joieria", "RayGold", "fabricació joies", "control pèrdues or", "traçabilitat metalls preciosos", "Raytecno"],
+    defaultDescription: "Programari de gestió integral per al sector joier. ERP especialitzat amb mòduls de fabricació, traçabilitat de metalls preciosos i control de minves. Des de 1990.",
+    orgDescription: "Raytecno BCN SL desenvolupa des de 1990 RayGold, l'ERP especialitzat en fabricació de joieria: traçabilitat de metalls preciosos, control de minves i localització fiscal per a Espanya, Colòmbia, Perú i Brasil.",
+    defaultKeywords: ["ERP joieria", "programari joieria", "gestió joieria", "RayGold", "fabricació joies", "control minves or", "traçabilitat metalls preciosos", "Raytecno"],
     homeLabel: "Inici",
     ogImageAlt: "Pantalla de l'ERP RayGold per a joieria mostrant el control de fabricació",
   },
@@ -147,7 +225,8 @@ const LANG_CONFIG: Record<Lang, {
     hreflang: "pt-BR",
     languageName: "Portuguese",
     defaultTitle: "RayGold - Software ERP para Joalheria",
-    defaultDescription: "Software de gestão integral para o setor joalheiro. ERP especializado com módulos de fabricação, rastreabilidade de metais preciosos, controle de perdas e mais. +35 anos de experiência.",
+    defaultDescription: "Software de gestão integral para o setor joalheiro. ERP especializado com módulos de fabricação, rastreabilidade de metais preciosos e controle de perdas. Desde 1990.",
+    orgDescription: "A Raytecno BCN SL desenvolve desde 1990 o RayGold, o ERP especializado em fabricação de joias: rastreabilidade de metais preciosos, controle de perdas e localização fiscal para Espanha, Colômbia, Peru e Brasil.",
     defaultKeywords: ["ERP joalheria", "software joalheria", "gestão joalheria", "RayGold", "fabricação joias", "controle perdas ouro", "rastreabilidade metais preciosos", "Raytecno"],
     homeLabel: "Início",
     ogImageAlt: "Tela do ERP RayGold para joalheria mostrando o controle de fabricação",
@@ -170,6 +249,8 @@ interface Props {
   publishedTime?: string;
   modifiedTime?: string;
   alternateUrls?: { lang: Lang; url: string }[];
+  /** [13] Migas personalizadas. Si se pasan, sustituyen a las automáticas. */
+  breadcrumbs?: { name: string; url?: string }[];
 }
 
 const {
@@ -184,6 +265,7 @@ const {
   publishedTime,
   modifiedTime,
   alternateUrls = [],
+  breadcrumbs,
 } = Astro.props;
 
 // ============================================
@@ -209,28 +291,22 @@ function removeTrailingSlash(url: string): string {
 // devuelve "/" en vez del path real para rutas dinámicas [lang].
 //
 // Solución: Usar alternateUrls[lang].url como fuente de verdad
-// cuando está disponible, ya que se calcula correctamente
-// en cada página.
+// cuando está disponible.
 // ============================================
 function getCanonicalPath(): string {
-  // 1. Intentar obtener el path desde alternateUrls (más confiable)
   const currentLangAlt = alternateUrls.find(alt => alt.lang === lang);
   if (currentLangAlt?.url) {
-    // Si es URL absoluta, extraer el path
     if (currentLangAlt.url.startsWith('http')) {
       try {
         const urlObj = new URL(currentLangAlt.url);
         return removeTrailingSlash(urlObj.pathname);
       } catch {
-        // Si falla el parse, usar tal cual
         return removeTrailingSlash(currentLangAlt.url);
       }
     }
-    // Si es path relativo, usarlo directamente
     return removeTrailingSlash(currentLangAlt.url);
   }
 
-  // 2. Fallback: usar Astro.url.pathname
   let path = Astro.url.pathname;
   if (path.length > 1 && path.endsWith('/')) {
     path = path.slice(0, -1);
@@ -243,10 +319,6 @@ const canonicalUrl = `${siteDomain}${currentPath}`;
 
 // ============================================
 // TÍTULO - [1] Sin duplicar la marca
-//
-// Antes: `${title} | ${COMPANY.name}` siempre.
-// Si la página ya traía "RayGold" en su title, el resultado
-// era "Modules | RayGold ERP | RayGold ERP".
 // ============================================
 const fullTitle = title
   ? (BRAND_PATTERN.test(title) ? title : `${title} | ${COMPANY.name}`)
@@ -261,6 +333,13 @@ if (import.meta.env.DEV && fullTitle.length > MAX_TITLE_LENGTH) {
 
 // Descripción
 const finalDescription = description || config.defaultDescription;
+
+// Aviso SOLO en desarrollo: Google corta la descripción sobre los 160 car.
+if (import.meta.env.DEV && finalDescription.length > 160) {
+  console.warn(
+    `[SEO] Descripción de ${finalDescription.length} car. (se cortará en ~160) en ${currentPath}`
+  );
+}
 
 // Keywords - NO se emiten como meta tag (Google las ignora desde 2009).
 // Se conservan como documentación interna de la intención de cada idioma.
@@ -277,16 +356,17 @@ const ogImageAlt = imageAlt || config.ogImageAlt;
 // Logo absoluto
 const logoUrl = `${siteDomain}${COMPANY.logo}`;
 
+// [9] Fecha de modificación: la de la página, o la revisión del sitio.
+// Nunca la fecha del build.
+const finalModified = modifiedTime || SITE_LAST_UPDATED;
+
 // ============================================
 // FUNCIÓN HELPER: Normalizar URL para hreflang
-// Construye URL absoluta SIN trailing slash
 // ============================================
 function buildHreflangUrl(altUrl: string): string {
-  // Si ya es absoluta, solo quitar trailing slash
   if (altUrl.startsWith('http')) {
     return removeTrailingSlash(altUrl);
   }
-  // Si es relativa, construir con dominio
   const cleanPath = removeTrailingSlash(altUrl);
   return `${siteDomain}${cleanPath}`;
 }
@@ -294,17 +374,22 @@ function buildHreflangUrl(altUrl: string): string {
 // ============================================
 // FILTRAR ALTERNATE URLS
 // Las páginas noindex NO generan hreflang
-// Esto evita "Canonical no indexable" porque Google
-// no seguirá hreflang hacia páginas que no indexa
 // ============================================
 const indexableAlternateUrls = noindex ? [] : alternateUrls;
 
 // ============================================
+// [10] LOCALES ALTERNATIVOS PARA OPEN GRAPH
+// Solo los idiomas que esta página tiene de verdad.
+// Si la página no declara alternateUrls, se asume que existe en todos.
+// ============================================
+const ogAlternateLocales = (
+  alternateUrls.length > 0
+    ? alternateUrls.filter(alt => alt.lang !== lang).map(alt => LANG_CONFIG[alt.lang]?.locale)
+    : Object.entries(LANG_CONFIG).filter(([code]) => code !== lang).map(([_, conf]) => conf.locale)
+).filter(Boolean);
+
+// ============================================
 // [4] X-DEFAULT
-// Busca la versión inglesa de la página actual.
-// Si no existe, cae a la HOME inglesa (/en).
-// Antes devolvía canonicalUrl, lo que hacía que una página
-// sin versión EN declarase como x-default su versión FR o CA.
 // ============================================
 function getXDefaultUrl(): string {
   const englishAlt = alternateUrls.find(alt => alt.lang === 'en');
@@ -317,16 +402,41 @@ function getXDefaultUrl(): string {
 const xDefaultUrl = getXDefaultUrl();
 
 // ============================================
+// [7] IDENTIFICADORES ESTABLES DEL GRAFO
+//
+// Esto es la corrección de fondo. Con @id fijos, Organization y WebSite
+// son LA MISMA entidad en las 300 páginas del sitio, no 300 entidades
+// distintas que se parecen. Es lo que permite que un buscador consolide
+// "Raytecno BCN SL" y "RayGold" en una sola ficha.
+// ============================================
+const ORG_ID = `${siteDomain}/#organization`;
+const SITE_ID = `${siteDomain}/#website`;
+const SOFTWARE_ID = `${siteDomain}/#raygold`;
+const pageId = `${canonicalUrl}#webpage`;
+const breadcrumbId = `${canonicalUrl}#breadcrumb`;
+
+// ============================================
 // SCHEMA.ORG - ORGANIZATION
 // ============================================
 const schemaOrganization = {
-  "@context": "https://schema.org",
   "@type": "Organization",
+  "@id": ORG_ID,
   "name": COMPANY.legalName,
+  "alternateName": ["RayGold", "RayGold ERP", "Raytecno", "Raytecno BCN"],
   "url": COMPANY.primaryDomain,
-  "logo": logoUrl,
-  "description": config.defaultDescription,
+  "logo": {
+    "@type": "ImageObject",
+    "url": logoUrl,
+  },
+  "image": logoUrl,
+  // [8] Descripción de empresa, no de producto
+  "description": config.orgDescription,
   "foundingDate": COMPANY.foundingDate,
+  "knowsAbout": KNOWS_ABOUT,
+  "areaServed": COMPANY.areaServed.map(code => ({
+    "@type": "Country",
+    "identifier": code,
+  })),
   "address": {
     "@type": "PostalAddress",
     "streetAddress": COMPANY.address.street,
@@ -353,15 +463,26 @@ const schemaOrganization = {
 };
 
 // ============================================
+// SCHEMA.ORG - WEBSITE
+// ============================================
+const schemaWebSite = {
+  "@type": "WebSite",
+  "@id": SITE_ID,
+  "name": COMPANY.name,
+  "url": siteDomain,
+  "inLanguage": ["es", "ca", "en", "fr", "pt-BR"],
+  "publisher": { "@id": ORG_ID },
+};
+
+// ============================================
 // SCHEMA.ORG - SOFTWARE APPLICATION
 //
 // IMPORTANTE: "offers.price" debe coincidir EXACTAMENTE
-// con lo publicado en /[lang]/precios. Una discrepancia
-// genera aviso en Search Console.
+// con lo publicado en /[lang]/precios.
 // ============================================
 const schemaSoftware = {
-  "@context": "https://schema.org",
   "@type": "SoftwareApplication",
+  "@id": SOFTWARE_ID,
   "name": COMPANY.name,
   "alternateName": "RayGold ERP Joyero",
   "applicationCategory": "BusinessApplication",
@@ -373,18 +494,10 @@ const schemaSoftware = {
   "screenshot": `${siteDomain}/images/raygold-dashboard-screenshot.jpg`,
   "softwareVersion": "2026",
   "datePublished": "1990-01-01",
-  "dateModified": new Date().toISOString().split("T")[0],
+  "dateModified": finalModified,
   "inLanguage": ["es", "en", "fr", "ca", "pt-BR"],
-  "author": {
-    "@type": "Organization",
-    "name": COMPANY.legalName,
-    "url": COMPANY.primaryDomain,
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": COMPANY.legalName,
-    "url": COMPANY.primaryDomain,
-  },
+  "author": { "@id": ORG_ID },
+  "publisher": { "@id": ORG_ID },
   "featureList": [
     "Trazabilidad de oro y plata",
     "Control de mermas en fundición",
@@ -416,10 +529,7 @@ const schemaSoftware = {
     },
     "priceValidUntil": new Date(new Date().getFullYear() + 1, 11, 31).toISOString().split("T")[0],
     "availability": "https://schema.org/InStock",
-    "seller": {
-      "@type": "Organization",
-      "name": COMPANY.legalName,
-    },
+    "seller": { "@id": ORG_ID },
   },
   ...(COMPANY.reviews.enabled && {
     "aggregateRating": {
@@ -433,41 +543,47 @@ const schemaSoftware = {
 };
 
 // ============================================
-// SCHEMA.ORG - WEBPAGE
+// SCHEMA.ORG - WEBPAGE / ARTICLE
+// [12] Article necesita headline y publisher con logo.
 // ============================================
 const schemaWebPage = {
-  "@context": "https://schema.org",
   "@type": type === "article" ? "Article" : "WebPage",
+  "@id": pageId,
   "name": fullTitle,
   "description": finalDescription,
   "url": canonicalUrl,
   "image": ogImage,
   "inLanguage": config.hreflang,
-  "isPartOf": {
-    "@type": "WebSite",
-    "name": COMPANY.name,
-    "url": siteDomain,
-  },
+  "isPartOf": { "@id": SITE_ID },
+  "about": { "@id": ORG_ID },
+  "breadcrumb": { "@id": breadcrumbId },
   ...(publishedTime && { "datePublished": publishedTime }),
-  ...(modifiedTime && { "dateModified": modifiedTime }),
+  "dateModified": finalModified,
   ...(type === "article" && {
-    "author": {
-      "@type": "Organization",
-      "name": COMPANY.legalName,
-    },
+    // headline: Google recomienda no pasar de 110 caracteres
+    "headline": fullTitle.slice(0, 110),
+    "author": { "@id": ORG_ID },
+    "publisher": { "@id": ORG_ID },
   }),
 };
 
 // ============================================
 // SCHEMA.ORG - BREADCRUMB
-// URLs en breadcrumbs también sin trailing slash
+// [13] Etiquetas legibles + posibilidad de sobrescribirlas por prop
 // ============================================
+function prettifySegment(segment: string): string {
+  const fixed = SEGMENT_FIXES[segment.toLowerCase()];
+  if (fixed) return fixed;
+  const words = segment.replace(/-/g, " ");
+  return words.charAt(0).toUpperCase() + words.slice(1);
+}
+
 const pathSegments = currentPath
   .split("/")
   .filter(Boolean)
   .filter(s => !["es", "en", "fr", "ca", "pt-br"].includes(s));
 
-const breadcrumbItems = [
+const autoBreadcrumbItems = [
   {
     "@type": "ListItem",
     "position": 1,
@@ -477,15 +593,37 @@ const breadcrumbItems = [
   ...pathSegments.map((segment, index) => ({
     "@type": "ListItem",
     "position": index + 2,
-    "name": segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, " "),
+    "name": prettifySegment(segment),
     "item": `${siteDomain}/${lang}/${pathSegments.slice(0, index + 1).join("/")}`,
   })),
 ];
 
+const customBreadcrumbItems = breadcrumbs?.map((crumb, index) => ({
+  "@type": "ListItem",
+  "position": index + 1,
+  "name": crumb.name,
+  ...(crumb.url && { "item": buildHreflangUrl(crumb.url) }),
+}));
+
 const schemaBreadcrumb = {
-  "@context": "https://schema.org",
   "@type": "BreadcrumbList",
-  "itemListElement": breadcrumbItems,
+  "@id": breadcrumbId,
+  "itemListElement": customBreadcrumbItems || autoBreadcrumbItems,
+};
+
+// ============================================
+// [7] GRAFO ÚNICO
+// Un solo <script>, todas las entidades enlazadas por @id.
+// ============================================
+const schemaGraph = {
+  "@context": "https://schema.org",
+  "@graph": [
+    schemaOrganization,
+    schemaWebSite,
+    schemaWebPage,
+    schemaBreadcrumb,
+    ...(type === "product" ? [schemaSoftware] : []),
+  ],
 };
 ---
 
@@ -497,15 +635,18 @@ const schemaBreadcrumb = {
 <meta name="author" content={COMPANY.legalName} />
 <meta name="language" content={config.languageName} />
 
-<!-- Robots -->
+<!-- Robots - [11] noindex conserva el follow -->
 {noindex ? (
-  <meta name="robots" content="noindex, nofollow" />
+  <meta name="robots" content="noindex, follow" />
 ) : (
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 )}
 
 <!-- Canonical - Usa el path calculado correctamente -->
 <link rel="canonical" href={canonicalUrl} />
+
+<!-- [16] Sitemap declarado también en el head -->
+<link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
 
 <!-- ========================================
      HREFLANG (Multiidioma)
@@ -543,13 +684,10 @@ const schemaBreadcrumb = {
 <meta property="og:locale" content={config.locale} />
 <meta property="og:site_name" content={COMPANY.name} />
 
-<!-- Locales alternativos -->
-{Object.entries(LANG_CONFIG)
-  .filter(([code]) => code !== lang)
-  .map(([_, conf]) => (
-    <meta property="og:locale:alternate" content={conf.locale} />
-  ))
-}
+<!-- [10] Locales alternativos: solo los idiomas reales de esta página -->
+{ogAlternateLocales.map((loc) => (
+  <meta property="og:locale:alternate" content={loc} />
+))}
 
 <!-- Article meta (solo para blogs) -->
 {type === "article" && publishedTime && (
@@ -573,9 +711,12 @@ const schemaBreadcrumb = {
 
 <!-- ========================================
      TEMA Y COLORES
+     [6] Hex reales. Antes se emitía "var(--accent)", que el navegador
+     descarta: la barra de direcciones en móvil salía siempre por defecto.
      ======================================== -->
-<meta name="theme-color" content={COMPANY.themeColor} />
-<meta name="msapplication-TileColor" content={COMPANY.themeColor} />
+<meta name="theme-color" media="(prefers-color-scheme: light)" content={COMPANY.themeColorLight} />
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content={COMPANY.themeColorDark} />
+<meta name="msapplication-TileColor" content={COMPANY.tileColor} />
 
 <!-- ========================================
      GEO TAGS (SEO Local)
@@ -593,17 +734,7 @@ const schemaBreadcrumb = {
 <link rel="manifest" href="/site.webmanifest" />
 
 <!-- ========================================
-     PRECONNECT (Rendimiento)
-     ======================================== -->
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-<!-- ========================================
      SCHEMA.ORG JSON-LD
+     [7] Un único grafo con @id estables en todo el sitio.
      ======================================== -->
-<script type="application/ld+json" set:html={JSON.stringify(schemaOrganization)}></script>
-<script type="application/ld+json" set:html={JSON.stringify(schemaWebPage)}></script>
-<script type="application/ld+json" set:html={JSON.stringify(schemaBreadcrumb)}></script>
-{type === "product" && (
-  <script type="application/ld+json" set:html={JSON.stringify(schemaSoftware)}></script>
-)}
+<script type="application/ld+json" set:html={JSON.stringify(schemaGraph)}></script>

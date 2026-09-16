@@ -14,8 +14,19 @@
  *   que no haya destello blanco al cargar en modo oscuro.
  * - tokens.css define todo el color. Ningún componente escribe ya un #hex.
  * - CORREGIDO: body tenía  background: var(--ink)  — el color del TEXTO como
- *   fondo. Ahora usa var(--bg), que es lo que provocaba las bandas de color
- *   raro en las juntas entre secciones.
+ *   fondo. Ahora usa var(--bg).
+ *
+ * SEO (Septiembre 2026):
+ * - [A] <html lang> ahora emite etiquetas BCP-47 completas (es-ES, pt-BR,
+ *       ca-ES...) en vez del código interno en minúsculas. Debe coincidir
+ *       con lo que declaran los hreflang de SEO.astro.
+ * - [B] Se reenvían a SEO.astro dos props que existían en el componente pero
+ *       que el Layout nunca pasaba, así que ninguna página podía usarlas:
+ *       imageAlt (alt de la imagen OG) y breadcrumbs (migas personalizadas).
+ * - [C] La redirección .com → .es por JavaScript se mantiene como red de
+ *       seguridad, pero NO es una redirección válida para buscadores: no
+ *       transmite autoridad y Google puede indexar igualmente el .com.
+ *       El arreglo de verdad es un 301 en el hosting del dominio .com.
  */
 import SEO from "@/components/SEO.astro";
 import Analytics from "@/components/Analytics.astro";
@@ -33,12 +44,16 @@ interface Props {
   description?: string;
   keywords?: string[];
   image?: string;
+  /** [B] Alt de la imagen OG. Describe la IMAGEN, no la página. */
+  imageAlt?: string;
   lang?: Lang;
   type?: "website" | "article" | "product";
   noindex?: boolean;
   publishedTime?: string;
   modifiedTime?: string;
   alternateUrls?: { lang: Lang; url: string }[];
+  /** [B] Migas personalizadas; si no se pasan, SEO.astro las deduce del path. */
+  breadcrumbs?: { name: string; url?: string }[];
 }
 
 const {
@@ -46,17 +61,30 @@ const {
   description,
   keywords,
   image,
+  imageAlt,
   lang = "es",
   type = "website",
   noindex = false,
   publishedTime,
   modifiedTime,
   alternateUrls = [],
+  breadcrumbs,
 } = Astro.props;
+
+// [A] Código interno -> etiqueta BCP-47 para el atributo lang del <html>
+const HTML_LANG: Record<Lang, string> = {
+  es: "es-ES",
+  ca: "ca-ES",
+  en: "en",
+  fr: "fr-FR",
+  "pt-br": "pt-BR",
+};
+
+const htmlLang = HTML_LANG[lang] || "es-ES";
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang={htmlLang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -64,7 +92,9 @@ const {
     <!-- TEMA: lo primero que se ejecuta, antes de pintar nada -->
     <ThemeScript />
 
-    <!-- REDIRECCIÓN .COM → .ES -->
+    <!-- REDIRECCIÓN .COM → .ES
+         [C] Red de seguridad para el visitante. Para el buscador hace falta
+         un 301 real en el hosting de raytecno.com. -->
     <script is:inline>
       (function () {
         var host = window.location.hostname;
@@ -93,11 +123,13 @@ const {
       description={description}
       keywords={keywords}
       image={image}
+      imageAlt={imageAlt}
       type={type}
       noindex={noindex}
       publishedTime={publishedTime}
       modifiedTime={modifiedTime}
       alternateUrls={alternateUrls}
+      breadcrumbs={breadcrumbs}
     />
     <Analytics />
   </head>
@@ -129,11 +161,11 @@ const {
   /* Color, fondo y tipografía salen de tokens.css.
      Aquí solo lo que no es color. */
   body {
-  line-height: 1.6;
-  min-height: 100vh;
-  background: var(--rg-bg);
-  color: var(--rg-ink);
-}
+    line-height: 1.6;
+    min-height: 100vh;
+    background: var(--rg-bg);
+    color: var(--rg-ink);
+  }
 
   img {
     max-width: 100%;
