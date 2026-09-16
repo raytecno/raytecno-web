@@ -16,6 +16,18 @@
  * - Al pulsar la captura se abre a pantalla completa. La miniatura va
  *   recortada (object-fit: cover) porque en la fila hay poco alto; la versión
  *   ampliada va entera (object-fit: contain), que es donde se lee de verdad.
+ *
+ * TRADUCCIÓN (Septiembre 2026): tres literales salían en español en los
+ * cinco idiomas y ahora vienen de i18n/fugas.ts:
+ * - La etiqueta '2 %' de cada barra estaba escrita en el CSS. Ahora llega
+ *   como custom property --rg-barra-pct, porque content() no puede leer un
+ *   atributo de un elemento antepasado. En inglés es '2%', sin espacio.
+ * - La cifra grande del medidor concatenaba ' %' a pelo, aquí y en el script.
+ *   Ahora usa la plantilla frases.formatoPorcentaje.
+ * - El pie del medidor filtrado sacaba el nombre del área del DOM y le hacía
+ *   toLowerCase(). Con 'Informática' colaba; con 'IT' salía 'it' y en francés
+ *   faltaba el artículo. Ahora el nombre viaja en data-area-nombre y se usa
+ *   tal cual: lo escribe el traductor, no el navegador.
  */
 import { getPageUrl, type Lang } from '@/config/pages';
 import { getFugasTranslations, contarPorArea, type AreaId } from '@/i18n/fugas';
@@ -32,9 +44,17 @@ const total = t.fugas.length;
 const urlContacto = getPageUrl('contacto', lang);
 
 const BLOB = 'https://raygoldstorage.blob.core.windows.net/web';
+
+/** Cifra del medidor ya formateada según el idioma ('30 %' / '30%') */
+const cifraTotal = t.frases.formatoPorcentaje.replace('{n}', String(total * 2));
 ---
 
-<div class="fugas-sec" data-plantilla-area={t.frases.medidorPieArea}>
+<div
+  class="fugas-sec"
+  data-plantilla-area={t.frases.medidorPieArea}
+  data-formato-pct={t.frases.formatoPorcentaje}
+  style={`--rg-barra-pct: '${t.frases.porcentajeBarra}'`}
+>
   <!-- ═══════════ Las dos frases + medidor ═══════════ -->
   <section class="par">
     <div class="par__grid">
@@ -57,7 +77,7 @@ const BLOB = 'https://raygoldstorage.blob.core.windows.net/web';
           {t.fugas.map((f) => <div class="barra is-on" data-area={f.area}></div>)}
         </div>
         <div class="medidor__sum">
-          <span class="medidor__cifra" data-cifra>{total * 2} %</span>
+          <span class="medidor__cifra" data-cifra>{cifraTotal}</span>
           <span class="medidor__pie" data-pie>{t.frases.medidorPie}</span>
         </div>
       </div>
@@ -77,7 +97,7 @@ const BLOB = 'https://raygoldstorage.blob.core.windows.net/web';
           {t.seccion.filtroTodas}<b>{total}</b>
         </button>
         {areasOrden.map((a) => (
-          <button class="pastilla" data-area={a}>
+          <button class="pastilla" data-area={a} data-area-nombre={t.areasFrase[a]}>
             {t.areas[a]}<b>{cuenta[a]}</b>
           </button>
         ))}
@@ -252,8 +272,10 @@ const BLOB = 'https://raygoldstorage.blob.core.windows.net/web';
   .barra.is-dim {
     opacity: 0.28;
   }
+  /* El texto lo pone el idioma: --rg-barra-pct se define en .fugas-sec.
+     El valor de reserva solo salta si falta la clave en fugas.ts. */
   .barra::after {
-    content: '2 %';
+    content: var(--rg-barra-pct, '2 %');
     position: absolute;
     left: 0;
     right: 0;
@@ -796,6 +818,7 @@ const BLOB = 'https://raygoldstorage.blob.core.windows.net/web';
     const pie = sec.querySelector<HTMLElement>('[data-pie]');
     const pieTodas = pie?.textContent || '';
     const plantillaArea = sec.dataset.plantillaArea || '';
+    const formatoPct = sec.dataset.formatoPct || '{n} %';
 
     pastillas.forEach((p) => {
       p.addEventListener('click', () => {
@@ -815,12 +838,14 @@ const BLOB = 'https://raygoldstorage.blob.core.windows.net/web';
           b.classList.toggle('is-dim', !(area === 'all' || b.dataset.area === area));
         });
 
-        if (cifra) cifra.textContent = `${n * 2} %`;
+        if (cifra) cifra.textContent = formatoPct.replace('{n}', String(n * 2));
         if (pie) {
           if (area === 'all') {
             pie.textContent = pieTodas;
           } else {
-            const nombre = (p.childNodes[0]?.textContent || '').trim().toLowerCase();
+            // El nombre viene traducido desde fugas.ts (areasFrase), con su
+            // artículo y sus mayúsculas. No se toca en el cliente.
+            const nombre = p.dataset.areaNombre || '';
             pie.textContent = plantillaArea.replace('{area}', nombre);
           }
         }
