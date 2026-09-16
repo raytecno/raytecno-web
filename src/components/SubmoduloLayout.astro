@@ -16,6 +16,46 @@
  *   opacidad en ese caso.
  * - CORREGIDO: <main> anidado dentro del <main> del Layout.
  *
+ * CONTENIDO INDEXABLE (Septiembre 2026):
+ * El layout solo sabía pintar título, subtítulo y tarjetas de imagen. Una
+ * página de módulo entera se quedaba en ~40 palabras de texto indexable, y
+ * además casi todas viven dentro de pestañas ocultas. Se añaden TRES bloques
+ * OPCIONALES que se leen del fichero de traducciones. Si un módulo no los
+ * declara, no se pinta nada y esa página queda exactamente como está hoy.
+ *
+ *   intro  -> prosa bajo la cabecera, SIEMPRE visible (fuera de las pestañas,
+ *             que es lo importante: el texto que cuenta no puede estar
+ *             escondido tras un tab).
+ *   noEs   -> negaciones explícitas. Lo que el módulo NO hace. En Print3D es
+ *             lo que separa "gestor de parque de impresoras" de "software CAD".
+ *   faq    -> preguntas y respuestas. Un único array alimenta a la vez el HTML
+ *             visible y el JSON-LD FAQPage, para que no puedan divergir.
+ *
+ * Forma de los datos en submodulos.[lang].json, dentro de cada módulo:
+ *
+ *   "intro": {
+ *     "titulo": "Qué hace el módulo",
+ *     "parrafos": ["Primer párrafo.", "Segundo párrafo."]
+ *   },
+ *   "noEs": {
+ *     "titulo": "Qué no es",
+ *     "items": ["No crea geometría 3D.", "No sustituye a tu CAD."]
+ *   },
+ *   "faq": [
+ *     { "pregunta": "¿...?", "respuesta": "..." }
+ *   ]
+ *
+ * Los tipos de @/i18n/submodulos NO hace falta tocarlos: el módulo se lee aquí
+ * con una extensión local de tipo. Si luego los añades allí, esto sigue
+ * funcionando igual.
+ *
+ * OTRAS CORRECCIONES:
+ * - Jerarquía de encabezados: los títulos de imagen eran <h4> colgando de un
+ *   <h2>, saltándose el h3. Ahora son <h3>.
+ * - alt de las capturas: era solo el título ("Mantenimiento", "Alertas"), que
+ *   no describe nada fuera de contexto. Ahora incluye módulo y sección.
+ * - La FAQ usa <details>/<summary>: se despliega sin una línea de JavaScript.
+ *
  * OJO con modulosConfig: si algún módulo tiene color "var(--accent)", esa
  * variable ya no existe. Por eso todos los usos aquí llevan fallback:
  * var(--modulo-color, var(--rg-accent)). Conviene revisar
@@ -50,6 +90,52 @@ const config = modulosConfig[moduloId];
 // URL base de imágenes
 const blobBaseUrl = "https://raygoldstorage.blob.core.windows.net/web";
 
+// ---------------------------------------------------------------
+// BLOQUES DE CONTENIDO OPCIONALES
+// Extensión local del tipo: no obliga a tocar @/i18n/submodulos.
+// ---------------------------------------------------------------
+interface IntroTranslation {
+  titulo?: string;
+  parrafos: string[];
+}
+
+interface NoEsTranslation {
+  titulo?: string;
+  items: string[];
+}
+
+interface FaqItem {
+  pregunta: string;
+  respuesta: string;
+}
+
+const moduloExt = modulo as ModuloTranslation & {
+  intro?: IntroTranslation;
+  noEs?: NoEsTranslation;
+  faq?: FaqItem[];
+};
+
+const intro = moduloExt.intro;
+const noEs = moduloExt.noEs;
+const faq: FaqItem[] = moduloExt.faq ?? [];
+
+// JSON-LD FAQPage: mismo array que el HTML visible.
+// Google exige que la respuesta del schema coincida con la de la página.
+const schemaFaq = faq.length > 0
+  ? {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": faq.map((item) => ({
+        "@type": "Question",
+        "name": item.pregunta,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": item.respuesta,
+        },
+      })),
+    }
+  : null;
+
 // Interfaz para secciones construidas
 interface SeccionConstruida {
   id: string;
@@ -59,6 +145,7 @@ interface SeccionConstruida {
     url: string;
     titulo: string;
     descripcion: string;
+    alt: string;
   }[];
 }
 
@@ -76,6 +163,8 @@ const secciones: SeccionConstruida[] = config.secciones
         url: `${blobBaseUrl}/${secConfig.prefix}0${index + 1}.png`,
         titulo: img.title,
         descripcion: img.description,
+        // alt descriptivo: módulo + sección + pantalla
+        alt: `${img.title} — ${seccionData.name}, módulo ${modulo.title} de RayGold ERP`,
       })),
     };
   })
@@ -149,6 +238,21 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
       </a>
     </header>
 
+    <!-- ============================================================
+         INTRO (opcional)
+         Prosa siempre visible, fuera de las pestañas.
+         ============================================================ -->
+    {intro && intro.parrafos?.length > 0 && (
+      <section class="modulo-intro">
+        <div class="intro-inner">
+          {intro.titulo && <h2>{intro.titulo}</h2>}
+          {intro.parrafos.map((parrafo: string) => (
+            <p>{parrafo}</p>
+          ))}
+        </div>
+      </section>
+    )}
+
     <!-- Navegación de secciones -->
     <nav class="secciones-nav">
       <div class="container">
@@ -183,7 +287,7 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
               {seccion.imagenes.map((imagen, imgIndex: number) => (
                 <article class="galeria-item" style={`--delay: ${imgIndex * 0.1}s`}>
                   <div class="imagen-wrapper">
-                    <img src={imagen.url} alt={imagen.titulo} loading="lazy" />
+                    <img src={imagen.url} alt={imagen.alt} loading="lazy" />
                     <div class="imagen-overlay">
                       <button class="btn-ampliar" data-img={imagen.url} aria-label={imagen.titulo}>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -193,7 +297,7 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
                     </div>
                   </div>
                   <div class="imagen-info">
-                    <h4>{imagen.titulo}</h4>
+                    <h3>{imagen.titulo}</h3>
                     <p>{imagen.descripcion}</p>
                   </div>
                 </article>
@@ -203,6 +307,48 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
         ))}
       </div>
     </div>
+
+    <!-- ============================================================
+         QUÉ NO ES (opcional)
+         Las negaciones explícitas son lo que impide que se te
+         clasifique en la categoría equivocada.
+         ============================================================ -->
+    {noEs && noEs.items?.length > 0 && (
+      <section class="modulo-noes">
+        <div class="noes-inner">
+          {noEs.titulo && <h2>{noEs.titulo}</h2>}
+          <ul>
+            {noEs.items.map((item: string) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )}
+
+    <!-- ============================================================
+         FAQ (opcional)
+         <details>/<summary>: se despliega sin JavaScript, y el
+         contenido está en el HTML aunque esté plegado.
+         ============================================================ -->
+    {faq.length > 0 && (
+      <section class="modulo-faq">
+        <div class="faq-inner">
+          <h2>{common.faqTitle ?? "Preguntas frecuentes"}</h2>
+          {faq.map((item: FaqItem) => (
+            <details class="faq-item">
+              <summary>
+                <span>{item.pregunta}</span>
+                <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </summary>
+              <p>{item.respuesta}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+    )}
 
     <!-- Modal de imagen -->
     <div id="modalImagen" class="modal-imagen">
@@ -220,6 +366,10 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
       </div>
     </section>
   </div>
+
+  {schemaFaq && (
+    <script type="application/ld+json" set:html={JSON.stringify(schemaFaq)}></script>
+  )}
 </Layout>
 
 <style>
@@ -291,6 +441,36 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
 
   .back-link:hover {
     color: var(--modulo-color, var(--rg-accent));
+  }
+
+  /* ---------- Intro en prosa ---------- */
+  .modulo-intro {
+    padding: 2.75rem 1.5rem 0.5rem;
+  }
+
+  .intro-inner {
+    max-width: 68ch;
+    margin: 0 auto;
+  }
+
+  .intro-inner h2 {
+    font-family: var(--rg-display);
+    font-size: clamp(1.25rem, 2.6vw, 1.6rem);
+    font-weight: 450;
+    letter-spacing: -0.015em;
+    color: var(--rg-ink);
+    margin: 0 0 1rem;
+  }
+
+  .intro-inner p {
+    color: var(--rg-soft);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    margin: 0 0 1rem;
+  }
+
+  .intro-inner p:last-child {
+    margin-bottom: 0;
   }
 
   /* ---------- Navegación de secciones ---------- */
@@ -492,7 +672,7 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
     padding: 1.25rem;
   }
 
-  .imagen-info h4 {
+  .imagen-info h3 {
     font-size: 1rem;
     font-weight: 600;
     color: var(--rg-ink);
@@ -504,6 +684,117 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
     color: var(--rg-soft);
     margin: 0;
     line-height: 1.5;
+  }
+
+  /* ---------- Qué no es ---------- */
+  .modulo-noes {
+    padding: 0 1.5rem 3rem;
+  }
+
+  .noes-inner {
+    max-width: 68ch;
+    margin: 0 auto;
+    padding: 1.75rem 1.75rem 1.5rem;
+    background: var(--rg-panel);
+    border: 1px solid var(--rg-line);
+    border-radius: 16px;
+  }
+
+  .noes-inner h2 {
+    font-family: var(--rg-display);
+    font-size: 1.25rem;
+    font-weight: 450;
+    letter-spacing: -0.015em;
+    color: var(--rg-ink);
+    margin: 0 0 1rem;
+  }
+
+  .noes-inner ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .noes-inner li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.625rem;
+    color: var(--rg-soft);
+    line-height: 1.6;
+  }
+
+  .noes-inner li:last-child {
+    margin-bottom: 0;
+  }
+
+  .noes-inner li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--modulo-color, var(--rg-accent));
+  }
+
+  /* ---------- FAQ ---------- */
+  .modulo-faq {
+    padding: 0 1.5rem 3.5rem;
+  }
+
+  .faq-inner {
+    max-width: 68ch;
+    margin: 0 auto;
+  }
+
+  .faq-inner h2 {
+    font-family: var(--rg-display);
+    font-size: clamp(1.25rem, 2.6vw, 1.6rem);
+    font-weight: 450;
+    letter-spacing: -0.015em;
+    color: var(--rg-ink);
+    margin: 0 0 1.25rem;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--rg-line);
+  }
+
+  .faq-item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 0;
+    cursor: pointer;
+    list-style: none;
+    font-weight: 500;
+    color: var(--rg-ink);
+    transition: color 0.2s ease;
+  }
+
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item summary:hover {
+    color: var(--modulo-color, var(--rg-accent));
+  }
+
+  .faq-chevron {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    color: var(--modulo-color, var(--rg-accent));
+    transition: transform 0.2s ease;
+  }
+
+  .faq-item[open] .faq-chevron {
+    transform: rotate(180deg);
+  }
+
+  .faq-item p {
+    margin: 0;
+    padding: 0 0 1.25rem;
+    color: var(--rg-soft);
+    line-height: 1.7;
   }
 
   /* ---------- Modal ---------- */
@@ -612,6 +903,14 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
     .galeria-grid {
       grid-template-columns: 1fr;
     }
+
+    .modulo-intro {
+      padding-top: 2rem;
+    }
+
+    .noes-inner {
+      padding: 1.25rem;
+    }
   }
 
   /* IMPORTANTE: sin esto, con "reducir movimiento" activado las tarjetas
@@ -623,6 +922,9 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
     }
     .seccion-panel {
       animation: none;
+    }
+    .faq-chevron {
+      transition: none;
     }
   }
 </style>
