@@ -253,22 +253,25 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
       </section>
     )}
 
-    <!-- Navegación de secciones -->
-    <nav class="secciones-nav">
-      <div class="container">
-        <div class="secciones-tabs">
-          {secciones.map((seccion, index: number) => (
-            <button
-              class={`seccion-tab ${index === 0 ? "active" : ""}`}
-              data-seccion={seccion.id}
-            >
-              <div class="tab-icon" set:html={getSeccionIcon(seccion.id)} />
-              <span class="tab-label">{seccion.nombre}</span>
-            </button>
-          ))}
+        <!-- Navegación de secciones: con una sola sección no navega a ningún
+         sitio, así que no se pinta. -->
+    {secciones.length > 1 && (
+      <nav class="secciones-nav">
+        <div class="container">
+          <div class="secciones-tabs">
+            {secciones.map((seccion, index: number) => (
+              <button
+                class={`seccion-tab ${index === 0 ? "active" : ""}`}
+                data-seccion={seccion.id}
+              >
+                <div class="tab-icon" set:html={getSeccionIcon(seccion.id)} />
+                <span class="tab-label">{seccion.nombre}</span>
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    )}
 
     <!-- Contenido de secciones -->
     <div class="secciones-content">
@@ -444,13 +447,14 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
   }
 
   /* ---------- Intro en prosa ---------- */
-  .modulo-intro {
-    padding: 2.75rem 1.5rem 0.5rem;
+    .modulo-intro {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2.75rem 1.5rem 2rem;
   }
 
   .intro-inner {
     max-width: 68ch;
-    margin: 0 auto;
   }
 
   .intro-inner h2 {
@@ -687,13 +691,14 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
   }
 
   /* ---------- Qué no es ---------- */
-  .modulo-noes {
+    .modulo-noes {
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 0 1.5rem 3rem;
   }
 
   .noes-inner {
     max-width: 68ch;
-    margin: 0 auto;
     padding: 1.75rem 1.75rem 1.5rem;
     background: var(--rg-panel);
     border: 1px solid var(--rg-line);
@@ -735,13 +740,14 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
   }
 
   /* ---------- FAQ ---------- */
-  .modulo-faq {
+   .modulo-faq {
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 0 1.5rem 3.5rem;
   }
 
   .faq-inner {
     max-width: 68ch;
-    margin: 0 auto;
   }
 
   .faq-inner h2 {
