@@ -650,25 +650,13 @@
       "metaTitle": "Impresoras 3D | RayGold ERP - Producción 3D",
       "metaDescription": "Control y gestión de producción con impresoras 3D para joyería. Gestión de trabajos, materiales y configuración.",
        "intro": {
-        "titulo": "Qué hace el módulo",
+        "titulo": "El parque de impresoras, dentro del ERP",
         "parrafos": [
-          "Primer párrafo de prueba.",
-          "Segundo párrafo de prueba."
+          "En la mayoría de los talleres, la impresión 3D vive aparte. Alguien sabe qué hay imprimiéndose porque lo ha visto al pasar, el consumo de resina se estima a ojo, y cuando una máquina falla nadie sabe cuánto llevaba trabajando desde el último mantenimiento. El módulo Print3D trata las impresoras como lo que son: un recurso de producción más, con su ficha, su carga de trabajo y su coste.",
+          "Cada impresora tiene su registro en el sistema, con su estado y el historial de lo que ha pasado por ella. Los trabajos se dan de alta y se siguen desde la misma pantalla donde se gestiona el resto del taller, y las alertas avisan de lo que no conviene descubrir tarde: material a punto de agotarse, mantenimiento pendiente, trabajos parados.",
+          "Conviene decir qué no es. Print3D no diseña: la geometría de la pieza se sigue creando en tu programa de CAD, y la preparación del archivo, en el software propio de la impresora. Lo que aporta RayGold empieza después, cuando ese archivo se convierte en trabajo de taller con una máquina, un material y un coste detrás."
         ]
       },
-      "noEs": {
-        "titulo": "Qué no es",
-        "items": [
-          "Primera negación de prueba.",
-          "Segunda negación de prueba."
-        ]
-      },
-      "faq": [
-        {
-          "pregunta": "¿Pregunta de prueba?",
-          "respuesta": "Respuesta de prueba."
-        }
-      ],
       "sections": {
         "impresoras": {
           "name": "Impresoras",
