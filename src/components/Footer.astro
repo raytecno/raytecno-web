@@ -190,9 +190,7 @@ const currentYear = new Date().getFullYear();
     <!-- Columna 3: Empresa - URLs sin trailing slash -->
     <div class="footer-col">
       <h5>{ft.company}</h5>
-      {lang === "es" && (
-        <a href={getPageUrl("queEsRayGold", lang)} data-ga="cta_click" data-ga-elemento="que_es_raygold" data-ga-ubicacion="footer">{ft.whatIs}</a>
-      )}
+            <a href={getPageUrl("queEsRayGold", lang)} data-ga="cta_click" data-ga-elemento="que_es_raygold" data-ga-ubicacion="footer">{ft.whatIs}</a>
       <a href={`/${lang}/#porque`} data-ga="cta_click" data-ga-elemento="sobre_nosotros" data-ga-ubicacion="footer">{ft.about}</a>
       <a href={getPageUrl("tecnologia", lang)} data-ga="cta_click" data-ga-elemento="tecnologia" data-ga-ubicacion="footer">{ft.technology}</a>
       <a href={getPageUrl("precios", lang)} data-ga="cta_click" data-ga-elemento="precios" data-ga-ubicacion="footer">{ft.pricing}</a>

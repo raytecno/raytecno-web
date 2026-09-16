@@ -1,0 +1,554 @@
+---
+/**
+ * /[lang]/<slug de queEsRayGold>
+ *
+ * @file src/pages/[lang]/[queesraygold].astro
+ *
+ * Página de DESAMBIGUACIÓN de categoría de producto.
+ * No es una landing comercial: su trabajo es que un modelo de lenguaje
+ * (y un lector nuevo) entienda que RayGold es un ERP y no un CAD.
+ *
+ * Reglas de esta página:
+ * - Nada por encima del párrafo canónico (ni imagen, ni badge, ni cita)
+ * - Sin formulario ni CTA agresiva
+ * - type="website" (NO "product"): evita duplicar SoftwareApplication
+ *   con el schema global de SEO.astro
+ *
+ * CINCO IDIOMAS (Septiembre 2026):
+ * - El fichero pasa a ser ruta dinámica, como [lang]/[terms].astro, porque
+ *   el slug cambia por idioma: que-es-raygold / what-is-raygold /
+ *   qu-est-ce-que-raygold / o-que-e-raygold. El slug sale de
+ *   pageSlugs.queEsRayGold, nunca escrito a mano.
+ *
+ *   ⚠️ HAY QUE BORRAR el antiguo src/pages/[lang]/que-es-raygold.astro.
+ *   Si se queda, genera /es/que-es-raygold dos veces y Astro aborta el
+ *   build por ruta duplicada.
+ *
+ * - alternateUrls sale de getAlternateUrls('queEsRayGold'): antes era un
+ *   array fijo con una sola entrada y rompía la reciprocidad de hreflang.
+ * - El enlace de contacto usa getPageUrl(), no `/${lang}/contacto`. Con la
+ *   URL a mano, en inglés apuntaba a /en/contacto, que no existe.
+ * - El JSON-LD se emite en los cinco idiomas, con su propia url e
+ *   inLanguage. Un SoftwareApplication solo en español dejaría a las otras
+ *   cuatro versiones sin el dato que precisamente queremos que se cite.
+ *
+ * TEMA CLARO/OSCURO:
+ * - Los títulos usan --rg-ink y el texto --rg-soft, que son tokens de
+ *   TEXTO. No usar --sup-2 ni --line aquí: son de superficie y de filete,
+ *   casi blancos, e invisibles como color de letra sobre fondo claro.
+ */
+import Layout from "@/layouts/Layout.astro";
+import {
+  supportedLangs,
+  pageSlugs,
+  getPageUrl,
+  getAlternateUrls,
+  type Lang,
+} from "@/config/pages";
+import { getQerTranslations, langTag } from "@/i18n/queesraygold";
+
+export function getStaticPaths() {
+  return supportedLangs.map((lang) => ({
+    params: { lang, queesraygold: pageSlugs.queEsRayGold[lang] },
+    props: { lang },
+  }));
+}
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getQerTranslations(lang);
+
+const alternateUrls = getAlternateUrls("queEsRayGold");
+const urlContacto = getPageUrl("contacto", lang);
+const urlAbsoluta = `https://www.raytecno.es${getPageUrl("queEsRayGold", lang)}`;
+
+// ============================================
+// JSON-LD específico de esta página
+// Va en el body: SEO.astro no expone slot de head,
+// y Google lo lee igual en cualquier parte del documento.
+// ============================================
+const schemaSoftwareRayGold = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "RayGold",
+  alternateName: "RayGold ERP",
+  applicationCategory: "BusinessApplication",
+  applicationSubCategory: "ERP",
+  description: t.schemaDescripcion,
+  url: urlAbsoluta,
+  inLanguage: langTag[lang],
+  availableLanguage: ["es", "ca", "en", "fr", "pt-BR"],
+  operatingSystem: "Web",
+  publisher: {
+    "@type": "Organization",
+    name: "Raytecno BCN SL",
+    url: "https://www.raytecno.es",
+    foundingDate: "1990",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Barcelona",
+      addressCountry: "ES",
+    },
+  },
+  featureList: t.resuelve.si,
+};
+
+const schemaFaq = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  inLanguage: langTag[lang],
+  mainEntity: t.faq.items.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+---
+
+<Layout
+  lang={lang}
+  title={t.title}
+  description={t.description}
+  type="website"
+  alternateUrls={alternateUrls}
+>
+  <article class="qer">
+    <!-- ==========================================================
+         CABECERA — nada puede ir por encima del párrafo canónico
+         ========================================================== -->
+    <header class="qer__head">
+      <h1>{t.h1}</h1>
+      <p class="qer__canonical">{t.canonico}</p>
+    </header>
+
+    <!-- ========================================================== -->
+    <section class="qer__section">
+      <h2>{t.noEs.titulo}</h2>
+      <p class="qer__lead">{t.noEs.lead}</p>
+
+      <ul class="qer__negations">
+        {t.noEs.negaciones.map((n) => <li set:html={n} />)}
+      </ul>
+
+      <div class="qer__note">
+        <p set:html={t.noEs.nota} />
+      </div>
+    </section>
+
+    <!-- ========================================================== -->
+    <section class="qer__section">
+      <h2>{t.cad.titulo}</h2>
+      {t.cad.parrafos.map((p) => <p set:html={p} />)}
+    </section>
+
+    <!-- ========================================================== -->
+    <section class="qer__section">
+      <h2>{t.resuelve.titulo}</h2>
+      <div class="qer__cols">
+        <div class="qer__col qer__col--yes">
+          <h3>{t.resuelve.tituloSi}</h3>
+          <ul>{t.resuelve.si.map((i) => <li>{i}</li>)}</ul>
+        </div>
+        <div class="qer__col qer__col--no">
+          <h3>{t.resuelve.tituloNo}</h3>
+          <ul>{t.resuelve.no.map((i) => <li>{i}</li>)}</ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================== -->
+    <section class="qer__section">
+      <h2>{t.paraQuien.titulo}</h2>
+      <p set:html={t.paraQuien.intro} />
+      <ul class="qer__bullets">
+        {t.paraQuien.items.map((i) => <li>{i}</li>)}
+      </ul>
+      <p>{t.paraQuien.cierre}</p>
+    </section>
+
+    <!-- ========================================================== -->
+    <section class="qer__section">
+      <h2>{t.incluye.titulo}</h2>
+      <p>{t.incluye.intro}</p>
+      <dl class="qer__modules">
+        {t.incluye.modulos.map((m) => (
+          <div class="qer__module">
+            <dt>{m.n}</dt>
+            <dd>{m.d}</dd>
+          </div>
+        ))}
+      </dl>
+      <!-- Activar cuando exista la página de mapa funcional (Paso 3).
+           Añadir antes su clave en pageSlugs y usar getPageUrl(): nada de
+           `/${lang}/mapa-funcional`, que solo existiría en español.
+      <p><a href={getPageUrl('mapaFuncional', lang)}>…</a></p>
+      -->
+    </section>
+
+    <!-- ========================================================== -->
+    <section class="qer__section">
+      <h2>{t.mercados.titulo}</h2>
+      <p>{t.mercados.intro}</p>
+      <dl class="qer__markets">
+        {t.mercados.items.map((m) => (
+          <div class="qer__market">
+            <dt>{m.p}</dt>
+            <dd>{m.d}</dd>
+          </div>
+        ))}
+      </dl>
+      <p>{t.mercados.idiomas}</p>
+    </section>
+
+    <!-- ========================================================== -->
+    <section class="qer__section">
+      <h2>{t.faq.titulo}</h2>
+      <div class="qer__faq">
+        {t.faq.items.map((f) => (
+          <details class="qer__faq-item">
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- CTA discreta: esta página no vende, informa -->
+    <footer class="qer__foot">
+      <p>
+        {t.foot.texto}
+        <a href={urlContacto}>{t.foot.enlace}</a>.
+      </p>
+    </footer>
+  </article>
+
+  <script type="application/ld+json" set:html={JSON.stringify(schemaSoftwareRayGold)} />
+  <script type="application/ld+json" set:html={JSON.stringify(schemaFaq)} />
+</Layout>
+
+<style>
+  .qer {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 4rem 1.5rem 6rem;
+    background: var(--rg-bg);
+    color: var(--rg-soft);
+    font-family: var(--rg-sans);
+    font-size: 1.05rem;
+    line-height: 1.75;
+  }
+
+  .qer__head {
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--rg-line);
+  }
+
+  .qer h1 {
+    font-family: var(--rg-display);
+    font-size: clamp(2rem, 5vw, 2.75rem);
+    line-height: 1.12;
+    font-weight: 400;
+    color: var(--rg-ink);
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Párrafo canónico: es el fragmento que extraen los modelos */
+  .qer__canonical {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    color: var(--rg-ink);
+  }
+
+  .qer__section {
+    margin-top: 3.5rem;
+  }
+
+  .qer h2 {
+    font-family: var(--rg-display);
+    font-size: 1.55rem;
+    font-weight: 450;
+    color: var(--rg-ink);
+    letter-spacing: -0.015em;
+    margin-bottom: 1.25rem;
+  }
+
+  .qer h3 {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1rem;
+  }
+
+  .qer p {
+    margin-bottom: 1.1rem;
+  }
+
+  .qer strong {
+    color: var(--rg-ink);
+    font-weight: 600;
+  }
+
+  .qer em {
+    color: var(--rg-accent);
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  .qer a {
+    color: var(--rg-accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .qer a:hover {
+    color: var(--rg-ink);
+  }
+
+  /* ---------- Negaciones ---------- */
+  .qer__negations {
+    list-style: none;
+    display: grid;
+    gap: 0.9rem;
+    margin: 1.5rem 0;
+    padding: 0;
+  }
+
+  .qer__negations li {
+    padding-left: 1.5rem;
+    position: relative;
+  }
+
+  .qer__negations li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.78em;
+    width: 12px;
+    height: 2px;
+    background: var(--rg-faint);
+    border-radius: 2px;
+  }
+
+  /* ---------- Nota de matiz ---------- */
+  .qer__note {
+    margin-top: 2rem;
+    padding: 1.4rem 1.6rem;
+    background: var(--rg-accent-soft);
+    border-left: 2px solid var(--rg-accent);
+    border-radius: 0 8px 8px 0;
+  }
+
+  .qer__note p {
+    margin: 0;
+  }
+
+  /* ---------- Dos columnas ---------- */
+  .qer__cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .qer__col {
+    padding: 1.5rem;
+    border-radius: 12px;
+    background: var(--rg-panel);
+    border: 1px solid var(--rg-line);
+  }
+
+  .qer__col ul {
+    list-style: none;
+    display: grid;
+    gap: 0.7rem;
+    font-size: 0.97rem;
+    padding: 0;
+    margin: 0;
+  }
+
+  .qer__col li {
+    padding-left: 1.4rem;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .qer__col--yes h3 {
+    color: var(--rg-accent);
+  }
+
+  .qer__col--yes li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.45em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--rg-accent);
+  }
+
+  .qer__col--no h3 {
+    color: var(--rg-faint);
+  }
+
+  .qer__col--no li {
+    color: var(--rg-faint);
+  }
+
+  .qer__col--no li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.72em;
+    width: 8px;
+    height: 1px;
+    background: var(--rg-faint);
+  }
+
+  /* ---------- Bullets ---------- */
+  .qer__bullets {
+    list-style: none;
+    display: grid;
+    gap: 0.6rem;
+    margin: 1.2rem 0 1.5rem;
+    padding: 0;
+  }
+
+  .qer__bullets li {
+    padding-left: 1.4rem;
+    position: relative;
+  }
+
+  .qer__bullets li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.72em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--rg-accent);
+  }
+
+  /* ---------- Módulos y mercados ---------- */
+  .qer__modules,
+  .qer__markets {
+    display: grid;
+    gap: 0.1rem;
+    margin: 1.5rem 0;
+  }
+
+  .qer__module,
+  .qer__market {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 1.25rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--rg-line);
+  }
+
+  .qer__module dt,
+  .qer__market dt {
+    font-weight: 600;
+    color: var(--rg-ink);
+  }
+
+  .qer__module dd,
+  .qer__market dd {
+    margin: 0;
+    font-size: 0.97rem;
+    color: var(--rg-soft);
+    line-height: 1.55;
+  }
+
+  /* ---------- FAQ ---------- */
+  .qer__faq {
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--rg-line);
+  }
+
+  .qer__faq-item {
+    border-bottom: 1px solid var(--rg-line);
+  }
+
+  .qer__faq-item summary {
+    padding: 1.15rem 2rem 1.15rem 0;
+    cursor: pointer;
+    font-weight: 550;
+    color: var(--rg-ink);
+    list-style: none;
+    position: relative;
+    transition: color 0.15s ease;
+  }
+
+  .qer__faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .qer__faq-item summary:hover {
+    color: var(--rg-accent);
+  }
+
+  .qer__faq-item summary::after {
+    content: "";
+    position: absolute;
+    right: 0.4rem;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    border-right: 1.5px solid var(--rg-faint);
+    border-bottom: 1.5px solid var(--rg-faint);
+    transform: translateY(-70%) rotate(45deg);
+    transition: transform 0.2s ease;
+  }
+
+  .qer__faq-item[open] summary::after {
+    transform: translateY(-20%) rotate(-135deg);
+  }
+
+  .qer__faq-item p {
+    padding: 0 0 1.3rem;
+    margin: 0;
+    color: var(--rg-soft);
+    font-size: 0.98rem;
+  }
+
+  /* ---------- Cierre ---------- */
+  .qer__foot {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--rg-line);
+    font-size: 0.97rem;
+    color: var(--rg-soft);
+  }
+
+  .qer__foot p {
+    margin: 0;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 640px) {
+    .qer {
+      padding: 2.5rem 1.25rem 4rem;
+    }
+
+    .qer__canonical {
+      font-size: 1.1rem;
+    }
+
+    .qer__cols {
+      grid-template-columns: 1fr;
+    }
+
+    .qer__module,
+    .qer__market {
+      grid-template-columns: 1fr;
+      gap: 0.3rem;
+    }
+  }
+</style>

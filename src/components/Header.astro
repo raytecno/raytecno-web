@@ -190,14 +190,12 @@ const isToolsActive = currentPath.includes('/herramientas') || currentPath.inclu
         data-ga-ubicacion="header"
       >{t.nav?.contact || "Contacto"}</a>
 
-      {lang === "es" && (
-        <a href={queEsUrl}
-          class:list={["nav-link", { active: isActive(queEsUrl) }]}
-          data-ga="cta_click"
-          data-ga-elemento="que_es_raygold"
-          data-ga-ubicacion="header"
-        >{queEsLabel[lang]}</a>
-      )}
+            <a href={queEsUrl}
+        class:list={["nav-link", { active: isActive(queEsUrl) }]}
+        data-ga="cta_click"
+        data-ga-elemento="que_es_raygold"
+        data-ga-ubicacion="header"
+      >{queEsLabel[lang]}</a>
     </nav>
 
     <!-- Herramientas de cabecera: idioma + tema -->
