@@ -74,6 +74,10 @@ export interface FugasTranslations {
     fugasFuente: string;
     medidorPie: string;
     medidorPieArea: string; // usa {area}
+    /** Etiqueta bajo cada barra del medidor. Llega a CSS como content */
+    porcentajeBarra: string;
+    /** Formato de la cifra grande del medidor. Usa {n} */
+    formatoPorcentaje: string;
   };
   seccion: {
     titulo: string;
@@ -87,6 +91,10 @@ export interface FugasTranslations {
     etiquetaPantalla: string;
   };
   areas: Record<AreaId, string>;
+  /** Nombre del área tal y como entra en la frase del medidor filtrado.
+      Lleva artículo donde el idioma lo pida (fr) y respeta las siglas
+      (IT, TI). El cliente lo usa tal cual, sin transformarlo. */
+  areasFrase: Record<AreaId, string>;
   fugas: Fuga[];
   cierre: {
     frase: string;
@@ -131,6 +139,8 @@ const es: FugasTranslations = {
     fugasFuente: 'Lo que vemos desde 1990 en las cuentas de nuestros clientes.',
     medidorPie: 'del margen, sin un solo gran problema.',
     medidorPieArea: 'del margen solo en {area}.',
+    porcentajeBarra: '2 %',
+    formatoPorcentaje: '{n} %',
   },
 
   seccion: {
@@ -151,6 +161,14 @@ const es: FugasTranslations = {
     cli: 'Clientes',
     info: 'Información',
     it: 'Informática',
+  },
+
+  areasFrase: {
+    fab: 'fabricación',
+    prov: 'proveedores',
+    cli: 'clientes',
+    info: 'información',
+    it: 'informática',
   },
 
   fugas: [
@@ -346,7 +364,9 @@ const ca: FugasTranslations = {
     fugasEnfasis: "sinó per 15 fuites d'un 2 % cadascuna.",
     fugasFuente: 'El que veiem des del 1990 als comptes dels nostres clients.',
     medidorPie: 'del marge, sense ni un sol gran problema.',
-    medidorPieArea: 'del marge només a {area}.',
+    medidorPieArea: 'del marge només en {area}.',
+    porcentajeBarra: '2 %',
+    formatoPorcentaje: '{n} %',
   },
 
   seccion: {
@@ -367,6 +387,14 @@ const ca: FugasTranslations = {
     cli: 'Clients',
     info: 'Informació',
     it: 'Informàtica',
+  },
+
+  areasFrase: {
+    fab: 'fabricació',
+    prov: 'proveïdors',
+    cli: 'clients',
+    info: 'informació',
+    it: 'informàtica',
   },
 
   fugas: [
@@ -563,6 +591,8 @@ const en: FugasTranslations = {
     fugasFuente: "What we have seen since 1990 in our clients' books.",
     medidorPie: 'of your margin, without a single big problem.',
     medidorPieArea: 'of your margin in {area} alone.',
+    porcentajeBarra: '2%',
+    formatoPorcentaje: '{n}%',
   },
 
   seccion: {
@@ -582,6 +612,14 @@ const en: FugasTranslations = {
     prov: 'Suppliers',
     cli: 'Customers',
     info: 'Information',
+    it: 'IT',
+  },
+
+  areasFrase: {
+    fab: 'manufacturing',
+    prov: 'suppliers',
+    cli: 'customers',
+    info: 'information',
     it: 'IT',
   },
 
@@ -778,7 +816,9 @@ const fr: FugasTranslations = {
     fugasEnfasis: 'mais à cause de 15 fuites de 2 % chacune.',
     fugasFuente: 'Ce que nous voyons depuis 1990 dans les comptes de nos clients.',
     medidorPie: 'de la marge, sans un seul grand problème.',
-    medidorPieArea: "de la marge rien qu'en {area}.",
+    medidorPieArea: 'de la marge rien que sur {area}.',
+    porcentajeBarra: '2 %',
+    formatoPorcentaje: '{n} %',
   },
 
   seccion: {
@@ -799,6 +839,14 @@ const fr: FugasTranslations = {
     cli: 'Clients',
     info: 'Information',
     it: 'Informatique',
+  },
+
+  areasFrase: {
+    fab: 'la fabrication',
+    prov: 'les fournisseurs',
+    cli: 'les clients',
+    info: "l'information",
+    it: "l'informatique",
   },
 
   fugas: [
@@ -995,6 +1043,8 @@ const ptBr: FugasTranslations = {
     fugasFuente: 'O que vemos desde 1990 nas contas dos nossos clientes.',
     medidorPie: 'da margem, sem um único grande problema.',
     medidorPieArea: 'da margem só em {area}.',
+    porcentajeBarra: '2%',
+    formatoPorcentaje: '{n}%',
   },
 
   seccion: {
@@ -1014,6 +1064,14 @@ const ptBr: FugasTranslations = {
     prov: 'Fornecedores',
     cli: 'Clientes',
     info: 'Informação',
+    it: 'TI',
+  },
+
+  areasFrase: {
+    fab: 'fabricação',
+    prov: 'fornecedores',
+    cli: 'clientes',
+    info: 'informação',
     it: 'TI',
   },
 

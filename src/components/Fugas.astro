@@ -45,15 +45,20 @@ const urlContacto = getPageUrl('contacto', lang);
 
 const BLOB = 'https://raygoldstorage.blob.core.windows.net/web';
 
-/** Cifra del medidor ya formateada según el idioma ('30 %' / '30%') */
-const cifraTotal = t.frases.formatoPorcentaje.replace('{n}', String(total * 2));
+/**
+ * Formatos del medidor. Con reserva: si falta la clave en fugas.ts el
+ * medidor sale en formato español, pero el build no se cae.
+ */
+const formatoPct = t.frases.formatoPorcentaje ?? '{n} %';
+const pctBarra = t.frases.porcentajeBarra ?? '2 %';
+const cifraTotal = formatoPct.replace('{n}', String(total * 2));
 ---
 
 <div
   class="fugas-sec"
   data-plantilla-area={t.frases.medidorPieArea}
-  data-formato-pct={t.frases.formatoPorcentaje}
-  style={`--rg-barra-pct: '${t.frases.porcentajeBarra}'`}
+  data-formato-pct={formatoPct}
+  style={`--rg-barra-pct: '${pctBarra}'`}
 >
   <!-- ═══════════ Las dos frases + medidor ═══════════ -->
   <section class="par">
@@ -97,7 +102,7 @@ const cifraTotal = t.frases.formatoPorcentaje.replace('{n}', String(total * 2));
           {t.seccion.filtroTodas}<b>{total}</b>
         </button>
         {areasOrden.map((a) => (
-          <button class="pastilla" data-area={a} data-area-nombre={t.areasFrase[a]}>
+                    <button class="pastilla" data-area={a} data-area-nombre={t.areasFrase?.[a] ?? t.areas[a]}>
             {t.areas[a]}<b>{cuenta[a]}</b>
           </button>
         ))}
