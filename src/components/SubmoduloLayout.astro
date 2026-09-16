@@ -453,24 +453,20 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
     padding: 1.5rem 1.5rem 0.75rem;
   }
 
+    /* Ancho completo del contenedor, en dos columnas: cada una mantiene una
+     medida legible sin dejar medio bloque vacío a la derecha. */
   .intro-inner {
-    max-width: 68ch;
+    columns: 2;
+    column-gap: 3rem;
   }
 
   .intro-inner h2 {
-    font-family: var(--rg-display);
-    font-size: clamp(1.25rem, 2.6vw, 1.6rem);
-    font-weight: 450;
-    letter-spacing: -0.015em;
-    color: var(--rg-ink);
-    margin: 0 0 1rem;
+    column-span: all;
   }
 
-   .intro-inner p {
-    color: var(--rg-soft);
-    font-size: 1rem;
-    line-height: 1.65;
-    margin: 0 0 0.875rem;
+  /* Evita que un párrafo se parta por la mitad entre columnas */
+  .intro-inner p {
+    break-inside: avoid;
   }
 
   .intro-inner p:last-child {
@@ -884,6 +880,10 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
       align-items: flex-start;
       gap: 1rem;
       padding: 2rem 1.5rem 1.5rem;
+    }
+
+        .intro-inner {
+      columns: 1;
     }
 
     .header-icon {
