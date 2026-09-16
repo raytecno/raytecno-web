@@ -701,22 +701,26 @@
       }
     },
     "asistenteia": {
-      "title": "Assistent IA",
-      "subtitle": "Assistent intel·ligent integrat en l'ERP",
-      "metaTitle": "Assistent IA | RayGold ERP Joieria",
-      "metaDescription": "Assistent basat en intel·ligència artificial per a consultes i suport dins de l'ERP.",
+      "title": "Certificacions",
+      "subtitle": "Control d'enviaments a laboratori gemològic i informes verificats",
+      "metaTitle": "Certificacions | RayGold ERP Joieria",
+      "metaDescription": "Control d'enviaments a laboratori gemològic i informes verificats",
       "sections": {
         "consultas": {
-          "name": "Consultes",
-          "description": "Consultes en llenguatge natural sobre les teves dades",
+          "name": "Certificats",
+          "description": "Consulta tots els teus certificats",
           "images": [
             {
-              "title": "Xat",
-              "description": "Interacció mitjançant xat amb l'assistent"
+              "title": "Lots",
+              "description": "Manteniment dels lots"
             },
             {
-              "title": "Respostes",
-              "description": "Respostes i suggeriments basats en IA"
+              "title": "Informes",
+              "description": "Consulta els informes"
+            },
+            {
+              "title": "Gemològics",
+              "description": "Llistat de laboratoris gemològics"
             }
           ]
         }

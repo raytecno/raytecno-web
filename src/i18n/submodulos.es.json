@@ -714,22 +714,26 @@
       }
     },
     "asistenteia": {
-      "title": "Asistente IA",
-      "subtitle": "Asistente inteligente integrado en el ERP",
-      "metaTitle": "Asistente IA | RayGold ERP Joyería",
-      "metaDescription": "Asistente basado en inteligencia artificial para consultas y soporte dentro del ERP.",
+      "title": "Certificaciones",
+      "subtitle": "Control de envíos a laboratorio gemológico e informes verificados",
+      "metaTitle": "Certificaciones | RayGold ERP Joyería",
+      "metaDescription": "Control de envíos a laboratorio gemológico e informes verificados",
       "sections": {
         "consultas": {
-          "name": "Consultas",
-          "description": "Consultas en lenguaje natural sobre tus datos",
+          "name": "Certificados",
+          "description": "Consultas todos tus certificados",
           "images": [
             {
-              "title": "Chat",
-              "description": "Interacción mediante chat con el asistente"
+              "title": "Lotes",
+              "description": "Mantenimiento de los lotes"
             },
             {
-              "title": "Respuestas",
-              "description": "Respuestas y sugerencias basadas en IA"
+              "title": "Informes",
+              "description": "Consulta los informes"
+            },
+            {
+              "title": "Gemológicos",
+              "description": "Listado de laboratorios gemológicos "
             }
           ]
         }

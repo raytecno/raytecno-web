@@ -701,22 +701,26 @@
       }
     },
     "asistenteia": {
-      "title": "AI Assistant",
-      "subtitle": "Intelligent assistant integrated into the ERP",
-      "metaTitle": "AI Assistant | RayGold Jewelry ERP",
-      "metaDescription": "AI-powered assistant for queries and support within the ERP.",
+      "title": "Certifications",
+      "subtitle": "Gemological lab submission tracking and verified reports",
+      "metaTitle": "Certifications | RayGold Jewelry ERP",
+      "metaDescription": "Gemological lab submission tracking and verified reports",
       "sections": {
         "consultas": {
-          "name": "Queries",
-          "description": "Natural language queries about your data",
+          "name": "Certificates",
+          "description": "Browse all your certificates",
           "images": [
             {
-              "title": "Chat",
-              "description": "Chat-based interaction with the assistant"
+              "title": "Batches",
+              "description": "Batch maintenance"
             },
             {
-              "title": "Answers",
-              "description": "AI-based answers and suggestions"
+              "title": "Reports",
+              "description": "Browse the reports"
+            },
+            {
+              "title": "Gemological",
+              "description": "Gemological lab list"
             }
           ]
         }
