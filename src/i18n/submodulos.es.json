@@ -649,26 +649,6 @@
       "subtitle": "Control y gestión de producción con impresoras 3D",
       "metaTitle": "Impresoras 3D | RayGold ERP - Producción 3D",
       "metaDescription": "Control y gestión de producción con impresoras 3D para joyería. Gestión de trabajos, materiales y configuración.",
-       "intro": {
-        "titulo": "Qué hace el módulo",
-        "parrafos": [
-          "Primer párrafo de prueba.",
-          "Segundo párrafo de prueba."
-        ]
-      },
-      "noEs": {
-        "titulo": "Qué no es",
-        "items": [
-          "Primera negación de prueba.",
-          "Segunda negación de prueba."
-        ]
-      },
-      "faq": [
-        {
-          "pregunta": "¿Pregunta de prueba?",
-          "respuesta": "Respuesta de prueba."
-        }
-      ],
       "sections": {
         "impresoras": {
           "name": "Impresoras",
