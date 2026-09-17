@@ -460,13 +460,21 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
     column-gap: 3rem;
   }
 
-  .intro-inner h2 {
-    column-span: all;
+    .intro-inner h2 {
+    font-family: var(--rg-display);
+    font-size: clamp(1.125rem, 2vw, 1.35rem);
+    font-weight: 450;
+    letter-spacing: -0.015em;
+    color: var(--rg-ink);
+    margin: 0 0 0.625rem;
   }
 
   /* Evita que un párrafo se parta por la mitad entre columnas */
-  .intro-inner p {
-    break-inside: avoid;
+  .  .intro-inner p {
+    color: var(--rg-soft);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    margin: 0 0 0.75rem;
   }
 
   .intro-inner p:last-child {
@@ -485,9 +493,9 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
   }
 
   .secciones-tabs {
-    display: flex;
+     display: flex;
     gap: 0.5rem;
-    padding: 1rem 0;
+    padding: 0.625rem 0;
     overflow-x: auto;
     scrollbar-width: none;
   }
@@ -523,9 +531,9 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
     color: var(--rg-ink);
   }
 
-  .tab-icon {
-    width: 40px;
-    height: 40px;
+    .tab-icon {
+    width: 32px;
+    height: 32px;
     color: var(--modulo-color, var(--rg-accent));
   }
 
@@ -541,8 +549,8 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
   }
 
   /* ---------- Contenido de secciones ---------- */
-  .secciones-content {
-    padding: 2.5rem 0 3rem;
+   .secciones-content {
+    padding: 1.75rem 0 3rem;
   }
 
   .seccion-panel {
