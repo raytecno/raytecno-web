@@ -6,13 +6,21 @@
       "requestDemo": "Solicitar uma demo",
       "seeInAction": "Quer ver este módulo em ação?",
       "imageNotAvailable": "Imagem não disponível",
-      "close": "Fechar"
+      "close": "Fechar",
+      "faqTitle": "Perguntas frequentes"
     },
     "maestros": {
       "title": "Cadastros",
       "subtitle": "Itens, fornecedores, clientes e famílias",
       "metaTitle": "Cadastros | RayGold ERP - Gestão de Catálogo",
       "metaDescription": "Gestão completa de itens, preços, estruturas e imagens do seu catálogo de joalheria com RayGold ERP.",
+      "intro": {
+        "titulo": "O catálogo, com o peso e o teor dentro",
+        "parrafos": [
+          "Um item de joalheria não é uma referência com um preço. É uma liga com seu teor, um peso fino, pedras com sua lapidação e seus quilates, e uma mão de obra que muda conforme quem a executa. Os cadastros do RayGold guardam essa estrutura completa, não uma ficha plana com um código e uma descrição.",
+          "Todo o resto vem daí. Se a composição da peça está bem definida, o custo se calcula sozinho, a tabela se recalcula com o metal do dia e a oficina sabe de que material precisa antes de lançar a ordem. Quando o catálogo está mal montado, esse trabalho se repete à mão em cada orçamento."
+        ]
+      },
       "sections": {
         "articulos": {
           "name": "Itens",
@@ -129,6 +137,13 @@
       "subtitle": "Vendas, pedidos e faturamento completo para sua joalheria",
       "metaTitle": "Comercial | RayGold ERP - Gestão de Vendas",
       "metaDescription": "Controle total de vendas, pedidos, notas de entrega e faturamento para joalherias com RayGold ERP.",
+      "intro": {
+        "titulo": "Vender ouro não é vender produto",
+        "parrafos": [
+          "Na joalheria, uma fatura precisa separar o que é metal do que é trabalho. O cliente pode trazer o próprio ouro, o preço pode ter sido dado com a cotação de três semanas atrás e a peça pode continuar em consignação sem ter sido vendida. O módulo comercial cobre o ciclo inteiro — pedido, nota de entrega, fatura — contando os gramas à parte.",
+          "O livro do ouro registra os movimentos de metal com clientes e fornecedores e seus saldos, para que a qualquer momento se saiba quem deve gramas a quem. E os depósitos mantêm a própria conta: o que saiu, o que foi vendido e o que continua fora esperando voltar ou ser faturado."
+        ]
+      },
       "sections": {
         "pedidos": {
           "name": "Pedidos",
@@ -227,6 +242,13 @@
       "subtitle": "Planejamento, produção, materiais e gestão trabalhista",
       "metaTitle": "Fabricação | RayGold ERP - Controle de Produção",
       "metaDescription": "Planejamento de planos, mapa de fabricação, gestão de materiais, fundição, expedições e controle trabalhista para joalherias.",
+      "intro": {
+        "titulo": "Do plano lançado ao grama que falta",
+        "parrafos": [
+          "A fabricação é onde a margem escapa. Um plano é lançado, passa por cera, fundição, cravação e polimento, e em cada fase há uma diferença de peso que alguém precisa explicar. O RayGold pesa na entrada e na saída de cada fase e por operário, de modo que a perda deixa de ser um número global no fim do mês e passa a ter nome, fase e data.",
+          "Em volta disso está todo o resto: o lançamento de planos, o mapa de fabricação com o estado de cada ordem, os apontamentos que registram o que cada operário faz, a fundição com seus troncos, retalhos e escória, e as taxas horárias que transformam o tempo de oficina num custo que dá para repassar."
+        ]
+      },
       "sections": {
         "planes": {
           "name": "Planos",
@@ -343,6 +365,13 @@
       "subtitle": "Contabilidade, tesouraria e impostos integrados",
       "metaTitle": "Finanças | RayGold ERP - Gestão Financeira",
       "metaDescription": "Contabilidade integrada, gestão de recebimentos, pagamentos, bancos e relatórios financeiros para joalherias.",
+      "intro": {
+        "titulo": "Contabilidade que sabe de onde vêm os números",
+        "parrafos": [
+          "Em muitas oficinas a contabilidade é um mundo à parte: fatura-se num lugar, contabiliza-se em outro, e entre os dois há uma ponte que falha a cada fechamento. No RayGold o lançamento nasce da operação, de modo que de uma fatura se vê o seu lançamento e do lançamento se chega à peça que o originou.",
+          "Sobre essa base ficam a tesouraria, com a posição de liquidez e os títulos emitidos e recebidos; os livros de impostos e as remessas em cobrança e em desconto; e as demonstrações financeiras, com uma estrutura de balanço definida por fórmulas e contas atribuídas em vez de refeita a cada ano."
+        ]
+      },
       "sections": {
         "contabilidad": {
           "name": "Contabilidade",
@@ -423,6 +452,13 @@
       "subtitle": "Dados históricos e rastreabilidade completa",
       "metaTitle": "Históricos | RayGold ERP - Rastreabilidade",
       "metaDescription": "Acesso completo ao histórico de operações, movimentos e rastreabilidade de peças de joalheria.",
+      "intro": {
+        "titulo": "O que aconteceu, íntegro e consultável",
+        "parrafos": [
+          "Quando um cliente pergunta por uma encomenda de três anos atrás, ou quando é preciso justificar uma operação diante de quem a exige, a resposta não pode depender de quem se lembre. Históricos guarda o registro completo das operações com o seu detalhe original, e permite localizá-lo pelos critérios com que se busca de verdade.",
+          "Ali fica também o rastro do faturamento eletrônico enviado ao fisco, com o registro de cada envio e a sua resposta. Não é um arquivo morto que ninguém abre: é a parte do sistema que se consulta justamente no dia em que é preciso comprovar alguma coisa."
+        ]
+      },
       "sections": {
         "operaciones": {
           "name": "Operações",
@@ -449,6 +485,13 @@
       "subtitle": "Gestão de diversos inventários",
       "metaTitle": "Inventários | RayGold ERP - Rastreabilidade",
       "metaDescription": "Gestão de recursos, estoques, movimentos e distribuições",
+      "intro": {
+        "titulo": "Saber o que há, onde está e quanto vale",
+        "parrafos": [
+          "O estoque de uma joalheria se conta em gramas, em unidades e em quilates ao mesmo tempo, e está repartido entre almoxarifado, oficina, lojas e oficinas externas. O módulo de inventários mantém cada um desses saldos separado e os valoriza, em vez de juntar tudo num preço médio que não diz grande coisa.",
+          "As contagens físicas se fazem sobre essa base: conta-se, compara-se com o que o sistema dizia e a diferença fica registrada com a sua data e o seu responsável. O que nenhuma oficina pode permitir é que uma divergência seja corrigida em silêncio e ninguém chegue a saber de onde vinha."
+        ]
+      },
       "sections": {
         "stocks": {
           "name": "Estoques",
@@ -493,6 +536,13 @@
       "subtitle": "Relatórios e painéis para decisões",
       "metaTitle": "Estatísticas | RayGold ERP - Business Intelligence",
       "metaDescription": "Análise de dados, relatórios personalizados e dashboards para tomada de decisões em joalherias.",
+      "intro": {
+        "titulo": "Os números da oficina, sem montar a planilha",
+        "parrafos": [
+          "A informação já está dentro do sistema; o problema de sempre é tirá-la de lá. Estatísticas reúne os indicadores que de fato se olham numa oficina — o que se fabricou, o que se vendeu, o que custou — em painéis que se consultam direto, sem pedir a ninguém nem esperar até segunda-feira.",
+          "Dá para olhar por período, comparando meses ou exercícios, ou descer ao item concreto para ver quais referências giram e quais estão há um ano ocupando lugar. Tudo sai dos mesmos dados com que se trabalha todo dia, então nunca há duas versões do mesmo número."
+        ]
+      },
       "sections": {
         "dashboards": {
           "name": "Dashboards",
@@ -519,6 +569,13 @@
       "subtitle": "Gestão especializada para vendedores",
       "metaTitle": "Vendedores | RayGold ERP - Gestão Comercial",
       "metaDescription": "Gestão de equipes comerciais, comissões, metas e acompanhamento de vendas para joalherias.",
+      "intro": {
+        "titulo": "O vendedor, com o catálogo em cima",
+        "parrafos": [
+          "Um vendedor de joalheria trabalha na rua, mostrando peças e anotando no balcão do cliente. Precisa do catálogo com as suas imagens, do preço com o metal do dia e da possibilidade de fechar o pedido ali mesmo, não de uma folha de papel que alguém vai digitar no escritório dois dias depois.",
+          "O módulo dá a ele o próprio aplicativo, com o menu e o calendário ajustados à sua rota. E dá à direção a outra metade: as vendas por vendedor e por loja, as comissões calculadas sobre o que realmente foi recebido, e um pipeline em que as oportunidades abertas não dependem da memória de cada um."
+        ]
+      },
       "sections": {
         "equipo": {
           "name": "Aplicação",
@@ -581,6 +638,13 @@
       "subtitle": "Lojas online e marketplaces integrados",
       "metaTitle": "E-commerce | RayGold ERP - Venda Online",
       "metaDescription": "Integração com loja online, sincronização de estoque e gestão de pedidos web para joalherias.",
+      "intro": {
+        "titulo": "A loja e a oficina, com um só estoque",
+        "parrafos": [
+          "Vender online com o estoque da oficina desencontrado termina sempre igual: vende-se uma peça que já não existe e é preciso ligar para o cliente. O módulo de e-commerce publica o catálogo a partir dos mesmos itens que a oficina fabrica, com as suas imagens e especificações, e mantém as quantidades sincronizadas.",
+          "Inclui também o lado físico da venda: PDV para o balcão, planos de distribuição para repartir produto entre pontos de venda e contagem cíclica por classes. As lojas e o site deixam de ser dois sistemas a conciliar e passam a ser duas saídas do mesmo inventário."
+        ]
+      },
       "sections": {
         "catalogo": {
           "name": "Catálogo Online",
@@ -643,6 +707,13 @@
       "subtitle": "Controle e gestão de produção com impressoras 3D",
       "metaTitle": "Impressoras 3D | RayGold ERP - Produção 3D",
       "metaDescription": "Controle e gestão de produção com impressoras 3D para joalheria. Gestão de trabalhos, materiais e configuração.",
+      "intro": {
+        "titulo": "O parque de impressoras, dentro do ERP",
+        "parrafos": [
+          "Na maioria das oficinas a impressão 3D vive à parte: alguém sabe o que está imprimindo porque viu ao passar, a resina se estima no olho e ninguém sabe há quanto tempo uma máquina não recebe manutenção. O Print3D trata as impressoras como mais um recurso de produção, com a sua ficha, a sua carga de trabalho e o seu custo.",
+          "Não desenha: a geometria continua sendo criada no seu programa de CAD e o arquivo é preparado no software da própria impressora. O que o RayGold acrescenta começa depois, quando esse arquivo vira trabalho de oficina com uma máquina, um material e alertas por trás."
+        ]
+      },
       "sections": {
         "impresoras": {
           "name": "Impressoras",
@@ -669,6 +740,13 @@
       "subtitle": "Acesso dos clientes a pedidos e faturas",
       "metaTitle": "Portal do Cliente | RayGold ERP Joalheria",
       "metaDescription": "Portal web para que seus clientes consultem seus pedidos e faturas em tempo real.",
+      "intro": {
+        "titulo": "Que o cliente olhe, em vez de ligar",
+        "parrafos": [
+          "Cada ligação perguntando por uma encomenda custa a alguém da oficina parar o que está fazendo, procurar a peça e retornar a ligação. O portal dá aos seus clientes acesso aos próprios pedidos, com o status de cada um, sem que ninguém precise atender a consulta.",
+          "Com as faturas acontece o mesmo: o cliente entra, consulta e baixa o PDF de que precisa quando precisa, inclusive fora do horário. É o módulo com menos telas de todo o sistema e um dos que mais devolvem horas à oficina."
+        ]
+      },
       "sections": {
         "pedidos": {
           "name": "Pedidos",
@@ -705,6 +783,13 @@
       "subtitle": "Controle de envios ao laboratório gemológico e laudos verificados",
       "metaTitle": "Certificações | RayGold ERP Joalheria",
       "metaDescription": "Controle de envios ao laboratório gemológico e laudos verificados",
+      "intro": {
+        "titulo": "O laudo, preso à pedra",
+        "parrafos": [
+          "Uma gema sem o seu laudo e um laudo sem a sua gema valem o mesmo: nada. O módulo de certificações controla os envios ao laboratório gemológico por lotes — o que sai, o que volta e quando — para que nenhuma pedra fique numa gaveta esperando que alguém se lembre de cobrar.",
+          "Os laudos recebidos ficam guardados junto ao seu lote e ao laboratório que os emitiu. Assim, no dia em que um cliente pergunta de onde veio a esmeralda do seu anel, a resposta se busca no sistema e não numa pasta que ninguém sabe quem guardou."
+        ]
+      },
       "sections": {
         "consultas": {
           "name": "Certificados",

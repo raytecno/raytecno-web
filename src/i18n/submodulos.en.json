@@ -6,13 +6,21 @@
       "requestDemo": "Request a demo",
       "seeInAction": "Want to see this module in action?",
       "imageNotAvailable": "Image not available",
-      "close": "Close"
+      "close": "Close",
+      "faqTitle": "Frequently asked questions"
     },
     "maestros": {
       "title": "Master Data",
       "subtitle": "Items, suppliers, customers and families",
       "metaTitle": "Master Data | RayGold ERP - Catalog Management",
       "metaDescription": "Complete management of items, prices, structures and images of your jewelry catalog with RayGold ERP.",
+      "intro": {
+        "titulo": "The catalog, with weight and fineness inside it",
+        "parrafos": [
+          "A jewelry item is not a reference with a price attached. It is an alloy with its fineness, a fine weight, stones with their cut and carats, and a making charge that changes depending on who does the work. RayGold's master data holds that whole structure, not a flat record with a code and a description.",
+          "Everything else follows from it. With the composition properly defined, the costing calculates itself, the price list recalculates with the day's metal and the workshop knows what material it needs before releasing the order. When the catalog is badly built, that work gets repeated by hand on every quote."
+        ]
+      },
       "sections": {
         "articulos": {
           "name": "Items",
@@ -129,6 +137,13 @@
       "subtitle": "Complete sales, orders and invoicing for your jewelry business",
       "metaTitle": "Sales | RayGold ERP - Sales Management",
       "metaDescription": "Total control of sales, orders, delivery notes and invoicing for jewelers with RayGold ERP.",
+      "intro": {
+        "titulo": "Selling gold is not selling product",
+        "parrafos": [
+          "In jewelry, an invoice has to separate metal from labor. The customer may supply their own gold, the price may have been quoted at a rate from three weeks ago, and the piece may still be sitting on deposit unsold. The sales module covers the full cycle — order, delivery note, invoice — counting the grams separately.",
+          "The gold book records metal movements with customers and suppliers along with their balances, so at any moment you know who owes grams to whom. And deposits keep their own account: what went out, what has sold, and what is still out there waiting to come back or be invoiced."
+        ]
+      },
       "sections": {
         "pedidos": {
           "name": "Orders",
@@ -227,6 +242,13 @@
       "subtitle": "Planning, production, materials and labor management",
       "metaTitle": "Manufacturing | RayGold ERP - Production Control",
       "metaDescription": "Plan management, manufacturing map, material management, casting, shipments and labor control for jewelers.",
+      "intro": {
+        "titulo": "From the released plan to the missing gram",
+        "parrafos": [
+          "Manufacturing is where the margin leaks. A plan is released, moves through wax, casting, setting and polishing, and at every stage there is a weight difference someone has to account for. RayGold weighs in and out of each stage and by operator, so loss stops being one global figure at month end and gets a name, a stage and a date.",
+          "Around that sits everything else: plan release, the manufacturing map with the status of each order, the clocking records of what every operator does, the casting module with its trees, scrap and slag, and the hourly rates that turn shop-floor time into a cost you can actually pass on."
+        ]
+      },
       "sections": {
         "planes": {
           "name": "Plans",
@@ -343,6 +365,13 @@
       "subtitle": "Integrated accounting, treasury and VAT",
       "metaTitle": "Finance | RayGold ERP - Financial Management",
       "metaDescription": "Integrated accounting, management of collections, payments, banks and financial reports for jewelers.",
+      "intro": {
+        "titulo": "Accounting that knows where the numbers came from",
+        "parrafos": [
+          "In many workshops accounting lives in a world of its own: you invoice in one place, post it in another, and between the two sits a bridge that breaks at every close. In RayGold the journal entry is born from the operation, so from an invoice you can see its entry, and from the entry you can reach the piece that produced it.",
+          "On top of that base sit treasury, with the liquidity position and the bills issued and received; the VAT books and the collection and discount batches; and the financial statements, with a balance sheet structure defined by formulas and assigned accounts instead of rebuilt every year."
+        ]
+      },
       "sections": {
         "contabilidad": {
           "name": "Accounting",
@@ -423,6 +452,13 @@
       "subtitle": "Historical data and complete traceability",
       "metaTitle": "Historical | RayGold ERP - Traceability",
       "metaDescription": "Complete access to the history of operations, movements and traceability of jewelry pieces.",
+      "intro": {
+        "titulo": "What happened, complete and searchable",
+        "parrafos": [
+          "When a customer asks about a job from three years ago, or when an operation has to be justified to whoever is asking, the answer cannot depend on who happens to remember. Historical keeps the full record of operations with their original detail, and lets you find it by the criteria people actually search on.",
+          "It also holds the trail of invoicing declared under VERI*FACTU, with the record of each submission and its response. This is not a dead archive nobody opens: it is the part of the system you go to on the day you have to prove something."
+        ]
+      },
       "sections": {
         "operaciones": {
           "name": "Operations",
@@ -449,6 +485,13 @@
       "subtitle": "Management of various inventories",
       "metaTitle": "Inventories | RayGold ERP - Traceability",
       "metaDescription": "Management of resources, stocks, movements and distributions",
+      "intro": {
+        "titulo": "Knowing what you have, where it is and what it is worth",
+        "parrafos": [
+          "A jeweler's stock is counted in grams, in units and in carats at the same time, and it is spread across the warehouse, the workshop, the stores and outside workshops. The inventory module keeps each of those balances separately and values them, instead of collapsing everything into an average price that says very little.",
+          "Physical counts work on that basis: you count, you compare against what the system said, and the difference is recorded with its date and the person responsible. What no workshop can afford is for a discrepancy to be corrected quietly and never traced back to where it came from."
+        ]
+      },
       "sections": {
         "stocks": {
           "name": "Stocks",
@@ -493,6 +536,13 @@
       "subtitle": "Reports and dashboards for decisions",
       "metaTitle": "Statistics | RayGold ERP - Business Intelligence",
       "metaDescription": "Data analysis, custom reports and dashboards for decision making in jewelers.",
+      "intro": {
+        "titulo": "The workshop's numbers, without building the spreadsheet",
+        "parrafos": [
+          "The information is already inside the system; the old problem is getting it out. Statistics brings together the indicators people actually look at in a workshop — what has been made, what has been sold, what it cost — in dashboards you consult directly, without asking anyone or waiting until Monday.",
+          "You can look by period, comparing months or fiscal years, or drill down to a single item to see which references move and which have been taking up space for a year. It all comes from the same data you work with every day, so there are never two versions of the same figure."
+        ]
+      },
       "sections": {
         "dashboards": {
           "name": "Dashboards",
@@ -519,6 +569,13 @@
       "subtitle": "Specialized management for sales reps",
       "metaTitle": "Sales Reps | RayGold ERP - Commercial Management",
       "metaDescription": "Management of sales teams, commissions, targets and sales tracking for jewelers.",
+      "intro": {
+        "titulo": "The rep, with the catalog in hand",
+        "parrafos": [
+          "A jewelry sales rep works on the road, showing pieces and taking notes at the customer's counter. They need the catalog with its images, the price at the day's metal rate and the ability to close the order right there, not a sheet of paper someone types up back at the office two days later.",
+          "The module gives the rep their own application, with the menu and calendar fitted to their route. And it gives management the other half: sales by rep and by store, commissions calculated on what has actually been collected, and a pipeline where open opportunities do not depend on anyone's memory."
+        ]
+      },
       "sections": {
         "equipo": {
           "name": "Application",
@@ -581,6 +638,13 @@
       "subtitle": "Integrated online stores and marketplaces",
       "metaTitle": "E-commerce | RayGold ERP - Online Sales",
       "metaDescription": "Integration with online store, stock synchronization and management of web orders for jewelers.",
+      "intro": {
+        "titulo": "The store and the workshop, on a single stock",
+        "parrafos": [
+          "Selling online with the workshop's stock out of sync always ends the same way: you sell a piece that is no longer there and have to call the customer back. The e-commerce module publishes the catalog from the same items the workshop makes, with their images and specifications, and keeps quantities synchronized.",
+          "It also covers the physical side of selling: POS for the counter, distribution plans for moving product between points of sale, and cyclic counting by class. Stores and the website stop being two systems to reconcile and become two outlets of the same inventory."
+        ]
+      },
       "sections": {
         "catalogo": {
           "name": "Online Catalog",
@@ -643,6 +707,13 @@
       "subtitle": "Control and management of 3D printing production",
       "metaTitle": "3D Printers | RayGold ERP - 3D Production",
       "metaDescription": "Control and management of 3D printing production for jewelry. Management of jobs, materials and configuration.",
+      "intro": {
+        "titulo": "The printer fleet, inside the ERP",
+        "parrafos": [
+          "In most workshops 3D printing lives apart: someone knows what is printing because they walked past it, resin is estimated by eye, and nobody knows how long a machine has gone without maintenance. Print3D treats printers as one more production resource, with a record, a workload and a cost of their own.",
+          "It does not design. Geometry is still created in your CAD program and the file is still prepared in the printer's own software. What RayGold adds starts afterwards, when that file becomes shop-floor work with a machine, a material and a set of alerts behind it."
+        ]
+      },
       "sections": {
         "impresoras": {
           "name": "Printers",
@@ -669,6 +740,13 @@
       "subtitle": "Customer access to orders and invoices",
       "metaTitle": "Customer Portal | RayGold Jewelry ERP",
       "metaDescription": "Web portal for your customers to check their orders and invoices in real time.",
+      "intro": {
+        "titulo": "Let the customer look, instead of calling",
+        "parrafos": [
+          "Every call asking about a job costs someone in the workshop stopping what they are doing, finding the piece and calling back. The portal gives your customers access to their own orders, with the status of each one, without anyone having to field the question.",
+          "Invoices work the same way: the customer logs in, checks, and downloads the PDF they need when they need it, including outside working hours. It is the module with the fewest screens in the whole system and one of the ones that gives the most hours back to the workshop."
+        ]
+      },
       "sections": {
         "pedidos": {
           "name": "Orders",
@@ -705,6 +783,13 @@
       "subtitle": "Gemological lab submission tracking and verified reports",
       "metaTitle": "Certifications | RayGold Jewelry ERP",
       "metaDescription": "Gemological lab submission tracking and verified reports",
+      "intro": {
+        "titulo": "The certificate, tied to the stone",
+        "parrafos": [
+          "A gem without its certificate and a certificate without its gem are worth the same: nothing. The certifications module tracks submissions to the gemological lab by batch — what went out, what came back and when — so no stone sits in a drawer waiting for someone to remember to chase it.",
+          "The reports that come back are stored alongside their batch and the lab that issued them. So the day a customer asks where the emerald in their ring came from, the answer gets looked up in the system and not in a folder nobody remembers filing."
+        ]
+      },
       "sections": {
         "consultas": {
           "name": "Certificates",

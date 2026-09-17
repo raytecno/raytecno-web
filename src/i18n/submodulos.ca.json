@@ -6,13 +6,21 @@
       "requestDemo": "Sol·licitar una demo",
       "seeInAction": "Vols veure aquest mòdul en acció?",
       "imageNotAvailable": "Imatge no disponible",
-      "close": "Tancar"
+      "close": "Tancar",
+      "faqTitle": "Preguntes freqüents"
     },
     "maestros": {
       "title": "Mestres",
       "subtitle": "Articles, proveïdors, clients i famílies",
       "metaTitle": "Mestres | RayGold ERP - Gestió de Catàleg",
       "metaDescription": "Gestió completa d'articles, preus, estructures i imatges del teu catàleg de joieria amb RayGold ERP.",
+      "intro": {
+        "titulo": "El catàleg, amb el pes i la llei a dins",
+        "parrafos": [
+          "Un article de joieria no és una referència amb un preu. És un aliatge amb la seva llei, un pes fi, unes pedres amb la seva talla i els seus quirats, i una manufactura que canvia segons qui la faci. Els mestres de RayGold guarden aquesta estructura completa, no una fitxa plana amb un codi i una descripció.",
+          "D'aquí surt tota la resta. Si la composició de la peça està ben definida, l'escandall es calcula sol, la tarifa es recalcula amb el metall del dia i el taller sap quin material necessita abans de llançar l'ordre. Quan el catàleg està mal muntat, aquesta feina es repeteix a mà en cada pressupost."
+        ]
+      },
       "sections": {
         "articulos": {
           "name": "Articles",
@@ -129,6 +137,13 @@
       "subtitle": "Vendes, comandes i facturació completa per a la teva joieria",
       "metaTitle": "Comercial | RayGold ERP - Gestió de Vendes",
       "metaDescription": "Control total de vendes, comandes, albarans i facturació per a joieries amb RayGold ERP.",
+      "intro": {
+        "titulo": "Vendre or no és vendre producte",
+        "parrafos": [
+          "En joieria, una factura ha de distingir el que és metall del que és feina. El client pot aportar el seu propi or, el preu pot haver-se donat amb la cotització de fa tres setmanes i la peça pot continuar en dipòsit sense haver-se venut. El mòdul comercial recorre el cicle sencer —comanda, albarà, factura— comptant els grams a part.",
+          "El llibre d'or registra els moviments de metall amb clients i proveïdors i els seus saldos, perquè en qualsevol moment se sàpiga qui deu grams a qui. I els dipòsits porten el seu propi compte: què va sortir, què s'ha venut i què continua fora esperant a tornar o a facturar-se."
+        ]
+      },
       "sections": {
         "pedidos": {
           "name": "Comandes",
@@ -227,6 +242,13 @@
       "subtitle": "Planificació, producció, materials i gestió laboral",
       "metaTitle": "Fabricació | RayGold ERP - Control de Producció",
       "metaDescription": "Planificació de plans, mapa de fabricació, gestió de materials, fosa, expedicions i control laboral per a joieries.",
+      "intro": {
+        "titulo": "Del pla llançat al gram que falta",
+        "parrafos": [
+          "La fabricació és on s'escapa el marge. Un pla es llança, passa per cera, fosa, encast i poliment, i a cada fase hi ha una diferència de pes que algú ha d'explicar. RayGold pesa a l'entrada i a la sortida de cada fase i per operari, així la minva deixa de ser un número global a final de mes i passa a tenir nom, fase i data.",
+          "Al voltant d'això hi ha la resta: el llançament de plans, el mapa de fabricació amb l'estat de cada ordre, els marcatges que registren què fa cada operari, l'arbre de fosa amb els seus troncs, retalls i escòria, i les taxes horàries que converteixen el temps de taller en un cost que es pot repercutir."
+        ]
+      },
       "sections": {
         "planes": {
           "name": "Plans",
@@ -343,6 +365,13 @@
       "subtitle": "Comptabilitat, tresoreria i IVA integrats",
       "metaTitle": "Finances | RayGold ERP - Gestió Financera",
       "metaDescription": "Comptabilitat integrada, gestió de cobraments, pagaments, bancs i informes financers per a joieries.",
+      "intro": {
+        "titulo": "Comptabilitat que sap d'on vénen els números",
+        "parrafos": [
+          "En molts tallers la comptabilitat és un món a part: es factura en un lloc, es comptabilitza en un altre i entre tots dos hi ha una passarel·la que falla cada tancament. A RayGold l'assentament neix de l'operació, de manera que des d'una factura es veu el seu assentament i des de l'assentament s'arriba a la peça que el va originar.",
+          "Damunt d'aquesta base hi ha la tresoreria, amb la posició de liquiditat i els efectes emesos i rebuts; els llibres d'IVA i les remeses al cobrament i al descompte; i els estats financers, amb una estructura de balanç que es defineix per fórmules i comptes assignats en lloc de refer-se cada any."
+        ]
+      },
       "sections": {
         "contabilidad": {
           "name": "Comptabilitat",
@@ -423,6 +452,13 @@
       "subtitle": "Dades històriques i traçabilitat completa",
       "metaTitle": "Històrics | RayGold ERP - Traçabilitat",
       "metaDescription": "Accés complet a l'historial d'operacions, moviments i traçabilitat de peces de joieria.",
+      "intro": {
+        "titulo": "El que va passar, íntegre i consultable",
+        "parrafos": [
+          "Quan un client pregunta per un encàrrec de fa tres anys, o quan cal justificar una operació davant de qui correspongui, la resposta no pot dependre de qui se'n recordi. Històrics conserva el registre complet de les operacions amb el seu detall original, i permet localitzar-lo pels criteris amb què un busca de debò.",
+          "Allà hi ha també el rastre de la facturació declarada sota VERI*FACTU, amb el registre de cada enviament i la seva resposta. No és un arxiu mort que ningú obre: és la part del sistema on s'acudeix justament el dia que cal demostrar alguna cosa."
+        ]
+      },
       "sections": {
         "operaciones": {
           "name": "Operacions",
@@ -449,6 +485,13 @@
       "subtitle": "Gestió de diversos inventaris",
       "metaTitle": "Inventaris | RayGold ERP - Traçabilitat",
       "metaDescription": "Gestió de recursos, estocs, moviments i distribucions",
+      "intro": {
+        "titulo": "Saber què hi ha, on és i quant val",
+        "parrafos": [
+          "L'estoc d'una joieria es compta en grams, en unitats i en quirats alhora, i està repartit entre magatzem, taller, botigues i tallers externs. El mòdul d'inventaris porta cadascun d'aquests saldos per separat i els valora, en lloc d'agregar-ho tot en un preu mitjà que no diu gran cosa.",
+          "Els recomptes físics es fan sobre aquesta base: es compta, es compara amb el que deia el sistema i la diferència queda registrada amb la seva data i el seu responsable. El que no es pot permetre un taller és que un desquadrament es corregeixi en silenci i ningú arribi a saber d'on venia."
+        ]
+      },
       "sections": {
         "stocks": {
           "name": "Estocs",
@@ -493,6 +536,13 @@
       "subtitle": "Informes i quadres de comandament per a decisions",
       "metaTitle": "Estadístiques | RayGold ERP - Business Intelligence",
       "metaDescription": "Anàlisi de dades, informes personalitzats i dashboards per a presa de decisions en joieries.",
+      "intro": {
+        "titulo": "Els números del taller, sense muntar l'Excel",
+        "parrafos": [
+          "La informació ja és dins del sistema; el problema de sempre és treure-la. Estadístiques reuneix els indicadors que de debò es miren en un taller —el que s'ha fabricat, el que s'ha venut, el que ha costat— en quadres de comandament que es consulten directament, sense demanar-los a ningú ni esperar al dilluns.",
+          "Es pot mirar per períodes, comparant mesos o exercicis, o baixar a l'article concret per veure quines referències tiren i quines fa un any que ocupen lloc. Tot surt de les mateixes dades amb què es treballa cada dia, així que no hi ha dues versions diferents de la mateixa xifra."
+        ]
+      },
       "sections": {
         "dashboards": {
           "name": "Dashboards",
@@ -519,6 +569,13 @@
       "subtitle": "Gestió especialitzada per a venedors",
       "metaTitle": "Venedors | RayGold ERP - Gestió Comercial",
       "metaDescription": "Gestió d'equips comercials, comissions, objectius i seguiment de vendes per a joieries.",
+      "intro": {
+        "titulo": "El comercial, amb el catàleg a sobre",
+        "parrafos": [
+          "Un venedor de joieria treballa fora, ensenyant peces i prenent nota al taulell del client. Necessita el catàleg amb les seves imatges, el preu amb el metall del dia i la possibilitat de tancar la comanda allà mateix, no un full de paper que després algú teclejarà a l'oficina dos dies més tard.",
+          "El mòdul li dóna la seva pròpia aplicació, amb el menú i el calendari ajustats a la seva ruta. I a la direcció li dóna l'altra meitat: les vendes per venedor i per botiga, les comissions calculades sobre el que realment s'ha cobrat, i un pipeline on les oportunitats obertes no depenen de la memòria de cadascú."
+        ]
+      },
       "sections": {
         "equipo": {
           "name": "Aplicació",
@@ -581,6 +638,13 @@
       "subtitle": "Botigues en línia i marketplaces integrats",
       "metaTitle": "E-commerce | RayGold ERP - Venda en Línia",
       "metaDescription": "Integració amb botiga en línia, sincronització d'estoc i gestió de comandes web per a joieries.",
+      "intro": {
+        "titulo": "La botiga i el taller, amb un sol estoc",
+        "parrafos": [
+          "Vendre en línia amb l'estoc del taller desquadrat acaba sempre igual: es ven una peça que ja no hi és i cal trucar al client. El mòdul d'e-commerce publica el catàleg a partir dels mateixos articles que fabrica el taller, amb les seves imatges i especificacions, i manté les existències sincronitzades.",
+          "A més inclou el costat físic de la venda: TPV per al taulell, plans de distribució per repartir producte entre punts de venda i recompte cíclic per classes. Les botigues i el web deixen de ser dos sistemes que cal quadrar i passen a ser dues sortides del mateix inventari."
+        ]
+      },
       "sections": {
         "catalogo": {
           "name": "Catàleg en Línia",
@@ -643,6 +707,13 @@
       "subtitle": "Control i gestió de producció amb impressores 3D",
       "metaTitle": "Impressores 3D | RayGold ERP - Producció 3D",
       "metaDescription": "Control i gestió de producció amb impressores 3D per a joieria. Gestió de treballs, materials i configuració.",
+      "intro": {
+        "titulo": "El parc d'impressores, dins de l'ERP",
+        "parrafos": [
+          "A la majoria de tallers la impressió 3D viu a part: algú sap què s'està imprimint perquè ho ha vist en passar, la resina s'estima a ull i ningú sap quant fa que una màquina no rep manteniment. Print3D tracta les impressores com un recurs de producció més, amb la seva fitxa, la seva càrrega de treball i el seu cost.",
+          "No dissenya: la geometria es continua creant al teu programa de CAD i l'arxiu es prepara al programari de la impressora. El que aporta RayGold comença després, quan aquest arxiu es converteix en feina de taller amb una màquina, un material i unes alertes al darrere."
+        ]
+      },
       "sections": {
         "impresoras": {
           "name": "Impressores",
@@ -669,6 +740,13 @@
       "subtitle": "Accés dels clients a comandes i factures",
       "metaTitle": "Portal Client | RayGold ERP Joieria",
       "metaDescription": "Portal web perquè els teus clients consultin les seves comandes i factures en temps real.",
+      "intro": {
+        "titulo": "Que el client miri, en lloc de trucar",
+        "parrafos": [
+          "Cada trucada preguntant per un encàrrec li costa a algú del taller deixar el que està fent, buscar la peça i tornar la trucada. El portal dóna als teus clients accés a les seves pròpies comandes, amb l'estat de cadascuna, sense que ningú hagi d'atendre la consulta.",
+          "Amb les factures passa el mateix: el client entra, consulta i es descarrega el PDF que necessita quan li fa falta, també fora d'horari. És el mòdul amb menys pantalles de tot el sistema i un dels que més hores torna al taller."
+        ]
+      },
       "sections": {
         "pedidos": {
           "name": "Comandes",
@@ -705,6 +783,13 @@
       "subtitle": "Control d'enviaments a laboratori gemològic i informes verificats",
       "metaTitle": "Certificacions | RayGold ERP Joieria",
       "metaDescription": "Control d'enviaments a laboratori gemològic i informes verificats",
+      "intro": {
+        "titulo": "El certificat, lligat a la pedra",
+        "parrafos": [
+          "Una gemma sense el seu certificat i un certificat sense la seva gemma valen el mateix: res. El mòdul de certificacions porta els enviaments al laboratori gemològic per lots, amb el que surt, el que torna i quan, perquè cap pedra no es quedi esperant en un calaix que algú se'n recordi de reclamar-la.",
+          "Els informes rebuts queden desats al costat del seu lot i del laboratori que els va emetre. Així, el dia que un client pregunta d'on va sortir l'esmeralda del seu anell, la resposta es busca al sistema i no en una carpeta que ningú sap qui va guardar."
+        ]
+      },
       "sections": {
         "consultas": {
           "name": "Certificats",

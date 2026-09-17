@@ -14,6 +14,13 @@
       "subtitle": "Artículos, proveedores, clientes y familias",
       "metaTitle": "Maestros | RayGold ERP - Gestión de Catálogo",
       "metaDescription": "Gestión completa de artículos, precios, estructuras e imágenes de tu catálogo de joyería con RayGold ERP.",
+      "intro": {
+        "titulo": "El catálogo, con el peso y la ley dentro",
+        "parrafos": [
+          "Un artículo de joyería no es una referencia con un precio. Es una aleación con su ley, un peso fino, unas piedras con su talla y sus quilates, y una hechura que cambia según quién la haga. Los maestros de RayGold guardan esa estructura completa, no una ficha plana con un código y una descripción.",
+          "De ahí sale todo lo demás. Si la composición de la pieza está bien definida, el escandallo se calcula solo, la tarifa se recalcula con el metal del día y el taller sabe qué material necesita antes de lanzar la orden. Cuando el catálogo está mal montado, ese trabajo se repite a mano en cada presupuesto."
+        ]
+      },
       "sections": {
         "articulos": {
           "name": "Artículos",
@@ -130,6 +137,13 @@
       "subtitle": "Ventas, pedidos y facturación completa para tu joyería",
       "metaTitle": "Comercial | RayGold ERP - Gestión de Ventas",
       "metaDescription": "Control total de ventas, pedidos, albaranes y facturación para joyerías con RayGold ERP.",
+      "intro": {
+        "titulo": "Vender oro no es vender producto",
+        "parrafos": [
+          "En joyería, una factura tiene que distinguir lo que es metal de lo que es trabajo. El cliente puede aportar su propio oro, el precio puede haberse dado con la cotización de hace tres semanas y la pieza puede seguir en depósito sin haberse vendido. El módulo comercial recorre el ciclo entero —pedido, albarán, factura— contando los gramos aparte.",
+          "El libro de oro registra los movimientos de metal con clientes y proveedores y sus saldos, para que en cualquier momento se sepa quién debe gramos a quién. Y los depósitos llevan su propia cuenta: qué salió, qué se ha vendido y qué sigue fuera esperando a volver o a facturarse."
+        ]
+      },
       "sections": {
         "pedidos": {
           "name": "Pedidos",
@@ -228,6 +242,13 @@
       "subtitle": "Planificación, producción, materiales y gestión laboral",
       "metaTitle": "Fabricación | RayGold ERP - Control de Producción",
       "metaDescription": "Planificación de planes, mapa de fabricación, gestión de materiales, fundición, expediciones y control laboral para joyerías.",
+      "intro": {
+        "titulo": "Del plan lanzado al gramo que falta",
+        "parrafos": [
+          "La fabricación es donde se escapa el margen. Un plan se lanza, pasa por cera, fundición, engaste y pulido, y en cada fase hay una diferencia de peso que alguien tiene que explicar. RayGold pesa a la entrada y a la salida de cada fase y por operario, así que la merma deja de ser un número global a fin de mes y pasa a tener nombre, fase y fecha.",
+          "Alrededor de eso está lo demás: el lanzamiento de planes, el mapa de fabricación con el estado de cada orden, los marcajes que registran lo que hace cada operario, el árbol de fundición con sus troncos, retales y escoria, y las tasas horarias que convierten el tiempo de taller en un coste que se puede repercutir."
+        ]
+      },
       "sections": {
         "planes": {
           "name": "Planes",
@@ -349,6 +370,13 @@
       "subtitle": "Contabilidad, tesorería e IVA integrados",
       "metaTitle": "Finanzas | RayGold ERP - Gestión Financiera",
       "metaDescription": "Contabilidad integrada, gestión de cobros, pagos, bancos e informes financieros para joyerías.",
+      "intro": {
+        "titulo": "Contabilidad que sabe de dónde vienen los números",
+        "parrafos": [
+          "En muchos talleres la contabilidad es un mundo aparte: se factura en un sitio, se contabiliza en otro y entre los dos hay una pasarela que falla cada cierre. En RayGold el asiento nace de la operación, de modo que desde una factura se ve su asiento y desde el asiento se llega a la pieza que lo originó.",
+          "Encima de esa base están la tesorería, con la posición de liquidez y los efectos emitidos y recibidos; los libros de IVA y las remesas al cobro y al descuento; y los estados financieros, con una estructura de balance que se define por fórmulas y cuentas asignadas en lugar de rehacerse cada año."
+        ]
+      },
       "sections": {
         "contabilidad": {
           "name": "Contabilidad",
@@ -429,6 +457,13 @@
       "subtitle": "Datos históricos y trazabilidad completa",
       "metaTitle": "Históricos | RayGold ERP - Trazabilidad",
       "metaDescription": "Acceso completo al historial de operaciones, movimientos y trazabilidad de piezas de joyería.",
+      "intro": {
+        "titulo": "Lo que pasó, íntegro y consultable",
+        "parrafos": [
+          "Cuando un cliente pregunta por un encargo de hace tres años, o cuando hay que justificar una operación ante quien corresponda, la respuesta no puede depender de quién se acuerde. Históricos conserva el registro completo de las operaciones con su detalle original, y permite localizarlo por los criterios con los que uno busca de verdad.",
+          "Ahí está también el rastro de la facturación declarada bajo VERI*FACTU, con el registro de cada envío y su respuesta. No es un archivo muerto que nadie abre: es la parte del sistema a la que se acude justo el día en que hay que demostrar algo."
+        ]
+      },
       "sections": {
         "operaciones": {
           "name": "Operaciones",
@@ -455,6 +490,13 @@
       "subtitle": "Gestión de diversos inventarios",
       "metaTitle": "Inventarios | RayGold ERP - Trazabilidad",
       "metaDescription": "Gestión de recursos, stocks, movimientos y distribuciones",
+      "intro": {
+        "titulo": "Saber qué hay, dónde está y cuánto vale",
+        "parrafos": [
+          "El stock de una joyería se cuenta en gramos, en unidades y en quilates a la vez, y está repartido entre almacén, taller, tiendas y talleres externos. El módulo de inventarios lleva cada uno de esos saldos por separado y los valora, en lugar de agregarlo todo en un precio medio que no dice gran cosa.",
+          "Los recuentos físicos se hacen sobre esa base: se cuenta, se compara con lo que decía el sistema y la diferencia queda registrada con su fecha y su responsable. Lo que no se puede permitir un taller es que un descuadre se corrija en silencio y nadie llegue a saber de dónde venía."
+        ]
+      },
       "sections": {
         "stocks": {
           "name": "Stocks",
@@ -499,6 +541,13 @@
       "subtitle": "Informes y cuadros de mando para decisiones",
       "metaTitle": "Estadísticas | RayGold ERP - Business Intelligence",
       "metaDescription": "Análisis de datos, informes personalizados y dashboards para toma de decisiones en joyerías.",
+      "intro": {
+        "titulo": "Los números del taller, sin montar el Excel",
+        "parrafos": [
+          "La información ya está dentro del sistema; el problema de siempre es sacarla. Estadísticas reúne los indicadores que de verdad se miran en un taller —lo que se ha fabricado, lo que se ha vendido, lo que ha costado— en cuadros de mando que se consultan directamente, sin pedírselos a nadie ni esperar al lunes.",
+          "Se puede mirar por periodos, comparando meses o ejercicios, o bajar al artículo concreto para ver qué referencias tiran y cuáles llevan un año ocupando sitio. Todo sale de los mismos datos con los que se trabaja a diario, así que no hay dos versiones distintas de la misma cifra."
+        ]
+      },
       "sections": {
         "dashboards": {
           "name": "Dashboards",
@@ -525,6 +574,13 @@
       "subtitle": "Gestión especializada para vendedores",
       "metaTitle": "Vendedores | RayGold ERP - Gestión Comercial",
       "metaDescription": "Gestión de equipos comerciales, comisiones, objetivos y seguimiento de ventas para joyerías.",
+      "intro": {
+        "titulo": "El comercial, con el catálogo encima",
+        "parrafos": [
+          "Un vendedor de joyería trabaja fuera, enseñando piezas y tomando nota en el mostrador del cliente. Necesita el catálogo con sus imágenes, el precio con el metal del día y la posibilidad de cerrar el pedido allí mismo, no una hoja de papel que luego alguien teclea en la oficina dos días después.",
+          "El módulo le da su propia aplicación, con el menú y el calendario ajustados a su ruta. Y a la dirección le da la otra mitad: las ventas por vendedor y por tienda, las comisiones calculadas sobre lo que realmente se ha cobrado, y un pipeline donde las oportunidades abiertas no dependen de la memoria de cada uno."
+        ]
+      },
       "sections": {
         "equipo": {
           "name": "Aplicacion",
@@ -587,6 +643,13 @@
       "subtitle": "Tiendas online y marketplaces integrados",
       "metaTitle": "E-commerce | RayGold ERP - Venta Online",
       "metaDescription": "Integración con tienda online, sincronización de stock y gestión de pedidos web para joyerías.",
+      "intro": {
+        "titulo": "La tienda y el taller, con un solo stock",
+        "parrafos": [
+          "Vender online con el stock del taller descuadrado acaba siempre igual: se vende una pieza que ya no está y hay que llamar al cliente. El módulo de e-commerce publica el catálogo a partir de los mismos artículos que fabrica el taller, con sus imágenes y especificaciones, y mantiene las existencias sincronizadas.",
+          "Incluye además el lado físico de la venta: TPV para el mostrador, planes de distribución para repartir producto entre puntos de venta y recuento cíclico por clases. Las tiendas y la web dejan de ser dos sistemas que hay que cuadrar y pasan a ser dos salidas del mismo inventario."
+        ]
+      },
       "sections": {
         "catalogo": {
           "name": "Catálogo Online",
@@ -649,7 +712,7 @@
       "subtitle": "Control y gestión de producción con impresoras 3D",
       "metaTitle": "Impresoras 3D | RayGold ERP - Producción 3D",
       "metaDescription": "Control y gestión de producción con impresoras 3D para joyería. Gestión de trabajos, materiales y configuración.",
-            "intro": {
+      "intro": {
         "titulo": "El parque de impresoras, dentro del ERP",
         "parrafos": [
           "En la mayoría de talleres la impresión 3D vive aparte: alguien sabe qué se está imprimiendo porque lo ha visto al pasar, la resina se estima a ojo y nadie sabe cuánto lleva una máquina desde el último mantenimiento. Print3D trata las impresoras como un recurso de producción más, con su ficha, su carga de trabajo y su coste.",
@@ -682,6 +745,13 @@
       "subtitle": "Acceso de clientes a pedidos y facturas",
       "metaTitle": "Portal Cliente | RayGold ERP Joyería",
       "metaDescription": "Portal web para que tus clientes consulten sus pedidos y facturas en tiempo real.",
+      "intro": {
+        "titulo": "Que el cliente mire, en vez de llamar",
+        "parrafos": [
+          "Cada llamada preguntando por un encargo le cuesta a alguien del taller dejar lo que está haciendo, buscar la pieza y devolver la llamada. El portal da a tus clientes acceso a sus propios pedidos, con el estado de cada uno, sin que nadie tenga que atender la consulta.",
+          "Con las facturas ocurre lo mismo: el cliente entra, consulta y se descarga el PDF que necesita cuando le hace falta, también fuera de horario. Es el módulo con menos pantallas de todo el sistema y uno de los que más horas devuelve al taller."
+        ]
+      },
       "sections": {
         "pedidos": {
           "name": "Pedidos",
@@ -718,6 +788,13 @@
       "subtitle": "Control de envíos a laboratorio gemológico e informes verificados",
       "metaTitle": "Certificaciones | RayGold ERP Joyería",
       "metaDescription": "Control de envíos a laboratorio gemológico e informes verificados",
+      "intro": {
+        "titulo": "El certificado, atado a la piedra",
+        "parrafos": [
+          "Una gema sin su certificado y un certificado sin su gema valen lo mismo: nada. El módulo de certificaciones lleva los envíos al laboratorio gemológico por lotes, con lo que sale, lo que vuelve y cuándo, para que ninguna piedra se quede esperando en un cajón a que alguien se acuerde de reclamarla.",
+          "Los informes recibidos quedan guardados junto a su lote y al laboratorio que los emitió. Así, el día que un cliente pregunta de dónde salió la esmeralda de su anillo, la respuesta se busca en el sistema y no en una carpeta que nadie sabe quién guardó."
+        ]
+      },
       "sections": {
         "consultas": {
           "name": "Certificados",
