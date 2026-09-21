@@ -140,9 +140,9 @@ export const legalSlugs: Record<string, Record<Lang, string>> = {
     'pt-br': 'cookies' 
   },
 };
-
 // Páginas legales que SÍ usan la carpeta /legal/
-const legalPagesInFolder = ['verifactu'];
+export const legalPagesInFolder = ['verifactu'];
+
 
 /**
  * Obtiene la URL de una página legal específica

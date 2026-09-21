@@ -12,7 +12,7 @@
  */
 
 import type { GetStaticPaths } from 'astro';
-import { supportedLangs, legalFolderSlugs, legalSlugs, type Lang } from '@/config/pages';
+import { supportedLangs, legalFolderSlugs, legalSlugs, legalPagesInFolder, type Lang } from '@/config/pages';
 
 // Templates
 import DeclaracionVerifactuPage from '@/templates/DeclaracionVerifactuPage.astro';
@@ -27,7 +27,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
   for (const lang of supportedLangs) {
     const legalFolder = legalFolderSlugs[lang];
     
-    for (const [pageId, slugs] of Object.entries(legalSlugs)) {
+       for (const [pageId, slugs] of Object.entries(legalSlugs)) {
+      // Solo las páginas que viven en /legal/ (VERI*FACTU); privacidad, términos y cookies están en la raíz
+      if (!legalPagesInFolder.includes(pageId)) continue;
       const pageSlug = slugs[lang];
       
       paths.push({
