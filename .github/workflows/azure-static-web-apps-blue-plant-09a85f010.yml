@@ -35,6 +35,20 @@ jobs:
           output_location: "dist" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
 
+      ###### IndexNow: avisa a Bing, Yandex, Seznam, Naver... tras cada deploy a producción ######
+      - name: Setup Node para IndexNow
+        if: github.event_name == 'push'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Aviso IndexNow
+        if: github.event_name == 'push'
+        continue-on-error: true
+        run: node scripts/indexnow.mjs
+        env:
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
