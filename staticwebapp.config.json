@@ -425,6 +425,25 @@
       "redirect": "/pt-br/blog/arquitectura-erp-joyeria",
       "statusCode": 301
     },
+        { "route": "/es/legal/privacidad", "redirect": "/es/privacidad", "statusCode": 301 },
+    { "route": "/es/legal/terminos", "redirect": "/es/terminos", "statusCode": 301 },
+    { "route": "/es/legal/cookies", "redirect": "/es/cookies", "statusCode": 301 },
+
+    { "route": "/ca/legal/privacitat", "redirect": "/ca/privacitat", "statusCode": 301 },
+    { "route": "/ca/legal/termes", "redirect": "/ca/termes", "statusCode": 301 },
+    { "route": "/ca/legal/cookies", "redirect": "/ca/cookies", "statusCode": 301 },
+
+    { "route": "/en/legal/privacy", "redirect": "/en/privacy", "statusCode": 301 },
+    { "route": "/en/legal/terms", "redirect": "/en/terms", "statusCode": 301 },
+    { "route": "/en/legal/cookies", "redirect": "/en/cookies", "statusCode": 301 },
+
+    { "route": "/fr/legal/confidentialite", "redirect": "/fr/confidentialite", "statusCode": 301 },
+    { "route": "/fr/legal/conditions", "redirect": "/fr/conditions", "statusCode": 301 },
+    { "route": "/fr/legal/cookies", "redirect": "/fr/cookies", "statusCode": 301 },
+
+    { "route": "/pt-br/legal/privacidade", "redirect": "/pt-br/privacidade", "statusCode": 301 },
+    { "route": "/pt-br/legal/termos", "redirect": "/pt-br/termos", "statusCode": 301 },
+    { "route": "/pt-br/legal/cookies", "redirect": "/pt-br/cookies", "statusCode": 301 },
     {
       "route": "/pt-br/blog/post-indice-serie-raytecno",
       "redirect": "/pt-br/blog/serie-control-produccion-joyeria",
