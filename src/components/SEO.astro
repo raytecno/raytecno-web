@@ -16,43 +16,52 @@
  * - [5] sameAs completo y apuntando a la página de EMPRESA de LinkedIn
  *
  * CORRECCIONES SEO (Septiembre 2026):
- * - [6] theme-color / TileColor eran literalmente "var(--accent)". Una variable
- *       CSS no se resuelve dentro de un <meta>: ahora son hex reales, con
- *       variante clara y oscura vía media.
- * - [7] JSON-LD unificado en UN SOLO @graph con @id estables. Antes se emitían
- *       3-4 scripts sueltos y Google trataba Organization como una entidad nueva
- *       en cada página. Ahora todas las páginas apuntan al MISMO
- *       #organization y #website. Esto es lo que consolida la entidad
- *       "Raytecno BCN SL / RayGold" en lugar de repetirla 300 veces.
- * - [8] Organization: descripción de EMPRESA (antes reusaba la del producto),
- *       + alternateName, + knowsAbout, + areaServed, + vatID opcional.
- *       knowsAbout es la señal temática que usan buscadores y modelos para
- *       entender de qué va la entidad: aquí se declara ERP joyero, no CAD.
- * - [9] dateModified ya NO es la fecha del build. Se recalculaba en cada
- *       despliegue y declaraba contenido fresco cuando no lo era. Ahora usa
- *       modifiedTime de la página, o SITE_LAST_UPDATED como respaldo.
- * - [10] og:locale:alternate se deriva de alternateUrls: solo se declaran los
- *        idiomas que esa página realmente tiene traducidos.
- * - [11] noindex pasa de "noindex, nofollow" a "noindex, follow": se sigue
- *        repartiendo autoridad por los enlaces internos de esas páginas.
- * - [12] Article incluye headline y publisher con logo (requisito de Google
- *        para artículos; el blog no los tenía).
- * - [13] Breadcrumbs: etiquetas legibles ("RayGold", "IA", "3D" bien escritos)
- *        y prop opcional `breadcrumbs` para sobrescribirlas.
- * - [14] Descripciones por defecto: "+35 años de experiencia" -> "Desde 1990".
- *        El número quedaba desfasado cada enero y contradecía los "36 años"
- *        del resto del sitio.
- * - [15] Eliminados los preconnect duplicados: ya están en Layout.astro, antes
- *        en el <head>, que es donde sirven de algo.
+ * - [6] theme-color / TileColor con hex reales, variante clara y oscura.
+ * - [7] JSON-LD unificado en UN SOLO @graph con @id estables.
+ * - [8] Organization: descripción de EMPRESA, alternateName, knowsAbout, areaServed.
+ * - [9] dateModified ya NO es la fecha del build.
+ * - [10] og:locale:alternate solo con los idiomas reales de la página.
+ * - [11] noindex pasa a "noindex, follow".
+ * - [12] Article incluye headline y publisher.
+ * - [13] Breadcrumbs legibles y prop opcional `breadcrumbs`.
+ * - [14] Descripciones por defecto: "Desde 1990".
+ * - [15] Eliminados los preconnect duplicados.
  * - [16] Añadido <link rel="sitemap">.
+ *
+ * CORRECCIONES SEO (Septiembre 2026 - indexación):
+ * - [17] HREFLANG DERIVADO DE pages.ts. Antes dependía de que cada página
+ *        pasara alternateUrls, y muchas no lo hacían o pasaban solo 2 idiomas.
+ *        Ahora las traducciones se calculan desde pageSlugs, moduloSlugs,
+ *        toolSlugs y legalSlugs (misma lógica que el sitemap en
+ *        astro.config.mjs). Si la ruta no está en pages.ts, se usa
+ *        alternateUrls como antes.
+ * - [18] x-default -> inglés también en el sitemap (astro.config.mjs).
+ *        Antes el <head> decía inglés y el sitemap español: señales opuestas.
+ * - [19] SoftwareApplication solo se emitía con type="product", que no usa
+ *        ninguna página: el producto RayGold no existía en el grafo. Ahora
+ *        sale en home, qué es RayGold, módulos y precios, con descripción
+ *        fija del producto (no la de cada página).
+ * - [20] Dirección: "Montgat" estaba como calle y "Barcelona" como localidad.
+ *        Ahora localidad = Montgat, provincia = Barcelona.
+ * - [21] Eliminado "screenshot": apuntaba a una propiedad que no existía.
  *
  * PENDIENTE DE VERIFICAR (no se puede arreglar desde aquí):
  * - /images/og-default.jpg debe existir en el output del build.
- * - /images/raygold-dashboard-screenshot.jpg idem, o quitar "screenshot".
  * - offers.price "29" debe coincidir EXACTAMENTE con /[lang]/precios.
  */
 
-import { type Lang } from "@/config/pages";
+import {
+  type Lang,
+  supportedLangs,
+  pageSlugs,
+  moduloSlugs,
+  toolSlugs,
+  legalSlugs,
+  getPageUrl,
+  getModuloUrl,
+  getToolUrl,
+  getLegalUrl,
+} from "@/config/pages";
 
 // ============================================
 // CONFIGURACIÓN DE LA EMPRESA
@@ -61,7 +70,7 @@ const COMPANY = {
   name: "RayGold ERP",
   legalName: "Raytecno BCN SL",
 
-  // Dominios - TODO va a .es (el .com redirige)
+  // Dominios - TODO va a .es (el .com redirige con 301 desde Don Dominio)
   primaryDomain: "https://www.raytecno.es",
 
   // Imágenes
@@ -73,18 +82,16 @@ const COMPANY = {
   phoneDisplay: "+34 648 088 550",
   email: "info@raytecno.es",
 
-  // Dirección
+  // [20] Dirección. street vacío = no se publica la calle.
   address: {
-    street: "Montgat",
-    city: "Barcelona",
-    region: "Cataluña",
+    street: "",
+    city: "Montgat",
+    region: "Barcelona",
     postalCode: "08390",
     country: "ES",
   },
 
   // Redes sociales
-  // NOTA: para schema Organization, LinkedIn debe ser la página de EMPRESA
-  // (/company/...), no un perfil personal (/in/...).
   social: {
     linkedinCompany: "https://www.linkedin.com/company/raytecno",
     twitter: "@raytecno",
@@ -94,7 +101,7 @@ const COMPANY = {
     youtube: "https://youtube.com/@raytecnobcn?si=TpJy90rEnuwgzMGT",
   },
 
-  // [6] Colores reales. theme-color pinta la barra del navegador en móvil.
+  // [6] Colores reales
   themeColorLight: "#fafaf8",
   themeColorDark: "#0f172a",
   tileColor: "#a8862b",
@@ -102,8 +109,7 @@ const COMPANY = {
   // Datos de la empresa
   foundingDate: "1990",
 
-  // [8] CIF. Señal fuerte de identidad para una empresa española.
-  // Descomentar y rellenar cuando quieras publicarlo.
+  // [8] CIF. Descomentar y rellenar cuando quieras publicarlo.
   // vatID: "ESB********",
 
   // Mercados activos
@@ -120,17 +126,12 @@ const COMPANY = {
 };
 
 // [9] Fecha de última revisión editorial del sitio.
-// Súbela a mano cuando revises contenido de verdad, no en cada despliegue.
 const SITE_LAST_UPDATED = "2026-09-16";
 
-// Longitud máxima recomendada de título (solo aviso en desarrollo)
 const MAX_TITLE_LENGTH = 60;
-
-// Detecta si un título ya contiene la marca, para no duplicarla
 const BRAND_PATTERN = /raygold/i;
 
 // [8] Temas sobre los que la entidad tiene autoridad.
-// Es la lista que separa "ERP de fabricación joyera" de "software CAD de joyería".
 const KNOWS_ABOUT = [
   "ERP para joyería",
   "software de gestión para talleres de joyería",
@@ -161,6 +162,9 @@ const SEGMENT_FIXES: Record<string, string> = {
   iva: "IVA",
 };
 
+// [19] Páginas de pageSlugs donde se publica la entidad SoftwareApplication
+const SOFTWARE_PAGES = ["home", "queEsRayGold", "modulos", "precios"];
+
 // ============================================
 // CONFIGURACIÓN POR IDIOMA
 // ============================================
@@ -170,7 +174,6 @@ const LANG_CONFIG: Record<Lang, {
   languageName: string;
   defaultTitle: string;
   defaultDescription: string;
-  /** [8] Descripción de la EMPRESA, no del producto. Va en Organization. */
   orgDescription: string;
   defaultKeywords: string[];
   homeLabel: string;
@@ -242,14 +245,12 @@ interface Props {
   description?: string;
   keywords?: string[];
   image?: string;
-  /** Texto alternativo de la imagen OG. Describe la IMAGEN, no la página. */
   imageAlt?: string;
   type?: "website" | "article" | "product";
   noindex?: boolean;
   publishedTime?: string;
   modifiedTime?: string;
   alternateUrls?: { lang: Lang; url: string }[];
-  /** [13] Migas personalizadas. Si se pasan, sustituyen a las automáticas. */
   breadcrumbs?: { name: string; url?: string }[];
 }
 
@@ -272,13 +273,8 @@ const {
 // VARIABLES CALCULADAS
 // ============================================
 const config = LANG_CONFIG[lang] || LANG_CONFIG.es;
-
-// Siempre usar el dominio principal .es
 const siteDomain = COMPANY.primaryDomain;
 
-// ============================================
-// FUNCIÓN HELPER: Eliminar trailing slash
-// ============================================
 function removeTrailingSlash(url: string): string {
   if (url === '/' || url.endsWith('://')) return url;
   return url.endsWith('/') ? url.slice(0, -1) : url;
@@ -286,12 +282,6 @@ function removeTrailingSlash(url: string): string {
 
 // ============================================
 // URL CANONICAL - CORREGIDO para build estático
-//
-// Problema: Astro.url.pathname en build estático a veces
-// devuelve "/" en vez del path real para rutas dinámicas [lang].
-//
-// Solución: Usar alternateUrls[lang].url como fuente de verdad
-// cuando está disponible.
 // ============================================
 function getCanonicalPath(): string {
   const currentLangAlt = alternateUrls.find(alt => alt.lang === lang);
@@ -318,31 +308,81 @@ const currentPath = getCanonicalPath();
 const canonicalUrl = `${siteDomain}${currentPath}`;
 
 // ============================================
+// [17] TRADUCCIONES DERIVADAS DE pages.ts
+// Misma lógica que el sitemap en astro.config.mjs.
+// ============================================
+type AltGroup = { source: string; key: string; urls: Record<Lang, string> };
+
+function buildAltIndex(): Map<string, AltGroup> {
+  const index = new Map<string, AltGroup>();
+
+  const register = (
+    source: string,
+    key: string,
+    build: (l: Lang) => string,
+    allowLangRoot = false,
+  ) => {
+    const urls = {} as Record<Lang, string>;
+    for (const l of supportedLangs) {
+      const path = removeTrailingSlash(build(l));
+      // Las funciones de pages.ts devuelven /{lang} cuando falta un slug
+      if (!allowLangRoot && path === `/${l}`) return;
+      urls[l] = path;
+    }
+    const group = { source, key, urls };
+    for (const path of Object.values(urls)) index.set(path, group);
+  };
+
+  for (const key of Object.keys(pageSlugs)) register("page", key, (l) => getPageUrl(key, l), key === "home");
+  for (const key of Object.keys(moduloSlugs)) register("modulo", key, (l) => getModuloUrl(key, l));
+  for (const key of Object.keys(toolSlugs)) register("tool", key, (l) => getToolUrl(key, l));
+  for (const key of Object.keys(legalSlugs)) register("legal", key, (l) => getLegalUrl(key, l));
+
+  return index;
+}
+
+const BLOG_RE = /^\/(es|en|fr|ca|pt-br)(\/blog(?:\/.*)?)$/;
+
+function getAltGroup(path: string): AltGroup | null {
+  const group = buildAltIndex().get(path);
+  if (group) return group;
+  const m = path.match(BLOG_RE);
+  if (m) {
+    const urls = Object.fromEntries(supportedLangs.map(l => [l, `/${l}${m[2]}`])) as Record<Lang, string>;
+    return { source: "blog", key: m[2], urls };
+  }
+  return null;
+}
+
+const altGroup = getAltGroup(currentPath);
+
+// Fuente de verdad: pages.ts. Si la ruta no está ahí, lo que pase la página.
+const effectiveAlternates: { lang: Lang; url: string }[] = altGroup
+  ? supportedLangs.map(l => ({ lang: l, url: altGroup.urls[l] }))
+  : alternateUrls;
+
+// ============================================
 // TÍTULO - [1] Sin duplicar la marca
 // ============================================
 const fullTitle = title
   ? (BRAND_PATTERN.test(title) ? title : `${title} | ${COMPANY.name}`)
   : config.defaultTitle;
 
-// Aviso SOLO en desarrollo: Google muestra ~60 caracteres
 if (import.meta.env.DEV && fullTitle.length > MAX_TITLE_LENGTH) {
   console.warn(
     `[SEO] Título de ${fullTitle.length} car. (recomendado <= ${MAX_TITLE_LENGTH}) en ${currentPath}\n      "${fullTitle}"`
   );
 }
 
-// Descripción
 const finalDescription = description || config.defaultDescription;
 
-// Aviso SOLO en desarrollo: Google corta la descripción sobre los 160 car.
 if (import.meta.env.DEV && finalDescription.length > 160) {
   console.warn(
     `[SEO] Descripción de ${finalDescription.length} car. (se cortará en ~160) en ${currentPath}`
   );
 }
 
-// Keywords - NO se emiten como meta tag (Google las ignora desde 2009).
-// Se conservan como documentación interna de la intención de cada idioma.
+// Keywords - NO se emiten como meta tag. Documentación interna.
 const finalKeywords = keywords || config.defaultKeywords;
 
 // Imagen OG
@@ -350,19 +390,10 @@ const ogImage = image
   ? (image.startsWith("http") ? image : `${siteDomain}${image}`)
   : `${siteDomain}${COMPANY.defaultOgImage}`;
 
-// [3] Alt de la imagen OG: describe la imagen, no repite el título
 const ogImageAlt = imageAlt || config.ogImageAlt;
-
-// Logo absoluto
 const logoUrl = `${siteDomain}${COMPANY.logo}`;
-
-// [9] Fecha de modificación: la de la página, o la revisión del sitio.
-// Nunca la fecha del build.
 const finalModified = modifiedTime || SITE_LAST_UPDATED;
 
-// ============================================
-// FUNCIÓN HELPER: Normalizar URL para hreflang
-// ============================================
 function buildHreflangUrl(altUrl: string): string {
   if (altUrl.startsWith('http')) {
     return removeTrailingSlash(altUrl);
@@ -371,28 +402,23 @@ function buildHreflangUrl(altUrl: string): string {
   return `${siteDomain}${cleanPath}`;
 }
 
-// ============================================
-// FILTRAR ALTERNATE URLS
 // Las páginas noindex NO generan hreflang
-// ============================================
-const indexableAlternateUrls = noindex ? [] : alternateUrls;
+const indexableAlternateUrls = noindex ? [] : effectiveAlternates;
 
 // ============================================
 // [10] LOCALES ALTERNATIVOS PARA OPEN GRAPH
-// Solo los idiomas que esta página tiene de verdad.
-// Si la página no declara alternateUrls, se asume que existe en todos.
 // ============================================
 const ogAlternateLocales = (
-  alternateUrls.length > 0
-    ? alternateUrls.filter(alt => alt.lang !== lang).map(alt => LANG_CONFIG[alt.lang]?.locale)
+  effectiveAlternates.length > 0
+    ? effectiveAlternates.filter(alt => alt.lang !== lang).map(alt => LANG_CONFIG[alt.lang]?.locale)
     : Object.entries(LANG_CONFIG).filter(([code]) => code !== lang).map(([_, conf]) => conf.locale)
 ).filter(Boolean);
 
 // ============================================
-// [4] X-DEFAULT
+// [4][18] X-DEFAULT -> versión inglesa (igual que el sitemap)
 // ============================================
 function getXDefaultUrl(): string {
-  const englishAlt = alternateUrls.find(alt => alt.lang === 'en');
+  const englishAlt = effectiveAlternates.find(alt => alt.lang === 'en');
   if (englishAlt) {
     return buildHreflangUrl(englishAlt.url);
   }
@@ -403,11 +429,6 @@ const xDefaultUrl = getXDefaultUrl();
 
 // ============================================
 // [7] IDENTIFICADORES ESTABLES DEL GRAFO
-//
-// Esto es la corrección de fondo. Con @id fijos, Organization y WebSite
-// son LA MISMA entidad en las 300 páginas del sitio, no 300 entidades
-// distintas que se parecen. Es lo que permite que un buscador consolide
-// "Raytecno BCN SL" y "RayGold" en una sola ficha.
 // ============================================
 const ORG_ID = `${siteDomain}/#organization`;
 const SITE_ID = `${siteDomain}/#website`;
@@ -429,7 +450,6 @@ const schemaOrganization = {
     "url": logoUrl,
   },
   "image": logoUrl,
-  // [8] Descripción de empresa, no de producto
   "description": config.orgDescription,
   "foundingDate": COMPANY.foundingDate,
   "knowsAbout": KNOWS_ABOUT,
@@ -437,9 +457,10 @@ const schemaOrganization = {
     "@type": "Country",
     "identifier": code,
   })),
+  // [20] Localidad y provincia correctas; la calle solo si está rellenada
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": COMPANY.address.street,
+    ...(COMPANY.address.street && { "streetAddress": COMPANY.address.street }),
     "addressLocality": COMPANY.address.city,
     "addressRegion": COMPANY.address.region,
     "postalCode": COMPANY.address.postalCode,
@@ -452,7 +473,6 @@ const schemaOrganization = {
     "contactType": "sales",
     "availableLanguage": ["Spanish", "English", "French", "Catalan", "Portuguese"],
   },
-  // [5] Perfiles oficiales completos. LinkedIn = página de empresa.
   "sameAs": [
     COMPANY.social.linkedinCompany,
     COMPANY.social.twitterUrl,
@@ -476,9 +496,8 @@ const schemaWebSite = {
 
 // ============================================
 // SCHEMA.ORG - SOFTWARE APPLICATION
-//
-// IMPORTANTE: "offers.price" debe coincidir EXACTAMENTE
-// con lo publicado en /[lang]/precios.
+// [19] Descripción FIJA del producto, no la de cada página.
+// IMPORTANTE: "offers.price" debe coincidir con /[lang]/precios.
 // ============================================
 const schemaSoftware = {
   "@type": "SoftwareApplication",
@@ -488,13 +507,12 @@ const schemaSoftware = {
   "applicationCategory": "BusinessApplication",
   "applicationSubCategory": "Enterprise Resource Planning",
   "operatingSystem": "Windows, Web, Cloud",
-  "description": finalDescription,
+  "description": config.defaultDescription,
   "url": COMPANY.primaryDomain,
-  "image": ogImage,
-  "screenshot": COMPANY.screenshot,
+  "image": `${siteDomain}${COMPANY.defaultOgImage}`,
   "softwareVersion": "2026",
   "datePublished": "1990-01-01",
-  "dateModified": finalModified,
+  "dateModified": SITE_LAST_UPDATED,
   "inLanguage": ["es", "en", "fr", "ca", "pt-BR"],
   "author": { "@id": ORG_ID },
   "publisher": { "@id": ORG_ID },
@@ -542,9 +560,13 @@ const schemaSoftware = {
   }),
 };
 
+// [19] ¿Esta página presenta el producto?
+const showSoftware =
+  type === "product" ||
+  (altGroup?.source === "page" && SOFTWARE_PAGES.includes(altGroup.key));
+
 // ============================================
 // SCHEMA.ORG - WEBPAGE / ARTICLE
-// [12] Article necesita headline y publisher con logo.
 // ============================================
 const schemaWebPage = {
   "@type": type === "article" ? "Article" : "WebPage",
@@ -555,12 +577,11 @@ const schemaWebPage = {
   "image": ogImage,
   "inLanguage": config.hreflang,
   "isPartOf": { "@id": SITE_ID },
-  "about": { "@id": ORG_ID },
+  "about": { "@id": showSoftware ? SOFTWARE_ID : ORG_ID },
   "breadcrumb": { "@id": breadcrumbId },
   ...(publishedTime && { "datePublished": publishedTime }),
   "dateModified": finalModified,
   ...(type === "article" && {
-    // headline: Google recomienda no pasar de 110 caracteres
     "headline": fullTitle.slice(0, 110),
     "author": { "@id": ORG_ID },
     "publisher": { "@id": ORG_ID },
@@ -569,7 +590,6 @@ const schemaWebPage = {
 
 // ============================================
 // SCHEMA.ORG - BREADCRUMB
-// [13] Etiquetas legibles + posibilidad de sobrescribirlas por prop
 // ============================================
 function prettifySegment(segment: string): string {
   const fixed = SEGMENT_FIXES[segment.toLowerCase()];
@@ -613,7 +633,6 @@ const schemaBreadcrumb = {
 
 // ============================================
 // [7] GRAFO ÚNICO
-// Un solo <script>, todas las entidades enlazadas por @id.
 // ============================================
 const schemaGraph = {
   "@context": "https://schema.org",
@@ -622,7 +641,7 @@ const schemaGraph = {
     schemaWebSite,
     schemaWebPage,
     schemaBreadcrumb,
-    ...(type === "product" ? [schemaSoftware] : []),
+    ...(showSoftware ? [schemaSoftware] : []),
   ],
 };
 ---
@@ -642,7 +661,7 @@ const schemaGraph = {
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 )}
 
-<!-- Canonical - Usa el path calculado correctamente -->
+<!-- Canonical -->
 <link rel="canonical" href={canonicalUrl} />
 
 <!-- [16] Sitemap declarado también en el head -->
@@ -650,8 +669,7 @@ const schemaGraph = {
 
 <!-- ========================================
      HREFLANG (Multiidioma)
-     - URLs SIN trailing slash (coherente con canonicals)
-     - Solo se generan si la página NO tiene noindex
+     [17] Derivado de pages.ts; mismos códigos que el sitemap
      ======================================== -->
 {indexableAlternateUrls.map((alt) => (
   <link
@@ -661,7 +679,6 @@ const schemaGraph = {
   />
 ))}
 
-<!-- x-default: Solo para páginas indexables con alternateUrls -->
 {indexableAlternateUrls.length > 0 && (
   <link
     rel="alternate"
@@ -684,12 +701,10 @@ const schemaGraph = {
 <meta property="og:locale" content={config.locale} />
 <meta property="og:site_name" content={COMPANY.name} />
 
-<!-- [10] Locales alternativos: solo los idiomas reales de esta página -->
 {ogAlternateLocales.map((loc) => (
   <meta property="og:locale:alternate" content={loc} />
 ))}
 
-<!-- Article meta (solo para blogs) -->
 {type === "article" && publishedTime && (
   <meta property="article:published_time" content={publishedTime} />
 )}
@@ -711,8 +726,6 @@ const schemaGraph = {
 
 <!-- ========================================
      TEMA Y COLORES
-     [6] Hex reales. Antes se emitía "var(--accent)", que el navegador
-     descarta: la barra de direcciones en móvil salía siempre por defecto.
      ======================================== -->
 <meta name="theme-color" media="(prefers-color-scheme: light)" content={COMPANY.themeColorLight} />
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content={COMPANY.themeColorDark} />
@@ -735,6 +748,5 @@ const schemaGraph = {
 
 <!-- ========================================
      SCHEMA.ORG JSON-LD
-     [7] Un único grafo con @id estables en todo el sitio.
      ======================================== -->
 <script type="application/ld+json" set:html={JSON.stringify(schemaGraph)}></script>
