@@ -73,14 +73,14 @@ const {
 
 // [A] Código interno -> etiqueta BCP-47 para el atributo lang del <html>
 const HTML_LANG: Record<Lang, string> = {
-  es: "es-ES",
-  ca: "ca-ES",
+  es: "es",
+  ca: "ca",
   en: "en",
-  fr: "fr-FR",
+  fr: "fr",
   "pt-br": "pt-BR",
 };
 
-const htmlLang = HTML_LANG[lang] || "es-ES";
+const htmlLang = HTML_LANG[lang] || "es";
 ---
 
 <!doctype html>
