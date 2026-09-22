@@ -4,6 +4,18 @@
  * src/templates/DeclaracionVerifactuPage.astro
  * 
  * CORREGIDO: El CTA ahora usa getPageUrl('contacto', lang) en vez de hardcodear /contacto
+ *
+ * TEMA CLARO/OSCURO (Septiembre 2026):
+ * - ELIMINADO el bloque :root {} del <style>. Astro no puede aislarlo y
+ *   pisaba --primary/--text/--border en TODA la web al cargar esta página
+ *   (mismo bug que tuvo Contacto.astro). Las variables locales viven ahora
+ *   en .legal-page y apuntan a tokens --rg-.
+ * - Fuera el h1 con texto recortado sobre degradado blanco (invisible en claro).
+ * - Fuera el violeta #667eea/#764ba2: el acento es var(--rg-accent).
+ * - Fuera el override blanco de móvil: el tema manda en todos los anchos.
+ * - Etiquetas en minúscula normal (sin uppercase).
+ * - Marcado y textos sin cambios, salvo los stop-color del logo (inline style
+ *   para que acepten variables CSS).
  */
 
 import Layout from "@/layouts/Layout.astro";
@@ -498,7 +510,7 @@ const contactUrl = getPageUrl('contacto', lang);
                   fill="url(#logo-gradient)"></rect>
                 <path
                   d="M20 32h24M32 20v24"
-                  stroke="white"
+                  stroke="var(--rg-on-ink)"
                   stroke-width="4"
                   stroke-linecap="round"></path>
                 <defs>
@@ -509,8 +521,8 @@ const contactUrl = getPageUrl('contacto', lang);
                     x2="56"
                     y2="56"
                   >
-                    <stop stop-color="var(--accent)"></stop>
-                    <stop offset="1" stop-color="#764ba2"></stop>
+                    <stop style="stop-color: var(--rg-accent)"></stop>
+                    <stop offset="1" style="stop-color: var(--rg-accent-ink)"></stop>
                   </linearGradient>
                 </defs>
               </svg>
@@ -805,23 +817,28 @@ const contactUrl = getPageUrl('contacto', lang);
 </Layout>
 
 <style>
-  /* Variables */
-  :root {
-    --primary: var(--accent);
-    --primary-dark: #5a67d8;
-    --secondary: #764ba2;
-    --success: #10b981;
-    --bg-dark: var(--ink);
-    --bg-card: rgba(255, 255, 255, 0.03);
-    --border: rgba(255, 255, 255, 0.1);
-    --text: var(--line);
-    --text-muted: var(--soft);
+  /* ── Variables locales, SIEMPRE dentro de .legal-page ───────────────────
+     Nunca en :root: Astro no puede aislar :root y lo aplicaría a toda la web.
+     --ok / --ko: verde y rojo semánticos, ajustados por tema. */
+  .legal-page {
+    --ok: #1f7a4d;
+    --ok-soft: rgba(31, 122, 77, 0.1);
+    --ko: #b42318;
+    --ko-soft: rgba(180, 35, 24, 0.09);
+    --card-r: 16px;
+    --item-r: 10px;
+
+    min-height: 100vh;
+    background: var(--rg-bg);
+    color: var(--rg-ink);
+    transition: background 0.25s ease, color 0.25s ease;
   }
 
-  .legal-page {
-    min-height: 100vh;
-    background: var(--bg-dark);
-    color: var(--text);
+  :global([data-theme="oscuro"]) .legal-page {
+    --ok: #4ade80;
+    --ok-soft: rgba(74, 222, 128, 0.12);
+    --ko: #f87171;
+    --ko-soft: rgba(248, 113, 113, 0.12);
   }
 
   .container {
@@ -830,111 +847,111 @@ const contactUrl = getPageUrl('contacto', lang);
     padding: 0 1.5rem;
   }
 
-  /* Hero */
+  /* ── Hero ───────────────────────────────────────────────────────────── */
   .hero {
-    padding: 6rem 0 4rem;
+    padding: 8rem 0 4rem;
     text-align: center;
-    background: linear-gradient(
-      135deg,
-      rgba(102, 126, 234, 0.1) 0%,
-      rgba(118, 75, 162, 0.1) 100%
-    );
-    border-bottom: 1px solid var(--border);
+    background: var(--rg-bg);
+    border-bottom: 1px solid var(--rg-line);
   }
 
   .badge {
     display: inline-block;
-    padding: 0.5rem 1rem;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    border-radius: 50px;
-    font-size: 0.875rem;
+    padding: 0.4rem 0.95rem;
+    background: var(--rg-accent-soft);
+    color: var(--rg-accent);
+    border: 1px solid color-mix(in srgb, var(--rg-accent) 35%, transparent);
+    border-radius: 999px;
+    font-size: 0.8rem;
     font-weight: 600;
+    letter-spacing: 0.02em;
     margin-bottom: 1.5rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
   }
 
   .hero h1 {
+    font-family: var(--rg-display);
     font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: 700;
+    font-weight: 600;
+    line-height: 1.12;
+    letter-spacing: -0.015em;
+    color: var(--rg-ink);
     margin-bottom: 1rem;
-    background: linear-gradient(135deg, #fff, var(--text));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
   }
 
   .subtitle {
-    font-size: 1.125rem;
-    color: var(--text-muted);
-    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    color: var(--rg-soft);
+    max-width: 38rem;
+    margin: 0 auto 2rem;
   }
 
   .download-btn {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.875rem 1.5rem;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    color: white;
+    gap: 0.55rem;
+    padding: 0.8rem 1.4rem;
+    background: var(--rg-ink);
+    color: var(--rg-on-ink);
     text-decoration: none;
-    border-radius: 8px;
+    border-radius: 999px;
     font-weight: 600;
-    transition:
-      transform 0.2s,
-      box-shadow 0.2s;
+    font-size: 0.95rem;
+    transition: background 0.2s, color 0.2s;
   }
 
   .download-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    background: var(--rg-accent);
+    color: var(--rg-on-ink);
   }
 
   .last-update {
-    font-size: 0.875rem;
-    color: var(--text-muted);
+    font-size: 0.85rem;
+    color: var(--rg-faint);
     margin-top: 1.5rem;
   }
 
-  /* Content */
+  /* ── Contenido ──────────────────────────────────────────────────────── */
   .content {
     padding: 4rem 0;
   }
 
-  /* Section Cards */
   .section-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
+    background: var(--rg-panel);
+    border: 1px solid var(--rg-line);
+    border-radius: var(--card-r);
     padding: 2rem;
     margin-bottom: 2rem;
-    backdrop-filter: blur(10px);
   }
 
   .section-card h2 {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    font-size: 1.5rem;
+    gap: 0.9rem;
+    font-family: var(--rg-display);
+    font-size: 1.45rem;
     font-weight: 600;
+    color: var(--rg-ink);
     margin-bottom: 1.5rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--rg-line);
   }
 
   .section-number {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    border-radius: 8px;
-    font-size: 1rem;
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    background: var(--rg-accent-soft);
+    color: var(--rg-accent);
+    border-radius: 999px;
+    font-family: var(--rg-sans);
+    font-size: 0.95rem;
     font-weight: 700;
   }
 
-  /* Data Grid */
+  /* ── Datos del sistema ──────────────────────────────────────────────── */
   .data-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -945,50 +962,48 @@ const contactUrl = getPageUrl('contacto', lang);
   .data-item {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    align-items: flex-start;
+    gap: 0.4rem;
   }
 
   .data-item .label {
-    font-size: 0.875rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    font-size: 0.85rem;
+    color: var(--rg-faint);
   }
 
   .data-item .value {
-    font-size: 1.125rem;
+    font-size: 1.1rem;
     font-weight: 600;
+    color: var(--rg-ink);
   }
 
   .data-item .value.highlight {
-    color: var(--primary);
+    color: var(--rg-accent);
     font-size: 1.25rem;
   }
 
-  .version-badge {
+  .data-item .value.version-badge {
     display: inline-block;
-    padding: 0.25rem 0.75rem;
-    background: rgba(16, 185, 129, 0.2);
-    color: var(--success);
-    border-radius: 50px;
-    font-size: 1rem !important;
+    padding: 0.2rem 0.75rem;
+    background: var(--ok-soft);
+    color: var(--ok);
+    border-radius: 999px;
+    font-size: 0.95rem;
   }
 
-  /* Subsections */
   .subsection {
     margin-top: 2rem;
     padding-top: 1.5rem;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--rg-line);
   }
 
   .subsection h3 {
-    font-size: 1.125rem;
+    font-size: 1.05rem;
     font-weight: 600;
     margin-bottom: 1rem;
-    color: var(--text);
+    color: var(--rg-ink);
   }
 
-  /* Tech Grid */
   .tech-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -1000,24 +1015,21 @@ const contactUrl = getPageUrl('contacto', lang);
     flex-direction: column;
     gap: 0.25rem;
     padding: 1rem;
-    background: rgba(255, 255, 255, 0.02);
-    border-radius: 8px;
-    border: 1px solid var(--border);
+    background: var(--rg-sup2);
+    border-radius: var(--item-r);
+    border: 1px solid var(--rg-line);
   }
 
   .tech-label {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+    color: var(--rg-faint);
   }
 
   .tech-value {
     font-weight: 600;
-    color: var(--text);
+    color: var(--rg-ink);
   }
 
-  /* Feature List */
   .feature-list {
     list-style: none;
     padding: 0;
@@ -1026,71 +1038,73 @@ const contactUrl = getPageUrl('contacto', lang);
 
   .feature-list li {
     position: relative;
-    padding-left: 1.5rem;
-    margin-bottom: 0.75rem;
-    color: var(--text-muted);
-    line-height: 1.6;
+    padding-left: 1.4rem;
+    margin-bottom: 0.7rem;
+    color: var(--rg-soft);
+    line-height: 1.65;
   }
 
   .feature-list li::before {
     content: "";
     position: absolute;
     left: 0;
-    top: 0.5rem;
+    top: 0.62rem;
     width: 6px;
     height: 6px;
-    background: var(--primary);
+    background: var(--rg-accent);
     border-radius: 50%;
   }
 
   .description {
-    color: var(--text-muted);
-    line-height: 1.7;
+    color: var(--rg-soft);
+    line-height: 1.75;
   }
 
-  /* Yes/No Grid */
+  /* ── Sí / No ────────────────────────────────────────────────────────── */
   .yes-no-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1rem;
     margin-top: 2rem;
     padding-top: 1.5rem;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--rg-line);
   }
 
   .yes-no-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
     padding: 1rem;
-    background: rgba(255, 255, 255, 0.02);
-    border-radius: 8px;
-    border: 1px solid var(--border);
+    background: var(--rg-sup2);
+    border-radius: var(--item-r);
+    border: 1px solid var(--rg-line);
   }
 
   .yes-no-item .question {
     font-size: 0.9rem;
-    color: var(--text-muted);
+    color: var(--rg-soft);
   }
 
   .yes-no-item .answer {
-    padding: 0.25rem 0.75rem;
-    border-radius: 4px;
+    flex-shrink: 0;
+    padding: 0.2rem 0.75rem;
+    border-radius: 999px;
     font-weight: 700;
-    font-size: 0.875rem;
+    font-size: 0.8rem;
   }
 
   .yes-no-item .answer.yes {
-    background: rgba(16, 185, 129, 0.2);
-    color: var(--success);
+    background: var(--ok-soft);
+    color: var(--ok);
   }
 
   .yes-no-item .answer.no {
-    background: rgba(239, 68, 68, 0.2);
-    color: #ef4444;
+    background: var(--ko-soft);
+    color: var(--ko);
   }
 
-  /* Company Info */
+  /* ── Entidad productora ─────────────────────────────────────────────── */
   .company-info {
     display: flex;
     gap: 1.5rem;
@@ -1103,10 +1117,11 @@ const contactUrl = getPageUrl('contacto', lang);
   }
 
   .company-details h3 {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     font-weight: 700;
     margin-bottom: 1rem;
-    color: var(--text);
+    color: var(--rg-ink);
+    letter-spacing: 0.02em;
   }
 
   .detail-row {
@@ -1117,25 +1132,24 @@ const contactUrl = getPageUrl('contacto', lang);
   }
 
   .detail-row .label {
-    color: var(--text-muted);
+    color: var(--rg-faint);
     min-width: 80px;
   }
 
   .detail-row .value {
-    color: var(--text);
+    color: var(--rg-ink);
   }
 
-  /* Conformity */
   .conformity-box {
-    background: rgba(102, 126, 234, 0.1);
-    border: 1px solid rgba(102, 126, 234, 0.3);
+    background: var(--rg-accent-soft);
+    border: 1px solid color-mix(in srgb, var(--rg-accent) 30%, transparent);
     border-radius: 12px;
     padding: 1.5rem;
   }
 
   .conformity-box p {
     margin-bottom: 1rem;
-    color: var(--text);
+    color: var(--rg-ink);
   }
 
   .conformity-box ul {
@@ -1148,24 +1162,24 @@ const contactUrl = getPageUrl('contacto', lang);
     position: relative;
     padding-left: 1.5rem;
     margin-bottom: 0.5rem;
-    color: var(--text-muted);
+    color: var(--rg-soft);
   }
 
   .conformity-box li::before {
     content: "✓";
     position: absolute;
     left: 0;
-    color: var(--success);
+    color: var(--ok);
     font-weight: bold;
   }
 
-  /* Signature Info */
   .signature-info {
     display: flex;
+    flex-wrap: wrap;
     gap: 2rem;
     margin-top: 2rem;
     padding-top: 1.5rem;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--rg-line);
   }
 
   .signature-item {
@@ -1174,77 +1188,80 @@ const contactUrl = getPageUrl('contacto', lang);
   }
 
   .signature-item .label {
-    color: var(--text-muted);
+    color: var(--rg-faint);
   }
 
   .signature-item .value {
     font-weight: 600;
+    color: var(--rg-ink);
   }
 
-  /* Contact Grid */
+  /* ── Anexo: contacto ────────────────────────────────────────────────── */
   .contact-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.5rem;
+    gap: 1.25rem;
   }
 
   .contact-item {
     display: flex;
     gap: 1rem;
     align-items: center;
-    padding: 1.25rem;
-    background: rgba(255, 255, 255, 0.02);
+    padding: 1.1rem;
+    background: var(--rg-sup2);
     border-radius: 12px;
-    border: 1px solid var(--border);
+    border: 1px solid var(--rg-line);
     transition: border-color 0.2s;
   }
 
   .contact-item:hover {
-    border-color: var(--primary);
+    border-color: var(--rg-accent);
   }
 
   .contact-icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 48px;
-    height: 48px;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    border-radius: 12px;
+    width: 44px;
+    height: 44px;
+    background: var(--rg-accent-soft);
+    color: var(--rg-accent);
+    border-radius: 999px;
     flex-shrink: 0;
   }
 
   .contact-icon svg {
-    color: white;
+    width: 20px;
+    height: 20px;
   }
 
   .contact-info {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 0.2rem;
+    min-width: 0;
   }
 
   .contact-label {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+    color: var(--rg-faint);
   }
 
   .contact-value {
-    color: var(--text);
+    color: var(--rg-ink);
     text-decoration: none;
     font-weight: 500;
+    overflow-wrap: anywhere;
     transition: color 0.2s;
   }
 
   .contact-value:hover {
-    color: var(--primary);
+    color: var(--rg-accent);
   }
 
-  /* Compliance Section */
+  /* ── Cumplimiento técnico ───────────────────────────────────────────── */
   .compliance-intro {
-    color: var(--text-muted);
+    color: var(--rg-soft);
     margin-bottom: 2rem;
     font-size: 1rem;
   }
@@ -1252,312 +1269,127 @@ const contactUrl = getPageUrl('contacto', lang);
   .compliance-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
+    gap: 1.25rem;
   }
 
   .compliance-item {
     padding: 1.5rem;
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--rg-sup2);
     border-radius: 12px;
-    border: 1px solid var(--border);
-    transition:
-      transform 0.2s,
-      border-color 0.2s;
+    border: 1px solid var(--rg-line);
+    transition: border-color 0.2s;
   }
 
   .compliance-item:hover {
-    transform: translateY(-2px);
-    border-color: var(--primary);
+    border-color: var(--rg-accent);
   }
 
   .compliance-icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 56px;
-    height: 56px;
-    background: linear-gradient(
-      135deg,
-      rgba(102, 126, 234, 0.2),
-      rgba(118, 75, 162, 0.2)
-    );
+    width: 48px;
+    height: 48px;
+    background: var(--rg-accent-soft);
+    color: var(--rg-accent);
     border-radius: 12px;
     margin-bottom: 1rem;
   }
 
   .compliance-icon svg {
-    color: var(--primary);
+    width: 24px;
+    height: 24px;
   }
 
   .compliance-item h4 {
     font-size: 1rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
-    color: var(--text);
+    color: var(--rg-ink);
   }
 
   .compliance-item p {
     font-size: 0.875rem;
-    color: var(--text-muted);
-    line-height: 1.5;
+    color: var(--rg-soft);
+    line-height: 1.55;
   }
 
-  /* CTA Section */
+  /* ── CTA: superficie sólida con el color de texto ───────────────────── */
   .cta-section {
     text-align: center;
     padding: 3rem 2rem;
-    background: linear-gradient(
-      135deg,
-      rgba(102, 126, 234, 0.1) 0%,
-      rgba(118, 75, 162, 0.1) 100%
-    );
-    border-radius: 16px;
-    border: 1px solid var(--border);
+    background: var(--rg-ink);
+    color: var(--rg-on-ink);
+    border-radius: var(--card-r);
     margin-top: 2rem;
   }
 
   .cta-section h2 {
+    font-family: var(--rg-display);
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: 600;
     margin-bottom: 0.75rem;
+    color: var(--rg-on-ink);
   }
 
   .cta-section p {
-    color: var(--text-muted);
+    color: color-mix(in srgb, var(--rg-on-ink) 72%, transparent);
     margin-bottom: 1.5rem;
   }
 
   .cta-btn {
     display: inline-block;
-    padding: 1rem 2rem;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    color: white;
+    padding: 0.85rem 1.8rem;
+    background: var(--rg-accent);
+    color: var(--rg-on-ink);
     text-decoration: none;
-    border-radius: 8px;
+    border-radius: 999px;
     font-weight: 600;
-    transition:
-      transform 0.2s,
-      box-shadow 0.2s;
+    transition: background 0.2s, color 0.2s;
   }
 
   .cta-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    background: var(--rg-on-ink);
+    color: var(--rg-ink);
   }
 
-  /* Responsive - MÓVIL TEMA BLANCO */
+  /* ── Responsive: solo layout, el color lo pone el tema ──────────────── */
   @media (max-width: 768px) {
-    :root {
-      --bg-dark: var(--panel);
-      --bg-card: rgba(0, 0, 0, 0.02);
-      --border: rgba(0, 0, 0, 0.1);
-      --text: var(--ink);
-      --text-muted: var(--soft);
-    }
-
-    .legal-page {
-      background: var(--panel);
-      color: var(--ink);
-    }
-
     .hero {
-      padding: 4rem 0 3rem;
-      background: linear-gradient(
-        135deg,
-        rgba(102, 126, 234, 0.05) 0%,
-        rgba(118, 75, 162, 0.05) 100%
-      );
-      border-bottom-color: var(--line);
-    }
-
-    .badge {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-    }
-
-    .hero h1 {
-      background: linear-gradient(135deg, var(--ink), #334155);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .subtitle {
-      color: var(--soft);
-    }
-
-    .last-update {
-      color: var(--soft);
+      padding: 6.5rem 0 3rem;
     }
 
     .section-card {
       padding: 1.5rem;
-      background: var(--panel);
-      border-color: var(--line);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     }
 
     .section-card h2 {
-      color: var(--ink);
-      border-bottom-color: var(--line);
-    }
-
-    .data-item .label {
-      color: var(--soft);
-    }
-
-    .data-item .value {
-      color: var(--ink);
-    }
-
-    .data-item .value.highlight {
-      color: var(--primary);
-    }
-
-    .subsection h3 {
-      color: var(--ink);
-    }
-
-    .subsection {
-      border-top-color: var(--line);
-    }
-
-    .tech-item {
-      background: var(--sup-2);
-      border-color: var(--line);
-    }
-
-    .tech-label {
-      color: var(--soft);
-    }
-
-    .tech-value {
-      color: var(--ink);
-    }
-
-    .feature-list li {
-      color: #475569;
-    }
-
-    .feature-list li::before {
-      background: var(--primary);
-    }
-
-    .description {
-      color: #475569;
-    }
-
-    .yes-no-grid {
-      border-top-color: var(--line);
+      font-size: 1.25rem;
     }
 
     .yes-no-item {
       flex-direction: column;
-      gap: 0.75rem;
-      text-align: center;
-      background: var(--sup-2);
-      border-color: var(--line);
-    }
-
-    .yes-no-item .question {
-      color: var(--soft);
+      align-items: flex-start;
+      gap: 0.6rem;
     }
 
     .company-info {
       flex-direction: column;
-      align-items: center;
-      text-align: center;
+      gap: 1rem;
     }
 
-    .company-details h3 {
-      color: var(--ink);
-    }
-
-    .detail-row .label {
-      color: var(--soft);
-    }
-
-    .detail-row .value {
-      color: var(--ink);
-    }
-
-    .conformity-box {
-      background: rgba(102, 126, 234, 0.05);
-      border-color: rgba(102, 126, 234, 0.2);
-    }
-
-    .conformity-box p {
-      color: var(--ink);
-    }
-
-    .conformity-box li {
-      color: #475569;
+    .detail-row {
+      flex-direction: column;
+      gap: 0.15rem;
     }
 
     .signature-info {
       flex-direction: column;
-      gap: 1rem;
-      border-top-color: var(--line);
-    }
-
-    .signature-item .label {
-      color: var(--soft);
-    }
-
-    .signature-item .value {
-      color: var(--ink);
-    }
-
-    .contact-item {
-      background: var(--sup-2);
-      border-color: var(--line);
-    }
-
-    .contact-label {
-      color: var(--soft);
-    }
-
-    .contact-value {
-      color: var(--ink);
-    }
-
-    .compliance-intro {
-      color: var(--soft);
-    }
-
-    .compliance-item {
-      background: var(--sup-2);
-      border-color: var(--line);
-    }
-
-    .compliance-item h4 {
-      color: var(--ink);
-    }
-
-    .compliance-item p {
-      color: var(--soft);
-    }
-
-    .compliance-icon {
-      background: linear-gradient(
-        135deg,
-        rgba(102, 126, 234, 0.1),
-        rgba(118, 75, 162, 0.1)
-      );
+      gap: 0.75rem;
     }
 
     .cta-section {
-      background: linear-gradient(
-        135deg,
-        rgba(102, 126, 234, 0.05) 0%,
-        rgba(118, 75, 162, 0.05) 100%
-      );
-      border-color: var(--line);
-    }
-    .cta-section h2 {
-      color: var(--ink);
-    }
-    .cta-section p {
-      color: var(--soft);
+      padding: 2.5rem 1.25rem;
     }
   }
 </style>
