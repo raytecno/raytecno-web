@@ -5,6 +5,15 @@
  * 
  * Objetivo SEO: "ERP joyería" (singular femenino) + "software ERP joyería" + "programa joyería"
  * Objetivo GEO: Que las IAs (ChatGPT, Claude, Gemini) la citen al preguntar por ERPs para joyerías
+ *
+ * TEMA CLARO/OSCURO (Septiembre 2026):
+ * - Solo tokens --rg-. Fuera var(--ink) como fondo (ahora significa otra cosa),
+ *   los white/#cbd5e1/#475569/#334155 literales y el violeta #667eea/#764ba2.
+ * - Tarjetas, FAQ y tabla sobre --rg-panel (antes background: white fijo, que
+ *   en oscuro dejaba texto claro sobre blanco).
+ * - CTA final: superficie sólida --rg-ink con texto --rg-on-ink, contrasta en
+ *   los dos temas.
+ * - Marcado, textos y schemas sin cambios.
  */
 import Layout from "@/layouts/Layout.astro";
 import { supportedLangs, type Lang, getPageUrl } from "@/config/pages";
@@ -445,9 +454,21 @@ const alternateUrls = [
 </Layout>
 
 <style>
+  /* ── Variables locales, dentro de la landing (nunca en :root) ─────────── */
   .landing-erp-joyeria {
-    color: var(--ink);
+    --ok: #1f7a4d;
+    --ok-soft: rgba(31, 122, 77, 0.1);
+    --card-r: 14px;
+
+    background: var(--rg-bg);
+    color: var(--rg-ink);
     line-height: 1.7;
+    transition: background 0.25s ease, color 0.25s ease;
+  }
+
+  :global([data-theme="oscuro"]) .landing-erp-joyeria {
+    --ok: #4ade80;
+    --ok-soft: rgba(74, 222, 128, 0.12);
   }
 
   .container {
@@ -456,63 +477,86 @@ const alternateUrls = [
     padding: 0 1.5rem;
   }
 
-  /* HERO */
+  /* ── Secciones ──────────────────────────────────────────────────────── */
+  section {
+    padding: 4.5rem 0;
+  }
+
+  section h2 {
+    font-family: var(--rg-display);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+    color: var(--rg-ink);
+  }
+
+  section p strong {
+    color: var(--rg-ink);
+    font-weight: 600;
+  }
+
+  /* ── Hero ───────────────────────────────────────────────────────────── */
   .hero {
-    background: linear-gradient(135deg, var(--ink) 0%, var(--ink) 100%);
-    color: white;
-    padding: 5rem 0 4rem;
+    background: var(--rg-bg);
+    padding: 8rem 0 4rem;
+    border-bottom: 1px solid var(--rg-line);
+  }
+
+  .hero-content {
+    max-width: 52rem;
   }
 
   .hero h1 {
-    font-size: 2.5rem;
-    font-weight: 800;
-    line-height: 1.2;
-    margin: 1rem 0 1.5rem;
+    font-family: var(--rg-display);
+    font-size: clamp(1.9rem, 4.5vw, 2.9rem);
+    font-weight: 600;
+    line-height: 1.12;
     letter-spacing: -0.02em;
+    color: var(--rg-ink);
+    margin: 1.25rem 0 1.5rem;
   }
 
   .hero-lead {
     font-size: 1.15rem;
-    color: #cbd5e1;
+    color: var(--rg-soft);
+    max-width: 44rem;
     margin-bottom: 2rem;
-  }
-
-  .hero-lead strong {
-    color: #fff;
   }
 
   .hero-badges {
     display: flex;
-    gap: 0.75rem;
+    gap: 0.6rem;
     flex-wrap: wrap;
   }
 
   .badge {
     display: inline-block;
-    padding: 0.4rem 0.9rem;
-    border-radius: 50px;
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
     font-size: 0.8rem;
     font-weight: 600;
   }
 
   .badge-primary {
-    background: rgba(102, 126, 234, 0.2);
-    color: #c4b5fd;
-    border: 1px solid rgba(102, 126, 234, 0.4);
+    background: var(--rg-accent-soft);
+    color: var(--rg-accent);
+    border: 1px solid color-mix(in srgb, var(--rg-accent) 35%, transparent);
   }
 
   .badge-secondary {
-    background: rgba(16, 185, 129, 0.15);
-    color: #6ee7b7;
-    border: 1px solid rgba(16, 185, 129, 0.4);
+    background: var(--ok-soft);
+    color: var(--ok);
+    border: 1px solid color-mix(in srgb, var(--ok) 35%, transparent);
   }
 
   .hero-stats {
     display: flex;
-    gap: 2.5rem;
+    gap: 2.75rem;
     padding: 1.5rem 0;
-    border-top: 1px solid #334155;
-    border-bottom: 1px solid #334155;
+    border-top: 1px solid var(--rg-line);
+    border-bottom: 1px solid var(--rg-line);
     margin-bottom: 2rem;
   }
 
@@ -522,108 +566,111 @@ const alternateUrls = [
   }
 
   .stat-num {
-    font-size: 2rem;
-    font-weight: 800;
-    color: white;
+    font-family: var(--rg-display);
+    font-size: 2.1rem;
+    font-weight: 600;
+    line-height: 1.1;
+    color: var(--rg-ink);
   }
 
   .stat-label {
     font-size: 0.85rem;
-    color: var(--soft);
+    color: var(--rg-faint);
   }
 
   .hero-ctas {
     display: flex;
-    gap: 1rem;
+    gap: 0.75rem;
     flex-wrap: wrap;
   }
 
   .cta-primary {
     display: inline-block;
-    padding: 1rem 1.75rem;
-    background: linear-gradient(135deg, var(--accent) 0%, #764ba2 100%);
-    color: white;
-    border-radius: 12px;
+    padding: 0.9rem 1.6rem;
+    background: var(--rg-ink);
+    color: var(--rg-on-ink);
+    border-radius: 999px;
     font-weight: 600;
     text-decoration: none;
-    transition: transform 0.2s;
+    transition: background 0.2s, color 0.2s;
   }
 
   .cta-primary:hover {
-    transform: translateY(-2px);
+    background: var(--rg-accent);
+    color: var(--rg-on-ink);
   }
 
   .cta-secondary {
     display: inline-block;
-    padding: 1rem 1.75rem;
+    padding: 0.9rem 1.6rem;
     background: transparent;
-    color: #cbd5e1;
-    border: 1px solid #334155;
-    border-radius: 12px;
+    color: var(--rg-ink);
+    border: 1px solid var(--rg-line);
+    border-radius: 999px;
     font-weight: 500;
     text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
   }
 
   .cta-secondary:hover {
-    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--rg-accent);
+    background: var(--rg-accent-soft);
   }
 
-  /* SECCIONES */
-  section {
-    padding: 4rem 0;
-  }
-
-  section h2 {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-    color: var(--ink);
-  }
-
-  .que-es p, .pilares .lead {
+  /* ── Qué es ─────────────────────────────────────────────────────────── */
+  .que-es p,
+  .pilares .lead {
     font-size: 1.05rem;
-    color: #475569;
+    color: var(--rg-soft);
+    max-width: 48rem;
     margin-bottom: 1rem;
   }
 
-  /* PILARES */
+  /* ── Pilares ────────────────────────────────────────────────────────── */
   .pilares {
-    background: var(--sup-2);
+    background: var(--rg-sup2);
   }
 
   .pilares-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
+    gap: 1.25rem;
     margin-top: 2.5rem;
   }
 
   .pilar {
-    background: white;
-    border-radius: 12px;
+    background: var(--rg-panel);
+    border-radius: var(--card-r);
     padding: 2rem;
-    border: 1px solid var(--line);
-    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid var(--rg-line);
+    transition: border-color 0.2s;
   }
 
   .pilar:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+    border-color: var(--rg-accent);
   }
 
   .pilar-icon {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    background: var(--rg-accent-soft);
+    border-radius: 999px;
+    font-size: 1.5rem;
+    margin-bottom: 1.1rem;
   }
 
   .pilar h3 {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
+    font-weight: 600;
     margin-bottom: 0.75rem;
-    color: var(--ink);
+    color: var(--rg-ink);
   }
 
   .pilar-desc {
-    color: var(--soft);
+    color: var(--rg-soft);
     font-size: 0.95rem;
     margin-bottom: 1.25rem;
   }
@@ -637,7 +684,7 @@ const alternateUrls = [
   .pilar li {
     padding: 0.4rem 0 0.4rem 1.5rem;
     position: relative;
-    color: #475569;
+    color: var(--rg-soft);
     font-size: 0.92rem;
   }
 
@@ -645,12 +692,12 @@ const alternateUrls = [
     content: "✓";
     position: absolute;
     left: 0;
-    color: #10b981;
+    color: var(--ok);
     font-weight: 700;
   }
 
   .pilar-link a {
-    color: var(--accent);
+    color: var(--rg-accent);
     font-size: 0.9rem;
     font-weight: 500;
     text-decoration: none;
@@ -658,66 +705,92 @@ const alternateUrls = [
 
   .pilar-link a:hover {
     text-decoration: underline;
+    text-underline-offset: 3px;
   }
 
-  /* COMPARATIVA */
+  /* ── Comparativa ────────────────────────────────────────────────────── */
   .comparativa {
     overflow-x: auto;
     margin-top: 2rem;
+    border: 1px solid var(--rg-line);
+    border-radius: var(--card-r);
   }
 
   .comparativa table {
     width: 100%;
+    min-width: 560px;
     border-collapse: collapse;
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    background: var(--rg-panel);
   }
 
-  .comparativa th, .comparativa td {
+  .comparativa th,
+  .comparativa td {
     padding: 1rem 1.25rem;
     text-align: left;
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px solid var(--rg-line);
+    color: var(--rg-soft);
+  }
+
+  .comparativa tbody tr:last-child td {
+    border-bottom: none;
   }
 
   .comparativa th {
-    background: var(--ink);
-    color: white;
+    background: var(--rg-sup2);
+    color: var(--rg-ink);
     font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .comparativa th:last-child,
+  .comparativa td:last-child {
+    background: var(--rg-accent-soft);
+    color: var(--rg-ink);
   }
 
   .comparativa td:first-child {
     font-weight: 500;
-    color: #334155;
+    color: var(--rg-ink);
   }
 
-  /* FAQ */
+  /* ── FAQ ────────────────────────────────────────────────────────────── */
   .faq {
-    background: var(--sup-2);
+    background: var(--rg-sup2);
   }
 
   .faq-item {
-    background: white;
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    margin-bottom: 1rem;
+    background: var(--rg-panel);
+    border: 1px solid var(--rg-line);
+    border-radius: var(--card-r);
+    margin-bottom: 0.75rem;
     overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .faq-item[open] {
+    border-color: color-mix(in srgb, var(--rg-accent) 45%, var(--rg-line));
   }
 
   .faq-item summary {
-    padding: 1.25rem 1.5rem;
+    padding: 1.2rem 1.5rem;
     cursor: pointer;
     list-style: none;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .faq-item summary::-webkit-details-marker {
+    display: none;
   }
 
   .faq-item summary::after {
     content: "+";
-    font-size: 1.5rem;
-    color: var(--accent);
+    flex-shrink: 0;
+    font-size: 1.4rem;
+    line-height: 1;
+    color: var(--rg-accent);
     transition: transform 0.2s;
   }
 
@@ -727,75 +800,80 @@ const alternateUrls = [
 
   .faq-item summary h3 {
     margin: 0;
-    font-size: 1.05rem;
+    font-size: 1.02rem;
     font-weight: 600;
-    color: var(--ink);
+    color: var(--rg-ink);
     display: inline;
   }
 
   .faq-item p {
     padding: 0 1.5rem 1.25rem;
-    color: #475569;
+    color: var(--rg-soft);
     margin: 0;
   }
 
-  /* CTA FINAL */
+  /* ── CTA final: superficie sólida con el color de texto ─────────────── */
   .cta-final {
-    background: linear-gradient(135deg, var(--accent) 0%, #764ba2 100%);
-    color: white;
+    background: var(--rg-ink);
+    color: var(--rg-on-ink);
     text-align: center;
   }
 
   .cta-final h2 {
-    color: white;
-    font-size: 2rem;
+    color: var(--rg-on-ink);
   }
 
   .cta-final p {
     font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.9);
+    color: color-mix(in srgb, var(--rg-on-ink) 75%, transparent);
     margin-bottom: 2rem;
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
   }
 
-  .cta-large {
+  .cta-final .cta-large {
     font-size: 1.05rem;
-    padding: 1.15rem 2rem;
-    background: white;
-    color: var(--accent);
+    padding: 1.05rem 2rem;
+    background: var(--rg-on-ink);
+    color: var(--rg-ink);
   }
 
-  .cta-large:hover {
-    background: var(--sup-2);
+  .cta-final .cta-large:hover {
+    background: var(--rg-accent);
+    color: var(--rg-on-ink);
   }
 
-  /* RESPONSIVE */
+  /* ── Responsive: solo layout, el color lo pone el tema ──────────────── */
   @media (max-width: 768px) {
-    .hero h1 {
-      font-size: 1.75rem;
+    section {
+      padding: 3.25rem 0;
+    }
+
+    .hero {
+      padding: 6.5rem 0 3rem;
     }
 
     .hero-stats {
-      gap: 1.25rem;
+      gap: 1.5rem;
       flex-wrap: wrap;
     }
 
     .stat-num {
-      font-size: 1.5rem;
+      font-size: 1.6rem;
     }
 
-    section h2 {
-      font-size: 1.5rem;
+    .pilar {
+      padding: 1.5rem;
     }
 
     .comparativa table {
       font-size: 0.85rem;
     }
 
-    .comparativa th, .comparativa td {
-      padding: 0.65rem 0.75rem;
+    .comparativa th,
+    .comparativa td {
+      padding: 0.7rem 0.8rem;
     }
   }
 </style>
