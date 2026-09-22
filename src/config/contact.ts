@@ -50,7 +50,7 @@ export const social = {
     handle: "raytecno",
   },
   twitter: {
-    url: "https://x.com/raytecno95",
+    url: "https://x.com/raytecnobcn",
     handle: "@raytecno",
   },
   facebook: {
@@ -58,7 +58,7 @@ export const social = {
     handle: "raytecno",
   },
   instagram: {
-    url: "https://www.instagram.com/raytecno95",
+    url: "https://www.instagram.com/raytecnobcn",
     handle: "@raytecno",
   },
   youtube: {
