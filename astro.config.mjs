@@ -118,7 +118,7 @@ export default defineConfig({
         if (group) {
           out.links = [
             ...supportedLangs.map((l) => ({ lang: HREFLANG[l], url: SITE + group[l] })),
-            { lang: "x-default", url: SITE + group.es },
+            { lang: "x-default", url: SITE + group.en },
           ];
         }
         return out;
