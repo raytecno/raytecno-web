@@ -3,6 +3,15 @@
  * VideoDemo.astro - Sección de video demo para RayGold
  * Con soporte multiidioma y tema adaptativo móvil
  * Reproductor: YouTube (facade + IFrame API + eventos GA4 manuales)
+ *
+ * TEMA CLARO/OSCURO (Septiembre 2026):
+ * - Solo tokens --rg-. Fuera los degradados #0a0a0f/#12121a, el violeta
+ *   #8b5cf6/#a78bfa/#6366f1/#ec4899 y los white literales.
+ * - Fuera el bloque "MÓVIL: tema blanco": en móvil solo quedan ajustes de
+ *   layout, el color lo pone el tema en todos los anchos.
+ * - .video-frame y .video-player siguen siendo oscuros a propósito (el vídeo
+ *   lo es), pero con un negro fijo propio, no con tokens de texto.
+ * - Marcado, traducciones y el <script> del reproductor sin tocar.
  */
 import { type Lang, getPageUrl } from "@/config/pages";
 
@@ -241,15 +250,21 @@ const contactUrl = getPageUrl('contacto', lang);
 
 <style>
   /* ============================================
-     DESKTOP: Tema azul oscuro (default)
+     Un solo tema, el que marque --rg-*
      ============================================ */
   .video-section {
+    /* Negro del marco del vídeo: fijo a propósito, el vídeo también lo es */
+    --video-negro: #0b0b10;
+
     padding: 100px 0;
-    background: linear-gradient(180deg, #0a0a0f 0%, #12121a 50%, #0a0a0f 100%);
+    background: var(--rg-sup2);
+    color: var(--rg-ink);
     position: relative;
     overflow: hidden;
+    transition: background 0.25s ease, color 0.25s ease;
   }
 
+  /* Trama de puntos muy tenue, derivada del acento */
   .video-section::before {
     content: '';
     position: absolute;
@@ -257,8 +272,12 @@ const contactUrl = getPageUrl('contacto', lang);
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: radial-gradient(rgba(139, 92, 246, 0.03) 1px, transparent 1px);
+    background-image: radial-gradient(
+      color-mix(in srgb, var(--rg-accent) 18%, transparent) 1px,
+      transparent 1px
+    );
     background-size: 40px 40px;
+    opacity: 0.5;
     pointer-events: none;
   }
 
@@ -279,35 +298,33 @@ const contactUrl = getPageUrl('contacto', lang);
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: rgba(139, 92, 246, 0.1);
-    border: 1px solid rgba(139, 92, 246, 0.3);
-    color: #a78bfa;
-    padding: 8px 16px;
-    border-radius: 100px;
+    background: var(--rg-accent-soft);
+    border: 1px solid color-mix(in srgb, var(--rg-accent) 35%, transparent);
+    color: var(--rg-accent);
+    padding: 7px 16px;
+    border-radius: 999px;
     font-size: 0.85rem;
-    font-weight: 500;
+    font-weight: 600;
     margin-bottom: 20px;
   }
 
   .section-title {
+    font-family: var(--rg-display);
     font-size: clamp(1.75rem, 4vw, 2.5rem);
-    font-weight: 700;
-    color: white;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    color: var(--rg-ink);
     margin: 0 0 16px 0;
     line-height: 1.2;
   }
 
   .gradient-text {
-    background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--rg-accent);
   }
 
   .section-subtitle {
     font-size: 1.1rem;
-    color: var(--soft);
-    margin: 0;
+    color: var(--rg-soft);
     max-width: 500px;
     margin: 0 auto;
   }
@@ -321,11 +338,9 @@ const contactUrl = getPageUrl('contacto', lang);
     position: relative;
     border-radius: 16px;
     overflow: hidden;
-    background: #1a1a2e;
-    box-shadow: 
-      0 0 0 1px rgba(139, 92, 246, 0.2),
-      0 25px 50px -12px rgba(0, 0, 0, 0.5),
-      0 0 100px rgba(139, 92, 246, 0.1);
+    background: var(--video-negro);
+    border: 1px solid var(--rg-line);
+    box-shadow: 0 24px 48px -20px var(--rg-sombra);
   }
 
   .glow-effect {
@@ -334,7 +349,11 @@ const contactUrl = getPageUrl('contacto', lang);
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 50%);
+    background: radial-gradient(
+      circle,
+      color-mix(in srgb, var(--rg-accent) 12%, transparent) 0%,
+      transparent 50%
+    );
     pointer-events: none;
     z-index: 0;
   }
@@ -342,7 +361,7 @@ const contactUrl = getPageUrl('contacto', lang);
   .video-player {
     position: relative;
     aspect-ratio: 16 / 9;
-    background: #0f0f1a;
+    background: var(--video-negro);
   }
 
   .video-poster {
@@ -367,7 +386,7 @@ const contactUrl = getPageUrl('contacto', lang);
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(10, 10, 15, 0.7) 0%, rgba(10, 10, 15, 0.4) 100%);
+    background: linear-gradient(135deg, rgba(11, 11, 16, 0.65) 0%, rgba(11, 11, 16, 0.35) 100%);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -377,41 +396,44 @@ const contactUrl = getPageUrl('contacto', lang);
   }
 
   .video-poster:hover .poster-overlay {
-    background: linear-gradient(135deg, rgba(10, 10, 15, 0.6) 0%, rgba(10, 10, 15, 0.3) 100%);
+    background: linear-gradient(135deg, rgba(11, 11, 16, 0.55) 0%, rgba(11, 11, 16, 0.25) 100%);
   }
 
   .play-button {
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+    background: var(--rg-accent);
     border: none;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
-    transition: all 0.3s ease;
-    box-shadow: 0 10px 40px rgba(139, 92, 246, 0.4), 0 0 0 0 rgba(139, 92, 246, 0.4);
-    animation: pulse-play 2s ease-in-out infinite;
+    color: var(--rg-on-ink);
+    transition: transform 0.3s ease, background 0.3s ease;
+    box-shadow: 0 10px 40px color-mix(in srgb, var(--rg-accent) 35%, transparent);
+    animation: pulse-play 2.4s ease-in-out infinite;
   }
 
   @keyframes pulse-play {
     0%, 100% {
-      box-shadow: 0 10px 40px rgba(139, 92, 246, 0.4), 0 0 0 0 rgba(139, 92, 246, 0.4);
+      box-shadow:
+        0 10px 40px color-mix(in srgb, var(--rg-accent) 35%, transparent),
+        0 0 0 0 color-mix(in srgb, var(--rg-accent) 40%, transparent);
     }
     50% {
-      box-shadow: 0 10px 40px rgba(139, 92, 246, 0.4), 0 0 0 20px rgba(139, 92, 246, 0);
+      box-shadow:
+        0 10px 40px color-mix(in srgb, var(--rg-accent) 35%, transparent),
+        0 0 0 20px transparent;
     }
   }
 
   .play-button:hover {
-    transform: scale(1.1);
-    box-shadow: 0 15px 50px rgba(139, 92, 246, 0.5);
+    transform: scale(1.08);
   }
 
   .play-button:focus-visible {
-    outline: 3px solid #a78bfa;
+    outline: 3px solid var(--rg-accent);
     outline-offset: 4px;
   }
 
@@ -422,10 +444,10 @@ const contactUrl = getPageUrl('contacto', lang);
   }
 
   .play-text {
-    color: white;
+    color: #fff;
     font-size: 1rem;
     font-weight: 500;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
   }
 
   /* Contenedor del iframe de YouTube */
@@ -454,9 +476,11 @@ const contactUrl = getPageUrl('contacto', lang);
     justify-content: center;
     align-items: center;
     gap: 32px;
-    padding: 24px;
-    background: rgba(255, 255, 255, 0.02);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 20px 24px;
+    margin-top: 12px;
+    background: var(--rg-panel);
+    border: 1px solid var(--rg-line);
+    border-radius: 14px;
   }
 
   .feature-item {
@@ -468,17 +492,18 @@ const contactUrl = getPageUrl('contacto', lang);
   .feature-icon {
     width: 40px;
     height: 40px;
-    border-radius: 10px;
-    background: rgba(139, 92, 246, 0.1);
+    border-radius: 999px;
+    background: var(--rg-accent-soft);
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
   }
 
   .feature-icon svg {
     width: 20px;
     height: 20px;
-    color: #a78bfa;
+    color: var(--rg-accent);
   }
 
   .feature-text {
@@ -489,18 +514,18 @@ const contactUrl = getPageUrl('contacto', lang);
   .feature-value {
     font-size: 1rem;
     font-weight: 600;
-    color: var(--panel);
+    color: var(--rg-ink);
   }
 
   .feature-label {
     font-size: 0.75rem;
-    color: var(--soft);
+    color: var(--rg-faint);
   }
 
   .feature-divider {
     width: 1px;
     height: 32px;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--rg-line);
   }
 
   .video-cta {
@@ -509,7 +534,7 @@ const contactUrl = getPageUrl('contacto', lang);
   }
 
   .cta-text {
-    color: var(--soft);
+    color: var(--rg-soft);
     margin: 0 0 20px 0;
     font-size: 1rem;
   }
@@ -518,20 +543,19 @@ const contactUrl = getPageUrl('contacto', lang);
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
-    color: white;
-    padding: 14px 28px;
-    border-radius: 12px;
+    background: var(--rg-ink);
+    color: var(--rg-on-ink);
+    padding: 13px 28px;
+    border-radius: 999px;
     font-weight: 600;
     font-size: 1rem;
     text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+    transition: background 0.25s ease, color 0.25s ease;
   }
 
   .cta-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(139, 92, 246, 0.4);
+    background: var(--rg-accent);
+    color: var(--rg-on-ink);
   }
 
   .cta-button svg {
@@ -545,70 +569,30 @@ const contactUrl = getPageUrl('contacto', lang);
   }
 
   /* ============================================
-     MÓVIL: Tema blanco claro
+     Móvil: solo layout, el color lo pone el tema
      ============================================ */
   @media (max-width: 768px) {
     .video-section {
       padding: 60px 0;
-      background: linear-gradient(180deg, var(--panel) 0%, var(--sup-2) 50%, var(--panel) 100%);
-    }
-
-    .video-section::before {
-      background-image: radial-gradient(rgba(139, 92, 246, 0.05) 1px, transparent 1px);
     }
 
     .section-header {
       margin-bottom: 32px;
     }
 
-    .section-badge {
-      background: rgba(139, 92, 246, 0.08);
-      border-color: rgba(139, 92, 246, 0.2);
-      color: #8b5cf6;
-    }
-
-    .section-title {
-      color: var(--ink);
-    }
-
-    .section-subtitle {
-      color: var(--soft);
-    }
-
-    .video-frame {
-      background: var(--line);
-      box-shadow: 
-        0 0 0 1px rgba(139, 92, 246, 0.1),
-        0 15px 30px -12px rgba(0, 0, 0, 0.15);
-    }
-
-    .glow-effect {
-      background: radial-gradient(circle, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
-    }
-
     .video-features {
       flex-direction: column;
       gap: 16px;
-      background: rgba(0, 0, 0, 0.02);
-      border-top: 1px solid var(--line);
     }
 
-    .feature-icon {
-      background: rgba(139, 92, 246, 0.08);
-    }
-
-    .feature-value {
-      color: var(--ink);
-    }
-
-    .feature-label {
-      color: var(--soft);
+    .feature-item {
+      width: 100%;
+      max-width: 220px;
     }
 
     .feature-divider {
       width: 60px;
       height: 1px;
-      background: var(--line);
     }
 
     .play-button {
@@ -619,10 +603,6 @@ const contactUrl = getPageUrl('contacto', lang);
     .play-button svg {
       width: 24px;
       height: 24px;
-    }
-
-    .cta-text {
-      color: var(--soft);
     }
 
     .cta-button {
