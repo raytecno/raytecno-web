@@ -126,7 +126,8 @@ const es: FugasTranslations = {
 
   pantallas: [
     { archivo: 'IniciFin5.png', nombre: 'Mapa de fabricación', alt: 'Mapa de fabricación de RayGold con las fases de producción' },
-    { archivo: 'InicioFin4.png', nombre: 'Planes y artículos',  alt: 'Pantalla de planes y artículos de RayGold' },
+    { archivo: 'finita.png', nombre: 'Producción finita',  alt: 'Pantalla de la producción finita de los talleres' },
+    { archivo: 'Taller.png', nombre: 'Taller',  alt: 'Pantalla de los talleres en producción' },
     { archivo: 'InicioFin6.png', nombre: 'Cuadro de mando',     alt: 'Cuadro de mando de RayGold con indicadores del taller' },
   ],
 
@@ -352,7 +353,8 @@ const ca: FugasTranslations = {
 
   pantallas: [
     { archivo: 'IniciFin5.png', nombre: 'Mapa de fabricació',    alt: 'Mapa de fabricació de RayGold amb les fases de producció' },
-    { archivo: 'InicioFin4.png', nombre: 'Plans i articles',      alt: 'Pantalla de plans i articles de RayGold' },
+    { archivo: 'finita.png', nombre: 'Producció finalitzada',  alt: 'Pantalla de la producció finalitzada dels tallers' },
+    { archivo: 'Taller.png', nombre: 'Taller',  alt: 'Pantalla dels tallers en producció' },
     { archivo: 'InicioFin6.png', nombre: 'Quadre de comandament', alt: 'Quadre de comandament de RayGold amb indicadors del taller' },
   ],
 
@@ -578,7 +580,8 @@ const en: FugasTranslations = {
 
   pantallas: [
     { archivo: 'IniciFin5.png', nombre: 'Manufacturing map', alt: 'RayGold manufacturing map showing the production phases' },
-    { archivo: 'InicioFin4.png', nombre: 'Plans and items',   alt: 'RayGold plans and items screen' },
+    { archivo: 'finita.png', nombre: 'Finished Production',  alt: 'Screen showing the finished production from the workshops' },
+    { archivo: 'Taller.png', nombre: 'Workshop',  alt: 'Screen showing the workshops in production' },
     { archivo: 'InicioFin6.png', nombre: 'Dashboard',         alt: 'RayGold dashboard with workshop indicators' },
   ],
 
@@ -804,7 +807,8 @@ const fr: FugasTranslations = {
 
   pantallas: [
     { archivo: 'IniciFin5.png', nombre: 'Carte de fabrication', alt: 'Carte de fabrication de RayGold avec les phases de production' },
-    { archivo: 'InicioFin4.png', nombre: 'Plans et articles',    alt: 'Écran des plans et articles de RayGold' },
+    { archivo: 'finita.png', nombre: 'Production terminée',  alt: 'Écran de la production terminée des ateliers' },
+    { archivo: 'Taller.png', nombre: 'Atelier',  alt: 'Écran des ateliers en production' },
     { archivo: 'InicioFin6.png', nombre: 'Tableau de bord',      alt: "Tableau de bord de RayGold avec les indicateurs de l'atelier" },
   ],
 
@@ -1030,7 +1034,8 @@ const ptBr: FugasTranslations = {
 
   pantallas: [
     { archivo: 'IniciFin5.png', nombre: 'Mapa de fabricação',   alt: 'Mapa de fabricação do RayGold com as fases de produção' },
-    { archivo: 'InicioFin4.png', nombre: 'Planos e artigos',     alt: 'Tela de planos e artigos do RayGold' },
+    { archivo: 'finita.png', nombre: 'Produção finalizada',  alt: 'Tela da produção finalizada das oficinas' },
+    { archivo: 'Taller.png', nombre: 'Oficina',  alt: 'Tela das oficinas em produção' },
     { archivo: 'InicioFin6.png', nombre: 'Painel de indicadores', alt: 'Painel do RayGold com indicadores da oficina' },
   ],
 
