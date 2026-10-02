@@ -13,6 +13,13 @@
  *   - etiqueta debajo diciendo qué pantalla es,
  *   - puntos para cambiar y lupa para verla a pantalla completa.
  *
+ * CAMBIO (Octubre 2026): el marco ya no tiene proporción fija (4/3).
+ * Las capturas son apaisadas y dejaban bandas arriba y abajo. Ahora el marco
+ * adopta la proporción real de la captura visible (--ratio, leído de
+ * naturalWidth/naturalHeight) y la transiciona al cambiar de pantalla.
+ * Mientras carga la primera usa RATIO_INICIAL: ajústalo a la proporción
+ * real de tus capturas para evitar el salto de layout (CLS).
+ *
  * Ya no se usan las variables --rg-velo-fuerte, --rg-velo-suave,
  * --rg-filtro-img ni --rg-barra: puedes borrarlas de tokens.css.
  *
@@ -33,6 +40,9 @@ const BLOB = 'https://raygoldstorage.blob.core.windows.net/web';
 const pantallas = t.pantallas.map((p) => ({ ...p, url: `${BLOB}/${p.archivo}` }));
 
 const urlContacto = getPageUrl('contacto', lang);
+
+// Proporción provisional del marco hasta que carga la primera captura.
+const RATIO_INICIAL = '16 / 9';
 ---
 
 <section class="fugas-hero">
@@ -59,7 +69,7 @@ const urlContacto = getPageUrl('contacto', lang);
 
     <!-- Vitrina: la captura, entera y nítida -->
     <figure class="vitrina">
-      <div class="vitrina__marco">
+      <div class="vitrina__marco" style={`--ratio: ${RATIO_INICIAL}`}>
         {pantallas.map((p, i) => (
           <img
             src={p.url}
@@ -208,9 +218,9 @@ const urlContacto = getPageUrl('contacto', lang);
   }
 
   /* ── Vitrina ──
-     La captura se ve ENTERA (contain), nunca recortada: son pantallas de
-     trabajo, y recortarlas por la mitad no dice nada. El marco absorbe la
-     diferencia de proporción entre unas y otras. */
+     La captura se ve ENTERA (contain), nunca recortada. El marco ya no
+     fuerza una proporción: toma la de la captura visible (--ratio), así que
+     la imagen llena el marco de borde a borde, sin bandas. */
   .vitrina {
     margin: 0;
     min-width: 0;
@@ -218,12 +228,14 @@ const urlContacto = getPageUrl('contacto', lang);
 
   .vitrina__marco {
     position: relative;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: var(--ratio, 16 / 9);
+    max-height: 72vh;
     background: var(--rg-panel);
     border: 1px solid var(--rg-line);
     border-radius: 14px;
     overflow: hidden;
     box-shadow: 0 18px 50px var(--rg-sombra);
+    transition: aspect-ratio 0.6s ease;
   }
 
   .vitrina__img {
@@ -366,9 +378,6 @@ const urlContacto = getPageUrl('contacto', lang);
     h1 {
       max-width: 20ch;
     }
-    .vitrina__marco {
-      aspect-ratio: 16 / 10;
-    }
     .ibtn[data-tip]::after {
       display: none;
     }
@@ -382,7 +391,8 @@ const urlContacto = getPageUrl('contacto', lang);
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .vitrina__img {
+    .vitrina__img,
+    .vitrina__marco {
       transition: none;
     }
   }
@@ -394,6 +404,7 @@ const urlContacto = getPageUrl('contacto', lang);
     if (!hero || hero.dataset.listo === '1') return;
     hero.dataset.listo = '1';
 
+    const marco = hero.querySelector<HTMLElement>('.vitrina__marco');
     const imgs = Array.from(hero.querySelectorAll<HTMLImageElement>('.vitrina__img'));
     const puntos = Array.from(hero.querySelectorAll<HTMLButtonElement>('[data-punto]'));
     const pieNombre = hero.querySelector<HTMLElement>('[data-pie-nombre]');
@@ -407,12 +418,26 @@ const urlContacto = getPageUrl('contacto', lang);
     let actual = 0;
     let reloj: ReturnType<typeof setInterval> | null = null;
 
+    // El marco adopta la proporción real de la captura visible
+    function ajustarMarco(img: HTMLImageElement) {
+      if (!marco || !img.naturalWidth || !img.naturalHeight) return;
+      marco.style.setProperty('--ratio', `${img.naturalWidth} / ${img.naturalHeight}`);
+    }
+
+    imgs.forEach((img, i) => {
+      if (img.complete && i === actual) ajustarMarco(img);
+      img.addEventListener('load', () => {
+        if (i === actual) ajustarMarco(img);
+      });
+    });
+
     function mostrar(i: number) {
       imgs[actual].classList.remove('is-on');
       puntos[actual]?.classList.remove('is-on');
       actual = (i + imgs.length) % imgs.length;
       imgs[actual].classList.add('is-on');
       puntos[actual]?.classList.add('is-on');
+      ajustarMarco(imgs[actual]);
       if (pieNombre) pieNombre.textContent = imgs[actual].dataset.nombre || '';
     }
 
