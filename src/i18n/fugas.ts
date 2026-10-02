@@ -128,8 +128,7 @@ const es: FugasTranslations = {
     { archivo: 'IniciFin5.png', nombre: 'Mapa de fabricación', alt: 'Mapa de fabricación de RayGold con las fases de producción' },
     { archivo: 'finita.png', nombre: 'Producción finita',  alt: 'Pantalla de la producción finita de los talleres' },
     { archivo: 'Taller.png', nombre: 'Taller',  alt: 'Pantalla de los talleres en producción' },
-    { archivo: 'InicioFin6.png', nombre: 'Cuadro de mando',     alt: 'Cuadro de mando de RayGold con indicadores del taller' },
-  ],
+ ],
 
   frases: {
     propia: 'Tú no tienes un gran problema.',
@@ -355,7 +354,6 @@ const ca: FugasTranslations = {
     { archivo: 'IniciFin5.png', nombre: 'Mapa de fabricació',    alt: 'Mapa de fabricació de RayGold amb les fases de producció' },
     { archivo: 'finita.png', nombre: 'Producció finalitzada',  alt: 'Pantalla de la producció finalitzada dels tallers' },
     { archivo: 'Taller.png', nombre: 'Taller',  alt: 'Pantalla dels tallers en producció' },
-    { archivo: 'InicioFin6.png', nombre: 'Quadre de comandament', alt: 'Quadre de comandament de RayGold amb indicadors del taller' },
   ],
 
   frases: {
@@ -582,8 +580,7 @@ const en: FugasTranslations = {
     { archivo: 'IniciFin5.png', nombre: 'Manufacturing map', alt: 'RayGold manufacturing map showing the production phases' },
     { archivo: 'finita.png', nombre: 'Finished Production',  alt: 'Screen showing the finished production from the workshops' },
     { archivo: 'Taller.png', nombre: 'Workshop',  alt: 'Screen showing the workshops in production' },
-    { archivo: 'InicioFin6.png', nombre: 'Dashboard',         alt: 'RayGold dashboard with workshop indicators' },
-  ],
+ ],
 
   frases: {
     propia: "You don't have one big problem.",
@@ -809,8 +806,7 @@ const fr: FugasTranslations = {
     { archivo: 'IniciFin5.png', nombre: 'Carte de fabrication', alt: 'Carte de fabrication de RayGold avec les phases de production' },
     { archivo: 'finita.png', nombre: 'Production terminée',  alt: 'Écran de la production terminée des ateliers' },
     { archivo: 'Taller.png', nombre: 'Atelier',  alt: 'Écran des ateliers en production' },
-    { archivo: 'InicioFin6.png', nombre: 'Tableau de bord',      alt: "Tableau de bord de RayGold avec les indicateurs de l'atelier" },
-  ],
+ ],
 
   frases: {
     propia: "Vous n'avez pas un grand problème.",
@@ -1036,8 +1032,7 @@ const ptBr: FugasTranslations = {
     { archivo: 'IniciFin5.png', nombre: 'Mapa de fabricação',   alt: 'Mapa de fabricação do RayGold com as fases de produção' },
     { archivo: 'finita.png', nombre: 'Produção finalizada',  alt: 'Tela da produção finalizada das oficinas' },
     { archivo: 'Taller.png', nombre: 'Oficina',  alt: 'Tela das oficinas em produção' },
-    { archivo: 'InicioFin6.png', nombre: 'Painel de indicadores', alt: 'Painel do RayGold com indicadores da oficina' },
-  ],
+ ],
 
   frases: {
     propia: 'Você não tem um grande problema.',
