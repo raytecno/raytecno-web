@@ -89,6 +89,8 @@ export interface FugasTranslations {
     dentroDelPrograma: string;
     /** Etiqueta bajo la captura */
     etiquetaPantalla: string;
+    mostrarFugas?: string;   // admite {n}
+    ocultarFugas?: string;
   };
   areas: Record<AreaId, string>;
   /** Nombre del área tal y como entra en la frase del medidor filtrado.
@@ -153,6 +155,8 @@ const es: FugasTranslations = {
     etiquetaCierre: 'cierre',
     dentroDelPrograma: 'Dentro del programa:',
     etiquetaPantalla: 'en pantalla',
+    mostrarFugas: 'Ver las {n} fugas',
+    ocultarFugas: 'Ocultar las fugas',
   },
 
   areas: {
@@ -379,6 +383,8 @@ const ca: FugasTranslations = {
     etiquetaCierre: 'tancament',
     dentroDelPrograma: 'Dins del programa:',
     etiquetaPantalla: 'a la pantalla',
+    mostrarFugas: 'Ver las {n} fugas',
+    ocultarFugas: 'Ocultar las fugas',
   },
 
   areas: {
@@ -605,6 +611,8 @@ const en: FugasTranslations = {
     etiquetaCierre: 'the fix',
     dentroDelPrograma: 'Inside the program:',
     etiquetaPantalla: 'on screen',
+    mostrarFugas: 'See all {n} leaks',
+    ocultarFugas: 'Hide the leaks',
   },
 
   areas: {
@@ -831,6 +839,8 @@ const fr: FugasTranslations = {
     etiquetaCierre: 'colmatage',
     dentroDelPrograma: 'Dans le programme :',
     etiquetaPantalla: "à l'écran",
+    mostrarFugas: 'Ver las {n} fugas',
+    ocultarFugas: 'Ocultar las fugas',
   },
 
   areas: {
@@ -1057,6 +1067,8 @@ const ptBr: FugasTranslations = {
     etiquetaCierre: 'fecho',
     dentroDelPrograma: 'Dentro do programa:',
     etiquetaPantalla: 'na tela',
+    mostrarFugas: 'Ver las {n} fugas',
+    ocultarFugas: 'Ocultar las fugas',
   },
 
   areas: {

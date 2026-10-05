@@ -28,6 +28,17 @@
  *   toLowerCase(). Con 'Informática' colaba; con 'IT' salía 'it' y en francés
  *   faltaba el artículo. Ahora el nombre viaja en data-area-nombre y se usa
  *   tal cual: lo escribe el traductor, no el navegador.
+ *
+ * PLEGADO (Octubre 2026): la lista ocupaba demasiado y empujaba el cierre
+ * muy abajo. Ahora filtros + lista arrancan plegados detrás de una pastilla
+ * junto a la entradilla ("Ver las 15 fugas").
+ * - Siguen en el HTML del build: buscadores e IA los leen igual.
+ * - Plegado con grid-template-rows 0fr → 1fr (anima altura sin medir).
+ * - Cerrado lleva `inert`: ni foco de teclado ni lector de pantalla.
+ * - Sin JavaScript, un <noscript> los deja abiertos y oculta la pastilla.
+ * - Si se llega por #fugas (CTA del hero) la lista se abre sola.
+ * - Textos nuevos en fugas.ts: seccion.mostrarFugas ('{n}') y
+ *   seccion.ocultarFugas. Con reserva en español si faltan.
  */
 import { getPageUrl, type Lang } from '@/config/pages';
 import { getFugasTranslations, contarPorArea, type AreaId } from '@/i18n/fugas';
@@ -52,6 +63,10 @@ const BLOB = 'https://raygoldstorage.blob.core.windows.net/web';
 const formatoPct = t.frases.formatoPorcentaje ?? '{n} %';
 const pctBarra = t.frases.porcentajeBarra ?? '2 %';
 const cifraTotal = formatoPct.replace('{n}', String(total * 2));
+
+/** Textos de la pastilla de plegado (con reserva en español). */
+const txtVer = (t.seccion.mostrarFugas ?? 'Ver las {n} fugas').replace('{n}', String(total));
+const txtOcultar = t.seccion.ocultarFugas ?? 'Ocultar las fugas';
 ---
 
 <div
@@ -97,78 +112,105 @@ const cifraTotal = formatoPct.replace('{n}', String(total * 2));
         <p>{t.seccion.entradilla}</p>
       </div>
 
-      <div class="pastillas" data-pastillas>
-        <button class="pastilla is-on" data-area="all">
-          {t.seccion.filtroTodas}<b>{total}</b>
-        </button>
-        {areasOrden.map((a) => (
-                    <button class="pastilla" data-area={a} data-area-nombre={t.areasFrase?.[a] ?? t.areas[a]}>
-            {t.areas[a]}<b>{cuenta[a]}</b>
+      <button
+        class="plegar"
+        data-plegar
+        aria-expanded="false"
+        aria-controls="fugas-plegable"
+        data-txt-ver={txtVer}
+        data-txt-ocultar={txtOcultar}
+      >
+        <span data-plegar-txt>{txtVer}</span>
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 6l4 4 4-4"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div class="plegable" id="fugas-plegable" data-plegable>
+      <div class="plegable__in" data-plegable-in>
+        <div class="pastillas" data-pastillas>
+          <button class="pastilla is-on" data-area="all">
+            {t.seccion.filtroTodas}<b>{total}</b>
           </button>
-        ))}
+          {areasOrden.map((a) => (
+            <button class="pastilla" data-area={a} data-area-nombre={t.areasFrase?.[a] ?? t.areas[a]}>
+              {t.areas[a]}<b>{cuenta[a]}</b>
+            </button>
+          ))}
+        </div>
+
+        <div class="lista">
+          {t.fugas.map((f, i) => (
+            <article class="fuga" data-area={f.area}>
+              <div class="fuga__n">
+                {String(i + 1).padStart(2, '0')}
+                <i>{t.areas[f.area]}</i>
+              </div>
+
+              <div class="fuga__cuerpo">
+                <h3 class="fuga__t">{f.titulo}</h3>
+                <p class="fuga__s">{f.problema}</p>
+
+                <div class="fuga__fix">
+                  <div class="fuga__texto">
+                    <p class="fuga__cierre">
+                      <span class="k">{t.seccion.etiquetaCierre}</span>
+                      <span>{f.cierre}</span>
+                    </p>
+                    <p class="mod">{t.seccion.dentroDelPrograma} <b>{f.modulo}</b></p>
+                  </div>
+
+                  {f.imagen && (
+                    <figure class="fuga__shot">
+                      <button class="fuga__zoom" data-zoom aria-label={t.hero.verPantalla}>
+                        <img
+                          data-src={`${BLOB}/${f.imagen}`}
+                          alt={f.imagenAlt}
+                          width="640"
+                          height="400"
+                          decoding="async"
+                        />
+                        <span class="fuga__lupa" aria-hidden="true">
+                          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+                            <circle cx="8.8" cy="8.8" r="5.6"></circle>
+                            <path d="M13 13l4 4M8.8 6.6v4.4M6.6 8.8h4.4"></path>
+                          </svg>
+                        </span>
+                      </button>
+                      <figcaption>{t.seccion.etiquetaPantalla}</figcaption>
+                    </figure>
+                  )}
+                </div>
+              </div>
+
+              <button
+                class="ibtn"
+                data-abrir
+                data-tip-abrir={t.seccion.verComoSeCierra}
+                data-tip-cerrar={t.seccion.cerrar}
+                data-tip={t.seccion.verComoSeCierra}
+                aria-expanded="false"
+                aria-label={t.seccion.verComoSeCierra}
+              >
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+                  <path d="M8 3v10M3 8h10"></path>
+                </svg>
+              </button>
+            </article>
+          ))}
+        </div>
       </div>
     </div>
 
-    <div class="lista">
-      {t.fugas.map((f, i) => (
-        <article class="fuga" data-area={f.area}>
-          <div class="fuga__n">
-            {String(i + 1).padStart(2, '0')}
-            <i>{t.areas[f.area]}</i>
-          </div>
-
-          <div class="fuga__cuerpo">
-            <h3 class="fuga__t">{f.titulo}</h3>
-            <p class="fuga__s">{f.problema}</p>
-
-            <div class="fuga__fix">
-              <div class="fuga__texto">
-                <p class="fuga__cierre">
-                  <span class="k">{t.seccion.etiquetaCierre}</span>
-                  <span>{f.cierre}</span>
-                </p>
-                <p class="mod">{t.seccion.dentroDelPrograma} <b>{f.modulo}</b></p>
-              </div>
-
-              {f.imagen && (
-                <figure class="fuga__shot">
-                  <button class="fuga__zoom" data-zoom aria-label={t.hero.verPantalla}>
-                    <img
-                      data-src={`${BLOB}/${f.imagen}`}
-                      alt={f.imagenAlt}
-                      width="640"
-                      height="400"
-                      decoding="async"
-                    />
-                    <span class="fuga__lupa" aria-hidden="true">
-                      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
-                        <circle cx="8.8" cy="8.8" r="5.6"></circle>
-                        <path d="M13 13l4 4M8.8 6.6v4.4M6.6 8.8h4.4"></path>
-                      </svg>
-                    </span>
-                  </button>
-                  <figcaption>{t.seccion.etiquetaPantalla}</figcaption>
-                </figure>
-              )}
-            </div>
-          </div>
-
-          <button
-            class="ibtn"
-            data-abrir
-            data-tip-abrir={t.seccion.verComoSeCierra}
-            data-tip-cerrar={t.seccion.cerrar}
-            data-tip={t.seccion.verComoSeCierra}
-            aria-expanded="false"
-            aria-label={t.seccion.verComoSeCierra}
-          >
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
-              <path d="M8 3v10M3 8h10"></path>
-            </svg>
-          </button>
-        </article>
-      ))}
-    </div>
+    <!-- Sin JavaScript: la lista se ve abierta y la pastilla no aparece -->
+    <noscript>
+      <style is:inline>
+        .fugas-sec .plegable { grid-template-rows: 1fr; }
+        .fugas-sec .plegable__in { overflow: visible; }
+        .fugas-sec .plegar { display: none; }
+      </style>
+    </noscript>
   </section>
 
   <!-- ═══════════ Cierre ═══════════ -->
@@ -309,7 +351,7 @@ const cifraTotal = formatoPct.replace('{n}', String(total * 2));
   /* ── Cabecera de la sección ── */
   .fugas {
     padding-top: 74px;
-    padding-bottom: 88px;
+    padding-bottom: 72px;
   }
   .fugas__head {
     display: flex;
@@ -317,7 +359,6 @@ const cifraTotal = formatoPct.replace('{n}', String(total * 2));
     justify-content: space-between;
     gap: 24px;
     flex-wrap: wrap;
-    margin-bottom: 28px;
   }
   .fugas__head h2 {
     margin: 0;
@@ -337,10 +378,69 @@ const cifraTotal = formatoPct.replace('{n}', String(total * 2));
     line-height: 1.55;
   }
 
+  /* ── Pastilla de plegado ── */
+  .plegar {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 10px 14px 10px 18px;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--rg-ink);
+    background: var(--rg-accent-soft);
+    border: 1px solid transparent;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+  }
+  .plegar:hover {
+    border-color: var(--rg-accent);
+  }
+  .plegar[aria-expanded='true'] {
+    background: var(--rg-panel);
+    border-color: var(--rg-line);
+    color: var(--rg-soft);
+  }
+  .plegar[aria-expanded='true']:hover {
+    border-color: var(--rg-accent);
+    color: var(--rg-ink);
+  }
+  .plegar svg {
+    width: 15px;
+    height: 15px;
+    color: var(--rg-accent);
+    transition: transform 0.25s ease;
+  }
+  .plegar[aria-expanded='true'] svg {
+    transform: rotate(180deg);
+  }
+
+  /* ── Contenedor plegable: anima la altura sin medirla ── */
+  .plegable {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.45s ease;
+  }
+  .plegable.is-open {
+    grid-template-rows: 1fr;
+  }
+  .plegable__in {
+    min-height: 0;
+    overflow: hidden;
+  }
+  /* Terminada la apertura se libera el overflow para no recortar sombras
+     de las capturas ni los tooltips. */
+  .plegable.is-open.is-hecho .plegable__in {
+    overflow: visible;
+  }
+
   .pastillas {
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
+    padding: 28px 0 24px;
   }
   .pastilla {
     padding: 8px 14px;
@@ -730,10 +830,19 @@ const cifraTotal = formatoPct.replace('{n}', String(total * 2));
     }
   }
 
+  @media (max-width: 560px) {
+    .plegar {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .barra,
     .ibtn svg,
-    .fuga__zoom {
+    .fuga__zoom,
+    .plegable,
+    .plegar svg {
       transition: none;
     }
   }
@@ -744,6 +853,64 @@ const cifraTotal = formatoPct.replace('{n}', String(total * 2));
     const sec = document.querySelector<HTMLElement>('.fugas-sec');
     if (!sec || sec.dataset.listo === '1') return;
     sec.dataset.listo = '1';
+
+    // ── Plegar / desplegar toda la lista ──
+    const btnPlegar = sec.querySelector<HTMLButtonElement>('[data-plegar]');
+    const txtPlegar = sec.querySelector<HTMLElement>('[data-plegar-txt]');
+    const plegable = sec.querySelector<HTMLElement>('[data-plegable]');
+    const plegableIn = sec.querySelector<HTMLElement>('[data-plegable-in]');
+    const seccionFugas = sec.querySelector<HTMLElement>('#fugas');
+    const lento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function fijarPlegado(abierta: boolean, sinAnimar = false) {
+      if (!plegable || !btnPlegar) return;
+      if (plegable.classList.contains('is-open') === abierta) return;
+
+      if (sinAnimar) plegable.style.transition = 'none';
+      plegable.classList.toggle('is-open', abierta);
+      plegable.classList.remove('is-hecho');
+      if (plegableIn) plegableIn.inert = !abierta;
+
+      btnPlegar.setAttribute('aria-expanded', String(abierta));
+      if (txtPlegar) {
+        txtPlegar.textContent = abierta
+          ? btnPlegar.dataset.txtOcultar || ''
+          : btnPlegar.dataset.txtVer || '';
+      }
+
+      if (sinAnimar || lento) {
+        if (abierta) plegable.classList.add('is-hecho');
+        requestAnimationFrame(() => (plegable.style.transition = ''));
+      }
+
+      // Al cerrar desde abajo, devolver la cabecera a la vista
+      if (!abierta && seccionFugas && seccionFugas.getBoundingClientRect().top < 0) {
+        seccionFugas.scrollIntoView({ behavior: lento ? 'auto' : 'smooth', block: 'start' });
+      }
+    }
+
+    // Arranca plegada e inaccesible al foco
+    if (plegableIn) plegableIn.inert = true;
+
+    plegable?.addEventListener('transitionend', (e) => {
+      if (e.target === plegable && plegable.classList.contains('is-open')) {
+        plegable.classList.add('is-hecho');
+      }
+    });
+
+    btnPlegar?.addEventListener('click', () => {
+      fijarPlegado(!plegable?.classList.contains('is-open'));
+    });
+
+    // Llegada por #fugas (CTA del hero, enlaces externos): abrir sola
+    if (location.hash === '#fugas') fijarPlegado(true, true);
+    window.addEventListener('hashchange', () => {
+      if (location.hash === '#fugas') fijarPlegado(true);
+    });
+    document.addEventListener('click', (e) => {
+      const a = (e.target as HTMLElement | null)?.closest?.('a[href="#fugas"]');
+      if (a) fijarPlegado(true);
+    });
 
     // ── Abrir / cerrar cada fuga ──
     sec.querySelectorAll<HTMLButtonElement>('[data-abrir]').forEach((b) => {
