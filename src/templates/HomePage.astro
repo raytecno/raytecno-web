@@ -16,6 +16,7 @@ import WhatsAppButton from "@/components/WhatsAppButton.astro";
 import { getAlternateUrls, type Lang } from "@/config/pages";
 import FugasHero from "@/components/FugasHero.astro";
 import Fugas from "@/components/Fugas.astro";
+import CrmVitrina from "@/components/CrmVitrina.astro";
 
 interface Props {
   lang: Lang;
@@ -67,6 +68,7 @@ const meta = metaInfo[lang] || metaInfo.es;
   
   <FugasHero lang={lang} />
 <Fugas lang={lang} />
+<CrmVitrina lang={lang} />
 
   <!-- Módulos - fondo CLARO -->
   <div class="section-bg section-bg--light">
