@@ -3,29 +3,28 @@
  * Página del CRM comercial
  *
  * @file src/pages/[lang]/crm.astro
- * URL: /es/crm
+ * URL: /es/crm, /en/crm, /fr/crm, /ca/crm, /pt-br/crm
  *
- * Solo en español por ahora (guard lang === 'es' en getStaticPaths): los
- * textos de i18n/crm.ts existen solo en 'es'. Cuando se traduzcan, añadir
- * los idiomas aquí y quitar el filtro de alternateUrls.
+ * Octubre 2026: los cinco idiomas, con textos de i18n/crm.ts. El slug "crm"
+ * es el mismo en todos (pageSlugs.crm en config/pages.ts).
  *
  * Ruta estática: Astro le da prioridad sobre [lang]/[slug].astro, así que
  * no hay conflicto con el router dinámico de páginas.
  */
 import Layout from '@/layouts/Layout.astro';
 import CrmCapitulos from '@/components/CrmCapitulos.astro';
-import { type Lang, getPageUrl } from '@/config/pages';
+import { type Lang, getPageUrl, supportedLangs } from '@/config/pages';
 import { getCrmTranslations } from '@/i18n/crm';
 
 export function getStaticPaths() {
-   return supportedLangs.map((lang) => ({ params: { lang } }));
+  return supportedLangs.map((lang) => ({ params: { lang } }));
 }
 
 const { lang } = Astro.params as { lang: Lang };
 const t = getCrmTranslations(lang);
 
-// hreflang solo a los idiomas que existen
-const alternateUrls = [{ lang: 'es' as Lang, url: getPageUrl('crm', 'es') }];
+// hreflang a los cinco idiomas
+const alternateUrls = supportedLangs.map((l) => ({ lang: l, url: getPageUrl('crm', l) }));
 ---
 
 <Layout
