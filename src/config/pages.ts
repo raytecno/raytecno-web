@@ -30,6 +30,7 @@ export const pageSlugs: Record<string, Record<Lang, string>> = {
   modulos: { es: 'modulos', en: 'modules', fr: 'modules', ca: 'moduls', 'pt-br': 'modulos' },
   precios: { es: 'precios', en: 'pricing', fr: 'tarifs', ca: 'preus', 'pt-br': 'precos' },
   tecnologia: { es: 'tecnologia', en: 'technology', fr: 'technologie', ca: 'tecnologia', 'pt-br': 'tecnologia' },
+  crm: { es: 'crm', en: 'crm', fr: 'crm', ca: 'crm', 'pt-br': 'crm' },
   contacto: { es: 'contacto', en: 'contact', fr: 'contact', ca: 'contacte', 'pt-br': 'contato' },
   nosotros: { es: 'nosotros', en: 'about', fr: 'a-propos', ca: 'nosaltres', 'pt-br': 'sobre' },
     queEsRayGold: {
