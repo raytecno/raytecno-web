@@ -18,7 +18,7 @@ import { type Lang, getPageUrl } from '@/config/pages';
 import { getCrmTranslations } from '@/i18n/crm';
 
 export function getStaticPaths() {
-  return [{ params: { lang: 'es' } }];
+   return supportedLangs.map((lang) => ({ params: { lang } }));
 }
 
 const { lang } = Astro.params as { lang: Lang };
