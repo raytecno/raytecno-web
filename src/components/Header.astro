@@ -19,6 +19,13 @@
  * - Se han eliminado los colores literales: el marino rgba(15,23,42,.95), los
  *   rgba(255,255,255,.x), el violeta rgba(102,126,234,.x) y el #764ba2.
  * - El header ya NO se vuelve blanco en móvil: mismo color en todos los anchos.
+ *
+ * CRM (Octubre 2026):
+ * - Enlace "CRM" tras Módulos, hacia la página /crm.
+ * - Solo en español: la página se genera solo para 'es'. En los demás idiomas
+ *   el enlace no se pinta, para no llevar a un 404. Al traducir la página,
+ *   añadir el idioma a crmLangs.
+ * - "CRM" se queda igual en los cinco idiomas.
  */
 import { getPageUrl, getToolUrl, type Lang } from "@/config/pages";
 import { getTranslations } from "@/i18n";
@@ -60,6 +67,10 @@ const tecnologiaUrl = getPageUrl("tecnologia", lang);
 const blogUrl = `/${lang}/blog`;
 const contactoUrl = getPageUrl("contacto", lang);
 const queEsUrl = getPageUrl("queEsRayGold", lang);
+
+// CRM: solo en los idiomas donde existe la página
+const crmLangs: Lang[] = ["es"];
+const crmUrl = crmLangs.includes(lang) ? getPageUrl("crm", lang) : null;
 
 // URLs de herramientas - SIN trailing slash
 const calculadoraUrl = getToolUrl("calculadora", lang);
@@ -130,6 +141,15 @@ const isToolsActive = currentPath.includes('/herramientas') || currentPath.inclu
         data-ga-elemento="modulos"
         data-ga-ubicacion="header"
       >{t.nav?.modules || "Módulos"}</a>
+      {crmUrl && (
+        <a
+          href={crmUrl}
+          class:list={["nav-link", { active: isActive(crmUrl) }]}
+          data-ga="cta_click"
+          data-ga-elemento="crm"
+          data-ga-ubicacion="header"
+        >CRM</a>
+      )}
       <a
         href={preciosUrl}
         class:list={["nav-link", { active: isActive(preciosUrl) }]}

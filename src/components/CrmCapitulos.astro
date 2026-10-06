@@ -30,6 +30,10 @@
  *
  * Lupa: clic en cualquier captura → visor a pantalla completa (Escape cierra).
  *
+ * Cabecera fija de la web (Header.astro, position: fixed, 72 px): todo lo
+ * sticky se pega en --cp-cab, y los saltos de ancla dejan ese hueco. El
+ * hueco de arriba de la página ya lo pone Layout (main padding-top: 72px).
+ *
  * Tema: secciones claras con los tokens --rg-* de la web; el cierre redefine
  * los tokens dentro de .crmp-cierre (nunca en :root), como CrmVitrina.
  */
@@ -278,6 +282,8 @@ const faqLd = {
   .crmp {
     /* Color de identidad del módulo Comercial (fijo) */
     --cp-mod: #0d9488;
+    /* Alto de la cabecera fija de la web */
+    --cp-cab: 72px;
 
     background: var(--rg-bg);
     color: var(--rg-ink);
@@ -461,7 +467,7 @@ const faqLd = {
   /* Índice de capítulos: pastillas, la activa en tinta */
   .crmp-indice {
     position: sticky;
-    top: 0;
+    top: var(--cp-cab);
     z-index: 5;
     display: flex;
     gap: 8px;
@@ -503,8 +509,11 @@ const faqLd = {
     align-items: start;
   }
 
+  .crmp-recorrido {
+    scroll-margin-top: var(--cp-cab);
+  }
   .crmp-cap {
-    scroll-margin-top: 80px;
+    scroll-margin-top: calc(var(--cp-cab) + 64px);
   }
   .crmp-cap__head {
     padding: 64px 0 8px;
@@ -593,8 +602,8 @@ const faqLd = {
   /* Captura fija (escritorio) */
   .crmp-fija {
     position: sticky;
-    top: 0;
-    height: 100vh;
+    top: var(--cp-cab);
+    height: calc(100vh - var(--cp-cab));
     display: flex;
     align-items: center;
   }
