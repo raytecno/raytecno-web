@@ -25,6 +25,12 @@
  * Marco: adopta la proporción real de la captura visible (--ratio), igual que
  * la vitrina del hero. RATIO_INICIAL evita el salto mientras carga.
  *
+ * FONDO OSCURO (Octubre 2026): la sección va siempre en azul noche, como
+ * "¿Por qué RayGold?", para cortar la portada clara. Los tokens --rg-* se
+ * redefinen DENTRO de .crm-vit (nunca en :root), así el resto del
+ * componente no cambia y no se filtra nada al resto de la web. En tema
+ * oscuro el fondo baja un tono más para seguir separándose de la página.
+ *
  * Enlace a la página /crm: solo aparece si se pasa `urlDetalle`. Así este
  * componente se puede publicar antes de que exista la página.
  *   <CrmVitrina lang={lang} urlDetalle={getPageUrl('crm', lang)} />
@@ -161,14 +167,34 @@ const DURACION = 7000;
 
 <style>
   .crm-vit {
-    /* Color de identidad del módulo Comercial (fijo, no depende del tema) */
-    --cv-mod: #0d9488;
+    /* Color de identidad del módulo Comercial (fijo; tono claro para fondo oscuro) */
+    --cv-mod: #2dd4bf;
+
+    /* Paleta oscura fija de la sección: redefine los tokens solo aquí dentro */
+    --cv-fondo: #0f172a;
+    --rg-bg: var(--cv-fondo);
+    --rg-ink: #f5f2ea;
+    --rg-soft: rgba(245, 242, 234, 0.72);
+    --rg-faint: rgba(245, 242, 234, 0.46);
+    --rg-line: rgba(255, 255, 255, 0.12);
+    --rg-panel: rgba(255, 255, 255, 0.04);
+    --rg-accent: #c9a54a;
+    --rg-accent-soft: rgba(201, 165, 74, 0.16);
+    --rg-on-ink: #0f172a;
+    --rg-sombra: rgba(0, 0, 0, 0.5);
 
     background: var(--rg-bg);
     color: var(--rg-ink);
     font-family: var(--rg-sans);
-    border-top: 1px solid var(--rg-line);
     padding: 88px 24px 96px;
+  }
+
+  /* En tema oscuro la página ya es azul noche: la sección baja un tono y
+     se separa con filetes. Ajusta el selector si tu tema usa otra marca. */
+  :global([data-theme='dark']) .crm-vit {
+    --cv-fondo: #080d1a;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   .cv-in {
@@ -182,10 +208,10 @@ const DURACION = 7000;
     align-items: center;
     gap: 9px;
     font-size: 12.5px;
-    color: var(--rg-soft);
-    border: 1px solid var(--rg-line);
-    background: var(--rg-panel);
-    padding: 6px 13px;
+    font-weight: 600;
+    color: var(--rg-accent);
+    background: var(--rg-accent-soft);
+    padding: 7px 15px;
     border-radius: 999px;
   }
   .cv-sello i {
