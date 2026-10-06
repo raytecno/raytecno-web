@@ -1,0 +1,1003 @@
+---
+/**
+ * CrmCapitulos.astro — Cuerpo de la página /crm
+ *
+ * @file src/components/CrmCapitulos.astro
+ *
+ * Octubre 2026. Estructura:
+ *   1. Cabecera: sello, H1, entradilla, dos CTA y la captura de "Mi día".
+ *   2. Tres claves (sobre tus datos / vendedor / dirección).
+ *   3. Tres capítulos en scroll: el texto avanza a la izquierda y la captura
+ *      se queda fija a la derecha (sticky). Cambia al entrar en cada paso.
+ *   4. Más pantallas del módulo (solo nombres, sin promesas).
+ *   5. Preguntas frecuentes (con JSON-LD FAQPage).
+ *   6. Cierre en azul noche con CTA a contacto.
+ *
+ * Todo el texto está en el HTML del build (buscadores e IA). Viene de
+ * i18n/crm.ts → pagina. Las capturas se buscan por id en `pantallas` y
+ * `pantallasExtra`.
+ *
+ * Captura fija (escritorio):
+ *   - Una sola figura sticky con las 7 capturas apiladas; cambia la visible
+ *     con un IntersectionObserver sobre los pasos (franja central de la
+ *     pantalla, rootMargin -45% arriba y abajo).
+ *   - El rótulo "02 / 07 · Fidelización" se actualiza con el paso.
+ *   - Sin JavaScript se queda la primera captura, y cada paso tiene además su
+ *     propia captura en línea (la que se ve en móvil), así que no se pierde nada.
+ *
+ * Móvil (< 980 px): la figura sticky desaparece y cada paso muestra su
+ * captura debajo del texto (loading="lazy" nativo).
+ *
+ * Lupa: clic en cualquier captura → visor a pantalla completa (Escape cierra).
+ *
+ * Tema: secciones claras con los tokens --rg-* de la web; el cierre redefine
+ * los tokens dentro de .crmp-cierre (nunca en :root), como CrmVitrina.
+ */
+import type { Lang } from '@/config/pages';
+import { getPageUrl } from '@/config/pages';
+import { getCrmTranslations, type CrmPantalla } from '@/i18n/crm';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'es' } = Astro.props;
+const t = getCrmTranslations(lang);
+const p = t.pagina;
+const urlContacto = getPageUrl('contacto', lang);
+
+const BLOB = 'https://raygoldstorage.blob.core.windows.net/web';
+const todas: CrmPantalla[] = [...t.pantallas, ...t.pantallasExtra];
+const porId = new Map(todas.map((x) => [x.id, { ...x, url: `${BLOB}/${x.archivo}` }]));
+
+// Lista plana de pasos, numerados en orden de lectura
+const pasos = p.capitulos.flatMap((c) =>
+  c.pasos.map((paso) => ({ ...paso, capitulo: c.id, img: porId.get(paso.pantalla) }))
+);
+const totalPasos = pasos.length;
+const pad = (n: number) => String(n).padStart(2, '0');
+
+// Índice del primer paso de cada capítulo (para numerar dentro del bucle)
+const inicio: Record<string, number> = {};
+{
+  let k = 0;
+  for (const c of p.capitulos) {
+    inicio[c.id] = k;
+    k += c.pasos.length;
+  }
+}
+
+const portada = porId.get('mi-dia');
+
+// JSON-LD de las preguntas frecuentes
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: p.faq.map((f) => ({
+    '@type': 'Question',
+    name: f.pregunta,
+    acceptedAnswer: { '@type': 'Answer', text: f.respuesta },
+  })),
+};
+---
+
+<div class="crmp">
+  <!-- ═══════════ 1. Cabecera ═══════════ -->
+  <section class="crmp-hero">
+    <div class="crmp-in">
+      <span class="crmp-sello"><i aria-hidden="true"></i>{p.sello}</span>
+      <h1>
+        {p.titulo}
+        <em>{p.tituloEnfasis}</em>
+      </h1>
+      <p class="crmp-lead">{p.lead}</p>
+
+      <div class="crmp-ctas">
+        <a class="crmp-btn crmp-btn--solid" href={urlContacto}>{p.ctaContacto}</a>
+        <a class="crmp-btn crmp-btn--suave" href="#recorrido">
+          {p.ctaRecorrido}
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M8 3v10M4 9l4 4 4-4"></path>
+          </svg>
+        </a>
+      </div>
+
+      {portada && (
+        <figure class="crmp-portada">
+          <button class="crmp-zoom" data-zoom aria-label={t.vitrina.verPantalla}>
+            <img
+              src={portada.url}
+              alt={portada.alt}
+              width="1845"
+              height="950"
+              fetchpriority="high"
+              decoding="async"
+            />
+          </button>
+          <figcaption>{t.vitrina.etiquetaPantalla}</figcaption>
+        </figure>
+      )}
+    </div>
+  </section>
+
+  <!-- ═══════════ 2. Claves ═══════════ -->
+  <section class="crmp-claves">
+    <div class="crmp-in crmp-claves__grid">
+      {p.claves.map((c, i) => (
+        <div class="crmp-clave">
+          <span class="crmp-clave__n">{pad(i + 1)}</span>
+          <h2>{c.titulo}</h2>
+          <p>{c.texto}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ═══════════ 3. Capítulos ═══════════ -->
+  <section class="crmp-recorrido" id="recorrido">
+    <div class="crmp-in">
+      <nav class="crmp-indice" aria-label={p.indiceLabel}>
+        {p.capitulos.map((c) => (
+          <a href={`#cap-${c.id}`} data-indice={c.id}>
+            <span>{c.numero}</span>
+            {c.titulo}
+          </a>
+        ))}
+      </nav>
+
+      <div class="crmp-scroll">
+        <!-- Texto -->
+        <div class="crmp-textos">
+          {p.capitulos.map((c) => (
+            <div class="crmp-cap" id={`cap-${c.id}`} data-cap={c.id}>
+              <header class="crmp-cap__head">
+                <span class="crmp-cap__n">{c.numero}</span>
+                <h2>{c.titulo}</h2>
+                <p>{c.entradilla}</p>
+              </header>
+
+              {c.pasos.map((paso, j) => {
+                const n = inicio[c.id] + j;
+                const img = porId.get(paso.pantalla);
+                return (
+                  <article class="crmp-paso" data-paso={n} data-cap={c.id}>
+                    <span class="crmp-paso__n">
+                      {pad(n + 1)} / {pad(totalPasos)}
+                      {img && <b>{img.pestana}</b>}
+                    </span>
+                    <h3>{paso.titulo}</h3>
+                    {paso.parrafos.map((par) => <p>{par}</p>)}
+                    <ul>
+                      {paso.puntos.map((pt) => <li>{pt}</li>)}
+                    </ul>
+
+                    {img && (
+                      <figure class="crmp-linea">
+                        <button class="crmp-zoom" data-zoom aria-label={t.vitrina.verPantalla}>
+                          <img src={img.url} alt={img.alt} loading="lazy" decoding="async" width="1842" height="940" />
+                        </button>
+                      </figure>
+                    )}
+                  </article>
+                );
+              })}
+            </div>
+          ))}
+        </div>
+
+        <!-- Captura fija -->
+        <div class="crmp-fija" aria-hidden="true">
+          <div class="crmp-fija__in">
+            <div class="crmp-fija__rot">
+              <span data-rot-n>{pad(1)} / {pad(totalPasos)}</span>
+              <b data-rot-t>{pasos[0]?.img?.pestana}</b>
+            </div>
+            <button class="crmp-fija__marco" data-fija-zoom tabindex="-1">
+              {pasos.map((paso, i) =>
+                paso.img ? (
+                  <img
+                    src={paso.img.url}
+                    alt=""
+                    class:list={['crmp-fija__img', { 'is-on': i === 0 }]}
+                    data-fija={i}
+                    loading={i === 0 ? 'eager' : 'lazy'}
+                    decoding="async"
+                  />
+                ) : null
+              )}
+            </button>
+            <div class="crmp-fija__barra">
+              {pasos.map((_, i) => (
+                <span class:list={[{ 'is-on': i === 0 }]} data-barra={i}></span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 4. Más pantallas ═══════════ -->
+  <section class="crmp-mas">
+    <div class="crmp-in">
+      <h2>{p.masTitulo}</h2>
+      <p>{p.masTexto}</p>
+      <ul>
+        {p.masPantallas.map((m) => <li>{m}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══════════ 5. Preguntas frecuentes ═══════════ -->
+  <section class="crmp-faq">
+    <div class="crmp-in">
+      <h2>{p.faqTitulo}</h2>
+      <div class="crmp-faq__lista">
+        {p.faq.map((f) => (
+          <details>
+            <summary>
+              {f.pregunta}
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+                <path d="M8 3v10M3 8h10"></path>
+              </svg>
+            </summary>
+            <p>{f.respuesta}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+    <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />
+  </section>
+
+  <!-- ═══════════ 6. Cierre ═══════════ -->
+  <section class="crmp-cierre">
+    <div class="crmp-in">
+      <p class="crmp-cierre__q">
+        {p.cierreTitulo} <em>{p.cierreEnfasis}</em>
+      </p>
+      <p class="crmp-cierre__t">{p.cierreTexto}</p>
+      <a class="crmp-btn crmp-btn--oro" href={urlContacto}>{p.cierreCta}</a>
+    </div>
+  </section>
+
+  <!-- Visor a pantalla completa -->
+  <div class="crmp-lb" data-lb role="dialog" aria-modal="true" aria-label={t.vitrina.verPantalla}>
+    <button class="crmp-lb__x" data-lb-x aria-label={t.vitrina.cerrar}>
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+        <path d="M5 5l10 10M15 5L5 15"></path>
+      </svg>
+    </button>
+    <figure class="crmp-lb__fig">
+      <img data-lb-img src="" alt="" />
+      <figcaption data-lb-pie></figcaption>
+    </figure>
+  </div>
+</div>
+
+<style>
+  .crmp {
+    /* Color de identidad del módulo Comercial (fijo) */
+    --cp-mod: #0d9488;
+
+    background: var(--rg-bg);
+    color: var(--rg-ink);
+    font-family: var(--rg-sans);
+  }
+
+  .crmp-in {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .crmp h1,
+  .crmp h2,
+  .crmp h3 {
+    font-family: var(--rg-display);
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  /* ── Botones ── */
+  .crmp-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 12px 21px;
+    border-radius: 999px;
+    font-size: 14.5px;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: background 0.18s, border-color 0.18s, color 0.18s;
+  }
+  .crmp-btn svg {
+    width: 15px;
+    height: 15px;
+  }
+  .crmp-btn--solid {
+    background: var(--rg-ink);
+    color: var(--rg-on-ink);
+  }
+  .crmp-btn--solid:hover {
+    background: var(--rg-accent);
+  }
+  .crmp-btn--suave {
+    background: var(--rg-accent-soft);
+    color: var(--rg-ink);
+  }
+  .crmp-btn--suave:hover {
+    border-color: var(--rg-accent);
+  }
+  .crmp-btn--suave svg {
+    color: var(--rg-accent);
+  }
+
+  /* ── 1. Cabecera ── */
+  .crmp-hero {
+    padding: 72px 0 40px;
+  }
+  .crmp-sello {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--rg-accent);
+    background: var(--rg-accent-soft);
+    padding: 7px 15px;
+    border-radius: 999px;
+  }
+  .crmp-sello i {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--cp-mod);
+  }
+  .crmp-hero h1 {
+    margin: 22px 0 0;
+    font-weight: 380;
+    font-size: clamp(2.1rem, 5vw, 3.6rem);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    max-width: 20ch;
+  }
+  .crmp-hero h1 em {
+    display: block;
+    font-style: italic;
+    color: var(--rg-accent);
+  }
+  .crmp-lead {
+    margin: 22px 0 0;
+    max-width: 62ch;
+    font-size: 1.08rem;
+    line-height: 1.6;
+    color: var(--rg-soft);
+  }
+  .crmp-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 30px;
+  }
+
+  .crmp-portada {
+    margin: 56px 0 0;
+  }
+  .crmp-portada figcaption,
+  .crmp-fija__rot {
+    font-family: var(--rg-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--rg-faint);
+  }
+  .crmp-portada figcaption {
+    margin-top: 10px;
+  }
+
+  /* Botón-captura con lupa al pasar */
+  .crmp-zoom {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 1px solid var(--rg-line);
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--rg-panel);
+    cursor: zoom-in;
+    box-shadow: 0 22px 60px var(--rg-sombra);
+    transition: border-color 0.2s;
+  }
+  .crmp-zoom:hover {
+    border-color: var(--rg-accent);
+  }
+  .crmp-zoom img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* ── 2. Claves ── */
+  .crmp-claves {
+    padding: 48px 0 24px;
+  }
+  .crmp-claves__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+  }
+  .crmp-clave {
+    padding: 26px 28px 26px 0;
+    border-top: 1px solid var(--rg-line);
+  }
+  .crmp-clave + .crmp-clave {
+    padding-left: 28px;
+    border-left: 1px solid var(--rg-line);
+  }
+  .crmp-clave__n {
+    font-family: var(--rg-mono);
+    font-size: 11px;
+    color: var(--rg-accent);
+  }
+  .crmp-clave h2 {
+    margin: 10px 0 0;
+    font-size: 1.3rem;
+    line-height: 1.25;
+  }
+  .crmp-clave p {
+    margin: 8px 0 0;
+    color: var(--rg-soft);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  /* ── 3. Recorrido ── */
+  .crmp-recorrido {
+    padding: 64px 0 40px;
+  }
+
+  /* Índice de capítulos: pastillas, la activa en tinta */
+  .crmp-indice {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 14px 0;
+    background: var(--rg-bg);
+    border-bottom: 1px solid var(--rg-line);
+  }
+  .crmp-indice a {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 8px 15px;
+    border-radius: 999px;
+    font-size: 13.5px;
+    color: var(--rg-soft);
+    background: var(--rg-accent-soft);
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .crmp-indice a span {
+    font-family: var(--rg-mono);
+    font-size: 10.5px;
+    opacity: 0.7;
+  }
+  .crmp-indice a:hover {
+    border-color: var(--rg-accent);
+  }
+  .crmp-indice a.is-on {
+    background: var(--rg-ink);
+    color: var(--rg-on-ink);
+  }
+
+  .crmp-scroll {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.35fr);
+    gap: 56px;
+    align-items: start;
+  }
+
+  .crmp-cap {
+    scroll-margin-top: 80px;
+  }
+  .crmp-cap__head {
+    padding: 64px 0 8px;
+  }
+  .crmp-cap__n,
+  .crmp-paso__n {
+    font-family: var(--rg-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--rg-accent);
+  }
+  .crmp-cap__head h2 {
+    margin: 10px 0 0;
+    font-size: clamp(1.7rem, 3.2vw, 2.4rem);
+    line-height: 1.1;
+  }
+  .crmp-cap__head p {
+    margin: 12px 0 0;
+    color: var(--rg-soft);
+    font-size: 1.02rem;
+    line-height: 1.6;
+  }
+
+  .crmp-paso {
+    padding: 48px 0 48px 20px;
+    border-left: 2px solid var(--rg-line);
+    min-height: 62vh;
+    transition: border-color 0.3s, opacity 0.3s;
+  }
+  .crmp-paso.is-on {
+    border-left-color: var(--rg-accent);
+  }
+  .crmp-paso__n {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    color: var(--rg-faint);
+  }
+  .crmp-paso__n b {
+    font-weight: 500;
+    color: var(--cp-mod);
+  }
+  .crmp-paso h3 {
+    margin: 12px 0 0;
+    font-size: 1.45rem;
+    line-height: 1.2;
+    font-weight: 450;
+  }
+  .crmp-paso p {
+    margin: 14px 0 0;
+    color: var(--rg-soft);
+    font-size: 15.5px;
+    line-height: 1.65;
+  }
+  .crmp-paso ul {
+    list-style: none;
+    margin: 18px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+  }
+  .crmp-paso li {
+    position: relative;
+    padding-left: 18px;
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--rg-ink);
+  }
+  .crmp-paso li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 7px;
+    height: 1.5px;
+    background: var(--rg-accent);
+  }
+
+  /* Captura en línea: solo móvil */
+  .crmp-linea {
+    display: none;
+    margin: 22px 0 0;
+  }
+
+  /* Captura fija (escritorio) */
+  .crmp-fija {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+  .crmp-fija__in {
+    width: 100%;
+  }
+  .crmp-fija__rot {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .crmp-fija__rot b {
+    font-weight: 500;
+    color: var(--rg-ink);
+  }
+  .crmp-fija__marco {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    aspect-ratio: 1842 / 940;
+    border: 1px solid var(--rg-line);
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--rg-panel);
+    box-shadow: 0 22px 60px var(--rg-sombra);
+    cursor: zoom-in;
+    transition: border-color 0.2s;
+  }
+  .crmp-fija__marco:hover {
+    border-color: var(--rg-accent);
+  }
+  .crmp-fija__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  .crmp-fija__img.is-on {
+    opacity: 1;
+  }
+  .crmp-fija__barra {
+    display: flex;
+    gap: 5px;
+    margin-top: 14px;
+  }
+  .crmp-fija__barra span {
+    flex: 1;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--rg-line);
+    transition: background 0.3s;
+  }
+  .crmp-fija__barra span.is-on {
+    background: var(--rg-accent);
+  }
+
+  /* ── 4. Más pantallas ── */
+  .crmp-mas {
+    padding: 56px 0;
+    border-top: 1px solid var(--rg-line);
+  }
+  .crmp-mas h2 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  .crmp-mas p {
+    margin: 8px 0 0;
+    color: var(--rg-soft);
+  }
+  .crmp-mas ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .crmp-mas li {
+    padding: 8px 15px;
+    border-radius: 999px;
+    font-size: 13.5px;
+    color: var(--rg-soft);
+    border: 1px solid var(--rg-line);
+  }
+
+  /* ── 5. Preguntas frecuentes ── */
+  .crmp-faq {
+    padding: 56px 0 80px;
+  }
+  .crmp-faq h2 {
+    margin: 0 0 18px;
+    font-size: 1.5rem;
+  }
+  .crmp-faq__lista {
+    border-top: 1px solid var(--rg-line);
+    max-width: 820px;
+  }
+  .crmp-faq details {
+    border-bottom: 1px solid var(--rg-line);
+  }
+  .crmp-faq summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 0;
+    cursor: pointer;
+    font-family: var(--rg-display);
+    font-size: 1.12rem;
+    color: var(--rg-ink);
+  }
+  .crmp-faq summary::-webkit-details-marker {
+    display: none;
+  }
+  .crmp-faq summary svg {
+    flex: 0 0 auto;
+    width: 16px;
+    height: 16px;
+    color: var(--rg-soft);
+    transition: transform 0.2s;
+  }
+  .crmp-faq details[open] summary svg {
+    transform: rotate(45deg);
+    color: var(--rg-accent);
+  }
+  .crmp-faq details p {
+    margin: 0 0 20px;
+    color: var(--rg-soft);
+    line-height: 1.6;
+    max-width: 68ch;
+  }
+
+  /* ── 6. Cierre en azul noche ── */
+  .crmp-cierre {
+    --rg-bg: #0f172a;
+    --rg-ink: #f5f2ea;
+    --rg-soft: rgba(245, 242, 234, 0.72);
+    --rg-accent: #c9a54a;
+
+    background: var(--rg-bg);
+    color: var(--rg-ink);
+    padding: 88px 0 96px;
+    text-align: center;
+  }
+  :global([data-theme='dark']) .crmp-cierre {
+    --rg-bg: #080d1a;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .crmp-cierre__q {
+    margin: 0 auto;
+    font-family: var(--rg-display);
+    font-weight: 380;
+    font-size: clamp(1.6rem, 3.6vw, 2.6rem);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    max-width: 24ch;
+    text-wrap: balance;
+  }
+  .crmp-cierre__q em {
+    font-style: italic;
+    color: var(--rg-accent);
+  }
+  .crmp-cierre__t {
+    margin: 18px auto 0;
+    color: var(--rg-soft);
+    max-width: 52ch;
+    line-height: 1.6;
+  }
+  .crmp-btn--oro {
+    margin-top: 30px;
+    background: var(--rg-accent);
+    color: #0f172a;
+  }
+  .crmp-btn--oro:hover {
+    background: #dcbb62;
+  }
+
+  /* ── Visor ── */
+  .crmp-lb {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(10, 12, 18, 0.92);
+    display: none;
+    place-items: center;
+    padding: 40px 28px 28px;
+  }
+  .crmp-lb.is-on {
+    display: grid;
+  }
+  .crmp-lb__fig {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    max-width: 100%;
+  }
+  .crmp-lb img {
+    max-width: min(1700px, 96vw);
+    max-height: 84vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.5);
+  }
+  .crmp-lb figcaption {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 13px;
+    text-align: center;
+    max-width: 60ch;
+  }
+  .crmp-lb__x {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .crmp-lb__x:hover {
+    background: rgba(255, 255, 255, 0.24);
+  }
+  .crmp-lb__x svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 980px) {
+    .crmp-hero {
+      padding: 48px 0 24px;
+    }
+    .crmp-portada {
+      margin-top: 36px;
+    }
+    .crmp-claves__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .crmp-clave,
+    .crmp-clave + .crmp-clave {
+      padding: 20px 0;
+      border-left: 0;
+    }
+    .crmp-indice {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+      margin: 0 -20px;
+      padding: 12px 20px;
+    }
+    .crmp-indice::-webkit-scrollbar {
+      display: none;
+    }
+    .crmp-indice a {
+      white-space: nowrap;
+    }
+    .crmp-scroll {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0;
+    }
+    .crmp-fija {
+      display: none;
+    }
+    .crmp-paso {
+      min-height: 0;
+      padding: 36px 0 36px 16px;
+    }
+    .crmp-linea {
+      display: block;
+    }
+    .crmp-lb {
+      padding: 56px 12px 12px;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .crmp-in {
+      padding: 0 16px;
+    }
+    .crmp-indice {
+      margin: 0 -16px;
+      padding: 12px 16px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .crmp-fija__img,
+    .crmp-paso,
+    .crmp-fija__barra span,
+    .crmp-faq summary svg {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  function initCrmPagina() {
+    const raiz = document.querySelector<HTMLElement>('.crmp');
+    if (!raiz || raiz.dataset.listo === '1') return;
+    raiz.dataset.listo = '1';
+
+    // ── Paso activo → captura fija, rótulo, barra e índice ──
+    const pasos = Array.from(raiz.querySelectorAll<HTMLElement>('[data-paso]'));
+    const fijas = Array.from(raiz.querySelectorAll<HTMLImageElement>('[data-fija]'));
+    const barras = Array.from(raiz.querySelectorAll<HTMLElement>('[data-barra]'));
+    const indice = Array.from(raiz.querySelectorAll<HTMLAnchorElement>('[data-indice]'));
+    const rotN = raiz.querySelector<HTMLElement>('[data-rot-n]');
+    const rotT = raiz.querySelector<HTMLElement>('[data-rot-t]');
+    const total = pasos.length;
+    const pad = (n: number) => String(n).padStart(2, '0');
+    let actual = -1;
+
+    function activar(i: number) {
+      if (i === actual || i < 0 || i >= total) return;
+      actual = i;
+
+      pasos.forEach((p, k) => p.classList.toggle('is-on', k === i));
+      fijas.forEach((img, k) => img.classList.toggle('is-on', k === i));
+      barras.forEach((b, k) => b.classList.toggle('is-on', k <= i));
+
+      if (rotN) rotN.textContent = `${pad(i + 1)} / ${pad(total)}`;
+      if (rotT) rotT.textContent = pasos[i].querySelector('.crmp-paso__n b')?.textContent || '';
+
+      const cap = pasos[i].dataset.cap;
+      indice.forEach((a) => a.classList.toggle('is-on', a.dataset.indice === cap));
+    }
+
+    if ('IntersectionObserver' in window && pasos.length) {
+      const io = new IntersectionObserver(
+        (entradas) => {
+          entradas.forEach((e) => {
+            if (e.isIntersecting) activar(Number((e.target as HTMLElement).dataset.paso));
+          });
+        },
+        { rootMargin: '-45% 0px -45% 0px' }
+      );
+      pasos.forEach((p) => io.observe(p));
+    }
+    activar(0);
+
+    // ── Visor a pantalla completa ──
+    const lb = raiz.querySelector<HTMLElement>('[data-lb]');
+    const lbImg = raiz.querySelector<HTMLImageElement>('[data-lb-img]');
+    const lbPie = raiz.querySelector<HTMLElement>('[data-lb-pie]');
+    const lbX = raiz.querySelector<HTMLButtonElement>('[data-lb-x]');
+    let ultimoFoco: HTMLElement | null = null;
+
+    function abrirLb(img: HTMLImageElement, alt: string, disparador: HTMLElement) {
+      if (!lb || !lbImg) return;
+      ultimoFoco = disparador;
+      lbImg.src = img.currentSrc || img.src;
+      lbImg.alt = alt;
+      if (lbPie) lbPie.textContent = alt;
+      lb.classList.add('is-on');
+      document.body.style.overflow = 'hidden';
+      lbX?.focus();
+    }
+    function cerrarLb() {
+      if (!lb) return;
+      lb.classList.remove('is-on');
+      document.body.style.overflow = '';
+      ultimoFoco?.focus();
+      ultimoFoco = null;
+    }
+
+    raiz.querySelectorAll<HTMLButtonElement>('[data-zoom]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const img = btn.querySelector('img');
+        if (img) abrirLb(img, img.alt, btn);
+      });
+    });
+
+    // La fija no lleva alt (aria-hidden): se toma de la captura en línea del paso
+    raiz.querySelector<HTMLButtonElement>('[data-fija-zoom]')?.addEventListener('click', (e) => {
+      const img = fijas[Math.max(actual, 0)];
+      const alt = pasos[Math.max(actual, 0)]?.querySelector<HTMLImageElement>('.crmp-linea img')?.alt || '';
+      if (img) abrirLb(img, alt, e.currentTarget as HTMLElement);
+    });
+
+    lbX?.addEventListener('click', cerrarLb);
+    lb?.addEventListener('click', (e) => {
+      if (e.target === lb) cerrarLb();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lb?.classList.contains('is-on')) cerrarLb();
+    });
+  }
+
+  document.addEventListener('astro:page-load', initCrmPagina);
+  initCrmPagina();
+</script>
