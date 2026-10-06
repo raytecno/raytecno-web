@@ -22,9 +22,8 @@
  *
  * CRM (Octubre 2026):
  * - Enlace "CRM" tras Módulos, hacia la página /crm.
- * - Solo en español: la página se genera solo para 'es'. En los demás idiomas
- *   el enlace no se pinta, para no llevar a un 404. Al traducir la página,
- *   añadir el idioma a crmLangs.
+ * - En los cinco idiomas (página traducida en Octubre 2026). crmLangs se
+ *   mantiene por si algún idioma nuevo llega antes que su traducción.
  * - "CRM" se queda igual en los cinco idiomas.
  */
 import { getPageUrl, getToolUrl, type Lang } from "@/config/pages";
@@ -69,7 +68,7 @@ const contactoUrl = getPageUrl("contacto", lang);
 const queEsUrl = getPageUrl("queEsRayGold", lang);
 
 // CRM: solo en los idiomas donde existe la página
-const crmLangs: Lang[] = ["es"];
+const crmLangs: Lang[] = ["es", "en", "fr", "ca", "pt-br"];
 const crmUrl = crmLangs.includes(lang) ? getPageUrl("crm", lang) : null;
 
 // URLs de herramientas - SIN trailing slash

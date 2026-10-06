@@ -1,0 +1,37 @@
+---
+/**
+ * Página del CRM comercial
+ *
+ * @file src/pages/[lang]/crm.astro
+ * URL: /es/crm, /en/crm, /fr/crm, /ca/crm, /pt-br/crm
+ *
+ * Octubre 2026: los cinco idiomas, con textos de i18n/crm.ts. El slug "crm"
+ * es el mismo en todos (pageSlugs.crm en config/pages.ts).
+ *
+ * Ruta estática: Astro le da prioridad sobre [lang]/[slug].astro, así que
+ * no hay conflicto con el router dinámico de páginas.
+ */
+import Layout from '@/layouts/Layout.astro';
+import CrmCapitulos from '@/components/CrmCapitulos.astro';
+import { type Lang, getPageUrl, supportedLangs } from '@/config/pages';
+import { getCrmTranslations } from '@/i18n/crm';
+
+export function getStaticPaths() {
+  return supportedLangs.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const t = getCrmTranslations(lang);
+
+// hreflang a los cinco idiomas
+const alternateUrls = supportedLangs.map((l) => ({ lang: l, url: getPageUrl('crm', l) }));
+---
+
+<Layout
+  title={t.pagina.metaTitulo}
+  description={t.pagina.metaDescripcion}
+  lang={lang}
+  alternateUrls={alternateUrls}
+>
+  <CrmCapitulos lang={lang} />
+</Layout>
