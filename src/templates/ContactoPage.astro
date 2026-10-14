@@ -21,6 +21,15 @@
  *   <slot /> en <main class="main-content">, así que había un <main> dentro
  *   de otro <main>: HTML inválido, y los lectores de pantalla se pierden con
  *   dos regiones principales. El estilo no cambia, .contacto-page sigue igual.
+ *
+ * VALIDACIÓN Y AVISOS (Octubre 2026):
+ * - El mensaje es obligatorio y tiene un mínimo de MIN_MENSAJE caracteres,
+ *   con contador en vivo. La API rechaza los mensajes más cortos, así que
+ *   aquí se avisa ANTES de enviar en lugar de perder el contacto.
+ * - Los alert() se sustituyen por un aviso dentro del formulario (éxito o
+ *   error), traducido a los 5 idiomas, y se marca en rojo el campo a corregir.
+ * - Captcha Cloudflare Turnstile: solo se muestra si TURNSTILE_SITE_KEY
+ *   tiene valor. Con la clave vacía, el formulario funciona como antes.
  */
 import Layout from "@/layouts/Layout.astro";
 import { getAlternateUrls, type Lang } from "@/config/pages";
@@ -31,6 +40,12 @@ interface Props {
 
 const { lang } = Astro.props;
 const alternateUrls = getAlternateUrls("contacto");
+
+// Mínimo de caracteres del mensaje. Debe coincidir con MinMensaje de la API.
+const MIN_MENSAJE = 20;
+
+// Clave pública (site key) de Cloudflare Turnstile. Vacía = captcha desactivado.
+const TURNSTILE_SITE_KEY = "";
 
 // Traducciones de contacto
 const contactT: Record<
@@ -55,8 +70,18 @@ const contactT: Record<
       sizeOptions: { value: string; label: string }[];
       message: string;
       messagePlaceholder: string;
+      messageHint: string;
       submit: string;
       sending: string;
+    };
+    status: {
+      companyRequired: string;
+      nameRequired: string;
+      emailInvalid: string;
+      messageShort: string;
+      captcha: string;
+      success: string;
+      error: string;
     };
     directContact: {
       title: string;
@@ -106,8 +131,20 @@ const contactT: Record<
       ],
       message: "Mensaje",
       messagePlaceholder: "Cuéntanos sobre tu joyería y qué necesitas...",
+      messageHint: "Mínimo {n} caracteres",
       submit: "Enviar mensaje",
       sending: "Enviando...",
+    },
+    status: {
+      companyRequired: "Indica el nombre de tu empresa.",
+      nameRequired: "Indica tu nombre.",
+      emailInvalid: "Revisa el email: no parece una dirección válida.",
+      messageShort:
+        "El mensaje debe tener al menos {n} caracteres para que podamos ayudarte.",
+      captcha: "Completa la verificación anti-bots antes de enviar.",
+      success: "¡Mensaje enviado! Te responderemos en menos de 24 horas.",
+      error:
+        "No se ha podido enviar el mensaje. Inténtalo de nuevo o escríbenos a info@raytecno.es.",
     },
     directContact: {
       title: "Contacto directo",
@@ -157,8 +194,20 @@ const contactT: Record<
       message: "Message",
       messagePlaceholder:
         "Tell us about your jewelry business and what you need...",
+      messageHint: "At least {n} characters",
       submit: "Send message",
       sending: "Sending...",
+    },
+    status: {
+      companyRequired: "Please enter your company name.",
+      nameRequired: "Please enter your name.",
+      emailInvalid: "Please check your email: it doesn't look valid.",
+      messageShort:
+        "Your message needs at least {n} characters so we can help you.",
+      captcha: "Please complete the anti-bot check before sending.",
+      success: "Message sent! We will get back to you within 24 hours.",
+      error:
+        "We couldn't send your message. Please try again or write to info@raytecno.es.",
     },
     directContact: {
       title: "Direct contact",
@@ -208,8 +257,20 @@ const contactT: Record<
       message: "Message",
       messagePlaceholder:
         "Parlez-nous de votre bijouterie et de vos besoins...",
+      messageHint: "{n} caractères minimum",
       submit: "Envoyer message",
       sending: "Envoi...",
+    },
+    status: {
+      companyRequired: "Indiquez le nom de votre entreprise.",
+      nameRequired: "Indiquez votre nom.",
+      emailInvalid: "Vérifiez votre email : l'adresse ne semble pas valide.",
+      messageShort:
+        "Le message doit contenir au moins {n} caractères pour que nous puissions vous aider.",
+      captcha: "Complétez la vérification anti-robots avant d'envoyer.",
+      success: "Message envoyé ! Nous vous répondrons sous 24 heures.",
+      error:
+        "Le message n'a pas pu être envoyé. Réessayez ou écrivez-nous à info@raytecno.es.",
     },
     directContact: {
       title: "Contact direct",
@@ -259,8 +320,20 @@ const contactT: Record<
       message: "Missatge",
       messagePlaceholder:
         "Explica'ns sobre la teva joieria i què necessites...",
+      messageHint: "Mínim {n} caràcters",
       submit: "Enviar missatge",
       sending: "Enviant...",
+    },
+    status: {
+      companyRequired: "Indica el nom de la teva empresa.",
+      nameRequired: "Indica el teu nom.",
+      emailInvalid: "Revisa l'email: no sembla una adreça vàlida.",
+      messageShort:
+        "El missatge ha de tenir almenys {n} caràcters perquè et puguem ajudar.",
+      captcha: "Completa la verificació anti-bots abans d'enviar.",
+      success: "Missatge enviat! Et respondrem en menys de 24 hores.",
+      error:
+        "No s'ha pogut enviar el missatge. Torna-ho a provar o escriu-nos a info@raytecno.es.",
     },
     directContact: {
       title: "Contacte directe",
@@ -310,8 +383,20 @@ const contactT: Record<
       message: "Mensagem",
       messagePlaceholder:
         "Conte-nos sobre sua joalheria e o que você precisa...",
+      messageHint: "Mínimo de {n} caracteres",
       submit: "Enviar mensagem",
       sending: "Enviando...",
+    },
+    status: {
+      companyRequired: "Informe o nome da sua empresa.",
+      nameRequired: "Informe o seu nome.",
+      emailInvalid: "Confira o email: o endereço não parece válido.",
+      messageShort:
+        "A mensagem precisa ter pelo menos {n} caracteres para podermos ajudar.",
+      captcha: "Conclua a verificação anti-bots antes de enviar.",
+      success: "Mensagem enviada! Responderemos em menos de 24 horas.",
+      error:
+        "Não foi possível enviar a mensagem. Tente novamente ou escreva para info@raytecno.es.",
     },
     directContact: {
       title: "Contato direto",
@@ -329,6 +414,14 @@ const contactT: Record<
 
 const t = contactT[lang] || contactT.es;
 
+// Textos con el mínimo ya sustituido
+const messageHint = t.form.messageHint.replace("{n}", String(MIN_MENSAJE));
+const STATUS = {
+  ...t.status,
+  messageShort: t.status.messageShort.replace("{n}", String(MIN_MENSAJE)),
+};
+const SENDING_TEXT = t.form.sending;
+
 // API URL del formulario de contacto
 const CONTACT_API_URL =
   "https://raygoldapi-c3ckbgc6b5g5bvds.spaincentral-01.azurewebsites.net/api/contacto";
@@ -340,6 +433,17 @@ const CONTACT_API_URL =
   lang={lang}
   alternateUrls={alternateUrls}
 >
+  {
+    TURNSTILE_SITE_KEY && (
+      <script
+        is:inline
+        src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+        async
+        defer
+      />
+    )
+  }
+
   <div class="contacto-page">
     <!-- Hero Section -->
     <section class="contacto-hero">
@@ -382,7 +486,7 @@ const CONTACT_API_URL =
               </div>
             </div>
 
-            <form id="contactForm" class="contact-form">
+            <form id="contactForm" class="contact-form" novalidate>
               <div class="form-row">
                 <div class="form-group">
                   <label for="empresa">{t.form.company}</label>
@@ -391,6 +495,7 @@ const CONTACT_API_URL =
                     id="empresa"
                     name="empresa"
                     placeholder={t.form.companyPlaceholder}
+                    autocomplete="organization"
                     required
                   />
                 </div>
@@ -401,6 +506,7 @@ const CONTACT_API_URL =
                     id="nombre"
                     name="nombre"
                     placeholder={t.form.namePlaceholder}
+                    autocomplete="name"
                     required
                   />
                 </div>
@@ -416,6 +522,7 @@ const CONTACT_API_URL =
                       id="telefono"
                       name="telefono"
                       placeholder="612 345 678"
+                      autocomplete="tel-national"
                     />
                   </div>
                 </div>
@@ -426,6 +533,7 @@ const CONTACT_API_URL =
                     id="email"
                     name="email"
                     placeholder="juan@joyeria.com"
+                    autocomplete="email"
                     required
                   />
                 </div>
@@ -460,7 +568,39 @@ const CONTACT_API_URL =
                   id="mensaje"
                   name="mensaje"
                   rows="4"
+                  minlength={MIN_MENSAJE}
+                  maxlength="3000"
+                  required
+                  aria-describedby="mensajeHint"
                   placeholder={t.form.messagePlaceholder}></textarea>
+                <div class="form-hint" id="mensajeHint">
+                  <span>{messageHint}</span>
+                  <span class="char-counter" id="charCounter" aria-live="polite"
+                    >0 / {MIN_MENSAJE}</span
+                  >
+                </div>
+              </div>
+
+              {
+                TURNSTILE_SITE_KEY && (
+                  <div class="turnstile-wrap">
+                    <div
+                      class="cf-turnstile"
+                      data-sitekey={TURNSTILE_SITE_KEY}
+                      data-theme="auto"
+                      data-size="flexible"
+                    />
+                  </div>
+                )
+              }
+
+              <div
+                class="form-status"
+                id="formStatus"
+                role="status"
+                aria-live="polite"
+                hidden
+              >
               </div>
 
               <button type="submit" class="btn-submit">
@@ -666,6 +806,7 @@ const CONTACT_API_URL =
   .contacto-page {
     --borde: var(--rg-line);
     --verde: #10b981;
+    --rojo: #ef4444;
 
     background: var(--rg-bg);
     color: var(--rg-ink);
@@ -828,6 +969,57 @@ const CONTACT_API_URL =
   .form-group select option {
     background-color: var(--rg-panel);
     color: var(--rg-ink);
+  }
+
+  /* Campo a corregir */
+  .form-group input.is-invalid,
+  .form-group textarea.is-invalid,
+  .input-prefix.is-invalid {
+    border-color: var(--rojo);
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+  }
+
+  /* Pista y contador del mensaje */
+  .form-hint {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 0.75rem;
+    color: var(--rg-faint);
+  }
+
+  .char-counter {
+    font-variant-numeric: tabular-nums;
+    transition: color 0.2s ease;
+  }
+
+  .char-counter.ok {
+    color: var(--verde);
+  }
+
+  .turnstile-wrap {
+    min-height: 65px;
+  }
+
+  /* Aviso de resultado (éxito / error) */
+  .form-status {
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    border: 1px solid transparent;
+  }
+
+  .form-status.error {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.35);
+    color: var(--rojo);
+  }
+
+  .form-status.success {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.35);
+    color: var(--verde);
   }
 
   .input-prefix {
@@ -1052,9 +1244,23 @@ const CONTACT_API_URL =
   }
 </style>
 
-<script define:vars={{ CONTACT_API_URL }}>
+<script
+  define:vars={{
+    CONTACT_API_URL,
+    TURNSTILE_SITE_KEY,
+    MIN_MENSAJE,
+    STATUS,
+    SENDING_TEXT,
+  }}
+>
   document.addEventListener("DOMContentLoaded", () => {
     const contactForm = document.getElementById("contactForm");
+    if (!contactForm) return;
+
+    const statusBox = document.getElementById("formStatus");
+    const counter = document.getElementById("charCounter");
+    const mensajeEl = contactForm.querySelector("#mensaje");
+    const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     // Envío seguro: si analytics falla, el formulario sigue funcionando
     const ga = (name, params) => {
@@ -1073,78 +1279,154 @@ const CONTACT_API_URL =
       }
     })();
 
-    if (contactForm) {
-      contactForm.addEventListener("submit", async function (e) {
-        e.preventDefault();
+    // ---- Avisos ----
+    const showStatus = (type, text) => {
+      if (!statusBox) return;
+      statusBox.textContent = text;
+      statusBox.className = "form-status " + type;
+      statusBox.hidden = false;
+    };
 
-        const formData = new FormData(contactForm);
-        const data = {
-          empresa: formData.get("empresa") || "",
-          nombre: formData.get("nombre") || "",
-          telefono: formData.get("telefono") || "",
-          email: formData.get("email") || "",
-          interes: formData.get("interes") || "informacion",
-          tamano: formData.get("tamano") || "1-5",
-          mensaje: formData.get("mensaje") || "",
-        };
+    const clearStatus = () => {
+      if (!statusBox) return;
+      statusBox.hidden = true;
+      statusBox.textContent = "";
+      statusBox.className = "form-status";
+    };
 
-        if (!data.nombre.trim()) {
-          ga("form_error", { elemento: "nombre_vacio" });
-          alert("Por favor, introduce tu nombre");
-          return;
-        }
+    const markInvalid = (id) => {
+      const el = contactForm.querySelector("#" + id);
+      if (!el) return;
+      el.classList.add("is-invalid");
+      el.setAttribute("aria-invalid", "true");
+      el.focus();
+    };
 
-        if (!data.email.trim()) {
-          ga("form_error", { elemento: "email_vacio" });
-          alert("Por favor, introduce tu email");
-          return;
-        }
+    const clearInvalid = (el) => {
+      el.classList.remove("is-invalid");
+      el.removeAttribute("aria-invalid");
+    };
 
-        const btn = contactForm.querySelector(".btn-submit");
-        if (!btn) return;
-
-        const originalText = btn.innerHTML;
-        btn.innerHTML = "<span>Enviando...</span>";
-        btn.disabled = true;
-
-        try {
-          const response = await fetch(CONTACT_API_URL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data),
-          });
-
-          const responseText = await response.text();
-          let result;
-          try {
-            result = JSON.parse(responseText);
-          } catch {
-            result = { success: response.ok, message: responseText };
-          }
-
-          if (!response.ok) {
-            throw new Error(result.message || "Error al enviar");
-          }
-
-          ga("generate_lead", {
-            origen: origen,
-            elemento: data.interes,
-          });
-
-          alert(
-            result.message ||
-              "¡Gracias! Te responderemos en menos de 24 horas."
-          );
-          contactForm.reset();
-        } catch (error) {
-          ga("form_error", { elemento: "envio_api" });
-          console.error("Error contacto:", error);
-          alert(error.message || "Error al enviar. Inténtalo de nuevo.");
-        } finally {
-          btn.innerHTML = originalText;
-          btn.disabled = false;
+    // Al corregir un campo se quita el rojo y el aviso de error
+    contactForm.querySelectorAll("input, textarea").forEach((el) => {
+      el.addEventListener("input", () => {
+        if (el.classList.contains("is-invalid")) {
+          clearInvalid(el);
+          if (statusBox && statusBox.classList.contains("error")) clearStatus();
         }
       });
-    }
+    });
+
+    // ---- Contador de caracteres del mensaje ----
+    const updateCounter = () => {
+      if (!counter || !mensajeEl) return;
+      const n = mensajeEl.value.trim().length;
+      counter.textContent = n + " / " + MIN_MENSAJE;
+      counter.classList.toggle("ok", n >= MIN_MENSAJE);
+    };
+    if (mensajeEl) mensajeEl.addEventListener("input", updateCounter);
+    updateCounter();
+
+    const resetTurnstile = () => {
+      if (TURNSTILE_SITE_KEY && window.turnstile) {
+        try {
+          window.turnstile.reset();
+        } catch {}
+      }
+    };
+
+    // ---- Envío ----
+    contactForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      clearStatus();
+
+      const formData = new FormData(contactForm);
+      const data = {
+        empresa: String(formData.get("empresa") || "").trim(),
+        nombre: String(formData.get("nombre") || "").trim(),
+        telefono: String(formData.get("telefono") || "").trim(),
+        email: String(formData.get("email") || "").trim(),
+        interes: formData.get("interes") || "informacion",
+        tamano: formData.get("tamano") || "1-5",
+        mensaje: String(formData.get("mensaje") || "").trim(),
+      };
+
+      // Validación antes de enviar: el usuario sabe qué corregir
+      if (!data.empresa) {
+        ga("form_error", { elemento: "empresa_vacia" });
+        showStatus("error", STATUS.companyRequired);
+        markInvalid("empresa");
+        return;
+      }
+
+      if (!data.nombre) {
+        ga("form_error", { elemento: "nombre_vacio" });
+        showStatus("error", STATUS.nameRequired);
+        markInvalid("nombre");
+        return;
+      }
+
+      if (!EMAIL_RE.test(data.email)) {
+        ga("form_error", { elemento: "email_invalido" });
+        showStatus("error", STATUS.emailInvalid);
+        markInvalid("email");
+        return;
+      }
+
+      if (data.mensaje.length < MIN_MENSAJE) {
+        ga("form_error", { elemento: "mensaje_corto" });
+        showStatus("error", STATUS.messageShort);
+        markInvalid("mensaje");
+        return;
+      }
+
+      let url = CONTACT_API_URL;
+      if (TURNSTILE_SITE_KEY) {
+        const token = String(formData.get("cf-turnstile-response") || "");
+        if (!token) {
+          ga("form_error", { elemento: "captcha" });
+          showStatus("error", STATUS.captcha);
+          return;
+        }
+        url += "?cf=" + encodeURIComponent(token);
+      }
+
+      const btn = contactForm.querySelector(".btn-submit");
+      if (!btn) return;
+
+      const originalText = btn.innerHTML;
+      btn.innerHTML = "<span>" + SENDING_TEXT + "</span>";
+      btn.disabled = true;
+
+      try {
+        const response = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+
+        if (!response.ok) {
+          throw new Error("HTTP " + response.status);
+        }
+
+        ga("generate_lead", {
+          origen: origen,
+          elemento: data.interes,
+        });
+
+        contactForm.reset();
+        updateCounter();
+        showStatus("success", STATUS.success);
+      } catch (error) {
+        ga("form_error", { elemento: "envio_api" });
+        console.error("Error contacto:", error);
+        showStatus("error", STATUS.error);
+      } finally {
+        // El token de Turnstile solo vale una vez
+        resetTurnstile();
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }
+    });
   });
 </script>
