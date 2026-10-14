@@ -109,7 +109,7 @@ export const basePrices = {
   starter: { monthly: 29, minUsers: 2 },
   professional: { monthly: 49, minUsers: 3 },
   enterprise: { monthly: 69, minUsers: 5 },
-  perpetual: { base: 12000 },
+  perpetual: { base: 16000 },
 };
 
 // ============================================
