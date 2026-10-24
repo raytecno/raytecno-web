@@ -5,6 +5,13 @@
  * 
  * CORREGIDO: El CTA ahora usa getPageUrl('contacto', lang) en vez de hardcodear /contacto
  *
+ * CORRECCIONES VERI*FACTU (Octubre 2026):
+ * - Fuera la tarjeta "Firma XAdES-BES": contradecía el apartado "Tipos de firma"
+ *   (sistema exclusivamente VERI*FACTU, sin firma individual de registros,
+ *   art. 14 Orden HAC/1177/2024). Sustituida por "Envío y respuestas AEAT".
+ * - CTA: "ERP certificado" → "ERP con Declaración Responsable" (la AEAT no certifica).
+ * - Sitio web del anexo: raytecno.com → www.raytecno.es.
+ *
  * TEMA CLARO/OSCURO (Septiembre 2026):
  * - ELIMINADO el bloque :root {} del <style>. Astro no puede aislarlo y
  *   pisaba --primary/--text/--border en TODA la web al cargar esta página
@@ -119,7 +126,7 @@ const translations: Record<
     yes: "SÍ",
     no: "NO",
     cta: {
-      title: "¿Necesitas un ERP certificado VERI*FACTU?",
+      title: "¿Necesitas un ERP con Declaración Responsable VERI*FACTU?",
       description:
         "RayGold cumple con toda la normativa fiscal española para el sector joyero",
       button: "Solicitar demo",
@@ -166,7 +173,7 @@ const translations: Record<
     yes: "YES",
     no: "NO",
     cta: {
-      title: "Need a VERI*FACTU certified ERP?",
+      title: "Need an ERP with a VERI*FACTU Statement of Compliance?",
       description:
         "RayGold complies with all Spanish tax regulations for the jewelry sector",
       button: "Request demo",
@@ -214,7 +221,7 @@ const translations: Record<
     yes: "OUI",
     no: "NON",
     cta: {
-      title: "Besoin d'un ERP certifié VERI*FACTU?",
+      title: "Besoin d'un ERP avec Déclaration Responsable VERI*FACTU ?",
       description:
         "RayGold respecte toutes les réglementations fiscales espagnoles pour le secteur de la bijouterie",
       button: "Demander une démo",
@@ -262,7 +269,7 @@ const translations: Record<
     yes: "SÍ",
     no: "NO",
     cta: {
-      title: "Necessites un ERP certificat VERI*FACTU?",
+      title: "Necessites un ERP amb Declaració Responsable VERI*FACTU?",
       description:
         "RayGold compleix amb tota la normativa fiscal espanyola per al sector joier",
       button: "Sol·licitar demo",
@@ -310,7 +317,7 @@ const translations: Record<
     yes: "SIM",
     no: "NÃO",
     cta: {
-      title: "Precisa de um ERP certificado VERI*FACTU?",
+      title: "Precisa de um ERP com Declaração Responsável VERI*FACTU?",
       description:
         "RayGold cumpre toda a regulamentação fiscal espanhola para o setor joalheiro",
       button: "Solicitar demo",
@@ -651,10 +658,10 @@ const contactUrl = getPageUrl('contacto', lang);
               <div class="contact-info">
                 <span class="contact-label">{t.labels.websites}</span>
                 <a
-                  href="https://raytecno.com"
+                  href="https://www.raytecno.es"
                   target="_blank"
                   rel="noopener"
-                  class="contact-value">raytecno.com</a
+                  class="contact-value">www.raytecno.es</a
                 >
               </div>
             </div>
@@ -732,8 +739,11 @@ const contactUrl = getPageUrl('contacto', lang);
                   <polyline points="9 12 11 14 15 10"></polyline>
                 </svg>
               </div>
-              <h4>Firma XAdES-BES</h4>
-              <p>Sello del sistema con validación automática</p>
+              <h4>Envío y respuestas AEAT</h4>
+              <p>
+                Remisión autenticada con certificado cualificado y control de
+                registros aceptados, aceptados con errores y rechazados
+              </p>
             </div>
 
             <div class="compliance-item">
