@@ -289,8 +289,8 @@ const es: FugasTranslations = {
       problema: 'Cada llamada es alguien del taller buscando la pieza para responder.',
       cierre: 'Portal de cliente con el estado por fase, sin llamar.',
       modulo: 'Portal Cliente',
-      imagen: '',
-      imagenAlt: '',
+      imagen: 'Portal.png',
+      imagenAlt: 'Portal de clientes',
     },
 
     {
