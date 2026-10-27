@@ -737,42 +737,32 @@
     },
     "portal": {
       "title": "Portal do Cliente",
-      "subtitle": "Acesso dos clientes a pedidos e faturas",
+      "subtitle": "Acesso dos clientes a pedidos, romaneios e faturas",
       "metaTitle": "Portal do Cliente | RayGold ERP Joalheria",
-      "metaDescription": "Portal web para que seus clientes consultem seus pedidos e faturas em tempo real.",
+      "metaDescription": "Portal web para que seus clientes consultem seus pedidos, romaneios e faturas em tempo real.",
       "intro": {
         "titulo": "Que o cliente olhe, em vez de ligar",
         "parrafos": [
           "Cada ligação perguntando por uma encomenda custa a alguém da oficina parar o que está fazendo, procurar a peça e retornar a ligação. O portal dá aos seus clientes acesso aos próprios pedidos, com o status de cada um, sem que ninguém precise atender a consulta.",
-          "Com as faturas acontece o mesmo: o cliente entra, consulta e baixa o PDF de que precisa quando precisa, inclusive fora do horário. É o módulo com menos telas de todo o sistema e um dos que mais devolvem horas à oficina."
+          "Com os romaneios e as faturas acontece o mesmo: o cliente entra e vê o que foi enviado, de qual pedido sai cada peça e quanto foi faturado, quando precisa, inclusive fora do horário. É o módulo com menos telas de todo o sistema e um dos que mais devolvem horas à oficina."
         ]
       },
       "sections": {
-        "pedidos": {
-          "name": "Pedidos",
-          "description": "Consulta de pedidos do cliente",
+        "portal": {
+          "name": "",
+          "description": "",
           "images": [
             {
-              "title": "Listagem",
-              "description": "Listagem de pedidos do cliente"
+              "title": "Pedidos",
+              "description": "Status de cada pedido, de recebido a faturado, com sua data de entrega estimada"
             },
             {
-              "title": "Detalhe",
-              "description": "Detalhe e status do pedido"
-            }
-          ]
-        },
-        "facturas": {
-          "name": "Faturas",
-          "description": "Consulta e download de faturas",
-          "images": [
-            {
-              "title": "Listagem",
-              "description": "Listagem de faturas do cliente"
+              "title": "Romaneios",
+              "description": "Romaneios enviados com suas peças, unidades e o pedido de origem de cada linha"
             },
             {
-              "title": "Download",
-              "description": "Download de faturas em PDF"
+              "title": "Faturas",
+              "description": "Faturas com seu valor, os romaneios incluídos e o detalhe por peça"
             }
           ]
         }

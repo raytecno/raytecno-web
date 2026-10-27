@@ -737,42 +737,32 @@
     },
     "portal": {
       "title": "Portail Client",
-      "subtitle": "Accès des clients aux commandes et factures",
+      "subtitle": "Accès des clients aux commandes, bons de livraison et factures",
       "metaTitle": "Portail Client | RayGold ERP Joaillerie",
-      "metaDescription": "Portail web permettant à vos clients de consulter leurs commandes et factures en temps réel.",
+      "metaDescription": "Portail web permettant à vos clients de consulter leurs commandes, bons de livraison et factures en temps réel.",
       "intro": {
         "titulo": "Que le client regarde, au lieu d'appeler",
         "parrafos": [
           "Chaque appel pour demander où en est une commande coûte à quelqu'un de l'atelier d'arrêter ce qu'il fait, de chercher la pièce et de rappeler. Le portail donne à vos clients l'accès à leurs propres commandes, avec l'état de chacune, sans que personne n'ait à traiter la demande.",
-          "Pour les factures, c'est pareil : le client se connecte, consulte et télécharge le PDF dont il a besoin quand il en a besoin, y compris en dehors des heures ouvrables. C'est le module qui compte le moins d'écrans de tout le système et l'un de ceux qui rendent le plus d'heures à l'atelier."
+          "Pour les bons de livraison et les factures, c'est pareil : le client se connecte et voit ce qui lui a été expédié, de quelle commande provient chaque pièce et ce qui lui a été facturé, quand il en a besoin, y compris en dehors des heures ouvrables. C'est le module qui compte le moins d'écrans de tout le système et l'un de ceux qui rendent le plus d'heures à l'atelier."
         ]
       },
       "sections": {
-        "pedidos": {
-          "name": "Commandes",
-          "description": "Consultation des commandes du client",
+        "portal": {
+          "name": "",
+          "description": "",
           "images": [
             {
-              "title": "Liste",
-              "description": "Liste des commandes du client"
+              "title": "Commandes",
+              "description": "État de chaque commande, de la réception à la facturation, avec sa date de livraison estimée"
             },
             {
-              "title": "Détail",
-              "description": "Détail et statut de la commande"
-            }
-          ]
-        },
-        "facturas": {
-          "name": "Factures",
-          "description": "Consultation et téléchargement des factures",
-          "images": [
-            {
-              "title": "Liste",
-              "description": "Liste des factures du client"
+              "title": "Bons de livraison",
+              "description": "Bons de livraison expédiés avec leurs pièces, unités et la commande d'origine de chaque ligne"
             },
             {
-              "title": "Téléchargement",
-              "description": "Téléchargement des factures en PDF"
+              "title": "Factures",
+              "description": "Factures avec leur montant, les bons de livraison inclus et le détail par pièce"
             }
           ]
         }

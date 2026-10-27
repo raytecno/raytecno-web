@@ -75,6 +75,8 @@ export function getSubmoduloCommon(lang: string): CommonTranslation {
 export interface SeccionConfig {
   id: string;
   prefix: string;
+  // Nombres de archivo en el blob (sin .png) cuando no siguen el patrón {prefix}0N
+  imagenes?: string[];
 }
 
 export interface ModuloConfig {
@@ -189,8 +191,7 @@ export const modulosConfig: Record<ModuloId, ModuloConfig> = {
     color: '#0ea5e9',
     icon: `<svg viewBox="0 0 64 64" fill="none"><rect x="8" y="12" width="48" height="40" rx="4" fill="currentColor" opacity="0.2"/><rect x="8" y="12" width="48" height="10" rx="4" fill="currentColor"/><circle cx="14" cy="17" r="2" fill="white"/><circle cx="21" cy="17" r="2" fill="white"/><circle cx="28" cy="17" r="2" fill="white"/><rect x="14" y="28" width="16" height="18" rx="2" fill="currentColor" opacity="0.4"/><rect x="34" y="28" width="16" height="8" rx="2" fill="currentColor" opacity="0.6"/><rect x="34" y="40" width="16" height="6" rx="2" fill="currentColor" opacity="0.4"/></svg>`,
     secciones: [
-      { id: 'pedidos', prefix: 'PORP' },
-      { id: 'facturas', prefix: 'PORF' },
+      { id: 'portal', prefix: 'POR', imagenes: ['Portal', 'Portal2', 'Portal3'] },
     ],
   },
   asistenteia: {

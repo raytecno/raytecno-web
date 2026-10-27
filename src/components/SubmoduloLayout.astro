@@ -160,11 +160,11 @@ const secciones: SeccionConstruida[] = config.secciones
       nombre: seccionData.name,
       descripcion: seccionData.description,
       imagenes: seccionData.images.map((img: ImageTranslation, index: number) => ({
-        url: `${blobBaseUrl}/${secConfig.prefix}0${index + 1}.png`,
+        url: `${blobBaseUrl}/${secConfig.imagenes?.[index] ?? `${secConfig.prefix}0${index + 1}`}.png`,
         titulo: img.title,
         descripcion: img.description,
         // alt descriptivo: módulo + sección + pantalla
-        alt: `${img.title} — ${seccionData.name}, módulo ${modulo.title} de RayGold ERP`,
+        alt: `${img.title} — ${seccionData.name ? `${seccionData.name}, ` : ""}módulo ${modulo.title} de RayGold ERP`,
       })),
     };
   })
@@ -281,10 +281,12 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
             class={`seccion-panel ${index === 0 ? "active" : ""}`}
             data-panel={seccion.id}
           >
-            <div class="seccion-intro">
-              <h2>{seccion.nombre}</h2>
-              <p class="seccion-descripcion">{seccion.descripcion}</p>
-            </div>
+            {(seccion.nombre || seccion.descripcion) && (
+              <div class="seccion-intro">
+                {seccion.nombre && <h2>{seccion.nombre}</h2>}
+                {seccion.descripcion && <p class="seccion-descripcion">{seccion.descripcion}</p>}
+              </div>
+            )}
 
             <div class="galeria-grid">
               {seccion.imagenes.map((imagen, imgIndex: number) => (

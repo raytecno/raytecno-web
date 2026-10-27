@@ -737,42 +737,32 @@
     },
     "portal": {
       "title": "Customer Portal",
-      "subtitle": "Customer access to orders and invoices",
+      "subtitle": "Customer access to orders, delivery notes and invoices",
       "metaTitle": "Customer Portal | RayGold Jewelry ERP",
-      "metaDescription": "Web portal for your customers to check their orders and invoices in real time.",
+      "metaDescription": "Web portal for your customers to check their orders, delivery notes and invoices in real time.",
       "intro": {
         "titulo": "Let the customer look, instead of calling",
         "parrafos": [
           "Every call asking about a job costs someone in the workshop stopping what they are doing, finding the piece and calling back. The portal gives your customers access to their own orders, with the status of each one, without anyone having to field the question.",
-          "Invoices work the same way: the customer logs in, checks, and downloads the PDF they need when they need it, including outside working hours. It is the module with the fewest screens in the whole system and one of the ones that gives the most hours back to the workshop."
+          "Delivery notes and invoices work the same way: the customer logs in and sees what has been shipped, which order each piece comes from and how much has been invoiced, whenever they need it, including outside working hours. It is the module with the fewest screens in the whole system and one of the ones that gives the most hours back to the workshop."
         ]
       },
       "sections": {
-        "pedidos": {
-          "name": "Orders",
-          "description": "Customer order lookup",
+        "portal": {
+          "name": "",
+          "description": "",
           "images": [
             {
-              "title": "List",
-              "description": "Customer order list"
+              "title": "Orders",
+              "description": "Status of each order, from received to invoiced, with its estimated delivery date"
             },
             {
-              "title": "Detail",
-              "description": "Order detail and status"
-            }
-          ]
-        },
-        "facturas": {
-          "name": "Invoices",
-          "description": "Invoice lookup and download",
-          "images": [
-            {
-              "title": "List",
-              "description": "Customer invoice list"
+              "title": "Delivery notes",
+              "description": "Shipped delivery notes with their pieces, units and the source order of each line"
             },
             {
-              "title": "Download",
-              "description": "Invoice download in PDF"
+              "title": "Invoices",
+              "description": "Invoices with their amount, the delivery notes they include and the detail per piece"
             }
           ]
         }

@@ -737,42 +737,32 @@
     },
     "portal": {
       "title": "Portal Client",
-      "subtitle": "Accés dels clients a comandes i factures",
+      "subtitle": "Accés dels clients a comandes, albarans i factures",
       "metaTitle": "Portal Client | RayGold ERP Joieria",
-      "metaDescription": "Portal web perquè els teus clients consultin les seves comandes i factures en temps real.",
+      "metaDescription": "Portal web perquè els teus clients consultin les seves comandes, albarans i factures en temps real.",
       "intro": {
         "titulo": "Que el client miri, en lloc de trucar",
         "parrafos": [
           "Cada trucada preguntant per un encàrrec li costa a algú del taller deixar el que està fent, buscar la peça i tornar la trucada. El portal dóna als teus clients accés a les seves pròpies comandes, amb l'estat de cadascuna, sense que ningú hagi d'atendre la consulta.",
-          "Amb les factures passa el mateix: el client entra, consulta i es descarrega el PDF que necessita quan li fa falta, també fora d'horari. És el mòdul amb menys pantalles de tot el sistema i un dels que més hores torna al taller."
+          "Amb els albarans i les factures passa el mateix: el client entra i veu què se li ha enviat, de quina comanda surt cada peça i quant se li ha facturat, quan li fa falta i també fora d'horari. És el mòdul amb menys pantalles de tot el sistema i un dels que més hores torna al taller."
         ]
       },
       "sections": {
-        "pedidos": {
-          "name": "Comandes",
-          "description": "Consulta de comandes del client",
+        "portal": {
+          "name": "",
+          "description": "",
           "images": [
             {
-              "title": "Llistat",
-              "description": "Llistat de comandes del client"
+              "title": "Comandes",
+              "description": "Estat de cada comanda, de rebuda a facturada, amb la seva data d'entrega estimada"
             },
             {
-              "title": "Detall",
-              "description": "Detall i estat de la comanda"
-            }
-          ]
-        },
-        "facturas": {
-          "name": "Factures",
-          "description": "Consulta i descàrrega de factures",
-          "images": [
-            {
-              "title": "Llistat",
-              "description": "Llistat de factures del client"
+              "title": "Albarans",
+              "description": "Albarans enviats amb les seves peces, unitats i la comanda d'origen de cada línia"
             },
             {
-              "title": "Descàrrega",
-              "description": "Descàrrega de factures en PDF"
+              "title": "Factures",
+              "description": "Factures amb el seu import, els albarans que inclouen i el detall per peça"
             }
           ]
         }
