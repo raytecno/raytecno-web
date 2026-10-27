@@ -299,7 +299,7 @@ const es: FugasTranslations = {
       problema: 'Compras, taller y tienda cuadran cada uno con sus números. Nunca con los de los demás.',
       cierre: 'Una sola base de datos. El mismo gramo en todos los sitios.',
       modulo: 'Todo RayGold',
-      imagen: '',
+      imagen: 'CAP02.png',
       imagenAlt: 'Cuadro de mando de RayGold con datos de todo el taller',
     },
     {
