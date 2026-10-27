@@ -357,6 +357,24 @@
               "description": "Daily clock-ins, absences, requests, incidents, HR, biometric devices, geolocation and productivity"
             }
           ]
+        },
+        "capacidad": {
+          "name": "Production Capacity",
+          "description": "Load planning with infinite, finite and per-operator capacity",
+          "images": [
+            {
+              "title": "Finite capacity",
+              "description": "Real occupancy per section and day with TOC: constraint, buffer, delayed plans and purchases to issue"
+            },
+            {
+              "title": "Workshop",
+              "description": "Gantt per operator and workstation: who does what and when, with conflicts, manual pins and versions"
+            },
+            {
+              "title": "Infinite capacity",
+              "description": "Load per section and day without queues: overloaded sections, pending hours and slack of each plan"
+            }
+          ]
         }
       }
     },

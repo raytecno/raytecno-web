@@ -357,6 +357,24 @@
               "description": "Registros diários de ponto, ausências, solicitações, ocorrências, RH, dispositivos biométricos, geolocalização e produtividade"
             }
           ]
+        },
+        "capacidad": {
+          "name": "Capacidade de Produção",
+          "description": "Planejamento de carga com capacidade infinita, finita e por operário",
+          "images": [
+            {
+              "title": "Capacidade finita",
+              "description": "Ocupação real por seção e dia com TOC: restrição, pulmão, planos atrasados e compras a emitir"
+            },
+            {
+              "title": "Oficina",
+              "description": "Gantt por operário e posto: quem faz o quê e quando, com conflitos, fixações manuais e versões"
+            },
+            {
+              "title": "Capacidade infinita",
+              "description": "Carga por seção e dia sem filas: seções sobrecarregadas, horas pendentes e folga de cada plano"
+            }
+          ]
         }
       }
     },

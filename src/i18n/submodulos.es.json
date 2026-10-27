@@ -362,6 +362,24 @@
               "description": "Fichajes diarios, ausencias, solicitudes, incidencias, RRHH, dispositivos biométricos, geolocalización y productividad"
             }
           ]
+        },
+        "capacidad": {
+          "name": "Capacidad Producción",
+          "description": "Planificación de carga con capacidad infinita, finita y por operario",
+          "images": [
+            {
+              "title": "Capacidad finita",
+              "description": "Ocupación real por sección y día con TOC: restricción, colchón, planes con retraso y compras a emitir"
+            },
+            {
+              "title": "Taller",
+              "description": "Gantt por operario y puesto: quién hace qué y cuándo, con conflictos, fijados a mano y versiones"
+            },
+            {
+              "title": "Capacidad infinita",
+              "description": "Carga por sección y día sin colas: secciones sobrecargadas, horas pendientes y holgura de cada plan"
+            }
+          ]
         }
       }
     },

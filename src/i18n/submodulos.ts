@@ -126,6 +126,7 @@ export const modulosConfig: Record<ModuloId, ModuloConfig> = {
       { id: 'tiempos', prefix: 'TIM' },
       // { id: 'expediciones', prefix: 'EXP' },
       { id: 'laboral', prefix: 'LAB' },
+      { id: 'capacidad', prefix: 'CAP' },
     ],
   },
   finanzas: {

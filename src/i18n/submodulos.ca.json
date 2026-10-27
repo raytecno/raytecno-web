@@ -357,6 +357,24 @@
               "description": "Fitxatges diaris, absències, sol·licituds, incidències, RRHH, dispositius biomètrics, geolocalització i productivitat"
             }
           ]
+        },
+        "capacidad": {
+          "name": "Capacitat Producció",
+          "description": "Planificació de càrrega amb capacitat infinita, finita i per operari",
+          "images": [
+            {
+              "title": "Capacitat finita",
+              "description": "Ocupació real per secció i dia amb TOC: restricció, coixí, plans amb retard i compres a emetre"
+            },
+            {
+              "title": "Taller",
+              "description": "Gantt per operari i lloc: qui fa què i quan, amb conflictes, fixats a mà i versions"
+            },
+            {
+              "title": "Capacitat infinita",
+              "description": "Càrrega per secció i dia sense cues: seccions sobrecarregades, hores pendents i marge de cada pla"
+            }
+          ]
         }
       }
     },

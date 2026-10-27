@@ -357,6 +357,24 @@
               "description": "Pointages quotidiens, absences, demandes, incidents, RH, dispositifs biométriques, géolocalisation et productivité"
             }
           ]
+        },
+        "capacidad": {
+          "name": "Capacité de Production",
+          "description": "Planification de charge en capacité infinie, finie et par opérateur",
+          "images": [
+            {
+              "title": "Capacité finie",
+              "description": "Occupation réelle par section et par jour avec TOC : contrainte, tampon, plans en retard et achats à émettre"
+            },
+            {
+              "title": "Atelier",
+              "description": "Gantt par opérateur et poste : qui fait quoi et quand, avec conflits, fixations manuelles et versions"
+            },
+            {
+              "title": "Capacité infinie",
+              "description": "Charge par section et par jour sans files d'attente : sections surchargées, heures en attente et marge de chaque plan"
+            }
+          ]
         }
       }
     },
