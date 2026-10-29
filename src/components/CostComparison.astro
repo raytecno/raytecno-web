@@ -90,7 +90,7 @@ const sourcesButtonText: Record<string, string> = {
                   </th>
                   {data.competitors.map(c => (
                     <th>
-                      <div class="brand" style={`color: ${c.color}`}>
+                      <div class="brand" style={`--brand: ${c.color}`}>
                         {c.name}<span class="est">*</span>
                       </div>
                     </th>
@@ -191,7 +191,7 @@ const sourcesButtonText: Record<string, string> = {
                 </th>
                 {data.competitors.map(c => (
                   <th>
-                    <div class="brand" style={`color: ${c.color}`}>
+                    <div class="brand" style={`--brand: ${c.color}`}>
                       {c.name}<span class="est">*</span>
                     </div>
                   </th>
@@ -272,8 +272,43 @@ const sourcesButtonText: Record<string, string> = {
 </section>
 
 <style>
+  /* Las variables antiguas (--ink, --soft...) ya no existen a nivel global:
+     se mapean aquí a los tokens --rg-* para que la caja siga el tema. */
   .cost-comparison {
+    --ink: var(--rg-ink);
+    --soft: var(--rg-soft);
+    --line: var(--rg-line);
+    --sup-2: var(--rg-sup2);
+    --accent: var(--rg-accent);
+    --cc-panel: var(--rg-panel);
+    --cc-text: #334155;
+    --cc-hover-border: #cbd5e1;
+    --cc-green: #059669;
+    --cc-green-bg: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    --cc-green-flat: #f0fdf4;
+    --cc-green-border: #86efac;
+    --cc-green-cell: rgba(16, 185, 129, 0.06);
+    --cc-indigo-bg: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
+    --cc-indigo-border: #a5b4fc;
+    --cc-warn-bg: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);
+    --cc-warn-border: #fde047;
+    --cc-warn-text: #713f12;
     padding: 60px 0;
+  }
+
+  :global([data-theme="oscuro"]) .cost-comparison {
+    --cc-text: var(--rg-ink);
+    --cc-hover-border: var(--rg-faint);
+    --cc-green: #34d399;
+    --cc-green-bg: rgba(16, 185, 129, 0.14);
+    --cc-green-flat: rgba(16, 185, 129, 0.1);
+    --cc-green-border: rgba(52, 211, 153, 0.45);
+    --cc-green-cell: rgba(16, 185, 129, 0.1);
+    --cc-indigo-bg: rgba(99, 102, 241, 0.16);
+    --cc-indigo-border: rgba(165, 180, 252, 0.5);
+    --cc-warn-bg: rgba(234, 179, 8, 0.1);
+    --cc-warn-border: rgba(234, 179, 8, 0.35);
+    --cc-warn-text: #fde68a;
   }
 
   .container {
@@ -284,7 +319,7 @@ const sourcesButtonText: Record<string, string> = {
 
   /* Caja blanca principal */
   .comparison-card {
-    background: white;
+    background: var(--cc-panel);
     border-radius: 20px;
     padding: 44px 56px; /* MÁS PADDING */
     box-shadow: 
@@ -302,13 +337,13 @@ const sourcesButtonText: Record<string, string> = {
   .badge {
     display: inline-block;
     padding: 6px 16px;
-    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-    color: #059669;
+    background: var(--cc-green-bg);
+    color: var(--cc-green);
     font-size: 0.75rem;
     font-weight: 600;
     border-radius: 20px;
     margin-bottom: 12px;
-    border: 1px solid #bbf7d0;
+    border: 1px solid var(--cc-green-border);
   }
 
   .header h2 {
@@ -348,17 +383,17 @@ const sourcesButtonText: Record<string, string> = {
 
   .year-tab:hover {
     background: var(--line);
-    border-color: #cbd5e1;
+    border-color: var(--cc-hover-border);
   }
 
   .year-tab.active {
-    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-    border-color: #86efac;
+    background: var(--cc-green-bg);
+    border-color: var(--cc-green-border);
   }
 
   .year-tab.total-tab.active {
-    background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
-    border-color: #a5b4fc;
+    background: var(--cc-indigo-bg);
+    border-color: var(--cc-indigo-border);
   }
 
   .tab-year {
@@ -426,10 +461,16 @@ const sourcesButtonText: Record<string, string> = {
   .brand {
     font-size: 0.9rem;
     font-weight: 600;
+    color: var(--brand);
+  }
+
+  /* Colores de marca oscuros (Odoo, PIRO) se aclaran sobre fondo oscuro */
+  :global([data-theme="oscuro"]) .brand {
+    color: color-mix(in srgb, var(--brand) 55%, white);
   }
 
   .brand.raygold {
-    color: #059669;
+    color: var(--cc-green);
   }
 
   .est {
@@ -443,7 +484,7 @@ const sourcesButtonText: Record<string, string> = {
   }
 
   tbody tr:hover {
-    background: #fafbfc;
+    background: var(--sup-2);
   }
 
   .label {
@@ -455,12 +496,12 @@ const sourcesButtonText: Record<string, string> = {
   }
 
   td {
-    color: #334155;
+    color: var(--cc-text);
   }
 
   .raygold-cell {
-    background: rgba(16, 185, 129, 0.06);
-    color: #059669;
+    background: var(--cc-green-cell);
+    color: var(--cc-green);
     font-weight: 600;
   }
 
@@ -481,7 +522,7 @@ const sourcesButtonText: Record<string, string> = {
   }
 
   .raygold-cell .amount {
-    color: #059669;
+    color: var(--cc-green);
     font-size: 1.2rem;
   }
 
@@ -490,7 +531,7 @@ const sourcesButtonText: Record<string, string> = {
   }
 
   .grand-total {
-    background: #f0fdf4 !important;
+    background: var(--cc-green-flat) !important;
   }
 
   /* Disclaimer corto */
@@ -507,8 +548,8 @@ const sourcesButtonText: Record<string, string> = {
   .disclaimer-box {
     margin-top: 32px;
     padding: 24px 32px;
-    background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);
-    border: 1px solid #fde047;
+    background: var(--cc-warn-bg);
+    border: 1px solid var(--cc-warn-border);
     border-radius: 14px;
     display: flex;
     gap: 18px;
@@ -522,7 +563,7 @@ const sourcesButtonText: Record<string, string> = {
 
   .disclaimer-box p {
     font-size: 0.88rem;
-    color: #713f12;
+    color: var(--cc-warn-text);
     line-height: 1.7;
     margin: 0;
   }
@@ -535,7 +576,7 @@ const sourcesButtonText: Record<string, string> = {
 
   .sources-btn {
     padding: 14px 28px;
-    background: white;
+    background: var(--cc-panel);
     color: var(--soft);
     font-size: 0.88rem;
     border: 1px solid var(--line);
@@ -546,15 +587,15 @@ const sourcesButtonText: Record<string, string> = {
 
   .sources-btn:hover {
     background: var(--sup-2);
-    border-color: #cbd5e1;
-    color: #334155;
+    border-color: var(--cc-hover-border);
+    color: var(--ink);
   }
 
   .sources-panel {
     display: none;
     margin-top: 24px;
     padding: 28px;
-    background: white;
+    background: var(--cc-panel);
     border-radius: 14px;
     border: 1px solid var(--line);
     text-align: left;
