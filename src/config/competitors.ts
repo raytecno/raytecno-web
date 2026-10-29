@@ -25,7 +25,7 @@ export const scenario = {
 // ============================================
 export const raygold = {
   name: "RayGold",
-  pricePerUserMonth: 49,
+  pricePerUserMonth: 59,
   // Año 1 - Inversión inicial
   implementation: 5250, // Implementación básica
   configuration: 0, // Ya está configurado para joyería

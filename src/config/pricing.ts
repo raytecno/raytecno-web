@@ -106,9 +106,9 @@ export const defaultCurrency: Record<Lang, Currency> = {
 // PRECIOS BASE (en EUR)
 // ============================================
 export const basePrices = {
-  starter: { monthly: 29, minUsers: 2 },
-  professional: { monthly: 49, minUsers: 3 },
-  enterprise: { monthly: 69, minUsers: 5 },
+  starter: { monthly: 39, minUsers: 2 },
+  professional: { monthly: 59, minUsers: 3 },
+  enterprise: { monthly: 79, minUsers: 5 },
   perpetual: { base: 16000 },
 };
 
