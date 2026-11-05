@@ -1,0 +1,826 @@
+---
+/**
+ * Landing: Programa de gestión para joyerías
+ * URL: /es/programa-gestion-joyeria (solo castellano, una sola URL para
+ * España y Latinoamérica: nunca variantes regionales de /es)
+ *
+ * Objetivo SEO: las búsquedas "genéricas" que no usan la palabra ERP:
+ *   "programa informático para joyería", "programa de gestión para joyerías",
+ *   "software para joyería", "sistema para joyerías" (habitual en México,
+ *   Chile y Argentina).
+ * Complementa a /es/erp-joyeria (búsqueda "ERP joyería") sin competir con
+ * ella: título, H1 y FAQ distintos, y enlace cruzado.
+ *
+ * Mercados: España, México, Colombia, Perú, Chile, Argentina y Brasil.
+ * Localización fiscal nativa declarada solo para España, Colombia, Perú y
+ * Brasil (igual que el resto de la web). México, Chile y Argentina: no se
+ * afirma integración; se revisa en la demo.
+ *
+ * Reglas de contenido: 36 años (desde 1990), VERI*FACTU = declaración
+ * responsable, sin nombres de competidores, RayGold NO es un CAD.
+ * Estilos copiados de erp-joyeria.astro (solo tokens --rg-).
+ */
+import Layout from "@/layouts/Layout.astro";
+import { type Lang, getPageUrl, getLegalUrl } from "@/config/pages";
+
+export function getStaticPaths() {
+  return [{ params: { lang: "es" } }];
+}
+
+const { lang } = Astro.params as { lang: Lang };
+
+const contactoUrl = getPageUrl("contacto", lang);
+const modulosUrl = getPageUrl("modulos", lang);
+const preciosUrl = getPageUrl("precios", lang);
+const queEsUrl = getPageUrl("queEsRayGold", lang);
+const verifactuUrl = getLegalUrl("verifactu", lang);
+const erpJoyeriaUrl = "/es/erp-joyeria";
+const brasilUrl = getPageUrl("home", "pt-br");
+
+const PAGE_URL = "https://www.raytecno.es/es/programa-gestion-joyeria";
+
+// Países: el texto fiscal tiene que coincidir con lo que dice el resto de la web.
+const paises = [
+  {
+    flag: "🇪🇸",
+    nombre: "España",
+    fiscal: "Facturación VERI*FACTU con declaración responsable del fabricante.",
+  },
+  {
+    flag: "🇲🇽",
+    nombre: "México",
+    fiscal: "Facturación electrónica CFDI: revisamos contigo en la demo cómo se conecta con tu proveedor.",
+  },
+  {
+    flag: "🇨🇴",
+    nombre: "Colombia",
+    fiscal: "Facturación electrónica DIAN integrada.",
+  },
+  {
+    flag: "🇵🇪",
+    nombre: "Perú",
+    fiscal: "Facturación electrónica SUNAT integrada.",
+  },
+  {
+    flag: "🇨🇱",
+    nombre: "Chile",
+    fiscal: "Facturación electrónica SII: revisamos contigo en la demo cómo se conecta con tu proveedor.",
+  },
+  {
+    flag: "🇦🇷",
+    nombre: "Argentina",
+    fiscal: "Factura electrónica ARCA (antes AFIP): revisamos contigo en la demo cómo se conecta con tu proveedor.",
+  },
+  {
+    flag: "🇧🇷",
+    nombre: "Brasil",
+    fiscal: "Emisión de NF-e. Web y atención en portugués.",
+  },
+];
+
+// FAQ: mismo texto en el schema y en la página.
+const faqs = [
+  {
+    q: "¿Qué es un programa de gestión para joyerías?",
+    a: "Es un programa informático pensado para el día a día de una joyería: ventas en tienda, stock de piezas únicas, control del oro y la plata en gramos, arreglos y encargos de clientes, fabricación en taller y facturación. A diferencia de un programa de facturación genérico, entiende que cada joya tiene un peso, una ley de metal y unas piedras concretas, y que su precio depende de la cotización del oro.",
+  },
+  {
+    q: "¿RayGold es un programa de diseño de joyas en 3D?",
+    a: "No. RayGold es un programa de gestión (ERP), no un programa de diseño CAD. No dibuja ni modela joyas: gestiona todo lo que pasa alrededor de ellas, desde la orden de fabricación y el metal consumido hasta la venta y la factura. Convive con el programa de diseño que ya use tu taller.",
+  },
+  {
+    q: "¿Sirve para una joyería pequeña o solo para fabricantes grandes?",
+    a: "Sirve para los dos. Una joyería con una sola tienda puede empezar con ventas, stock, arreglos y facturación, y añadir más módulos cuando los necesite. Los fabricantes y mayoristas usan además la fabricación, el control de mermas, la subcontratación a talleres externos y la gestión de varias tiendas.",
+  },
+  {
+    q: "¿En qué países se puede usar RayGold?",
+    a: "RayGold se usa en España, Colombia, Perú y Brasil con la facturación electrónica de cada país integrada (VERI*FACTU, DIAN, SUNAT y NF-e). También trabajamos con joyerías de México, Chile y Argentina: en la demo revisamos contigo cómo se conecta con tu facturación electrónica (CFDI, SII o ARCA).",
+  },
+  {
+    q: "¿Cuánto cuesta un programa para joyería como RayGold?",
+    a: "RayGold tiene planes en la nube desde 39 € por usuario y mes, y licencias a medida con presupuesto personalizado. El precio final depende del número de usuarios y de los módulos que necesites. En la página de precios puedes ver los planes, y en una demo de 30 minutos te damos el coste exacto para tu caso.",
+  },
+  {
+    q: "¿Cuánto se tarda en empezar a usarlo?",
+    a: "Una joyería pequeña o mediana suele estar trabajando con RayGold en 4 a 8 semanas, incluyendo la carga de artículos y clientes y la formación del equipo. Te acompaña un equipo que lleva 36 años trabajando solo con joyerías.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map((f) => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": { "@type": "Answer", "text": f.a },
+  })),
+};
+
+const softwareSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "RayGold",
+  "alternateName": "RayGold, programa de gestión para joyerías",
+  "applicationCategory": "BusinessApplication",
+  "applicationSubCategory": "Software de gestión para joyerías",
+  "operatingSystem": "Web, Windows, Cloud",
+  "inLanguage": ["es", "pt-BR"],
+  "description": "Programa informático de gestión para joyerías, talleres y fabricantes: ventas, stock de piezas únicas, control de oro y plata, arreglos, fabricación y facturación electrónica. Desarrollado por Raytecno BCN SL desde 1990.",
+  "url": PAGE_URL,
+  "areaServed": ["ES", "MX", "CO", "PE", "CL", "AR", "BR"].map((c) => ({
+    "@type": "Country",
+    "identifier": c,
+  })),
+  "author": {
+    "@type": "Organization",
+    "name": "Raytecno BCN SL",
+    "url": "https://www.raytecno.es",
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "39",
+    "priceCurrency": "EUR",
+    "availability": "https://schema.org/InStock",
+  },
+};
+
+const alternateUrls = [{ lang: "es" as Lang, url: "/es/programa-gestion-joyeria" }];
+---
+
+<Layout
+  title="Programa de gestión para joyerías y talleres | RayGold"
+  description="Programa informático para joyerías, talleres y fabricantes: ventas, stock, oro y plata en gramos, arreglos, fabricación y facturación electrónica. España, México, Colombia, Perú, Chile, Argentina y Brasil."
+  keywords={[
+    "programa para joyería",
+    "programa informático joyería",
+    "programa de gestión para joyerías",
+    "software para joyería",
+    "sistema para joyerías",
+    "software joyería México",
+    "software joyería Colombia",
+    "programa joyería Argentina",
+    "sistema joyería Chile",
+    "RayGold",
+  ]}
+  lang="es"
+  type="product"
+  alternateUrls={alternateUrls}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} slot="head" />
+  <script type="application/ld+json" set:html={JSON.stringify(softwareSchema)} slot="head" />
+
+  <article class="landing-programa-joyeria">
+
+    <!-- 1. HERO -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-badges">
+            <span class="badge badge-primary">Programa de gestión para joyerías</span>
+            <span class="badge badge-secondary">España y Latinoamérica</span>
+          </div>
+          <h1>Programa informático de gestión para joyerías, talleres y fabricantes</h1>
+          <p class="hero-lead">
+            RayGold es el <strong>programa para joyería</strong> que reúne en un solo sitio la tienda, el taller y la oficina: ventas, stock de piezas únicas, oro y plata en gramos, arreglos de clientes, fabricación y facturación electrónica. Lo usan joyerías de España, Latinoamérica y Brasil desde 1990.
+          </p>
+          <div class="hero-stats">
+            <div class="stat">
+              <span class="stat-num">36</span>
+              <span class="stat-label">años con joyerías</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num">200+</span>
+              <span class="stat-label">joyerías</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num">7</span>
+              <span class="stat-label">países</span>
+            </div>
+          </div>
+          <div class="hero-ctas">
+            <a href={contactoUrl} class="cta-primary">Solicitar demostración</a>
+            <a href={preciosUrl} class="cta-secondary">Ver precios</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. QUÉ HACE -->
+    <section class="que-es">
+      <div class="container">
+        <h2>¿Qué hace un programa de gestión para joyerías?</h2>
+        <p>
+          Un <strong>programa informático para joyería</strong> tiene que entender lo que un programa de facturación genérico no entiende: que cada joya es única, que se vende por su peso y su ley de metal, que lleva piedras con su propio certificado y que su coste cambia con la cotización del oro. RayGold está hecho para eso, y no es un programa de diseño 3D: gestiona todo lo que pasa alrededor de la joya, no la dibuja.
+        </p>
+
+        <div class="pilares-grid">
+          <article class="pilar">
+            <div class="pilar-icon">🛍️</div>
+            <h3>Tienda y ventas</h3>
+            <ul>
+              <li>Ventas en mostrador y por encargo</li>
+              <li>Stock de piezas únicas con etiqueta y referencia</li>
+              <li>Varias tiendas con stock centralizado</li>
+              <li>Tienda online sincronizada con el stock</li>
+            </ul>
+          </article>
+
+          <article class="pilar">
+            <div class="pilar-icon">🔧</div>
+            <h3>Arreglos y encargos</h3>
+            <ul>
+              <li>Recepción de arreglos con ficha del cliente</li>
+              <li>Seguimiento de cada trabajo hasta la entrega</li>
+              <li>Encargos a medida con presupuesto</li>
+              <li>Historial completo de cada cliente</li>
+            </ul>
+          </article>
+
+          <article class="pilar">
+            <div class="pilar-icon">⚖️</div>
+            <h3>Oro, plata y piedras</h3>
+            <ul>
+              <li>Stock de metal en gramos por aleación</li>
+              <li>Cotización del oro y la plata del día</li>
+              <li>Piedras y gemas con lote y certificado</li>
+              <li>Metal entregado a talleres externos, siempre cuadrado</li>
+            </ul>
+          </article>
+
+          <article class="pilar">
+            <div class="pilar-icon">⚒️</div>
+            <h3>Taller y fabricación</h3>
+            <ul>
+              <li>Órdenes de fabricación pieza a pieza</li>
+              <li>Fundición, engaste y pulido por fases</li>
+              <li>Control de mermas por fase y operario</li>
+              <li>Coste real de cada pieza (escandallo)</li>
+            </ul>
+          </article>
+        </div>
+
+        <p class="pilar-link">
+          <a href={modulosUrl}>Ver todos los módulos de RayGold →</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- 3. PARA QUIÉN -->
+    <section class="para-quien">
+      <div class="container">
+        <h2>Un programa para cada tipo de joyería</h2>
+        <div class="comparativa">
+          <table>
+            <thead>
+              <tr>
+                <th>Tu negocio</th>
+                <th>Qué usa de RayGold</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Joyería con una tienda</td>
+                <td>Ventas, stock, arreglos, clientes y facturación</td>
+              </tr>
+              <tr>
+                <td>Cadena de joyerías</td>
+                <td>Lo anterior, más varias tiendas, traspasos y reposición</td>
+              </tr>
+              <tr>
+                <td>Taller o fabricante</td>
+                <td>Fabricación, mermas, escandallos y metal en talleres externos</td>
+              </tr>
+              <tr>
+                <td>Mayorista o distribuidor</td>
+                <td>Pedidos de clientes, catálogo, comerciales y CRM</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          ¿Buscas específicamente un ERP para una empresa joyera con fabricación propia? Tienes más detalle en
+          <a href={erpJoyeriaUrl}>ERP para joyería</a> y en <a href={queEsUrl}>qué es RayGold</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- 4. PAÍSES -->
+    <section class="paises">
+      <div class="container">
+        <h2>Software para joyerías en España, Latinoamérica y Brasil</h2>
+        <p class="lead">
+          RayGold trabaja en castellano y en portugués, en la nube o en tus servidores. Esto es lo que encontrarás en cada país:
+        </p>
+        <div class="paises-grid">
+          {paises.map((p) => (
+            <article class="pais">
+              <h3><span aria-hidden="true">{p.flag}</span> {p.nombre}</h3>
+              <p>{p.fiscal}</p>
+            </article>
+          ))}
+        </div>
+        <p class="pilar-link">
+          <a href={verifactuUrl}>Declaración responsable VERI*FACTU →</a>
+          <a href={brasilUrl} hreflang="pt-BR" lang="pt-BR">RayGold em português (Brasil) →</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- 5. FAQ -->
+    <section class="faq">
+      <div class="container">
+        <h2>Preguntas frecuentes sobre programas para joyería</h2>
+        {faqs.map((f) => (
+          <details class="faq-item">
+            <summary><h3>{f.q}</h3></summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- 6. CTA -->
+    <section class="cta-final">
+      <div class="container">
+        <h2>Prueba RayGold con los datos de tu joyería</h2>
+        <p>
+          En una videollamada de 30 minutos te enseñamos el programa con casos como los tuyos, estés en España, México, Colombia, Perú, Chile, Argentina o Brasil.
+        </p>
+        <a href={contactoUrl} class="cta-primary cta-large">Solicitar demostración gratuita</a>
+      </div>
+    </section>
+
+  </article>
+</Layout>
+
+<style>
+  /* ── Variables locales, dentro de la landing (nunca en :root) ─────────── */
+  .landing-programa-joyeria {
+    --ok: #1f7a4d;
+    --ok-soft: rgba(31, 122, 77, 0.1);
+    --card-r: 14px;
+
+    background: var(--rg-bg);
+    color: var(--rg-ink);
+    line-height: 1.7;
+    transition: background 0.25s ease, color 0.25s ease;
+  }
+
+  :global([data-theme="oscuro"]) .landing-programa-joyeria {
+    --ok: #4ade80;
+    --ok-soft: rgba(74, 222, 128, 0.12);
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* ── Secciones ──────────────────────────────────────────────────────── */
+  section {
+    padding: 4.5rem 0;
+  }
+
+  section h2 {
+    font-family: var(--rg-display);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+    color: var(--rg-ink);
+  }
+
+  section p strong {
+    color: var(--rg-ink);
+    font-weight: 600;
+  }
+
+  /* ── Hero ───────────────────────────────────────────────────────────── */
+  .hero {
+    background: var(--rg-bg);
+    padding: 8rem 0 4rem;
+    border-bottom: 1px solid var(--rg-line);
+  }
+
+  .hero-content {
+    max-width: 52rem;
+  }
+
+  .hero h1 {
+    font-family: var(--rg-display);
+    font-size: clamp(1.9rem, 4.5vw, 2.9rem);
+    font-weight: 600;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: var(--rg-ink);
+    margin: 1.25rem 0 1.5rem;
+  }
+
+  .hero-lead {
+    font-size: 1.15rem;
+    color: var(--rg-soft);
+    max-width: 44rem;
+    margin-bottom: 2rem;
+  }
+
+  .hero-badges {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .badge-primary {
+    background: var(--rg-accent-soft);
+    color: var(--rg-accent);
+    border: 1px solid color-mix(in srgb, var(--rg-accent) 35%, transparent);
+  }
+
+  .badge-secondary {
+    background: var(--ok-soft);
+    color: var(--ok);
+    border: 1px solid color-mix(in srgb, var(--ok) 35%, transparent);
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 2.75rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--rg-line);
+    border-bottom: 1px solid var(--rg-line);
+    margin-bottom: 2rem;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-num {
+    font-family: var(--rg-display);
+    font-size: 2.1rem;
+    font-weight: 600;
+    line-height: 1.1;
+    color: var(--rg-ink);
+  }
+
+  .stat-label {
+    font-size: 0.85rem;
+    color: var(--rg-faint);
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .cta-primary {
+    display: inline-block;
+    padding: 0.9rem 1.6rem;
+    background: var(--rg-ink);
+    color: var(--rg-on-ink);
+    border-radius: 999px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .cta-primary:hover {
+    background: var(--rg-accent);
+    color: var(--rg-on-ink);
+  }
+
+  .cta-secondary {
+    display: inline-block;
+    padding: 0.9rem 1.6rem;
+    background: transparent;
+    color: var(--rg-ink);
+    border: 1px solid var(--rg-line);
+    border-radius: 999px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .cta-secondary:hover {
+    border-color: var(--rg-accent);
+    background: var(--rg-accent-soft);
+  }
+
+  /* ── Qué es ─────────────────────────────────────────────────────────── */
+  .que-es p,
+  .pilares .lead {
+    font-size: 1.05rem;
+    color: var(--rg-soft);
+    max-width: 48rem;
+    margin-bottom: 1rem;
+  }
+
+  /* ── Pilares ────────────────────────────────────────────────────────── */
+  .pilares {
+    background: var(--rg-sup2);
+  }
+
+  .pilares-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+    margin-top: 2.5rem;
+  }
+
+  .pilar {
+    background: var(--rg-panel);
+    border-radius: var(--card-r);
+    padding: 2rem;
+    border: 1px solid var(--rg-line);
+    transition: border-color 0.2s;
+  }
+
+  .pilar:hover {
+    border-color: var(--rg-accent);
+  }
+
+  .pilar-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    background: var(--rg-accent-soft);
+    border-radius: 999px;
+    font-size: 1.5rem;
+    margin-bottom: 1.1rem;
+  }
+
+  .pilar h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--rg-ink);
+  }
+
+  .pilar-desc {
+    color: var(--rg-soft);
+    font-size: 0.95rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .pilar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem;
+  }
+
+  .pilar li {
+    padding: 0.4rem 0 0.4rem 1.5rem;
+    position: relative;
+    color: var(--rg-soft);
+    font-size: 0.92rem;
+  }
+
+  .pilar li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--ok);
+    font-weight: 700;
+  }
+
+  .pilar-link a {
+    color: var(--rg-accent);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .pilar-link a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* ── Comparativa ────────────────────────────────────────────────────── */
+  .comparativa {
+    overflow-x: auto;
+    margin-top: 2rem;
+    border: 1px solid var(--rg-line);
+    border-radius: var(--card-r);
+  }
+
+  .comparativa table {
+    width: 100%;
+    min-width: 560px;
+    border-collapse: collapse;
+    background: var(--rg-panel);
+  }
+
+  .comparativa th,
+  .comparativa td {
+    padding: 1rem 1.25rem;
+    text-align: left;
+    border-bottom: 1px solid var(--rg-line);
+    color: var(--rg-soft);
+  }
+
+  .comparativa tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .comparativa th {
+    background: var(--rg-sup2);
+    color: var(--rg-ink);
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .comparativa th:last-child,
+  .comparativa td:last-child {
+    background: var(--rg-accent-soft);
+    color: var(--rg-ink);
+  }
+
+  .comparativa td:first-child {
+    font-weight: 500;
+    color: var(--rg-ink);
+  }
+
+  /* ── FAQ ────────────────────────────────────────────────────────────── */
+  .faq {
+    background: var(--rg-sup2);
+  }
+
+  .faq-item {
+    background: var(--rg-panel);
+    border: 1px solid var(--rg-line);
+    border-radius: var(--card-r);
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .faq-item[open] {
+    border-color: color-mix(in srgb, var(--rg-accent) 45%, var(--rg-line));
+  }
+
+  .faq-item summary {
+    padding: 1.2rem 1.5rem;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item summary::after {
+    content: "+";
+    flex-shrink: 0;
+    font-size: 1.4rem;
+    line-height: 1;
+    color: var(--rg-accent);
+    transition: transform 0.2s;
+  }
+
+  .faq-item[open] summary::after {
+    transform: rotate(45deg);
+  }
+
+  .faq-item summary h3 {
+    margin: 0;
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: var(--rg-ink);
+    display: inline;
+  }
+
+  .faq-item p {
+    padding: 0 1.5rem 1.25rem;
+    color: var(--rg-soft);
+    margin: 0;
+  }
+
+  /* ── CTA final: superficie sólida con el color de texto ─────────────── */
+  .cta-final {
+    background: var(--rg-ink);
+    color: var(--rg-on-ink);
+    text-align: center;
+  }
+
+  .cta-final h2 {
+    color: var(--rg-on-ink);
+  }
+
+  .cta-final p {
+    font-size: 1.1rem;
+    color: color-mix(in srgb, var(--rg-on-ink) 75%, transparent);
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-final .cta-large {
+    font-size: 1.05rem;
+    padding: 1.05rem 2rem;
+    background: var(--rg-on-ink);
+    color: var(--rg-ink);
+  }
+
+  .cta-final .cta-large:hover {
+    background: var(--rg-accent);
+    color: var(--rg-on-ink);
+  }
+
+  /* ── Responsive: solo layout, el color lo pone el tema ──────────────── */
+  @media (max-width: 768px) {
+    section {
+      padding: 3.25rem 0;
+    }
+
+    .hero {
+      padding: 6.5rem 0 3rem;
+    }
+
+    .hero-stats {
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .stat-num {
+      font-size: 1.6rem;
+    }
+
+    .pilar {
+      padding: 1.5rem;
+    }
+
+    .comparativa table {
+      font-size: 0.85rem;
+    }
+
+    .comparativa th,
+    .comparativa td {
+      padding: 0.7rem 0.8rem;
+    }
+  }
+
+  /* ── Específico de esta landing ─────────────────────────────────────── */
+  .que-es .pilares-grid {
+    margin-top: 2rem;
+  }
+
+  .pilar-link {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .para-quien a {
+    color: var(--rg-accent);
+  }
+
+  .paises .lead {
+    color: var(--rg-soft);
+    margin-bottom: 2rem;
+  }
+
+  .paises-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 1rem;
+  }
+
+  .pais {
+    background: var(--rg-panel);
+    border: 1px solid var(--rg-line);
+    border-radius: var(--card-r);
+    padding: 1.25rem 1.4rem;
+  }
+
+  .pais h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    color: var(--rg-ink);
+  }
+
+  .pais p {
+    font-size: 0.92rem;
+    color: var(--rg-soft);
+    line-height: 1.55;
+  }
+</style>
