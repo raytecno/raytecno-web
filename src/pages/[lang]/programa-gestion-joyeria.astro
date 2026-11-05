@@ -35,7 +35,7 @@ const preciosUrl = getPageUrl("precios", lang);
 const queEsUrl = getPageUrl("queEsRayGold", lang);
 const verifactuUrl = getLegalUrl("verifactu", lang);
 const erpJoyeriaUrl = "/es/erp-joyeria";
-const brasilUrl = getPageUrl("home", "pt-br");
+const brasilUrl = "/pt-br/sistema-para-joalheria";
 
 const PAGE_URL = "https://www.raytecno.es/es/programa-gestion-joyeria";
 
@@ -144,7 +144,11 @@ const softwareSchema = {
   },
 };
 
-const alternateUrls = [{ lang: "es" as Lang, url: "/es/programa-gestion-joyeria" }];
+// Par hreflang con la landing de Brasil.
+const alternateUrls = [
+  { lang: "es" as Lang, url: "/es/programa-gestion-joyeria" },
+  { lang: "pt-br" as Lang, url: brasilUrl },
+];
 ---
 
 <Layout
@@ -321,7 +325,7 @@ const alternateUrls = [{ lang: "es" as Lang, url: "/es/programa-gestion-joyeria"
         </div>
         <p class="pilar-link">
           <a href={verifactuUrl}>Declaración responsable VERI*FACTU →</a>
-          <a href={brasilUrl} hreflang="pt-BR" lang="pt-BR">RayGold em português (Brasil) →</a>
+          <a href={brasilUrl} hreflang="pt-BR" lang="pt-BR">Sistema para joalheria (Brasil, em português) →</a>
         </p>
       </div>
     </section>
