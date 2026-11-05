@@ -191,6 +191,12 @@ const currentYear = new Date().getFullYear();
     <div class="footer-col">
       <h5>{ft.company}</h5>
             <a href={getPageUrl("queEsRayGold", lang)} data-ga="cta_click" data-ga-elemento="que_es_raygold" data-ga-ubicacion="footer">{ft.whatIs}</a>
+      {lang === "es" && (
+        <>
+          <a href="/es/programa-gestion-joyeria" data-ga="cta_click" data-ga-elemento="programa_joyeria" data-ga-ubicacion="footer">Programa para joyerías</a>
+          <a href="/es/erp-joyeria" data-ga="cta_click" data-ga-elemento="erp_joyeria" data-ga-ubicacion="footer">ERP para joyería</a>
+        </>
+      )}
       <a href={`/${lang}/#porque`} data-ga="cta_click" data-ga-elemento="sobre_nosotros" data-ga-ubicacion="footer">{ft.about}</a>
       <a href={getPageUrl("tecnologia", lang)} data-ga="cta_click" data-ga-elemento="tecnologia" data-ga-ubicacion="footer">{ft.technology}</a>
       <a href={getPageUrl("precios", lang)} data-ga="cta_click" data-ga-elemento="precios" data-ga-ubicacion="footer">{ft.pricing}</a>
