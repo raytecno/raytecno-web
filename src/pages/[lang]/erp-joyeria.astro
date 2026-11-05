@@ -14,6 +14,12 @@
  * - CTA final: superficie sólida --rg-ink con texto --rg-on-ink, contrasta en
  *   los dos temas.
  * - Marcado, textos y schemas sin cambios.
+ *
+ * REGLAS DE CONTENIDO (Noviembre 2026):
+ * - VERI*FACTU como declaración responsable, nunca "certificado".
+ * - 36 años; sin nombres de competidores; RayGold no es un CAD.
+ * - RJC/Kimberley como compatibilidad, no certificación.
+ * - Enlace al post de fundición corregido (antes daba 404).
  */
 import Layout from "@/layouts/Layout.astro";
 import { supportedLangs, type Lang, getPageUrl } from "@/config/pages";
@@ -62,7 +68,7 @@ const faqSchema = {
       "name": "¿Qué es VERI*FACTU y por qué es importante para una joyería?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "VERI*FACTU es la normativa española de facturación electrónica verificable, obligatoria para empresas a partir de 2026. Establece que todas las facturas emitidas deben generarse mediante un sistema informático certificado que garantice su trazabilidad, integridad y no manipulación. Para una joyería, cumplir con VERI*FACTU no es opcional: es un requisito legal. RayGold es un ERP joyero certificado VERI*FACTU, lo que significa que tu joyería cumple la normativa desde el primer día sin necesidad de soluciones adicionales."
+        "text": "VERI*FACTU es la normativa española de facturación verificable. Exige que las facturas se emitan con un sistema informático de facturación que garantice su trazabilidad, integridad y no manipulación, y cuyo fabricante lo acredite mediante una declaración responsable. Para una joyería, cumplir con VERI*FACTU no es opcional: es un requisito legal. RayGold cumple VERI*FACTU y Raytecno BCN SL ha emitido su declaración responsable, así que tu joyería no necesita soluciones adicionales."
       }
     },
     {
@@ -70,7 +76,7 @@ const faqSchema = {
       "name": "¿Puede un ERP de joyería gestionar fabricación propia?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Sí, y de hecho es una de sus funciones críticas. Un ERP de joyería con módulo de fabricación gestiona el ciclo completo de producción de joyas: desde el diseño CAD inicial, pasando por la creación de cauchos y modelos en cera, la fundición o microfusión con control de temperaturas y rendimientos por colada, el engaste de gemas con trazabilidad por lote, el pulido y los acabados, hasta el control de calidad final. RayGold registra cada fase, cada operario que interviene, cada gramo de metal consumido y cada merma producida, dando una trazabilidad completa pieza a pieza."
+        "text": "Sí, y de hecho es una de sus funciones críticas. Un ERP de joyería con módulo de fabricación gestiona el ciclo completo de producción de joyas: desde el modelo que llega de diseño, pasando por la creación de cauchos y modelos en cera, la fundición o microfusión con control de temperaturas y rendimientos por colada, el engaste de gemas con trazabilidad por lote, el pulido y los acabados, hasta el control de calidad final. RayGold registra cada fase, cada operario que interviene, cada gramo de metal consumido y cada merma producida, dando una trazabilidad completa pieza a pieza."
       }
     },
     {
@@ -94,7 +100,7 @@ const faqSchema = {
       "name": "¿Qué ERP es el mejor para una joyería en España?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "La elección del mejor ERP depende del tamaño y tipo de joyería. Para joyerías con fabricación propia, retail multitienda o necesidades de trazabilidad de oro y cumplimiento VERI*FACTU, RayGold es una opción especializada desarrollada en España desde 1990 por Raytecno BCN SL. Es un ERP joyero diseñado nativamente para el sector, con módulos integrados de fabricación, VERI*FACTU, inventario de metales preciosos y ecommerce. Otras opciones del mercado son ERPs genéricos (NetSuite, Microsoft Dynamics, Holded) que requieren adaptación, o software internacional joyero (Diaspark, Logic Mate) generalmente más caro y no adaptado a la normativa española."
+        "text": "La elección del mejor ERP depende del tamaño y tipo de joyería. Para joyerías con fabricación propia, retail multitienda o necesidades de trazabilidad de oro y cumplimiento VERI*FACTU, RayGold es una opción especializada desarrollada en España desde 1990 por Raytecno BCN SL. Es un ERP joyero diseñado nativamente para el sector, con módulos integrados de fabricación, VERI*FACTU, inventario de metales preciosos y ecommerce. Frente a ella están los ERP genéricos, que requieren adaptación para el sector, y el software joyero internacional, que no suele estar adaptado a la normativa española."
       }
     },
     {
@@ -122,11 +128,11 @@ const softwareSchema = {
   "softwareVersion": "2026",
   "datePublished": "1990-01-01",
   "featureList": [
-    "Módulo de fabricación: gestión de cauchos, modelos CAD, fundición y microfusión",
-    "Certificación VERI*FACTU: cumplimiento normativo de facturación electrónica",
+    "Módulo de fabricación: gestión de cauchos, modelos, fundición y microfusión",
+    "VERI*FACTU: cumplimiento normativo con declaración responsable del fabricante",
     "Gestión de stocks de metales preciosos: oro, plata, platino por aleación y lote",
     "Ecommerce integrado: sincronización stock con tiendas online",
-    "Trazabilidad pieza a pieza: certificación RJC y Kimberley",
+    "Trazabilidad pieza a pieza compatible con los requisitos RJC y Kimberley",
     "Control de mermas por fase de producción",
     "Gestión multitienda con stock centralizado"
   ],
@@ -183,7 +189,7 @@ const alternateUrls = [
           <div class="hero-content">
             <div class="hero-badges">
               <span class="badge badge-primary">Software ERP especializado</span>
-              <span class="badge badge-secondary">Certificado VERI*FACTU</span>
+              <span class="badge badge-secondary">VERI*FACTU · Declaración responsable</span>
             </div>
             <h1>ERP Joyería: el software de gestión integral diseñado para joyerías y fabricantes</h1>
             <p class="hero-lead">
@@ -191,7 +197,7 @@ const alternateUrls = [
             </p>
             <div class="hero-stats">
               <div class="stat">
-                <span class="stat-num">35</span>
+                <span class="stat-num">36</span>
                 <span class="stat-label">años especializados</span>
               </div>
               <div class="stat">
@@ -247,7 +253,7 @@ const alternateUrls = [
             <div class="pilar-icon">⚒️</div>
             <h3>1. Fabricación</h3>
             <p class="pilar-desc">
-              Gestión completa del ciclo productivo de joyas en taller propio: desde el modelo CAD hasta la pieza acabada.
+              Gestión completa del ciclo productivo de joyas en taller propio: desde el modelo hasta la pieza acabada.
             </p>
             <ul>
               <li>Maestro de cauchos con vida útil y rendimiento</li>
@@ -257,7 +263,7 @@ const alternateUrls = [
               <li>Cálculo de coste real con precio de oro del día</li>
             </ul>
             <p class="pilar-link">
-              <a href="/es/blog/post-fundicion-microfusion-raytecno">Cómo controla RayGold la microfusión →</a>
+              <a href="/es/blog/fundicion-microfusion-joyeria">Cómo controla RayGold la microfusión →</a>
             </p>
           </article>
 
@@ -266,13 +272,13 @@ const alternateUrls = [
             <div class="pilar-icon">📋</div>
             <h3>2. VERI*FACTU</h3>
             <p class="pilar-desc">
-              Certificación oficial de cumplimiento de la normativa española de facturación electrónica verificable, obligatoria desde 2026.
+              Cumplimiento de la normativa española de facturación verificable, con declaración responsable del fabricante.
             </p>
             <ul>
               <li>Emisión de facturas con firma electrónica integrada</li>
               <li>Trazabilidad e integridad de cada documento</li>
               <li>Reporte automático a Hacienda</li>
-              <li>Sistema certificado, no parche posterior</li>
+              <li>Integrado en el ERP, no un parche posterior</li>
               <li>Cero coste adicional de adaptación normativa</li>
             </ul>
             <p class="pilar-link">
@@ -356,7 +362,7 @@ const alternateUrls = [
               <tr>
                 <td>Cumplimiento VERI*FACTU</td>
                 <td>⚠️ Requiere módulo adicional</td>
-                <td>✅ Certificado integrado</td>
+                <td>✅ Integrado, con declaración responsable</td>
               </tr>
               <tr>
                 <td>Gestión de gemas con lote y certificado</td>
@@ -398,14 +404,14 @@ const alternateUrls = [
         <details class="faq-item">
           <summary><h3>¿Qué es VERI*FACTU y por qué es importante para una joyería?</h3></summary>
           <p>
-            VERI*FACTU es la normativa española de facturación electrónica verificable, obligatoria para empresas a partir de 2026. Para una joyería, cumplir con VERI*FACTU no es opcional: es un requisito legal. RayGold es un ERP joyero certificado VERI*FACTU, lo que significa que tu joyería cumple la normativa desde el primer día sin necesidad de soluciones adicionales.
+            VERI*FACTU es la normativa española de facturación verificable. Para una joyería, cumplir con VERI*FACTU no es opcional: es un requisito legal. RayGold cumple VERI*FACTU y Raytecno BCN SL ha emitido su declaración responsable, así que tu joyería no necesita soluciones adicionales.
           </p>
         </details>
 
         <details class="faq-item">
           <summary><h3>¿Puede un ERP de joyería gestionar fabricación propia?</h3></summary>
           <p>
-            Sí, y es una de sus funciones críticas. Un ERP de joyería con módulo de fabricación gestiona el ciclo completo de producción: desde el diseño CAD inicial, pasando por cauchos, fundición o microfusión con control de temperaturas y rendimientos, engaste de gemas con trazabilidad por lote, hasta el control de calidad final. RayGold registra cada fase, cada operario, cada gramo de metal y cada merma.
+            Sí, y es una de sus funciones críticas. Un ERP de joyería con módulo de fabricación gestiona el ciclo completo de producción: desde el modelo que llega de diseño, pasando por cauchos, fundición o microfusión con control de temperaturas y rendimientos, engaste de gemas con trazabilidad por lote, hasta el control de calidad final. RayGold registra cada fase, cada operario, cada gramo de metal y cada merma.
           </p>
         </details>
 
@@ -426,7 +432,7 @@ const alternateUrls = [
         <details class="faq-item">
           <summary><h3>¿Qué ERP es el mejor para una joyería en España?</h3></summary>
           <p>
-            La elección depende del tamaño y tipo de joyería. Para joyerías con fabricación propia, retail multitienda o necesidades de trazabilidad de oro y cumplimiento VERI*FACTU, RayGold es una opción especializada desarrollada en España desde 1990. Es un ERP joyero diseñado nativamente para el sector. Otras opciones son ERPs genéricos (NetSuite, Microsoft Dynamics) que requieren adaptación, o software internacional joyero generalmente más caro y no adaptado a la normativa española.
+            La elección depende del tamaño y tipo de joyería. Para joyerías con fabricación propia, retail multitienda o necesidades de trazabilidad de oro y cumplimiento VERI*FACTU, RayGold es una opción especializada desarrollada en España desde 1990. Es un ERP joyero diseñado nativamente para el sector. Frente a ella están los ERP genéricos, que requieren adaptación para el sector, y el software joyero internacional, que no suele estar adaptado a la normativa española.
           </p>
         </details>
 
