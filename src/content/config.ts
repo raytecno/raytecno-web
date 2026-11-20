@@ -72,6 +72,16 @@ const blogCollection = defineCollection({
     // ARTÍCULOS RELACIONADOS
     // ============================================
     relatedSlugs: z.array(z.string()).default([]).describe('Slugs de artículos relacionados'),
+
+    // ============================================
+    // PREGUNTAS FRECUENTES (Noviembre 2026)
+    // ============================================
+    // lib/blog.ts ya leía data.faq para el JSON-LD FAQPage, pero el campo no
+    // estaba en el esquema y Astro lo descartaba: el schema nunca salía.
+    faq: z
+      .array(z.object({ q: z.string(), a: z.string() }))
+      .optional()
+      .describe('Preguntas frecuentes: alimentan el JSON-LD FAQPage. Deben coincidir con las del cuerpo del artículo.'),
   }),
 });
 
