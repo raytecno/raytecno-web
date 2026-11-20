@@ -1,0 +1,547 @@
+---
+/**
+ * AyudaContextual.astro — Bloque "Ayuda en cada pantalla" (modo ?)
+ *
+ * @file src/components/AyudaContextual.astro
+ *
+ * Noviembre 2026. Textos en i18n/ayuda.ts. Hoy se usa en la página de
+ * Tecnología, antes del CTA; es autónomo y se puede poner en otra página.
+ *
+ * Estructura:
+ *   1. Cabecera: sello, h2, entradilla.
+ *   2. Maqueta del panel de ayuda (HTML, sin captura) + los 4 pasos.
+ *      La maqueta es decorativa (aria-hidden): lo que cuenta ya está en texto.
+ *   3. Tres capas: RayGold, la empresa, tú.
+ *   4. La IA con números reales: texto + preguntas de ejemplo.
+ *   5. Tres ventajas.
+ *
+ * Colores: lila para el halo y el panel (como en el programa), verde para
+ * "Mis notas". Tokens --rg-* para todo lo demás, así funciona en los dos
+ * temas sin tocar :root.
+ */
+import type { Lang } from '@/config/pages';
+import { getAyudaTranslations } from '@/i18n/ayuda';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'es' } = Astro.props;
+const t = getAyudaTranslations(lang);
+const m = t.maqueta;
+const pad = (n: number) => String(n).padStart(2, '0');
+---
+
+<section class="ayc" id="ayuda">
+  <div class="ayc-in">
+    <!-- 1. Cabecera -->
+    <header class="ayc-head">
+      <span class="ayc-sello"><b aria-hidden="true">?</b>{t.sello}</span>
+      <h2>
+        {t.titulo}
+        <em>{t.tituloEnfasis}</em>
+      </h2>
+      <p class="ayc-lead">{t.lead}</p>
+    </header>
+
+    <!-- 2. Maqueta + pasos -->
+    <div class="ayc-demo">
+      <div class="ayc-maqueta" aria-hidden="true">
+        <div class="ayc-pantalla">
+          <div class="ayc-ficha">
+            <span class="ayc-etq">{m.campo}</span>
+            <div class="ayc-campo is-halo">{m.valor}</div>
+            <span class="ayc-etq ayc-etq--gris"></span>
+            <div class="ayc-campo ayc-campo--gris"></div>
+            <span class="ayc-etq ayc-etq--gris"></span>
+            <div class="ayc-campo ayc-campo--gris"></div>
+          </div>
+          <div class="ayc-panel">
+            <div class="ayc-panel__tit">{m.panelTitulo}</div>
+            <div class="ayc-capa">
+              <span>{m.queEs}</span>
+              <p>{m.queEsTexto}</p>
+            </div>
+            <div class="ayc-capa ayc-capa--empresa">
+              <span>{m.empresa}</span>
+              <p>{m.empresaTexto}</p>
+            </div>
+            <div class="ayc-capa ayc-capa--notas">
+              <span>{m.notas}</span>
+              <p>{m.notasTexto}</p>
+            </div>
+            <div class="ayc-preg">{m.pregunta}</div>
+          </div>
+        </div>
+        <div class="ayc-pista"><b>?</b>{m.pista}</div>
+      </div>
+
+      <div class="ayc-pasos">
+        <h3>{t.pasosTitulo}</h3>
+        <ol>
+          {t.pasos.map((p) => (
+            <li>
+              <kbd>{p.tecla}</kbd>
+              <div>
+                <h4>{p.titulo}</h4>
+                <p>{p.texto}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+
+    <!-- 3. Tres capas -->
+    <h3 class="ayc-sub">{t.capasTitulo}</h3>
+    <div class="ayc-capas">
+      {t.capas.map((c, i) => (
+        <div class={`ayc-card ayc-card--${i + 1}`}>
+          <span class="ayc-card__n">{c.capa}</span>
+          <h4>{c.titulo}</h4>
+          <p>{c.texto}</p>
+          <span class="ayc-card__quien">{c.quien}</span>
+        </div>
+      ))}
+    </div>
+
+    <!-- 4. IA -->
+    <div class="ayc-ia">
+      <div class="ayc-ia__txt">
+        <h3>{t.iaTitulo}</h3>
+        <p>{t.iaTexto}</p>
+        <p class="ayc-ia__nota">{t.iaNota}</p>
+      </div>
+      <ul class="ayc-ia__qa">
+        {t.iaPreguntas.map((q) => (
+          <li>
+            <span class="ayc-q">{q.pregunta}</span>
+            <span class="ayc-a">{q.respuesta}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- 5. Ventajas -->
+    <div class="ayc-ventajas">
+      {t.ventajas.map((v, i) => (
+        <div class="ayc-ventaja">
+          <span>{pad(i + 1)}</span>
+          <h4>{v.titulo}</h4>
+          <p>{v.texto}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .ayc {
+    --ay-lila: #8b5cf6;
+    --ay-verde: #10b981;
+    padding: 80px 0 72px;
+    background: var(--rg-bg);
+    color: var(--rg-ink);
+    font-family: var(--rg-sans);
+    border-top: 1px solid var(--rg-line);
+  }
+  .ayc-in {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  .ayc h2,
+  .ayc h3,
+  .ayc h4 {
+    font-family: var(--rg-display);
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  /* 1. Cabecera */
+  .ayc-sello {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--ay-lila);
+    background: color-mix(in srgb, var(--ay-lila) 12%, transparent);
+    padding: 6px 14px 6px 6px;
+    border-radius: 999px;
+  }
+  .ayc-sello b {
+    display: grid;
+    place-items: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--ay-lila);
+    color: #fff;
+    font-size: 12px;
+  }
+  .ayc-head h2 {
+    margin-top: 20px;
+    font-size: clamp(1.9rem, 4vw, 2.9rem);
+    line-height: 1.08;
+    max-width: 22ch;
+  }
+  .ayc-head h2 em {
+    display: block;
+    font-style: italic;
+    color: var(--ay-lila);
+  }
+  .ayc-lead {
+    margin: 18px 0 0;
+    max-width: 68ch;
+    color: var(--rg-soft);
+    font-size: 1.05rem;
+    line-height: 1.65;
+  }
+
+  /* 2. Maqueta + pasos */
+  .ayc-demo {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: 48px;
+    align-items: center;
+    margin-top: 48px;
+  }
+  .ayc-maqueta {
+    border: 1px solid var(--rg-line);
+    border-radius: 16px;
+    background: var(--rg-panel);
+    box-shadow: 0 22px 60px var(--rg-sombra);
+    overflow: hidden;
+  }
+  .ayc-pantalla {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    min-height: 300px;
+  }
+  .ayc-ficha {
+    padding: 22px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .ayc-etq {
+    font-size: 11.5px;
+    color: var(--rg-faint);
+    margin-top: 8px;
+  }
+  .ayc-etq--gris {
+    width: 40%;
+    height: 8px;
+    border-radius: 4px;
+    background: var(--rg-line);
+    margin-top: 14px;
+  }
+  .ayc-campo {
+    padding: 9px 12px;
+    border: 1px solid var(--rg-line);
+    border-radius: 8px;
+    font-size: 13.5px;
+  }
+  .ayc-campo--gris {
+    height: 36px;
+    opacity: 0.6;
+  }
+  .ayc-campo.is-halo {
+    border-color: var(--ay-lila);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--ay-lila) 22%, transparent);
+  }
+  .ayc-panel {
+    padding: 18px;
+    border-left: 1px solid var(--rg-line);
+    background: color-mix(in srgb, var(--ay-lila) 5%, transparent);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .ayc-panel__tit {
+    font-family: var(--rg-display);
+    font-size: 1.05rem;
+  }
+  .ayc-capa {
+    padding: 9px 11px;
+    border-radius: 8px;
+    background: var(--rg-panel);
+    border: 1px solid var(--rg-line);
+  }
+  .ayc-capa span {
+    display: block;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ay-lila);
+  }
+  .ayc-capa p {
+    margin: 4px 0 0;
+    font-size: 12.5px;
+    line-height: 1.45;
+    color: var(--rg-soft);
+  }
+  .ayc-capa--empresa {
+    border-left: 3px solid var(--ay-lila);
+  }
+  .ayc-capa--notas {
+    border-color: color-mix(in srgb, var(--ay-verde) 45%, transparent);
+    background: color-mix(in srgb, var(--ay-verde) 9%, var(--rg-panel));
+  }
+  .ayc-capa--notas span {
+    color: var(--ay-verde);
+  }
+  .ayc-preg {
+    padding: 8px 11px;
+    border: 1px dashed var(--rg-faint);
+    border-radius: 8px;
+    font-size: 12.5px;
+    color: var(--rg-faint);
+  }
+  .ayc-pista {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    font-size: 12px;
+    color: var(--rg-soft);
+    border-top: 1px solid var(--rg-line);
+  }
+  .ayc-pista b {
+    display: grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--ay-lila);
+    color: #fff;
+    font-size: 12px;
+    flex: 0 0 auto;
+  }
+
+  .ayc-pasos h3 {
+    font-size: 1.35rem;
+  }
+  .ayc-pasos ol {
+    list-style: none;
+    margin: 18px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 18px;
+  }
+  .ayc-pasos li {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .ayc-pasos kbd {
+    flex: 0 0 auto;
+    min-width: 40px;
+    height: 34px;
+    padding: 0 8px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--rg-line);
+    border-bottom-width: 3px;
+    border-radius: 8px;
+    background: var(--rg-panel);
+    font-family: var(--rg-mono);
+    font-size: 13px;
+    color: var(--ay-lila);
+  }
+  .ayc-pasos h4 {
+    font-size: 1.05rem;
+  }
+  .ayc-pasos p {
+    margin: 4px 0 0;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--rg-soft);
+  }
+
+  /* 3. Capas */
+  .ayc-sub {
+    margin-top: 64px !important;
+    font-size: 1.5rem;
+  }
+  .ayc-capas {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .ayc-card {
+    display: flex;
+    flex-direction: column;
+    padding: 22px;
+    border: 1px solid var(--rg-line);
+    border-top: 3px solid var(--rg-faint);
+    border-radius: 14px;
+    background: var(--rg-panel);
+  }
+  .ayc-card--2 {
+    border-top-color: var(--ay-lila);
+  }
+  .ayc-card--3 {
+    border-top-color: var(--ay-verde);
+  }
+  .ayc-card__n {
+    font-family: var(--rg-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--rg-faint);
+  }
+  .ayc-card h4 {
+    margin-top: 8px;
+    font-size: 1.25rem;
+  }
+  .ayc-card p {
+    margin: 10px 0 0;
+    flex: 1;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--rg-soft);
+  }
+  .ayc-card__quien {
+    margin-top: 16px;
+    align-self: flex-start;
+    padding: 5px 11px;
+    border-radius: 999px;
+    font-size: 12px;
+    color: var(--rg-ink);
+    background: var(--rg-accent-soft);
+  }
+
+  /* 4. IA */
+  .ayc-ia {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 40px;
+    margin-top: 64px;
+    padding: 32px;
+    border-radius: 18px;
+    border: 1px solid color-mix(in srgb, var(--ay-lila) 35%, var(--rg-line));
+    background: color-mix(in srgb, var(--ay-lila) 6%, var(--rg-panel));
+  }
+  .ayc-ia h3 {
+    font-size: 1.5rem;
+  }
+  .ayc-ia__txt p {
+    margin: 12px 0 0;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--rg-soft);
+  }
+  .ayc-ia__nota {
+    padding-left: 12px;
+    border-left: 2px solid var(--ay-lila);
+  }
+  .ayc-ia__qa {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+    align-content: start;
+  }
+  .ayc-ia__qa li {
+    padding: 14px 16px;
+    border-radius: 12px;
+    background: var(--rg-panel);
+    border: 1px solid var(--rg-line);
+  }
+  .ayc-q {
+    display: block;
+    font-weight: 500;
+    font-size: 14.5px;
+    color: var(--rg-ink);
+  }
+  .ayc-q::before {
+    content: '“';
+    color: var(--ay-lila);
+  }
+  .ayc-q::after {
+    content: '”';
+    color: var(--ay-lila);
+  }
+  .ayc-a {
+    display: block;
+    margin-top: 6px;
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--rg-soft);
+  }
+
+  /* 5. Ventajas */
+  .ayc-ventajas {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: 56px;
+    border-top: 1px solid var(--rg-line);
+  }
+  .ayc-ventaja {
+    padding: 24px 24px 0 0;
+  }
+  .ayc-ventaja + .ayc-ventaja {
+    padding-left: 24px;
+    border-left: 1px solid var(--rg-line);
+  }
+  .ayc-ventaja span {
+    font-family: var(--rg-mono);
+    font-size: 11px;
+    color: var(--ay-lila);
+  }
+  .ayc-ventaja h4 {
+    margin-top: 8px;
+    font-size: 1.2rem;
+  }
+  .ayc-ventaja p {
+    margin: 8px 0 0;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--rg-soft);
+  }
+
+  /* Responsive */
+  @media (max-width: 980px) {
+    .ayc-demo,
+    .ayc-ia {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 32px;
+    }
+    .ayc-capas,
+    .ayc-ventajas {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .ayc-ventaja,
+    .ayc-ventaja + .ayc-ventaja {
+      padding: 20px 0 0;
+      border-left: 0;
+    }
+  }
+  @media (max-width: 560px) {
+    .ayc {
+      padding: 56px 0;
+    }
+    .ayc-in {
+      padding: 0 16px;
+    }
+    .ayc-pantalla {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .ayc-ficha {
+      display: none;
+    }
+    .ayc-panel {
+      border-left: 0;
+    }
+    .ayc-ia {
+      padding: 22px 18px;
+    }
+  }
+</style>

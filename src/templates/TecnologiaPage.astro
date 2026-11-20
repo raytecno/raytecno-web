@@ -21,6 +21,7 @@
  *   .module-tag no existen en el marcado de esta página.
  */
 import Layout from "@/layouts/Layout.astro";
+import AyudaContextual from "@/components/AyudaContextual.astro";
 import { getAlternateUrls, getPageUrl, type Lang } from "@/config/pages";
 
 interface Props {
@@ -500,6 +501,9 @@ const moduleIcons = ["📦", "🛒", "🏭", "💰", "📈", "👥", "🌐"];
         </div>
       </div>
     </section>
+
+    <!-- Ayuda en cada pantalla (Noviembre 2026) -->
+    <AyudaContextual lang={lang} />
 
     <!-- CTA Section -->
     <section class="cta-section">
