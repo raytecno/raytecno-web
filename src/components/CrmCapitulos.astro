@@ -9,7 +9,11 @@
  *   2. Tres claves (sobre tus datos / vendedor / dirección).
  *   3. Tres capítulos en scroll: el texto avanza a la izquierda y la captura
  *      se queda fija a la derecha (sticky). Cambia al entrar en cada paso.
- *   4. Más pantallas del módulo (solo nombres, sin promesas).
+ *   2b. Sin APIs: un CRM aparte con sus conexiones frente a RayGold (Nov. 2026).
+ *   4. Fuera de la oficina: grupos de funciones sin captura (calle, cliente,
+ *      IA), el recorrido "sube el oro → reetiquetar" y la comparativa con un
+ *      CRM aparte (Noviembre 2026). Solo funciones ya disponibles: lo que el
+ *      dossier del CRM da como "lo que viene" no se anuncia aquí.
  *   5. Preguntas frecuentes (con JSON-LD FAQPage).
  *   6. Cierre en azul noche con CTA a contacto.
  *
@@ -137,6 +141,55 @@ const faqLd = {
     </div>
   </section>
 
+  <!-- ═══════════ 2b. Sin APIs ═══════════ -->
+  <section class="crmp-apis">
+    <div class="crmp-in">
+      <span class="crmp-sello"><i aria-hidden="true"></i>{p.sinApis.sello}</span>
+      <h2>
+        {p.sinApis.titulo}
+        <em>{p.sinApis.tituloEnfasis}</em>
+      </h2>
+      <p class="crmp-apis__t">{p.sinApis.texto}</p>
+
+      <div class="crmp-apis__cmp">
+        <div class="crmp-apis__col crmp-apis__col--aparte">
+          <h3>{p.sinApis.aparteTitulo}</h3>
+          <div class="crmp-apis__caja">ERP</div>
+          <ul class="crmp-apis__flechas">
+            {p.sinApis.aparteFlechas.map((f) => (
+              <li>
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 2v12M2 5l3-3 3 3M11 14V2M8 11l3 3 3-3"></path>
+                </svg>
+                {f}
+              </li>
+            ))}
+          </ul>
+          <div class="crmp-apis__caja">CRM</div>
+          <p class="crmp-apis__nota">{p.sinApis.aparteNota}</p>
+        </div>
+
+        <div class="crmp-apis__col crmp-apis__col--rg">
+          <h3>{p.sinApis.rgTitulo}</h3>
+          <ul class="crmp-apis__bloques">
+            {p.sinApis.rgBloques.map((b) => <li>{b}</li>)}
+          </ul>
+          <p class="crmp-apis__nota">{p.sinApis.rgNota}</p>
+        </div>
+      </div>
+
+      <div class="crmp-claves__grid crmp-apis__ventajas">
+        {p.sinApis.ventajas.map((v, i) => (
+          <div class="crmp-clave">
+            <span class="crmp-clave__n">{pad(i + 1)}</span>
+            <h3>{v.titulo}</h3>
+            <p>{v.texto}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- ═══════════ 3. Capítulos ═══════════ -->
   <section class="crmp-recorrido" id="recorrido">
     <div class="crmp-in">
@@ -221,14 +274,77 @@ const faqLd = {
     </div>
   </section>
 
-  <!-- ═══════════ 4. Más pantallas ═══════════ -->
-  <section class="crmp-mas">
+  <!-- ═══════════ 4. Fuera de la oficina (grupos sin captura) ═══════════ -->
+  <section class="crmp-mas" id="mas">
     <div class="crmp-in">
       <h2>{p.masTitulo}</h2>
-      <p>{p.masTexto}</p>
-      <ul>
-        {p.masPantallas.map((m) => <li>{m}</li>)}
-      </ul>
+      <p class="crmp-mas__t">{p.masTexto}</p>
+
+      {p.grupos.map((g) => (
+        <div class="crmp-grupo" id={`grupo-${g.id}`}>
+          <header class="crmp-grupo__head">
+            <h3>{g.titulo}</h3>
+            <p>{g.entradilla}</p>
+          </header>
+          <div class="crmp-grupo__grid">
+            {g.items.map((it) => (
+              <div class="crmp-item">
+                <h4>{it.titulo}</h4>
+                <p>{it.texto}</p>
+              </div>
+            ))}
+          </div>
+          {g.nota && <p class="crmp-grupo__nota">{g.nota}</p>}
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ═══════════ 4b. Sube el oro → reetiquetar ═══════════ -->
+  <section class="crmp-oro">
+    <div class="crmp-in">
+      <span class="crmp-sello"><i aria-hidden="true"></i>{p.oro.sello}</span>
+      <h2>{p.oro.titulo}</h2>
+      <p class="crmp-oro__t">{p.oro.texto}</p>
+      <ol class="crmp-oro__pasos">
+        {p.oro.pasos.map((paso, i) => (
+          <li>
+            <span class="crmp-oro__n">{pad(i + 1)}</span>
+            <h3>{paso.titulo}</h3>
+            <p>{paso.texto}</p>
+          </li>
+        ))}
+      </ol>
+      <p class="crmp-oro__nota">{p.oro.nota}</p>
+    </div>
+  </section>
+
+  <!-- ═══════════ 4c. Frente a un CRM aparte ═══════════ -->
+  <section class="crmp-cmp">
+    <div class="crmp-in">
+      <h2>{p.comparativa.titulo}</h2>
+      <p class="crmp-cmp__t">{p.comparativa.texto}</p>
+      <div class="crmp-cmp__tabla">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">{p.comparativa.colQue}</th>
+              <th scope="col" class="is-rg">{p.comparativa.colRg}</th>
+              <th scope="col">{p.comparativa.colAparte}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {p.comparativa.filas.map(([que, rg, aparte]) => (
+              <tr>
+                <th scope="row">{que}</th>
+                <td class="is-rg">{rg}</td>
+                <td>{aparte}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="crmp-cmp__nota">{p.comparativa.nota}</p>
     </div>
   </section>
 
@@ -664,33 +780,272 @@ const faqLd = {
     background: var(--rg-accent);
   }
 
-  /* ── 4. Más pantallas ── */
+  /* ── 2b. Sin APIs ── */
+  .crmp-apis {
+    padding: 72px 0 32px;
+  }
+  .crmp-apis h2,
+  .crmp-oro h2,
+  .crmp-cmp h2,
+  .crmp-mas h2 {
+    margin: 18px 0 0;
+    font-size: clamp(1.7rem, 3.2vw, 2.4rem);
+    line-height: 1.1;
+    max-width: 26ch;
+  }
+  .crmp-apis h2 em {
+    display: block;
+    font-style: italic;
+    color: var(--rg-accent);
+  }
+  .crmp-apis__t,
+  .crmp-oro__t,
+  .crmp-cmp__t,
+  .crmp-mas__t {
+    margin: 14px 0 0;
+    max-width: 66ch;
+    color: var(--rg-soft);
+    font-size: 1.02rem;
+    line-height: 1.6;
+  }
+  .crmp-apis__cmp {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 20px;
+    margin-top: 36px;
+  }
+  .crmp-apis__col {
+    padding: 24px;
+    border: 1px solid var(--rg-line);
+    border-radius: 14px;
+    background: var(--rg-panel);
+  }
+  .crmp-apis__col--rg {
+    border-color: var(--cp-mod);
+    box-shadow: 0 18px 50px var(--rg-sombra);
+  }
+  .crmp-apis__col h3 {
+    margin: 0 0 18px;
+    font-size: 1.15rem;
+    line-height: 1.3;
+  }
+  .crmp-apis__caja {
+    padding: 10px;
+    border: 1px dashed var(--rg-faint);
+    border-radius: 10px;
+    text-align: center;
+    font-family: var(--rg-mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: var(--rg-soft);
+  }
+  .crmp-apis__flechas {
+    list-style: none;
+    margin: 10px 0;
+    padding: 0;
+    display: grid;
+    gap: 6px;
+  }
+  .crmp-apis__flechas li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 12px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    color: var(--rg-soft);
+    background: var(--rg-accent-soft);
+  }
+  .crmp-apis__flechas svg {
+    flex: 0 0 auto;
+    width: 15px;
+    height: 15px;
+    color: var(--rg-faint);
+  }
+  .crmp-apis__bloques {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .crmp-apis__bloques li {
+    padding: 12px 8px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 13.5px;
+    color: var(--rg-ink);
+    background: color-mix(in srgb, var(--cp-mod) 10%, transparent);
+    border: 1px solid color-mix(in srgb, var(--cp-mod) 28%, transparent);
+  }
+  .crmp-apis__nota {
+    margin: 16px 0 0;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--rg-soft);
+  }
+  .crmp-apis__ventajas {
+    margin-top: 36px;
+  }
+  .crmp-clave h3 {
+    margin: 10px 0 0;
+    font-size: 1.2rem;
+    line-height: 1.25;
+  }
+
+  /* ── 4. Fuera de la oficina ── */
   .crmp-mas {
-    padding: 56px 0;
+    padding: 64px 0 24px;
     border-top: 1px solid var(--rg-line);
   }
   .crmp-mas h2 {
+    margin-top: 0;
+  }
+  .crmp-grupo {
+    margin-top: 44px;
+    scroll-margin-top: calc(var(--cp-cab) + 16px);
+  }
+  .crmp-grupo__head h3 {
     margin: 0;
-    font-size: 1.5rem;
+    font-size: 1.35rem;
+    line-height: 1.2;
   }
-  .crmp-mas p {
-    margin: 8px 0 0;
+  .crmp-grupo__head p {
+    margin: 6px 0 0;
     color: var(--rg-soft);
+    font-size: 15px;
   }
-  .crmp-mas ul {
-    list-style: none;
-    padding: 0;
-    margin: 20px 0 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
+  .crmp-grupo__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 18px;
   }
-  .crmp-mas li {
-    padding: 8px 15px;
-    border-radius: 999px;
-    font-size: 13.5px;
-    color: var(--rg-soft);
+  .crmp-item {
+    padding: 20px;
     border: 1px solid var(--rg-line);
+    border-top: 2px solid var(--cp-mod);
+    border-radius: 12px;
+    background: var(--rg-panel);
+  }
+  .crmp-item h4 {
+    margin: 0;
+    font-family: var(--rg-display);
+    font-weight: 450;
+    font-size: 1.05rem;
+    line-height: 1.3;
+    color: var(--rg-ink);
+  }
+  .crmp-item p {
+    margin: 10px 0 0;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--rg-soft);
+  }
+  .crmp-grupo__nota {
+    margin: 14px 0 0;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    color: var(--rg-ink);
+    background: var(--rg-accent-soft);
+  }
+
+  /* ── 4b. Sube el oro ── */
+  .crmp-oro {
+    padding: 64px 0 24px;
+  }
+  .crmp-oro__pasos {
+    list-style: none;
+    margin: 32px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0;
+    counter-reset: none;
+  }
+  .crmp-oro__pasos li {
+    position: relative;
+    padding: 18px 18px 0 0;
+    border-top: 2px solid var(--rg-accent);
+  }
+  .crmp-oro__pasos li + li {
+    padding-left: 18px;
+  }
+  .crmp-oro__n {
+    font-family: var(--rg-mono);
+    font-size: 11px;
+    color: var(--rg-accent);
+  }
+  .crmp-oro__pasos h3 {
+    margin: 8px 0 0;
+    font-size: 1.15rem;
+    line-height: 1.25;
+  }
+  .crmp-oro__pasos p {
+    margin: 8px 0 0;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--rg-soft);
+  }
+  .crmp-oro__nota,
+  .crmp-cmp__nota {
+    margin: 24px 0 0;
+    font-size: 13.5px;
+    color: var(--rg-faint);
+  }
+
+  /* ── 4c. Comparativa ── */
+  .crmp-cmp {
+    padding: 64px 0 24px;
+  }
+  .crmp-cmp__tabla {
+    margin-top: 28px;
+    overflow-x: auto;
+    border: 1px solid var(--rg-line);
+    border-radius: 14px;
+    background: var(--rg-panel);
+  }
+  .crmp-cmp table {
+    width: 100%;
+    min-width: 520px;
+    border-collapse: collapse;
+    font-size: 14.5px;
+  }
+  .crmp-cmp th,
+  .crmp-cmp td {
+    padding: 13px 18px;
+    text-align: left;
+    border-bottom: 1px solid var(--rg-line);
+    vertical-align: top;
+  }
+  .crmp-cmp tbody tr:last-child th,
+  .crmp-cmp tbody tr:last-child td {
+    border-bottom: 0;
+  }
+  .crmp-cmp thead th {
+    font-family: var(--rg-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--rg-faint);
+  }
+  .crmp-cmp tbody th {
+    font-weight: 400;
+    color: var(--rg-ink);
+  }
+  .crmp-cmp td {
+    color: var(--rg-soft);
+  }
+  .crmp-cmp .is-rg {
+    color: var(--rg-ink);
+    font-weight: 500;
+    background: color-mix(in srgb, var(--cp-mod) 8%, transparent);
+  }
+  .crmp-cmp thead .is-rg {
+    color: var(--cp-mod);
   }
 
   /* ── 5. Preguntas frecuentes ── */
@@ -891,6 +1246,34 @@ const faqLd = {
     }
     .crmp-lb {
       padding: 56px 12px 12px;
+    }
+    .crmp-apis__cmp {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .crmp-grupo__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .crmp-oro__pasos {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0;
+    }
+    .crmp-oro__pasos li,
+    .crmp-oro__pasos li + li {
+      padding: 14px 0 14px 18px;
+      border-top: 0;
+      border-left: 2px solid var(--rg-accent);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .crmp-grupo__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .crmp-apis__bloques {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .crmp-apis__col {
+      padding: 18px;
     }
   }
 

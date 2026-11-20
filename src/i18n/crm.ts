@@ -7,6 +7,11 @@
  * Paso 2 (Octubre 2026): página /crm (clave `pagina`). Los capítulos reutilizan
  * las capturas de `pantallas` por su `id`, más `objetivos`, que solo sale aquí.
  *
+ * Paso 3 (Noviembre 2026): /crm amplía con `sinApis`, `grupos` (calle,
+ * cliente, IA), `oro` y `comparativa`, y sustituye a `masPantallas`. Solo
+ * funciones ya disponibles; el precio va como "incluido en el ERP" (la web
+ * cobra por usuario, no por empresa).
+ *
  * Idiomas (Octubre 2026): es, en, fr, ca y pt-br completos. Con
  * Record<Lang, …> TypeScript avisa si se añade un idioma a Lang y falta aquí.
  * getCrmTranslations mantiene la reserva en español por si acaso.
@@ -61,6 +66,50 @@ export interface CrmCapitulo {
   pasos: CrmPaso[];
 }
 
+export interface CrmSinApis {
+  sello: string;
+  titulo: string;
+  tituloEnfasis: string;
+  texto: string;
+  /** Columna izquierda: un CRM aparte y sus conexiones */
+  aparteTitulo: string;
+  aparteFlechas: string[];
+  aparteNota: string;
+  /** Columna derecha: RayGold, una sola aplicación */
+  rgTitulo: string;
+  rgBloques: string[];
+  rgNota: string;
+  ventajas: { titulo: string; texto: string }[];
+}
+
+export interface CrmGrupo {
+  id: string;
+  titulo: string;
+  entradilla: string;
+  items: { titulo: string; texto: string }[];
+  /** Línea de aviso al pie del grupo (opcional) */
+  nota?: string;
+}
+
+export interface CrmOro {
+  sello: string;
+  titulo: string;
+  texto: string;
+  pasos: { titulo: string; texto: string }[];
+  nota: string;
+}
+
+export interface CrmComparativa {
+  titulo: string;
+  texto: string;
+  colQue: string;
+  colRg: string;
+  colAparte: string;
+  /** [qué, RayGold, CRM aparte] */
+  filas: [string, string, string][];
+  nota: string;
+}
+
 export interface CrmTranslations {
   vitrina: {
     sello: string;
@@ -89,9 +138,15 @@ export interface CrmTranslations {
     claves: { titulo: string; texto: string }[];
     indiceLabel: string;
     capitulos: CrmCapitulo[];
+    /** Bloque "Sin APIs": un CRM aparte frente a RayGold */
+    sinApis: CrmSinApis;
     masTitulo: string;
     masTexto: string;
-    masPantallas: string[];
+    /** Funciones sin captura en la página, agrupadas (Noviembre 2026) */
+    grupos: CrmGrupo[];
+    /** Recorrido "sube el oro → reetiquetar las tiendas" */
+    oro: CrmOro;
+    comparativa: CrmComparativa;
     faqTitulo: string;
     faq: { pregunta: string; respuesta: string }[];
     cierreTitulo: string;
@@ -195,7 +250,7 @@ const es: CrmTranslations = {
   pagina: {
     metaTitulo: 'CRM para joyería: clientes, vendedores y previsión de ventas | RayGold',
     metaDescripcion:
-      'El CRM de RayGold trabaja sobre las ventas y facturas del ERP de joyería: fidelización por recencia, frecuencia e importe, pirámide de clientes, agenda del vendedor, forecast y objetivos.',
+      'CRM para joyería dentro del ERP, sin APIs: fidelización, pirámide de clientes, recompra, forecast y objetivos, ruta con GPS, postventa, WhatsApp, Instagram y Facebook en una bandeja, e IA.',
     sello: 'CRM comercial',
     titulo: 'El CRM que ya conoce a tus clientes',
     tituloEnfasis: 'porque vive dentro del ERP.',
@@ -338,9 +393,150 @@ const es: CrmTranslations = {
         ],
       },
     ],
-    masTitulo: 'Y más pantallas en el mismo módulo',
-    masTexto: 'El CRM comercial incluye además estas vistas, sobre los mismos datos.',
-    masPantallas: ['Contactos', 'Pipeline', 'Recompra', 'Estadísticas', 'Imágenes', 'Marketing'],
+    sinApis: {
+      sello: 'Sin APIs · sin integraciones',
+      titulo: 'Un CRM aparte hay que conectarlo.',
+      tituloEnfasis: 'El de RayGold ya está dentro.',
+      texto:
+        'Un CRM aparte no sabe nada de la empresa hasta que se le conecta: una API para los clientes, otra para las facturas, otra para los pedidos, otra para el stock… y alguien que las vigile. En RayGold el CRM es una pantalla más de la misma aplicación, sobre la misma base de datos.',
+      aparteTitulo: 'Un CRM aparte',
+      aparteFlechas: [
+        'API · sincronizar clientes y artículos',
+        'API · traspasar las ventas cada noche',
+        'API · pasar el pedido del CRM al ERP',
+        'API · estadísticas y objetivos',
+      ],
+      aparteNota: 'Cada flecha es un desarrollo, una cuota y un sitio donde se pierden o se duplican datos.',
+      rgTitulo: 'RayGold · una aplicación, una base de datos',
+      rgBloques: [
+        'Clientes', 'Artículos', 'Precios', 'Stock', 'Pedidos', 'Facturas',
+        'Fidelización', 'Pirámide', 'Forecast', 'Pipeline', 'Postventa', 'Mensajes',
+      ],
+      rgNota: 'Sin flechas: el CRM lee y escribe directamente los clientes, las facturas y los pedidos del ERP. Solo salen fuera WhatsApp, Instagram, Facebook y el email, con las conexiones ya hechas.',
+      ventajas: [
+        {
+          titulo: 'Nada que conectar',
+          texto: 'Ni conectores, ni sincronizaciones nocturnas, ni datos copiados de un programa a otro.',
+        },
+        {
+          titulo: 'Todo al momento',
+          texto: 'La factura que sale ahora ya está en la ficha del cliente, en su fidelización y en el forecast.',
+        },
+        {
+          titulo: 'Nada que mantener',
+          texto: 'Una actualización del ERP no rompe el CRM: son el mismo programa, con un solo responsable.',
+        },
+      ],
+    },
+    masTitulo: 'Fuera de la oficina',
+    masTexto:
+      'El vendedor en la calle, la conversación con el cliente y una inteligencia artificial que conoce toda la empresa. Sobre los mismos datos.',
+    grupos: [
+      {
+        id: 'calle',
+        titulo: 'En la calle',
+        entradilla: 'Lo que el vendedor necesita fuera de la oficina, en el móvil.',
+        items: [
+          {
+            titulo: 'Ruta y visitas verificadas',
+            texto: 'Los clientes en el mapa por su estado. «He llegado» registra la visita con el GPS y la marca como verificada si está a menos de 200 m del cliente. La ruta del día se ordena por cercanía y se abre en Google Maps.',
+          },
+          {
+            titulo: 'La app del vendedor',
+            texto: 'Se instala desde el navegador, en iPhone y Android, sin tiendas de apps: Hoy, Ruta, Clientes, Agenda y Postventa. Con notas de voz, avisos en el móvil y foto a la tarjeta de visita para crear el lead.',
+          },
+          {
+            titulo: 'Postventa de piezas',
+            texto: 'Reparaciones, garantías y reclamaciones como tickets, con fotos de la pieza, presupuesto, fecha límite y la firma del cliente con el dedo al dejarla y al recogerla.',
+          },
+          {
+            titulo: 'Recompra',
+            texto: 'RayGold aprende de las facturas en qué meses suele comprar cada cliente. Cada mes enseña quién debería comprar, quién ya lo ha hecho y quién falta, con el importe en juego. Es la lista de llamadas.',
+          },
+        ],
+      },
+      {
+        id: 'cliente',
+        titulo: 'Hablar con el cliente',
+        entradilla: 'Todos los canales en el mismo sitio, y cada conversación en la ficha del cliente.',
+        items: [
+          {
+            titulo: 'WhatsApp, Instagram y Facebook en una bandeja',
+            texto: 'Conectada a las cuentas oficiales de la empresa. Reconoce al cliente por el teléfono y enseña sus ventas de 12 meses. Si es nuevo, pasa a lead con un clic. Y desde el chat se crea un pedido del ERP, con el mismo cálculo de precio.',
+          },
+          {
+            titulo: 'Las tiendas, en la misma bandeja',
+            texto: 'Las tiendas hablan con la central desde su TPV, sin WhatsApp. Los comunicados importantes piden «Enterado» y la central ve qué tiendas faltan; los urgentes salen a pantalla completa.',
+          },
+          {
+            titulo: 'Pipeline y leads',
+            texto: 'Oportunidades por fase, con la probabilidad calculada sobre el histórico de la empresa. Los leads llegan del formulario de la web, de las redes sociales o de una foto a la tarjeta de visita, y las automatizaciones crean tareas y avisos solas.',
+          },
+          {
+            titulo: 'Marketing por email',
+            texto: 'Campañas con Brevo a los segmentos que calcula RayGold (superiores, en riesgo, dormidos…). Los resultados se miden en ventas: cuántos clientes del segmento compraron después y cuánto.',
+          },
+        ],
+      },
+      {
+        id: 'ia',
+        titulo: 'Inteligencia artificial',
+        entradilla: 'Trabaja con los datos de todo el ERP, no solo del CRM, y siempre limitada a la cartera de quien pregunta.',
+        items: [
+          {
+            titulo: 'Asistente',
+            texto: 'Se le pregunta en lenguaje normal: «¿qué clientes míos están en riesgo?», «¿cómo voy frente al objetivo?», «¿qué stock hay de este anillo?».',
+          },
+          {
+            titulo: 'Preparar la visita',
+            texto: 'Resumen del cliente, qué compra, qué ha dejado de comprar y qué ofrecerle. Y el borrador del email.',
+          },
+          {
+            titulo: 'Responder mensajes',
+            texto: 'Propone la respuesta con el trato y el idioma de la conversación, sin inventar precios ni plazos, y la resume: qué quiere y cuál es el siguiente paso.',
+          },
+          {
+            titulo: 'Otras IA, por MCP',
+            texto: 'RayGold se conecta a Claude, ChatGPT y otros asistentes, que consultan los datos de la empresa con los permisos del usuario y solo en lectura.',
+          },
+        ],
+        nota: 'La IA propone; no envía mensajes ni graba nada por su cuenta. Todo pasa por la persona.',
+      },
+    ],
+    oro: {
+      sello: 'Precios y tiendas',
+      titulo: 'Sube el oro: precios nuevos en todas las tiendas, sin Excel',
+      texto:
+        'La central recalcula los precios de las tiendas con el mismo cálculo del ERP: la cotización del día a la ley de cada artículo, la tarifa y el beneficio de cada tienda. Graba solo lo que cambia y avisa a cada tienda.',
+      pasos: [
+        { titulo: 'Calcular', texto: 'Con la cotización del día y el beneficio de cada tienda.' },
+        { titulo: 'Revisar', texto: 'Solo lo que cambia, tienda a tienda, con aviso en las subidas fuera de lo normal.' },
+        { titulo: 'Grabar', texto: 'El TPV ya cobra el precio nuevo.' },
+        { titulo: 'Avisar', texto: 'Cada tienda recibe la lista de sus piezas con el precio nuevo.' },
+        { titulo: 'Reetiquetar', texto: 'La tienda imprime las etiquetas y pulsa «Hecho». La central ve cuáles faltan.' },
+      ],
+      nota: 'Sin sorpresas en el mostrador: nada llega a la tienda sin revisarse antes.',
+    },
+    comparativa: {
+      titulo: 'Frente a un CRM aparte',
+      texto:
+        'Los CRM más conocidos son buenos CRM, pero son un programa más: hay que conectarlos al ERP y pagarlos aparte.',
+      colQue: 'Qué',
+      colRg: 'RayGold',
+      colAparte: 'CRM aparte',
+      filas: [
+        ['Ventas reales en la ficha del cliente', 'De serie', 'Con integración'],
+        ['Fidelización, pirámide y recompra', 'De serie', 'Informes a medida'],
+        ['Forecast y objetivos con lo facturado', 'De serie', 'Con integración'],
+        ['Pedido desde el CRM o desde un WhatsApp', 'Pedido del ERP', 'Se traspasa'],
+        ['Postventa de piezas (taller, garantía, firma)', 'De serie', 'No'],
+        ['Canal con las tiendas del TPV', 'De serie', 'No'],
+        ['WhatsApp, Instagram y Facebook', 'De serie', 'Módulo aparte'],
+        ['IA con los datos de toda la empresa', 'Sí', 'Solo los del CRM'],
+        ['Precio', 'Incluido en el ERP', 'Licencia aparte'],
+      ],
+      nota: 'Comparativa orientativa con las funciones estándar de los CRM más extendidos.',
+    },
     faqTitulo: 'Preguntas frecuentes',
     faq: [
       {
@@ -357,6 +553,21 @@ const es: CrmTranslations = {
         pregunta: '¿Lo usan los vendedores o la dirección?',
         respuesta:
           'Los dos, con pantallas distintas. El vendedor trabaja con su día, su agenda, su seguimiento y sus clientes a recuperar. La dirección usa la pirámide, el forecast, los objetivos y la central del equipo.',
+      },
+      {
+        pregunta: '¿Hay que conectar el CRM con el ERP?',
+        respuesta:
+          'No. El CRM es parte del ERP y usa la misma base de datos, así que no hay APIs, conectores ni sincronizaciones. Lo único que se conecta fuera son las cuentas de WhatsApp, Instagram y Facebook de la empresa y, si se quiere email marketing, la cuenta de Brevo.',
+      },
+      {
+        pregunta: '¿Se puede hacer un pedido desde un WhatsApp?',
+        respuesta:
+          'Sí. Con el cliente reconocido en la conversación, «Crear pedido» abre un pedido del ERP con el mismo cálculo de precio que Pedidos. Queda en borrador hasta que se confirma.',
+      },
+      {
+        pregunta: '¿La inteligencia artificial actúa sola?',
+        respuesta:
+          'No. Propone respuestas, citas, actividades o leads, pero no envía mensajes ni graba nada sin que la persona lo confirme. Y solo ve la cartera de quien pregunta.',
       },
     ],
     cierreTitulo: 'Tus clientes ya están en RayGold.',
@@ -461,7 +672,7 @@ const en: CrmTranslations = {
   pagina: {
     metaTitulo: 'Jewelry CRM: customers, sales reps and sales forecast | RayGold',
     metaDescripcion:
-      'The RayGold CRM runs on the sales and invoices of the jewelry ERP: loyalty by recency, frequency and value, customer pyramid, sales rep agenda, forecast and targets.',
+      'A jewelry CRM inside the ERP, no APIs: loyalty, customer pyramid, repurchase, forecast and targets, GPS routes, after-sales, WhatsApp, Instagram and Facebook in one inbox, and AI.',
     sello: 'Sales CRM',
     titulo: 'The CRM that already knows your customers',
     tituloEnfasis: 'because it lives inside the ERP.',
@@ -604,9 +815,150 @@ const en: CrmTranslations = {
         ],
       },
     ],
-    masTitulo: 'And more screens in the same module',
-    masTexto: 'The sales CRM also includes these views, on the same data.',
-    masPantallas: ['Contacts', 'Pipeline', 'Repurchase', 'Statistics', 'Images', 'Marketing'],
+    sinApis: {
+      sello: 'No APIs · no integrations',
+      titulo: 'A standalone CRM has to be connected.',
+      tituloEnfasis: 'RayGold’s is already inside.',
+      texto:
+        'A standalone CRM knows nothing about the business until it is connected: one API for customers, another for invoices, another for orders, another for stock… and someone to keep an eye on them. In RayGold the CRM is just another screen of the same application, on the same database.',
+      aparteTitulo: 'A standalone CRM',
+      aparteFlechas: [
+        'API · sync customers and items',
+        'API · move sales over every night',
+        'API · push CRM orders into the ERP',
+        'API · statistics and targets',
+      ],
+      aparteNota: 'Every arrow is a development project, a subscription and a place where data gets lost or duplicated.',
+      rgTitulo: 'RayGold · one application, one database',
+      rgBloques: [
+        'Customers', 'Items', 'Prices', 'Stock', 'Orders', 'Invoices',
+        'Loyalty', 'Pyramid', 'Forecast', 'Pipeline', 'After-sales', 'Messages',
+      ],
+      rgNota: 'No arrows: the CRM reads and writes the ERP’s customers, invoices and orders directly. Only WhatsApp, Instagram, Facebook and email go outside, with the connections already built.',
+      ventajas: [
+        {
+          titulo: 'Nothing to connect',
+          texto: 'No connectors, no nightly syncs, no data copied from one program to another.',
+        },
+        {
+          titulo: 'Everything in real time',
+          texto: 'The invoice issued now is already on the customer record, in their loyalty status and in the forecast.',
+        },
+        {
+          titulo: 'Nothing to maintain',
+          texto: 'An ERP update does not break the CRM: they are the same program, with a single vendor responsible.',
+        },
+      ],
+    },
+    masTitulo: 'Beyond the office',
+    masTexto:
+      'Sales reps on the road, conversations with customers and an AI that knows the whole business. On the same data.',
+    grupos: [
+      {
+        id: 'calle',
+        titulo: 'On the road',
+        entradilla: 'What the sales rep needs outside the office, on their phone.',
+        items: [
+          {
+            titulo: 'Route and verified visits',
+            texto: 'Customers on the map by status. “I’m here” logs the visit with GPS and marks it verified if the rep is within 200 m of the customer. Today’s route is sorted by distance and opens in Google Maps.',
+          },
+          {
+            titulo: 'The sales rep app',
+            texto: 'Installed from the browser on iPhone and Android, no app store needed: Today, Route, Customers, Calendar and After-sales. With voice notes, phone notifications and a business card scanner that creates the lead.',
+          },
+          {
+            titulo: 'Jewelry after-sales',
+            texto: 'Repairs, warranties and complaints as tickets, with photos of the piece, quote, due date and the customer’s finger signature at drop-off and pick-up.',
+          },
+          {
+            titulo: 'Repurchase',
+            texto: 'RayGold learns from the invoices which months each customer usually buys in. Every month it shows who should buy, who already has and who is missing, with the amount at stake. It is the call list.',
+          },
+        ],
+      },
+      {
+        id: 'cliente',
+        titulo: 'Talking to customers',
+        entradilla: 'Every channel in one place, and every conversation on the customer record.',
+        items: [
+          {
+            titulo: 'WhatsApp, Instagram and Facebook in one inbox',
+            texto: 'Connected to the company’s official accounts. It recognizes the customer by phone number and shows their last 12 months of sales. New contacts become leads in one click. And an ERP order can be created right from the chat, with the same pricing.',
+          },
+          {
+            titulo: 'Stores in the same inbox',
+            texto: 'Stores talk to head office from their POS, without WhatsApp. Important notices require an “Acknowledged” and head office sees which stores are missing; urgent ones take over the full screen.',
+          },
+          {
+            titulo: 'Pipeline and leads',
+            texto: 'Opportunities by stage, with the probability calculated from the company’s own history. Leads come from the website form, social media or a photo of a business card, and automations create tasks and reminders on their own.',
+          },
+          {
+            titulo: 'Email marketing',
+            texto: 'Brevo campaigns to the segments RayGold calculates (top customers, at risk, dormant…). Results are measured in sales: how many customers in the segment bought afterwards, and how much.',
+          },
+        ],
+      },
+      {
+        id: 'ia',
+        titulo: 'Artificial intelligence',
+        entradilla: 'It works with data from the whole ERP, not just the CRM, and is always limited to the portfolio of whoever is asking.',
+        items: [
+          {
+            titulo: 'Assistant',
+            texto: 'Ask in plain language: “which of my customers are at risk?”, “how am I doing against target?”, “how much stock is there of this ring?”.',
+          },
+          {
+            titulo: 'Visit prep',
+            texto: 'A customer summary: what they buy, what they have stopped buying and what to offer them. Plus a draft email.',
+          },
+          {
+            titulo: 'Replying to messages',
+            texto: 'It suggests a reply in the tone and language of the conversation, without making up prices or lead times, and summarizes it: what the customer wants and the next step.',
+          },
+          {
+            titulo: 'Other AIs, via MCP',
+            texto: 'RayGold connects to Claude, ChatGPT and other assistants, which can query company data with the user’s permissions, read-only.',
+          },
+        ],
+        nota: 'The AI suggests; it never sends messages or saves anything on its own. Everything goes through a person.',
+      },
+    ],
+    oro: {
+      sello: 'Prices and stores',
+      titulo: 'Gold goes up: new prices in every store, no spreadsheets',
+      texto:
+        'Head office recalculates store prices with the ERP’s own pricing: today’s gold price at each item’s fineness, the price list and each store’s margin. It saves only what changes and notifies each store.',
+      pasos: [
+        { titulo: 'Calculate', texto: 'With today’s price and each store’s margin.' },
+        { titulo: 'Review', texto: 'Only what changes, store by store, with a warning on unusual increases.' },
+        { titulo: 'Save', texto: 'The POS charges the new price straight away.' },
+        { titulo: 'Notify', texto: 'Each store gets the list of its pieces with the new price.' },
+        { titulo: 'Re-tag', texto: 'The store prints the tags and taps “Done”. Head office sees which stores are missing.' },
+      ],
+      nota: 'No surprises at the counter: nothing reaches the store without being reviewed first.',
+    },
+    comparativa: {
+      titulo: 'Versus a standalone CRM',
+      texto:
+        'The best-known CRMs are good CRMs, but they are one more program: they have to be connected to the ERP and paid for separately.',
+      colQue: 'Feature',
+      colRg: 'RayGold',
+      colAparte: 'Standalone CRM',
+      filas: [
+        ['Real sales on the customer record', 'Built in', 'Via integration'],
+        ['Loyalty, pyramid and repurchase', 'Built in', 'Custom reports'],
+        ['Forecast and targets from invoiced sales', 'Built in', 'Via integration'],
+        ['Order from the CRM or from a WhatsApp chat', 'ERP order', 'Transferred'],
+        ['Jewelry after-sales (workshop, warranty, signature)', 'Built in', 'No'],
+        ['Channel with the stores’ POS', 'Built in', 'No'],
+        ['WhatsApp, Instagram and Facebook', 'Built in', 'Separate module'],
+        ['AI with data from the whole business', 'Yes', 'CRM data only'],
+        ['Price', 'Included in the ERP', 'Separate license'],
+      ],
+      nota: 'Indicative comparison with the standard features of the most widely used CRMs.',
+    },
     faqTitulo: 'Frequently asked questions',
     faq: [
       {
@@ -623,6 +975,21 @@ const en: CrmTranslations = {
         pregunta: 'Is it for sales reps or for management?',
         respuesta:
           'Both, with different screens. Sales reps work with their day, agenda, follow-up and customers to win back. Management uses the pyramid, forecast, targets and the team’s sales HQ.',
+      },
+      {
+        pregunta: 'Does the CRM need to be connected to the ERP?',
+        respuesta:
+          'No. The CRM is part of the ERP and uses the same database, so there are no APIs, connectors or syncs. The only outside connections are the company’s WhatsApp, Instagram and Facebook accounts and, for email marketing, the Brevo account.',
+      },
+      {
+        pregunta: 'Can an order be placed from a WhatsApp chat?',
+        respuesta:
+          'Yes. Once the customer is recognized in the conversation, “Create order” opens an ERP order with the same pricing as Orders. It stays as a draft until it is confirmed.',
+      },
+      {
+        pregunta: 'Does the AI act on its own?',
+        respuesta:
+          'No. It suggests replies, appointments, activities or leads, but it never sends messages or saves anything without the person confirming. And it only sees the portfolio of whoever is asking.',
       },
     ],
     cierreTitulo: 'Your customers are already in RayGold.',
@@ -727,7 +1094,7 @@ const fr: CrmTranslations = {
   pagina: {
     metaTitulo: 'CRM pour la bijouterie : clients, commerciaux et prévisions de ventes | RayGold',
     metaDescripcion:
-      'Le CRM de RayGold travaille sur les ventes et factures de l’ERP pour la bijouterie : fidélisation par récence, fréquence et montant, pyramide des clients, agenda du commercial, prévisions et objectifs.',
+      'CRM pour la bijouterie intégré à l’ERP, sans API : fidélisation, pyramide des clients, réachat, prévisions et objectifs, tournées GPS, SAV, WhatsApp, Instagram et Facebook dans une seule boîte, et IA.',
     sello: 'CRM commercial',
     titulo: 'Le CRM qui connaît déjà vos clients',
     tituloEnfasis: 'parce qu’il vit dans l’ERP.',
@@ -870,9 +1237,150 @@ const fr: CrmTranslations = {
         ],
       },
     ],
-    masTitulo: 'Et d’autres écrans dans le même module',
-    masTexto: 'Le CRM commercial comprend aussi ces vues, sur les mêmes données.',
-    masPantallas: ['Contacts', 'Pipeline', 'Réachat', 'Statistiques', 'Images', 'Marketing'],
+    sinApis: {
+      sello: 'Sans API · sans intégrations',
+      titulo: 'Un CRM séparé, il faut le connecter.',
+      tituloEnfasis: 'Celui de RayGold est déjà dedans.',
+      texto:
+        'Un CRM séparé ne sait rien de l’entreprise tant qu’on ne l’a pas connecté : une API pour les clients, une autre pour les factures, une autre pour les commandes, une autre pour le stock… et quelqu’un pour les surveiller. Dans RayGold, le CRM est un écran de plus de la même application, sur la même base de données.',
+      aparteTitulo: 'Un CRM séparé',
+      aparteFlechas: [
+        'API · synchroniser clients et articles',
+        'API · transférer les ventes chaque nuit',
+        'API · envoyer la commande du CRM à l’ERP',
+        'API · statistiques et objectifs',
+      ],
+      aparteNota: 'Chaque flèche est un développement, un abonnement et un endroit où les données se perdent ou se dupliquent.',
+      rgTitulo: 'RayGold · une application, une base de données',
+      rgBloques: [
+        'Clients', 'Articles', 'Prix', 'Stock', 'Commandes', 'Factures',
+        'Fidélisation', 'Pyramide', 'Prévisions', 'Pipeline', 'SAV', 'Messages',
+      ],
+      rgNota: 'Aucune flèche : le CRM lit et écrit directement les clients, les factures et les commandes de l’ERP. Seuls WhatsApp, Instagram, Facebook et l’e-mail sortent, avec des connexions déjà prêtes.',
+      ventajas: [
+        {
+          titulo: 'Rien à connecter',
+          texto: 'Ni connecteurs, ni synchronisations nocturnes, ni données copiées d’un logiciel à l’autre.',
+        },
+        {
+          titulo: 'Tout en temps réel',
+          texto: 'La facture émise maintenant est déjà sur la fiche du client, dans sa fidélisation et dans les prévisions.',
+        },
+        {
+          titulo: 'Rien à maintenir',
+          texto: 'Une mise à jour de l’ERP ne casse pas le CRM : c’est le même logiciel, avec un seul responsable.',
+        },
+      ],
+    },
+    masTitulo: 'Hors du bureau',
+    masTexto:
+      'Le commercial sur le terrain, la conversation avec le client et une intelligence artificielle qui connaît toute l’entreprise. Sur les mêmes données.',
+    grupos: [
+      {
+        id: 'calle',
+        titulo: 'Sur le terrain',
+        entradilla: 'Ce dont le commercial a besoin hors du bureau, sur son téléphone.',
+        items: [
+          {
+            titulo: 'Tournée et visites vérifiées',
+            texto: 'Les clients sur la carte selon leur statut. « Je suis arrivé » enregistre la visite avec le GPS et la marque comme vérifiée à moins de 200 m du client. La tournée du jour est triée par proximité et s’ouvre dans Google Maps.',
+          },
+          {
+            titulo: 'L’appli du commercial',
+            texto: 'Elle s’installe depuis le navigateur, sur iPhone et Android, sans magasin d’applications : Aujourd’hui, Tournée, Clients, Agenda et SAV. Avec notes vocales, notifications et scan de carte de visite pour créer le lead.',
+          },
+          {
+            titulo: 'SAV des bijoux',
+            texto: 'Réparations, garanties et réclamations sous forme de tickets, avec photos de la pièce, devis, date limite et signature du client du bout du doigt au dépôt et au retrait.',
+          },
+          {
+            titulo: 'Réachat',
+            texto: 'RayGold apprend des factures les mois où chaque client achète d’habitude. Chaque mois, il montre qui devrait acheter, qui l’a déjà fait et qui manque, avec le montant en jeu. C’est la liste d’appels.',
+          },
+        ],
+      },
+      {
+        id: 'cliente',
+        titulo: 'Parler au client',
+        entradilla: 'Tous les canaux au même endroit, et chaque conversation sur la fiche du client.',
+        items: [
+          {
+            titulo: 'WhatsApp, Instagram et Facebook dans une seule boîte',
+            texto: 'Reliée aux comptes officiels de l’entreprise. Elle reconnaît le client par son téléphone et affiche ses ventes sur 12 mois. Un nouveau contact devient un lead en un clic. Et une commande de l’ERP se crée depuis la conversation, avec le même calcul de prix.',
+          },
+          {
+            titulo: 'Les boutiques, dans la même boîte',
+            texto: 'Les boutiques parlent au siège depuis leur caisse, sans WhatsApp. Les communications importantes demandent un « Lu » et le siège voit quelles boutiques manquent ; les urgentes s’affichent en plein écran.',
+          },
+          {
+            titulo: 'Pipeline et leads',
+            texto: 'Les opportunités par étape, avec une probabilité calculée sur l’historique de l’entreprise. Les leads arrivent du formulaire du site, des réseaux sociaux ou d’une photo de carte de visite, et les automatisations créent tâches et rappels toutes seules.',
+          },
+          {
+            titulo: 'Marketing par e-mail',
+            texto: 'Campagnes Brevo vers les segments calculés par RayGold (meilleurs clients, à risque, dormants…). Les résultats se mesurent en ventes : combien de clients du segment ont acheté ensuite, et pour combien.',
+          },
+        ],
+      },
+      {
+        id: 'ia',
+        titulo: 'Intelligence artificielle',
+        entradilla: 'Elle travaille avec les données de tout l’ERP, pas seulement du CRM, et toujours limitée au portefeuille de qui pose la question.',
+        items: [
+          {
+            titulo: 'Assistant',
+            texto: 'On lui pose des questions en langage courant : « quels clients à moi sont à risque ? », « où en suis-je par rapport à l’objectif ? », « quel est le stock de cette bague ? ».',
+          },
+          {
+            titulo: 'Préparer la visite',
+            texto: 'Le résumé du client : ce qu’il achète, ce qu’il a cessé d’acheter et quoi lui proposer. Et le brouillon de l’e-mail.',
+          },
+          {
+            titulo: 'Répondre aux messages',
+            texto: 'Elle propose la réponse avec le ton et la langue de la conversation, sans inventer de prix ni de délais, et la résume : ce que veut le client et l’étape suivante.',
+          },
+          {
+            titulo: 'Autres IA, via MCP',
+            texto: 'RayGold se connecte à Claude, ChatGPT et d’autres assistants, qui consultent les données de l’entreprise avec les droits de l’utilisateur, en lecture seule.',
+          },
+        ],
+        nota: 'L’IA propose ; elle n’envoie aucun message et n’enregistre rien d’elle-même. Tout passe par la personne.',
+      },
+    ],
+    oro: {
+      sello: 'Prix et boutiques',
+      titulo: 'L’or monte : de nouveaux prix dans toutes les boutiques, sans Excel',
+      texto:
+        'Le siège recalcule les prix des boutiques avec le calcul même de l’ERP : le cours du jour au titre de chaque article, le tarif et la marge de chaque boutique. Il n’enregistre que ce qui change et prévient chaque boutique.',
+      pasos: [
+        { titulo: 'Calculer', texto: 'Avec le cours du jour et la marge de chaque boutique.' },
+        { titulo: 'Vérifier', texto: 'Seulement ce qui change, boutique par boutique, avec une alerte sur les hausses inhabituelles.' },
+        { titulo: 'Enregistrer', texto: 'La caisse applique aussitôt le nouveau prix.' },
+        { titulo: 'Prévenir', texto: 'Chaque boutique reçoit la liste de ses pièces avec le nouveau prix.' },
+        { titulo: 'Réétiqueter', texto: 'La boutique imprime les étiquettes et appuie sur « Fait ». Le siège voit celles qui manquent.' },
+      ],
+      nota: 'Pas de surprise au comptoir : rien n’arrive en boutique sans avoir été vérifié.',
+    },
+    comparativa: {
+      titulo: 'Face à un CRM séparé',
+      texto:
+        'Les CRM les plus connus sont de bons CRM, mais ce sont des logiciels de plus : il faut les connecter à l’ERP et les payer à part.',
+      colQue: 'Fonction',
+      colRg: 'RayGold',
+      colAparte: 'CRM séparé',
+      filas: [
+        ['Ventes réelles sur la fiche du client', 'En standard', 'Par intégration'],
+        ['Fidélisation, pyramide et réachat', 'En standard', 'Rapports sur mesure'],
+        ['Prévisions et objectifs avec le facturé', 'En standard', 'Par intégration'],
+        ['Commande depuis le CRM ou un WhatsApp', 'Commande de l’ERP', 'Transférée'],
+        ['SAV des bijoux (atelier, garantie, signature)', 'En standard', 'Non'],
+        ['Canal avec les caisses des boutiques', 'En standard', 'Non'],
+        ['WhatsApp, Instagram et Facebook', 'En standard', 'Module à part'],
+        ['IA avec les données de toute l’entreprise', 'Oui', 'Données du CRM seulement'],
+        ['Prix', 'Inclus dans l’ERP', 'Licence à part'],
+      ],
+      nota: 'Comparaison indicative avec les fonctions standard des CRM les plus répandus.',
+    },
     faqTitulo: 'Questions fréquentes',
     faq: [
       {
@@ -889,6 +1397,21 @@ const fr: CrmTranslations = {
         pregunta: 'Est-il destiné aux commerciaux ou à la direction ?',
         respuesta:
           'Aux deux, avec des écrans différents. Le commercial travaille avec sa journée, son agenda, son suivi et ses clients à reconquérir. La direction utilise la pyramide, les prévisions, les objectifs et le pilotage de l’équipe.',
+      },
+      {
+        pregunta: 'Faut-il connecter le CRM à l’ERP ?',
+        respuesta:
+          'Non. Le CRM fait partie de l’ERP et utilise la même base de données : il n’y a ni API, ni connecteurs, ni synchronisations. Les seules connexions extérieures sont les comptes WhatsApp, Instagram et Facebook de l’entreprise et, pour le marketing par e-mail, le compte Brevo.',
+      },
+      {
+        pregunta: 'Peut-on passer une commande depuis un WhatsApp ?',
+        respuesta:
+          'Oui. Une fois le client reconnu dans la conversation, « Créer une commande » ouvre une commande de l’ERP avec le même calcul de prix que Commandes. Elle reste en brouillon jusqu’à sa confirmation.',
+      },
+      {
+        pregunta: 'L’intelligence artificielle agit-elle seule ?',
+        respuesta:
+          'Non. Elle propose des réponses, des rendez-vous, des activités ou des leads, mais n’envoie aucun message et n’enregistre rien sans la confirmation de la personne. Et elle ne voit que le portefeuille de qui pose la question.',
       },
     ],
     cierreTitulo: 'Vos clients sont déjà dans RayGold.',
@@ -993,7 +1516,7 @@ const ca: CrmTranslations = {
   pagina: {
     metaTitulo: 'CRM per a joieria: clients, venedors i previsió de vendes | RayGold',
     metaDescripcion:
-      'El CRM de RayGold treballa sobre les vendes i factures de l’ERP de joieria: fidelització per recència, freqüència i import, piràmide de clients, agenda del venedor, previsió i objectius.',
+      'CRM per a joieria dins de l’ERP, sense API: fidelització, piràmide de clients, recompra, previsió i objectius, ruta amb GPS, postvenda, WhatsApp, Instagram i Facebook en una safata, i IA.',
     sello: 'CRM comercial',
     titulo: 'El CRM que ja coneix els teus clients',
     tituloEnfasis: 'perquè viu dins de l’ERP.',
@@ -1136,9 +1659,150 @@ const ca: CrmTranslations = {
         ],
       },
     ],
-    masTitulo: 'I més pantalles al mateix mòdul',
-    masTexto: 'El CRM comercial inclou també aquestes vistes, sobre les mateixes dades.',
-    masPantallas: ['Contactes', 'Pipeline', 'Recompra', 'Estadístiques', 'Imatges', 'Màrqueting'],
+    sinApis: {
+      sello: 'Sense API · sense integracions',
+      titulo: 'Un CRM a part s’ha de connectar.',
+      tituloEnfasis: 'El de RayGold ja hi és, a dins.',
+      texto:
+        'Un CRM a part no sap res de l’empresa fins que no s’hi connecta: una API per als clients, una altra per a les factures, una altra per a les comandes, una altra per a l’estoc… i algú que les vigili. A RayGold el CRM és una pantalla més de la mateixa aplicació, sobre la mateixa base de dades.',
+      aparteTitulo: 'Un CRM a part',
+      aparteFlechas: [
+        'API · sincronitzar clients i articles',
+        'API · traspassar les vendes cada nit',
+        'API · passar la comanda del CRM a l’ERP',
+        'API · estadístiques i objectius',
+      ],
+      aparteNota: 'Cada fletxa és un desenvolupament, una quota i un lloc on es perden o es dupliquen dades.',
+      rgTitulo: 'RayGold · una aplicació, una base de dades',
+      rgBloques: [
+        'Clients', 'Articles', 'Preus', 'Estoc', 'Comandes', 'Factures',
+        'Fidelització', 'Piràmide', 'Previsió', 'Pipeline', 'Postvenda', 'Missatges',
+      ],
+      rgNota: 'Sense fletxes: el CRM llegeix i escriu directament els clients, les factures i les comandes de l’ERP. Només surten fora WhatsApp, Instagram, Facebook i el correu, amb les connexions ja fetes.',
+      ventajas: [
+        {
+          titulo: 'Res a connectar',
+          texto: 'Ni connectors, ni sincronitzacions nocturnes, ni dades copiades d’un programa a l’altre.',
+        },
+        {
+          titulo: 'Tot al moment',
+          texto: 'La factura que surt ara ja és a la fitxa del client, a la seva fidelització i a la previsió.',
+        },
+        {
+          titulo: 'Res a mantenir',
+          texto: 'Una actualització de l’ERP no trenca el CRM: són el mateix programa, amb un sol responsable.',
+        },
+      ],
+    },
+    masTitulo: 'Fora de l’oficina',
+    masTexto:
+      'El venedor al carrer, la conversa amb el client i una intel·ligència artificial que coneix tota l’empresa. Sobre les mateixes dades.',
+    grupos: [
+      {
+        id: 'calle',
+        titulo: 'Al carrer',
+        entradilla: 'El que el venedor necessita fora de l’oficina, al mòbil.',
+        items: [
+          {
+            titulo: 'Ruta i visites verificades',
+            texto: 'Els clients al mapa segons el seu estat. «He arribat» registra la visita amb el GPS i la marca com a verificada si és a menys de 200 m del client. La ruta del dia s’ordena per proximitat i s’obre a Google Maps.',
+          },
+          {
+            titulo: 'L’app del venedor',
+            texto: 'S’instal·la des del navegador, a iPhone i Android, sense botigues d’apps: Avui, Ruta, Clients, Agenda i Postvenda. Amb notes de veu, avisos al mòbil i foto a la targeta de visita per crear el lead.',
+          },
+          {
+            titulo: 'Postvenda de peces',
+            texto: 'Reparacions, garanties i reclamacions com a tiquets, amb fotos de la peça, pressupost, data límit i la signatura del client amb el dit en deixar-la i en recollir-la.',
+          },
+          {
+            titulo: 'Recompra',
+            texto: 'RayGold aprèn de les factures en quins mesos sol comprar cada client. Cada mes mostra qui hauria de comprar, qui ja ho ha fet i qui falta, amb l’import en joc. És la llista de trucades.',
+          },
+        ],
+      },
+      {
+        id: 'cliente',
+        titulo: 'Parlar amb el client',
+        entradilla: 'Tots els canals al mateix lloc, i cada conversa a la fitxa del client.',
+        items: [
+          {
+            titulo: 'WhatsApp, Instagram i Facebook en una safata',
+            texto: 'Connectada als comptes oficials de l’empresa. Reconeix el client pel telèfon i mostra les seves vendes de 12 mesos. Si és nou, passa a lead amb un clic. I des del xat es crea una comanda de l’ERP, amb el mateix càlcul de preu.',
+          },
+          {
+            titulo: 'Les botigues, a la mateixa safata',
+            texto: 'Les botigues parlen amb la central des del seu TPV, sense WhatsApp. Els comunicats importants demanen «Assabentat» i la central veu quines botigues falten; els urgents surten a pantalla completa.',
+          },
+          {
+            titulo: 'Pipeline i leads',
+            texto: 'Oportunitats per fase, amb la probabilitat calculada sobre l’històric de l’empresa. Els leads arriben del formulari del web, de les xarxes socials o d’una foto a la targeta de visita, i les automatitzacions creen tasques i avisos soles.',
+          },
+          {
+            titulo: 'Màrqueting per correu',
+            texto: 'Campanyes amb Brevo als segments que calcula RayGold (superiors, en risc, adormits…). Els resultats es mesuren en vendes: quants clients del segment van comprar després i quant.',
+          },
+        ],
+      },
+      {
+        id: 'ia',
+        titulo: 'Intel·ligència artificial',
+        entradilla: 'Treballa amb les dades de tot l’ERP, no només del CRM, i sempre limitada a la cartera de qui pregunta.',
+        items: [
+          {
+            titulo: 'Assistent',
+            texto: 'Se li pregunta en llenguatge normal: «quins clients meus estan en risc?», «com vaig respecte a l’objectiu?», «quin estoc hi ha d’aquest anell?».',
+          },
+          {
+            titulo: 'Preparar la visita',
+            texto: 'Resum del client: què compra, què ha deixat de comprar i què oferir-li. I l’esborrany del correu.',
+          },
+          {
+            titulo: 'Respondre missatges',
+            texto: 'Proposa la resposta amb el tracte i l’idioma de la conversa, sense inventar preus ni terminis, i la resumeix: què vol i quin és el pas següent.',
+          },
+          {
+            titulo: 'Altres IA, per MCP',
+            texto: 'RayGold es connecta a Claude, ChatGPT i altres assistents, que consulten les dades de l’empresa amb els permisos de l’usuari i només en lectura.',
+          },
+        ],
+        nota: 'La IA proposa; no envia missatges ni desa res pel seu compte. Tot passa per la persona.',
+      },
+    ],
+    oro: {
+      sello: 'Preus i botigues',
+      titulo: 'Puja l’or: preus nous a totes les botigues, sense Excel',
+      texto:
+        'La central recalcula els preus de les botigues amb el mateix càlcul de l’ERP: la cotització del dia a la llei de cada article, la tarifa i el benefici de cada botiga. Desa només el que canvia i avisa cada botiga.',
+      pasos: [
+        { titulo: 'Calcular', texto: 'Amb la cotització del dia i el benefici de cada botiga.' },
+        { titulo: 'Revisar', texto: 'Només el que canvia, botiga per botiga, amb avís en les pujades fora del normal.' },
+        { titulo: 'Desar', texto: 'El TPV ja cobra el preu nou.' },
+        { titulo: 'Avisar', texto: 'Cada botiga rep la llista de les seves peces amb el preu nou.' },
+        { titulo: 'Reetiquetar', texto: 'La botiga imprimeix les etiquetes i prem «Fet». La central veu quines falten.' },
+      ],
+      nota: 'Sense sorpreses al taulell: res no arriba a la botiga sense haver-se revisat abans.',
+    },
+    comparativa: {
+      titulo: 'Davant d’un CRM a part',
+      texto:
+        'Els CRM més coneguts són bons CRM, però són un programa més: s’han de connectar a l’ERP i pagar a part.',
+      colQue: 'Què',
+      colRg: 'RayGold',
+      colAparte: 'CRM a part',
+      filas: [
+        ['Vendes reals a la fitxa del client', 'De sèrie', 'Amb integració'],
+        ['Fidelització, piràmide i recompra', 'De sèrie', 'Informes a mida'],
+        ['Previsió i objectius amb el facturat', 'De sèrie', 'Amb integració'],
+        ['Comanda des del CRM o des d’un WhatsApp', 'Comanda de l’ERP', 'Es traspassa'],
+        ['Postvenda de peces (taller, garantia, signatura)', 'De sèrie', 'No'],
+        ['Canal amb els TPV de les botigues', 'De sèrie', 'No'],
+        ['WhatsApp, Instagram i Facebook', 'De sèrie', 'Mòdul a part'],
+        ['IA amb les dades de tota l’empresa', 'Sí', 'Només les del CRM'],
+        ['Preu', 'Inclòs a l’ERP', 'Llicència a part'],
+      ],
+      nota: 'Comparativa orientativa amb les funcions estàndard dels CRM més estesos.',
+    },
     faqTitulo: 'Preguntes freqüents',
     faq: [
       {
@@ -1155,6 +1819,21 @@ const ca: CrmTranslations = {
         pregunta: 'El fan servir els venedors o la direcció?',
         respuesta:
           'Tots dos, amb pantalles diferents. El venedor treballa amb el seu dia, la seva agenda, el seu seguiment i els clients a recuperar. La direcció fa servir la piràmide, la previsió, els objectius i la central de l’equip.',
+      },
+      {
+        pregunta: 'Cal connectar el CRM amb l’ERP?',
+        respuesta:
+          'No. El CRM és part de l’ERP i fa servir la mateixa base de dades, així que no hi ha API, connectors ni sincronitzacions. L’únic que es connecta fora són els comptes de WhatsApp, Instagram i Facebook de l’empresa i, si es vol màrqueting per correu, el compte de Brevo.',
+      },
+      {
+        pregunta: 'Es pot fer una comanda des d’un WhatsApp?',
+        respuesta:
+          'Sí. Amb el client reconegut a la conversa, «Crear comanda» obre una comanda de l’ERP amb el mateix càlcul de preu que Comandes. Queda en esborrany fins que es confirma.',
+      },
+      {
+        pregunta: 'La intel·ligència artificial actua sola?',
+        respuesta:
+          'No. Proposa respostes, cites, activitats o leads, però no envia missatges ni desa res sense que la persona ho confirmi. I només veu la cartera de qui pregunta.',
       },
     ],
     cierreTitulo: 'Els teus clients ja són a RayGold.',
@@ -1259,7 +1938,7 @@ const ptbr: CrmTranslations = {
   pagina: {
     metaTitulo: 'CRM para joalheria: clientes, vendedores e previsão de vendas | RayGold',
     metaDescripcion:
-      'O CRM do RayGold trabalha sobre as vendas e notas fiscais do ERP para joalheria: fidelização por recência, frequência e valor, pirâmide de clientes, agenda do vendedor, previsão e metas.',
+      'CRM para joalheria dentro do ERP, sem APIs: fidelização, pirâmide de clientes, recompra, previsão e metas, rota com GPS, pós-venda, WhatsApp, Instagram e Facebook em uma caixa, e IA.',
     sello: 'CRM comercial',
     titulo: 'O CRM que já conhece os seus clientes',
     tituloEnfasis: 'porque vive dentro do ERP.',
@@ -1402,9 +2081,150 @@ const ptbr: CrmTranslations = {
         ],
       },
     ],
-    masTitulo: 'E mais telas no mesmo módulo',
-    masTexto: 'O CRM comercial inclui também estas visões, sobre os mesmos dados.',
-    masPantallas: ['Contatos', 'Pipeline', 'Recompra', 'Estatísticas', 'Imagens', 'Marketing'],
+    sinApis: {
+      sello: 'Sem APIs · sem integrações',
+      titulo: 'Um CRM separado precisa ser conectado.',
+      tituloEnfasis: 'O do RayGold já está dentro.',
+      texto:
+        'Um CRM separado não sabe nada da empresa até ser conectado: uma API para os clientes, outra para as notas fiscais, outra para os pedidos, outra para o estoque… e alguém para vigiá-las. No RayGold o CRM é mais uma tela do mesmo aplicativo, sobre o mesmo banco de dados.',
+      aparteTitulo: 'Um CRM separado',
+      aparteFlechas: [
+        'API · sincronizar clientes e produtos',
+        'API · transferir as vendas toda noite',
+        'API · passar o pedido do CRM para o ERP',
+        'API · estatísticas e metas',
+      ],
+      aparteNota: 'Cada seta é um desenvolvimento, uma mensalidade e um ponto onde os dados se perdem ou se duplicam.',
+      rgTitulo: 'RayGold · um aplicativo, um banco de dados',
+      rgBloques: [
+        'Clientes', 'Produtos', 'Preços', 'Estoque', 'Pedidos', 'Notas fiscais',
+        'Fidelização', 'Pirâmide', 'Previsão', 'Pipeline', 'Pós-venda', 'Mensagens',
+      ],
+      rgNota: 'Sem setas: o CRM lê e grava diretamente os clientes, as notas fiscais e os pedidos do ERP. Só saem para fora WhatsApp, Instagram, Facebook e o e-mail, com as conexões já prontas.',
+      ventajas: [
+        {
+          titulo: 'Nada para conectar',
+          texto: 'Nem conectores, nem sincronizações noturnas, nem dados copiados de um sistema para outro.',
+        },
+        {
+          titulo: 'Tudo na hora',
+          texto: 'A nota fiscal emitida agora já está na ficha do cliente, na sua fidelização e na previsão.',
+        },
+        {
+          titulo: 'Nada para manter',
+          texto: 'Uma atualização do ERP não quebra o CRM: são o mesmo programa, com um único responsável.',
+        },
+      ],
+    },
+    masTitulo: 'Fora do escritório',
+    masTexto:
+      'O vendedor na rua, a conversa com o cliente e uma inteligência artificial que conhece a empresa inteira. Sobre os mesmos dados.',
+    grupos: [
+      {
+        id: 'calle',
+        titulo: 'Na rua',
+        entradilla: 'O que o vendedor precisa fora do escritório, no celular.',
+        items: [
+          {
+            titulo: 'Rota e visitas verificadas',
+            texto: 'Os clientes no mapa conforme o seu status. «Cheguei» registra a visita com o GPS e a marca como verificada se o vendedor estiver a menos de 200 m do cliente. A rota do dia é ordenada por proximidade e abre no Google Maps.',
+          },
+          {
+            titulo: 'O app do vendedor',
+            texto: 'Instalado pelo navegador, em iPhone e Android, sem lojas de apps: Hoje, Rota, Clientes, Agenda e Pós-venda. Com notas de voz, avisos no celular e foto do cartão de visita para criar o lead.',
+          },
+          {
+            titulo: 'Pós-venda de peças',
+            texto: 'Consertos, garantias e reclamações como tickets, com fotos da peça, orçamento, prazo e a assinatura do cliente com o dedo ao deixar e ao retirar a peça.',
+          },
+          {
+            titulo: 'Recompra',
+            texto: 'O RayGold aprende pelas notas fiscais em quais meses cada cliente costuma comprar. Todo mês mostra quem deveria comprar, quem já comprou e quem falta, com o valor em jogo. É a lista de ligações.',
+          },
+        ],
+      },
+      {
+        id: 'cliente',
+        titulo: 'Falar com o cliente',
+        entradilla: 'Todos os canais no mesmo lugar, e cada conversa na ficha do cliente.',
+        items: [
+          {
+            titulo: 'WhatsApp, Instagram e Facebook em uma caixa',
+            texto: 'Conectada às contas oficiais da empresa. Reconhece o cliente pelo telefone e mostra as suas vendas de 12 meses. Se é novo, vira lead com um clique. E pelo chat se cria um pedido do ERP, com o mesmo cálculo de preço.',
+          },
+          {
+            titulo: 'As lojas, na mesma caixa',
+            texto: 'As lojas falam com a central pelo PDV, sem WhatsApp. Os comunicados importantes pedem «Ciente» e a central vê quais lojas faltam; os urgentes aparecem em tela cheia.',
+          },
+          {
+            titulo: 'Pipeline e leads',
+            texto: 'Oportunidades por fase, com a probabilidade calculada sobre o histórico da empresa. Os leads chegam do formulário do site, das redes sociais ou de uma foto do cartão de visita, e as automações criam tarefas e avisos sozinhas.',
+          },
+          {
+            titulo: 'E-mail marketing',
+            texto: 'Campanhas com a Brevo para os segmentos que o RayGold calcula (principais, em risco, inativos…). Os resultados são medidos em vendas: quantos clientes do segmento compraram depois e quanto.',
+          },
+        ],
+      },
+      {
+        id: 'ia',
+        titulo: 'Inteligência artificial',
+        entradilla: 'Trabalha com os dados de todo o ERP, não só do CRM, e sempre limitada à carteira de quem pergunta.',
+        items: [
+          {
+            titulo: 'Assistente',
+            texto: 'Pergunte em linguagem normal: «quais clientes meus estão em risco?», «como estou em relação à meta?», «qual o estoque deste anel?».',
+          },
+          {
+            titulo: 'Preparar a visita',
+            texto: 'Resumo do cliente: o que compra, o que deixou de comprar e o que oferecer. E o rascunho do e-mail.',
+          },
+          {
+            titulo: 'Responder mensagens',
+            texto: 'Sugere a resposta com o tom e o idioma da conversa, sem inventar preços nem prazos, e a resume: o que o cliente quer e qual o próximo passo.',
+          },
+          {
+            titulo: 'Outras IAs, via MCP',
+            texto: 'O RayGold se conecta ao Claude, ao ChatGPT e a outros assistentes, que consultam os dados da empresa com as permissões do usuário, somente leitura.',
+          },
+        ],
+        nota: 'A IA sugere; não envia mensagens nem grava nada por conta própria. Tudo passa pela pessoa.',
+      },
+    ],
+    oro: {
+      sello: 'Preços e lojas',
+      titulo: 'O ouro subiu: preços novos em todas as lojas, sem planilha',
+      texto:
+        'A central recalcula os preços das lojas com o mesmo cálculo do ERP: a cotação do dia no teor de cada produto, a tabela e a margem de cada loja. Grava só o que muda e avisa cada loja.',
+      pasos: [
+        { titulo: 'Calcular', texto: 'Com a cotação do dia e a margem de cada loja.' },
+        { titulo: 'Revisar', texto: 'Só o que muda, loja por loja, com aviso nas altas fora do normal.' },
+        { titulo: 'Gravar', texto: 'O PDV já cobra o preço novo.' },
+        { titulo: 'Avisar', texto: 'Cada loja recebe a lista das suas peças com o preço novo.' },
+        { titulo: 'Reetiquetar', texto: 'A loja imprime as etiquetas e toca em «Feito». A central vê quais faltam.' },
+      ],
+      nota: 'Sem surpresas no balcão: nada chega à loja sem ser revisado antes.',
+    },
+    comparativa: {
+      titulo: 'Frente a um CRM separado',
+      texto:
+        'Os CRMs mais conhecidos são bons CRMs, mas são mais um programa: é preciso conectá-los ao ERP e pagar por eles à parte.',
+      colQue: 'O quê',
+      colRg: 'RayGold',
+      colAparte: 'CRM separado',
+      filas: [
+        ['Vendas reais na ficha do cliente', 'De série', 'Com integração'],
+        ['Fidelização, pirâmide e recompra', 'De série', 'Relatórios sob medida'],
+        ['Previsão e metas com o faturado', 'De série', 'Com integração'],
+        ['Pedido pelo CRM ou por um WhatsApp', 'Pedido do ERP', 'É transferido'],
+        ['Pós-venda de peças (oficina, garantia, assinatura)', 'De série', 'Não'],
+        ['Canal com o PDV das lojas', 'De série', 'Não'],
+        ['WhatsApp, Instagram e Facebook', 'De série', 'Módulo à parte'],
+        ['IA com os dados da empresa inteira', 'Sim', 'Só os do CRM'],
+        ['Preço', 'Incluído no ERP', 'Licença à parte'],
+      ],
+      nota: 'Comparação indicativa com as funções padrão dos CRMs mais difundidos.',
+    },
     faqTitulo: 'Perguntas frequentes',
     faq: [
       {
@@ -1421,6 +2241,21 @@ const ptbr: CrmTranslations = {
         pregunta: 'Quem usa: os vendedores ou a diretoria?',
         respuesta:
           'Os dois, com telas diferentes. O vendedor trabalha com o seu dia, a agenda, o acompanhamento e os clientes a recuperar. A diretoria usa a pirâmide, a previsão, as metas e a central da equipe.',
+      },
+      {
+        pregunta: 'É preciso conectar o CRM ao ERP?',
+        respuesta:
+          'Não. O CRM faz parte do ERP e usa o mesmo banco de dados, então não há APIs, conectores nem sincronizações. A única coisa conectada por fora são as contas de WhatsApp, Instagram e Facebook da empresa e, para e-mail marketing, a conta da Brevo.',
+      },
+      {
+        pregunta: 'Dá para fazer um pedido a partir de um WhatsApp?',
+        respuesta:
+          'Sim. Com o cliente reconhecido na conversa, «Criar pedido» abre um pedido do ERP com o mesmo cálculo de preço de Pedidos. Fica como rascunho até ser confirmado.',
+      },
+      {
+        pregunta: 'A inteligência artificial age sozinha?',
+        respuesta:
+          'Não. Sugere respostas, compromissos, atividades ou leads, mas não envia mensagens nem grava nada sem a confirmação da pessoa. E só vê a carteira de quem pergunta.',
       },
     ],
     cierreTitulo: 'Seus clientes já estão no RayGold.',
