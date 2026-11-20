@@ -88,6 +88,17 @@ export interface QerTranslations {
     modulos: ModuloQer[];
   };
 
+  /** Noviembre 2026: método de implantación (reparto RACI). Texto plano. */
+  implantacion: {
+    titulo: string;
+    intro: string;
+    papelesIntro: string;
+    papeles: ModuloQer[];
+    nivel: string;
+    avisosTitulo: string;
+    avisos: string[];
+    cierre: string;
+  };
   mercados: {
     titulo: string;
     intro: string;
@@ -202,6 +213,30 @@ const es: QerTranslations = {
     ],
   },
 
+  implantacion: {
+    titulo: 'Cómo se implanta',
+    intro:
+      'Muchas implantaciones de ERP fallan por algo que no es el programa: nadie tiene claro quién hace cada trabajo. Por eso, en RayGold, antes de enseñar pantallas se reparten las actividades de la empresa, desde dar de alta un artículo hasta cerrar el mes, en una pantalla propia de Implantación.',
+    papelesIntro: 'Cada persona entra en cada actividad con un papel, siguiendo el método RACI de las grandes implantaciones:',
+    papeles: [
+      { n: 'A · Responde', d: 'El dueño de la actividad: decide, da el visto bueno y responde si algo sale mal. Solo uno por actividad.' },
+      { n: 'R · Lo hace', d: 'Hace el trabajo en el ERP cada día. Puede haber varios.' },
+      { n: 'S · Suplente', d: 'Lo hace cuando falta quien lo hace, en lo que no puede parar: venta, factura, cobro, nómina.' },
+      { n: 'C · Consultado', d: 'Se le pregunta antes de decidir: opina, no hace.' },
+      { n: 'I · Informado', d: 'Se le cuenta lo que se ha hecho: ve, no toca.' },
+    ],
+    nivel:
+      'Además, cada persona tiene un nivel de 0 a 4 en cada actividad, de «aún no lo conoce» a «lo domina y puede enseñarlo», y la pantalla dice sola a quién hay que formar en qué antes de arrancar.',
+    avisosTitulo: 'Lo que la pantalla avisa antes de arrancar',
+    avisos: [
+      'Conflicto de funciones: una misma persona hace dos cosas que deberían hacer personas distintas, como recibir la mercancía y recontarla. Se separa o, si la empresa es pequeña, se acepta con un control periódico.',
+      'Carga: alguien responde de demasiadas actividades y conviene pasar alguna a quien la hace cada día.',
+      'Sin suplente: actividades que no pueden parar y no tienen quien cubra a la persona.',
+      'Falta de nivel: la persona tiene menos nivel del que pide la actividad y hay que formarla antes.',
+    ],
+    cierre:
+      'El reparto se ve por área del menú, por proceso de principio a fin (del pedido al cobro, de la compra al pago, de planificar a fabricar) y por persona, y cada uno recibe su hoja impresa: desde el primer día, cada persona sabe qué le toca. Lo que no hace falta el primer día, como la fundición o los activos fijos, se arranca cuando lo básico ya funciona.',
+  },
   mercados: {
     titulo: 'Mercados y cumplimiento fiscal',
     intro:
@@ -355,6 +390,30 @@ const ca: QerTranslations = {
     ],
   },
 
+  implantacion: {
+    titulo: 'Com s’implanta',
+    intro:
+      'Moltes implantacions d’ERP fallen per una cosa que no és el programa: ningú no té clar qui fa cada feina. Per això, a RayGold, abans d’ensenyar pantalles es reparteixen les activitats de l’empresa, des de donar d’alta un article fins a tancar el mes, en una pantalla pròpia d’Implantació.',
+    papelesIntro: 'Cada persona entra a cada activitat amb un paper, seguint el mètode RACI de les grans implantacions:',
+    papeles: [
+      { n: 'A · Respon', d: 'El propietari de l’activitat: decideix, dona el vistiplau i respon si alguna cosa surt malament. Només un per activitat.' },
+      { n: 'R · Ho fa', d: 'Fa la feina a l’ERP cada dia. N’hi pot haver diversos.' },
+      { n: 'S · Suplent', d: 'Ho fa quan falta qui ho fa, en el que no es pot aturar: venda, factura, cobrament, nòmina.' },
+      { n: 'C · Consultat', d: 'Se li pregunta abans de decidir: opina, no fa.' },
+      { n: 'I · Informat', d: 'Se li explica el que s’ha fet: veu, no toca.' },
+    ],
+    nivel:
+      'A més, cada persona té un nivell de 0 a 4 a cada activitat, de «encara no ho coneix» a «ho domina i ho pot ensenyar», i la pantalla diu sola a qui cal formar en què abans d’arrencar.',
+    avisosTitulo: 'El que la pantalla avisa abans d’arrencar',
+    avisos: [
+      'Conflicte de funcions: una mateixa persona fa dues coses que haurien de fer persones diferents, com rebre la mercaderia i recomptar-la. Se separa o, si l’empresa és petita, s’accepta amb un control periòdic.',
+      'Càrrega: algú respon de massa activitats i convé passar-ne alguna a qui la fa cada dia.',
+      'Sense suplent: activitats que no es poden aturar i no tenen qui cobreixi la persona.',
+      'Manca de nivell: la persona té menys nivell del que demana l’activitat i cal formar-la abans.',
+    ],
+    cierre:
+      'El repartiment es veu per àrea del menú, per procés de principi a fi (de la comanda al cobrament, de la compra al pagament, de planificar a fabricar) i per persona, i cadascú rep el seu full imprès: des del primer dia, cada persona sap què li toca. El que no cal el primer dia, com la fosa o els actius fixos, s’arrenca quan el bàsic ja funciona.',
+  },
   mercados: {
     titulo: 'Mercats i compliment fiscal',
     intro:
@@ -508,6 +567,30 @@ const en: QerTranslations = {
     ],
   },
 
+  implantacion: {
+    titulo: 'How it is implemented',
+    intro:
+      'Many ERP implementations fail for a reason that has nothing to do with the software: nobody is clear about who does each job. That is why, with RayGold, before showing any screens the company’s activities are assigned, from creating an item to closing the month, on a dedicated Implementation screen.',
+    papelesIntro: 'Each person takes part in each activity with a role, following the RACI method used in large implementations:',
+    papeles: [
+      { n: 'A · Accountable', d: 'The owner of the activity: decides, signs off and answers if something goes wrong. Only one per activity.' },
+      { n: 'R · Responsible', d: 'Does the work in the ERP every day. There can be several.' },
+      { n: 'S · Backup', d: 'Steps in when the usual person is away, for what cannot stop: sales, invoicing, collections, payroll.' },
+      { n: 'C · Consulted', d: 'Asked before a decision is made: gives an opinion, does not do the work.' },
+      { n: 'I · Informed', d: 'Told what has been done: sees, does not touch.' },
+    ],
+    nivel:
+      'On top of that, each person has a level from 0 to 4 in each activity, from “not familiar with it yet” to “masters it and can teach it”, and the screen shows on its own who needs training in what before go-live.',
+    avisosTitulo: 'What the screen flags before go-live',
+    avisos: [
+      'Segregation of duties: the same person does two things that should be done by different people, such as receiving goods and counting them. They are separated or, in a small company, accepted with a periodic check.',
+      'Workload: someone is accountable for too many activities and should hand some to the people who do them every day.',
+      'No backup: activities that cannot stop and have nobody to cover for the person.',
+      'Missing skills: the person’s level is below what the activity requires and they need training first.',
+    ],
+    cierre:
+      'The assignment can be viewed by menu area, by end-to-end process (order to cash, purchase to pay, plan to produce) and by person, and everyone gets their own printed sheet: from day one, each person knows what is theirs. What is not needed on day one, such as casting or fixed assets, is started once the basics are running.',
+  },
   mercados: {
     titulo: 'Markets and tax compliance',
     intro:
@@ -661,6 +744,30 @@ const fr: QerTranslations = {
     ],
   },
 
+  implantacion: {
+    titulo: 'Comment se fait la mise en place',
+    intro:
+      'Beaucoup de mises en place d’ERP échouent pour une raison qui n’a rien à voir avec le logiciel : personne ne sait clairement qui fait quoi. C’est pourquoi, avec RayGold, avant de montrer le moindre écran, on répartit les activités de l’entreprise, de la création d’un article à la clôture du mois, sur un écran dédié à la mise en place.',
+    papelesIntro: 'Chaque personne intervient dans chaque activité avec un rôle, selon la méthode RACI des grandes mises en place :',
+    papeles: [
+      { n: 'A · Approbateur', d: 'Le propriétaire de l’activité : il décide, valide et répond si quelque chose se passe mal. Un seul par activité.' },
+      { n: 'R · Réalisateur', d: 'Fait le travail dans l’ERP chaque jour. Il peut y en avoir plusieurs.' },
+      { n: 'S · Suppléant', d: 'Prend le relais en cas d’absence, pour ce qui ne peut pas s’arrêter : vente, facturation, encaissement, paie.' },
+      { n: 'C · Consulté', d: 'On lui demande son avis avant de décider : il conseille, il ne fait pas.' },
+      { n: 'I · Informé', d: 'On lui dit ce qui a été fait : il voit, il ne touche pas.' },
+    ],
+    nivel:
+      'De plus, chaque personne a un niveau de 0 à 4 dans chaque activité, de « ne connaît pas encore » à « maîtrise et peut l’enseigner », et l’écran indique tout seul qui former et sur quoi avant le démarrage.',
+    avisosTitulo: 'Ce que l’écran signale avant le démarrage',
+    avisos: [
+      'Séparation des tâches : une même personne fait deux choses qui devraient revenir à des personnes différentes, comme réceptionner la marchandise et la recompter. On les sépare ou, dans une petite entreprise, on l’accepte avec un contrôle périodique.',
+      'Charge : quelqu’un est approbateur de trop d’activités et devrait en confier certaines à ceux qui les font chaque jour.',
+      'Sans suppléant : des activités qui ne peuvent pas s’arrêter et n’ont personne pour remplacer la personne.',
+      'Niveau insuffisant : la personne a un niveau inférieur à celui que demande l’activité et doit être formée avant.',
+    ],
+    cierre:
+      'La répartition se consulte par domaine du menu, par processus de bout en bout (de la commande à l’encaissement, de l’achat au paiement, de la planification à la fabrication) et par personne, et chacun reçoit sa fiche imprimée : dès le premier jour, chacun sait ce qui lui revient. Ce qui n’est pas nécessaire le premier jour, comme la fonte ou les immobilisations, démarre une fois l’essentiel en marche.',
+  },
   mercados: {
     titulo: 'Marchés et conformité fiscale',
     intro:
@@ -814,6 +921,30 @@ const ptBr: QerTranslations = {
     ],
   },
 
+  implantacion: {
+    titulo: 'Como é feita a implantação',
+    intro:
+      'Muitas implantações de ERP falham por algo que não é o sistema: ninguém sabe ao certo quem faz cada trabalho. Por isso, no RayGold, antes de mostrar telas, as atividades da empresa são distribuídas, de cadastrar um produto a fechar o mês, em uma tela própria de Implantação.',
+    papelesIntro: 'Cada pessoa participa de cada atividade com um papel, seguindo o método RACI das grandes implantações:',
+    papeles: [
+      { n: 'A · Aprovador', d: 'O dono da atividade: decide, aprova e responde se algo der errado. Só um por atividade.' },
+      { n: 'R · Responsável', d: 'Faz o trabalho no ERP todos os dias. Pode haver vários.' },
+      { n: 'S · Substituto', d: 'Faz quando falta quem faz, no que não pode parar: venda, nota fiscal, cobrança, folha de pagamento.' },
+      { n: 'C · Consultado', d: 'É ouvido antes da decisão: opina, não executa.' },
+      { n: 'I · Informado', d: 'Fica sabendo do que foi feito: vê, não mexe.' },
+    ],
+    nivel:
+      'Além disso, cada pessoa tem um nível de 0 a 4 em cada atividade, de «ainda não conhece» a «domina e pode ensinar», e a tela mostra sozinha quem precisa de treinamento em quê antes de começar.',
+    avisosTitulo: 'O que a tela avisa antes de começar',
+    avisos: [
+      'Conflito de funções: a mesma pessoa faz duas coisas que deveriam ser feitas por pessoas diferentes, como receber a mercadoria e recontá-la. Separa-se ou, em uma empresa pequena, aceita-se com um controle periódico.',
+      'Carga: alguém é aprovador de atividades demais e convém passar algumas para quem as faz no dia a dia.',
+      'Sem substituto: atividades que não podem parar e não têm quem cubra a pessoa.',
+      'Falta de nível: a pessoa tem menos nível do que a atividade exige e precisa de treinamento antes.',
+    ],
+    cierre:
+      'A distribuição pode ser vista por área do menu, por processo de ponta a ponta (do pedido ao recebimento, da compra ao pagamento, do planejamento à fabricação) e por pessoa, e cada um recebe a sua folha impressa: desde o primeiro dia, cada pessoa sabe o que lhe cabe. O que não é necessário no primeiro dia, como a fundição ou o ativo imobilizado, começa quando o básico já está funcionando.',
+  },
   mercados: {
     titulo: 'Mercados e conformidade fiscal',
     intro:

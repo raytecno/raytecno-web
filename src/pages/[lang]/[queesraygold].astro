@@ -188,6 +188,27 @@ const schemaFaq = {
       -->
     </section>
 
+    <!-- Noviembre 2026: método de implantación (reparto RACI) -->
+    <section class="qer__section">
+      <h2>{t.implantacion.titulo}</h2>
+      <p>{t.implantacion.intro}</p>
+      <p>{t.implantacion.papelesIntro}</p>
+      <dl class="qer__modules">
+        {t.implantacion.papeles.map((m) => (
+          <div class="qer__module">
+            <dt>{m.n}</dt>
+            <dd>{m.d}</dd>
+          </div>
+        ))}
+      </dl>
+      <p>{t.implantacion.nivel}</p>
+      <h3>{t.implantacion.avisosTitulo}</h3>
+      <ul class="qer__bullets">
+        {t.implantacion.avisos.map((i) => <li>{i}</li>)}
+      </ul>
+      <p>{t.implantacion.cierre}</p>
+    </section>
+
     <!-- ========================================================== -->
     <section class="qer__section">
       <h2>{t.mercados.titulo}</h2>
