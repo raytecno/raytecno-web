@@ -202,6 +202,12 @@ const iconosSecciones: Record<string, string> = {
   capacidad: `<svg viewBox="0 0 48 48" fill="none"><rect x="6" y="8" width="36" height="32" rx="3" fill="currentColor" opacity="0.15"/><rect x="10" y="14" width="22" height="5" rx="1.5" fill="currentColor"/><rect x="10" y="22" width="14" height="5" rx="1.5" fill="currentColor" opacity="0.6"/><rect x="10" y="30" width="26" height="5" rx="1.5" fill="currentColor" opacity="0.4"/><path d="M36 12v26" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/></svg>`,
   calidad: `<svg viewBox="0 0 48 48" fill="none"><path d="M24 5l15 6v11c0 10-6.5 17-15 21-8.5-4-15-11-15-21V11l15-6z" fill="currentColor" opacity="0.15"/><path d="M24 5l15 6v11c0 10-6.5 17-15 21-8.5-4-15-11-15-21V11l15-6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M17 24l5 5 9-10" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   cronometrajes: `<svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="27" r="15" fill="currentColor" opacity="0.15"/><circle cx="24" cy="27" r="15" stroke="currentColor" stroke-width="2"/><path d="M20 6h8M24 6v6M36 13l3-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M24 27V18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><circle cx="24" cy="27" r="2.5" fill="currentColor"/></svg>`,
+  // Ingeniería de producto
+  pipeline: `<svg viewBox="0 0 48 48" fill="none"><rect x="6" y="8" width="10" height="32" rx="2" fill="currentColor" opacity="0.15"/><rect x="19" y="8" width="10" height="32" rx="2" fill="currentColor" opacity="0.15"/><rect x="32" y="8" width="10" height="32" rx="2" fill="currentColor" opacity="0.15"/><rect x="7.5" y="11" width="7" height="6" rx="1.5" fill="currentColor"/><rect x="7.5" y="20" width="7" height="6" rx="1.5" fill="currentColor" opacity="0.6"/><rect x="20.5" y="11" width="7" height="6" rx="1.5" fill="currentColor" opacity="0.8"/><rect x="33.5" y="11" width="7" height="6" rx="1.5" fill="#10b981"/></svg>`,
+  coste: `<svg viewBox="0 0 48 48" fill="none"><rect x="16" y="4" width="16" height="40" rx="8" fill="currentColor" opacity="0.15"/><rect x="16" y="4" width="16" height="40" rx="8" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="13" r="4.5" fill="#ef4444"/><circle cx="24" cy="24" r="4.5" fill="#f59e0b"/><circle cx="24" cy="35" r="4.5" fill="#10b981"/></svg>`,
+  cad: `<svg viewBox="0 0 48 48" fill="none"><path d="M24 5l17 9.5v19L24 43 7 33.5v-19L24 5z" fill="currentColor" opacity="0.15"/><path d="M24 5l17 9.5v19L24 43 7 33.5v-19L24 5zM7 14.5l17 9.5 17-9.5M24 24v19" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>`,
+  readiness: `<svg viewBox="0 0 48 48" fill="none"><rect x="9" y="6" width="30" height="36" rx="3" fill="currentColor" opacity="0.15"/><path d="M14 15l2.5 2.5L21 13M14 25l2.5 2.5L21 23" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="14" y="32" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.5"/><path d="M25 15h9M25 25h9M25 34.5h9" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.6"/></svg>`,
+  versiones: `<svg viewBox="0 0 48 48" fill="none"><rect x="14" y="6" width="26" height="20" rx="3" fill="currentColor" opacity="0.2"/><rect x="11" y="13" width="26" height="20" rx="3" fill="currentColor" opacity="0.35"/><rect x="8" y="20" width="26" height="20" rx="3" fill="currentColor"/><path d="M14 30h14" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.8"/></svg>`,
   inventario: `<svg viewBox="0 0 48 48" fill="none"><rect x="8" y="14" width="32" height="26" rx="3" fill="currentColor" opacity="0.15"/><rect x="12" y="8" width="24" height="8" rx="2" fill="currentColor"/><path d="M16 22h16M16 28h12M16 34h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.6"/></svg>`,
   // Finanzas
   contabilidad: `<svg viewBox="0 0 48 48" fill="none"><rect x="8" y="8" width="32" height="32" rx="3" fill="currentColor" opacity="0.15"/><rect x="12" y="12" width="24" height="6" rx="1" fill="currentColor"/><path d="M12 24h10M26 24h10M12 30h8M26 30h10M12 36h12M26 36h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.6"/></svg>`,
@@ -979,9 +985,16 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
       min-width: 48px;
     }
 
+    /* Sin encoger: con nombres largos ("Readiness y liberación") las
+       pestañas se pisaban. La barra ya tiene overflow-x: auto. */
     .seccion-tab {
       padding: 0.5rem 1rem;
       min-width: 80px;
+      flex: 0 0 auto;
+    }
+
+    .tab-label {
+      white-space: nowrap;
     }
 
     .tab-icon {

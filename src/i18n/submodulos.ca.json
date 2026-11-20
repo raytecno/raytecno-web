@@ -430,6 +430,130 @@
         }
       }
     },
+    "ingenieria": {
+      "title": "Enginyeria de producte",
+      "subtitle": "De l’esbós a producció: prototips, cost i viabilitat de cada joia",
+      "metaTitle": "Enginyeria de producte | RayGold ERP - De l’esbós a producció",
+      "metaDescription": "Prototips, versions i viabilitat de cada joia abans de fabricar-la: CAD i STL, pes estimat, cost per etapes amb semàfor de marge, readiness i alliberament a producció.",
+      "intro": {
+        "titulo": "Cap joia arriba al taller sense saber si és rendible",
+        "parrafos": [
+          "Abans de fabricar una peça es fan esbossos, ceres, resines impreses en 3D, cautxús i un primer pilot fos en metall. A cada pas canvien el pes, les pedres i les hores de mà d’obra, i amb ells el cost. El mòdul d’Enginyeria de producte reuneix tota aquesta feina en un sol lloc i respon a tres preguntes: si la joia és rendible, si està llesta per fabricar i què ha canviat i per què.",
+          "Cada model avança per set etapes en un tauler, amb el cost valorat a cadascuna davant del preu objectiu. Quan té el seu disseny, la seva estructura, la seva ruta, els prototips aprovats, un marge suficient i totes les comprovacions fetes, s’allibera, i RayGold crea l’article definitiu llest per fabricar."
+        ]
+      },
+      "noEs": {
+        "titulo": "Què no és",
+        "items": [
+          "No és un programa de CAD: el disseny es fa al teu CAD i aquí es puja l’STL.",
+          "No és un configurador per al client final: és l’estudi intern de cada model abans de fabricar-lo.",
+          "No duplica el mestre d’articles: l’article definitiu es crea només en alliberar la versió."
+        ]
+      },
+      "faq": [
+        {
+          "pregunta": "Des de quan es pot calcular el cost d’una joia nova?",
+          "respuesta": "Des que la versió té estructura. Amb l’STL carregat es calcula amb el pes estimat i, tan bon punt hi ha un pilot fos, amb el pes real. Cada càlcul queda desat amb la cotització del metall d’aquell dia."
+        },
+        {
+          "pregunta": "Què passa amb la despesa dels prototips?",
+          "respuesta": "Se suma per versió i es reparteix entre les unitats previstes com a cost de desenvolupament, així que forma part del cost de cada peça."
+        },
+        {
+          "pregunta": "Es pot canviar un producte que ja està en fabricació?",
+          "respuesta": "No directament: la versió alliberada queda congelada. S’obre una ordre de canvi amb el seu motiu i el seu impacte i, en aprovar-la, es crea una versió nova que torna a recórrer les etapes."
+        }
+      ],
+      "sections": {
+        "pipeline": {
+          "name": "De l’esbós a producció",
+          "description": "Set etapes en un tauler, i el sistema comprova el que cal abans de deixar passar cada targeta.",
+          "detalle": {
+            "parrafos": [
+              "Les versions de cada producte es veuen en columnes: Esbós, Prototip, Pilot, Viabilitat, Readiness, Alliberada i Rebutjada. Es passen d’una etapa a l’altra arrossegant la targeta, i RayGold no deixa avançar si falta alguna cosa: no hi ha pilot sense prototip, ni viabilitat sense estructura, ni readiness sense un cost valorat.",
+              "Cada prototip queda registrat amb el seu tipus (cera, resina impresa en 3D, cautxú), el seu operari, les dates, el pes, les hores i la despesa. L’últim pilot aprovat fixa el pes real de la versió."
+            ],
+            "puntos": [
+              "Esbós: la idea, la família, la col·lecció, el preu objectiu i la previsió d’unitats",
+              "Prototip i pilot: models físics de prova i primera peça fosa en metall",
+              "Viabilitat: el cost complet amb l’estructura i la ruta, i la decisió sobre el marge",
+              "Rebutjada: sempre amb el seu motiu; si es rebutgen totes les versions, el producte queda descartat",
+              "Cada targeta mostra cost, marge, prototips, readiness i dies a l’etapa"
+            ]
+          },
+          "images": []
+        },
+        "coste": {
+          "name": "Cost i viabilitat",
+          "description": "El cost de cada versió, etapa a etapa, davant del preu objectiu.",
+          "detalle": {
+            "parrafos": [
+              "Cada vegada que es calcula, RayGold fa una valoració completa i la desa tal com és, amb la cotització del metall d’aquell dia. Les valoracions no es recalculen després: queden com a històric, es tria quina és la vigent i es comparen les versions entre si.",
+              "El semàfor diu si el marge hi arriba: verd si assoleix l’objectiu, ambre fins a 5 punts per sota i vermell si queda més lluny. En una peça d’or el metall pot ser el 90 % del cost, així que unes dècimes de gram decideixen la viabilitat: per això es pot calcular amb el pes estimat del CAD o amb el pes real del pilot."
+            ],
+            "puntos": [
+              "Metall: pes × (1 + merma) × llei × cotització del metall fi",
+              "Pedres, fornitures i embalatge des de l’estructura, amb l’origen de cada cost",
+              "Mà d’obra des de la ruta: hores per peça × tarifa de la secció",
+              "Subcontractació: fosa externa, banys o encastos fora de casa",
+              "Desenvolupament: la despesa en prototips, repartida entre les unitats previstes",
+              "Marge davant de l’objectiu (40 % per defecte, configurable) i preu mínim per assolir-lo"
+            ]
+          },
+          "images": []
+        },
+        "cad": {
+          "name": "CAD, STL i 3D",
+          "description": "S’arrossega l’arxiu i RayGold el mesura, el desa i el mostra en 3D.",
+          "detalle": {
+            "parrafos": [
+              "Els STL, 3MF i OBJ es mesuren al mateix navegador: volum, mides i triangles. Es desen al mòdul d’Impressores 3D llestos per imprimir i es genera una vista de la peça en el color del metall. Fotos, renders, plànols i PDF es desen amb la seva miniatura.",
+              "L’STL principal fixa el volum de la versió i, amb la densitat del metall, en surt el pes estimat. Una arracada de 18 mm amb fil de 2 mm té 0,1574 cm³: 2,44 g en or de 18 K groc i 1,63 g en plata 925."
+            ],
+            "puntos": [
+              "Pes estimat = volum de l’STL × densitat del metall",
+              "Densitats i lleis d’or de 18 K i 14 K, plata 925 i platí 950, configurables",
+              "Visor 3D amb reflexos de metall: gira, s’apropa, mostra la malla i descarrega l’arxiu",
+              "Mides, volum, pes estimat i triangles sota el visor"
+            ]
+          },
+          "images": []
+        },
+        "readiness": {
+          "name": "Readiness i alliberament",
+          "description": "El que ha d’estar llest abans de fabricar, i el pas a producció en una sola operació.",
+          "detalle": {
+            "parrafos": [
+              "La llista de comprovacions ve amb una política per defecte i s’ajusta per família. Les automàtiques les marca el sistema tan bon punt es compleixen: CAD carregat, estructura, ruta, prototip i pilot aprovats, pes real i cost vigent. Les manuals les marca qui en respon: l’aprovació comercial, la revisió de qualitat del pilot i, si s’hi apliquen, les pedres, les fotos i l’embalatge.",
+              "Quan hi ha cost vigent i totes les obligatòries estan fetes, s’habilita Alliberar. En una sola operació RayGold crea l’article definitiu amb la seva família, metall, quirats i color, crea els components nous, desa l’estructura i les fases i dona d’alta els estocs. La versió queda congelada, amb data i usuari."
+            ],
+            "puntos": [
+              "Comprovacions obligatòries i opcionals, i «no s’hi aplica» per al que no toca",
+              "Si falta alguna cosa, el botó diu exactament què: per exemple, 7 de 9 obligatòries",
+              "Els components que encara no existeixen es marquen com a nous i es creen en alliberar"
+            ]
+          },
+          "images": []
+        },
+        "versiones": {
+          "name": "Versions i documents",
+          "description": "Cada canvi és una versió amb el seu motiu, i cada versió té la seva fitxa per al client.",
+          "detalle": {
+            "parrafos": [
+              "Un producte pot tenir diverses versions. Una versió nova es crea des d’una altra amb el seu motiu i pot clonar-ne l’estructura, la ruta i els arxius, així que les alternatives es comparen amb els seus costos una al costat de l’altra: un altre metall, un altre gruix, altres pedres. Una versió alliberada ja no es toca: per canviar un producte en fabricació s’obre una ordre de canvi que, en aprovar-se, crea la versió nova.",
+              "Des de la fitxa s’imprimeixen dos documents. La fitxa per al client és la presentació comercial, sense costos ni marges, amb caselles de conformitat i signatura. El dossier tècnic intern porta tot l’estudi: desglossament del cost, estructura, ruta, prototips, readiness i històric de valoracions."
+            ],
+            "puntos": [
+              "Ordre de canvi amb tipus, prioritat, sol·licitant, motiu i anàlisi d’impacte",
+              "Fitxa per al client: imatge, especificacions, composició sense imports, preu opcional i conformitat",
+              "Dossier tècnic amb signatures d’elaborat, revisat i aprovat",
+              "Tots dos es desen en PDF per enviar-los per correu"
+            ]
+          },
+          "images": []
+        }
+      }
+    },
     "finanzas": {
       "title": "Finances",
       "subtitle": "Comptabilitat, tresoreria i IVA integrats",

@@ -430,6 +430,130 @@
         }
       }
     },
+    "ingenieria": {
+      "title": "Ingénierie produit",
+      "subtitle": "Du croquis à la production : prototypes, coût et viabilité de chaque bijou",
+      "metaTitle": "Ingénierie produit | RayGold ERP - Du croquis à la production",
+      "metaDescription": "Prototypes, versions et viabilité de chaque bijou avant sa fabrication : CAO et STL, poids estimé, coût par étape avec feu de marge, readiness et lancement en production.",
+      "intro": {
+        "titulo": "Aucun bijou n’arrive à l’atelier sans savoir s’il est rentable",
+        "parrafos": [
+          "Avant de fabriquer une pièce, on fait des croquis, des cires, des résines imprimées en 3D, des moules en caoutchouc et un premier pilote fondu en métal. À chaque étape changent le poids, les pierres et les heures de main-d’œuvre, et avec eux le coût. Le module Ingénierie produit réunit tout ce travail au même endroit et répond à trois questions : le bijou est-il rentable, est-il prêt à fabriquer, et qu’est-ce qui a changé et pourquoi.",
+          "Chaque modèle avance à travers sept étapes sur un tableau, avec son coût valorisé à chacune face au prix cible. Quand il a sa conception, sa nomenclature, sa gamme, ses prototypes approuvés, une marge suffisante et tous les contrôles faits, il est lancé, et RayGold crée l’article définitif prêt à fabriquer."
+        ]
+      },
+      "noEs": {
+        "titulo": "Ce que ce n’est pas",
+        "items": [
+          "Ce n’est pas un logiciel de CAO : la conception se fait dans votre CAO et le STL est déposé ici.",
+          "Ce n’est pas un configurateur pour le client final : c’est l’étude interne de chaque modèle avant sa fabrication.",
+          "Il ne double pas la fiche article : l’article définitif n’est créé qu’au lancement de la version."
+        ]
+      },
+      "faq": [
+        {
+          "pregunta": "À partir de quand peut-on calculer le coût d’un nouveau bijou ?",
+          "respuesta": "Dès que la version a une nomenclature. Avec le STL déposé, le calcul se fait sur le poids estimé et, dès qu’il y a un pilote fondu, sur le poids réel. Chaque calcul est enregistré avec le cours du métal du jour."
+        },
+        {
+          "pregunta": "Que devient la dépense des prototypes ?",
+          "respuesta": "Elle est cumulée par version et répartie sur les unités prévues comme coût de développement : elle fait donc partie du coût de chaque pièce."
+        },
+        {
+          "pregunta": "Peut-on modifier un produit déjà en fabrication ?",
+          "respuesta": "Pas directement : la version lancée est figée. On ouvre un ordre de modification avec son motif et son impact et, une fois approuvé, il crée une nouvelle version qui repasse par les étapes."
+        }
+      ],
+      "sections": {
+        "pipeline": {
+          "name": "Du croquis à la production",
+          "description": "Sept étapes sur un tableau, et le système vérifie le nécessaire avant de laisser passer chaque carte.",
+          "detalle": {
+            "parrafos": [
+              "Les versions de chaque produit s’affichent en colonnes : Croquis, Prototype, Pilote, Viabilité, Readiness, Lancée et Rejetée. On passe d’une étape à l’autre en faisant glisser la carte, et RayGold ne laisse pas avancer s’il manque quelque chose : pas de pilote sans prototype, pas de viabilité sans nomenclature, pas de readiness sans coût valorisé.",
+              "Chaque prototype est enregistré avec son type (cire, résine imprimée en 3D, caoutchouc), son opérateur, ses dates, son poids, ses heures et sa dépense. Le dernier pilote approuvé fixe le poids réel de la version."
+            ],
+            "puntos": [
+              "Croquis : l’idée, la famille, la collection, le prix cible et la prévision d’unités",
+              "Prototype et pilote : modèles physiques d’essai et première pièce fondue en métal",
+              "Viabilité : le coût complet avec la nomenclature et la gamme, et la décision sur la marge",
+              "Rejetée : toujours avec son motif ; si toutes les versions sont rejetées, le produit est écarté",
+              "Chaque carte affiche coût, marge, prototypes, readiness et jours dans l’étape"
+            ]
+          },
+          "images": []
+        },
+        "coste": {
+          "name": "Coût et viabilité",
+          "description": "Le coût de chaque version, étape par étape, face au prix cible.",
+          "detalle": {
+            "parrafos": [
+              "À chaque calcul, RayGold fait une valorisation complète et l’enregistre telle quelle, avec le cours du métal du jour. Les valorisations ne sont jamais recalculées : elles restent en historique, on choisit celle qui est en vigueur et on compare les versions entre elles.",
+              "Le feu indique si la marge est atteinte : vert si elle atteint l’objectif, orange jusqu’à 5 points en dessous et rouge au-delà. Dans une pièce en or, le métal peut représenter 90 % du coût : quelques dixièmes de gramme décident de la viabilité. C’est pourquoi on peut calculer avec le poids estimé de la CAO ou avec le poids réel du pilote."
+            ],
+            "puntos": [
+              "Métal : poids × (1 + perte de fonte) × titre × cours du métal fin",
+              "Pierres, apprêts et emballage depuis la nomenclature, avec l’origine de chaque coût",
+              "Main-d’œuvre depuis la gamme : heures par pièce × taux de la section",
+              "Sous-traitance : fonte externe, bains ou sertissage à l’extérieur",
+              "Développement : la dépense en prototypes répartie sur les unités prévues",
+              "Marge face à l’objectif (40 % par défaut, paramétrable) et prix minimum pour l’atteindre"
+            ]
+          },
+          "images": []
+        },
+        "cad": {
+          "name": "CAO, STL et 3D",
+          "description": "On fait glisser le fichier et RayGold le mesure, le range et l’affiche en 3D.",
+          "detalle": {
+            "parrafos": [
+              "Les fichiers STL, 3MF et OBJ sont mesurés dans le navigateur même : volume, dimensions et triangles. Ils sont rangés dans le module Imprimantes 3D prêts à imprimer, et une vue de la pièce est générée dans la couleur du métal. Photos, rendus, plans et PDF sont rangés avec leur miniature.",
+              "Le STL principal fixe le volume de la version et, avec la densité du métal, donne le poids estimé. Une créole de 18 mm en fil de 2 mm fait 0,1574 cm³ : 2,44 g en or jaune 18 carats et 1,63 g en argent 925."
+            ],
+            "puntos": [
+              "Poids estimé = volume du STL × densité du métal",
+              "Densités et titres de l’or 18 et 14 carats, de l’argent 925 et du platine 950, paramétrables",
+              "Visionneuse 3D avec reflets métalliques : rotation, zoom, maillage et téléchargement du fichier",
+              "Dimensions, volume, poids estimé et triangles sous la visionneuse"
+            ]
+          },
+          "images": []
+        },
+        "readiness": {
+          "name": "Readiness et lancement",
+          "description": "Ce qui doit être prêt avant de fabriquer, et le passage en production en une seule opération.",
+          "detalle": {
+            "parrafos": [
+              "La liste de contrôles vient avec une politique par défaut et s’ajuste par famille. Les contrôles automatiques sont cochés par le système dès qu’ils sont remplis : CAO déposée, nomenclature, gamme, prototype et pilote approuvés, poids réel et coût en vigueur. Les contrôles manuels sont cochés par leur responsable : approbation commerciale, revue qualité du pilote et, s’ils s’appliquent, pierres, photos et emballage.",
+              "Quand il y a un coût en vigueur et que tous les contrôles obligatoires sont faits, Lancer devient actif. En une seule opération, RayGold crée l’article définitif avec sa famille, son métal, ses carats et sa couleur, crée les nouveaux composants, enregistre la nomenclature et les phases et crée les stocks. La version est figée, avec date et utilisateur."
+            ],
+            "puntos": [
+              "Contrôles obligatoires et facultatifs, et « sans objet » pour ce qui ne s’applique pas",
+              "S’il manque quelque chose, le bouton dit exactement quoi : par exemple, 7 sur 9 obligatoires",
+              "Les composants qui n’existent pas encore sont marqués comme nouveaux et créés au lancement"
+            ]
+          },
+          "images": []
+        },
+        "versiones": {
+          "name": "Versions et documents",
+          "description": "Chaque changement est une version avec son motif, et chaque version a sa fiche client.",
+          "detalle": {
+            "parrafos": [
+              "Un produit peut avoir plusieurs versions. Une nouvelle version se crée à partir d’une autre avec son motif et peut en cloner la nomenclature, la gamme et les fichiers : on compare ainsi les alternatives avec leurs coûts côte à côte, autre métal, autre épaisseur, autres pierres. Une version lancée ne se modifie plus : pour changer un produit en fabrication, on ouvre un ordre de modification qui, une fois approuvé, crée la nouvelle version.",
+              "Deux documents s’impriment depuis la fiche. La fiche client est la présentation commerciale, sans coûts ni marges, avec cases d’accord et signature. Le dossier technique interne contient toute l’étude : décomposition du coût, nomenclature, gamme, prototypes, readiness et historique des valorisations."
+            ],
+            "puntos": [
+              "Ordre de modification avec type, priorité, demandeur, motif et analyse d’impact",
+              "Fiche client : image, caractéristiques, composition sans montants, prix facultatif et accord",
+              "Dossier technique avec signatures établi, vérifié et approuvé",
+              "Les deux s’enregistrent en PDF pour l’envoi par e-mail"
+            ]
+          },
+          "images": []
+        }
+      }
+    },
     "finanzas": {
       "title": "Finances",
       "subtitle": "Comptabilité, trésorerie et TVA intégrées",

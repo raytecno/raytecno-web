@@ -45,6 +45,7 @@ RayGold is a jewelry manufacturing ERP built by Raytecno BCN SL (Barcelona, Spai
 - [Qué es RayGold](https://www.raytecno.es/es/que-es-raygold): resumen del producto y a quién va dirigido.
 - [Módulos](https://www.raytecno.es/es/modulos): visión general de todos los módulos.
 - [Fabricación](https://www.raytecno.es/es/modulos/fabricacion): órdenes de fabricación, fases del taller y mermas.
+- [Ingeniería de producto](https://www.raytecno.es/es/modulos/ingenieria-producto): del boceto a producción, prototipos, coste y viabilidad de cada joya antes de fabricarla.
 - [Maestros](https://www.raytecno.es/es/modulos/maestros): artículos, metales, piedras, clientes y proveedores.
 - [Inventarios](https://www.raytecno.es/es/modulos/inventarios): stock e inventarios físicos.
 - [Comercial](https://www.raytecno.es/es/modulos/comercial): ventas y documentos comerciales.

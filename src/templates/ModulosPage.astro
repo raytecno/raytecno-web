@@ -49,6 +49,7 @@ const moduloSlugs: Record<string, Record<Lang, string>> = {
   ecommerce: { es: 'ecommerce', en: 'ecommerce', fr: 'ecommerce', ca: 'ecommerce', 'pt-br': 'ecommerce' },
   impresoras3d: { es: 'impresoras3d', en: '3dprinters', fr: 'imprimantes3d', ca: 'impressores3d', 'pt-br': 'impressoras3d' },
   portal: { es: 'portal', en: 'portal', fr: 'portail', ca: 'portal', 'pt-br': 'portal' },
+  ingenieria: { es: 'ingenieria-producto', en: 'product-engineering', fr: 'ingenierie-produit', ca: 'enginyeria-producte', 'pt-br': 'engenharia-produto' },
   asistenteia: { es: 'asistente-ia', en: 'ai-assistant', fr: 'assistant-ia', ca: 'assistent-ia', 'pt-br': 'assistente-ia' },
 };
 
@@ -97,6 +98,11 @@ const modulos = [
       <circle cx="14" cy="18" r="4" fill="currentColor"/>
       <path d="M14 10v-4M14 26v4M6 18H2M22 18h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
     </svg>`,
+  },
+  {
+    id: "ingenieria",
+    color: "#e11d48",
+    icono: `<svg viewBox="0 0 64 64" fill="none"><path d="M18 14h28l10 12-24 28L8 26z" fill="currentColor" opacity="0.2"/><path d="M18 14h28l10 12-24 28L8 26z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="M8 26h48M24 14l-4 12 12 28 12-28-4-12" stroke="currentColor" stroke-width="2" stroke-linejoin="round" opacity="0.6"/></svg>`,
   },
   {
     id: "finanzas",
@@ -223,6 +229,7 @@ const modulosT: Record<
     maestros: { nombre: "Maestros", descripcion: "Artículos, proveedores, clientes y familias" },
     comercial: { nombre: "Comercial", descripcion: "Ventas, pedidos y facturación" },
     fabricacion: { nombre: "Fabricación", descripcion: "Producción, inventarios y calidad" },
+    ingenieria: { nombre: "Ingeniería de producto", descripcion: "Del boceto a producción: prototipos, coste y viabilidad" },
     finanzas: { nombre: "Finanzas", descripcion: "Contabilidad, tesorería e IVA" },
     historicos: { nombre: "Históricos", descripcion: "Datos históricos y tendencias" },
     inventario: { nombre: "Inventarios", descripcion: "Gestión de diversos inventarios" },
@@ -237,6 +244,7 @@ const modulosT: Record<
     maestros: { nombre: "Masters", descripcion: "Items, suppliers, customers and families" },
     comercial: { nombre: "Commercial", descripcion: "Sales, orders and invoicing" },
     fabricacion: { nombre: "Manufacturing", descripcion: "Production, inventory and quality" },
+    ingenieria: { nombre: "Product Engineering", descripcion: "From sketch to production: prototypes, cost and viability" },
     finanzas: { nombre: "Finance", descripcion: "Accounting, treasury and VAT" },
     historicos: { nombre: "History", descripcion: "Historical data and trends" },
     inventario: { nombre: "Stocktaking", descripcion: "Management of various inventories" },
@@ -251,6 +259,7 @@ const modulosT: Record<
     maestros: { nombre: "Maîtres", descripcion: "Articles, fournisseurs, clients et familles" },
     comercial: { nombre: "Commercial", descripcion: "Ventes, commandes et facturation" },
     fabricacion: { nombre: "Fabrication", descripcion: "Production, inventaires et qualité" },
+    ingenieria: { nombre: "Ingénierie produit", descripcion: "Du croquis à la production : prototypes, coût et viabilité" },
     finanzas: { nombre: "Finances", descripcion: "Comptabilité, trésorerie et TVA" },
     historicos: { nombre: "Historique", descripcion: "Données historiques et tendances" },
     inventario: { nombre: "Stocks", descripcion: "Gestion de divers stocks" },
@@ -265,6 +274,7 @@ const modulosT: Record<
     maestros: { nombre: "Mestres", descripcion: "Articles, proveïdors, clients i famílies" },
     comercial: { nombre: "Comercial", descripcion: "Vendes, comandes i facturació" },
     fabricacion: { nombre: "Fabricació", descripcion: "Producció, inventaris i qualitat" },
+    ingenieria: { nombre: "Enginyeria de producte", descripcion: "De l’esbós a producció: prototips, cost i viabilitat" },
     finanzas: { nombre: "Finances", descripcion: "Comptabilitat, tresoreria i IVA" },
     historicos: { nombre: "Històrics", descripcion: "Dades històriques i tendències" },
     inventario: { nombre: "Inventaris", descripcion: "Gestió de diversos inventaris" },
@@ -279,6 +289,7 @@ const modulosT: Record<
     maestros: { nombre: "Mestres", descripcion: "Artigos, fornecedores, clientes e famílias" },
     comercial: { nombre: "Comercial", descripcion: "Vendas, pedidos e faturamento" },
     fabricacion: { nombre: "Fabricação", descripcion: "Produção, inventários e qualidade" },
+    ingenieria: { nombre: "Engenharia de produto", descripcion: "Do esboço à produção: protótipos, custo e viabilidade" },
     finanzas: { nombre: "Finanças", descripcion: "Contabilidade, tesouraria e IVA" },
     historicos: { nombre: "Históricos", descripcion: "Dados históricos e tendências" },
     inventario: { nombre: "Estoques", descripcion: "Gestão de diversos estoques" },

@@ -15,6 +15,7 @@ import EcommercePage from "../../../templates/modulos/EcommercePage.astro";
 import Impresoras3DPage from "../../../templates/modulos/Impresoras3DPage.astro";
 import PortalPage from "../../../templates/modulos/PortalPage.astro";
 import AsistenteIAPage from "../../../templates/modulos/AsistenteIAPage.astro";
+import IngenieriaProductoPage from "../../../templates/modulos/IngenieriaProductoPage.astro";
 import { type Lang } from "../../../config/pages";
 
 export function getStaticPaths() {
@@ -113,6 +114,13 @@ export function getStaticPaths() {
       ca: "portal",
       "pt-br": "portal",
     },
+    ingenieria: {
+      es: "ingenieria-producto",
+      en: "product-engineering",
+      fr: "ingenierie-produit",
+      ca: "enginyeria-producte",
+      "pt-br": "engenharia-produto",
+    },
     asistenteia: {
       es: "asistente-ia",
       en: "ai-assistant",
@@ -194,6 +202,11 @@ const currentLang = (lang || "es") as Lang;
 {
   moduleKey === "portal" && (
     <PortalPage lang={currentLang} pageId="portal" />
+  )
+}
+{
+  moduleKey === "ingenieria" && (
+    <IngenieriaProductoPage lang={currentLang} pageId="ingenieria" />
   )
 }
 {

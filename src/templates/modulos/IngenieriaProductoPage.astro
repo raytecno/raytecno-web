@@ -1,0 +1,16 @@
+---
+/**
+ * Template: Módulo Ingeniería de producto (Noviembre 2026)
+ * Del boceto a producción: prototipos, versiones, coste y viabilidad
+ */
+import SubmoduloLayout from "@/components/SubmoduloLayout.astro";
+
+interface Props {
+  lang: string;
+  pageId: string;
+}
+
+const { lang } = Astro.props;
+---
+
+<SubmoduloLayout lang={lang} moduloId="ingenieria" />

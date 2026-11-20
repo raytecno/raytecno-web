@@ -11,7 +11,7 @@ import submodulosCa from './submodulos.ca.json';
 import submodulosPtBr from './submodulos.pt-br.json';
 
 // Tipos
-export type ModuloId = 'maestros' | 'comercial' | 'fabricacion' | 'finanzas' | 'historicos' | 'inventario' | 'estadisticas' | 'vendedores' | 'ecommerce' | 'impresoras3d' | 'portal' | 'asistenteia';
+export type ModuloId = 'maestros' | 'comercial' | 'fabricacion' | 'finanzas' | 'historicos' | 'inventario' | 'estadisticas' | 'vendedores' | 'ecommerce' | 'impresoras3d' | 'portal' | 'asistenteia' | 'ingenieria';
 
 export interface ImageTranslation {
   title: string;
@@ -192,6 +192,19 @@ export const modulosConfig: Record<ModuloId, ModuloConfig> = {
     secciones: [
       { id: 'impresoras', prefix: '3DP' }
 
+    ],
+  },
+  // Noviembre 2026: secciones de texto (images vacío) hasta tener capturas
+  // de demostración; cuando las haya, ING-PIP01..03, ING-COS01..03, etc.
+  ingenieria: {
+    color: '#e11d48',
+    icon: `<svg viewBox="0 0 64 64" fill="none"><path d="M18 14h28l10 12-24 28L8 26z" fill="currentColor" opacity="0.2"/><path d="M18 14h28l10 12-24 28L8 26z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="M8 26h48M24 14l-4 12 12 28 12-28-4-12" stroke="currentColor" stroke-width="2" stroke-linejoin="round" opacity="0.6"/></svg>`,
+    secciones: [
+      { id: 'pipeline', prefix: 'ING-PIP' },
+      { id: 'coste', prefix: 'ING-COS' },
+      { id: 'cad', prefix: 'ING-CAD' },
+      { id: 'readiness', prefix: 'ING-RDY' },
+      { id: 'versiones', prefix: 'ING-VER' },
     ],
   },
   portal: {

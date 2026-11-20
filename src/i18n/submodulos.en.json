@@ -430,6 +430,130 @@
         }
       }
     },
+    "ingenieria": {
+      "title": "Product Engineering",
+      "subtitle": "From sketch to production: prototypes, cost and viability of every piece",
+      "metaTitle": "Product Engineering | RayGold ERP - From sketch to production",
+      "metaDescription": "Prototypes, versions and viability of every piece of jewelry before it is made: CAD and STL, estimated weight, stage-by-stage cost with a margin traffic light, readiness and release to production.",
+      "intro": {
+        "titulo": "No piece reaches the workshop without knowing whether it pays",
+        "parrafos": [
+          "Before a piece is made there are sketches, waxes, 3D-printed resins, rubber molds and a first pilot cast in metal. At every step the weight, the stones and the labor hours change, and the cost with them. The Product Engineering module brings all that work together in one place and answers three questions: is the piece profitable, is it ready to make, and what has changed and why.",
+          "Each model moves through seven stages on a board, with its cost valued at each one against the target price. Once it has its design, bill of materials, route, approved prototypes, a sufficient margin and every check done, it is released, and RayGold creates the final item ready for production."
+        ]
+      },
+      "noEs": {
+        "titulo": "What it is not",
+        "items": [
+          "It is not a CAD program: the design is done in your CAD software and the STL is uploaded here.",
+          "It is not a configurator for end customers: it is the internal study of each model before it is made.",
+          "It does not duplicate the item master: the final item is created only when the version is released."
+        ]
+      },
+      "faq": [
+        {
+          "pregunta": "When can the cost of a new piece be calculated?",
+          "respuesta": "As soon as the version has a bill of materials. With the STL uploaded it is calculated from the estimated weight and, once there is a cast pilot, from the real weight. Each calculation is saved with that day’s metal price."
+        },
+        {
+          "pregunta": "What happens to the money spent on prototypes?",
+          "respuesta": "It is added up per version and spread across the forecast units as development cost, so it becomes part of the cost of each piece."
+        },
+        {
+          "pregunta": "Can a product already in production be changed?",
+          "respuesta": "Not directly: the released version is frozen. An engineering change order is opened with its reason and impact and, once approved, it creates a new version that goes through the stages again."
+        }
+      ],
+      "sections": {
+        "pipeline": {
+          "name": "From sketch to production",
+          "description": "Seven stages on a board, and the system checks what is needed before letting each card move on.",
+          "detalle": {
+            "parrafos": [
+              "The versions of each product are shown in columns: Sketch, Prototype, Pilot, Viability, Readiness, Released and Rejected. Cards are dragged from one stage to the next, and RayGold will not let them advance if something is missing: no pilot without a prototype, no viability without a bill of materials, no readiness without a valued cost.",
+              "Each prototype is recorded with its type (wax, 3D-printed resin, rubber mold), operator, dates, weight, hours and spend. The last approved pilot sets the real weight of the version."
+            ],
+            "puntos": [
+              "Sketch: the idea, family, collection, target price and unit forecast",
+              "Prototype and pilot: physical test models and the first piece cast in metal",
+              "Viability: the full cost with the bill of materials and route, and the decision on margin",
+              "Rejected: always with a reason; if every version is rejected, the product is discarded",
+              "Each card shows cost, margin, prototypes, readiness and days in the stage"
+            ]
+          },
+          "images": []
+        },
+        "coste": {
+          "name": "Cost and viability",
+          "description": "The cost of each version, stage by stage, against the target price.",
+          "detalle": {
+            "parrafos": [
+              "Every time it is calculated, RayGold makes a full valuation and saves it as is, with that day’s metal price. Valuations are never recalculated afterwards: they stay as history, you choose which one is current and you compare versions with each other.",
+              "The traffic light shows whether the margin is reached: green if it meets the target, amber up to 5 points below and red if it falls further short. In a gold piece the metal can be 90% of the cost, so a few tenths of a gram decide viability: that is why the cost can be calculated from the CAD estimated weight or from the pilot’s real weight."
+            ],
+            "puntos": [
+              "Metal: weight × (1 + casting loss) × fineness × fine metal price",
+              "Stones, findings and packaging from the bill of materials, with the source of each cost",
+              "Labor from the route: hours per piece × section rate",
+              "Subcontracting: outside casting, plating or setting",
+              "Development: prototype spend spread across the forecast units",
+              "Margin against target (40% by default, configurable) and the minimum price to reach it"
+            ]
+          },
+          "images": []
+        },
+        "cad": {
+          "name": "CAD, STL and 3D",
+          "description": "Drag the file in and RayGold measures it, stores it and shows it in 3D.",
+          "detalle": {
+            "parrafos": [
+              "STL, 3MF and OBJ files are measured right in the browser: volume, dimensions and triangles. They are stored in the 3D Printers module ready to print, and a view of the piece is generated in the metal’s color. Photos, renders, drawings and PDFs are stored with their thumbnail.",
+              "The main STL sets the version’s volume and, with the metal’s density, gives the estimated weight. An 18 mm hoop earring with 2 mm wire has 0.1574 cm³: 2.44 g in 18K yellow gold and 1.63 g in 925 silver."
+            ],
+            "puntos": [
+              "Estimated weight = STL volume × metal density",
+              "Densities and fineness for 18K and 14K gold, 925 silver and 950 platinum, configurable",
+              "3D viewer with metal reflections: rotate, zoom, show the mesh and download the file",
+              "Dimensions, volume, estimated weight and triangles below the viewer"
+            ]
+          },
+          "images": []
+        },
+        "readiness": {
+          "name": "Readiness and release",
+          "description": "What must be ready before production, and the move to production in a single step.",
+          "detalle": {
+            "parrafos": [
+              "The checklist comes with a default policy and can be adjusted by family. Automatic checks are ticked by the system as soon as they are met: CAD uploaded, bill of materials, route, approved prototype and pilot, real weight and current cost. Manual checks are ticked by whoever owns them: commercial approval, pilot quality review and, where they apply, stones, photos and packaging.",
+              "When there is a current cost and every mandatory check is done, Release is enabled. In a single step RayGold creates the final item with its family, metal, karat and color, creates the new components, saves the bill of materials and stages and sets up stock. The version is frozen, with date and user."
+            ],
+            "puntos": [
+              "Mandatory and optional checks, and “not applicable” for what does not apply",
+              "If something is missing, the button says exactly what: for example, 7 of 9 mandatory",
+              "Components that do not exist yet are flagged as new and created on release"
+            ]
+          },
+          "images": []
+        },
+        "versiones": {
+          "name": "Versions and documents",
+          "description": "Every change is a version with its reason, and every version has its customer sheet.",
+          "detalle": {
+            "parrafos": [
+              "A product can have several versions. A new version is created from another one with its reason and can clone its bill of materials, route and files, so alternatives are compared side by side with their costs: another metal, another thickness, other stones. A released version can no longer be edited: to change a product in production, an engineering change order is opened which, once approved, creates the new version.",
+              "Two documents are printed from the version. The customer sheet is the sales presentation, with no costs or margins, and sign-off boxes. The internal technical dossier holds the whole study: cost breakdown, bill of materials, route, prototypes, readiness and valuation history."
+            ],
+            "puntos": [
+              "Change order with type, priority, requester, reason and impact analysis",
+              "Customer sheet: image, specifications, composition without amounts, optional price and sign-off",
+              "Technical dossier with prepared, reviewed and approved signatures",
+              "Both are saved as PDF to send by email"
+            ]
+          },
+          "images": []
+        }
+      }
+    },
     "finanzas": {
       "title": "Finance",
       "subtitle": "Integrated accounting, treasury and VAT",

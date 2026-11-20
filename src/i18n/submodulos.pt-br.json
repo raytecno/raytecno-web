@@ -430,6 +430,130 @@
         }
       }
     },
+    "ingenieria": {
+      "title": "Engenharia de produto",
+      "subtitle": "Do esboço à produção: protótipos, custo e viabilidade de cada joia",
+      "metaTitle": "Engenharia de produto | RayGold ERP - Do esboço à produção",
+      "metaDescription": "Protótipos, versões e viabilidade de cada joia antes de fabricá-la: CAD e STL, peso estimado, custo por etapa com semáforo de margem, readiness e liberação para a produção.",
+      "intro": {
+        "titulo": "Nenhuma joia chega à oficina sem saber se é rentável",
+        "parrafos": [
+          "Antes de fabricar uma peça são feitos esboços, ceras, resinas impressas em 3D, moldes de borracha e um primeiro piloto fundido em metal. A cada passo mudam o peso, as pedras e as horas de mão de obra, e com eles o custo. O módulo de Engenharia de produto reúne todo esse trabalho em um só lugar e responde a três perguntas: se a joia é rentável, se está pronta para fabricar e o que mudou e por quê.",
+          "Cada modelo avança por sete etapas em um quadro, com o custo avaliado em cada uma frente ao preço-alvo. Quando tem o seu design, a sua estrutura, o seu roteiro, os protótipos aprovados, uma margem suficiente e todas as verificações feitas, é liberado, e o RayGold cria o produto definitivo pronto para fabricar."
+        ]
+      },
+      "noEs": {
+        "titulo": "O que não é",
+        "items": [
+          "Não é um programa de CAD: o design é feito no seu CAD e aqui se envia o STL.",
+          "Não é um configurador para o cliente final: é o estudo interno de cada modelo antes de fabricá-lo.",
+          "Não duplica o cadastro de produtos: o produto definitivo só é criado ao liberar a versão."
+        ]
+      },
+      "faq": [
+        {
+          "pregunta": "A partir de quando dá para calcular o custo de uma joia nova?",
+          "respuesta": "Assim que a versão tem estrutura. Com o STL carregado, o cálculo usa o peso estimado e, quando já existe um piloto fundido, o peso real. Cada cálculo fica salvo com a cotação do metal daquele dia."
+        },
+        {
+          "pregunta": "O que acontece com o gasto dos protótipos?",
+          "respuesta": "É somado por versão e distribuído entre as unidades previstas como custo de desenvolvimento, então faz parte do custo de cada peça."
+        },
+        {
+          "pregunta": "Dá para mudar um produto que já está em fabricação?",
+          "respuesta": "Não diretamente: a versão liberada fica congelada. Abre-se uma ordem de alteração com o motivo e o impacto e, ao aprová-la, cria-se uma versão nova que volta a percorrer as etapas."
+        }
+      ],
+      "sections": {
+        "pipeline": {
+          "name": "Do esboço à produção",
+          "description": "Sete etapas em um quadro, e o sistema verifica o necessário antes de deixar passar cada cartão.",
+          "detalle": {
+            "parrafos": [
+              "As versões de cada produto aparecem em colunas: Esboço, Protótipo, Piloto, Viabilidade, Readiness, Liberada e Rejeitada. Passa-se de uma etapa a outra arrastando o cartão, e o RayGold não deixa avançar se falta algo: não há piloto sem protótipo, nem viabilidade sem estrutura, nem readiness sem um custo avaliado.",
+              "Cada protótipo fica registrado com o seu tipo (cera, resina impressa em 3D, borracha), o operador, as datas, o peso, as horas e o gasto. O último piloto aprovado fixa o peso real da versão."
+            ],
+            "puntos": [
+              "Esboço: a ideia, a família, a coleção, o preço-alvo e a previsão de unidades",
+              "Protótipo e piloto: modelos físicos de teste e primeira peça fundida em metal",
+              "Viabilidade: o custo completo com a estrutura e o roteiro, e a decisão sobre a margem",
+              "Rejeitada: sempre com o motivo; se todas as versões são rejeitadas, o produto é descartado",
+              "Cada cartão mostra custo, margem, protótipos, readiness e dias na etapa"
+            ]
+          },
+          "images": []
+        },
+        "coste": {
+          "name": "Custo e viabilidade",
+          "description": "O custo de cada versão, etapa por etapa, frente ao preço-alvo.",
+          "detalle": {
+            "parrafos": [
+              "Cada vez que se calcula, o RayGold faz uma avaliação completa e a salva como está, com a cotação do metal daquele dia. As avaliações não são recalculadas depois: ficam como histórico, escolhe-se qual é a vigente e comparam-se as versões entre si.",
+              "O semáforo diz se a margem é atingida: verde se alcança a meta, âmbar até 5 pontos abaixo e vermelho se fica mais longe. Em uma peça de ouro o metal pode ser 90 % do custo, então alguns décimos de grama decidem a viabilidade: por isso dá para calcular com o peso estimado do CAD ou com o peso real do piloto."
+            ],
+            "puntos": [
+              "Metal: peso × (1 + perda de fundição) × teor × cotação do metal fino",
+              "Pedras, componentes e embalagem a partir da estrutura, com a origem de cada custo",
+              "Mão de obra a partir do roteiro: horas por peça × tarifa da seção",
+              "Terceirização: fundição externa, banhos ou cravação fora da casa",
+              "Desenvolvimento: o gasto em protótipos, distribuído entre as unidades previstas",
+              "Margem frente à meta (40 % por padrão, configurável) e preço mínimo para alcançá-la"
+            ]
+          },
+          "images": []
+        },
+        "cad": {
+          "name": "CAD, STL e 3D",
+          "description": "Arraste o arquivo e o RayGold o mede, o guarda e o mostra em 3D.",
+          "detalle": {
+            "parrafos": [
+              "Os arquivos STL, 3MF e OBJ são medidos no próprio navegador: volume, medidas e triângulos. Ficam guardados no módulo de Impressoras 3D prontos para imprimir, e é gerada uma vista da peça na cor do metal. Fotos, renders, desenhos e PDF são guardados com a sua miniatura.",
+              "O STL principal fixa o volume da versão e, com a densidade do metal, sai o peso estimado. Uma argola de 18 mm com fio de 2 mm tem 0,1574 cm³: 2,44 g em ouro 18K amarelo e 1,63 g em prata 925."
+            ],
+            "puntos": [
+              "Peso estimado = volume do STL × densidade do metal",
+              "Densidades e teores de ouro 18K e 14K, prata 925 e platina 950, configuráveis",
+              "Visualizador 3D com reflexos de metal: gira, aproxima, mostra a malha e baixa o arquivo",
+              "Medidas, volume, peso estimado e triângulos abaixo do visualizador"
+            ]
+          },
+          "images": []
+        },
+        "readiness": {
+          "name": "Readiness e liberação",
+          "description": "O que precisa estar pronto antes de fabricar, e a passagem para a produção em uma só operação.",
+          "detalle": {
+            "parrafos": [
+              "A lista de verificações vem com uma política padrão e se ajusta por família. As automáticas são marcadas pelo sistema assim que se cumprem: CAD carregado, estrutura, roteiro, protótipo e piloto aprovados, peso real e custo vigente. As manuais são marcadas por quem responde por elas: a aprovação comercial, a revisão de qualidade do piloto e, quando se aplicam, as pedras, as fotos e a embalagem.",
+              "Quando há custo vigente e todas as obrigatórias estão feitas, o botão Liberar é habilitado. Em uma só operação o RayGold cria o produto definitivo com a sua família, metal, quilates e cor, cria os componentes novos, grava a estrutura e as fases e cadastra os estoques. A versão fica congelada, com data e usuário."
+            ],
+            "puntos": [
+              "Verificações obrigatórias e opcionais, e «não se aplica» para o que não cabe",
+              "Se falta algo, o botão diz exatamente o quê: por exemplo, 7 de 9 obrigatórias",
+              "Os componentes que ainda não existem são marcados como novos e criados ao liberar"
+            ]
+          },
+          "images": []
+        },
+        "versiones": {
+          "name": "Versões e documentos",
+          "description": "Cada mudança é uma versão com o seu motivo, e cada versão tem a sua ficha para o cliente.",
+          "detalle": {
+            "parrafos": [
+              "Um produto pode ter várias versões. Uma versão nova é criada a partir de outra com o seu motivo e pode clonar a estrutura, o roteiro e os arquivos, então as alternativas são comparadas com os seus custos lado a lado: outro metal, outra espessura, outras pedras. Uma versão liberada não é mais alterada: para mudar um produto em fabricação abre-se uma ordem de alteração que, ao ser aprovada, cria a versão nova.",
+              "Da ficha se imprimem dois documentos. A ficha para o cliente é a apresentação comercial, sem custos nem margens, com campos de aprovação e assinatura. O dossiê técnico interno traz todo o estudo: detalhamento do custo, estrutura, roteiro, protótipos, readiness e histórico de avaliações."
+            ],
+            "puntos": [
+              "Ordem de alteração com tipo, prioridade, solicitante, motivo e análise de impacto",
+              "Ficha para o cliente: imagem, especificações, composição sem valores, preço opcional e aprovação",
+              "Dossiê técnico com assinaturas de elaborado, revisado e aprovado",
+              "Os dois são salvos em PDF para enviar por e-mail"
+            ]
+          },
+          "images": []
+        }
+      }
+    },
     "finanzas": {
       "title": "Finanças",
       "subtitle": "Contabilidade, tesouraria e impostos integrados",
