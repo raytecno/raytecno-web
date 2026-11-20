@@ -376,7 +376,16 @@
               "Control estadístico con Cp y Cpk, reglas de alarma y Pareto de defectos por fase, operario o taller"
             ]
           },
-          "images": []
+          "images": [
+            {
+              "title": "Puntos de control",
+              "description": "Plantilla de joyería: peso, ley, piedras y poros, con tolerancias y características críticas"
+            },
+            {
+              "title": "Inspección",
+              "description": "Características medidas, no conformidad y decisión, ligada al marcaje de la fase"
+            }
+          ]
         },
         "cronometrajes": {
           "name": "Métodos y tiempos",
@@ -395,7 +404,20 @@
               "Por operación, con el máximo detalle, o por sección, más rápido para talleres medianos y pequeños"
             ]
           },
-          "images": []
+          "images": [
+            {
+              "title": "Cronómetro",
+              "description": "Ciclo en curso por operaciones, en el orden de la ruta"
+            },
+            {
+              "title": "Comparativa",
+              "description": "Ciclo a ciclo frente al estándar, con TMO, TE y paradas aparte"
+            },
+            {
+              "title": "Suplementos",
+              "description": "Constantes y variables por puesto, con sus porcentajes"
+            }
+          ]
         },
         "laboral": {
           "name": "Gestión Laboral",
@@ -486,7 +508,12 @@
               "Cada tarjeta enseña coste, margen, prototipos, readiness y días en la etapa"
             ]
           },
-          "images": []
+          "images": [
+            {
+              "title": "Pipeline",
+              "description": "Las versiones por etapa, con coste, margen, peso y días en la etapa"
+            }
+          ]
         },
         "coste": {
           "name": "Coste y viabilidad",
@@ -505,7 +532,12 @@
               "Margen frente al objetivo (40 % por defecto, configurable) y precio mínimo para llegar a él"
             ]
           },
-          "images": []
+          "images": [
+            {
+              "title": "Desglose del coste",
+              "description": "Metal, mano de obra por operación y piedras, con el histórico de valoraciones"
+            }
+          ]
         },
         "cad": {
           "name": "CAD, STL y 3D",
@@ -522,7 +554,12 @@
               "Medidas, volumen, peso estimado y triángulos bajo el visor"
             ]
           },
-          "images": []
+          "images": [
+            {
+              "title": "Visor 3D",
+              "description": "La pieza desde el STL: dimensiones, volumen, peso estimado y piedras"
+            }
+          ]
         },
         "readiness": {
           "name": "Readiness y liberación",
@@ -538,7 +575,12 @@
               "Los componentes que aún no existen se marcan como nuevos y se crean al liberar"
             ]
           },
-          "images": []
+          "images": [
+            {
+              "title": "Readiness",
+              "description": "Comprobaciones automáticas y manuales antes de liberar"
+            }
+          ]
         },
         "versiones": {
           "name": "Versiones y documentos",
@@ -555,7 +597,12 @@
               "Los dos se guardan en PDF para enviarlos por correo"
             ]
           },
-          "images": []
+          "images": [
+            {
+              "title": "Documentos",
+              "description": "Ficha para el cliente o dossier técnico interno, en PDF"
+            }
+          ]
         }
       }
     },

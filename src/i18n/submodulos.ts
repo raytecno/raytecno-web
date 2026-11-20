@@ -120,15 +120,15 @@ export const modulosConfig: Record<ModuloId, ModuloConfig> = {
       { id: 'planes', prefix: 'PLA' },
       { id: 'fabricacion2', prefix: 'FAB' },
       { id: 'marcaje', prefix: 'MAR' },
-      // Noviembre 2026: sección de texto (images vacío). CAL01-03 en el blob
-      // son plantillas de relleno: sustituirlas por capturas reales con
-      // datos de demostración y añadir sus títulos en `images`.
+      // Noviembre 2026: CAL01 (puntos de control) y CAL02 (inspección). El
+      // CAL03 del blob es una plantilla de relleno y no se usa: el SPC se
+      // añadirá cuando haya medidas suficientes.
       { id: 'calidad', prefix: 'CAL' },
       // { id: 'mapa', prefix: 'MAP' },
       // { id: 'materiales', prefix: 'MAT' },
       { id: 'fundicion', prefix: 'FUN' },
       { id: 'tiempos', prefix: 'TIM' },
-      // Noviembre 2026: sección de texto; capturas CRO01-03 cuando las haya.
+      // Noviembre 2026: CRO01 cronómetro, CRO02 comparativa, CRO03 suplementos.
       { id: 'cronometrajes', prefix: 'CRO' },
       // { id: 'expediciones', prefix: 'EXP' },
       { id: 'laboral', prefix: 'LAB' },
@@ -194,15 +194,16 @@ export const modulosConfig: Record<ModuloId, ModuloConfig> = {
 
     ],
   },
-  // Noviembre 2026: secciones de texto (images vacío) hasta tener capturas
-  // de demostración; cuando las haya, ING-PIP01..03, ING-COS01..03, etc.
+  // Noviembre 2026: una captura por sección (ING-PIP01, ING-COS01, ING-CAD02,
+  // ING-RDY01, ING-VER01). Para añadir más, subir ING-XXX02… y su título en `images`.
   ingenieria: {
     color: '#e11d48',
     icon: `<svg viewBox="0 0 64 64" fill="none"><path d="M18 14h28l10 12-24 28L8 26z" fill="currentColor" opacity="0.2"/><path d="M18 14h28l10 12-24 28L8 26z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="M8 26h48M24 14l-4 12 12 28 12-28-4-12" stroke="currentColor" stroke-width="2" stroke-linejoin="round" opacity="0.6"/></svg>`,
     secciones: [
       { id: 'pipeline', prefix: 'ING-PIP' },
       { id: 'coste', prefix: 'ING-COS' },
-      { id: 'cad', prefix: 'ING-CAD' },
+      // El visor 3D se guardó como ING-CAD02 (la 01, «Archivos», se descartó).
+      { id: 'cad', prefix: 'ING-CAD', imagenes: ['ING-CAD02'] },
       { id: 'readiness', prefix: 'ING-RDY' },
       { id: 'versiones', prefix: 'ING-VER' },
     ],

@@ -371,7 +371,16 @@
               "Statistical process control with Cp and Cpk, alarm rules and defect Pareto by stage, operator or workshop"
             ]
           },
-          "images": []
+          "images": [
+            {
+              "title": "Control points",
+              "description": "Jewelry template: weight, fineness, stones and porosity, with tolerances and critical characteristics"
+            },
+            {
+              "title": "Inspection",
+              "description": "Measured characteristics, nonconformity and decision, tied to the stage record"
+            }
+          ]
         },
         "cronometrajes": {
           "name": "Methods and times",
@@ -390,7 +399,20 @@
               "By operation, for maximum detail, or by section, faster for small and mid-sized workshops"
             ]
           },
-          "images": []
+          "images": [
+            {
+              "title": "Stopwatch",
+              "description": "Cycle in progress by operation, in route order"
+            },
+            {
+              "title": "Comparison",
+              "description": "Cycle by cycle against the standard, with MOT, ST and stoppages shown separately"
+            },
+            {
+              "title": "Allowances",
+              "description": "Constant and variable allowances per workstation, with their percentages"
+            }
+          ]
         },
         "laboral": {
           "name": "Labor Management",
@@ -481,7 +503,12 @@
               "Each card shows cost, margin, prototypes, readiness and days in the stage"
             ]
           },
-          "images": []
+          "images": [
+            {
+              "title": "Pipeline",
+              "description": "Versions by stage, with cost, margin, weight and days in the stage"
+            }
+          ]
         },
         "coste": {
           "name": "Cost and viability",
@@ -500,7 +527,12 @@
               "Margin against target (40% by default, configurable) and the minimum price to reach it"
             ]
           },
-          "images": []
+          "images": [
+            {
+              "title": "Cost breakdown",
+              "description": "Metal, labor by operation and stones, with the valuation history"
+            }
+          ]
         },
         "cad": {
           "name": "CAD, STL and 3D",
@@ -517,7 +549,12 @@
               "Dimensions, volume, estimated weight and triangles below the viewer"
             ]
           },
-          "images": []
+          "images": [
+            {
+              "title": "3D viewer",
+              "description": "The piece from the STL: dimensions, volume, estimated weight and stones"
+            }
+          ]
         },
         "readiness": {
           "name": "Readiness and release",
@@ -533,7 +570,12 @@
               "Components that do not exist yet are flagged as new and created on release"
             ]
           },
-          "images": []
+          "images": [
+            {
+              "title": "Readiness",
+              "description": "Automatic and manual checks before release"
+            }
+          ]
         },
         "versiones": {
           "name": "Versions and documents",
@@ -550,7 +592,12 @@
               "Both are saved as PDF to send by email"
             ]
           },
-          "images": []
+          "images": [
+            {
+              "title": "Documents",
+              "description": "Customer sheet or internal technical dossier, as PDF"
+            }
+          ]
         }
       }
     },

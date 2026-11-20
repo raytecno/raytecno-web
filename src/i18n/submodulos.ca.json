@@ -371,7 +371,16 @@
               "Control estadístic amb Cp i Cpk, regles d’alarma i Pareto de defectes per fase, operari o taller"
             ]
           },
-          "images": []
+          "images": [
+            {
+              "title": "Punts de control",
+              "description": "Plantilla de joieria: pes, llei, pedres i porus, amb toleràncies i característiques crítiques"
+            },
+            {
+              "title": "Inspecció",
+              "description": "Característiques mesurades, no conformitat i decisió, lligada al marcatge de la fase"
+            }
+          ]
         },
         "cronometrajes": {
           "name": "Mètodes i temps",
@@ -390,7 +399,20 @@
               "Per operació, amb el màxim detall, o per secció, més ràpid per a tallers mitjans i petits"
             ]
           },
-          "images": []
+          "images": [
+            {
+              "title": "Cronòmetre",
+              "description": "Cicle en curs per operacions, en l’ordre de la ruta"
+            },
+            {
+              "title": "Comparativa",
+              "description": "Cicle a cicle davant de l’estàndard, amb TMO, TE i parades a part"
+            },
+            {
+              "title": "Suplements",
+              "description": "Constants i variables per lloc de treball, amb els seus percentatges"
+            }
+          ]
         },
         "laboral": {
           "name": "Gestió Laboral",
@@ -481,7 +503,12 @@
               "Cada targeta mostra cost, marge, prototips, readiness i dies a l’etapa"
             ]
           },
-          "images": []
+          "images": [
+            {
+              "title": "Pipeline",
+              "description": "Les versions per etapa, amb cost, marge, pes i dies a l’etapa"
+            }
+          ]
         },
         "coste": {
           "name": "Cost i viabilitat",
@@ -500,7 +527,12 @@
               "Marge davant de l’objectiu (40 % per defecte, configurable) i preu mínim per assolir-lo"
             ]
           },
-          "images": []
+          "images": [
+            {
+              "title": "Desglossament del cost",
+              "description": "Metall, mà d’obra per operació i pedres, amb l’històric de valoracions"
+            }
+          ]
         },
         "cad": {
           "name": "CAD, STL i 3D",
@@ -517,7 +549,12 @@
               "Mides, volum, pes estimat i triangles sota el visor"
             ]
           },
-          "images": []
+          "images": [
+            {
+              "title": "Visor 3D",
+              "description": "La peça des de l’STL: dimensions, volum, pes estimat i pedres"
+            }
+          ]
         },
         "readiness": {
           "name": "Readiness i alliberament",
@@ -533,7 +570,12 @@
               "Els components que encara no existeixen es marquen com a nous i es creen en alliberar"
             ]
           },
-          "images": []
+          "images": [
+            {
+              "title": "Readiness",
+              "description": "Comprovacions automàtiques i manuals abans d’alliberar"
+            }
+          ]
         },
         "versiones": {
           "name": "Versions i documents",
@@ -550,7 +592,12 @@
               "Tots dos es desen en PDF per enviar-los per correu"
             ]
           },
-          "images": []
+          "images": [
+            {
+              "title": "Documents",
+              "description": "Fitxa per al client o dossier tècnic intern, en PDF"
+            }
+          ]
         }
       }
     },
