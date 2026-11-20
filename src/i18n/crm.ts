@@ -237,6 +237,15 @@ const es: CrmTranslations = {
   ],
   pantallasExtra: [
     {
+      id: 'pipeline',
+      pestana: 'Pipeline',
+      para: 'vendedor',
+      titulo: 'Cada oportunidad, en su fase.',
+      texto: 'Oportunidades por fase con su importe, su probabilidad y su fecha de cierre.',
+      archivo: 'crm-pipeline.png',
+      alt: 'Pipeline comercial en RayGold: oportunidades por fase con importe, probabilidad y fecha de cierre',
+    },
+    {
       id: 'objetivos',
       pestana: 'Objetivos',
       para: 'direccion',
@@ -351,6 +360,19 @@ const es: CrmTranslations = {
         entradilla:
           'Lo facturado ya pasó. La dirección necesita saber cómo va a acabar el año y quién va por detrás mientras todavía hay tiempo.',
         pasos: [
+          {
+            pantalla: 'pipeline',
+            titulo: 'Pipeline: las oportunidades, fase a fase',
+            parrafos: [
+              'Las oportunidades se mueven de fase arrastrándolas: leads, cualificados, propuestas, negociación y cierre. Cada tarjeta lleva el importe, la probabilidad y la fecha de cierre, en rojo si ha vencido.',
+              'La probabilidad la calcula RayGold con el histórico de ganadas y perdidas de la empresa, y al perder una oportunidad el motivo es obligatorio. Ese mismo pipeline, ponderado, es el que alimenta el forecast.',
+            ],
+            puntos: [
+              'Valor ponderado y probabilidad media del pipeline',
+              'Oportunidades vencidas y sin fecha, a la vista',
+              'Motivos de pérdida para la central',
+            ],
+          },
           {
             pantalla: 'forecast',
             titulo: 'Forecast: el cierre del año, mes a mes',
@@ -660,6 +682,15 @@ const en: CrmTranslations = {
   ],
   pantallasExtra: [
     {
+      id: 'pipeline',
+      pestana: 'Pipeline',
+      para: 'vendedor',
+      titulo: 'Every opportunity, at its stage.',
+      texto: 'Opportunities by stage with amount, probability and close date.',
+      archivo: 'crm-pipeline.png',
+      alt: 'RayGold sales pipeline: opportunities by stage with amount, probability and close date',
+    },
+    {
       id: 'objetivos',
       pestana: 'Targets',
       para: 'direccion',
@@ -773,6 +804,19 @@ const en: CrmTranslations = {
         entradilla:
           'What has been invoiced is in the past. Management needs to know how the year will end and who is falling behind while there is still time.',
         pasos: [
+          {
+            pantalla: 'pipeline',
+            titulo: 'Pipeline: opportunities, stage by stage',
+            parrafos: [
+              'Opportunities move between stages by dragging them: leads, qualified, proposals, negotiation and closing. Each card shows the amount, probability and close date, in red if it is overdue.',
+              'RayGold calculates the probability from the company’s history of won and lost deals, and a reason is required whenever an opportunity is lost. That same pipeline, weighted, is what feeds the forecast.',
+            ],
+            puntos: [
+              'Weighted value and average probability of the pipeline',
+              'Overdue and undated opportunities in plain sight',
+              'Loss reasons for sales HQ',
+            ],
+          },
           {
             pantalla: 'forecast',
             titulo: 'Forecast: the year-end close, month by month',
@@ -1082,6 +1126,15 @@ const fr: CrmTranslations = {
   ],
   pantallasExtra: [
     {
+      id: 'pipeline',
+      pestana: 'Pipeline',
+      para: 'vendedor',
+      titulo: 'Chaque opportunité, à son étape.',
+      texto: 'Les opportunités par étape avec leur montant, leur probabilité et leur date de clôture.',
+      archivo: 'crm-pipeline.png',
+      alt: 'Pipeline commercial dans RayGold : opportunités par étape avec montant, probabilité et date de clôture',
+    },
+    {
       id: 'objetivos',
       pestana: 'Objectifs',
       para: 'direccion',
@@ -1195,6 +1248,19 @@ const fr: CrmTranslations = {
         entradilla:
           'Le facturé appartient au passé. La direction doit savoir comment l’année va se terminer et qui est en retard tant qu’il reste du temps.',
         pasos: [
+          {
+            pantalla: 'pipeline',
+            titulo: 'Pipeline : les opportunités, étape par étape',
+            parrafos: [
+              'Les opportunités changent d’étape par glisser-déposer : leads, qualifiés, propositions, négociation et clôture. Chaque carte indique le montant, la probabilité et la date de clôture, en rouge si elle est dépassée.',
+              'RayGold calcule la probabilité à partir de l’historique des affaires gagnées et perdues de l’entreprise, et le motif est obligatoire quand une opportunité est perdue. Ce même pipeline, pondéré, alimente les prévisions.',
+            ],
+            puntos: [
+              'Valeur pondérée et probabilité moyenne du pipeline',
+              'Opportunités en retard et sans date, bien visibles',
+              'Motifs de perte pour le pilotage',
+            ],
+          },
           {
             pantalla: 'forecast',
             titulo: 'Prévisions : la clôture de l’année, mois par mois',
@@ -1504,6 +1570,15 @@ const ca: CrmTranslations = {
   ],
   pantallasExtra: [
     {
+      id: 'pipeline',
+      pestana: 'Pipeline',
+      para: 'vendedor',
+      titulo: 'Cada oportunitat, a la seva fase.',
+      texto: 'Oportunitats per fase amb l’import, la probabilitat i la data de tancament.',
+      archivo: 'crm-pipeline.png',
+      alt: 'Pipeline comercial a RayGold: oportunitats per fase amb import, probabilitat i data de tancament',
+    },
+    {
       id: 'objetivos',
       pestana: 'Objectius',
       para: 'direccion',
@@ -1617,6 +1692,19 @@ const ca: CrmTranslations = {
         entradilla:
           'El que s’ha facturat ja ha passat. La direcció necessita saber com acabarà l’any i qui va endarrerit mentre encara hi ha temps.',
         pasos: [
+          {
+            pantalla: 'pipeline',
+            titulo: 'Pipeline: les oportunitats, fase a fase',
+            parrafos: [
+              'Les oportunitats es mouen de fase arrossegant-les: leads, qualificats, propostes, negociació i tancament. Cada targeta porta l’import, la probabilitat i la data de tancament, en vermell si ha vençut.',
+              'La probabilitat la calcula RayGold amb l’històric de guanyades i perdudes de l’empresa, i en perdre una oportunitat el motiu és obligatori. Aquest mateix pipeline, ponderat, és el que alimenta la previsió.',
+            ],
+            puntos: [
+              'Valor ponderat i probabilitat mitjana del pipeline',
+              'Oportunitats vençudes i sense data, a la vista',
+              'Motius de pèrdua per a la central',
+            ],
+          },
           {
             pantalla: 'forecast',
             titulo: 'Previsió: el tancament de l’any, mes a mes',
@@ -1926,6 +2014,15 @@ const ptbr: CrmTranslations = {
   ],
   pantallasExtra: [
     {
+      id: 'pipeline',
+      pestana: 'Pipeline',
+      para: 'vendedor',
+      titulo: 'Cada oportunidade, na sua fase.',
+      texto: 'Oportunidades por fase com valor, probabilidade e data de fechamento.',
+      archivo: 'crm-pipeline.png',
+      alt: 'Pipeline comercial no RayGold: oportunidades por fase com valor, probabilidade e data de fechamento',
+    },
+    {
       id: 'objetivos',
       pestana: 'Metas',
       para: 'direccion',
@@ -2039,6 +2136,19 @@ const ptbr: CrmTranslations = {
         entradilla:
           'O que foi faturado já passou. A diretoria precisa saber como o ano vai terminar e quem está atrasado enquanto ainda há tempo.',
         pasos: [
+          {
+            pantalla: 'pipeline',
+            titulo: 'Pipeline: as oportunidades, fase a fase',
+            parrafos: [
+              'As oportunidades mudam de fase arrastando-as: leads, qualificados, propostas, negociação e fechamento. Cada cartão traz o valor, a probabilidade e a data de fechamento, em vermelho se venceu.',
+              'O RayGold calcula a probabilidade com o histórico de ganhas e perdidas da empresa, e ao perder uma oportunidade o motivo é obrigatório. Esse mesmo pipeline, ponderado, é o que alimenta a previsão.',
+            ],
+            puntos: [
+              'Valor ponderado e probabilidade média do pipeline',
+              'Oportunidades vencidas e sem data, à vista',
+              'Motivos de perda para a central',
+            ],
+          },
           {
             pantalla: 'forecast',
             titulo: 'Previsão: o fechamento do ano, mês a mês',
