@@ -241,14 +241,29 @@
       "title": "Fabricación",
       "subtitle": "Planificación, producción, materiales y gestión laboral",
       "metaTitle": "Fabricación | RayGold ERP - Control de Producción",
-      "metaDescription": "Planificación de planes, mapa de fabricación, gestión de materiales, fundición, expediciones y control laboral para joyerías.",
+      "metaDescription": "Planificación, mapa de fabricación, marcajes, calidad preventiva en la ruta, cronometrajes, fundición, capacidad y gestión laboral para joyerías.",
       "intro": {
         "titulo": "Del plan lanzado al gramo que falta",
         "parrafos": [
           "La fabricación es donde se escapa el margen. Un plan se lanza, pasa por cera, fundición, engaste y pulido, y en cada fase hay una diferencia de peso que alguien tiene que explicar. RayGold pesa a la entrada y a la salida de cada fase y por operario, así que la merma deja de ser un número global a fin de mes y pasa a tener nombre, fase y fecha.",
-          "Alrededor de eso está lo demás: el lanzamiento de planes, el mapa de fabricación con el estado de cada orden, los marcajes que registran lo que hace cada operario, el árbol de fundición con sus troncos, retales y escoria, y las tasas horarias que convierten el tiempo de taller en un coste que se puede repercutir."
+          "Alrededor de eso está lo demás: el lanzamiento de planes, el mapa de fabricación con el estado de cada orden, los marcajes que registran lo que hace cada operario, el árbol de fundición con sus troncos, retales y escoria, y las tasas horarias que convierten el tiempo de taller en un coste que se puede repercutir.",
+          "Y dentro de la ruta, la calidad y el tiempo: puntos de control que paran el defecto en la fase donde nace, con autocontrol del operario e inspección del encargado, y tiempos estándar medidos por cronometraje en lugar de estimados, que son los que luego usan el coste y la planificación."
         ]
       },
+      "faq": [
+        {
+          "pregunta": "¿El control de calidad para la producción?",
+          "respuesta": "No frena el trabajo ya hecho: la salida de una fase siempre se puede marcar. Lo que se frena, si el punto de control está configurado para bloquear, es la entrada en la fase siguiente hasta que la inspección se acepta. Se puede empezar en «solo avisar» y activar los bloqueos cuando el taller se haya acostumbrado."
+        },
+        {
+          "pregunta": "¿Cuántos cronometrajes hacen falta para fijar un tiempo estándar?",
+          "respuesta": "Entre 10 y 15 ciclos por artículo, repartidos entre varios operarios, días y turnos. En el trabajo manual de joyería una sola medida varía demasiado: por debajo de 10 ciclos el tiempo sirve como orientación, pero no se pasa a la ruta."
+        },
+        {
+          "pregunta": "¿La calidad sirve también para externos y talleres subcontratados?",
+          "respuesta": "Sí. El mismo punto de control se aplica según quién fabrica la pieza: la fábrica, un externo que hace una operación o un taller subcontratado que marca desde su portal. Lo que vuelve de fuera se controla al recibirlo."
+        }
+      ],
       "sections": {
         "planes": {
           "name": "Planes",
@@ -345,6 +360,43 @@
           ]
         },
        
+        "calidad": {
+          "name": "Calidad preventiva",
+          "description": "Control de calidad en proceso: el defecto se para en la fase donde nace, no en Expedición.",
+          "detalle": {
+            "parrafos": [
+              "Las fases importantes de la ruta llevan un punto de control. Al marcar la salida de esa fase, la inspección se crea sola y, si el control bloquea, la pieza no entra en la fase siguiente hasta que se acepta. La salida nunca se bloquea: el operario siempre puede terminar su trabajo.",
+              "Mide quien debe medir: el propio operario en los autocontroles y el encargado en los controles críticos, desde su bandeja de pendientes. Y funciona igual para lo que se hace en casa, para los externos que hacen una operación y para los talleres subcontratados, que marcan desde su portal."
+            ],
+            "puntos": [
+              "Plantilla de joyería: peso, ley del metal, medida o talla, piedras, poros, acabado, contraste, cierre y color",
+              "Características críticas: si la ley sale fuera de tolerancia, la pieza no se acepta sin una desviación documentada",
+              "Frecuencia por sobre, por primera pieza o una de cada N, y control al 100 % para órdenes de 1 a 5 piezas",
+              "Defectos de un catálogo, fotos desde el móvil y causa, acción y responsable al rechazar o reprocesar",
+              "Control estadístico con Cp y Cpk, reglas de alarma y Pareto de defectos por fase, operario o taller"
+            ]
+          },
+          "images": []
+        },
+        "cronometrajes": {
+          "name": "Métodos y tiempos",
+          "description": "Tiempos estándar medidos por cronometraje, no estimados.",
+          "detalle": {
+            "parrafos": [
+              "Del tiempo estándar de cada operación dependen el coste de mano de obra, la capacidad de cada sección y la planificación. El cronometraje sustituye las estimaciones por tiempos medidos, valorados y documentados: quién los midió, cuándo y cómo.",
+              "Se elige el artículo y RayGold prepara sus operaciones en el orden de la ruta. Se cronometra en pantalla o con la hoja impresa y el reloj del móvil, y las paradas se descuentan solas. Con los ciclos suficientes, el tiempo estándar se aprueba y pasa a la ruta, con el histórico del valor anterior."
+            ],
+            "puntos": [
+              "Tiempo medio, normal y estándar por operación: TE = TMO × FV × (FD + 1) / 100 × (SUPL + 1)",
+              "Valoración del ritmo en escala centesimal (100 = actividad normal) o en otras escalas",
+              "Factor de dificultad y suplementos por puesto, con valores de referencia de la OIT",
+              "Suplementos iguales para cualquier persona: la misma operación tiene el mismo tiempo, la haga quien la haga",
+              "De 10 a 15 ciclos por artículo; mandan los más recientes, así que el estándar se actualiza cuando mejora el método",
+              "Por operación, con el máximo detalle, o por sección, más rápido para talleres medianos y pequeños"
+            ]
+          },
+          "images": []
+        },
         "laboral": {
           "name": "Gestión Laboral",
           "description": "Operarios, presencia y configuración laboral",

@@ -241,14 +241,29 @@
       "title": "Fabrication",
       "subtitle": "Planification, production, matériaux et gestion du travail",
       "metaTitle": "Fabrication | RayGold ERP - Contrôle de Production",
-      "metaDescription": "Planification de plans, carte de fabrication, gestion des matériaux, fonte, expéditions et contrôle du travail pour joailleries.",
+      "metaDescription": "Planification, carte de fabrication, pointages, qualité préventive dans la gamme, chronométrages, fonte, capacité et gestion du personnel pour bijouteries.",
       "intro": {
         "titulo": "Du plan lancé au gramme qui manque",
         "parrafos": [
           "La fabrication, c'est là que la marge s'échappe. Un plan est lancé, passe par la cire, la fonte, le sertissage et le polissage, et à chaque phase il y a un écart de poids que quelqu'un doit expliquer. RayGold pèse à l'entrée et à la sortie de chaque phase et par opérateur : la perte cesse d'être un chiffre global en fin de mois et prend un nom, une phase et une date.",
-          "Autour, il y a tout le reste : le lancement des plans, la carte de fabrication avec l'état de chaque ordre, les pointages qui enregistrent ce que fait chaque opérateur, la fonderie avec ses troncs, ses chutes et ses scories, et les taux horaires qui transforment le temps d'atelier en un coût réellement répercutable."
+          "Autour, il y a tout le reste : le lancement des plans, la carte de fabrication avec l'état de chaque ordre, les pointages qui enregistrent ce que fait chaque opérateur, la fonderie avec ses troncs, ses chutes et ses scories, et les taux horaires qui transforment le temps d'atelier en un coût réellement répercutable.",
+          "Et dans la gamme, la qualité et le temps : des points de contrôle qui arrêtent le défaut à l’étape où il naît, avec autocontrôle de l’opérateur et inspection du chef d’atelier, et des temps standard mesurés par chronométrage plutôt qu’estimés, ceux qu’utilisent ensuite le coût et la planification."
         ]
       },
+      "faq": [
+        {
+          "pregunta": "Le contrôle qualité arrête-t-il la production ?",
+          "respuesta": "Il ne bloque jamais le travail déjà fait : la sortie d’une étape peut toujours être pointée. Ce qui est retenu, si le point de contrôle est bloquant, c’est l’entrée dans l’étape suivante jusqu’à l’acceptation de l’inspection. On peut commencer en mode « avertir seulement » et activer les blocages une fois l’atelier habitué."
+        },
+        {
+          "pregunta": "Combien de chronométrages faut-il pour fixer un temps standard ?",
+          "respuesta": "Entre 10 et 15 cycles par article, répartis entre plusieurs opérateurs, jours et équipes. Dans le travail manuel de bijouterie, une seule mesure varie trop : en dessous de 10 cycles, le temps sert d’indication mais ne passe pas dans la gamme."
+        },
+        {
+          "pregunta": "La qualité couvre-t-elle aussi les prestataires et les ateliers sous-traitants ?",
+          "respuesta": "Oui. Le même point de contrôle s’applique selon qui fabrique la pièce : l’usine, un prestataire qui fait une opération ou un atelier sous-traitant qui pointe depuis son portail. Ce qui revient de l’extérieur est contrôlé à la réception."
+        }
+      ],
       "sections": {
         "planes": {
           "name": "Plans",
@@ -339,6 +354,43 @@
               "description": "Configuration des éléments et de la hiérarchie"
             }
           ]
+        },
+        "calidad": {
+          "name": "Qualité préventive",
+          "description": "Contrôle qualité en cours de fabrication : le défaut est arrêté à l’étape où il naît, pas à l’expédition.",
+          "detalle": {
+            "parrafos": [
+              "Les étapes importantes de la gamme ont un point de contrôle. Quand on pointe la sortie de cette étape, l’inspection se crée toute seule et, si le contrôle est bloquant, la pièce n’entre pas dans l’étape suivante tant qu’elle n’est pas acceptée. La sortie n’est jamais bloquée : l’opérateur peut toujours finir son travail.",
+              "Chacun mesure ce qu’il doit : l’opérateur pour les autocontrôles, le chef d’atelier pour les contrôles critiques, depuis sa liste en attente. Et cela fonctionne de la même façon pour le travail fait en interne, pour les prestataires qui font une seule opération et pour les ateliers sous-traitants, qui pointent depuis leur portail."
+            ],
+            "puntos": [
+              "Modèle bijouterie : poids, titre du métal, mesure ou taille, pierres, porosités, finition, poinçon, fermoir et couleur",
+              "Caractéristiques critiques : si le titre est hors tolérance, la pièce n’est pas acceptée sans dérogation documentée",
+              "Fréquence par sachet, première pièce ou une sur N, et contrôle à 100 % pour les ordres de 1 à 5 pièces",
+              "Défauts issus d’un catalogue, photos depuis le mobile, et cause, action et responsable en cas de rejet ou de reprise",
+              "Maîtrise statistique avec Cp et Cpk, règles d’alerte et Pareto des défauts par étape, opérateur ou atelier"
+            ]
+          },
+          "images": []
+        },
+        "cronometrajes": {
+          "name": "Méthodes et temps",
+          "description": "Des temps standard mesurés par chronométrage, pas estimés.",
+          "detalle": {
+            "parrafos": [
+              "Du temps standard de chaque opération dépendent le coût de main-d’œuvre, la capacité de chaque section et la planification. Le chronométrage remplace les estimations par des temps mesurés, jugés et documentés : qui les a mesurés, quand et comment.",
+              "On choisit l’article et RayGold prépare ses opérations dans l’ordre de la gamme. On chronomètre à l’écran ou avec la feuille imprimée et l’horloge du téléphone, et les arrêts sont déduits automatiquement. Avec assez de cycles, le temps standard est approuvé et passe dans la gamme, avec l’historique de la valeur précédente."
+            ],
+            "puntos": [
+              "Temps moyen observé, normal et standard par opération : TS = TMO × JA × (FD + 1) / 100 × (MAJ + 1)",
+              "Jugement d’allure sur l’échelle centésimale (100 = allure normale) ou d’autres échelles",
+              "Facteur de difficulté et majorations par poste, avec les valeurs de référence de l’OIT",
+              "Les mêmes majorations pour tous : la même opération a le même temps standard, quelle que soit la personne",
+              "De 10 à 15 cycles par article ; les plus récents comptent, donc le standard se met à jour quand la méthode s’améliore",
+              "Par opération, pour le plus de détail, ou par section, plus rapide pour les petits et moyens ateliers"
+            ]
+          },
+          "images": []
         },
         "laboral": {
           "name": "Gestion du Travail",

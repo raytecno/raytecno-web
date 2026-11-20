@@ -241,14 +241,29 @@
       "title": "Manufacturing",
       "subtitle": "Planning, production, materials and labor management",
       "metaTitle": "Manufacturing | RayGold ERP - Production Control",
-      "metaDescription": "Plan management, manufacturing map, material management, casting, shipments and labor control for jewelers.",
+      "metaDescription": "Planning, manufacturing map, clocking records, in-process quality control, time studies, casting, capacity and labor management for jewelers.",
       "intro": {
         "titulo": "From the released plan to the missing gram",
         "parrafos": [
           "Manufacturing is where the margin leaks. A plan is released, moves through wax, casting, setting and polishing, and at every stage there is a weight difference someone has to account for. RayGold weighs in and out of each stage and by operator, so loss stops being one global figure at month end and gets a name, a stage and a date.",
-          "Around that sits everything else: plan release, the manufacturing map with the status of each order, the clocking records of what every operator does, the casting module with its trees, scrap and slag, and the hourly rates that turn shop-floor time into a cost you can actually pass on."
+          "Around that sits everything else: plan release, the manufacturing map with the status of each order, the clocking records of what every operator does, the casting module with its trees, scrap and slag, and the hourly rates that turn shop-floor time into a cost you can actually pass on.",
+          "And within the route, quality and time: control points that stop a defect at the stage where it starts, with operator self-inspection and supervisor inspection, and standard times measured by time study instead of estimated, which are the ones costing and planning then use."
         ]
       },
+      "faq": [
+        {
+          "pregunta": "Does quality control stop production?",
+          "respuesta": "It never holds back work already done: the exit from a stage can always be recorded. What is held, if the control point is set to block, is entry into the next stage until the inspection is accepted. You can start in “warn only” mode and switch on blocking once the workshop is used to it."
+        },
+        {
+          "pregunta": "How many time studies are needed to set a standard time?",
+          "respuesta": "Between 10 and 15 cycles per item, spread across several operators, days and shifts. In manual jewelry work a single measurement varies too much: below 10 cycles the time is a guide, but it is not moved to the route."
+        },
+        {
+          "pregunta": "Does quality control also cover outside specialists and subcontracted workshops?",
+          "respuesta": "Yes. The same control point applies depending on who makes the piece: the factory, an outside specialist doing one operation or a subcontracted workshop recording from its portal. Work coming back from outside is inspected on receipt."
+        }
+      ],
       "sections": {
         "planes": {
           "name": "Plans",
@@ -339,6 +354,43 @@
               "description": "Element and hierarchy configuration"
             }
           ]
+        },
+        "calidad": {
+          "name": "In-process quality",
+          "description": "In-process quality control: a defect is stopped at the stage where it starts, not at Shipping.",
+          "detalle": {
+            "parrafos": [
+              "The key stages of the route have a control point. When the exit from that stage is recorded, the inspection is created automatically and, if the control blocks, the piece cannot enter the next stage until it is accepted. The exit is never blocked: the operator can always finish their work.",
+              "The right person measures: the operator for self-inspections and the supervisor for critical controls, from their pending queue. And it works the same for in-house work, for outside specialists who do a single operation and for subcontracted workshops, which record progress from their own portal."
+            ],
+            "puntos": [
+              "Jewelry template: weight, metal fineness, size, stones, porosity, finish, hallmark, clasp and color",
+              "Critical characteristics: if fineness is out of tolerance, the piece cannot be accepted without a documented deviation",
+              "Frequency per envelope, first piece or one in every N, and 100% inspection for orders of 1 to 5 pieces",
+              "Defects from a catalog, photos from a phone, and cause, action and owner when rejecting or reworking",
+              "Statistical process control with Cp and Cpk, alarm rules and defect Pareto by stage, operator or workshop"
+            ]
+          },
+          "images": []
+        },
+        "cronometrajes": {
+          "name": "Methods and times",
+          "description": "Standard times measured by time study, not estimated.",
+          "detalle": {
+            "parrafos": [
+              "Labor cost, section capacity and planning all depend on the standard time of each operation. Time studies replace estimates with measured, rated and documented times: who measured them, when and how.",
+              "Choose the item and RayGold lists its operations in route order. Time it on screen or with the printed sheet and a phone clock, and stoppages are deducted automatically. With enough cycles, the standard time is approved and moved to the route, keeping a history of the previous value."
+            ],
+            "puntos": [
+              "Mean observed, normal and standard time per operation: ST = MOT × PR × (DF + 1) / 100 × (ALW + 1)",
+              "Performance rating on the 100-point scale (100 = normal pace) or other scales",
+              "Difficulty factor and allowances per workstation, with ILO reference values",
+              "The same allowances for everyone: the same operation has the same standard time, whoever does it",
+              "10 to 15 cycles per item; the most recent ones count, so the standard updates when the method improves",
+              "By operation, for maximum detail, or by section, faster for small and mid-sized workshops"
+            ]
+          },
+          "images": []
         },
         "laboral": {
           "name": "Labor Management",

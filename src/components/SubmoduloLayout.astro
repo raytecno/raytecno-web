@@ -136,11 +136,20 @@ const schemaFaq = faq.length > 0
     }
   : null;
 
+// Texto largo opcional de una sección (Noviembre 2026). Permite secciones
+// sin capturas: si `images` va vacío, la galería no se pinta y la sección
+// se sostiene con el detalle. Cuando haya capturas, se añaden en `images`.
+interface DetalleSeccion {
+  parrafos?: string[];
+  puntos?: string[];
+}
+
 // Interfaz para secciones construidas
 interface SeccionConstruida {
   id: string;
   nombre: string;
   descripcion: string;
+  detalle?: DetalleSeccion;
   imagenes: {
     url: string;
     titulo: string;
@@ -159,7 +168,8 @@ const secciones: SeccionConstruida[] = config.secciones
       id: secConfig.id,
       nombre: seccionData.name,
       descripcion: seccionData.description,
-      imagenes: seccionData.images.map((img: ImageTranslation, index: number) => ({
+      detalle: (seccionData as SectionTranslation & { detalle?: DetalleSeccion }).detalle,
+      imagenes: (seccionData.images ?? []).map((img: ImageTranslation, index: number) => ({
         url: `${blobBaseUrl}/${secConfig.imagenes?.[index] ?? `${secConfig.prefix}0${index + 1}`}.png`,
         titulo: img.title,
         descripcion: img.description,
@@ -190,6 +200,8 @@ const iconosSecciones: Record<string, string> = {
   fases: `<svg viewBox="0 0 48 48" fill="none"><circle cx="12" cy="24" r="6" fill="currentColor"/><circle cx="24" cy="24" r="6" fill="currentColor" opacity="0.7"/><circle cx="36" cy="24" r="6" fill="currentColor" opacity="0.4"/><path d="M18 24h2M30 24h2" stroke="currentColor" stroke-width="2"/></svg>`,
   fundicion: `<svg viewBox="0 0 48 48" fill="none"><path d="M14 12h20l4 8v16a4 4 0 01-4 4H14a4 4 0 01-4-4V20l4-8z" fill="currentColor" opacity="0.2"/><path d="M18 20h12M18 28h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="34" cy="32" r="4" fill="currentColor"/></svg>`,
   capacidad: `<svg viewBox="0 0 48 48" fill="none"><rect x="6" y="8" width="36" height="32" rx="3" fill="currentColor" opacity="0.15"/><rect x="10" y="14" width="22" height="5" rx="1.5" fill="currentColor"/><rect x="10" y="22" width="14" height="5" rx="1.5" fill="currentColor" opacity="0.6"/><rect x="10" y="30" width="26" height="5" rx="1.5" fill="currentColor" opacity="0.4"/><path d="M36 12v26" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/></svg>`,
+  calidad: `<svg viewBox="0 0 48 48" fill="none"><path d="M24 5l15 6v11c0 10-6.5 17-15 21-8.5-4-15-11-15-21V11l15-6z" fill="currentColor" opacity="0.15"/><path d="M24 5l15 6v11c0 10-6.5 17-15 21-8.5-4-15-11-15-21V11l15-6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M17 24l5 5 9-10" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  cronometrajes: `<svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="27" r="15" fill="currentColor" opacity="0.15"/><circle cx="24" cy="27" r="15" stroke="currentColor" stroke-width="2"/><path d="M20 6h8M24 6v6M36 13l3-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M24 27V18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><circle cx="24" cy="27" r="2.5" fill="currentColor"/></svg>`,
   inventario: `<svg viewBox="0 0 48 48" fill="none"><rect x="8" y="14" width="32" height="26" rx="3" fill="currentColor" opacity="0.15"/><rect x="12" y="8" width="24" height="8" rx="2" fill="currentColor"/><path d="M16 22h16M16 28h12M16 34h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.6"/></svg>`,
   // Finanzas
   contabilidad: `<svg viewBox="0 0 48 48" fill="none"><rect x="8" y="8" width="32" height="32" rx="3" fill="currentColor" opacity="0.15"/><rect x="12" y="12" width="24" height="6" rx="1" fill="currentColor"/><path d="M12 24h10M26 24h10M12 30h8M26 30h10M12 36h12M26 36h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.6"/></svg>`,
@@ -289,6 +301,18 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
               </div>
             )}
 
+            {seccion.detalle && (
+              <div class="seccion-detalle">
+                {seccion.detalle.parrafos?.map((parrafo: string) => <p>{parrafo}</p>)}
+                {seccion.detalle.puntos && seccion.detalle.puntos.length > 0 && (
+                  <ul>
+                    {seccion.detalle.puntos.map((punto: string) => <li>{punto}</li>)}
+                  </ul>
+                )}
+              </div>
+            )}
+
+            {seccion.imagenes.length > 0 && (
             <div class="galeria-grid">
               {seccion.imagenes.map((imagen, imgIndex: number) => (
                 <article class="galeria-item" style={`--delay: ${imgIndex * 0.1}s`}>
@@ -309,6 +333,7 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
                 </article>
               ))}
             </div>
+            )}
           </section>
         ))}
       </div>
@@ -589,6 +614,57 @@ const getSeccionIcon = (id: string): string => iconosSecciones[id] || iconosSecc
     font-size: 1rem;
     margin: 0 auto;
     max-width: 60ch;
+  }
+
+  /* ---------- Detalle de sección (texto largo, opcional) ---------- */
+  .seccion-detalle {
+    max-width: 760px;
+    margin: 0 auto 1.75rem;
+    padding: 1.5rem 1.75rem;
+    background: var(--rg-panel);
+    border: 1px solid var(--rg-line);
+    border-top: 3px solid var(--modulo-color, var(--rg-accent));
+    border-radius: 16px;
+  }
+
+  .seccion-detalle p {
+    margin: 0 0 0.9rem;
+    color: var(--rg-soft);
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .seccion-detalle ul {
+    list-style: none;
+    margin: 1.1rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .seccion-detalle li {
+    position: relative;
+    padding-left: 1.25rem;
+    color: var(--rg-ink);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .seccion-detalle li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 8px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--modulo-color, var(--rg-accent));
+  }
+
+  @media (max-width: 560px) {
+    .seccion-detalle {
+      padding: 1.15rem 1.1rem;
+    }
   }
 
   /* ---------- Galería ---------- */

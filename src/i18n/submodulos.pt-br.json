@@ -241,14 +241,29 @@
       "title": "Fabricação",
       "subtitle": "Planejamento, produção, materiais e gestão trabalhista",
       "metaTitle": "Fabricação | RayGold ERP - Controle de Produção",
-      "metaDescription": "Planejamento de planos, mapa de fabricação, gestão de materiais, fundição, expedições e controle trabalhista para joalherias.",
+      "metaDescription": "Planejamento, mapa de fabricação, apontamentos, qualidade preventiva no roteiro, cronoanálise, fundição, capacidade e gestão trabalhista para joalherias.",
       "intro": {
         "titulo": "Do plano lançado ao grama que falta",
         "parrafos": [
           "A fabricação é onde a margem escapa. Um plano é lançado, passa por cera, fundição, cravação e polimento, e em cada fase há uma diferença de peso que alguém precisa explicar. O RayGold pesa na entrada e na saída de cada fase e por operário, de modo que a perda deixa de ser um número global no fim do mês e passa a ter nome, fase e data.",
-          "Em volta disso está todo o resto: o lançamento de planos, o mapa de fabricação com o estado de cada ordem, os apontamentos que registram o que cada operário faz, a fundição com seus troncos, retalhos e escória, e as taxas horárias que transformam o tempo de oficina num custo que dá para repassar."
+          "Em volta disso está todo o resto: o lançamento de planos, o mapa de fabricação com o estado de cada ordem, os apontamentos que registram o que cada operário faz, a fundição com seus troncos, retalhos e escória, e as taxas horárias que transformam o tempo de oficina num custo que dá para repassar.",
+          "E dentro do roteiro, a qualidade e o tempo: pontos de controle que param o defeito na etapa onde ele nasce, com autocontrole do operador e inspeção do encarregado, e tempos-padrão medidos por cronoanálise em vez de estimados, que são os que o custo e o planejamento usam depois."
         ]
       },
+      "faq": [
+        {
+          "pregunta": "O controle de qualidade para a produção?",
+          "respuesta": "Não segura o trabalho já feito: a saída de uma etapa sempre pode ser apontada. O que fica retido, se o ponto de controle estiver configurado para bloquear, é a entrada na etapa seguinte até a inspeção ser aceita. Dá para começar em «só avisar» e ativar os bloqueios quando a oficina estiver acostumada."
+        },
+        {
+          "pregunta": "Quantas cronometragens são necessárias para fixar um tempo-padrão?",
+          "respuesta": "Entre 10 e 15 ciclos por produto, distribuídos entre vários operadores, dias e turnos. No trabalho manual de joalheria uma única medida varia demais: abaixo de 10 ciclos o tempo serve como referência, mas não vai para o roteiro."
+        },
+        {
+          "pregunta": "A qualidade vale também para terceiros e oficinas subcontratadas?",
+          "respuesta": "Sim. O mesmo ponto de controle se aplica conforme quem fabrica a peça: a fábrica, um terceiro que faz uma operação ou uma oficina subcontratada que aponta pelo seu portal. O que volta de fora é controlado no recebimento."
+        }
+      ],
       "sections": {
         "planes": {
           "name": "Planos",
@@ -339,6 +354,43 @@
               "description": "Configuração de elementos e hierarquia"
             }
           ]
+        },
+        "calidad": {
+          "name": "Qualidade preventiva",
+          "description": "Controle de qualidade em processo: o defeito é parado na etapa onde nasce, não na Expedição.",
+          "detalle": {
+            "parrafos": [
+              "As etapas importantes do roteiro têm um ponto de controle. Ao apontar a saída dessa etapa, a inspeção é criada sozinha e, se o controle bloqueia, a peça não entra na etapa seguinte até ser aceita. A saída nunca é bloqueada: o operador sempre pode terminar o seu trabalho.",
+              "Mede quem deve medir: o próprio operador nos autocontroles e o encarregado nos controles críticos, a partir da sua fila de pendências. E funciona igual para o que é feito na casa, para os terceiros que fazem uma operação e para as oficinas subcontratadas, que apontam pelo seu portal."
+            ],
+            "puntos": [
+              "Modelo de joalheria: peso, teor do metal, medida ou aro, pedras, porosidade, acabamento, contraste, fecho e cor",
+              "Características críticas: se o teor sai fora da tolerância, a peça não é aceita sem um desvio documentado",
+              "Frequência por envelope, primeira peça ou uma a cada N, e controle 100 % para ordens de 1 a 5 peças",
+              "Defeitos de um catálogo, fotos pelo celular e causa, ação e responsável ao rejeitar ou retrabalhar",
+              "Controle estatístico com Cp e Cpk, regras de alarme e Pareto de defeitos por etapa, operador ou oficina"
+            ]
+          },
+          "images": []
+        },
+        "cronometrajes": {
+          "name": "Métodos e tempos",
+          "description": "Tempos-padrão medidos por cronoanálise, não estimados.",
+          "detalle": {
+            "parrafos": [
+              "Do tempo-padrão de cada operação dependem o custo de mão de obra, a capacidade de cada seção e o planejamento. A cronoanálise substitui as estimativas por tempos medidos, avaliados e documentados: quem mediu, quando e como.",
+              "Escolhe-se o produto e o RayGold prepara as suas operações na ordem do roteiro. Cronometra-se na tela ou com a folha impressa e o relógio do celular, e as paradas são descontadas sozinhas. Com ciclos suficientes, o tempo-padrão é aprovado e vai para o roteiro, com o histórico do valor anterior."
+            ],
+            "puntos": [
+              "Tempo médio, normal e padrão por operação: TP = TMO × FV × (FD + 1) / 100 × (TOL + 1)",
+              "Avaliação do ritmo na escala centesimal (100 = atividade normal) ou em outras escalas",
+              "Fator de dificuldade e tolerâncias por posto, com valores de referência da OIT",
+              "Tolerâncias iguais para qualquer pessoa: a mesma operação tem o mesmo tempo, seja quem for que a faça",
+              "De 10 a 15 ciclos por produto; valem os mais recentes, então o padrão se atualiza quando o método melhora",
+              "Por operação, com o máximo detalhe, ou por seção, mais rápido para oficinas médias e pequenas"
+            ]
+          },
+          "images": []
         },
         "laboral": {
           "name": "Gestão Trabalhista",

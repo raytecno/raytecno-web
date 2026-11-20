@@ -120,10 +120,16 @@ export const modulosConfig: Record<ModuloId, ModuloConfig> = {
       { id: 'planes', prefix: 'PLA' },
       { id: 'fabricacion2', prefix: 'FAB' },
       { id: 'marcaje', prefix: 'MAR' },
+      // Noviembre 2026: sección de texto (images vacío). CAL01-03 en el blob
+      // son plantillas de relleno: sustituirlas por capturas reales con
+      // datos de demostración y añadir sus títulos en `images`.
+      { id: 'calidad', prefix: 'CAL' },
       // { id: 'mapa', prefix: 'MAP' },
       // { id: 'materiales', prefix: 'MAT' },
       { id: 'fundicion', prefix: 'FUN' },
       { id: 'tiempos', prefix: 'TIM' },
+      // Noviembre 2026: sección de texto; capturas CRO01-03 cuando las haya.
+      { id: 'cronometrajes', prefix: 'CRO' },
       // { id: 'expediciones', prefix: 'EXP' },
       { id: 'laboral', prefix: 'LAB' },
       { id: 'capacidad', prefix: 'CAP' },

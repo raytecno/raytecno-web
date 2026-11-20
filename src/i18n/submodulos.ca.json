@@ -241,14 +241,29 @@
       "title": "Fabricació",
       "subtitle": "Planificació, producció, materials i gestió laboral",
       "metaTitle": "Fabricació | RayGold ERP - Control de Producció",
-      "metaDescription": "Planificació de plans, mapa de fabricació, gestió de materials, fosa, expedicions i control laboral per a joieries.",
+      "metaDescription": "Planificació, mapa de fabricació, marcatges, qualitat preventiva a la ruta, cronometratges, fosa, capacitat i gestió laboral per a joieries.",
       "intro": {
         "titulo": "Del pla llançat al gram que falta",
         "parrafos": [
           "La fabricació és on s'escapa el marge. Un pla es llança, passa per cera, fosa, encast i poliment, i a cada fase hi ha una diferència de pes que algú ha d'explicar. RayGold pesa a l'entrada i a la sortida de cada fase i per operari, així la minva deixa de ser un número global a final de mes i passa a tenir nom, fase i data.",
-          "Al voltant d'això hi ha la resta: el llançament de plans, el mapa de fabricació amb l'estat de cada ordre, els marcatges que registren què fa cada operari, l'arbre de fosa amb els seus troncs, retalls i escòria, i les taxes horàries que converteixen el temps de taller en un cost que es pot repercutir."
+          "Al voltant d'això hi ha la resta: el llançament de plans, el mapa de fabricació amb l'estat de cada ordre, els marcatges que registren què fa cada operari, l'arbre de fosa amb els seus troncs, retalls i escòria, i les taxes horàries que converteixen el temps de taller en un cost que es pot repercutir.",
+          "I dins de la ruta, la qualitat i el temps: punts de control que aturen el defecte a la fase on neix, amb autocontrol de l’operari i inspecció de l’encarregat, i temps estàndard mesurats per cronometratge en lloc d’estimats, que són els que després fan servir el cost i la planificació."
         ]
       },
+      "faq": [
+        {
+          "pregunta": "El control de qualitat atura la producció?",
+          "respuesta": "No frena la feina ja feta: la sortida d’una fase sempre es pot marcar. El que es frena, si el punt de control està configurat per bloquejar, és l’entrada a la fase següent fins que s’accepta la inspecció. Es pot començar en «només avisar» i activar els bloquejos quan el taller s’hi hagi acostumat."
+        },
+        {
+          "pregunta": "Quants cronometratges calen per fixar un temps estàndard?",
+          "respuesta": "Entre 10 i 15 cicles per article, repartits entre diversos operaris, dies i torns. En la feina manual de joieria una sola mesura varia massa: per sota de 10 cicles el temps serveix d’orientació, però no passa a la ruta."
+        },
+        {
+          "pregunta": "La qualitat serveix també per a externs i tallers subcontractats?",
+          "respuesta": "Sí. El mateix punt de control s’aplica segons qui fabrica la peça: la fàbrica, un extern que fa una operació o un taller subcontractat que marca des del seu portal. El que torna de fora es controla en rebre’l."
+        }
+      ],
       "sections": {
         "planes": {
           "name": "Plans",
@@ -339,6 +354,43 @@
               "description": "Configuració d'elements i jerarquia"
             }
           ]
+        },
+        "calidad": {
+          "name": "Qualitat preventiva",
+          "description": "Control de qualitat en procés: el defecte s’atura a la fase on neix, no a Expedició.",
+          "detalle": {
+            "parrafos": [
+              "Les fases importants de la ruta porten un punt de control. En marcar la sortida d’aquesta fase, la inspecció es crea sola i, si el control bloqueja, la peça no entra a la fase següent fins que s’accepta. La sortida mai no es bloqueja: l’operari sempre pot acabar la seva feina.",
+              "Mesura qui ha de mesurar: el mateix operari en els autocontrols i l’encarregat en els controls crítics, des de la seva safata de pendents. I funciona igual per al que es fa a casa, per als externs que fan una operació i per als tallers subcontractats, que marquen des del seu portal."
+            ],
+            "puntos": [
+              "Plantilla de joieria: pes, llei del metall, mida o talla, pedres, porus, acabat, contrast, tancament i color",
+              "Característiques crítiques: si la llei surt fora de tolerància, la peça no s’accepta sense una desviació documentada",
+              "Freqüència per sobre, per primera peça o una de cada N, i control al 100 % per a ordres d’1 a 5 peces",
+              "Defectes d’un catàleg, fotos des del mòbil i causa, acció i responsable en rebutjar o reprocessar",
+              "Control estadístic amb Cp i Cpk, regles d’alarma i Pareto de defectes per fase, operari o taller"
+            ]
+          },
+          "images": []
+        },
+        "cronometrajes": {
+          "name": "Mètodes i temps",
+          "description": "Temps estàndard mesurats per cronometratge, no estimats.",
+          "detalle": {
+            "parrafos": [
+              "Del temps estàndard de cada operació depenen el cost de mà d’obra, la capacitat de cada secció i la planificació. El cronometratge substitueix les estimacions per temps mesurats, valorats i documentats: qui els va mesurar, quan i com.",
+              "S’escull l’article i RayGold prepara les seves operacions en l’ordre de la ruta. Es cronometra en pantalla o amb el full imprès i el rellotge del mòbil, i les parades es descompten soles. Amb prou cicles, el temps estàndard s’aprova i passa a la ruta, amb l’històric del valor anterior."
+            ],
+            "puntos": [
+              "Temps mitjà, normal i estàndard per operació: TE = TMO × FV × (FD + 1) / 100 × (SUPL + 1)",
+              "Valoració del ritme en escala centesimal (100 = activitat normal) o en altres escales",
+              "Factor de dificultat i suplements per lloc de treball, amb valors de referència de l’OIT",
+              "Suplements iguals per a qualsevol persona: la mateixa operació té el mateix temps, la faci qui la faci",
+              "De 10 a 15 cicles per article; manen els més recents, així que l’estàndard s’actualitza quan millora el mètode",
+              "Per operació, amb el màxim detall, o per secció, més ràpid per a tallers mitjans i petits"
+            ]
+          },
+          "images": []
         },
         "laboral": {
           "name": "Gestió Laboral",
