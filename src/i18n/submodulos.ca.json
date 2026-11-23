@@ -1010,33 +1010,183 @@
       }
     },
     "asistenteia": {
-      "title": "Certificacions",
-      "subtitle": "Control d'enviaments a laboratori gemològic i informes verificats",
-      "metaTitle": "Certificacions | RayGold ERP Joieria",
-      "metaDescription": "Control d'enviaments a laboratori gemològic i informes verificats",
+      "title": "Certificacions i ESG",
+      "subtitle": "Laboratori gemològic, origen del metall i la pedra, certificacions ESG i passaport digital",
+      "metaTitle": "Certificacions, ESG i passaport digital | RayGold ERP Joieria",
+      "metaDescription": "Enviaments al laboratori gemològic amb tarifes, informe i certificat de la casa, lots amb origen des de la compra, certificacions RJC, LBMA o Kimberley i passaport digital amb QR i petjada de carboni.",
       "intro": {
-        "titulo": "El certificat, lligat a la pedra",
+        "titulo": "Del laboratori al client, amb prova d’origen",
         "parrafos": [
-          "Una gemma sense el seu certificat i un certificat sense la seva gemma valen el mateix: res. El mòdul de certificacions porta els enviaments al laboratori gemològic per lots, amb el que surt, el que torna i quan, perquè cap pedra no es quedi esperant en un calaix que algú se'n recordi de reclamar-la.",
-          "Els informes rebuts queden desats al costat del seu lot i del laboratori que els va emetre. Així, el dia que un client pregunta d'on va sortir l'esmeralda del seu anell, la resposta es busca al sistema i no en una carpeta que ningú sap qui va guardar."
+          "Una joia de qualitat necessita avui més que una factura. El client vol saber quina pedra porta i qui l’ha analitzada, el banc o la gran cadena pregunta d’on ve l’or, i la normativa europea comença a demanar un passaport digital de producte.",
+          "RayGold ho resol dins del mateix ERP: l’enviament al laboratori, l’informe, el lot de compra, l’ordre de fabricació i la fitxa del client són les mateixes dades. La joia se segueix des que es compren la pedra i el metall fins que el client n’escaneja el QR, sense creuar fulls de càlcul ni demanar els papers al proveïdor cada vegada."
         ]
       },
+      "noEs": {
+        "titulo": "Què no és",
+        "items": [
+          "No és un laboratori ni emet informes gemològics: els emet el laboratori, i RayGold els registra i els vincula a la peça.",
+          "No certifica l’empresa: les certificacions ESG (RJC, LBMA, Kimberley, ISO…) les dona cada organisme; RayGold les desa amb el seu venciment.",
+          "La petjada de carboni és una estimació amb factors públics, no una anàlisi de cicle de vida verificada."
+        ]
+      },
+      "faq": [
+        {
+          "pregunta": "Quina diferència hi ha entre l’informe gemològic i el certificat de la casa?",
+          "respuesta": "L’informe l’emet un laboratori extern (GIA, IGE, HRD, IGI…) i RayGold el registra a la peça. El certificat de la casa és el document amb la marca de la joieria que es lliura al client: es compon a partir del darrer informe verificat i, si la peça té passaport, hi afegeix l’origen del metall i el QR."
+        },
+        {
+          "pregunta": "Es poden verificar els informes de manera automàtica?",
+          "respuesta": "Amb el GIA, sí: n’hi ha prou amb el número d’informe, i RayGold consulta el seu servei i en porta les dades i el PDF. Per als altres laboratoris, que no tenen consulta pública, s’obre el seu web des de la fitxa i es teclegen les dades."
+        },
+        {
+          "pregunta": "Què veu el client en escanejar el QR del passaport?",
+          "respuesta": "Una pàgina pública, sense entrar a RayGold i sense dades internes: l’origen del metall, si és de mina o reciclat, la certificació de la cadena, les pedres amb el seu informe i la petjada de carboni estimada. El que va veure no canvia encara que després canviïn els lots."
+        },
+        {
+          "pregunta": "On es desen els documents?",
+          "respuesta": "A Microsoft Azure, en un emmagatzematge privat: el PDF del laboratori, el certificat ESG i els documents del lot i del passaport. Azure té, entre d’altres, les certificacions ISO/IEC 27001 i 27018 i l’Esquema Nacional de Seguretat en categoria alta."
+        }
+      ],
       "sections": {
-        "consultas": {
-          "name": "Certificats",
-          "description": "Consulta tots els teus certificats",
+        "laboratorio": {
+          "name": "Laboratori gemològic",
+          "description": "Amb qui es treballa, quant costa cada servei i on és cada enviament.",
+          "detalle": {
+            "parrafos": [
+              "El mestre de laboratoris recull amb qui treballa la casa: país, web de verificació, si es verifica de manera automàtica o a mà, si analitzen peces muntades, termini i tarifari. Abans d’enviar una pedra, la comparativa pren el tram de tarifa que li correspon pel pes a cada laboratori, el passa a euros i marca el més barat i el més ràpid de cada servei.",
+              "Cada enviament recorre Esborrany, Enviat, Rebut, En procés, Facturat, Retornat i Tancat. En enviar-lo, les peces surten del seu magatzem i entren al del laboratori; en retornar-les, tornen. En facturar, el cost del laboratori se suma al cost del lot, una sola vegada."
+            ],
+            "puntos": [
+              "Laboratoris d’Espanya, Bèlgica, els Estats Units, el Brasil, Colòmbia i el Perú, i els que la casa hi afegeixi",
+              "Comparativa de graduació, graduació amb origen, identificació i inscripció làser",
+              "Estoc de les peces al laboratori mentre dura l’enviament",
+              "El cost de l’anàlisi, sumat al lot"
+            ]
+          },
           "images": [
             {
-              "title": "Lots",
-              "description": "Manteniment dels lots"
+              "title": "Laboratoris",
+              "description": "Verificació automàtica o manual, termini i tarifari de cada laboratori"
             },
             {
-              "title": "Informes",
-              "description": "Consulta els informes"
+              "title": "Comparativa de tarifes",
+              "description": "Cada servei a cada laboratori per al pes de la pedra, amb el més barat i el més ràpid"
             },
             {
-              "title": "Gemològics",
-              "description": "Llistat de laboratoris gemològics"
+              "title": "Estat de l’enviament",
+              "description": "El recorregut de l’enviament, amb el que fa cada pas"
+            }
+          ]
+        },
+        "informe": {
+          "name": "Informe i certificat",
+          "description": "L’informe del laboratori a la peça i el certificat de la casa per al client.",
+          "detalle": {
+            "parrafos": [
+              "Quan el laboratori dona el número d’informe, es registra a la peça de l’enviament. Amb el GIA n’hi ha prou amb el número: RayGold en porta l’espècie, el pes, el color, la puresa, les mides i el PDF. Amb els altres s’obre el seu web i es teclegen les dades. La peça queda verificada, l’informe apareix a Informes gemològics i les seves dades passen al lot.",
+              "El certificat de la casa és el document amb la marca de la joieria que es lliura al client. Es compon a partir del darrer informe verificat: gemma central, qualitat, origen i el peritatge amb el seu laboratori i número. La casa hi afegeix el títol, la muntura, el valor taxat i la signatura. Si la peça té passaport, el certificat hi afegeix l’origen del metall, la seva certificació, la petjada estimada i el QR."
+            ],
+            "puntos": [
+              "Informes per número, laboratori, article, espècie, pes, origen i vigència",
+              "Avís dels informes que cal revalidar",
+              "El PDF del laboratori, desat als documents de la peça",
+              "Certificat de la casa editable a l’esquerra i imprès a la dreta"
+            ]
+          },
+          "images": [
+            {
+              "title": "Informes gemològics",
+              "description": "Número, laboratori, article, espècie, pes, origen, verificació i vigència"
+            },
+            {
+              "title": "Certificat de la casa",
+              "description": "Les dades editables i el document tal com s’imprimeix per al client"
+            }
+          ]
+        },
+        "origen": {
+          "name": "Lots i origen",
+          "description": "L’origen no s’escriu al final: s’arrossega des de la compra.",
+          "detalle": {
+            "parrafos": [
+              "L’ordre de fabricació calcula les seves faltes, es llancen les ordres de compra i, en rebre-les, neix un lot per lliurament: de metall, de brillants, de maragdes… Cada línia de l’ordre de compra porta l’OF per a la qual es compra, així que el lot queda apuntat al seu material sense teclejar res.",
+              "Tots els lots, de metall i de pedra, són en un sol mestre, amb el seu saldo i el seu recorregut: ordre de compra, lot i OF. A la fitxa del lot es completa la traçabilitat: tipus d’origen (mina, reciclat o ferralla), país, refineria, certificat de cadena de custòdia, Kimberley i el seu propi factor de CO₂ si el proveïdor el dona."
+            ],
+            "puntos": [
+              "Faltes de material de l’OF amb la seva ordre de compra i el seu termini",
+              "Lots amb saldo, pes, quirats i estat, per magatzem",
+              "Vistes de compra, traçabilitat, gemmologia i cost",
+              "Control dels lots sense suport de procedència"
+            ]
+          },
+          "images": [
+            {
+              "title": "Moviments de l’OF",
+              "description": "Faltes, ordre de compra, el que s’ha rebut i el termini de cada component"
+            },
+            {
+              "title": "Lots i partides",
+              "description": "Metall i pedres en un sol mestre, amb saldo, pes, quirats i estat"
+            },
+            {
+              "title": "Fitxa del lot",
+              "description": "Proveïdor i document de compra, amb traçabilitat, gemmologia, cost i recorregut"
+            }
+          ]
+        },
+        "esg": {
+          "name": "Certificacions ESG",
+          "description": "Les certificacions de l’empresa, dels seus proveïdors i dels seus clients, amb el seu venciment.",
+          "detalle": {
+            "parrafos": [
+              "ESG és el que demanen cada vegada més les grans cadenes, els bancs i la normativa: d’on ve l’or i la pedra i amb quines garanties. RayGold desa les certificacions de l’empresa, dels seus proveïdors i refineries i, si cal, dels seus clients, amb un catàleg d’esquemes que ja porta la seva validesa i els seus dies d’avís.",
+              "Cada certificació té el seu estat calculat (vigent, a punt de caducar o caducada), els materials que cobreix i el seu PDF. Cada nit RayGold revisa les actives i avisa per correu de les que caducaran. Els lots d’un proveïdor hereten la seva certificació vigent, i això és el que després diu el passaport."
+            ],
+            "puntos": [
+              "Esquemes RJC, LBMA, Kimberley, Fairmined, Fairtrade, OCDE, ISO 9001, 14001 i 45001, SA8000 i reciclat",
+              "Venciment proposat segons la validesa de l’esquema",
+              "Activa, suspesa, revocada o anul·lada, amb historial de canvis",
+              "Avís de caducitat per correu, una vegada per venciment"
+            ]
+          },
+          "images": [
+            {
+              "title": "Certificacions",
+              "description": "Titular, esquema, emissor, materials, estat calculat i documents"
+            },
+            {
+              "title": "Fitxa de certificació",
+              "description": "Titular, esquema, materials que cobreix, vigència i situació"
+            },
+            {
+              "title": "Esquemes",
+              "description": "Catàleg de normes amb categoria, a qui s’aplica, validesa i dies d’avís"
+            }
+          ]
+        },
+        "pasaporte": {
+          "name": "Passaport i petjada",
+          "description": "Una foto fixa de cada peça, amb un QR públic i la seva petjada de carboni estimada.",
+          "detalle": {
+            "parrafos": [
+              "El passaport diu de quins lots surt el metall d’una peça i si és de mina o reciclat, quina refineria i quina certificació hi ha a la cadena, quines pedres porta amb el seu informe i una petjada de carboni estimada. S’emet des de la línia de l’OF i porta un codi públic: el QR obre una pàgina sense entrar a RayGold i sense dades internes. El que va veure el client no canvia encara que després canviïn els lots.",
+              "La petjada s’estima amb els grams de metall fi pel factor del metall, els minuts de taller pel CO₂ per hora de cada secció i els quirats pel factor de la pedra. Els factors de partida són ordres de magnitud públics: l’or de mina volta els 25 kg de CO₂e per gram i el reciclat, 0,5. S’ajusten amb la xifra del refinador i la factura de la llum."
+            ],
+            "puntos": [
+              "Avisos del que falta perquè el passaport sigui complet",
+              "Energia per secció i exercici, amb la seva font i el seu percentatge renovable",
+              "El CO₂ per hora surt de les hores de Taxes horàries",
+              "També al portal del client, línia a línia de la comanda"
+            ]
+          },
+          "images": [
+            {
+              "title": "Passaport digital",
+              "description": "Metall, certificació, petjada, pedres i QR, amb els avisos del que falta"
+            },
+            {
+              "title": "Energia per secció",
+              "description": "kWh de l’any, font, percentatge renovable i el CO₂ per hora que en resulta"
             }
           ]
         }

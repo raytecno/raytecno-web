@@ -1010,33 +1010,183 @@
       }
     },
     "asistenteia": {
-      "title": "Certifications",
-      "subtitle": "Suivi des envois au laboratoire gemmologique et rapports vérifiés",
-      "metaTitle": "Certifications | RayGold ERP Joaillerie",
-      "metaDescription": "Suivi des envois au laboratoire gemmologique et rapports vérifiés",
+      "title": "Certifications et ESG",
+      "subtitle": "Laboratoire gemmologique, origine du métal et de la pierre, certifications ESG et passeport numérique",
+      "metaTitle": "Certifications, ESG et passeport numérique | RayGold ERP Bijouterie",
+      "metaDescription": "Envois au laboratoire gemmologique avec tarifs, rapport et certificat de la maison, lots avec origine dès l’achat, certifications RJC, LBMA ou Kimberley et passeport numérique avec QR et empreinte carbone.",
       "intro": {
-        "titulo": "Le certificat, attaché à la pierre",
+        "titulo": "Du laboratoire au client, avec preuve d’origine",
         "parrafos": [
-          "Une gemme sans son certificat et un certificat sans sa gemme valent la même chose : rien. Le module de certifications suit les envois au laboratoire gemmologique par lots — ce qui sort, ce qui revient et quand — pour qu'aucune pierre ne reste dans un tiroir en attendant que quelqu'un pense à la réclamer.",
-          "Les rapports reçus sont conservés à côté de leur lot et du laboratoire qui les a émis. Ainsi, le jour où un client demande d'où vient l'émeraude de sa bague, la réponse se cherche dans le système et non dans un classeur dont personne ne sait qui l'a rangé."
+          "Un bijou de qualité demande aujourd’hui plus qu’une facture. Le client veut savoir quelle pierre il porte et qui l’a analysée, la banque ou la grande chaîne demande d’où vient l’or, et la réglementation européenne commence à exiger un passeport numérique de produit.",
+          "RayGold le gère dans le même ERP : l’envoi au laboratoire, le rapport, le lot d’achat, l’ordre de fabrication et la fiche client sont les mêmes données. Le bijou est suivi de l’achat de la pierre et du métal jusqu’au moment où le client scanne son QR, sans croiser de tableurs ni redemander les papiers au fournisseur à chaque fois."
         ]
       },
+      "noEs": {
+        "titulo": "Ce que ce n’est pas",
+        "items": [
+          "Ce n’est pas un laboratoire et il n’émet pas de rapports gemmologiques : c’est le laboratoire qui les émet ; RayGold les enregistre et les relie à la pièce.",
+          "Il ne certifie pas l’entreprise : les certifications ESG (RJC, LBMA, Kimberley, ISO…) sont délivrées par chaque organisme ; RayGold les conserve avec leur échéance.",
+          "L’empreinte carbone est une estimation fondée sur des facteurs publics, pas une analyse de cycle de vie vérifiée."
+        ]
+      },
+      "faq": [
+        {
+          "pregunta": "Quelle différence entre le rapport gemmologique et le certificat de la maison ?",
+          "respuesta": "Le rapport est émis par un laboratoire externe (GIA, IGE, HRD, IGI…) et RayGold l’enregistre sur la pièce. Le certificat de la maison est le document à la marque du bijoutier remis au client : il est composé à partir du dernier rapport vérifié et, si la pièce a un passeport, il ajoute l’origine du métal et le QR."
+        },
+        {
+          "pregunta": "Peut-on vérifier les rapports automatiquement ?",
+          "respuesta": "Avec le GIA, oui : le numéro du rapport suffit, et RayGold interroge son service et récupère les données et le PDF. Pour les autres laboratoires, sans consultation publique, on ouvre leur site depuis la fiche et on saisit les données."
+        },
+        {
+          "pregunta": "Que voit le client en scannant le QR du passeport ?",
+          "respuesta": "Une page publique, sans se connecter à RayGold et sans données internes : l’origine du métal, extrait ou recyclé, la certification de la chaîne, les pierres avec leur rapport et l’empreinte carbone estimée. Ce qu’il a vu ne change pas même si les lots changent ensuite."
+        },
+        {
+          "pregunta": "Où sont conservés les documents ?",
+          "respuesta": "Dans Microsoft Azure, sur un stockage privé : le PDF du laboratoire, le certificat ESG et les documents du lot et du passeport. Azure détient notamment les certifications ISO/IEC 27001 et 27018 et le Schéma national de sécurité espagnol (ENS) au niveau élevé."
+        }
+      ],
       "sections": {
-        "consultas": {
-          "name": "Certificats",
-          "description": "Consultez tous vos certificats",
+        "laboratorio": {
+          "name": "Laboratoire gemmologique",
+          "description": "Avec qui on travaille, ce que coûte chaque service et où en est chaque envoi.",
+          "detalle": {
+            "parrafos": [
+              "La fiche des laboratoires indique avec qui travaille la maison : pays, site de vérification, vérification automatique ou manuelle, analyse des pièces montées, délai et tarif. Avant d’envoyer une pierre, le comparatif prend la tranche de tarif qui correspond à son poids dans chaque laboratoire, la convertit en euros et signale le moins cher et le plus rapide pour chaque service.",
+              "Chaque envoi passe par Brouillon, Envoyé, Reçu, En cours, Facturé, Retourné et Clôturé. À l’envoi, les pièces sortent de leur magasin et entrent dans celui du laboratoire ; au retour, elles reviennent. À la facturation, le coût du laboratoire s’ajoute au coût du lot, une seule fois."
+            ],
+            "puntos": [
+              "Laboratoires en Espagne, Belgique, États-Unis, Brésil, Colombie et Pérou, et ceux que la maison ajoute",
+              "Comparatif de classification, classification avec origine, identification et inscription laser",
+              "Stock des pièces au laboratoire pendant toute la durée de l’envoi",
+              "Le coût de l’analyse, ajouté au lot"
+            ]
+          },
           "images": [
             {
-              "title": "Lots",
-              "description": "Gestion des lots"
+              "title": "Laboratoires",
+              "description": "Vérification automatique ou manuelle, délai et tarif de chaque laboratoire"
             },
             {
-              "title": "Rapports",
-              "description": "Consultez les rapports"
+              "title": "Comparatif des tarifs",
+              "description": "Chaque service dans chaque laboratoire pour le poids de la pierre, avec le moins cher et le plus rapide"
             },
             {
-              "title": "Gemmologiques",
-              "description": "Liste des laboratoires gemmologiques"
+              "title": "Statut de l’envoi",
+              "description": "Le parcours de l’envoi, avec ce que fait chaque étape"
+            }
+          ]
+        },
+        "informe": {
+          "name": "Rapport et certificat",
+          "description": "Le rapport du laboratoire sur la pièce et le certificat de la maison pour le client.",
+          "detalle": {
+            "parrafos": [
+              "Quand le laboratoire donne le numéro du rapport, on l’enregistre sur la pièce de l’envoi. Avec le GIA, le numéro suffit : RayGold récupère espèce, poids, couleur, pureté, dimensions et le PDF. Pour les autres, on ouvre leur site et on saisit les données. La pièce est vérifiée, le rapport apparaît dans Rapports gemmologiques et ses données passent au lot.",
+              "Le certificat de la maison est le document à la marque du bijoutier remis au client. Il est composé à partir du dernier rapport vérifié : pierre centrale, qualité, origine et expertise avec son laboratoire et son numéro. La maison ajoute le titre, la monture, la valeur estimée et la signature. Si la pièce a un passeport, le certificat ajoute l’origine du métal, sa certification, l’empreinte estimée et le QR."
+            ],
+            "puntos": [
+              "Rapports par numéro, laboratoire, article, espèce, poids, origine et validité",
+              "Alerte sur les rapports à revalider",
+              "Le PDF du laboratoire, conservé dans les documents de la pièce",
+              "Certificat de la maison modifiable à gauche et imprimé à droite"
+            ]
+          },
+          "images": [
+            {
+              "title": "Rapports gemmologiques",
+              "description": "Numéro, laboratoire, article, espèce, poids, origine, vérification et validité"
+            },
+            {
+              "title": "Certificat de la maison",
+              "description": "Les données modifiables et le document tel qu’il est imprimé pour le client"
+            }
+          ]
+        },
+        "origen": {
+          "name": "Lots et origine",
+          "description": "L’origine ne s’écrit pas à la fin : elle se reporte depuis l’achat.",
+          "detalle": {
+            "parrafos": [
+              "L’ordre de fabrication calcule ses manques, on lance les commandes d’achat et, à leur réception, un lot naît pour chaque livraison : métal, diamants, émeraudes… Chaque ligne de commande d’achat porte l’OF pour laquelle on achète : le lot est donc noté sur son matériau sans rien saisir.",
+              "Tous les lots, de métal et de pierre, sont dans une seule fiche maîtresse, avec leur solde et leur parcours : commande d’achat, lot et OF. La fiche du lot complète la traçabilité : type d’origine (mine, recyclé ou déchets), pays, affineur, certificat de chaîne de responsabilité, Kimberley et son propre facteur de CO₂ si le fournisseur le donne."
+            ],
+            "puntos": [
+              "Manques de matière de l’OF avec leur commande d’achat et leur délai",
+              "Lots avec solde, poids, carats et statut, par magasin",
+              "Vues achat, traçabilité, gemmologie et coût",
+              "Contrôle des lots sans justificatif d’origine"
+            ]
+          },
+          "images": [
+            {
+              "title": "Mouvements de l’OF",
+              "description": "Manques, commande d’achat, réception et délai de chaque composant"
+            },
+            {
+              "title": "Lots et parties",
+              "description": "Métal et pierres dans une seule fiche maîtresse, avec solde, poids, carats et statut"
+            },
+            {
+              "title": "Fiche du lot",
+              "description": "Fournisseur et document d’achat, avec traçabilité, gemmologie, coût et parcours"
+            }
+          ]
+        },
+        "esg": {
+          "name": "Certifications ESG",
+          "description": "Les certifications de l’entreprise, de ses fournisseurs et de ses clients, avec leur échéance.",
+          "detalle": {
+            "parrafos": [
+              "L’ESG, c’est ce que demandent de plus en plus les grandes chaînes, les banques et la réglementation : d’où viennent l’or et la pierre, et avec quelles garanties. RayGold conserve les certifications de l’entreprise, de ses fournisseurs et affineurs et, si besoin, de ses clients, avec un catalogue de référentiels qui intègre déjà leur validité et leurs jours d’alerte.",
+              "Chaque certification a son statut calculé (valide, bientôt expirée ou expirée), les matériaux couverts et son PDF. Chaque nuit, RayGold vérifie les certifications actives et envoie un e-mail pour celles qui vont expirer. Les lots d’un fournisseur héritent de sa certification valide, et c’est ce qu’indique ensuite le passeport."
+            ],
+            "puntos": [
+              "Référentiels RJC, LBMA, Kimberley, Fairmined, Fairtrade, OCDE, ISO 9001, 14001 et 45001, SA8000 et recyclé",
+              "Échéance proposée selon la validité du référentiel",
+              "Active, suspendue, révoquée ou annulée, avec historique des changements",
+              "Alerte d’expiration par e-mail, une fois par échéance"
+            ]
+          },
+          "images": [
+            {
+              "title": "Certifications",
+              "description": "Titulaire, référentiel, émetteur, matériaux, statut calculé et documents"
+            },
+            {
+              "title": "Fiche de certification",
+              "description": "Titulaire, référentiel, matériaux couverts, validité et situation"
+            },
+            {
+              "title": "Référentiels",
+              "description": "Catalogue de normes avec catégorie, champ d’application, validité et jours d’alerte"
+            }
+          ]
+        },
+        "pasaporte": {
+          "name": "Passeport et empreinte",
+          "description": "Une photo figée de chaque pièce, avec un QR public et son empreinte carbone estimée.",
+          "detalle": {
+            "parrafos": [
+              "Le passeport indique de quels lots vient le métal d’une pièce, s’il est extrait ou recyclé, quel affineur et quelle certification figurent dans la chaîne, quelles pierres elle porte avec leur rapport et une empreinte carbone estimée. Il est émis depuis la ligne de l’OF et porte un code public : le QR ouvre une page sans se connecter à RayGold et sans données internes. Ce qu’a vu le client ne change pas même si les lots changent ensuite.",
+              "L’empreinte s’estime avec les grammes de métal fin multipliés par le facteur du métal, les minutes d’atelier par le CO₂ par heure de chaque section, et les carats par le facteur de la pierre. Les facteurs de départ sont des ordres de grandeur publics : l’or extrait tourne autour de 25 kg de CO₂e par gramme et le recyclé, 0,5. On les ajuste avec le chiffre de l’affineur et la facture d’électricité."
+            ],
+            "puntos": [
+              "Alertes sur ce qui manque pour que le passeport soit complet",
+              "Énergie par section et exercice, avec sa source et sa part renouvelable",
+              "Le CO₂ par heure vient des heures des taux horaires",
+              "Aussi dans le portail client, ligne par ligne de la commande"
+            ]
+          },
+          "images": [
+            {
+              "title": "Passeport numérique",
+              "description": "Métal, certification, empreinte, pierres et QR, avec les alertes sur ce qui manque"
+            },
+            {
+              "title": "Énergie par section",
+              "description": "kWh de l’année, source, part renouvelable et CO₂ par heure obtenu"
             }
           ]
         }

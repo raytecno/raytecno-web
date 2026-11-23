@@ -1010,33 +1010,183 @@
       }
     },
     "asistenteia": {
-      "title": "Certificações",
-      "subtitle": "Controle de envios ao laboratório gemológico e laudos verificados",
-      "metaTitle": "Certificações | RayGold ERP Joalheria",
-      "metaDescription": "Controle de envios ao laboratório gemológico e laudos verificados",
+      "title": "Certificações e ESG",
+      "subtitle": "Laboratório gemológico, origem do metal e da pedra, certificações ESG e passaporte digital",
+      "metaTitle": "Certificações, ESG e passaporte digital | RayGold ERP Joalheria",
+      "metaDescription": "Envios ao laboratório gemológico com tabelas de preço, laudo e certificado da casa, lotes com origem desde a compra, certificações RJC, LBMA ou Kimberley e passaporte digital com QR e pegada de carbono.",
       "intro": {
-        "titulo": "O laudo, preso à pedra",
+        "titulo": "Do laboratório ao cliente, com prova de origem",
         "parrafos": [
-          "Uma gema sem o seu laudo e um laudo sem a sua gema valem o mesmo: nada. O módulo de certificações controla os envios ao laboratório gemológico por lotes — o que sai, o que volta e quando — para que nenhuma pedra fique numa gaveta esperando que alguém se lembre de cobrar.",
-          "Os laudos recebidos ficam guardados junto ao seu lote e ao laboratório que os emitiu. Assim, no dia em que um cliente pergunta de onde veio a esmeralda do seu anel, a resposta se busca no sistema e não numa pasta que ninguém sabe quem guardou."
+          "Uma joia de qualidade precisa hoje de mais do que uma nota fiscal. O cliente quer saber que pedra ela leva e quem a analisou, o banco ou a grande rede pergunta de onde vem o ouro, e a regulamentação europeia começa a exigir um passaporte digital do produto.",
+          "O RayGold resolve isso dentro do mesmo ERP: o envio ao laboratório, o laudo, o lote de compra, a ordem de fabricação e a ficha do cliente são os mesmos dados. A joia é acompanhada desde a compra da pedra e do metal até o cliente escanear o seu QR, sem cruzar planilhas nem pedir os papéis ao fornecedor toda vez."
         ]
       },
+      "noEs": {
+        "titulo": "O que não é",
+        "items": [
+          "Não é um laboratório nem emite laudos gemológicos: quem os emite é o laboratório, e o RayGold os registra e os vincula à peça.",
+          "Não certifica a empresa: as certificações ESG (RJC, LBMA, Kimberley, ISO…) são concedidas por cada organismo; o RayGold as guarda com o seu vencimento.",
+          "A pegada de carbono é uma estimativa com fatores públicos, não uma análise de ciclo de vida verificada."
+        ]
+      },
+      "faq": [
+        {
+          "pregunta": "Qual a diferença entre o laudo gemológico e o certificado da casa?",
+          "respuesta": "O laudo é emitido por um laboratório externo (GIA, IGE, HRD, IGI…) e o RayGold o registra na peça. O certificado da casa é o documento com a marca da joalheria entregue ao cliente: é montado a partir do último laudo verificado e, se a peça tem passaporte, acrescenta a origem do metal e o QR."
+        },
+        {
+          "pregunta": "Dá para verificar os laudos automaticamente?",
+          "respuesta": "Com o GIA, sim: basta o número do laudo, e o RayGold consulta o seu serviço e traz os dados e o PDF. Para os demais laboratórios, que não têm consulta pública, abre-se o site deles a partir da ficha e digitam-se os dados."
+        },
+        {
+          "pregunta": "O que o cliente vê ao escanear o QR do passaporte?",
+          "respuesta": "Uma página pública, sem entrar no RayGold e sem dados internos: a origem do metal, se é de mina ou reciclado, a certificação da cadeia, as pedras com o seu laudo e a pegada de carbono estimada. O que ele viu não muda mesmo que depois os lotes mudem."
+        },
+        {
+          "pregunta": "Onde os documentos ficam guardados?",
+          "respuesta": "No Microsoft Azure, em um armazenamento privado: o PDF do laboratório, o certificado ESG e os documentos do lote e do passaporte. O Azure possui, entre outras, as certificações ISO/IEC 27001 e 27018 e o Esquema Nacional de Segurança da Espanha (ENS) em categoria alta."
+        }
+      ],
       "sections": {
-        "consultas": {
-          "name": "Certificados",
-          "description": "Consulte todos os seus certificados",
+        "laboratorio": {
+          "name": "Laboratório gemológico",
+          "description": "Com quem se trabalha, quanto custa cada serviço e onde está cada envio.",
+          "detalle": {
+            "parrafos": [
+              "O cadastro de laboratórios reúne com quem a casa trabalha: país, site de verificação, se a verificação é automática ou manual, se analisam peças montadas, prazo e tabela de preços. Antes de enviar uma pedra, a comparação pega a faixa de preço que corresponde ao seu peso em cada laboratório, converte para euros e marca o mais barato e o mais rápido de cada serviço.",
+              "Cada envio passa por Rascunho, Enviado, Recebido, Em processo, Faturado, Devolvido e Fechado. Ao enviar, as peças saem do seu estoque e entram no do laboratório; ao devolvê-las, voltam. Ao faturar, o custo do laboratório é somado ao custo do lote, uma única vez."
+            ],
+            "puntos": [
+              "Laboratórios na Espanha, Bélgica, Estados Unidos, Brasil, Colômbia e Peru, além dos que a casa acrescentar",
+              "Comparação de graduação, graduação com origem, identificação e inscrição a laser",
+              "Estoque das peças no laboratório enquanto dura o envio",
+              "O custo da análise, somado ao lote"
+            ]
+          },
           "images": [
             {
-              "title": "Lotes",
-              "description": "Manutenção dos lotes"
+              "title": "Laboratórios",
+              "description": "Verificação automática ou manual, prazo e tabela de preços de cada laboratório"
             },
             {
-              "title": "Laudos",
-              "description": "Consulte os laudos"
+              "title": "Comparação de preços",
+              "description": "Cada serviço em cada laboratório para o peso da pedra, com o mais barato e o mais rápido"
             },
             {
-              "title": "Gemológicos",
-              "description": "Lista de laboratórios gemológicos"
+              "title": "Status do envio",
+              "description": "O percurso do envio, com o que faz cada etapa"
+            }
+          ]
+        },
+        "informe": {
+          "name": "Laudo e certificado",
+          "description": "O laudo do laboratório na peça e o certificado da casa para o cliente.",
+          "detalle": {
+            "parrafos": [
+              "Quando o laboratório informa o número do laudo, ele é registrado na peça do envio. Com o GIA basta o número: o RayGold traz espécie, peso, cor, pureza, medidas e o PDF. Com os demais, abre-se o site deles e digitam-se os dados. A peça fica verificada, o laudo aparece em Laudos gemológicos e os seus dados passam para o lote.",
+              "O certificado da casa é o documento com a marca da joalheria entregue ao cliente. É montado a partir do último laudo verificado: gema central, qualidade, origem e a perícia com o seu laboratório e número. A casa acrescenta o título, a montagem, o valor avaliado e a assinatura. Se a peça tem passaporte, o certificado acrescenta a origem do metal, a sua certificação, a pegada estimada e o QR."
+            ],
+            "puntos": [
+              "Laudos por número, laboratório, produto, espécie, peso, origem e validade",
+              "Aviso dos laudos que precisam ser revalidados",
+              "O PDF do laboratório, guardado nos documentos da peça",
+              "Certificado da casa editável à esquerda e impresso à direita"
+            ]
+          },
+          "images": [
+            {
+              "title": "Laudos gemológicos",
+              "description": "Número, laboratório, produto, espécie, peso, origem, verificação e validade"
+            },
+            {
+              "title": "Certificado da casa",
+              "description": "Os dados editáveis e o documento como é impresso para o cliente"
+            }
+          ]
+        },
+        "origen": {
+          "name": "Lotes e origem",
+          "description": "A origem não é escrita no final: ela vem desde a compra.",
+          "detalle": {
+            "parrafos": [
+              "A ordem de fabricação calcula as suas faltas, lançam-se as ordens de compra e, ao recebê-las, nasce um lote por entrega: de metal, de brilhantes, de esmeraldas… Cada linha da ordem de compra leva a OF para a qual se compra, então o lote fica anotado no seu material sem digitar nada.",
+              "Todos os lotes, de metal e de pedra, estão em um único cadastro, com o seu saldo e o seu percurso: ordem de compra, lote e OF. Na ficha do lote completa-se a rastreabilidade: tipo de origem (mina, reciclado ou sucata), país, refinaria, certificado de cadeia de custódia, Kimberley e o seu próprio fator de CO₂ se o fornecedor o informar."
+            ],
+            "puntos": [
+              "Faltas de material da OF com a sua ordem de compra e o seu prazo",
+              "Lotes com saldo, peso, quilates e status, por estoque",
+              "Visões de compra, rastreabilidade, gemologia e custo",
+              "Controle dos lotes sem comprovação de procedência"
+            ]
+          },
+          "images": [
+            {
+              "title": "Movimentos da OF",
+              "description": "Faltas, ordem de compra, o que foi recebido e o prazo de cada componente"
+            },
+            {
+              "title": "Lotes e partidas",
+              "description": "Metal e pedras em um único cadastro, com saldo, peso, quilates e status"
+            },
+            {
+              "title": "Ficha do lote",
+              "description": "Fornecedor e documento de compra, com rastreabilidade, gemologia, custo e percurso"
+            }
+          ]
+        },
+        "esg": {
+          "name": "Certificações ESG",
+          "description": "As certificações da empresa, dos seus fornecedores e dos seus clientes, com o seu vencimento.",
+          "detalle": {
+            "parrafos": [
+              "ESG é o que pedem cada vez mais as grandes redes, os bancos e a regulamentação: de onde vêm o ouro e a pedra e com que garantias. O RayGold guarda as certificações da empresa, dos seus fornecedores e refinarias e, se necessário, dos seus clientes, com um catálogo de esquemas que já traz a sua validade e os seus dias de aviso.",
+              "Cada certificação tem o seu status calculado (vigente, a vencer ou vencida), os materiais que cobre e o seu PDF. Toda noite o RayGold revisa as ativas e avisa por e-mail das que vão vencer. Os lotes de um fornecedor herdam a sua certificação vigente, e é isso que depois o passaporte mostra."
+            ],
+            "puntos": [
+              "Esquemas RJC, LBMA, Kimberley, Fairmined, Fairtrade, OCDE, ISO 9001, 14001 e 45001, SA8000 e reciclado",
+              "Vencimento sugerido conforme a validade do esquema",
+              "Ativa, suspensa, revogada ou anulada, com histórico de alterações",
+              "Aviso de vencimento por e-mail, uma vez por vencimento"
+            ]
+          },
+          "images": [
+            {
+              "title": "Certificações",
+              "description": "Titular, esquema, emissor, materiais, status calculado e documentos"
+            },
+            {
+              "title": "Ficha da certificação",
+              "description": "Titular, esquema, materiais cobertos, validade e situação"
+            },
+            {
+              "title": "Esquemas",
+              "description": "Catálogo de normas com categoria, a quem se aplica, validade e dias de aviso"
+            }
+          ]
+        },
+        "pasaporte": {
+          "name": "Passaporte e pegada",
+          "description": "Uma foto fixa de cada peça, com um QR público e a sua pegada de carbono estimada.",
+          "detalle": {
+            "parrafos": [
+              "O passaporte diz de quais lotes vem o metal de uma peça e se é de mina ou reciclado, qual refinaria e qual certificação há na cadeia, quais pedras ela leva com o seu laudo e uma pegada de carbono estimada. É emitido a partir da linha da OF e leva um código público: o QR abre uma página sem entrar no RayGold e sem dados internos. O que o cliente viu não muda mesmo que depois os lotes mudem.",
+              "A pegada é estimada com os gramas de metal fino vezes o fator do metal, os minutos de oficina vezes o CO₂ por hora de cada seção e os quilates vezes o fator da pedra. Os fatores de partida são ordens de grandeza públicas: o ouro de mina fica em torno de 25 kg de CO₂e por grama e o reciclado, 0,5. São ajustados com o número da refinaria e a conta de luz."
+            ],
+            "puntos": [
+              "Avisos do que falta para o passaporte ficar completo",
+              "Energia por seção e exercício, com a sua fonte e o seu percentual renovável",
+              "O CO₂ por hora vem das horas das Taxas horárias",
+              "Também no portal do cliente, linha a linha do pedido"
+            ]
+          },
+          "images": [
+            {
+              "title": "Passaporte digital",
+              "description": "Metal, certificação, pegada, pedras e QR, com os avisos do que falta"
+            },
+            {
+              "title": "Energia por seção",
+              "description": "kWh do ano, fonte, percentual renovável e o CO₂ por hora resultante"
             }
           ]
         }

@@ -215,11 +215,18 @@ export const modulosConfig: Record<ModuloId, ModuloConfig> = {
       { id: 'portal', prefix: 'POR', imagenes: ['Portal', 'Portal2', 'Portal3'] },
     ],
   },
+  // Certificaciones (el id y el slug "asistente-ia" son históricos; no se
+  // cambian para no romper las URLs publicadas). Noviembre 2026: cinco
+  // secciones con capturas CER-LAB/INF/ORI/ESG/PAS en el blob web/.
   asistenteia: {
     color: '#a855f7',
-    icon: `<svg viewBox="0 0 64 64" fill="none"><rect x="14" y="20" width="36" height="28" rx="6" fill="currentColor" opacity="0.2"/><rect x="14" y="20" width="36" height="28" rx="6" stroke="currentColor" stroke-width="2"/><circle cx="25" cy="34" r="3" fill="currentColor"/><circle cx="39" cy="34" r="3" fill="currentColor"/><path d="M26 41h12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M32 12v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><circle cx="32" cy="11" r="3" fill="currentColor"/><path d="M8 30v8M56 30v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>`,
+    icon: `<svg viewBox="0 0 64 64" fill="none"><rect x="10" y="8" width="38" height="46" rx="4" fill="currentColor" opacity="0.2"/><rect x="10" y="8" width="38" height="46" rx="4" stroke="currentColor" stroke-width="2.5"/><path d="M18 20h22M18 28h16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><circle cx="44" cy="42" r="9" fill="currentColor"/><path d="M40 42l3 3 5-6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M39 50l-2 8 7-3 7 3-2-8" fill="currentColor" opacity="0.6"/></svg>`,
     secciones: [
-      { id: 'consultas', prefix: 'IAC' },
+      { id: 'laboratorio', prefix: 'CER-LAB' },
+      { id: 'informe', prefix: 'CER-INF' },
+      { id: 'origen', prefix: 'CER-ORI' },
+      { id: 'esg', prefix: 'CER-ESG' },
+      { id: 'pasaporte', prefix: 'CER-PAS' },
     ],
   },
 };

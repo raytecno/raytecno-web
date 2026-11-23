@@ -1010,33 +1010,183 @@
       }
     },
     "asistenteia": {
-      "title": "Certifications",
-      "subtitle": "Gemological lab submission tracking and verified reports",
-      "metaTitle": "Certifications | RayGold Jewelry ERP",
-      "metaDescription": "Gemological lab submission tracking and verified reports",
+      "title": "Certifications and ESG",
+      "subtitle": "Gemological lab, metal and stone origin, ESG certifications and digital passport",
+      "metaTitle": "Certifications, ESG and digital passport | RayGold Jewelry ERP",
+      "metaDescription": "Gemological lab submissions with price lists, lab report and house certificate, lots with origin from purchasing, RJC, LBMA or Kimberley certifications, and a digital passport with QR code and carbon footprint.",
       "intro": {
-        "titulo": "The certificate, tied to the stone",
+        "titulo": "From the lab to the customer, with proof of origin",
         "parrafos": [
-          "A gem without its certificate and a certificate without its gem are worth the same: nothing. The certifications module tracks submissions to the gemological lab by batch — what went out, what came back and when — so no stone sits in a drawer waiting for someone to remember to chase it.",
-          "The reports that come back are stored alongside their batch and the lab that issued them. So the day a customer asks where the emerald in their ring came from, the answer gets looked up in the system and not in a folder nobody remembers filing."
+          "A quality piece of jewelry needs more than an invoice today. The customer wants to know which stone it has and who analyzed it, the bank or the large retailer asks where the gold comes from, and European regulation is starting to require a digital product passport.",
+          "RayGold handles it inside the same ERP: the lab submission, the report, the purchase lot, the manufacturing order and the customer record are the same data. The piece is traced from the moment the stone and metal are bought until the customer scans its QR code, without cross-checking spreadsheets or asking the supplier for paperwork every time."
         ]
       },
+      "noEs": {
+        "titulo": "What it is not",
+        "items": [
+          "It is not a lab and does not issue gemological reports: the lab issues them, and RayGold records them and links them to the piece.",
+          "It does not certify the company: ESG certifications (RJC, LBMA, Kimberley, ISO…) are granted by each body; RayGold stores them with their expiry date.",
+          "The carbon footprint is an estimate based on public factors, not a verified life-cycle assessment."
+        ]
+      },
+      "faq": [
+        {
+          "pregunta": "What is the difference between the gemological report and the house certificate?",
+          "respuesta": "The report is issued by an outside lab (GIA, IGE, HRD, IGI…) and RayGold records it on the piece. The house certificate is the document with the jeweler’s brand given to the customer: it is built from the latest verified report and, if the piece has a passport, it adds the metal’s origin and the QR code."
+        },
+        {
+          "pregunta": "Can reports be verified automatically?",
+          "respuesta": "With GIA, yes: the report number is enough, and RayGold queries its service and brings back the data and the PDF. For other labs, which have no public lookup, their website is opened from the record and the data is typed in."
+        },
+        {
+          "pregunta": "What does the customer see when scanning the passport QR code?",
+          "respuesta": "A public page, without logging into RayGold and with no internal data: the metal’s origin, whether it is mined or recycled, the chain-of-custody certification, the stones with their report and the estimated carbon footprint. What they saw does not change even if the lots change later."
+        },
+        {
+          "pregunta": "Where are the documents stored?",
+          "respuesta": "In Microsoft Azure, in private storage: the lab PDF, the ESG certificate and the lot and passport documents. Azure holds, among others, the ISO/IEC 27001 and 27018 certifications and Spain’s National Security Framework (ENS) at the high level."
+        }
+      ],
       "sections": {
-        "consultas": {
-          "name": "Certificates",
-          "description": "Browse all your certificates",
+        "laboratorio": {
+          "name": "Gemological lab",
+          "description": "Who you work with, what each service costs and where each submission is.",
+          "detalle": {
+            "parrafos": [
+              "The lab master records who the company works with: country, verification website, whether verification is automatic or manual, whether they analyze mounted pieces, lead time and price list. Before sending a stone, the comparison takes the price band for its weight at each lab, converts it to euros and flags the cheapest and fastest option for each service.",
+              "Each submission goes through Draft, Sent, Received, In progress, Invoiced, Returned and Closed. When it is sent, the pieces leave their warehouse and enter the lab’s; when they come back, they return. When it is invoiced, the lab cost is added to the lot cost, just once."
+            ],
+            "puntos": [
+              "Labs in Spain, Belgium, the United States, Brazil, Colombia and Peru, plus any the company adds",
+              "Comparison of grading, grading with origin, identification and laser inscription",
+              "Stock of the pieces at the lab for the duration of the submission",
+              "The cost of the analysis, added to the lot"
+            ]
+          },
           "images": [
             {
-              "title": "Batches",
-              "description": "Batch maintenance"
+              "title": "Labs",
+              "description": "Automatic or manual verification, lead time and price list for each lab"
             },
             {
-              "title": "Reports",
-              "description": "Browse the reports"
+              "title": "Price comparison",
+              "description": "Each service at each lab for the stone’s weight, with the cheapest and the fastest"
             },
             {
-              "title": "Gemological",
-              "description": "Gemological lab list"
+              "title": "Submission status",
+              "description": "The submission’s path, with what each step does"
+            }
+          ]
+        },
+        "informe": {
+          "name": "Report and certificate",
+          "description": "The lab report on the piece and the house certificate for the customer.",
+          "detalle": {
+            "parrafos": [
+              "When the lab provides the report number, it is recorded on the piece in the submission. With GIA the number is enough: RayGold brings back species, weight, color, clarity, measurements and the PDF. For other labs, their website is opened and the data is typed in. The piece is marked verified, the report appears in Gemological reports and its data is passed to the lot.",
+              "The house certificate is the document with the jeweler’s brand that is given to the customer. It is built from the latest verified report: center stone, quality, origin and the appraisal with its lab and number. The company adds the title, setting, appraised value and signature. If the piece has a passport, the certificate adds the metal’s origin, its certification, the estimated footprint and the QR code."
+            ],
+            "puntos": [
+              "Reports by number, lab, item, species, weight, origin and validity",
+              "Alerts for reports that need revalidating",
+              "The lab PDF, stored in the piece’s documents",
+              "House certificate editable on the left and printed on the right"
+            ]
+          },
+          "images": [
+            {
+              "title": "Gemological reports",
+              "description": "Number, lab, item, species, weight, origin, verification and validity"
+            },
+            {
+              "title": "House certificate",
+              "description": "The editable data and the document as it is printed for the customer"
+            }
+          ]
+        },
+        "origen": {
+          "name": "Lots and origin",
+          "description": "Origin is not written at the end: it is carried over from purchasing.",
+          "detalle": {
+            "parrafos": [
+              "The manufacturing order calculates its shortages, purchase orders are issued and, when they are received, a lot is created for each delivery: metal, diamonds, emeralds… Each purchase order line carries the manufacturing order it is bought for, so the lot is recorded against its material without typing anything.",
+              "All lots, metal and stone, are in a single master with their balance and path: purchase order, lot and manufacturing order. Traceability is completed in the lot record: type of origin (mined, recycled or scrap), country, refinery, chain-of-custody certificate, Kimberley and its own CO₂ factor if the supplier provides one."
+            ],
+            "puntos": [
+              "Material shortages of the manufacturing order with their purchase order and lead time",
+              "Lots with balance, weight, carats and status, by warehouse",
+              "Purchasing, traceability, gemology and cost views",
+              "Check for lots without proof of origin"
+            ]
+          },
+          "images": [
+            {
+              "title": "Manufacturing order movements",
+              "description": "Shortages, purchase order, what was received and the lead time of each component"
+            },
+            {
+              "title": "Lots",
+              "description": "Metal and stones in a single master, with balance, weight, carats and status"
+            },
+            {
+              "title": "Lot record",
+              "description": "Supplier and purchase document, with traceability, gemology, cost and path"
+            }
+          ]
+        },
+        "esg": {
+          "name": "ESG certifications",
+          "description": "Certifications of the company, its suppliers and its customers, with their expiry.",
+          "detalle": {
+            "parrafos": [
+              "ESG is what large retailers, banks and regulators increasingly ask for: where the gold and the stone come from, and with what guarantees. RayGold stores the certifications of the company, its suppliers and refineries and, if needed, its customers, with a catalog of schemes that already includes their validity and alert days.",
+              "Each certification has its calculated status (valid, expiring or expired), the materials it covers and its PDF. Every night RayGold checks the active ones and emails an alert about those about to expire. A supplier’s lots inherit its valid certification, and that is what the passport later shows."
+            ],
+            "puntos": [
+              "RJC, LBMA, Kimberley, Fairmined, Fairtrade, OECD, ISO 9001, 14001 and 45001, SA8000 and recycled schemes",
+              "Expiry date suggested from the scheme’s validity",
+              "Active, suspended, revoked or voided, with a change history",
+              "Expiry alert by email, once per expiry date"
+            ]
+          },
+          "images": [
+            {
+              "title": "Certifications",
+              "description": "Holder, scheme, issuer, materials, calculated status and documents"
+            },
+            {
+              "title": "Certification record",
+              "description": "Holder, scheme, materials covered, validity and status"
+            },
+            {
+              "title": "Schemes",
+              "description": "Catalog of standards with category, who it applies to, validity and alert days"
+            }
+          ]
+        },
+        "pasaporte": {
+          "name": "Passport and footprint",
+          "description": "A snapshot of each piece, with a public QR code and its estimated carbon footprint.",
+          "detalle": {
+            "parrafos": [
+              "The passport states which lots the piece’s metal comes from and whether it is mined or recycled, which refinery and certification are in the chain, which stones it has with their report and an estimated carbon footprint. It is issued from the manufacturing order line and carries a public code: the QR opens a page without logging into RayGold and with no internal data. What the customer saw does not change even if the lots change later.",
+              "The footprint is estimated from grams of fine metal times the metal factor, workshop minutes times each section’s CO₂ per hour, and carats times the stone factor. The starting factors are public orders of magnitude: mined gold is around 25 kg CO₂e per gram and recycled gold around 0.5. They are adjusted with the refiner’s figure and the electricity bill."
+            ],
+            "puntos": [
+              "Alerts for what is missing to complete the passport",
+              "Energy by section and year, with its source and renewable share",
+              "CO₂ per hour comes from the hours in Hourly rates",
+              "Also in the customer portal, order line by order line"
+            ]
+          },
+          "images": [
+            {
+              "title": "Digital passport",
+              "description": "Metal, certification, footprint, stones and QR, with alerts for what is missing"
+            },
+            {
+              "title": "Energy by section",
+              "description": "kWh for the year, source, renewable share and the resulting CO₂ per hour"
             }
           ]
         }
