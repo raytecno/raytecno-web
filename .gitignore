@@ -21,3 +21,5 @@ Thumbs.db
 
 # Capturas en preparación para el blob (no se suben)
 capturas/
+# Posts e imágenes para redes (no se suben)
+redes/

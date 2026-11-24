@@ -149,7 +149,9 @@ export const modulosConfig: Record<ModuloId, ModuloConfig> = {
     color: '#8b5cf6',
     icon: `<svg viewBox="0 0 64 64" fill="none"><rect x="8" y="12" width="48" height="40" rx="4" fill="currentColor" opacity="0.2"/><rect x="14" y="18" width="36" height="6" rx="2" fill="currentColor"/><circle cx="32" cy="38" r="12" fill="currentColor" opacity="0.3"/><path d="M32 30v8l6 4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><circle cx="32" cy="38" r="2" fill="currentColor"/></svg>`,
     secciones: [
-      { id: 'operaciones', prefix: 'HIS' }
+      { id: 'operaciones', prefix: 'HIS' },
+      // Noviembre 2026: estructura del precio guardada en cada línea facturada.
+      { id: 'estructuraprecio', prefix: 'HIS-EST' },
     ],
   },
   inventario: {
@@ -164,8 +166,12 @@ export const modulosConfig: Record<ModuloId, ModuloConfig> = {
     color: '#ec4899',
     icon: `<svg viewBox="0 0 64 64" fill="none"><rect x="8" y="12" width="48" height="40" rx="4" fill="currentColor" opacity="0.2"/><rect x="14" y="36" width="8" height="12" rx="1" fill="currentColor"/><rect x="26" y="28" width="8" height="20" rx="1" fill="currentColor" opacity="0.7"/><rect x="38" y="20" width="8" height="28" rx="1" fill="currentColor" opacity="0.5"/></svg>`,
     secciones: [
+      // Noviembre 2026: cuatro pestañas. 'dashboards' conserva DAS01-03
+      // (ventas y gráficos); estructura y recargos van sin capturas por ahora.
       { id: 'dashboards', prefix: 'DAS' },
-      // { id: 'informes', prefix: 'REP' },
+      { id: 'direccion', prefix: 'EST-DIR' },
+      { id: 'estructuraprecio', prefix: 'EST-EST' },
+      { id: 'recargos', prefix: 'EST-REC' },
     ],
   },
   vendedores: {

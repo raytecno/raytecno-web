@@ -697,7 +697,8 @@
         "titulo": "What happened, complete and searchable",
         "parrafos": [
           "When a customer asks about a job from three years ago, or when an operation has to be justified to whoever is asking, the answer cannot depend on who happens to remember. Historical keeps the full record of operations with their original detail, and lets you find it by the criteria people actually search on.",
-          "It also holds the trail of invoicing declared under VERI*FACTU, with the record of each submission and its response. This is not a dead archive nobody opens: it is the part of the system you go to on the day you have to prove something."
+          "It also holds the trail of invoicing declared under VERI*FACTU, with the record of each submission and its response. This is not a dead archive nobody opens: it is the part of the system you go to on the day you have to prove something.",
+          "In addition, every invoiced line stores its price structure: how much of what was charged was gold, components, labour, surcharges and profit, with that day's fixing and price list."
         ]
       },
       "sections": {
@@ -716,6 +717,29 @@
             {
               "title": "Verifactu",
               "description": "Invoicing with Verifactu"
+            }
+          ]
+        },
+        "estructuraprecio": {
+          "name": "Price structure",
+          "description": "Each invoice line with how its price was built: gold, components, labour, surcharges and profit.",
+          "detalle": {
+            "parrafos": [
+              "When an invoice is archived, RayGold stores how the price of each line was built, with the fixing on the invoice date and the price list it was sold under. In the history, a selector switches between the lines as issued and the price structure: one row per line and one column per concept, grouped as in the price calculator.",
+              "At the end of each row, what the structure gave, what was invoiced and the difference, green if more was charged and red if less. If a wedding band shows zero surcharges, it is not an error: the screen shows it was sold under a price list with them at 0 %."
+            ],
+            "puntos": [
+              "Model weight with loss allowance, fineness, colour and fixing applied",
+              "Components, and routing labour at each section's hourly rate",
+              "Every price-list surcharge in its own column, even at 0 %",
+              "For the whole line or a single piece, to compare it with the calculator",
+              "A button on each line opens the item's price calculator"
+            ]
+          },
+          "images": [
+            {
+              "title": "Invoice lines",
+              "description": "Item with photo, karat, colour, price list it was sold under, quantity, price and value"
             }
           ]
         }
@@ -774,24 +798,62 @@
     },
     "estadisticas": {
       "title": "Statistics",
-      "subtitle": "Reports and dashboards for decisions",
-      "metaTitle": "Statistics | RayGold ERP - Business Intelligence",
-      "metaDescription": "Data analysis, custom reports and dashboards for decision making in jewelers.",
+      "subtitle": "Sales, management dashboard and the price structure of what you sold",
+      "metaTitle": "Sales statistics and price structure | RayGold Jewelry ERP",
+      "metaDescription": "Sales by item, customer or karat with ABC class and Excel, a management dashboard with the gold you have at stake, the price structure of what was sold and surcharges against costs.",
       "intro": {
-        "titulo": "The workshop's numbers, without building the spreadsheet",
+        "titulo": "What you sold, why it changes and what each euro was made of",
         "parrafos": [
-          "The information is already inside the system; the old problem is getting it out. Statistics brings together the indicators people actually look at in a workshop — what has been made, what has been sold, what it cost — in dashboards you consult directly, without asking anyone or waiting until Monday.",
-          "You can look by period, comparing months or fiscal years, or drill down to a single item to see which references move and which have been taking up space for a year. It all comes from the same data you work with every day, so there are never two versions of the same figure."
+          "The information is already in the system; the usual problem is getting it out. Statistics brings together sales by item, customer, family, karat, colour, country, shop or salesperson, month by month, plus a management dashboard that sums it up in one sentence.",
+          "And because RayGold stores how the price of every line was built when it invoices, you can also see what the sales were made of: how much was gold, components, labour, channel surcharges and profit, and whether the price-list surcharges cover the costs they were set for. Everything comes from the same data you work with every day."
         ]
       },
+      "noEs": {
+        "titulo": "What it is not",
+        "items": [
+          "It is not a separate BI tool: nothing to export or cross-reference; the figures come from the ERP's own invoices and item records.",
+          "The price structure is the theoretical cost from the item record (bill of materials, routing and hourly rates), not the actual cost measured in the workshop.",
+          "It is not cost accounting: surcharges collected are compared with the costs in the hourly-rate plan, not with booked expenses."
+        ]
+      },
+      "faq": [
+        {
+          "pregunta": "What is the price structure?",
+          "respuesta": "It is how the price of each line sold was built: the gold in the piece at the day's fixing with its loss allowance and fineness, components and stones, labour at each section's hourly rate, every surcharge in the price list and the profit. RayGold stores it when the invoice is archived, with that invoice's gold price and price list."
+        },
+        {
+          "pregunta": "What is the \"gold at stake\"?",
+          "respuesta": "The gold the company owns today: in stock, bought from private sellers and not yet melted, at workshops and the refiner, and owed to it, minus what it owes. The dashboard values it at today's price and tells you how much you gain or lose if gold moves up or down 1, 5 or 10 %."
+        },
+        {
+          "pregunta": "What about invoices issued before this feature?",
+          "respuesta": "Their structure is calculated automatically when the invoice is opened, or in batches from statistics with the Calculate button. If structures or rates change, \"Rebuild the year\" recalculates everything with today's data."
+        },
+        {
+          "pregunta": "Can I take it to Excel?",
+          "respuesta": "Yes: an .xlsx with numbers stored as numbers, autofilter, frozen header and the description in its own column, ready to work with."
+        }
+      ],
       "sections": {
         "dashboards": {
-          "name": "Dashboards",
-          "description": "Visual dashboards",
+          "name": "Sales and charts",
+          "description": "By item, customer, family, karat, colour, country, shop or salesperson, month by month, with ABC class and Excel.",
+          "detalle": {
+            "parrafos": [
+              "Sales can be viewed by value, units or weight, month by month with the year total on top. For items you get the rank and ABC class —those making up 80 % and 95 % of sales—, the photo, share of sales and units and the average price. One click on a figure sorts by that column.",
+              "Every table has its chart: bars, lines, areas, pie, polar or radial. When one value dwarfs the rest —a test item, an exceptional customer— just click it in the legend to remove it and the scale is recalculated; you can also drag a box over the part you care about."
+            ],
+            "puntos": [
+              "ABC class per item, with photo and average price",
+              "Real Excel output: true numbers, autofilter and frozen header",
+              "Remove values from the chart from the legend and bring them back later",
+              "Rebuild a year's statistics with one button"
+            ]
+          },
           "images": [
             {
-              "title": "Main",
-              "description": "Main KPIs"
+              "title": "Overview",
+              "description": "Key indicators"
             },
             {
               "title": "Time",
@@ -802,6 +864,65 @@
               "description": "Charts by item"
             }
           ]
+        },
+        "direccion": {
+          "name": "Management dashboard",
+          "description": "One screen with the conclusion in a sentence, always against the same dates last year.",
+          "detalle": {
+            "parrafos": [
+              "By month, quarter, year or the last 12 months, always compared with the same dates last year. At the top, the conclusion in one sentence and the figures that matter: sales, sales excluding gold, target to date and order book; below, buying customers, new, recovered, average invoice and returns.",
+              "Further down, why sales change —how much is due to gold, price, pieces sold and product mix—, who is up and who is down, what to look at today, the customer pyramid and the ten best-selling items. And the gold the company has at stake: in stock, in the factory, at workshops and owed to it, with what it gains or loses if gold moves 1 %."
+            ],
+            "puntos": [
+              "Why sales change: gold, price, pieces and mix",
+              "Gold at stake, in kilos of fine gold and in money",
+              "What to look at today: late orders, customers not buying and those who don't reorder",
+              "Customer pyramid and top 10 items, by value or by quantity"
+            ]
+          },
+          "images": [
+            {
+              "title": "Overview and gold at stake",
+              "description": "The conclusion in one sentence, target, order book, customers and the gold at stake if the price moves"
+            },
+            {
+              "title": "Why sales change",
+              "description": "Month by month against last year, up and down, what to look at today, pyramid and top 10 items"
+            }
+          ]
+        },
+        "estructuraprecio": {
+          "name": "Price structure",
+          "description": "Out of every 100 sold, how much was gold, components, labour, distribution and profit.",
+          "detalle": {
+            "parrafos": [
+              "What is stored on every invoice, added up for the year: out of every 100 of structure, how much is gold, components, labour, distribution surcharges and profit; the kilos of gold sold with their loss allowance; and how much was charged above or below what the structure gave.",
+              "It can be viewed by month or by karat, in amounts or as a percentage of each row, so if gold weighs more one month you see it at once. Sales of items without a price structure are kept apart so they don't distort the rest, and below are the lines that stray furthest from their structure, with invoice, month, customer and pieces."
+            ],
+            "puntos": [
+              "Kilos of gold sold by fineness, with their loss allowance",
+              "By month or by karat, in amounts or in %",
+              "Charged above or below the structure, line by line",
+              "Rebuild the year with today's structures and rates"
+            ]
+          },
+          "images": []
+        },
+        "recargos": {
+          "name": "Surcharges vs. costs",
+          "description": "Whether what price lists add for selling, distribution and commissions covers the cost it was set for.",
+          "detalle": {
+            "parrafos": [
+              "Each price-list surcharge adds a percentage to recover a cost that is not in the hourly rate: selling, distribution, commissions, administration. The hourly-rate plan calculates that cost for the year; sales, when invoiced, collect their share. Side by side, they tell you whether the price-list percentages are set right.",
+              "For each surcharge you see the planned cost and its percentage of the cost of sales, the expected amount to date for the part of the year elapsed, what was collected, the percentage covered, the difference and what was collected each month."
+            ],
+            "puntos": [
+              "Red below 90 % covered, amber above 110 %, green when on target",
+              "Warning when a surcharge is collected with no cost to justify it",
+              "Warning when there is a cost and no sale recovers it"
+            ]
+          },
+          "images": []
         }
       }
     },

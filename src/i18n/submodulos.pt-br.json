@@ -697,7 +697,8 @@
         "titulo": "O que aconteceu, íntegro e consultável",
         "parrafos": [
           "Quando um cliente pergunta por uma encomenda de três anos atrás, ou quando é preciso justificar uma operação diante de quem a exige, a resposta não pode depender de quem se lembre. Históricos guarda o registro completo das operações com o seu detalhe original, e permite localizá-lo pelos critérios com que se busca de verdade.",
-          "Ali fica também o rastro do faturamento eletrônico enviado ao fisco, com o registro de cada envio e a sua resposta. Não é um arquivo morto que ninguém abre: é a parte do sistema que se consulta justamente no dia em que é preciso comprovar alguma coisa."
+          "Ali fica também o rastro do faturamento eletrônico enviado ao fisco, com o registro de cada envio e a sua resposta. Não é um arquivo morto que ninguém abre: é a parte do sistema que se consulta justamente no dia em que é preciso comprovar alguma coisa.",
+          "Além disso, cada linha faturada guarda a estrutura do seu preço: quanto do que foi cobrado era ouro, componentes, mão de obra, sobretaxas e lucro, com a cotação e a tabela daquele dia."
         ]
       },
       "sections": {
@@ -716,6 +717,29 @@
             {
               "title": "Verifactu",
               "description": "Faturamento com Verifactu"
+            }
+          ]
+        },
+        "estructuraprecio": {
+          "name": "Estrutura do preço",
+          "description": "Cada linha da nota com como se formou o seu preço: ouro, componentes, mão de obra, sobretaxas e lucro.",
+          "detalle": {
+            "parrafos": [
+              "Ao arquivar uma nota, o RayGold guarda como se formou o preço de cada linha, com a cotação do dia da nota e a tabela com que foi vendida. No histórico, um seletor alterna entre as linhas como foram emitidas e a estrutura do preço: uma linha por item e uma coluna por conceito, agrupadas como na calculadora de preços.",
+              "No fim de cada linha, o que dava a estrutura, o faturado e a diferença, em verde se foi cobrado a mais e em vermelho se foi cobrado a menos. Se uma aliança aparece com as sobretaxas zeradas, não é erro: a tela mostra que foi vendida com uma tabela que as tem em 0 %."
+            ],
+            "puntos": [
+              "Peso do modelo com sua quebra, teor, cor e cotação aplicada",
+              "Componentes, e mão de obra do roteiro pela taxa horária de cada seção",
+              "Cada sobretaxa da tabela em sua coluna, mesmo em 0 %",
+              "Pela linha inteira ou por uma única peça, para comparar com a calculadora",
+              "Um botão em cada linha abre a calculadora de preço do artigo"
+            ]
+          },
+          "images": [
+            {
+              "title": "Linhas da nota",
+              "description": "Artigo com sua foto, quilates, cor, tabela com que foi vendido, quantidade, preço e valor"
             }
           ]
         }
@@ -774,34 +798,131 @@
     },
     "estadisticas": {
       "title": "Estatísticas",
-      "subtitle": "Relatórios e painéis para decisões",
-      "metaTitle": "Estatísticas | RayGold ERP - Business Intelligence",
-      "metaDescription": "Análise de dados, relatórios personalizados e dashboards para tomada de decisões em joalherias.",
+      "subtitle": "Vendas, dashboard da diretoria e a estrutura do preço do que foi vendido",
+      "metaTitle": "Estatísticas de vendas e estrutura do preço | RayGold ERP Joalheria",
+      "metaDescription": "Vendas por artigo, cliente ou quilate com curva ABC e Excel, dashboard da diretoria com o ouro em jogo, a estrutura do preço do que foi vendido e as sobretaxas frente aos gastos.",
       "intro": {
-        "titulo": "Os números da oficina, sem montar a planilha",
+        "titulo": "O que foi vendido, por que muda e do que era feito cada real",
         "parrafos": [
-          "A informação já está dentro do sistema; o problema de sempre é tirá-la de lá. Estatísticas reúne os indicadores que de fato se olham numa oficina — o que se fabricou, o que se vendeu, o que custou — em painéis que se consultam direto, sem pedir a ninguém nem esperar até segunda-feira.",
-          "Dá para olhar por período, comparando meses ou exercícios, ou descer ao item concreto para ver quais referências giram e quais estão há um ano ocupando lugar. Tudo sai dos mesmos dados com que se trabalha todo dia, então nunca há duas versões do mesmo número."
+          "A informação já está dentro do sistema; o problema de sempre é tirá-la de lá. Estatísticas reúne as vendas por artigo, cliente, família, quilate, cor, país, loja ou vendedor, mês a mês, e um dashboard para a diretoria que dá a conclusão em uma frase.",
+          "E como o RayGold guarda ao faturar como se formou o preço de cada linha, também se vê do que era feito o que foi vendido: quanto era ouro, componentes, mão de obra, sobretaxas de cada canal e lucro, e se as sobretaxas das tabelas de preço cobrem o gasto para o qual foram definidas. Tudo sai dos mesmos dados com que se trabalha no dia a dia."
         ]
       },
+      "noEs": {
+        "titulo": "O que não é",
+        "items": [
+          "Não é uma ferramenta de BI à parte: não é preciso exportar nem cruzar dados; os números saem das mesmas notas e fichas do ERP.",
+          "A estrutura do preço é o custo teórico da ficha (estrutura de materiais, roteiro e taxas horárias), não o custo real medido na oficina.",
+          "Não é contabilidade de custos: as sobretaxas cobradas são comparadas com o gasto do plano de taxas horárias, não com o gasto contabilizado."
+        ]
+      },
+      "faq": [
+        {
+          "pregunta": "O que é a estrutura do preço?",
+          "respuesta": "É como se formou o preço de cada linha vendida: o ouro da peça pela cotação do dia com sua quebra e seu teor, os componentes e as pedras, a mão de obra pela taxa horária de cada seção, cada sobretaxa da tabela e o lucro. O RayGold a guarda ao arquivar a nota, com a cotação e a tabela daquela nota."
+        },
+        {
+          "pregunta": "O que é o «ouro em jogo»?",
+          "respuesta": "O ouro que é da empresa hoje: o do estoque, o comprado de particulares ainda sem fundir, o que está nas oficinas e no refinador e o que devem a ela, menos o que ela deve. O dashboard o valoriza pela cotação do dia e diz quanto se ganha ou se perde se o ouro sobe ou cai 1, 5 ou 10 %."
+        },
+        {
+          "pregunta": "E as notas anteriores a esta função?",
+          "respuesta": "A estrutura delas é calculada sozinha ao abrir a nota, ou em lotes a partir das estatísticas com o botão Calcular. Se as estruturas ou as taxas mudarem, «Refazer o ano» recalcula tudo com os dados de hoje."
+        },
+        {
+          "pregunta": "Dá para levar ao Excel?",
+          "respuesta": "Sim: um .xlsx com os números como números, autofiltro, cabeçalho fixo e a descrição em sua própria coluna, pronto para trabalhar."
+        }
+      ],
       "sections": {
         "dashboards": {
-          "name": "Dashboards",
-          "description": "Painéis de controle visuais",
+          "name": "Vendas e gráficos",
+          "description": "Por artigo, cliente, família, quilate, cor, país, loja ou vendedor, mês a mês, com curva ABC e Excel.",
+          "detalle": {
+            "parrafos": [
+              "As vendas são vistas em valores, unidades ou peso, mês a mês e com o total do ano no topo. Em artigos aparecem a posição e a curva ABC —os que fazem 80 % e 95 % da venda—, a foto, a porcentagem de venda e de unidades e o preço médio. Um clique em um número ordena por aquela coluna.",
+              "Cada tabela tem seu gráfico: barras, linhas, áreas, pizza, polar ou radial. Quando um valor achata os demais —um artigo de teste, um cliente extraordinário—, basta clicar nele na legenda para retirá-lo e a escala é recalculada; também dá para selecionar com o mouse a parte que interessa."
+            ],
+            "puntos": [
+              "Curva ABC por artigo, com foto e preço médio",
+              "Excel com números de verdade, autofiltro e cabeçalho fixo",
+              "Retirar valores do gráfico pela legenda e devolvê-los depois",
+              "Reconstruir as estatísticas de um exercício com um botão"
+            ]
+          },
           "images": [
             {
               "title": "Principal",
-              "description": "KPIs principais"
+              "description": "Indicadores principais"
             },
             {
               "title": "Tempo",
               "description": "Gráficos por meses ou anos"
             },
             {
-              "title": "Itens",
-              "description": "Gráficos por item"
+              "title": "Artigos",
+              "description": "Gráficos por artigos"
             }
           ]
+        },
+        "direccion": {
+          "name": "Dashboard da diretoria",
+          "description": "Uma tela com a conclusão em uma frase, sempre frente às mesmas datas do ano anterior.",
+          "detalle": {
+            "parrafos": [
+              "Por mês, trimestre, ano ou os últimos 12 meses, comparado sempre com as mesmas datas do ano anterior. No topo, a conclusão em uma frase e os números que importam: venda, venda sem ouro, meta até a data e carteira de pedidos; abaixo, clientes que compram, novos, recuperados, ticket médio e devoluções.",
+              "Mais abaixo, por que a venda muda —quanto se deve ao ouro, ao preço, às peças vendidas e ao mix de artigos—, quem sobe e quem cai, o que olhar hoje, a pirâmide de clientes e os dez artigos mais vendidos. E o ouro que a empresa tem em jogo: em estoque, na fábrica, nas oficinas e o que devem a ela, com quanto ganha ou perde se o ouro se move 1 %."
+            ],
+            "puntos": [
+              "Por que a venda muda: ouro, preço, peças e mix",
+              "Ouro em jogo, em quilos de fino e em dinheiro",
+              "O que olhar hoje: pedidos atrasados, clientes sem comprar e os que não repetem",
+              "Pirâmide de clientes e os 10 mais vendidos, por valor ou por quantidade"
+            ]
+          },
+          "images": [
+            {
+              "title": "Capa e ouro em jogo",
+              "description": "A conclusão em uma frase, meta, carteira, clientes e o ouro em jogo se a cotação se mover"
+            },
+            {
+              "title": "Por que a venda muda",
+              "description": "Mês a mês frente ao ano anterior, sobem e caem, o que olhar hoje, pirâmide e os 10 mais vendidos"
+            }
+          ]
+        },
+        "estructuraprecio": {
+          "name": "Estrutura do preço",
+          "description": "De cada 100 vendidos, quanto era ouro, componentes, mão de obra, distribuição e lucro.",
+          "detalle": {
+            "parrafos": [
+              "O que é guardado em cada nota, somado para o ano: de cada 100 de estrutura, quanto é ouro, componentes, mão de obra, sobretaxas de distribuição e lucro; os quilos de ouro vendidos com sua quebra; e quanto foi cobrado acima ou abaixo do que dava a estrutura.",
+              "Pode ser visto por meses ou por quilates, em valores ou em porcentagem de cada linha, então se em um mês o ouro pesa mais, isso aparece na hora. O faturado de artigos sem estrutura de preço fica à parte, para não misturar, e abaixo aparecem as linhas que mais se afastam de sua estrutura, com nota, mês, cliente e peças."
+            ],
+            "puntos": [
+              "Quilos de ouro vendidos por teor, com sua quebra",
+              "Por meses ou por quilates, em valores ou em %",
+              "O cobrado acima ou abaixo da estrutura, linha a linha",
+              "Refazer o ano com as estruturas e taxas de hoje"
+            ]
+          },
+          "images": []
+        },
+        "recargos": {
+          "name": "Sobretaxas frente ao gasto",
+          "description": "Se o que as tabelas de preço acrescentam para vender, distribuir e comissionar cobre o gasto para o qual foi definido.",
+          "detalle": {
+            "parrafos": [
+              "Cada sobretaxa da tabela acrescenta uma porcentagem para recuperar um gasto que não entra na taxa horária: vender, distribuir, comissionar, administrar. O plano de taxas horárias calcula esse gasto do ano; as vendas, ao serem faturadas, cobram sua parte. Colocados frente a frente, dizem se as porcentagens das tabelas estão bem definidas.",
+              "Para cada sobretaxa aparecem o gasto do plano e sua porcentagem sobre o custo das vendas, o previsto até hoje segundo a parte do ano que já passou, o cobrado, a porcentagem coberta, a diferença e o cobrado em cada mês."
+            ],
+            "puntos": [
+              "Vermelho abaixo de 90 % coberto, âmbar acima de 110 %, verde no lugar",
+              "Aviso se uma sobretaxa é cobrada sem gasto que a justifique",
+              "Aviso se há gasto e nenhuma venda o recupera"
+            ]
+          },
+          "images": []
         }
       }
     },

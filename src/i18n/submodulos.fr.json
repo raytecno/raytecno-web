@@ -697,7 +697,8 @@
         "titulo": "Ce qui s'est passé, intégral et consultable",
         "parrafos": [
           "Quand un client demande où en est une commande d'il y a trois ans, ou qu'il faut justifier une opération auprès de qui la réclame, la réponse ne peut pas dépendre de la mémoire de quelqu'un. Historiques conserve le registre complet des opérations avec leur détail d'origine, et permet de le retrouver selon les critères avec lesquels on cherche vraiment.",
-          "On y trouve aussi la trace de la facturation déclarée sous VERI*FACTU, avec l'enregistrement de chaque envoi et sa réponse. Ce n'est pas une archive morte que personne n'ouvre : c'est la partie du système que l'on consulte précisément le jour où il faut prouver quelque chose."
+          "On y trouve aussi la trace de la facturation déclarée sous VERI*FACTU, avec l'enregistrement de chaque envoi et sa réponse. Ce n'est pas une archive morte que personne n'ouvre : c'est la partie du système que l'on consulte précisément le jour où il faut prouver quelque chose.",
+          "De plus, chaque ligne facturée conserve la structure de son prix : la part d'or, de composants, de main-d'œuvre, de majorations et de bénéfice dans ce qui a été facturé, avec le fixing et le tarif du jour."
         ]
       },
       "sections": {
@@ -716,6 +717,29 @@
             {
               "title": "Verifactu",
               "description": "Facturation avec Verifactu"
+            }
+          ]
+        },
+        "estructuraprecio": {
+          "name": "Structure du prix",
+          "description": "Chaque ligne de facture avec la façon dont s'est formé son prix : or, composants, main-d'œuvre, majorations et bénéfice.",
+          "detalle": {
+            "parrafos": [
+              "À l'archivage d'une facture, RayGold enregistre comment s'est formé le prix de chaque ligne, avec le fixing du jour de la facture et le tarif de vente. Dans l'historique, un sélecteur bascule entre les lignes telles qu'émises et la structure du prix : une ligne par ligne de facture et une colonne par poste, regroupées comme dans le calculateur de prix.",
+              "En fin de ligne, ce que donnait la structure, le facturé et l'écart, en vert si l'on a facturé plus et en rouge si l'on a facturé moins. Si une alliance affiche des majorations à zéro, ce n'est pas une erreur : l'écran montre qu'elle a été vendue avec un tarif qui les a à 0 %."
+            ],
+            "puntos": [
+              "Poids du modèle avec sa perte, titre, couleur et fixing appliqué",
+              "Composants, et main-d'œuvre de la gamme au taux horaire de chaque section",
+              "Chaque majoration du tarif dans sa colonne, même à 0 %",
+              "Pour la ligne entière ou une seule pièce, pour la comparer au calculateur",
+              "Un bouton sur chaque ligne ouvre le calculateur de prix de l'article"
+            ]
+          },
+          "images": [
+            {
+              "title": "Lignes de la facture",
+              "description": "Article avec sa photo, carat, couleur, tarif de vente, quantité, prix et valeur"
             }
           ]
         }
@@ -774,34 +798,131 @@
     },
     "estadisticas": {
       "title": "Statistiques",
-      "subtitle": "Rapports et tableaux de bord pour décisions",
-      "metaTitle": "Statistiques | RayGold ERP - Business Intelligence",
-      "metaDescription": "Analyse de données, rapports personnalisés et tableaux de bord pour la prise de décision en joailleries.",
+      "subtitle": "Ventes, tableau de bord de direction et structure du prix de ce qui a été vendu",
+      "metaTitle": "Statistiques de ventes et structure du prix | RayGold ERP Bijouterie",
+      "metaDescription": "Ventes par article, client ou carat avec classe ABC et Excel, tableau de bord de direction avec l'or en jeu, structure du prix de ce qui a été vendu et majorations face aux frais.",
       "intro": {
-        "titulo": "Les chiffres de l'atelier, sans monter le tableur",
+        "titulo": "Ce qui s'est vendu, pourquoi cela change et de quoi était fait chaque euro",
         "parrafos": [
-          "L'information est déjà dans le système ; le problème, comme toujours, c'est de l'en sortir. Statistiques réunit les indicateurs que l'on regarde vraiment dans un atelier — ce qui a été fabriqué, ce qui a été vendu, ce que cela a coûté — dans des tableaux de bord que l'on consulte directement, sans les demander à personne.",
-          "On peut regarder par période, en comparant des mois ou des exercices, ou descendre à l'article pour voir quelles références tournent et lesquelles occupent de la place depuis un an. Tout provient des mêmes données que celles du quotidien : il n'existe jamais deux versions du même chiffre."
+          "L'information est déjà dans le système ; le problème habituel, c'est de la sortir. Statistiques réunit les ventes par article, client, famille, carat, couleur, pays, boutique ou vendeur, mois par mois, ainsi qu'un tableau de bord de direction qui résume tout en une phrase.",
+          "Et comme RayGold enregistre à la facturation comment s'est formé le prix de chaque ligne, on voit aussi de quoi étaient faites les ventes : la part d'or, de composants, de main-d'œuvre, de majorations de chaque canal et de bénéfice, et si les majorations des tarifs couvrent les frais pour lesquels elles ont été fixées. Tout vient des mêmes données que celles du quotidien."
         ]
       },
+      "noEs": {
+        "titulo": "Ce que ce n'est pas",
+        "items": [
+          "Ce n'est pas un outil de BI à part : rien à exporter ni à croiser ; les chiffres viennent des factures et des fiches de l'ERP.",
+          "La structure du prix est le coût théorique de la fiche (nomenclature, gamme et taux horaires), pas le coût réel mesuré à l'atelier.",
+          "Ce n'est pas une comptabilité analytique : les majorations encaissées sont comparées aux frais du plan de taux horaires, pas aux frais comptabilisés."
+        ]
+      },
+      "faq": [
+        {
+          "pregunta": "Qu'est-ce que la structure du prix ?",
+          "respuesta": "C'est la façon dont s'est formé le prix de chaque ligne vendue : l'or de la pièce au fixing du jour avec sa perte et son titre, les composants et les pierres, la main-d'œuvre au taux horaire de chaque section, chaque majoration du tarif et le bénéfice. RayGold l'enregistre à l'archivage de la facture, avec le cours et le tarif de cette facture."
+        },
+        {
+          "pregunta": "Qu'est-ce que « l'or en jeu » ?",
+          "respuesta": "L'or qui appartient à l'entreprise aujourd'hui : en stock, acheté aux particuliers et pas encore fondu, chez les ateliers et l'affineur, et celui qu'on lui doit, moins celui qu'elle doit. Le tableau de bord le valorise au cours du jour et indique combien on gagne ou perd si l'or monte ou baisse de 1, 5 ou 10 %."
+        },
+        {
+          "pregunta": "Et les factures antérieures à cette fonction ?",
+          "respuesta": "Leur structure se calcule seule à l'ouverture de la facture, ou par lots depuis les statistiques avec le bouton Calculer. Si les structures ou les taux changent, « Refaire l'année » recalcule tout avec les données d'aujourd'hui."
+        },
+        {
+          "pregunta": "Peut-on l'exporter vers Excel ?",
+          "respuesta": "Oui : un .xlsx avec des nombres enregistrés comme nombres, filtre automatique, en-tête figé et la description dans sa propre colonne, prêt à l'emploi."
+        }
+      ],
       "sections": {
         "dashboards": {
-          "name": "Tableaux de Bord",
-          "description": "Tableaux de bord visuels",
+          "name": "Ventes et graphiques",
+          "description": "Par article, client, famille, carat, couleur, pays, boutique ou vendeur, mois par mois, avec classe ABC et Excel.",
+          "detalle": {
+            "parrafos": [
+              "Les ventes se consultent en valeur, en unités ou en poids, mois par mois, avec le total de l'année en haut. Pour les articles : le rang et la classe ABC —ceux qui font 80 % et 95 % des ventes—, la photo, la part des ventes et des unités et le prix moyen. Un clic sur un chiffre trie par cette colonne.",
+              "Chaque tableau a son graphique : barres, lignes, aires, secteurs, polaire ou radial. Quand une valeur écrase les autres —un article de test, un client exceptionnel—, il suffit de cliquer dessus dans la légende pour la retirer et l'échelle se recalcule ; on peut aussi encadrer à la souris la partie qui intéresse."
+            ],
+            "puntos": [
+              "Classe ABC par article, avec photo et prix moyen",
+              "Un vrai Excel : nombres, filtre automatique et en-tête figé",
+              "Retirer des valeurs du graphique depuis la légende et les rétablir ensuite",
+              "Reconstruire les statistiques d'un exercice d'un clic"
+            ]
+          },
           "images": [
             {
               "title": "Principal",
-              "description": "KPIs principaux"
+              "description": "Indicateurs principaux"
             },
             {
               "title": "Temps",
-              "description": "Graphiques par mois ou années"
+              "description": "Graphiques par mois ou par année"
             },
             {
               "title": "Articles",
               "description": "Graphiques par article"
             }
           ]
+        },
+        "direccion": {
+          "name": "Tableau de bord de direction",
+          "description": "Un écran avec la conclusion en une phrase, toujours face aux mêmes dates de l'année précédente.",
+          "detalle": {
+            "parrafos": [
+              "Par mois, trimestre, année ou sur les 12 derniers mois, toujours comparé aux mêmes dates de l'année précédente. En haut, la conclusion en une phrase et les chiffres qui comptent : ventes, ventes hors or, objectif à date et carnet de commandes ; en dessous, clients acheteurs, nouveaux, récupérés, facture moyenne et retours.",
+              "Plus bas, pourquoi les ventes changent —la part due à l'or, au prix, aux pièces vendues et au mix d'articles—, qui monte et qui baisse, quoi regarder aujourd'hui, la pyramide des clients et les dix articles les plus vendus. Et l'or que l'entreprise a en jeu : en stock, en fabrication, chez les ateliers et celui qu'on lui doit, avec ce qu'elle gagne ou perd si l'or bouge de 1 %."
+            ],
+            "puntos": [
+              "Pourquoi les ventes changent : or, prix, pièces et mix",
+              "L'or en jeu, en kilos de fin et en argent",
+              "Quoi regarder aujourd'hui : commandes en retard, clients sans achat et ceux qui ne reviennent pas",
+              "Pyramide des clients et top 10 des articles, en valeur ou en quantité"
+            ]
+          },
+          "images": [
+            {
+              "title": "Accueil et or en jeu",
+              "description": "La conclusion en une phrase, objectif, carnet de commandes, clients et l'or en jeu si le cours bouge"
+            },
+            {
+              "title": "Pourquoi les ventes changent",
+              "description": "Mois par mois face à l'année précédente, hausses et baisses, quoi regarder, pyramide et top 10"
+            }
+          ]
+        },
+        "estructuraprecio": {
+          "name": "Structure du prix",
+          "description": "Sur chaque 100 vendus, la part d'or, de composants, de main-d'œuvre, de distribution et de bénéfice.",
+          "detalle": {
+            "parrafos": [
+              "Ce qui est enregistré sur chaque facture, additionné pour l'année : sur chaque 100 de structure, la part d'or, de composants, de main-d'œuvre, de majorations de distribution et de bénéfice ; les kilos d'or vendus avec leur perte ; et combien a été facturé au-dessus ou en dessous de ce que donnait la structure.",
+              "On la voit par mois ou par carat, en montants ou en pourcentage de chaque ligne : si l'or pèse plus un mois, cela se voit tout de suite. Les ventes d'articles sans structure de prix sont mises à part pour ne pas fausser le reste, et en dessous figurent les lignes qui s'écartent le plus de leur structure, avec facture, mois, client et pièces."
+            ],
+            "puntos": [
+              "Kilos d'or vendus par titre, avec leur perte",
+              "Par mois ou par carat, en montants ou en %",
+              "Facturé au-dessus ou en dessous de la structure, ligne par ligne",
+              "Refaire l'année avec les structures et taux d'aujourd'hui"
+            ]
+          },
+          "images": []
+        },
+        "recargos": {
+          "name": "Majorations face aux frais",
+          "description": "Si ce que les tarifs ajoutent pour vendre, distribuer et commissionner couvre les frais prévus.",
+          "detalle": {
+            "parrafos": [
+              "Chaque majoration du tarif ajoute un pourcentage pour récupérer des frais qui ne sont pas dans le taux horaire : vendre, distribuer, commissionner, administrer. Le plan de taux horaires calcule ces frais de l'année ; les ventes, à la facturation, en encaissent leur part. Mis face à face, ils disent si les pourcentages des tarifs sont bien fixés.",
+              "Pour chaque majoration, on voit les frais du plan et leur pourcentage sur le coût des ventes, le prévu à date selon la part de l'année écoulée, l'encaissé, le pourcentage couvert, l'écart et l'encaissé de chaque mois."
+            ],
+            "puntos": [
+              "Rouge sous 90 % de couverture, ambre au-dessus de 110 %, vert quand c'est juste",
+              "Alerte si une majoration est encaissée sans frais qui la justifient",
+              "Alerte s'il y a des frais et qu'aucune vente ne les récupère"
+            ]
+          },
+          "images": []
         }
       }
     },

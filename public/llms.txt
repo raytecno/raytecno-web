@@ -51,8 +51,8 @@ RayGold is a jewelry manufacturing ERP built by Raytecno BCN SL (Barcelona, Spai
 - [Comercial](https://www.raytecno.es/es/modulos/comercial): ventas y documentos comerciales.
 - [Vendedores](https://www.raytecno.es/es/modulos/vendedores): gestión de representantes comerciales.
 - [Finanzas](https://www.raytecno.es/es/modulos/finanzas): contabilidad y finanzas.
-- [Estadísticas](https://www.raytecno.es/es/modulos/estadisticas): análisis de producción y ventas.
-- [Históricos](https://www.raytecno.es/es/modulos/historicos): consulta de datos históricos.
+- [Estadísticas](https://www.raytecno.es/es/modulos/estadisticas): ventas con clase ABC y Excel, dashboard de dirección, estructura del precio de lo vendido (oro, componentes, mano de obra, recargos y beneficio) y recargos frente al gasto.
+- [Históricos](https://www.raytecno.es/es/modulos/historicos): consulta de operaciones históricas, VERI*FACTU y la estructura del precio de cada línea facturada.
 - [Impresoras 3D](https://www.raytecno.es/es/modulos/impresoras3d): gestión de impresión 3D en joyería.
 - [Ecommerce](https://www.raytecno.es/es/modulos/ecommerce): venta online integrada.
 - [Portal](https://www.raytecno.es/es/modulos/portal): portal de clientes.

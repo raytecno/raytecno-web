@@ -283,7 +283,6 @@
             }
           ]
         },
-
         "fabricacion2": {
           "name": "Fabricacion",
           "description": "Gestión de procesos de fabricacion",
@@ -302,7 +301,6 @@
             }
           ]
         },
-
         "marcaje": {
           "name": "Fabricacion",
           "description": "Gestión total de marcajes",
@@ -321,7 +319,6 @@
             }
           ]
         },
-        
         "fundicion": {
           "name": "Fundición",
           "description": "Gestión de procesos de fundición",
@@ -340,8 +337,7 @@
             }
           ]
         },
-
-         "tiempos": {
+        "tiempos": {
           "name": "Rutas y tiempos",
           "description": "Gestión de rutas y sus tiempos",
           "images": [
@@ -359,7 +355,6 @@
             }
           ]
         },
-       
         "calidad": {
           "name": "Calidad preventiva",
           "description": "Control de calidad en proceso: el defecto se para en la fase donde nace, no en Expedición.",
@@ -659,7 +654,7 @@
           "name": "IVA y Remesas",
           "description": "Liquidación de IVA y gestión de remesas bancarias",
           "images": [
-             {
+            {
               "title": "Panel fiscal",
               "description": "Control de modelos"
             },
@@ -702,7 +697,8 @@
         "titulo": "Lo que pasó, íntegro y consultable",
         "parrafos": [
           "Cuando un cliente pregunta por un encargo de hace tres años, o cuando hay que justificar una operación ante quien corresponda, la respuesta no puede depender de quién se acuerde. Históricos conserva el registro completo de las operaciones con su detalle original, y permite localizarlo por los criterios con los que uno busca de verdad.",
-          "Ahí está también el rastro de la facturación declarada bajo VERI*FACTU, con el registro de cada envío y su respuesta. No es un archivo muerto que nadie abre: es la parte del sistema a la que se acude justo el día en que hay que demostrar algo."
+          "Ahí está también el rastro de la facturación declarada bajo VERI*FACTU, con el registro de cada envío y su respuesta. No es un archivo muerto que nadie abre: es la parte del sistema a la que se acude justo el día en que hay que demostrar algo.",
+          "Además, cada línea facturada guarda la estructura de su precio: cuánto de lo cobrado era oro, componentes, mano de obra, recargos y beneficio, con el fixing y la tarifa de aquel día."
         ]
       },
       "sections": {
@@ -721,6 +717,29 @@
             {
               "title": "Verifactu",
               "description": "Facturacion con Verifactu"
+            }
+          ]
+        },
+        "estructuraprecio": {
+          "name": "Estructura del precio",
+          "description": "Cada línea de la factura con cómo se formó su precio: oro, componentes, mano de obra, recargos y beneficio.",
+          "detalle": {
+            "parrafos": [
+              "Al historificar una factura, RayGold guarda cómo se formó el precio de cada línea, con el fixing del día de la factura y la tarifa con la que se vendió. En el histórico, un selector cambia entre las líneas tal como se emitieron y la estructura del precio: una fila por línea y una columna por concepto, agrupadas como en la calculadora de precios.",
+              "Al final de cada fila, lo que daba la estructura, lo facturado y la diferencia, en verde si se cobró de más y en rojo si se cobró de menos. Si una alianza sale con los recargos a cero, no es un fallo: la pantalla enseña que se vendió con una tarifa que los tiene al 0 %."
+            ],
+            "puntos": [
+              "Peso del modelo con su merma, ley, color y fixing aplicado",
+              "Componentes, y mano de obra de la ruta a la tasa horaria de cada sección",
+              "Cada recargo de la tarifa en su columna, aunque esté al 0 %",
+              "Por la línea entera o por una sola pieza, para compararla con la calculadora",
+              "Un botón en cada línea abre la calculadora de precio del artículo"
+            ]
+          },
+          "images": [
+            {
+              "title": "Líneas de la factura",
+              "description": "Artículo con su foto, kilates, color, tarifa con la que se vendió, cantidad, precio y valor"
             }
           ]
         }
@@ -769,7 +788,7 @@
               "title": "Inventarios",
               "description": "Información sobre inventarios"
             },
-             {
+            {
               "title": "Edicion",
               "description": "Visualizacion y edicion de datos"
             }
@@ -779,34 +798,131 @@
     },
     "estadisticas": {
       "title": "Estadísticas",
-      "subtitle": "Informes y cuadros de mando para decisiones",
-      "metaTitle": "Estadísticas | RayGold ERP - Business Intelligence",
-      "metaDescription": "Análisis de datos, informes personalizados y dashboards para toma de decisiones en joyerías.",
+      "subtitle": "Ventas, dashboard de dirección y la estructura del precio de lo vendido",
+      "metaTitle": "Estadísticas de ventas y estructura del precio | RayGold ERP Joyería",
+      "metaDescription": "Ventas por artículo, cliente o kilates con clase ABC y Excel, dashboard de dirección con el oro que te juegas, la estructura del precio de lo vendido y los recargos frente al gasto.",
       "intro": {
-        "titulo": "Los números del taller, sin montar el Excel",
+        "titulo": "Qué se vendió, por qué cambia y de qué estaba hecho cada euro",
         "parrafos": [
-          "La información ya está dentro del sistema; el problema de siempre es sacarla. Estadísticas reúne los indicadores que de verdad se miran en un taller —lo que se ha fabricado, lo que se ha vendido, lo que ha costado— en cuadros de mando que se consultan directamente, sin pedírselos a nadie ni esperar al lunes.",
-          "Se puede mirar por periodos, comparando meses o ejercicios, o bajar al artículo concreto para ver qué referencias tiran y cuáles llevan un año ocupando sitio. Todo sale de los mismos datos con los que se trabaja a diario, así que no hay dos versiones distintas de la misma cifra."
+          "La información ya está dentro del sistema; el problema de siempre es sacarla. Estadísticas reúne las ventas por artículo, cliente, familia, kilates, color, país, tienda o vendedor, mes a mes, y un dashboard para dirección que da la conclusión en una frase.",
+          "Y como RayGold guarda al facturar cómo se formó el precio de cada línea, también se ve de qué estaba hecho lo vendido: cuánto era oro, cuánto componentes, mano de obra, recargos de cada canal y beneficio, y si los recargos de las tarifas cubren el gasto para el que se pusieron. Todo sale de los mismos datos con los que se trabaja a diario."
         ]
       },
+      "noEs": {
+        "titulo": "Qué no es",
+        "items": [
+          "No es una herramienta de BI aparte: no hay que exportar ni cruzar datos; las cifras salen de las mismas facturas y fichas del ERP.",
+          "La estructura del precio es el coste teórico de la ficha (estructura de materiales, ruta y tasas horarias), no el coste real medido en el taller.",
+          "No es contabilidad analítica: los recargos cobrados se comparan con el gasto del plan de tasas horarias, no con el gasto contabilizado."
+        ]
+      },
+      "faq": [
+        {
+          "pregunta": "¿Qué es la estructura del precio?",
+          "respuesta": "Es cómo se formó el precio de cada línea vendida: el oro de la pieza al fixing del día con su merma y su ley, los componentes y las piedras, la mano de obra a la tasa horaria de cada sección, cada recargo de la tarifa y el beneficio. RayGold la guarda al historificar la factura, con la cotización y la tarifa de esa factura."
+        },
+        {
+          "pregunta": "¿Qué es el «oro que te juegas»?",
+          "respuesta": "El oro que es de la empresa a hoy: el de stock, el comprado a particulares sin fundir, el que está en talleres y refinador y el que le deben, menos el que debe. El dashboard lo valora a la cotización del día y dice cuánto se gana o se pierde si el oro sube o baja un 1, un 5 o un 10 %."
+        },
+        {
+          "pregunta": "¿Y las facturas anteriores a esta función?",
+          "respuesta": "Su estructura se calcula sola al abrir la factura, o por lotes desde las estadísticas con el botón Calcular. Si cambian las estructuras o las tasas, «Rehacer el año» vuelve a calcularlo todo con los datos de hoy."
+        },
+        {
+          "pregunta": "¿Se puede llevar a Excel?",
+          "respuesta": "Sí: un .xlsx con los números como números, autofiltro, cabecera fija y la descripción en su propia columna, listo para trabajar."
+        }
+      ],
       "sections": {
         "dashboards": {
-          "name": "Dashboards",
-          "description": "Cuadros de mando visuales",
+          "name": "Ventas y gráficos",
+          "description": "Por artículo, cliente, familia, kilates, color, país, tienda o vendedor, mes a mes, con clase ABC y Excel.",
+          "detalle": {
+            "parrafos": [
+              "Las ventas se miran en valores, unidades o peso, mes a mes y con el total del año arriba. En artículos salen el puesto y la clase ABC —los que hacen el 80 % y el 95 % de la venta—, la foto, el porcentaje de venta y de unidades y el precio medio. Un clic en una cifra ordena por esa columna.",
+              "Cada tabla tiene su gráfico: barras, líneas, áreas, tarta, polar o radial. Cuando un valor aplasta al resto —un artículo de prueba, un cliente extraordinario—, basta pulsarlo en la leyenda para quitarlo y la escala se recalcula; también se puede recuadrar con el ratón la parte que interesa."
+            ],
+            "puntos": [
+              "Clase ABC por artículo, con foto y precio medio",
+              "Excel con números de verdad, autofiltro y cabecera fija",
+              "Quitar valores del gráfico desde la leyenda y devolverlos después",
+              "Reconstruir las estadísticas de un ejercicio con un botón"
+            ]
+          },
           "images": [
             {
               "title": "Principal",
-              "description": "KPIs principales"
+              "description": "Indicadores principales"
             },
             {
               "title": "Tiempo",
-              "description": "Graficos por meses o años"
+              "description": "Gráficos por meses o años"
             },
             {
-              "title": "Articulos",
-              "description": "Graficos por articulos"
+              "title": "Artículos",
+              "description": "Gráficos por artículos"
             }
           ]
+        },
+        "direccion": {
+          "name": "Dashboard de dirección",
+          "description": "Una pantalla con la conclusión en una frase, siempre frente a las mismas fechas del año anterior.",
+          "detalle": {
+            "parrafos": [
+              "Por mes, trimestre, año o los últimos 12 meses, comparado siempre con las mismas fechas del año anterior. Arriba, la conclusión en una frase y las cifras que importan: venta, venta sin oro, objetivo a la fecha y cartera de pedidos; debajo, clientes que compran, nuevos, recuperados, factura media y devoluciones.",
+              "Más abajo, por qué cambia la venta —cuánto se debe al oro, al precio, a las piezas vendidas y a la mezcla de artículos—, quién sube y quién baja, qué mirar hoy, la pirámide de clientes y los diez artículos más vendidos. Y el oro que se juega la empresa: el que tiene en stock, en fábrica, en talleres y el que le deben, con lo que gana o pierde si el oro se mueve un 1 %."
+            ],
+            "puntos": [
+              "Por qué cambia la venta: oro, precio, piezas y mezcla",
+              "Oro que te juegas, en kilos de fino y en dinero",
+              "Qué mirar hoy: pedidos con retraso, clientes sin comprar y los que no repiten",
+              "Pirámide de clientes y los 10 más vendidos, por valor o por cantidad"
+            ]
+          },
+          "images": [
+            {
+              "title": "Portada y oro que te juegas",
+              "description": "La conclusión en una frase, objetivo, cartera, clientes y el oro en juego si la cotización se mueve"
+            },
+            {
+              "title": "Por qué cambia la venta",
+              "description": "Mes a mes frente al año anterior, suben y bajan, qué mirar hoy, pirámide y los 10 más vendidos"
+            }
+          ]
+        },
+        "estructuraprecio": {
+          "name": "Estructura del precio",
+          "description": "De cada 100 vendidos, cuánto era oro, componentes, mano de obra, distribución y beneficio.",
+          "detalle": {
+            "parrafos": [
+              "Lo que se guarda en cada factura, sumado para el año: de cada 100 de estructura, cuánto es oro, componentes, mano de obra, recargos de distribución y beneficio; los kilos de oro vendidos con su merma; y cuánto se ha cobrado por encima o por debajo de lo que daba la estructura.",
+              "Se ve por meses o por kilates, en importes o en porcentaje de cada fila, así que si un mes el oro pesa más, se nota al momento. Lo facturado de artículos sin estructura de precio va aparte, para no mezclarlo, y debajo salen las líneas que más se apartan de su estructura, con su factura, mes, cliente y piezas."
+            ],
+            "puntos": [
+              "Kilos de oro vendidos por ley, con su merma",
+              "Por meses o por kilates, en importes o en %",
+              "Lo cobrado por encima o por debajo de la estructura, línea a línea",
+              "Rehacer el año con las estructuras y tasas de hoy"
+            ]
+          },
+          "images": []
+        },
+        "recargos": {
+          "name": "Recargos frente al gasto",
+          "description": "Si lo que cargan las tarifas para vender, distribuir y comisionar cubre el gasto para el que se puso.",
+          "detalle": {
+            "parrafos": [
+              "Cada recargo de la tarifa carga un porcentaje para recuperar un gasto que no entra en la tasa horaria: vender, distribuir, comisionar, administrar. El plan de tasas horarias calcula ese gasto del año; las ventas, al facturarse, cobran su parte. Puestos frente a frente, dicen si los porcentajes de las tarifas están bien puestos.",
+              "Para cada recargo se ve el gasto del plan y su porcentaje sobre el coste de ventas, lo previsto a hoy según la parte del año que ha pasado, lo cobrado, el porcentaje cubierto, la diferencia y lo cobrado cada mes."
+            ],
+            "puntos": [
+              "Rojo por debajo del 90 % cubierto, ámbar por encima del 110 %, verde en su sitio",
+              "Aviso si se cobra un recargo sin gasto que lo justifique",
+              "Aviso si hay gasto y ninguna venta lo recupera"
+            ]
+          },
+          "images": []
         }
       }
     },
@@ -859,7 +975,7 @@
             }
           ]
         },
-         "pipeline": {
+        "pipeline": {
           "name": "Pipeline",
           "description": "Gestión de oportunidades",
           "images": [
@@ -871,7 +987,7 @@
               "title": "Mantenimiento",
               "description": "Control de los datos"
             },
-             {
+            {
               "title": "Historico",
               "description": "Visualizacion de cierres"
             }
@@ -910,7 +1026,7 @@
             }
           ]
         },
-          "tienda": {
+        "tienda": {
           "name": "Tienda Online",
           "description": "tinedas y TPV",
           "images": [

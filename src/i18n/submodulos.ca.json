@@ -697,7 +697,8 @@
         "titulo": "El que va passar, íntegre i consultable",
         "parrafos": [
           "Quan un client pregunta per un encàrrec de fa tres anys, o quan cal justificar una operació davant de qui correspongui, la resposta no pot dependre de qui se'n recordi. Històrics conserva el registre complet de les operacions amb el seu detall original, i permet localitzar-lo pels criteris amb què un busca de debò.",
-          "Allà hi ha també el rastre de la facturació declarada sota VERI*FACTU, amb el registre de cada enviament i la seva resposta. No és un arxiu mort que ningú obre: és la part del sistema on s'acudeix justament el dia que cal demostrar alguna cosa."
+          "Allà hi ha també el rastre de la facturació declarada sota VERI*FACTU, amb el registre de cada enviament i la seva resposta. No és un arxiu mort que ningú obre: és la part del sistema on s'acudeix justament el dia que cal demostrar alguna cosa.",
+          "A més, cada línia facturada desa l'estructura del seu preu: quant del que es va cobrar era or, components, mà d'obra, recàrrecs i benefici, amb el fixing i la tarifa d'aquell dia."
         ]
       },
       "sections": {
@@ -716,6 +717,29 @@
             {
               "title": "Verifactu",
               "description": "Facturació amb Verifactu"
+            }
+          ]
+        },
+        "estructuraprecio": {
+          "name": "Estructura del preu",
+          "description": "Cada línia de la factura amb com es va formar el seu preu: or, components, mà d'obra, recàrrecs i benefici.",
+          "detalle": {
+            "parrafos": [
+              "En historificar una factura, RayGold desa com s'ha format el preu de cada línia, amb el fixing del dia de la factura i la tarifa amb què es va vendre. A l'històric, un selector canvia entre les línies tal com es van emetre i l'estructura del preu: una fila per línia i una columna per concepte, agrupades com a la calculadora de preus.",
+              "Al final de cada fila, el que donava l'estructura, el facturat i la diferència, en verd si es va cobrar de més i en vermell si es va cobrar de menys. Si una aliança surt amb els recàrrecs a zero, no és un error: la pantalla mostra que es va vendre amb una tarifa que els té al 0 %."
+            ],
+            "puntos": [
+              "Pes del model amb la seva merma, llei, color i fixing aplicat",
+              "Components, i mà d'obra de la ruta a la taxa horària de cada secció",
+              "Cada recàrrec de la tarifa a la seva columna, encara que sigui al 0 %",
+              "Per la línia sencera o per una sola peça, per comparar-la amb la calculadora",
+              "Un botó a cada línia obre la calculadora de preu de l'article"
+            ]
+          },
+          "images": [
+            {
+              "title": "Línies de la factura",
+              "description": "Article amb la seva foto, quirats, color, tarifa amb què es va vendre, quantitat, preu i valor"
             }
           ]
         }
@@ -774,24 +798,62 @@
     },
     "estadisticas": {
       "title": "Estadístiques",
-      "subtitle": "Informes i quadres de comandament per a decisions",
-      "metaTitle": "Estadístiques | RayGold ERP - Business Intelligence",
-      "metaDescription": "Anàlisi de dades, informes personalitzats i dashboards per a presa de decisions en joieries.",
+      "subtitle": "Vendes, dashboard de direcció i l'estructura del preu del que s'ha venut",
+      "metaTitle": "Estadístiques de vendes i estructura del preu | RayGold ERP Joieria",
+      "metaDescription": "Vendes per article, client o quirats amb classe ABC i Excel, dashboard de direcció amb l'or que et jugues, l'estructura del preu del que s'ha venut i els recàrrecs davant la despesa.",
       "intro": {
-        "titulo": "Els números del taller, sense muntar l'Excel",
+        "titulo": "Què s'ha venut, per què canvia i de què estava fet cada euro",
         "parrafos": [
-          "La informació ja és dins del sistema; el problema de sempre és treure-la. Estadístiques reuneix els indicadors que de debò es miren en un taller —el que s'ha fabricat, el que s'ha venut, el que ha costat— en quadres de comandament que es consulten directament, sense demanar-los a ningú ni esperar al dilluns.",
-          "Es pot mirar per períodes, comparant mesos o exercicis, o baixar a l'article concret per veure quines referències tiren i quines fa un any que ocupen lloc. Tot surt de les mateixes dades amb què es treballa cada dia, així que no hi ha dues versions diferents de la mateixa xifra."
+          "La informació ja és dins del sistema; el problema de sempre és treure-la. Estadístiques reuneix les vendes per article, client, família, quirats, color, país, botiga o venedor, mes a mes, i un dashboard per a direcció que dona la conclusió en una frase.",
+          "I com que RayGold desa en facturar com s'ha format el preu de cada línia, també es veu de què estava fet el que s'ha venut: quant era or, quant components, mà d'obra, recàrrecs de cada canal i benefici, i si els recàrrecs de les tarifes cobreixen la despesa per a la qual es van posar. Tot surt de les mateixes dades amb què es treballa cada dia."
         ]
       },
+      "noEs": {
+        "titulo": "Què no és",
+        "items": [
+          "No és una eina de BI a part: no cal exportar ni creuar dades; les xifres surten de les mateixes factures i fitxes de l'ERP.",
+          "L'estructura del preu és el cost teòric de la fitxa (estructura de materials, ruta i taxes horàries), no el cost real mesurat al taller.",
+          "No és comptabilitat analítica: els recàrrecs cobrats es comparen amb la despesa del pla de taxes horàries, no amb la despesa comptabilitzada."
+        ]
+      },
+      "faq": [
+        {
+          "pregunta": "Què és l'estructura del preu?",
+          "respuesta": "És com s'ha format el preu de cada línia venuda: l'or de la peça al fixing del dia amb la seva merma i la seva llei, els components i les pedres, la mà d'obra a la taxa horària de cada secció, cada recàrrec de la tarifa i el benefici. RayGold la desa en historificar la factura, amb la cotització i la tarifa d'aquella factura."
+        },
+        {
+          "pregunta": "Què és «l'or que et jugues»?",
+          "respuesta": "L'or que és de l'empresa avui: el d'estoc, el comprat a particulars sense fondre, el que és als tallers i al refinador i el que li deuen, menys el que deu. El dashboard el valora a la cotització del dia i diu quant es guanya o es perd si l'or puja o baixa un 1, un 5 o un 10 %."
+        },
+        {
+          "pregunta": "I les factures anteriors a aquesta funció?",
+          "respuesta": "La seva estructura es calcula sola en obrir la factura, o per lots des de les estadístiques amb el botó Calcular. Si canvien les estructures o les taxes, «Refer l'any» ho torna a calcular tot amb les dades d'avui."
+        },
+        {
+          "pregunta": "Es pot portar a Excel?",
+          "respuesta": "Sí: un .xlsx amb els números com a números, autofiltre, capçalera fixa i la descripció a la seva pròpia columna, a punt per treballar."
+        }
+      ],
       "sections": {
         "dashboards": {
-          "name": "Dashboards",
-          "description": "Quadres de comandament visuals",
+          "name": "Vendes i gràfics",
+          "description": "Per article, client, família, quirats, color, país, botiga o venedor, mes a mes, amb classe ABC i Excel.",
+          "detalle": {
+            "parrafos": [
+              "Les vendes es miren en valors, unitats o pes, mes a mes i amb el total de l'any a dalt. En articles surten el lloc i la classe ABC —els que fan el 80 % i el 95 % de la venda—, la foto, el percentatge de venda i d'unitats i el preu mitjà. Un clic en una xifra ordena per aquella columna.",
+              "Cada taula té el seu gràfic: barres, línies, àrees, pastís, polar o radial. Quan un valor aixafa la resta —un article de prova, un client extraordinari—, n'hi ha prou de prémer-lo a la llegenda per treure'l i l'escala es recalcula; també es pot requadrar amb el ratolí la part que interessa."
+            ],
+            "puntos": [
+              "Classe ABC per article, amb foto i preu mitjà",
+              "Excel amb números de veritat, autofiltre i capçalera fixa",
+              "Treure valors del gràfic des de la llegenda i tornar-los-hi després",
+              "Reconstruir les estadístiques d'un exercici amb un botó"
+            ]
+          },
           "images": [
             {
               "title": "Principal",
-              "description": "KPIs principals"
+              "description": "Indicadors principals"
             },
             {
               "title": "Temps",
@@ -802,6 +864,65 @@
               "description": "Gràfics per articles"
             }
           ]
+        },
+        "direccion": {
+          "name": "Dashboard de direcció",
+          "description": "Una pantalla amb la conclusió en una frase, sempre davant les mateixes dates de l'any anterior.",
+          "detalle": {
+            "parrafos": [
+              "Per mes, trimestre, any o els darrers 12 mesos, comparat sempre amb les mateixes dates de l'any anterior. A dalt, la conclusió en una frase i les xifres que importen: venda, venda sense or, objectiu a la data i cartera de comandes; a sota, clients que compren, nous, recuperats, factura mitjana i devolucions.",
+              "Més avall, per què canvia la venda —quant es deu a l'or, al preu, a les peces venudes i a la barreja d'articles—, qui puja i qui baixa, què mirar avui, la piràmide de clients i els deu articles més venuts. I l'or que es juga l'empresa: el que té en estoc, a fàbrica, als tallers i el que li deuen, amb el que guanya o perd si l'or es mou un 1 %."
+            ],
+            "puntos": [
+              "Per què canvia la venda: or, preu, peces i barreja",
+              "Or que et jugues, en quilos de fi i en diners",
+              "Què mirar avui: comandes amb retard, clients sense comprar i els que no repeteixen",
+              "Piràmide de clients i els 10 més venuts, per valor o per quantitat"
+            ]
+          },
+          "images": [
+            {
+              "title": "Portada i or que et jugues",
+              "description": "La conclusió en una frase, objectiu, cartera, clients i l'or en joc si la cotització es mou"
+            },
+            {
+              "title": "Per què canvia la venda",
+              "description": "Mes a mes davant l'any anterior, pugen i baixen, què mirar avui, piràmide i els 10 més venuts"
+            }
+          ]
+        },
+        "estructuraprecio": {
+          "name": "Estructura del preu",
+          "description": "De cada 100 venuts, quant era or, components, mà d'obra, distribució i benefici.",
+          "detalle": {
+            "parrafos": [
+              "El que es desa a cada factura, sumat per a l'any: de cada 100 d'estructura, quant és or, components, mà d'obra, recàrrecs de distribució i benefici; els quilos d'or venuts amb la seva merma; i quant s'ha cobrat per sobre o per sota del que donava l'estructura.",
+              "Es veu per mesos o per quirats, en imports o en percentatge de cada fila, així que si un mes l'or pesa més, es nota al moment. El que s'ha facturat d'articles sense estructura de preu va a part, per no barrejar-ho, i a sota surten les línies que més s'aparten de la seva estructura, amb factura, mes, client i peces."
+            ],
+            "puntos": [
+              "Quilos d'or venuts per llei, amb la seva merma",
+              "Per mesos o per quirats, en imports o en %",
+              "El que s'ha cobrat per sobre o per sota de l'estructura, línia a línia",
+              "Refer l'any amb les estructures i taxes d'avui"
+            ]
+          },
+          "images": []
+        },
+        "recargos": {
+          "name": "Recàrrecs davant la despesa",
+          "description": "Si el que carreguen les tarifes per vendre, distribuir i comissionar cobreix la despesa per a la qual es va posar.",
+          "detalle": {
+            "parrafos": [
+              "Cada recàrrec de la tarifa carrega un percentatge per recuperar una despesa que no entra a la taxa horària: vendre, distribuir, comissionar, administrar. El pla de taxes horàries calcula aquesta despesa de l'any; les vendes, en facturar-se, en cobren la seva part. Posats cara a cara, diuen si els percentatges de les tarifes estan ben posats.",
+              "Per a cada recàrrec es veu la despesa del pla i el seu percentatge sobre el cost de vendes, el previst a avui segons la part de l'any que ha passat, el cobrat, el percentatge cobert, la diferència i el cobrat cada mes."
+            ],
+            "puntos": [
+              "Vermell per sota del 90 % cobert, ambre per sobre del 110 %, verd al seu lloc",
+              "Avís si es cobra un recàrrec sense despesa que el justifiqui",
+              "Avís si hi ha despesa i cap venda no la recupera"
+            ]
+          },
+          "images": []
         }
       }
     },
