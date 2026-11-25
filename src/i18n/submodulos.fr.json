@@ -1064,6 +1064,148 @@
         }
       }
     },
+    "antirrobo": {
+      "title": "Antivol en boutique",
+      "subtitle": "La vitrine à chaque relève, chaque pièce qui passe au comptoir et, depuis le siège, tout ce qui sort de l'ordinaire",
+      "metaTitle": "Antivol pour bijouterie avec RFID | Vitrine, comptoir et exceptions du TPV | RayGold",
+      "metaDescription": "Prévention des pertes en bijouterie : contrôle de vitrine à chaque relève par RFID, une pièce sortie à la fois, pesée anti-substitution et exceptions du TPV par boutique et vendeuse.",
+      "intro": {
+        "titulo": "En bijouterie, la pièce ne sort pas par la porte : elle sort par le comptoir",
+        "parrafos": [
+          "Le portique à l'entrée a du sens dans une boutique de vêtements, où le client prend l'article sur l'étagère. En bijouterie, les pièces sont dans des vitrines fermées et sortent une à une, dans la main de la vendeuse. Les pertes viennent d'ailleurs : la pièce sortie pour être montrée qui ne revient pas, la substitution par une imitation, l'écart de relève dont personne ne sait à qui il revient, et le vol interne, qui ne se voit pas dans la vitrine mais dans les chiffres de la caisse.",
+          "RayGold traite ces quatre risques avec ce que la boutique utilise déjà : le même lecteur RFID que l'inventaire et la réception des envois —avec la puce dans l'étiquette de prix—, la balance de l'achat d'or et ce que le TPV enregistre à chaque vente. La vitrine et le comptoir contrôlent la pièce sur le moment ; le siège voit, boutique par boutique et vendeuse par vendeuse, tout ce qui sort de l'ordinaire."
+        ]
+      },
+      "noEs": {
+        "titulo": "Ce que cela ne résout pas",
+        "items": [
+          "Le vol éclair ou à main armée : cela relève du protocole de la boutique et des caméras.",
+          "La substitution avec l'étiquette si personne ne pèse la pièce : la puce est dans l'étiquette, pas dans le bijou. C'est pour cela qu'on pèse.",
+          "Une étiquette arrachée laissée dans la vitrine continue d'être lue comme présente.",
+          "Il ne se connecte pas aux caméras : il donne la boutique, la caisse et la minute pour retrouver l'enregistrement."
+        ]
+      },
+      "faq": [
+        {
+          "pregunta": "Pourquoi pas un portique antivol à l'entrée ?",
+          "respuesta": "Parce qu'en bijouterie les pièces ne sont pas à la portée du client : elles sortent de la vitrine dans la main de la vendeuse. De plus, une étiquette en papier avec puce s'arrache en une seconde. Les pertes se produisent au comptoir, à la relève et à la caisse, et c'est là qu'agit RayGold."
+        },
+        {
+          "pregunta": "De quel équipement chaque boutique a-t-elle besoin ?",
+          "respuesta": "Un lecteur RFID portable pour le contrôle de vitrine, l'inventaire et la réception des envois ; un lecteur de comptoir pour poser la pièce en la sortant et en la remettant ; et une balance au 0,01 g, souvent la même que pour l'achat d'or."
+        },
+        {
+          "pregunta": "Comment détecter une substitution si la puce est dans l'étiquette ?",
+          "respuesta": "Par le poids. Chaque pièce sort de l'usine avec son poids réel et, au retour en vitrine, lors d'un retour client ou à la réception d'un envoi, elle est pesée et comparée, avec une tolérance de 0,03 g. Sans poids d'usine, la responsable enregistre la première pesée comme référence."
+        },
+        {
+          "pregunta": "Les exceptions accusent-elles quelqu'un ?",
+          "respuesta": "Non. Elles comparent chaque vendeuse à la moyenne de la chaîne et signalent ce qui mérite un regard : un remboursement en espèces n'est pas un vol ; neuf, quand la moyenne est de trois, méritent un regard. Avec peu de tickets, on ne compare pas, pour ne désigner personne faute de données."
+        }
+      ],
+      "sections": {
+        "rutina": {
+          "name": "Routine du jour",
+          "description": "Avant de vendre, les étapes qu'on ne peut pas sauter ; et si on les saute, le siège le sait.",
+          "detalle": {
+            "parrafos": [
+              "La vendeuse entre dans le TPV avec son code PIN et, s'il reste quelque chose à faire, la routine s'ouvre : trois colonnes —à l'ouverture, pendant la journée et à la fermeture— qui se cochent seules avec les données du TPV, sans cases à la main. Chaque étape mène à l'écran où elle se fait.",
+              "Tant qu'il manque une étape obligatoire, vente, retour et réservations renvoient à la routine. Mais le client n'attend pas : la vendeuse appuie sur « Client en attente », la responsable autorise avec son PIN, la vente se fait et, juste après l'encaissement, le TPV revient à la routine. Cette vente apparaît dans les exceptions du siège comme faite avant le contrôle d'ouverture."
+            ],
+            "puntos": [
+              "À l'ouverture : ouvrir la caisse, contrôle de vitrine d'ouverture et aucune pièce sortie des jours précédents",
+              "Alertes d'envois à recevoir, inventaires du jour, réparations prêtes et clients du jour",
+              "Pendant la journée : une pièce sortie à la fois, contrôle au changement de vendeuse et pesée des retours",
+              "À la fermeture : aucune pièce sortie, contrôle de fermeture et clôture de caisse"
+            ]
+          },
+          "images": [
+            {
+              "title": "Routine du jour",
+              "description": "Ouverture, journée et fermeture, cochées automatiquement avec les données du TPV"
+            }
+          ]
+        },
+        "vitrina": {
+          "name": "Vitrine à chaque relève",
+          "description": "À l'ouverture, à la relève et à la fermeture : ce qui manque, à quelle relève et qui a signé.",
+          "detalle": {
+            "parrafos": [
+              "Avec la RFID, compter une vitrine revient à passer le lecteur au-dessus : quelques secondes. On choisit le moment —ouverture, relève ou fermeture— et on lit vitrine après vitrine ; chaque passage s'ajoute au précédent et, pendant la lecture, il signale déjà ce qui ne devrait pas y être : pièces d'un autre magasin, vendues ou non enregistrées. À la fin, on compare avec ce qui devrait se trouver au comptoir.",
+              "Deux personnes signent toujours : l'une compte, l'autre vérifie avec son PIN, et au moins l'une est responsable. Un contrôle mal fait ne peut pas se cacher : il reste enregistré avec qui a compté, qui a vérifié et l'heure, et ce qui manque ensuite revient à la relève suivante. La caisse le rappelle toute la journée et, si la boutique l'exige, elle ne se clôture pas sans contrôle de fermeture."
+            ],
+            "puntos": [
+              "Manquants avec photo, numéro de série et dernière lecture",
+              "Une pièce sortie avec une vendeuse est listée à part, pas comme manquante",
+              "En option : envoyer le contrôle au siège comme inventaire",
+              "Le même lecteur que l'inventaire et la réception des envois"
+            ]
+          },
+          "images": [
+            {
+              "title": "Contrôle de vitrine",
+              "description": "Lecture vitrine après vitrine et signature : une vendeuse compte, la responsable vérifie avec son PIN"
+            },
+            {
+              "title": "Résultat du contrôle",
+              "description": "Ouverture avec 21 sur 22 lues : manquantes, d'un autre magasin, non enregistrées ou vendues"
+            },
+            {
+              "title": "Un contrôle mal fait",
+              "description": "Une seule vitrine lue et 15 manquants : il reste enregistré avec qui l'a signé"
+            }
+          ]
+        },
+        "mostrador": {
+          "name": "Comptoir et poids",
+          "description": "Chaque pièce sortie de la vitrine a une responsable, et à son retour elle est pesée contre son poids d'usine.",
+          "detalle": {
+            "parrafos": [
+              "La vendeuse pose la pièce sur le lecteur en la sortant pour la montrer, puis en la remettant. RayGold sait à tout moment ce qui est sorti, avec qui et depuis quand ; si elle en sort une autre sans rendre la première, il prévient : une pièce à la fois. Au bout de 15 minutes, la pièce passe au rouge et, si elle ne réapparaît pas, elle est marquée perdue au nom de la vendeuse. À l'encaissement, la sortie se ferme seule, et avec une pièce sortie la caisse ne se clôture pas.",
+              "La puce est dans l'étiquette, pas dans le bijou : si quelqu'un la met sur une imitation, le lecteur ne voit rien. La balance, si. Chaque pièce naît à l'usine avec son poids réel et, au retour en vitrine, lors d'un retour ou à la réception d'un envoi, elle est comparée avec une tolérance de 0,03 g. C'est un avantage de fabricant : qui achète à des fournisseurs ne connaît pas le poids de chaque unité."
+            ],
+            "puntos": [
+              "Sorties du jour : qui, de quelle heure à quelle heure et comment cela s'est terminé (rendue, vendue ou perdue)",
+              "Alerte de pièce sortie à 15 minutes, paramétrable",
+              "Poids conforme, non conforme ou première pesée comme référence",
+              "Balance au 0,01 g, la même que pour l'achat d'or"
+            ]
+          },
+          "images": [
+            {
+              "title": "Sorties du jour",
+              "description": "Chaque pièce sortie de la vitrine, avec la vendeuse, les minutes dehors et l'issue"
+            },
+            {
+              "title": "Pesée anti-substitution",
+              "description": "La pièce revient en vitrine et correspond à son poids d'usine, dans la tolérance"
+            }
+          ]
+        },
+        "central": {
+          "name": "Exceptions du siège",
+          "description": "Depuis le bureau, par boutique et vendeuse : ce qui sort de l'ordinaire à la caisse et dans l'antivol.",
+          "detalle": {
+            "parrafos": [
+              "Le vol interne ne se voit pas dans la vitrine : il se voit dans les chiffres. Ce qui n'est pas encaissé n'apparaît pas dans les ventes, mais bien dans les remises, les remboursements et les annulations. Exceptions lit ce que le TPV enregistre déjà à chaque vente, retour, clôture de caisse et contrôle, sans matériel et sans que la vendeuse change quoi que ce soit.",
+              "Un seul écran pour toute la chaîne, par période et par boutique : combien de chaque type et pour quel montant, chaque vendeuse comparée à la moyenne de la chaîne et la liste de ce qu'il faut regarder, avec l'heure, la boutique, la caisse, la vendeuse, le document et le montant. Il compare, il n'accuse pas : avec peu de tickets, on ne compare personne. Et comme chaque cas porte la boutique, la caisse et la minute, on peut retrouver l'enregistrement des caméras."
+            ],
+            "puntos": [
+              "À la caisse : remise élevée, remboursement en espèces ou sans ticket, vendue et rendue le même jour, vente annulée, copie de ticket, carte saisie sans terminal et écart de caisse",
+              "En vitrine et au comptoir : manquants, ventes avant le contrôle d'ouverture, pièce non revenue, trop longtemps dehors et poids non conforme",
+              "Seuils fixés par chaque entreprise : remise, écart et minutes dehors",
+              "Les importantes, signalées et filtrables"
+            ]
+          },
+          "images": [
+            {
+              "title": "Exceptions du TPV",
+              "description": "Par type, par vendeuse face à la moyenne de la chaîne et quoi regarder, avec heure, document et montant"
+            }
+          ]
+        }
+      }
+    },
     "impresoras3d": {
       "title": "Imprimantes 3D",
       "subtitle": "Contrôle et gestion de la production avec imprimantes 3D",

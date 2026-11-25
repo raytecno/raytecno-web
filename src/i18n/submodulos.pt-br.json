@@ -1064,6 +1064,148 @@
         }
       }
     },
+    "antirrobo": {
+      "title": "Antifurto na loja",
+      "subtitle": "A vitrine em cada turno, cada peça que vai ao balcão e, da matriz, tudo o que foge do normal",
+      "metaTitle": "Antifurto para joalheria com RFID | Vitrine, balcão e exceções do PDV | RayGold",
+      "metaDescription": "Prevenção de perdas em joalherias: conferência de vitrine por turno com RFID, uma peça fora de cada vez, peso antitroca e exceções do PDV por loja e vendedora.",
+      "intro": {
+        "titulo": "Numa joalheria a peça não sai pela porta: sai pelo balcão",
+        "parrafos": [
+          "A antena na porta faz sentido numa loja de roupas, onde o cliente pega a peça na prateleira. Numa joalheria as peças ficam em vitrine fechada e saem uma de cada vez, na mão da vendedora. As perdas vêm de outro lugar: a peça que sai para ser mostrada e não volta, a troca por uma imitação, a diferença na troca de turno que ninguém sabe de quem é e o furto interno, que não aparece na vitrine, mas nos números do caixa.",
+          "O RayGold ataca esses quatro riscos com o que a loja já usa: o mesmo leitor RFID do inventário e do recebimento de remessas —com o chip na etiqueta de preço—, a balança da compra de ouro e o que o PDV grava em cada venda. A vitrine e o balcão controlam a peça na hora; a matriz vê, loja por loja e vendedora por vendedora, tudo o que foge do normal."
+        ]
+      },
+      "noEs": {
+        "titulo": "O que não resolve",
+        "items": [
+          "O furto rápido ou o assalto à mão armada: isso é o protocolo da loja e as câmeras.",
+          "A troca com a etiqueta junto se ninguém pesar a peça: o chip está na etiqueta, não na joia. Por isso se pesa.",
+          "Uma etiqueta arrancada deixada na vitrine continua sendo lida como presente.",
+          "Não se conecta às câmeras: dá a loja, o caixa e o minuto para buscar a gravação."
+        ]
+      },
+      "faq": [
+        {
+          "pregunta": "Por que não uma antena antifurto na porta?",
+          "respuesta": "Porque numa joalheria as peças não estão ao alcance do cliente: saem da vitrine na mão da vendedora. Além disso, uma etiqueta de papel com chip se arranca em um segundo. As perdas acontecem no balcão, na troca de turno e no caixa, e é aí que o RayGold atua."
+        },
+        {
+          "pregunta": "Que equipamento cada loja precisa?",
+          "respuesta": "Um leitor RFID de mão para a conferência de vitrine, o inventário e o recebimento de remessas; um leitor de mesa por balcão para encostar a peça ao tirá-la e ao devolvê-la; e uma balança de 0,01 g, que costuma ser a mesma da compra de ouro."
+        },
+        {
+          "pregunta": "Como detecta uma troca se o chip está na etiqueta?",
+          "respuesta": "Pelo peso. Cada peça sai da fábrica com seu peso real e, ao voltar à vitrine, numa devolução ou ao receber uma remessa, é pesada e comparada, com tolerância de 0,03 g. Se não houver peso de fábrica, a gerente salva a primeira pesagem como referência."
+        },
+        {
+          "pregunta": "As exceções acusam alguém?",
+          "respuesta": "Não. Comparam cada vendedora com a média da rede e apontam o que vale a pena olhar: uma devolução em dinheiro não é furto; nove, quando a média é três, merecem uma olhada. Com poucos cupons não se compara, para não apontar ninguém por falta de dados."
+        }
+      ],
+      "sections": {
+        "rutina": {
+          "name": "Rotina do dia",
+          "description": "Antes de vender, os passos que não se podem pular; e se forem pulados, a matriz fica sabendo.",
+          "detalle": {
+            "parrafos": [
+              "A vendedora entra no PDV com seu PIN e, se houver algo pendente, abre-se a rotina: três colunas —ao abrir, durante o dia e ao fechar— que se marcam sozinhas com os dados do PDV, sem caixinhas à mão. Cada passo leva à tela onde é feito.",
+              "Enquanto faltar um passo obrigatório, venda, devolução e reservas levam à rotina. Mas o cliente não espera: a vendedora toca em «Cliente esperando», a gerente autoriza com seu PIN, a venda é feita e, logo após o pagamento, o PDV volta à rotina. Essa venda fica nas exceções da matriz como feita antes da conferência de abertura."
+            ],
+            "puntos": [
+              "Ao abrir: abrir o caixa, conferência de vitrine de abertura e nenhuma peça fora de dias anteriores",
+              "Avisos de remessas a receber, contagens do dia, consertos prontos e clientes de hoje",
+              "Durante o dia: uma peça fora de cada vez, conferência na troca de vendedora e pesagem das devoluções",
+              "Ao fechar: nenhuma peça fora, conferência de fechamento e fechamento do caixa"
+            ]
+          },
+          "images": [
+            {
+              "title": "Rotina do dia",
+              "description": "Ao abrir, durante o dia e ao fechar, marcada sozinha com os dados do PDV"
+            }
+          ]
+        },
+        "vitrina": {
+          "name": "Vitrine por turno",
+          "description": "Na abertura, na troca de turno e no fechamento: o que falta, em que turno e quem assinou.",
+          "detalle": {
+            "parrafos": [
+              "Com RFID, contar uma vitrine é passar o leitor por cima: alguns segundos. Escolhe-se o momento —abertura, troca de turno ou fechamento— e lê-se vitrine após vitrine; cada passada soma à anterior e, durante a leitura, já avisa do que não deveria estar ali: peças de outro estoque, vendidas ou sem cadastro. No fim, compara-se com o que deveria estar no balcão.",
+              "Sempre assinam duas pessoas: uma conta e outra confere com seu PIN, e ao menos uma é gerente. Uma conferência malfeita não pode ser escondida: fica registrada com quem contou, quem conferiu e a hora, e o que faltar depois é do turno seguinte. O caixa lembra disso o dia todo e, se a loja exigir, não fecha sem a conferência de fechamento."
+            ],
+            "puntos": [
+              "Faltas com foto, número de série e quando foram vistas pela última vez",
+              "Uma peça fora com uma vendedora aparece à parte, não como falta",
+              "Opcional: enviar a conferência à matriz como contagem",
+              "O mesmo leitor do inventário e do recebimento de remessas"
+            ]
+          },
+          "images": [
+            {
+              "title": "Conferência de vitrine",
+              "description": "Leitura vitrine após vitrine e assinatura: uma vendedora conta e a gerente confere com seu PIN"
+            },
+            {
+              "title": "Resultado da conferência",
+              "description": "Abertura com 21 de 22 lidas: as que faltam, de outro estoque, sem cadastro ou vendidas"
+            },
+            {
+              "title": "Uma conferência malfeita",
+              "description": "Só uma vitrine foi lida e aparecem 15 faltas: fica registrada com quem assinou"
+            }
+          ]
+        },
+        "mostrador": {
+          "name": "Balcão e peso",
+          "description": "Cada peça que sai da vitrine tem dona, e ao voltar é pesada contra o peso de fábrica.",
+          "detalle": {
+            "parrafos": [
+              "A vendedora encosta a peça no leitor ao tirá-la para mostrar e de novo ao devolvê-la. O RayGold sabe a todo momento o que está fora, com quem e desde quando; se ela tirar outra sem devolver a primeira, avisa: uma peça de cada vez. Aos 15 minutos a peça fica vermelha e, se não aparecer, é marcada como perdida em nome da vendedora. Ao ser vendida, a saída se fecha sozinha, e com uma peça fora o caixa não fecha.",
+              "O chip está na etiqueta, não na joia: se alguém a passar para uma imitação, o leitor não percebe. A balança, sim. Cada peça nasce na fábrica com seu peso real e, ao voltar à vitrine, numa devolução ou ao receber uma remessa, é comparada com tolerância de 0,03 g. É uma vantagem de quem fabrica: quem compra de fornecedores não conhece o peso de cada unidade."
+            ],
+            "puntos": [
+              "Saídas do dia: quem, de que hora a que hora e como terminou (devolvida, vendida ou perdida)",
+              "Aviso de peça fora aos 15 minutos, configurável",
+              "Peso que confere, que não confere ou primeira pesagem como referência",
+              "Balança de 0,01 g, a mesma da compra de ouro"
+            ]
+          },
+          "images": [
+            {
+              "title": "Saídas de hoje",
+              "description": "Cada peça que saiu da vitrine, com a vendedora, os minutos fora e como terminou"
+            },
+            {
+              "title": "Peso antitroca",
+              "description": "A peça volta à vitrine e confere com seu peso de fábrica, dentro da tolerância"
+            }
+          ]
+        },
+        "central": {
+          "name": "Exceções da matriz",
+          "description": "Do escritório, por loja e vendedora: o que foge do normal no caixa e no antifurto.",
+          "detalle": {
+            "parrafos": [
+              "O furto interno não aparece na vitrine: aparece nos números. O que não é cobrado não aparece nas vendas, mas aparece nos descontos, nas devoluções e nos cancelamentos. Exceções lê o que o PDV já grava em cada venda, devolução, fechamento de caixa e conferência, sem hardware e sem que a vendedora faça nada diferente.",
+              "Uma só tela para toda a rede, por período e por loja: quantas há de cada tipo e por quanto dinheiro, cada vendedora comparada com a média da rede e a lista do que olhar, com hora, loja, caixa, vendedora, documento e valor. Compara, não acusa: com poucos cupons não se compara ninguém. E como cada caso traz a loja, o caixa e o minuto, dá para buscar a gravação das câmeras."
+            ],
+            "puntos": [
+              "No caixa: desconto alto, devolução em dinheiro ou sem cupom, vendida e devolvida no mesmo dia, venda cancelada, segunda via de cupom, cartão digitado sem maquininha e diferença de caixa",
+              "Na vitrine e no balcão: faltas, vendas antes da conferência de abertura, peça que não voltou, muito tempo fora e peso que não confere",
+              "Limites definidos por cada empresa: desconto, diferença de caixa e minutos fora",
+              "As importantes, marcadas e filtráveis"
+            ]
+          },
+          "images": [
+            {
+              "title": "Exceções do PDV",
+              "description": "Por tipo, por vendedora frente à média da rede e o que olhar, com hora, documento e valor"
+            }
+          ]
+        }
+      }
+    },
     "impresoras3d": {
       "title": "Impressoras 3D",
       "subtitle": "Controle e gestão de produção com impressoras 3D",

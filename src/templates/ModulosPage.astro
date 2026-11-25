@@ -50,6 +50,7 @@ const moduloSlugs: Record<string, Record<Lang, string>> = {
   impresoras3d: { es: 'impresoras3d', en: '3dprinters', fr: 'imprimantes3d', ca: 'impressores3d', 'pt-br': 'impressoras3d' },
   portal: { es: 'portal', en: 'portal', fr: 'portail', ca: 'portal', 'pt-br': 'portal' },
   ingenieria: { es: 'ingenieria-producto', en: 'product-engineering', fr: 'ingenierie-produit', ca: 'enginyeria-producte', 'pt-br': 'engenharia-produto' },
+  antirrobo: { es: 'antirrobo', en: 'loss-prevention', fr: 'antivol', ca: 'antirobatori', 'pt-br': 'antifurto' },
   asistenteia: { es: 'asistente-ia', en: 'ai-assistant', fr: 'assistant-ia', ca: 'assistent-ia', 'pt-br': 'assistente-ia' },
 };
 
@@ -177,6 +178,11 @@ const modulos = [
     </svg>`,
   },
   {
+    id: "antirrobo",
+    color: "#dc2626",
+    icono: `<svg viewBox="0 0 64 64" fill="none"><path d="M32 6l20 8v14c0 13-8.5 23-20 30C20.5 51 12 41 12 28V14z" fill="currentColor" opacity="0.2"/><path d="M32 6l20 8v14c0 13-8.5 23-20 30C20.5 51 12 41 12 28V14z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><rect x="22" y="26" width="20" height="14" rx="2" fill="currentColor" opacity="0.5"/><path d="M26 26v-4a6 6 0 0112 0v4" stroke="currentColor" stroke-width="2.5"/></svg>`,
+  },
+  {
     id: "impresoras3d",
     color: "#14b8a6",
     icono: `<svg viewBox="0 0 64 64" fill="none">
@@ -236,6 +242,7 @@ const modulosT: Record<
     estadisticas: { nombre: "Estadísticas", descripcion: "Ventas, dashboard y estructura del precio" },
     vendedores: { nombre: "Vendedores", descripcion: "Gestión de rutas y visitas" },
     ecommerce: { nombre: "Ecommerce", descripcion: "Tiendas online y marketplaces" },
+    antirrobo: { nombre: "Antirrobo en tienda", descripcion: "Vitrina por turno, pieza a pieza en el mostrador y excepciones del TPV" },
     impresoras3d: { nombre: "Impresoras 3D", descripcion: "Control y gestión de producción con impresoras 3D" },
     portal: { nombre: "Portal Cliente", descripcion: "Acceso de clientes a pedidos y facturas" },
     asistenteia: { nombre: "Certificaciones", descripcion: "Laboratorio gemológico, ESG y pasaporte digital" },
@@ -251,6 +258,7 @@ const modulosT: Record<
     estadisticas: { nombre: "Statistics", descripcion: "Sales, dashboard and price structure" },
     vendedores: { nombre: "Sales Reps", descripcion: "Route and visit management" },
     ecommerce: { nombre: "Ecommerce", descripcion: "Online stores and marketplaces" },
+    antirrobo: { nombre: "Store loss prevention", descripcion: "Display case by shift, every piece at the counter and POS exceptions" },
     impresoras3d: { nombre: "3D Printers", descripcion: "Production control and management with 3D printers" },
     portal: { nombre: "Customer Portal", descripcion: "Customer access to orders and invoices" },
     asistenteia: { nombre: "Certifications", descripcion: "Gemological lab, ESG and digital passport" },
@@ -266,6 +274,7 @@ const modulosT: Record<
     estadisticas: { nombre: "Statistiques", descripcion: "Ventes, tableau de bord et structure du prix" },
     vendedores: { nombre: "Vendeurs", descripcion: "Gestion des routes et visites" },
     ecommerce: { nombre: "Ecommerce", descripcion: "Boutiques en ligne et marketplaces" },
+    antirrobo: { nombre: "Antivol en boutique", descripcion: "Vitrine à chaque relève, pièce par pièce au comptoir et exceptions du TPV" },
     impresoras3d: { nombre: "Imprimantes 3D", descripcion: "Contrôle et gestion de production avec imprimantes 3D" },
     portal: { nombre: "Portail Client", descripcion: "Accès des clients aux commandes et factures" },
     asistenteia: { nombre: "Certifications", descripcion: "Laboratoire gemmologique, ESG et passeport numérique" },
@@ -281,6 +290,7 @@ const modulosT: Record<
     estadisticas: { nombre: "Estadístiques", descripcion: "Vendes, dashboard i estructura del preu" },
     vendedores: { nombre: "Venedors", descripcion: "Gestió de rutes i visites" },
     ecommerce: { nombre: "Ecommerce", descripcion: "Botigues online i marketplaces" },
+    antirrobo: { nombre: "Antirobatori a botiga", descripcion: "Vitrina per torn, peça a peça al taulell i excepcions del TPV" },
     impresoras3d: { nombre: "Impressores 3D", descripcion: "Control i gestió de producció amb impressores 3D" },
     portal: { nombre: "Portal Client", descripcion: "Accés dels clients a comandes i factures" },
     asistenteia: { nombre: "Certificacions", descripcion: "Laboratori gemològic, ESG i passaport digital" },
@@ -296,6 +306,7 @@ const modulosT: Record<
     estadisticas: { nombre: "Estatísticas", descripcion: "Vendas, dashboard e estrutura do preço" },
     vendedores: { nombre: "Vendedores", descripcion: "Gestão de rotas e visitas" },
     ecommerce: { nombre: "Ecommerce", descripcion: "Lojas online e marketplaces" },
+    antirrobo: { nombre: "Antifurto na loja", descripcion: "Vitrine por turno, peça a peça no balcão e exceções do PDV" },
     impresoras3d: { nombre: "Impressoras 3D", descripcion: "Controle e gestão de produção com impressoras 3D" },
     portal: { nombre: "Portal do Cliente", descripcion: "Acesso dos clientes a pedidos e faturas" },
     asistenteia: { nombre: "Certificações", descripcion: "Laboratório gemológico, ESG e passaporte digital" },

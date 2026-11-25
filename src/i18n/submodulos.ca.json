@@ -1064,6 +1064,148 @@
         }
       }
     },
+    "antirrobo": {
+      "title": "Antirobatori a botiga",
+      "subtitle": "La vitrina a cada torn, cada peça que surt al taulell i, des de la central, tot el que surt del normal",
+      "metaTitle": "Antirobatori per a joieria amb RFID | Vitrina, taulell i excepcions del TPV | RayGold",
+      "metaDescription": "Prevenció de pèrdues a joieries: control de vitrina per torn amb RFID, una peça fora cada vegada, pes anticanvi i excepcions del TPV per botiga i venedora.",
+      "intro": {
+        "titulo": "En una joieria la peça no surt per la porta: surt pel taulell",
+        "parrafos": [
+          "L'arc de la porta té sentit en una botiga de roba, on el client agafa la peça del prestatge. En una joieria les peces són en vitrina tancada i surten d'una en una, a la mà de la venedora. Les pèrdues vénen d'un altre lloc: la peça que surt per ensenyar-la i no torna, el canvi per una imitació, el descuadrament del canvi de torn que ningú no sap de qui és i el robatori intern, que no es veu a la vitrina sinó en els números de la caixa.",
+          "RayGold ataca aquests quatre riscos amb el que la botiga ja fa servir: el mateix lector RFID de l'inventari i la recepció d'enviaments —amb el xip a l'etiqueta de preu—, la bàscula de la compra d'or i el que el TPV grava a cada venda. La vitrina i el taulell controlen la peça en el moment; la central veu, botiga per botiga i venedora per venedora, tot el que surt del normal."
+        ]
+      },
+      "noEs": {
+        "titulo": "Què no resol",
+        "items": [
+          "El robatori ràpid o a mà armada: això és el protocol de la botiga i les càmeres.",
+          "El canvi amb l'etiqueta inclosa si ningú no pesa la peça: el xip és a l'etiqueta, no a la joia. Per això es pesa.",
+          "Una etiqueta arrencada que es deixa a la vitrina continua llegint-se com a present.",
+          "No es connecta a les càmeres: dona la botiga, la caixa i el minut per buscar l'enregistrament."
+        ]
+      },
+      "faq": [
+        {
+          "pregunta": "Per què no un arc antirobatori a la porta?",
+          "respuesta": "Perquè en una joieria les peces no són a l'abast del client: surten de la vitrina a la mà de la venedora. A més, una etiqueta de paper amb xip s'arrenca en un segon. Les pèrdues es produeixen al taulell, al canvi de torn i a la caixa, i és allà on actua RayGold."
+        },
+        {
+          "pregunta": "Quin equip necessita cada botiga?",
+          "respuesta": "Un lector RFID de mà per al control de vitrina, l'inventari i la recepció d'enviaments; un lector de sobretaula per taulell per recolzar-hi la peça en treure-la i en tornar-la; i una bàscula de 0,01 g, que sol ser la mateixa de la compra d'or."
+        },
+        {
+          "pregunta": "Com detecta un canvi si el xip va a l'etiqueta?",
+          "respuesta": "Pel pes. Cada peça surt de la fàbrica amb el seu pes real i, en tornar a la vitrina, en una devolució o en rebre un enviament, es pesa i es compara amb una tolerància de 0,03 g. Si no hi ha pes de fàbrica, l'encarregada desa la primera pesada com a referència."
+        },
+        {
+          "pregunta": "Les excepcions acusen algú?",
+          "respuesta": "No. Comparen cada venedora amb la mitjana de la cadena i assenyalen el que convé mirar: una devolució en efectiu no és un robatori; nou, quan la mitjana és tres, mereixen una mirada. Amb pocs tiquets no es compara, per no assenyalar ningú per falta de dades."
+        }
+      ],
+      "sections": {
+        "rutina": {
+          "name": "Rutina del dia",
+          "description": "Abans de vendre, els passos que no es poden saltar; i si se salten, la central ho sap.",
+          "detalle": {
+            "parrafos": [
+              "La venedora entra al TPV amb el seu PIN i, si hi ha alguna cosa pendent, se li obre la rutina: tres columnes —en començar, durant el dia i en tancar— que es marquen soles amb les dades del TPV, sense caselles a mà. Cada pas porta a la pantalla on es fa.",
+              "Mentre falti un pas obligatori, venda, devolució i reserves porten a la rutina. Però el client no espera: la venedora prem «Client esperant», l'encarregada ho autoritza amb el seu PIN, es ven i, tot just cobrar, el TPV torna a la rutina. Aquesta venda queda a les excepcions de la central com a feta abans del control d'obertura."
+            ],
+            "puntos": [
+              "En començar: obrir la caixa, control de vitrina d'obertura i cap peça fora de dies anteriors",
+              "Avisos d'enviaments per rebre, recomptes del dia, arranjaments a punt i clients d'avui",
+              "Durant el dia: una peça fora cada vegada, control en canviar de venedora i pesar les devolucions",
+              "En tancar: cap peça fora, control de tancament i tancament de caixa"
+            ]
+          },
+          "images": [
+            {
+              "title": "Rutina del dia",
+              "description": "En començar, durant el dia i en tancar, marcat sol amb les dades del TPV"
+            }
+          ]
+        },
+        "vitrina": {
+          "name": "Vitrina per torn",
+          "description": "En obrir, en canviar de torn i en tancar: què falta, en quin torn i qui ho va signar.",
+          "detalle": {
+            "parrafos": [
+              "Amb RFID, comptar una vitrina és passar-hi el lector per sobre: uns segons. Es tria el moment —obertura, canvi de torn o tancament— i es llegeix vitrina rere vitrina; cada passada se suma a l'anterior i, mentre es llegeix, ja avisa del que no hi hauria de ser: peces d'un altre magatzem, venudes o sense alta. En acabar es compara amb el que hi hauria d'haver al taulell.",
+              "Ho signen sempre dues persones: una compta i l'altra verifica amb el seu PIN, i almenys una és encarregada. Un control mal fet no es pot amagar: queda desat amb qui el va comptar, qui el va verificar i l'hora, i el que falta després és del torn següent. La caixa ho recorda tot el dia i, si la botiga ho exigeix, no es tanca sense el control de tancament."
+            ],
+            "puntos": [
+              "Faltes amb foto, sèrie i quan es van veure per última vegada",
+              "Una peça fora amb una venedora surt a part, no com a falta",
+              "Opcional: enviar el control a la central com a recompte",
+              "El mateix lector que l'inventari i la recepció d'enviaments"
+            ]
+          },
+          "images": [
+            {
+              "title": "Control de vitrina",
+              "description": "Lectura vitrina rere vitrina i signatura: compta una venedora i verifica l'encarregada amb el seu PIN"
+            },
+            {
+              "title": "Resultat del control",
+              "description": "Obertura amb 21 de 22 llegides: les que falten, d'un altre magatzem, sense alta o venudes"
+            },
+            {
+              "title": "Un control mal fet",
+              "description": "Només es va llegir una vitrina i surten 15 faltes: queda desat amb qui el va signar"
+            }
+          ]
+        },
+        "mostrador": {
+          "name": "Taulell i pes",
+          "description": "Cada peça que surt de la vitrina té responsable, i en tornar es pesa contra el pes de fàbrica.",
+          "detalle": {
+            "parrafos": [
+              "La venedora recolza la peça al lector en treure-la per ensenyar-la i un altre cop en tornar-la. RayGold sap en tot moment què és fora, amb qui i des de quan; si en treu una altra sense tornar la primera, avisa: una peça cada vegada. Als 15 minuts la peça es posa en vermell i, si no apareix, es marca com a perduda a nom de la venedora. En cobrar-la, la sortida es tanca sola, i amb una peça fora no es tanca la caixa.",
+              "El xip va a l'etiqueta, no a la joia: si algú la passa a una imitació, el lector no ho nota. La bàscula sí. Cada peça neix a la fàbrica amb el seu pes real i, en tornar a la vitrina, en una devolució o en rebre un enviament, es compara amb una tolerància de 0,03 g. És un avantatge de fabricar: qui compra a proveïdors no coneix el pes de cada unitat."
+            ],
+            "puntos": [
+              "Sortides del dia: qui, de quina hora a quina hora i com va acabar (tornada, venuda o perduda)",
+              "Avís de peça fora als 15 minuts, configurable",
+              "Pes que coincideix, que no coincideix o primera pesada com a referència",
+              "Bàscula de 0,01 g, la mateixa de la compra d'or"
+            ]
+          },
+          "images": [
+            {
+              "title": "Sortides d'avui",
+              "description": "Cada peça que va sortir de la vitrina, amb la venedora, els minuts fora i com va acabar"
+            },
+            {
+              "title": "Pes anticanvi",
+              "description": "La peça torna a la vitrina i coincideix amb el seu pes de fàbrica, dins de la tolerància"
+            }
+          ]
+        },
+        "central": {
+          "name": "Excepcions de la central",
+          "description": "Des de l'oficina, per botiga i venedora: el que surt del normal a la caixa i a l'antirobatori.",
+          "detalle": {
+            "parrafos": [
+              "El robatori intern no es veu a la vitrina: es veu en els números. El que no es cobra no apareix a les vendes, però sí als descomptes, les devolucions i les anul·lacions. Excepcions llegeix el que el TPV ja grava a cada venda, devolució, tancament de caixa i control, sense maquinari i sense que la venedora faci res diferent.",
+              "Una sola pantalla per a tota la cadena, per període i per botiga: quantes n'hi ha de cada tipus i per quants diners, cada venedora comparada amb la mitjana de la cadena i la llista de què mirar, amb hora, botiga, caixa, venedora, document i import. Compara, no acusa: amb pocs tiquets no es compara ningú. I com que cada cas porta la botiga, la caixa i el minut, es pot buscar l'enregistrament de les càmeres."
+            ],
+            "puntos": [
+              "A la caixa: descompte alt, devolució en efectiu o sense tiquet, venuda i tornada el mateix dia, venda anul·lada, còpia de tiquet, targeta sense datàfon i descuadrament",
+              "A la vitrina i al taulell: faltes, vendes abans del control d'obertura, peça que no va tornar, massa temps fora i pes que no coincideix",
+              "Llindars que posa cada empresa: descompte, descuadrament i minuts fora",
+              "Les importants, marcades i filtrables"
+            ]
+          },
+          "images": [
+            {
+              "title": "Excepcions del TPV",
+              "description": "Per tipus, per venedora davant la mitjana de la cadena i què mirar, amb hora, document i import"
+            }
+          ]
+        }
+      }
+    },
     "impresoras3d": {
       "title": "Impressores 3D",
       "subtitle": "Control i gestió de producció amb impressores 3D",

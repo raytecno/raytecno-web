@@ -1064,6 +1064,148 @@
         }
       }
     },
+    "antirrobo": {
+      "title": "Store loss prevention",
+      "subtitle": "The display case on every shift, every piece that goes to the counter and, from head office, everything out of the ordinary",
+      "metaTitle": "Jewelry store loss prevention with RFID | Display case, counter and POS exceptions | RayGold",
+      "metaDescription": "Loss prevention for jewelry stores: RFID display-case checks by shift, one piece out at a time, anti-switch weighing and POS exceptions by store and salesperson.",
+      "intro": {
+        "titulo": "In a jewelry store the piece doesn't leave through the door: it leaves over the counter",
+        "parrafos": [
+          "A security gate at the door makes sense in a clothing store, where customers take garments off the shelf. In a jewelry store pieces sit in locked display cases and come out one at a time, in the salesperson's hand. Losses come from elsewhere: the piece taken out to show that never comes back, the switch for an imitation, the shift-change shortfall nobody can pin down, and internal theft, which shows up not in the case but in the till figures.",
+          "RayGold tackles those four risks with what the store already uses: the same RFID reader as stocktaking and shipment receiving —with the chip in the price tag—, the scale used to buy gold, and what the POS records on every sale. The case and the counter control the piece in the moment; head office sees, store by store and salesperson by salesperson, everything out of the ordinary."
+        ]
+      },
+      "noEs": {
+        "titulo": "What it doesn't solve",
+        "items": [
+          "Smash-and-grab or armed robbery: that is the store's protocol and the cameras.",
+          "A switch with the tag included if nobody weighs the piece: the chip is in the tag, not the jewel. That is why it is weighed.",
+          "A tag torn off and left in the case still reads as present.",
+          "It doesn't connect to the cameras: it gives the store, till and minute to find the footage."
+        ]
+      },
+      "faq": [
+        {
+          "pregunta": "Why not a security gate at the door?",
+          "respuesta": "Because in a jewelry store pieces are not within the customer's reach: they leave the case in the salesperson's hand. Besides, a paper tag with a chip comes off in a second. Losses happen at the counter, at shift change and at the till, and that is where RayGold acts."
+        },
+        {
+          "pregunta": "What equipment does each store need?",
+          "respuesta": "A handheld RFID reader for display-case checks, stocktaking and receiving shipments; a desktop reader per counter to tap the piece when taking it out and putting it back; and a 0.01 g scale, usually the same one used to buy gold."
+        },
+        {
+          "pregunta": "How does it detect a switch if the chip is in the tag?",
+          "respuesta": "By weight. Each piece leaves the factory with its real weight, and when it goes back into the case, on a return or when a shipment is received it is weighed and compared, with a 0.03 g tolerance. If there is no factory weight, the manager saves the first weighing as the reference."
+        },
+        {
+          "pregunta": "Do the exceptions accuse anyone?",
+          "respuesta": "No. They compare each salesperson with the chain average and flag what is worth a look: one cash refund is not theft; nine, when the average is three, deserve a look. With few tickets there is no comparison, so nobody is flagged for lack of data."
+        }
+      ],
+      "sections": {
+        "rutina": {
+          "name": "Daily routine",
+          "description": "Before selling, the steps that can't be skipped; and if they are skipped, head office knows.",
+          "detalle": {
+            "parrafos": [
+              "The salesperson logs into the POS with their PIN and, if anything is pending, the routine opens: three columns —at opening, during the day and at closing— that tick themselves from POS data, with no manual checkboxes. Each step takes you to the screen where it is done.",
+              "While a mandatory step is missing, sale, return and layaway lead to the routine. But customers don't wait: the salesperson taps \"Customer waiting\", the manager authorises it with their PIN, the sale goes through and, right after payment, the POS returns to the routine. That sale shows up in head office's exceptions as made before the opening check."
+            ],
+            "puntos": [
+              "At opening: open the till, opening display-case check and no pieces left out from previous days",
+              "Alerts for shipments to receive, today's counts, repairs ready and today's customers",
+              "During the day: one piece out at a time, a check when salespeople change and weighing returns",
+              "At closing: no pieces out, closing check and till close"
+            ]
+          },
+          "images": [
+            {
+              "title": "Daily routine",
+              "description": "At opening, during the day and at closing, ticked automatically from POS data"
+            }
+          ]
+        },
+        "vitrina": {
+          "name": "Display case by shift",
+          "description": "At opening, shift change and closing: what is missing, on which shift and who signed it.",
+          "detalle": {
+            "parrafos": [
+              "With RFID, counting a display case means passing the reader over it: a few seconds. You choose the moment —opening, shift change or closing— and read case after case; each pass adds to the last and, while reading, it already flags what shouldn't be there: pieces from another warehouse, sold or not registered. At the end it is compared with what should be at the counter.",
+              "Two people always sign it: one counts and another verifies with their PIN, and at least one is a manager. A badly done check can't be hidden: it is stored with who counted, who verified and the time, and whatever is missing afterwards belongs to the next shift. The till remembers it all day and, if the store requires it, it can't be closed without the closing check."
+            ],
+            "puntos": [
+              "Missing pieces with photo, serial number and when they were last seen",
+              "A piece out with a salesperson is listed separately, not as missing",
+              "Optional: send the check to head office as a count",
+              "The same reader as stocktaking and shipment receiving"
+            ]
+          },
+          "images": [
+            {
+              "title": "Display-case check",
+              "description": "Reading case after case and signing: one salesperson counts and the manager verifies with their PIN"
+            },
+            {
+              "title": "Check result",
+              "description": "Opening with 21 of 22 read: missing, from another warehouse, unregistered or sold"
+            },
+            {
+              "title": "A badly done check",
+              "description": "Only one case was read and 15 show as missing: it is stored with who signed it"
+            }
+          ]
+        },
+        "mostrador": {
+          "name": "Counter and weight",
+          "description": "Every piece taken out of the case has an owner, and when it comes back it is weighed against its factory weight.",
+          "detalle": {
+            "parrafos": [
+              "The salesperson taps the piece on the reader when taking it out to show and again when putting it back. RayGold knows at all times what is out, with whom and since when; if they take out another without returning the first, it warns: one piece at a time. After 15 minutes the piece turns red and, if it doesn't turn up, it is marked as lost under the salesperson's name. When it is sold the exit closes by itself, and with a piece out the till can't be closed.",
+              "The chip is in the tag, not the jewel: if someone moves it to an imitation, the reader won't notice. The scale will. Each piece is born in the factory with its real weight and, when it goes back into the case, on a return or when a shipment is received, it is compared with a 0.03 g tolerance. It is an advantage of manufacturing: whoever buys from suppliers doesn't know the weight of each unit."
+            ],
+            "puntos": [
+              "Today's exits: who, from what time to what time and how it ended (returned, sold or lost)",
+              "Piece-out alert at 15 minutes, configurable",
+              "Weight that matches, doesn't match, or first weighing saved as reference",
+              "0.01 g scale, the same one used to buy gold"
+            ]
+          },
+          "images": [
+            {
+              "title": "Today's exits",
+              "description": "Every piece taken out of the case, with the salesperson, minutes out and how it ended"
+            },
+            {
+              "title": "Anti-switch weighing",
+              "description": "The piece goes back into the case and matches its factory weight, within tolerance"
+            }
+          ]
+        },
+        "central": {
+          "name": "Head-office exceptions",
+          "description": "From the office, by store and salesperson: what is out of the ordinary at the till and in loss prevention.",
+          "detalle": {
+            "parrafos": [
+              "Internal theft doesn't show in the display case: it shows in the numbers. What isn't charged doesn't appear in sales, but it does in discounts, refunds and voids. Exceptions reads what the POS already records on every sale, return, till close and check, with no hardware and without the salesperson doing anything differently.",
+              "One screen for the whole chain, by period and by store: how many of each type and for how much money, each salesperson compared with the chain average and the list of what to look at, with time, store, till, salesperson, document and amount. It compares, it doesn't accuse: with few tickets nobody is compared. And because each case carries the store, till and minute, the camera footage can be found."
+            ],
+            "puntos": [
+              "At the till: high discount, cash refund or refund without receipt, sold and returned the same day, voided sale, receipt reprint, card keyed without terminal and till shortfall",
+              "At the case and counter: missing pieces, sales before the opening check, piece not returned, too long out and weight mismatch",
+              "Thresholds set by each company: discount, shortfall and minutes out",
+              "The important ones, flagged and filterable"
+            ]
+          },
+          "images": [
+            {
+              "title": "POS exceptions",
+              "description": "By type, by salesperson against the chain average and what to look at, with time, document and amount"
+            }
+          ]
+        }
+      }
+    },
     "impresoras3d": {
       "title": "3D Printers",
       "subtitle": "Control and management of 3D printing production",

@@ -1064,6 +1064,148 @@
         }
       }
     },
+    "antirrobo": {
+      "title": "Antirrobo en tienda",
+      "subtitle": "La vitrina en cada turno, cada pieza que sale al mostrador y, desde la central, todo lo que se sale de lo normal",
+      "metaTitle": "Antirrobo para joyería con RFID | Vitrina, mostrador y excepciones del TPV | RayGold",
+      "metaDescription": "Prevención de pérdidas en joyerías: control de vitrina por turno con RFID, una pieza fuera cada vez, peso anti-cambiazo y excepciones del TPV por tienda y vendedora.",
+      "intro": {
+        "titulo": "En una joyería la pieza no sale por la puerta: sale por el mostrador",
+        "parrafos": [
+          "El arco de la puerta tiene sentido en una tienda de ropa, donde el cliente coge la prenda de la estantería. En una joyería las piezas están en vitrina cerrada y salen de una en una, en la mano de la vendedora. Las pérdidas vienen de otro sitio: la pieza que sale para enseñarla y no vuelve, el cambiazo por una imitación, el descuadre del cambio de turno que nadie sabe de quién es y el robo interno, que no se ve en la vitrina sino en los números de la caja.",
+          "RayGold ataca esos cuatro riesgos con lo que la tienda ya usa: el mismo lector RFID del inventario y la recepción de envíos —con el chip en la etiqueta de precio—, la báscula de la compra de oro y lo que el TPV graba en cada venta. La vitrina y el mostrador controlan la pieza en el momento; la central ve, tienda por tienda y vendedora por vendedora, todo lo que se sale de lo normal."
+        ]
+      },
+      "noEs": {
+        "titulo": "Qué no resuelve",
+        "items": [
+          "El robo rápido o a mano armada: eso es el protocolo de la tienda y las cámaras.",
+          "El cambiazo con la etiqueta incluida si nadie pesa la pieza: el chip está en la etiqueta, no en la joya. Por eso se pesa.",
+          "Una etiqueta arrancada que se deja en la vitrina sigue leyéndose como presente.",
+          "No se conecta a las cámaras: da la tienda, la caja y el minuto para buscar la grabación."
+        ]
+      },
+      "faq": [
+        {
+          "pregunta": "¿Por qué no un arco antirrobo en la puerta?",
+          "respuesta": "Porque en una joyería las piezas no están al alcance del cliente: salen de la vitrina en la mano de la vendedora. Además, una etiqueta de papel con chip se arranca en un segundo. Las pérdidas se producen en el mostrador, en el cambio de turno y en la caja, y ahí es donde actúa RayGold."
+        },
+        {
+          "pregunta": "¿Qué equipo necesita cada tienda?",
+          "respuesta": "Un lector RFID de mano para el control de vitrina, el inventario y la recepción de envíos; un lector de sobremesa por mostrador para apoyar la pieza al sacarla y al devolverla; y una báscula de 0,01 g, que suele ser la misma de la compra de oro."
+        },
+        {
+          "pregunta": "¿Cómo detecta un cambiazo si el chip va en la etiqueta?",
+          "respuesta": "Por el peso. Cada pieza sale de la fábrica con su peso real, y al volver a la vitrina, en una devolución o al recibir un envío se pesa y se compara, con una tolerancia de 0,03 g. Si no hay peso de fábrica, la encargada guarda la primera pesada como referencia."
+        },
+        {
+          "pregunta": "¿Las excepciones acusan a alguien?",
+          "respuesta": "No. Comparan a cada vendedora con la media de la cadena y señalan lo que conviene mirar: una devolución en efectivo no es un robo; nueve, cuando la media es tres, merecen una mirada. Con pocos tickets no se compara, para no señalar a nadie por falta de datos."
+        }
+      ],
+      "sections": {
+        "rutina": {
+          "name": "Rutina del día",
+          "description": "Antes de vender, los pasos que no se pueden saltar; y si se saltan, la central lo sabe.",
+          "detalle": {
+            "parrafos": [
+              "La vendedora entra en el TPV con su PIN y, si hay algo pendiente, se le abre la rutina: tres columnas —al empezar, durante el día y al cerrar— que se marcan solas con los datos del TPV, sin casillas a mano. Cada paso lleva a la pantalla donde se hace.",
+              "Mientras falte un paso obligatorio, venta, devolución y apartados llevan a la rutina. Pero el cliente no espera: la vendedora pulsa «Cliente esperando», la encargada lo autoriza con su PIN, se vende y, nada más cobrar, el TPV vuelve a la rutina. Esa venta queda en las excepciones de la central como hecha antes del control de apertura."
+            ],
+            "puntos": [
+              "Al empezar: abrir la caja, control de vitrina de apertura y ninguna pieza fuera de días anteriores",
+              "Avisos de envíos por recibir, recuentos del día, arreglos listos y clientes de hoy",
+              "Durante el día: una pieza fuera cada vez, control al cambiar de vendedora y pesar las devoluciones",
+              "Al cerrar: ninguna pieza fuera, control de cierre y cierre de caja"
+            ]
+          },
+          "images": [
+            {
+              "title": "Rutina del día",
+              "description": "Al empezar, durante el día y al cerrar, marcado solo con los datos del TPV"
+            }
+          ]
+        },
+        "vitrina": {
+          "name": "Vitrina por turno",
+          "description": "Al abrir, al cambiar de turno y al cerrar: qué falta, en qué turno y quién lo firmó.",
+          "detalle": {
+            "parrafos": [
+              "Con RFID, contar una vitrina es pasar el lector por encima: unos segundos. Se elige el momento —apertura, cambio de turno o cierre— y se lee vitrina tras vitrina; cada pasada se suma a la anterior y, mientras se lee, ya avisa de lo que no debería estar: piezas de otro almacén, vendidas o sin alta. Al terminar se compara con lo que debería haber en el mostrador.",
+              "Lo firman siempre dos personas: una cuenta y otra verifica con su PIN, y al menos una es encargada. Un control mal hecho no se puede esconder: queda guardado con quién lo contó, quién lo verificó y la hora, y lo que falta después es del turno siguiente. La caja lo recuerda todo el día y, si la tienda lo exige, no se cierra sin el control de cierre."
+            ],
+            "puntos": [
+              "Faltas con foto, serie y cuándo se vieron por última vez",
+              "Una pieza fuera con una vendedora sale aparte, no como falta",
+              "Opcional: enviar el control a la central como recuento",
+              "El mismo lector que el inventario y la recepción de envíos"
+            ]
+          },
+          "images": [
+            {
+              "title": "Control de vitrina",
+              "description": "Lectura vitrina tras vitrina y firma: cuenta una vendedora y verifica la encargada con su PIN"
+            },
+            {
+              "title": "Resultado del control",
+              "description": "Apertura con 21 de 22 leídas: las que faltan, de otro almacén, sin alta o vendidas"
+            },
+            {
+              "title": "Un control mal hecho",
+              "description": "Solo se leyó una vitrina y salen 15 faltas: queda guardado con quién lo firmó"
+            }
+          ]
+        },
+        "mostrador": {
+          "name": "Mostrador y peso",
+          "description": "Cada pieza que sale de la vitrina tiene dueña, y al volver se pesa contra el peso de fábrica.",
+          "detalle": {
+            "parrafos": [
+              "La vendedora apoya la pieza en el lector al sacarla para enseñarla y otra vez al devolverla. RayGold sabe en todo momento qué está fuera, con quién y desde cuándo; si saca otra sin devolver la primera, avisa: una pieza cada vez. A los 15 minutos la pieza se pone en rojo y, si no aparece, se marca como perdida a nombre de la vendedora. Al cobrarla, la salida se cierra sola, y con una pieza fuera no se cierra la caja.",
+              "El chip va en la etiqueta, no en la joya: si alguien la pasa a una imitación, el lector no lo nota. La báscula sí. Cada pieza nace en la fábrica con su peso real y, al volver a la vitrina, en una devolución o al recibir un envío, se compara con una tolerancia de 0,03 g. Es una ventaja de fabricar: quien compra a proveedores no conoce el peso de cada unidad."
+            ],
+            "puntos": [
+              "Salidas del día: quién, de qué hora a qué hora y cómo acabó (devuelta, vendida o perdida)",
+              "Aviso de pieza fuera a los 15 minutos, configurable",
+              "Peso que coincide, que no coincide o primera pesada como referencia",
+              "Báscula de 0,01 g, la misma de la compra de oro"
+            ]
+          },
+          "images": [
+            {
+              "title": "Salidas de hoy",
+              "description": "Cada pieza que salió de la vitrina, con la vendedora, los minutos fuera y cómo acabó"
+            },
+            {
+              "title": "Peso anti-cambiazo",
+              "description": "La pieza vuelve a la vitrina y coincide con su peso de fábrica, dentro de la tolerancia"
+            }
+          ]
+        },
+        "central": {
+          "name": "Excepciones de la central",
+          "description": "Desde la oficina, por tienda y vendedora: lo que se sale de lo normal en la caja y en el antirrobo.",
+          "detalle": {
+            "parrafos": [
+              "El robo interno no se ve en la vitrina: se ve en los números. Lo que no se cobra no aparece en las ventas, pero sí en los descuentos, las devoluciones y las anulaciones. Excepciones lee lo que el TPV ya graba en cada venta, devolución, cierre de caja y control, sin hardware y sin que la vendedora haga nada distinto.",
+              "Una sola pantalla para toda la cadena, por periodo y por tienda: cuántas hay de cada tipo y por cuánto dinero, cada vendedora comparada con la media de la cadena y la lista de qué mirar, con hora, tienda, caja, vendedora, documento e importe. Compara, no acusa: con pocos tickets no se compara a nadie. Y como cada caso lleva la tienda, la caja y el minuto, se puede buscar la grabación de las cámaras."
+            ],
+            "puntos": [
+              "En la caja: descuento alto, devolución en efectivo o sin ticket, vendida y devuelta el mismo día, venta anulada, copia de ticket, tarjeta sin datáfono y descuadre",
+              "En la vitrina y el mostrador: faltas, ventas antes del control de apertura, pieza que no volvió, mucho tiempo fuera y peso que no coincide",
+              "Umbrales que pone cada empresa: descuento, descuadre y minutos fuera",
+              "Las importantes, marcadas y filtrables"
+            ]
+          },
+          "images": [
+            {
+              "title": "Excepciones del TPV",
+              "description": "Por tipo, por vendedora frente a la media de la cadena y qué mirar, con hora, documento e importe"
+            }
+          ]
+        }
+      }
+    },
     "impresoras3d": {
       "title": "Impresoras 3D",
       "subtitle": "Control y gestión de producción con impresoras 3D",

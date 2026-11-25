@@ -1,0 +1,16 @@
+---
+/**
+ * Template: Módulo Antirrobo en tienda (Noviembre 2026)
+ * Rutina del día, vitrina por turno, mostrador con peso y excepciones de la central
+ */
+import SubmoduloLayout from "@/components/SubmoduloLayout.astro";
+
+interface Props {
+  lang: string;
+  pageId: string;
+}
+
+const { lang } = Astro.props;
+---
+
+<SubmoduloLayout lang={lang} moduloId="antirrobo" />

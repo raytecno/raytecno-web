@@ -5,8 +5,8 @@
  * @file src/components/NovedadesHome.astro
  *
  * Cuatro tarjetas que llevan a lo publicado en noviembre de 2026:
- * Ingeniería de producto, Calidad preventiva (Fabricación), cronometraje
- * (artículo del blog) y la ayuda en cada pantalla (Tecnología). El CRM no
+ * Antirrobo en tienda, Ingeniería de producto, Calidad preventiva
+ * (Fabricación) y la ayuda en cada pantalla (Tecnología). El CRM no
  * va aquí porque CrmVitrina, justo encima, ya lo presenta.
  *
  * Textos aquí mismo, en los cinco idiomas. Las URLs salen de los ayudantes
@@ -23,7 +23,7 @@ interface Props {
 
 const { lang = 'es' } = Astro.props;
 
-type Clave = 'ingenieria' | 'calidad' | 'tiempos' | 'ayuda';
+type Clave = 'antirrobo' | 'ingenieria' | 'calidad' | 'ayuda';
 
 interface Textos {
   sello: string;
@@ -44,7 +44,7 @@ const T: Record<Lang, Textos> = {
     tarjetas: {
       ingenieria: { tag: 'Módulo nuevo', titulo: 'Ingeniería de producto', texto: 'Del boceto a producción: prototipos, peso estimado desde el STL, coste por etapas y semáforo de margen antes de fabricar.' },
       calidad: { tag: 'Fabricación', titulo: 'Calidad preventiva', texto: 'Puntos de control en la ruta que paran el defecto en la fase donde nace, con autocontrol, ley, peso y Cpk.' },
-      tiempos: { tag: 'Fabricación', titulo: 'Métodos y tiempos', texto: 'Tiempos estándar medidos por cronometraje, no estimados. Por qué hacen falta entre 10 y 15 ciclos.' },
+      antirrobo: { tag: 'Módulo nuevo', titulo: 'Antirrobo en tienda', texto: 'La vitrina en cada turno con RFID, una pieza fuera cada vez, peso anti-cambiazo y las excepciones del TPV, vistas desde la central.' },
       ayuda: { tag: 'En cada pantalla', titulo: 'La ayuda que conoce tu empresa', texto: 'Pulsas ?, tocas el campo y se explica solo, con la forma de trabajar de tu empresa y tus propias notas.' },
     },
   },
@@ -57,7 +57,7 @@ const T: Record<Lang, Textos> = {
     tarjetas: {
       ingenieria: { tag: 'New module', titulo: 'Product Engineering', texto: 'From sketch to production: prototypes, estimated weight from the STL, stage-by-stage cost and a margin traffic light before production.' },
       calidad: { tag: 'Manufacturing', titulo: 'In-process quality', texto: 'Control points in the route that stop a defect at the stage where it starts, with self-inspection, fineness, weight and Cpk.' },
-      tiempos: { tag: 'Manufacturing', titulo: 'Methods and times', texto: 'Standard times measured by time study, not estimated. Why you need 10 to 15 cycles.' },
+      antirrobo: { tag: 'New module', titulo: 'Store loss prevention', texto: 'The display case on every shift with RFID, one piece out at a time, anti-switch weighing and POS exceptions, seen from head office.' },
       ayuda: { tag: 'On every screen', titulo: 'Help that knows your business', texto: 'Press ?, touch the field and it explains itself, with your company’s way of working and your own notes.' },
     },
   },
@@ -70,7 +70,7 @@ const T: Record<Lang, Textos> = {
     tarjetas: {
       ingenieria: { tag: 'Nouveau module', titulo: 'Ingénierie produit', texto: 'Du croquis à la production : prototypes, poids estimé depuis le STL, coût par étape et feu de marge avant de fabriquer.' },
       calidad: { tag: 'Fabrication', titulo: 'Qualité préventive', texto: 'Des points de contrôle dans la gamme qui arrêtent le défaut à l’étape où il naît, avec autocontrôle, titre, poids et Cpk.' },
-      tiempos: { tag: 'Fabrication', titulo: 'Méthodes et temps', texto: 'Des temps standard mesurés par chronométrage, pas estimés. Pourquoi il faut entre 10 et 15 cycles.' },
+      antirrobo: { tag: 'Nouveau module', titulo: 'Antivol en boutique', texto: 'La vitrine à chaque relève par RFID, une pièce sortie à la fois, pesée anti-substitution et exceptions du TPV, vues depuis le siège.' },
       ayuda: { tag: 'Sur chaque écran', titulo: 'L’aide qui connaît votre entreprise', texto: 'Appuyez sur ?, touchez le champ et il s’explique, avec la façon de travailler de votre entreprise et vos propres notes.' },
     },
   },
@@ -83,7 +83,7 @@ const T: Record<Lang, Textos> = {
     tarjetas: {
       ingenieria: { tag: 'Mòdul nou', titulo: 'Enginyeria de producte', texto: 'De l’esbós a producció: prototips, pes estimat des de l’STL, cost per etapes i semàfor de marge abans de fabricar.' },
       calidad: { tag: 'Fabricació', titulo: 'Qualitat preventiva', texto: 'Punts de control a la ruta que aturen el defecte a la fase on neix, amb autocontrol, llei, pes i Cpk.' },
-      tiempos: { tag: 'Fabricació', titulo: 'Mètodes i temps', texto: 'Temps estàndard mesurats per cronometratge, no estimats. Per què calen entre 10 i 15 cicles.' },
+      antirrobo: { tag: 'Mòdul nou', titulo: 'Antirobatori a botiga', texto: 'La vitrina a cada torn amb RFID, una peça fora cada vegada, pes anticanvi i les excepcions del TPV, vistes des de la central.' },
       ayuda: { tag: 'A cada pantalla', titulo: 'L’ajuda que coneix la teva empresa', texto: 'Prems ?, toques el camp i s’explica sol, amb la manera de treballar de la teva empresa i les teves pròpies notes.' },
     },
   },
@@ -96,7 +96,7 @@ const T: Record<Lang, Textos> = {
     tarjetas: {
       ingenieria: { tag: 'Módulo novo', titulo: 'Engenharia de produto', texto: 'Do esboço à produção: protótipos, peso estimado a partir do STL, custo por etapa e semáforo de margem antes de fabricar.' },
       calidad: { tag: 'Fabricação', titulo: 'Qualidade preventiva', texto: 'Pontos de controle no roteiro que param o defeito na etapa onde nasce, com autocontrole, teor, peso e Cpk.' },
-      tiempos: { tag: 'Fabricação', titulo: 'Métodos e tempos', texto: 'Tempos-padrão medidos por cronoanálise, não estimados. Por que são necessários de 10 a 15 ciclos.' },
+      antirrobo: { tag: 'Módulo novo', titulo: 'Antifurto na loja', texto: 'A vitrine em cada turno com RFID, uma peça fora de cada vez, peso antitroca e as exceções do PDV, vistas da matriz.' },
       ayuda: { tag: 'Em cada tela', titulo: 'A ajuda que conhece a sua empresa', texto: 'Aperte ?, toque o campo e ele se explica, com o jeito de trabalhar da sua empresa e as suas próprias notas.' },
     },
   },
@@ -107,15 +107,15 @@ const t = T[lang] ?? T.es;
 const iconos: Record<Clave, string> = {
   ingenieria: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M7 4h10l4 5-9 11L3 9z"/><path d="M3 9h18M9 4l-1.5 5L12 20l4.5-11L15 4"/></svg>`,
   calidad: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7.5 3v5.5c0 5-3.2 8.5-7.5 10.5-4.3-2-7.5-5.5-7.5-10.5V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>`,
-  tiempos: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="13.5" r="7.5"/><path d="M10 2.5h4M12 2.5v3.5M12 13.5V9.5M18.5 6.5l1.5-1.5"/></svg>`,
+  antirrobo: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3l7.5 3v5.5c0 5-3.2 8.5-7.5 10.5-4.3-2-7.5-5.5-7.5-10.5V6z"/><rect x="8.5" y="11" width="7" height="5" rx="1"/><path d="M10 11V9.5a2 2 0 0 1 4 0V11"/></svg>`,
   ayuda: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6"/><circle cx="12" cy="17" r=".6" fill="currentColor"/></svg>`,
 };
 
 const blogUrl = `/${lang}/blog`;
 const tarjetas: { clave: Clave; url: string; color: string }[] = [
+  { clave: 'antirrobo', url: getModuloUrl('antirrobo', lang), color: '#dc2626' },
   { clave: 'ingenieria', url: getModuloUrl('ingenieria', lang), color: '#e11d48' },
   { clave: 'calidad', url: getModuloUrl('fabricacion', lang), color: '#f59e0b' },
-  { clave: 'tiempos', url: `${blogUrl}/cronometraje-taller-joyeria`, color: '#f59e0b' },
   { clave: 'ayuda', url: `${getPageUrl('tecnologia', lang)}#ayuda`, color: '#8b5cf6' },
 ];
 ---

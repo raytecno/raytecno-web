@@ -11,7 +11,7 @@ import submodulosCa from './submodulos.ca.json';
 import submodulosPtBr from './submodulos.pt-br.json';
 
 // Tipos
-export type ModuloId = 'maestros' | 'comercial' | 'fabricacion' | 'finanzas' | 'historicos' | 'inventario' | 'estadisticas' | 'vendedores' | 'ecommerce' | 'impresoras3d' | 'portal' | 'asistenteia' | 'ingenieria';
+export type ModuloId = 'maestros' | 'comercial' | 'fabricacion' | 'finanzas' | 'historicos' | 'inventario' | 'estadisticas' | 'vendedores' | 'ecommerce' | 'impresoras3d' | 'portal' | 'asistenteia' | 'ingenieria' | 'antirrobo';
 
 export interface ImageTranslation {
   title: string;
@@ -190,6 +190,18 @@ export const modulosConfig: Record<ModuloId, ModuloConfig> = {
       { id: 'catalogo', prefix: 'CAT' },
       { id: 'tienda', prefix: 'TIE' },
       { id: 'pedidos', prefix: 'CONF' },
+    ],
+  },
+  // Noviembre 2026: antirrobo en tienda (RFID en la etiqueta, peso y
+  // excepciones del TPV). Capturas ANT-RUT/VIT/MOS/EXC en el blob web/.
+  antirrobo: {
+    color: '#dc2626',
+    icon: `<svg viewBox="0 0 64 64" fill="none"><path d="M32 6l20 8v14c0 13-8.5 23-20 30C20.5 51 12 41 12 28V14z" fill="currentColor" opacity="0.2"/><path d="M32 6l20 8v14c0 13-8.5 23-20 30C20.5 51 12 41 12 28V14z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><rect x="22" y="26" width="20" height="14" rx="2" fill="currentColor" opacity="0.5"/><path d="M26 26v-4a6 6 0 0112 0v4" stroke="currentColor" stroke-width="2.5"/></svg>`,
+    secciones: [
+      { id: 'rutina', prefix: 'ANT-RUT' },
+      { id: 'vitrina', prefix: 'ANT-VIT' },
+      { id: 'mostrador', prefix: 'ANT-MOS' },
+      { id: 'central', prefix: 'ANT-EXC' },
     ],
   },
   impresoras3d: {

@@ -92,6 +92,7 @@ export const moduloSlugs: Record<string, Record<Lang, string>> = {
  impresoras3d: { es: 'impresoras3d', en: '3dprinters', fr: 'imprimantes3d', ca: 'impressores3d', 'pt-br': 'impressoras3d' },
   portal: { es: 'portal', en: 'portal', fr: 'portail', ca: 'portal', 'pt-br': 'portal' },
   ingenieria: { es: 'ingenieria-producto', en: 'product-engineering', fr: 'ingenierie-produit', ca: 'enginyeria-producte', 'pt-br': 'engenharia-produto' },
+  antirrobo: { es: 'antirrobo', en: 'loss-prevention', fr: 'antivol', ca: 'antirobatori', 'pt-br': 'antifurto' },
   asistenteia: { es: 'asistente-ia', en: 'ai-assistant', fr: 'assistant-ia', ca: 'assistent-ia', 'pt-br': 'assistente-ia' },
 };
 
